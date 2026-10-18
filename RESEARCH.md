@@ -161,3 +161,17 @@ Final artifact SHA-256 receipts:
 - lean/lake-manifest.json: 48f918cb952b4db27d14ddbd1c2f6b4bf6864e3651811416802cd3c45c594d8c
 
 The completion audit finds no pending required proof, application, build, disclosure, style or artifact deliverable for the paper-and-Lean request. Historical priority and human peer review are not claimed. The requested goal is achieved.
+
+## Public repository and continuous integration
+
+The project is published at https://github.com/skypher/szkraw. GitHub Actions run
+39102531173 completed the pinned Lean build and principal-statement axiom audit
+successfully: https://github.com/skypher/szkraw/actions/runs/39102531173.
+
+Verdict caching preserves failures as well as successes. Run 39102488855 reused
+the preceding failed setup verdict in eight seconds, skipping dependency setup
+and the proof build: https://github.com/skypher/szkraw/actions/runs/39102488855.
+The setup issue was subsequently fixed and the full build above passed.
+Documentation changes leave the proof fingerprint unchanged; Lean sources,
+toolchain, dependency manifest and CI implementation changes invalidate it.
+The workflow's manual `rebuild` option bypasses the verdict cache.
