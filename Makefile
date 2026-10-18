@@ -8,7 +8,7 @@ PYTHON ?= python3
 help:
 	@echo 'make paper        Build paper.pdf (two LaTeX passes)'
 	@echo 'make lean         Build all Lean declarations'
-	@echo 'make axioms       Check principal statements and print their axioms'
+	@echo 'make axioms       Check principal statements and enforce the axiom allowlist'
 	@echo 'make diagnostics  Replay exact rational diagnostics through N=7'
 	@echo 'make check        Run all of the above'
 	@echo 'Override LAKE, PDFLATEX or PYTHON when needed.'

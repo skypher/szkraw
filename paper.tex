@@ -4,7 +4,7 @@
 \usepackage{amsmath,amssymb,amsthm,amsfonts,mathtools}
 \usepackage[letterpaper,total={5.5in,8in},vmarginratio=1:1,hmarginratio=1:1,headsep=21pt]{geometry}
 \usepackage{xcolor}
-\usepackage[breaklinks=false,linktocpage=true]{hyperref}
+\usepackage[breaklinks=true,linktocpage=true]{hyperref}
 \hypersetup{colorlinks=true,linkcolor=purple,urlcolor=purple,citecolor=blue!80!black,
 pdfauthor={Leslie P. Polzer},pdftitle={Coefficient criteria for finite nonnegative linearization},
 pdfsubject={Recurrence conditions and quantitative stability for finite orthogonal polynomials},
@@ -63,13 +63,13 @@ We give two sufficient criteria stated directly in the coefficients of a finite 
 \baselineskip=13.5pt
 \section{Introduction}\label{sec:introduction}
 
-Nonnegative linearization asks whether the product of two orthogonal polynomials is a nonnegative linear combination of polynomials in the same basis. For a finite system, the identity is understood on the orthogonality support. This distinction is essential when the formal product degree exceeds the terminal degree. In a normalization with $R_i(1)=1$, nonnegative coefficients have sum one and define the product probabilities of a finite polynomial hypergroup.
+Nonnegative linearization (property (P)) asks whether the product of two orthogonal polynomials is a nonnegative linear combination of polynomials in the same basis. For a finite system, the identity is understood on the orthogonality support. This distinction is essential when the formal product degree exceeds the terminal degree. In a normalization with $R_i(1)=1$, nonnegative coefficients have sum one and define the product probabilities of a finite polynomial hypergroup.
 
-The Krawtchouk case is classical. Eagleson~\cite{eagleson} studied positive definite sequences for these polynomials in 1969; Szwarc~\cite[\S5, Problem 2]{szwarc} records the nonnegative-linearization range as $0<p_0\leq1/2$ for binomial weights $\binom Njp_0^{N-j}(1-p_0)^j$ and the endpoint convention used here. Our proof below fixes that convention directly from a two-point model. It does not treat Krawtchouk positivity itself as a new result.
+The Krawtchouk case is classical. Eagleson~\cite{eagleson} studied positive definite sequences for these polynomials in 1969; Szwarc~\cite[\S5, Problem 2]{szwarc} records the nonnegative-linearization range as $0<p_0\leq1/2$ for binomial weights $\binom Njp_0^{N-j}(1-p_0)^j$. Our proof below fixes that convention directly from a two-point model. It does not treat Krawtchouk positivity itself as a new result.
 
 Recurrence methods also have a long history. In the second note of his 1969 report, Askey~\cite[Part II, Theorem 1 and Corollary 1]{askey} gives finite recurrence conditions leading to a hyperbolic difference-equation maximum principle. The stated polynomial conclusion concerns products with degree sum at most $N$. Szwarc's later characterization~\cite[Theorem 1]{szwarc2003} treats finite as well as infinite systems through an auxiliary discrete hyperbolic problem. His 2005 survey nevertheless asks for criteria for finite systems, including Krawtchouk~\cite[\S5, Problem 2]{szwarc}. The distinction is between a general positivity test and structural coefficient assumptions that supply its hypotheses.
 
-Koelink~\cite[Theorem 3.1(ii)]{koelink} constructed a triangular quadratic algebra associated with the type B Hecke algebra, and identified the corresponding $q$-Krawtchouk spherical functions. The dual recurrence in that construction is the geometric family used below. Our algebraic proof extracts its positive multiplication mechanism and expresses the resulting sufficient condition as two scalar patterns in a stochastic recurrence: a constant ratio and geometric increments. No priority is claimed for the algebra or for the resulting named family. For comparison, Miclo~\cite[Proposition 3.3]{miclo} gives a spectral characterization of the hypergroup property for finite birth--death chains by entrywise positivity of products of shifted transition matrices.
+Koelink~\cite[Theorems 3.1(ii) and 7.8]{koelink} constructed a triangular quadratic algebra associated with the type B Hecke algebra, and identified the corresponding $q$-Krawtchouk spherical functions. The dual recurrence in that construction is the geometric family used below. Our algebraic proof extracts its positive multiplication mechanism and expresses the resulting sufficient condition as two scalar patterns in a stochastic recurrence: a constant ratio and geometric increments. No priority is claimed for the algebra or for the resulting named family. For comparison, Miclo~\cite[Proposition 3.3]{miclo} gives a spectral characterization of the hypergroup property at a boundary point for irreducible finite birth--death chains by entrywise nonnegativity of products of transition matrices shifted by eigenvalues of their leading principal submatrices.
 
 The second criterion is quantitative stability. Around each asymmetric Krawtchouk array, we exhibit an explicit radius in the space of recurrence coefficients within which all finite products remain nonnegative. Its proof uses one positive term to obtain a reference margin, an error recurrence to control perturbations, and orthogonality to preserve exact zeros outside the triangle support. The resulting neighborhoods contain independently varying coefficient arrays, rather than only a reparametrized classical family. The radius is deliberately conservative and depends on $N$; no uniform stability radius at the symmetric endpoint is asserted.
 
@@ -90,6 +90,7 @@ xR_i=a_iR_{i+1}+b_iR_i+c_iR_{i-1}\qquad(0\leq i<N).
 \end{equation}
 The terminal relation is $(x-b_N)R_N-c_NR_{N-1}=0$ on the orthogonality support. Linearization means equality of functions on this support, rather than an unrestricted polynomial identity when the degree sum exceeds $N$.
 
+\begin{samepage}
 \begin{theorem}[Geometric increment criterion]\label{thm:criterion}
 Assume \eqref{eq:basic}. Set $d_i=b_i+c_i$. Suppose
 \begin{enumerate}
@@ -104,6 +105,7 @@ R_mR_n=\sum_{k=0}^N g(m,n;k)R_k,
 \end{equation}
 on that support for all $0\leq m,n\leq N$.
 \end{theorem}
+\end{samepage}
 
 \begin{lemma}[Coefficient parametrization]\label{lem:parameters}
 The hypotheses of Theorem~\ref{thm:criterion} are equivalent to
@@ -117,6 +119,17 @@ for $q\geq1$, $0<r\leq1$. When $N=1$, one may choose $q=1$.
 \begin{proof}
 The terminal sum gives $d_N=1$, and $d_0=0$. Geometric increments give $d_i=\delta_1[i]_q$, hence $\delta_1=1/[N]_q$. The constant ratio gives $c_i=d_i/(1+\beta)$ and $b_i=\beta d_i/(1+\beta)$. Put $r=(1+\beta)^{-1}$. Finally $[N]_q-[i]_q=q^i[N-i]_q$. These calculations reverse to give the converse, including $q=1$ and $N=1$.
 \end{proof}
+
+The parameter conventions used below are
+\[
+\begin{array}{c|l}
+\beta & b_i/c_i\\
+r & 1/(1+\beta)\\
+p & 1/r=1+\beta\\
+p_0 & r/(1+r)\\
+\text{symmetric Krawtchouk case} & r=1,\quad p_0=1/2
+\end{array}
+\]
 
 \section{A finite algebra with positive multiplication}\label{sec:algebra}
 Fix $p\geq1$ and $q\geq1$. Starting with $A_{N+1}=\mathbb R$, form recursively the commutative real algebras
@@ -232,6 +245,12 @@ Proposition~\ref{prop:subalgebra} and positive $t_k$ give nonnegative product co
 
 \section{A criterion allowing arbitrary small coefficient perturbations}\label{sec:perturbation}
 
+Write the tridiagonal recurrence matrix with the row convention
+\[
+J_{i,i+1}=a_i,\qquad J_{i,i}=b_i,\qquad J_{i,i-1}=c_i,
+\]
+with all other entries zero and indices outside $0,\ldots,N$ omitted.
+
 \begin{lemma}[Finite recurrence realization and triangle support]\label{lem:finite}
 Every recurrence satisfying \eqref{eq:basic} has a positive orthogonality measure on exactly $N+1$ real points. If $J$ is its tridiagonal recurrence matrix, then its finite product coefficients satisfy
 \begin{equation}\label{eq:matrix-product}
@@ -297,7 +316,7 @@ Subtract the two matrix recurrences for $1\leq m<N$. Writing $\Delta_m=\widetild
  &+\big(\widetilde J-J-(\widetilde b_m-b_m)I\big)B_m\\
  &-(\widetilde c_m-c_m)B_{m-1}-(\widetilde a_m-a_m)B_{m+1}.
 \end{align*}
-Since $\eta\leq1/(2N)$, $\widetilde a_m\geq1/(2N)$. The three lines of error terms not containing a $\Delta$ have combined norm at most $6\eta$. Also $0\leq\widetilde b_m,\widetilde c_m\leq1$, so
+Since $\eta\leq1/(2N)$, $\widetilde a_m\geq1/(2N)$. The terms not containing a $\Delta$ have combined norm at most $6\eta$. Also $0\leq\widetilde b_m,\widetilde c_m\leq1$, so
 \begin{equation}\label{eq:error-recursion}
 e_{m+1}\leq4Ne_m+2Ne_{m-1}+12N\eta.
 \end{equation}
@@ -330,29 +349,39 @@ All initial and terminal conventions and stochastic sums are preserved. The boun
 For every $N\geq1$ and $0<p_0\leq1/2$, Krawtchouk polynomials orthogonal for binomial weights $\binom Nj p_0^{N-j}(1-p_0)^j$ have nonnegative linearization when normalized at $j=0$.
 \end{corollary}
 \begin{proof}
-To fix the convention without relying on a named recurrence, put $s=1-p_0$, $r=p_0/s\in(0,1]$, and let $Y_1,\ldots,Y_N$ be independent variables with values $1,-r$ of probabilities $p_0,s$. Their mean is zero and $Y_i^2=(1-r)Y_i+r$. The normalized elementary symmetric sums
+To fix the convention without relying on a named recurrence, put $r=p_0/(1-p_0)\in(0,1]$, and let $Y_1,\ldots,Y_N$ be independent variables with values $1,-r$ of probabilities $p_0,1-p_0$. Their mean is zero and $Y_i^2=(1-r)Y_i+r$. The normalized elementary symmetric sums
 \[
 K_i(j)=\binom Ni^{-1}\sum_{|S|=i}\prod_{l\in S}Y_l
 \]
-depend only on the number $j$ of negative coordinates. They are orthogonal, because the expectation of two distinct squarefree monomials is zero: some independent mean-zero variable occurs once. Their weights in $j$ are exactly the stated binomial weights. With $x=N^{-1}\sum_lY_l=1-j/(Ns)$, multiplication by $x$ gives
+depend only on the number $j$ of negative coordinates. They are orthogonal, because the expectation of two distinct squarefree monomials is zero: some independent mean-zero variable occurs once. Their weights in $j$ are exactly the stated binomial weights. With $x=N^{-1}\sum_lY_l=1-j/(N(1-p_0))$, multiplication by $x$ gives
 \[
 xK_i=\frac{N-i}{N}K_{i+1}+(1-r)\frac iN K_i+r\frac iN K_{i-1}.
 \]
 Indeed, in multiplying the elementary sum by $\sum_lY_l$, indices outside a subset give $(i+1)$ copies of each subset of size $i+1$; the linear part of $Y_l^2$ gives $(1-r)i$ copies of each subset of size $i$; and the constant part gives $r(N-i+1)$ copies of each subset of size $i-1$. Division by the binomial normalizers gives the displayed recurrence, including $i=N$. Its leading coefficient in $x$ is positive, its degree is $i$, and its value at $j=0$ is one. These properties identify the normalized orthogonal polynomials for the binomial measure. Apply Theorem~\ref{thm:criterion} with $q=1$.
+The range is sharp in this endpoint normalization: if $1/2<p_0<1$, then
+$r=p_0/(1-p_0)>1$ and $g(1,1;1)=b_1=(1-r)/N<0$.
+For $N=1$, this coefficient follows from the terminal relation.
 \end{proof}
 
 \begin{corollary}[An additional continuous finite class]\label{cor:additional}
 For every $N\geq2$, $q>1$, and $0<r\leq1$, the recurrence \eqref{eq:parameters} has nonnegative linearization. In the normalization $R_0=1$, $R_1=x$, it is outside the Krawtchouk recurrence class.
 \end{corollary}
 \begin{proof}
-Its increments are $d_i-d_{i-1}=q^{i-1}/[N]_q$, so all hypotheses hold. For a Krawtchouk recurrence in this normalization the increments of $b_i+c_i$ are constant. Here their ratio is $q>1$ and $N\geq2$, so they are not constant. An affine change of the support followed by the normalization $R_1=x$ leaves the multiplication coefficients in the basis unchanged; it cannot remove this distinction.
+Its increments are $d_i-d_{i-1}=q^{i-1}/[N]_q$, so all hypotheses hold. For a Krawtchouk recurrence in this normalization the increments of $b_i+c_i$ are constant. Here their ratio is $q>1$ and $N\geq2$, so they are not constant. An affine change of the support transporting the same endpoint-normalized basis leaves the multiplication coefficients in the basis unchanged; it cannot remove this distinction.
 \end{proof}
 
 \begin{proposition}[Relation to the existing algebraic construction]\label{prop:source}
 The quadratic relations \eqref{eq:algebra} are those of Koelink~\cite[Theorem 3.1(ii), equation (3.3)]{koelink}, with $z_j=u(x^j)$ and the same parameters $p,q$. The recurrence in this paper is the normalized recurrence of his Theorem 7.1, with $r=1/p$; its polynomial-in-the-spectral-variable interpretation is the dual $q$-Krawtchouk interpretation described after his Theorem 7.8.
 \end{proposition}
 \begin{proof}
-The source square relation is $u(x^j)^2=(q-1)u(x^j)\sum_{l>j}u(x^l)+(p-1)u(x^j)+pq^{N-j}$, which is \eqref{eq:algebra}. In Theorem 7.1 the coefficients of the next, current and previous indices are respectively $pq^i(1-q^{N-i})$, $(p-1)(1-q^i)$ and $1-q^i$. Division by $p(1-q^N)$ gives \eqref{eq:parameters} for $q>1$. The $q=1$ case follows directly from the construction above, without division by zero. His discussion after Theorem 7.8 explicitly interchanges polynomial degree and spectral index to obtain the dual family.
+The source square relation is $u(x^j)^2=(q-1)u(x^j)\sum_{l>j}u(x^l)+(p-1)u(x^j)+pq^{N-j}$, which is \eqref{eq:algebra}. In Theorem 7.1 the coefficients of the next, current and previous indices are respectively $pq^i(1-q^{N-i})$, $(p-1)(1-q^i)$ and $1-q^i$. Division by $p(1-q^N)$ gives \eqref{eq:parameters} for $q>1$. For $0\leq f\leq N$, the corresponding spectral coordinate is
+\[
+x_f=\frac{p(1-q^{N-f})-(1-q^f)}{p(1-q^N)}
+=\frac{q^{N-f}-rq^f+r-1}{q^N-1},\qquad r=1/p.
+\]
+Thus $R_d(x_f)=\phi_f(w_d)$ for $0\leq d\leq N$: the initial value is one and the normalized recurrences agree, so induction in $d$ identifies them.
+As $q\to1$, dividing numerator and denominator by $q-1$ and using the finite geometric sums gives $x_f\to1-(1+r)f/N$.
+The $q=1$ case follows directly from the construction above, without division by zero. His discussion after Theorem 7.8 explicitly interchanges polynomial degree and spectral index to obtain the dual family.
 \end{proof}
 
 The geometric criterion covers the full positive Krawtchouk range, including the symmetric endpoint. The perturbation criterion allows freely varying coefficients around each asymmetric Krawtchouk array; its stated radius is conservative and decreases with $N$. Both hypotheses can be checked using a number of arithmetic comparisons proportional to $N$, without forming any general product coefficients or testing polynomial matrices. The proofs use positive algebra multiplication, a lower bound from a single positive term, and a norm estimate. They provide sufficient conditions, not a characterization of all finite systems with property (P). The geometric parameter family and underlying algebra predate Szwarc's survey; this paper makes no claim of historical priority for these constructions or criteria.
@@ -382,11 +411,11 @@ The companion source tree contains \path{probe.py} and \path{verify.py}. The com
 compares recurrence-matrix multiplication with direct multiplication modulo the terminal polynomial on exact rational inputs, checks the perturbation lower bounds, and replays two rejected coefficient-profile tests. These computations are diagnostics and do not replace the proofs at arbitrary size. The Lean development is pinned by \path{lean/lean-toolchain} and \path{lean/lake-manifest.json}; its declaration-level proof status is recorded separately from the paper proof. The geometric criterion, including a positive finite orthogonality measure, distinct support points, the terminal relation, and all finite product identities, is formalized as \path{Szkraw.geometric_criterion}. The quantitative perturbation theorem, including its explicit radius, positive triangle margin and exact zeros outside the triangle, is formalized as \path{Szkraw.perturbation_criterion}. Both main criteria have compiled proofs without added axioms or admitted goals. The accompanying development also verifies the squarefree basis and trace form, the algebra character and normalizers, the explicit nongeometric perturbation examples, the additional geometric class, the binomial-measure identification throughout the positive Krawtchouk range, and the relatively open coefficient neighborhoods. The declaration-by-declaration correspondence and verification commands are recorded in \path{RESEARCH.md}; \path{lean/CheckAxioms.lean} checks the principal statements and their axioms. Historical attribution and the proposed open problems are prose claims, not machine-verified statements.
 
 \begin{thebibliography}{9}
-\bibitem{askey} R. Askey, \emph{Three notes on orthogonal polynomials}, Stichting Mathematisch Centrum, Afdeling Toegepaste Wiskunde, report TW~114, Amsterdam, October 1969; Part II: \emph{Linearization of the product of orthogonal polynomials II}, \url{https://ir.cwi.nl/pub/7741}.
-\bibitem{eagleson} G. K. Eagleson, \emph{A characterization theorem for positive definite sequences on the Krawtchouk polynomials}, Australian Journal of Statistics \textbf{11} (1969), 29--38, \href{https://doi.org/10.1111/j.1467-842X.1969.tb00004.x}{doi:10.1111/j.1467-842X.1969.tb00004.x}.
-\bibitem{koelink} H. T. Koelink, \emph{$q$-Krawtchouk polynomials as spherical functions on the Hecke algebra of type B}, arXiv:q-alg/9605040 (1996), \url{https://arxiv.org/abs/q-alg/9605040}.
+\bibitem{askey} R. Askey, \emph{Three notes on orthogonal polynomials}, Stichting Mathematisch Centrum, Afdeling Toegepaste Wiskunde, report TW~114/69, Amsterdam, October 1969; Part II: \emph{Linearization of the product of orthogonal polynomials II}, \url{https://ir.cwi.nl/pub/7741}.
+\bibitem{eagleson} G. K. Eagleson, \emph{A characterization theorem for positive definite sequences on the Krawtchouk polynomials}, Australian Journal of Statistics \textbf{11} (1969), no.~1, 29--38, \href{https://doi.org/10.1111/j.1467-842X.1969.tb00004.x}{\nolinkurl{doi:10.1111/j.1467-842X.1969.tb00004.x}}.
+\bibitem{koelink} H. T. Koelink, \emph{$q$-Krawtchouk polynomials as spherical functions on the Hecke algebra of type B}, Transactions of the American Mathematical Society \textbf{352} (2000), no.~10, 4789--4813, \href{https://doi.org/10.1090/S0002-9947-00-02588-5}{\nolinkurl{doi:10.1090/S0002-9947-00-02588-5}}; preprint arXiv:q-alg/9605040v1 (1996), \url{https://arxiv.org/abs/q-alg/9605040v1}. Theorem and equation locators refer to the preprint.
 \bibitem{miclo} L. Miclo, \emph{On the hypergroup property}, Annales de la Facult\'e des Sciences de Toulouse, s\'erie~6, \textbf{26} (2017), 417--435, \href{https://doi.org/10.5802/afst.1539}{doi:10.5802/afst.1539}.
-\bibitem{szwarc} R. Szwarc, \emph{Orthogonal Polynomials and Banach Algebras}, Inzell Lectures on Orthogonal Polynomials (2005), \S5, Problem 2, \url{https://www.math.uni.wroc.pl/~szwarc/pdf/inzell.pdf}.
+\bibitem{szwarc} R. Szwarc, \emph{Orthogonal polynomials and Banach algebras}, in \emph{Inzell Lectures on Orthogonal Polynomials}, W. zu Castell, F. Filbir, and B. Forster (eds.), Advances in the Theory of Special Functions and Orthogonal Polynomials, vol.~2, Nova Science Publishers, 2005, 103--139; \S5, Problem~2. Author version: \url{https://www.math.uni.wroc.pl/~szwarc/pdf/inzell.pdf}.
 \bibitem{szwarc2003} R. Szwarc, \emph{A necessary and sufficient condition for nonnegative product linearization of orthogonal polynomials}, Constructive Approximation \textbf{19} (2003), 565--573, \href{https://doi.org/10.1007/s00365-002-0524-z}{doi:10.1007/s00365-002-0524-z}.
 \end{thebibliography}
 \end{document}

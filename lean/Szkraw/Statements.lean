@@ -85,7 +85,7 @@ def CloseToKrawtchouk {N : ℕ} (v : Coefficients N) (r : ℝ) : Prop :=
 
 /-- Geometric increment theorem, matrix-positivity conclusion. All finite sizes,
 all matrix entries, and the original scalar hypotheses are quantified.
-The spectral realization is a separate statement still to be integrated. -/
+The full criterion Stmt_geometric below also includes spectral realization. -/
 def Stmt_geometric_matrix : Prop :=
   ∀ (N : ℕ) (v : Coefficients N), Admissible v → Geometric v → MatrixPositivity v
 
