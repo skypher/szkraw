@@ -1,0 +1,209 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\qint}[1]{[#1]_q}
+\title{A geometric increment criterion for finite nonnegative linearization}
+\author{Research draft awaiting independent review}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give a sufficient criterion stated directly in the coefficients of a finite stochastic three-term recurrence. The sum of its diagonal and downward coefficients has positive geometric increments, and their ratio is constant and nonnegative. An elementary finite algebra construction gives nonnegative linearization, including products beyond the terminating degree. The criterion includes the full positive Krawtchouk range and a continuous family with nonconstant increments. The underlying quadratic algebra occurs in Koelink's work on type B Hecke algebras; no novelty of that algebra or of the named polynomial families is claimed.
+\end{abstract}
+
+\section{Statement and conventions}
+For integers $j\geq0$ put $[j]_q=1+q+\cdots+q^{j-1}$, with $[0]_q=0$; in particular $[j]_1=j$.
+Consider real coefficients indexed by $0\leq i\leq N$, where $N\geq1$, satisfying
+\begin{equation}\label{eq:basic}
+\begin{gathered}
+a_0=1,\quad b_0=c_0=0,\quad a_N=0,\quad a_i+b_i+c_i=1,\\
+a_i>0\ (i<N),\qquad c_i>0\ (i>0).
+\end{gathered}
+\end{equation}
+Set $R_{-1}=0$, $R_0=1$, and determine $R_1,\ldots,R_N$ by
+\begin{equation}\label{eq:recurrence}
+xR_i=a_iR_{i+1}+b_iR_i+c_iR_{i-1}\qquad(0\leq i<N).
+\end{equation}
+The terminal relation is $(x-b_N)R_N-c_NR_{N-1}=0$ on the orthogonality support. Linearization means equality of functions on this support, rather than an unrestricted polynomial identity when the degree sum exceeds $N$.
+
+\begin{theorem}[Geometric increment criterion, candidate]\label{thm:criterion}
+Assume \eqref{eq:basic}. Set $d_i=b_i+c_i$. Suppose
+\begin{enumerate}
+\item $b_i/c_i=\beta$ for every $1\leq i\leq N$, where $\beta\geq0$;
+\item $\delta_i=d_i-d_{i-1}>0$ for $1\leq i\leq N$;
+\item for some $q\geq1$, $\delta_{i+1}=q\delta_i$ whenever $1\leq i<N$.
+\end{enumerate}
+Then the recurrence has a positive orthogonality measure on exactly $N+1$ distinct real points. Its normalized polynomials satisfy
+\begin{equation}\label{eq:positive}
+R_mR_n=\sum_{k=0}^N g(m,n;k)R_k,
+\qquad g(m,n;k)\geq0,\qquad\sum_{k=0}^N g(m,n;k)=1
+\end{equation}
+on that support for all $0\leq m,n\leq N$.
+\end{theorem}
+
+\begin{lemma}[Coefficient parametrization]\label{lem:parameters}
+The hypotheses of Theorem~\ref{thm:criterion} are equivalent to
+\begin{equation}\label{eq:parameters}
+a_i=\frac{q^i[N-i]_q}{[N]_q},\qquad
+b_i=(1-r)\frac{[i]_q}{[N]_q},\qquad
+c_i=r\frac{[i]_q}{[N]_q}
+\end{equation}
+for $q\geq1$, $0<r\leq1$. When $N=1$, one may choose $q=1$.
+\end{lemma}
+\begin{proof}
+The terminal sum gives $d_N=1$, and $d_0=0$. Geometric increments give $d_i=\delta_1[i]_q$, hence $\delta_1=1/[N]_q$. The constant ratio gives $c_i=d_i/(1+\beta)$ and $b_i=\beta d_i/(1+\beta)$. Put $r=(1+\beta)^{-1}$. Finally $[N]_q-[i]_q=q^i[N-i]_q$. These calculations reverse to give the converse, including $q=1$ and $N=1$.
+\end{proof}
+
+\section{A finite algebra with positive multiplication}
+Fix $p\geq1$ and $q\geq1$. Starting with $A_{N+1}=\mathbb R$, form recursively the commutative real algebras
+\begin{equation}\label{eq:algebra}
+A_j=A_{j+1}[z_j]\big/
+\left(z_j^2-\left((q-1)\sum_{l=j+1}^N z_l+p-1\right)z_j-pq^{N-j}\right).
+\end{equation}
+Write $A=A_1$. For $S\subseteq\{1,\ldots,N\}$ let $z_S=\prod_{j\in S}z_j$, with $z_\varnothing=1$.
+
+\begin{lemma}[Basis and positivity]\label{lem:basis}
+The elements $z_S$ form a basis of $A$, and all their multiplication coefficients are nonnegative.
+\end{lemma}
+\begin{proof}
+Division by a monic quadratic over any commutative coefficient ring gives a unique remainder of degree at most one. Applying this successively in \eqref{eq:algebra} gives the asserted basis and dimension $2^N$.
+For positivity, replace a square by
+\[
+z_j^2=(q-1)\sum_{l>j}z_jz_l+(p-1)z_j+pq^{N-j}.
+\]
+Every displayed coefficient is nonnegative. This rewriting terminates: give $z_j$ weight $2^{N-j}$ and give a monomial the sum of the weights of its factors, counted with multiplicity. Each replacement strictly decreases this nonnegative integer weight, because $l>j$ implies $2^{N-l}<2^{N-j}$. The final expression is in the unique squarefree basis, proving the claim.
+\end{proof}
+
+\begin{lemma}[Positive associative inner product]\label{lem:trace}
+Let $\tau$ extract the coefficient of $z_\varnothing$. Then
+\begin{equation}\label{eq:trace}
+\tau(z_Sz_T)=\boldsymbol1_{S=T}\,p^{|S|}q^{\sum_{j\in S}(N-j)}.
+\end{equation}
+Consequently $\langle u,v\rangle=\tau(uv)$ is positive definite, and multiplication by every element of $A$ is self-adjoint.
+\end{lemma}
+\begin{proof}
+Induct downwards through the tower. If $j$ belongs to exactly one of $S,T$, their product has the form $z_jv$ with $v\in A_{j+1}$ and has zero constant coefficient in $z_j$. If it belongs to both, the constant coefficient in $z_j$ is $pq^{N-j}z_{S\setminus\{j\}}z_{T\setminus\{j\}}$ by \eqref{eq:algebra}. If it belongs to neither, pass to $A_{j+1}$. Iteration proves \eqref{eq:trace}. All diagonal factors are positive. Associativity and commutativity give $\tau((hu)v)=\tau(u(hv))$.
+\end{proof}
+
+Put $E_k=\sum_{|S|=k}z_S$ for $0\leq k\leq N$, and set $E_{-1}=E_{N+1}=0$.
+
+\begin{lemma}[Three-term multiplication]\label{lem:three}
+For $0\leq k\leq N$,
+\begin{equation}\label{eq:three}
+E_1E_k=[k+1]_qE_{k+1}+(p-1)[k]_qE_k+
+pq^{k-1}[N-k+1]_qE_{k-1}.
+\end{equation}
+The last term is interpreted as zero for $k=0$.
+\end{lemma}
+\begin{proof}
+For $k=0$ the identity reads $E_1=E_1$. For $N=1,k=1$ it is exactly $z_1^2=(p-1)z_1+p$.
+For the induction on $N$, write $F_j$ for the elementary squarefree sums in $z_2,\ldots,z_N$, with $F_j=0$ outside $0\leq j\leq N-1$. Then $E_k=F_k+z_1F_{k-1}$ and $E_1=F_1+z_1$. For $1\leq k\leq N-1$, use \eqref{eq:algebra} to obtain
+\[
+E_1E_k=F_1F_k+z_1F_k+qz_1F_1F_{k-1}
+ +(p-1)z_1F_{k-1}+pq^{N-1}F_{k-1}.
+\]
+Apply the induction hypothesis to $F_1F_k$ and $F_1F_{k-1}$. The coefficients of $F_{k+1}$ and $z_1F_k$ are respectively $[k+1]_q$ and $1+q[k]_q=[k+1]_q$. The coefficients of $F_k$ and $z_1F_{k-1}$ are both $(p-1)[k]_q$, since $1+q[k-1]_q=[k]_q$. The coefficient of $F_{k-1}$ is
+\[
+pq^{k-1}[N-k]_q+pq^{N-1}=pq^{k-1}[N-k+1]_q,
+\]
+which is also the coefficient of $z_1F_{k-2}$. Regrouping gives \eqref{eq:three}.
+For the endpoint $k=N$, $E_N=z_1F_{N-1}$, so the same square relation gives
+\[
+E_1E_N=qz_1F_1F_{N-1}+(p-1)z_1F_{N-1}+pq^{N-1}F_{N-1}.
+\]
+The tail endpoint identity is
+\[
+F_1F_{N-1}=(p-1)[N-1]_qF_{N-1}+pq^{N-2}F_{N-2}.
+\]
+Substitution gives $(p-1)[N]_qE_N+pq^{N-1}E_{N-1}$, as required. This separately checks the terminating boundary.
+\end{proof}
+
+\begin{proposition}[Positive subalgebra]\label{prop:subalgebra}
+The space $B=\operatorname{span}\{E_0,\ldots,E_N\}$ is the subalgebra generated by $E_1$. Every product $E_mE_n$ has nonnegative coefficients in this basis.
+\end{proposition}
+\begin{proof}
+All $E_k$ are independent, since their squarefree supports are nonempty and disjoint. Equation~\eqref{eq:three} shows that $B$ is invariant under multiplication by $E_1$. Since $[k+1]_q>0$, its interior recurrence also expresses each $E_{k+1}$ as a polynomial in $E_1$. Thus $B=\mathbb R[E_1]$, proving closure under multiplication, including products of total index greater than $N$.
+Expand such a product as $\sum_k h_kE_k$. Its coefficient at each squarefree monomial $z_S$ is $h_{|S|}$. Lemma~\ref{lem:basis} makes that coefficient nonnegative. There is a subset of each cardinality $0,\ldots,N$, so every $h_k$ is nonnegative.
+\end{proof}
+
+\section{Normalization and the finite orthogonal system}
+\begin{lemma}[Positive normalization]\label{lem:normalization}
+Evaluation $z_j\mapsto pq^{N-j}$ defines an algebra character $\epsilon$ of $A$. Put $t_k=\epsilon(E_k)>0$. Then
+\begin{equation}\label{eq:ratio}
+t_0=1,\quad t_1=p[N]_q,\qquad
+\frac{t_{k+1}}{t_k}=pq^k\frac{[N-k]_q}{[k+1]_q}\quad(0\leq k<N).
+\end{equation}
+\end{lemma}
+\begin{proof}
+For $h=N-j$, substitution in the right-hand side of \eqref{eq:algebra} gives
+\[
+(q-1)p^2q^h[h]_q+(p-1)pq^h+pq^h
+=p^2q^h\big((q-1)[h]_q+1\big)=p^2q^{2h}.
+\]
+Thus all defining relations hold. The generating polynomial of the $t_k$ is
+$T(u)=\prod_{j=0}^{N-1}(1+pq^ju)$, whose coefficients are strictly positive.
+When $q>1$, the identity $(1+pu)T(qu)=(1+pq^Nu)T(u)$ gives
+$(q^k-1)t_k=p(q^N-q^{k-1})t_{k-1}$ for $1\leq k\leq N$, which is \eqref{eq:ratio}. When $q=1$, $t_k=\binom Nk p^k$ and the same ratio follows directly.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:criterion}]
+Use Lemma~\ref{lem:parameters} and put $p=1/r\geq1$. Construct $A,B$ as above and set $X=E_1/t_1$, $U_k=E_k/t_k$. Divide \eqref{eq:three} by $t_1t_k$ and use \eqref{eq:ratio}. The three coefficients are
+\begin{align*}
+\frac{[k+1]_qt_{k+1}}{p[N]_qt_k}
+&=\frac{q^k[N-k]_q}{[N]_q},\\
+\frac{(p-1)[k]_q}{p[N]_q}&=(1-r)\frac{[k]_q}{[N]_q},\\
+\frac{pq^{k-1}[N-k+1]_qt_{k-1}}{p[N]_qt_k}
+&=r\frac{[k]_q}{[N]_q}.
+\end{align*}
+At $k=0$ omit the third expression; at $k=N$ omit the first. Consequently $U_k=R_k(X)$ for every $k\leq N$, with the stated terminal relation.
+
+The orthogonality support follows from the real spectral theorem in finite dimensions. On $B$ use the positive inner product from Lemma~\ref{lem:trace}. Multiplication by $X$ is self-adjoint. The vector $1=E_0$ is cyclic because the $E_k$ are polynomials of successive degrees in $X$ and form a basis. In an orthogonal eigenspace decomposition of a self-adjoint operator, the cyclic span of one vector has dimension at most the number of distinct eigenvalues. Here the cyclic span has dimension $N+1$, so there are exactly $N+1$ distinct eigenvalues, and the projection of $1$ on every eigenspace is nonzero. Give each eigenvalue the squared norm of that projection as its mass. All masses are positive, sum to $\langle1,1\rangle=1$, and yield
+\[
+\int f(x)h(x)\,d\mu(x)=\langle f(X),h(X)\rangle
+\]
+for real polynomials $f,h$, identifying an algebra element with its action on $1$. The $E_k$ are orthogonal by \eqref{eq:trace}, so the $R_k$ are orthogonal for this measure.
+
+Proposition~\ref{prop:subalgebra} and positive $t_k$ give nonnegative product coefficients for the $U_k$. Applying the character $\epsilon$ gives their sum equal to one because $\epsilon(U_k)=1$. Polynomial identities in the algebra hold on every spectral point; conversely the $R_k$, having successive degrees at most $N$, form a basis of functions on the $N+1$ distinct points. This proves uniqueness and \eqref{eq:positive} for all products.
+\end{proof}
+
+\section{Applications and scope}
+\begin{corollary}[Full positive Krawtchouk range, candidate]\label{cor:kraw}
+For every $N\geq1$ and $0<p_0\leq1/2$, Krawtchouk polynomials orthogonal for binomial weights $\binom Nj p_0^{N-j}(1-p_0)^j$ have nonnegative linearization when normalized at $j=0$.
+\end{corollary}
+\begin{proof}
+To fix the convention without relying on a named recurrence, put $s=1-p_0$, $r=p_0/s\in(0,1]$, and let $Y_1,\ldots,Y_N$ be independent variables with values $1,-r$ of probabilities $p_0,s$. Their mean is zero and $Y_i^2=(1-r)Y_i+r$. The normalized elementary symmetric sums
+\[
+K_i(j)=\binom Ni^{-1}\sum_{|S|=i}\prod_{l\in S}Y_l
+\]
+depend only on the number $j$ of negative coordinates. They are orthogonal, because the expectation of two distinct squarefree monomials is zero: some independent mean-zero variable occurs once. Their weights in $j$ are exactly the stated binomial weights. With $x=N^{-1}\sum_lY_l=1-j/(Ns)$, multiplication by $x$ gives
+\[
+xK_i=\frac{N-i}{N}K_{i+1}+(1-r)\frac iN K_i+r\frac iN K_{i-1}.
+\]
+Indeed, in multiplying the elementary sum by $\sum_lY_l$, indices outside a subset give $(i+1)$ copies of each subset of size $i+1$; the linear part of $Y_l^2$ gives $(1-r)i$ copies of each subset of size $i$; and the constant part gives $r(N-i+1)$ copies of each subset of size $i-1$. Division by the binomial normalizers gives the displayed recurrence, including $i=N$. Its leading coefficient in $x$ is positive, its degree is $i$, and its value at $j=0$ is one. These properties identify the normalized orthogonal polynomials for the binomial measure. Apply Theorem~\ref{thm:criterion} with $q=1$.
+\end{proof}
+
+\begin{corollary}[An additional continuous finite class, candidate]\label{cor:additional}
+For every $N\geq2$, $q>1$, and $0<r\leq1$, the recurrence \eqref{eq:parameters} has nonnegative linearization. In the normalization $R_0=1$, $R_1=x$, it is outside the Krawtchouk recurrence class.
+\end{corollary}
+\begin{proof}
+Its increments are $d_i-d_{i-1}=q^{i-1}/[N]_q$, so all hypotheses hold. For a Krawtchouk recurrence in this normalization the increments of $b_i+c_i$ are constant. Here their ratio is $q>1$ and $N\geq2$, so they are not constant. An affine change of the support followed by the normalization $R_1=x$ leaves the multiplication coefficients in the basis unchanged; it cannot remove this distinction.
+\end{proof}
+
+\begin{proposition}[Relation to the existing algebraic construction]\label{prop:source}
+The quadratic relations \eqref{eq:algebra} are those of Koelink~\cite[Theorem 3.1(ii), equation (3.3)]{koelink}, with $z_j=u(x^j)$ and the same parameters $p,q$. The recurrence in this paper is the normalized recurrence of his Theorem 7.1, with $r=1/p$; its polynomial-in-the-spectral-variable interpretation is the dual $q$-Krawtchouk interpretation described after his Theorem 7.8.
+\end{proposition}
+\begin{proof}
+The source square relation is $u(x^j)^2=(q-1)u(x^j)\sum_{l>j}u(x^l)+(p-1)u(x^j)+pq^{N-j}$, which is \eqref{eq:algebra}. In Theorem 7.1 the coefficients of the next, current and previous indices are respectively $pq^i(1-q^{N-i})$, $(p-1)(1-q^i)$ and $1-q^i$. Division by $p(1-q^N)$ gives \eqref{eq:parameters} for $q>1$. The $q=1$ case follows directly from the construction above, without division by zero. His discussion after Theorem 7.8 explicitly interchanges polynomial degree and spectral index to obtain the dual family.
+\end{proof}
+
+The sufficient assumptions here are restrictive equalities, not a characterization of all finite systems with property (P). They can be checked in a number of arithmetic operations proportional to $N$, without forming any general product coefficients or testing polynomial matrices. The proof uses positive algebra multiplication and closure, rather than an explicit linearization formula. The parameter family and underlying algebra predate Szwarc's survey; this paper does not claim a newly discovered historical resolution of his intended open problem.
+
+\begin{thebibliography}{9}
+\bibitem{koelink} H. T. Koelink, \emph{$q$-Krawtchouk polynomials as spherical functions on the Hecke algebra of type B}, arXiv:q-alg/9605040 (1996), \url{https://arxiv.org/abs/q-alg/9605040}.
+\bibitem{szwarc} R. Szwarc, \emph{Orthogonal Polynomials and Banach Algebras}, Inzell Lectures on Orthogonal Polynomials (2005), \S5, Problem 2, \url{https://www.math.uni.wroc.pl/~szwarc/pdf/inzell.pdf}.
+\end{thebibliography}
+\end{document}

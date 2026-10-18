@@ -1,0 +1,14 @@
+# Build outputs and local research tooling
+__pycache__/
+*.py[cod]
+*.log
+*.aux
+*.out
+*.toc
+*.synctex.gz
+.ci-result/
+.ci-tools/
+tools/
+sources/
+lean/.lake/
+lean/scratch/
