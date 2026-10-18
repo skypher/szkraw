@@ -22,8 +22,8 @@ lean/lake-manifest.json. From the project root:
   make diagnostics
   make check
 
-If lake is outside PATH, pass LAKE=/absolute/path/to/lake. For a fresh checkout, `lake -d lean exe cache get` fetches the dependencies
-and mathlib build artifacts using the committed manifest.
+If lake is outside PATH, pass LAKE=/absolute/path/to/lake. For a fresh checkout, run `lake exe cache get` from the lean/ directory to
+fetch the dependencies and mathlib artifacts using the committed manifest.
 The resident REPL in tools/ is optional and is not required for any proof build.
 
 Proof entry points

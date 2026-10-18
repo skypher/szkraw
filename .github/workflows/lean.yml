@@ -74,9 +74,10 @@ jobs:
 
       - name: Fetch mathlib artifacts
         if: steps.previous.outputs.result == 'miss'
+        working-directory: lean
         run: |
-          mapfile -t modules < <(python3 -u .github/scripts/lean_ci.py mathlib-imports)
-          lake -d lean exe cache get "${modules[@]}"
+          mapfile -t modules < <(python3 -u ../.github/scripts/lean_ci.py mathlib-imports)
+          lake exe cache get "${modules[@]}"
 
       - name: Build proof and audit principal statements
         if: steps.previous.outputs.result == 'miss'
