@@ -640,7 +640,11 @@ Let $b\equiv0$, $a_n=1-c_n$, and let $0=c_0<c_1\leq c_2\leq\cdots\leq c_N=1$ sat
 The array is palindromic. With $\sigma\equiv1$, $\alpha_n=c_n$ is nondecreasing, $\beta\equiv0$ and $\alpha_n+\gamma_n=1$. If $j\leq i$ and $i+j\leq N-2$, then $j<N-i$, so $\alpha_j=c_j\leq c_{N-i}=1-c_i=\gamma_i$. Theorem~\ref{thm:palindromic} applies.
 \end{proof}
 
-The hypotheses of Corollary~\ref{cor:palin} are inequalities in the coefficients. They contain the symmetric Krawtchouk endpoint, where the perturbation criterion of Section~\ref{sec:perturbation} gives no neighbourhood and where the convex counterexamples of Section~\ref{sec:open} show that convexity alone does not suffice. Miclo's palindromic criterion~\cite[Theorem~31]{miclo2015} requires $2^nP(n,n+1)$ to be nonincreasing on $[0,N/2]$, which the symmetric Krawtchouk chain violates.
+The hypotheses of Corollary~\ref{cor:palin} are inequalities in the coefficients. They contain the symmetric Krawtchouk endpoint, where the perturbation criterion of Section~\ref{sec:perturbation} gives no neighbourhood and where the convex counterexamples of Section~\ref{sec:open} show that convexity alone does not suffice.
+
+Combined with Theorem~\ref{thm:decomp}, Corollary~\ref{cor:palin} gives an inequality criterion for symmetric systems: an array with $b\equiv0$ on $0,\ldots,2N$ has nonnegative linearization whenever its two normalized components satisfy the hypotheses of Corollary~\ref{cor:palin}. For Szwarc's system \eqref{eq:qarray} at $p_0=1/2$ the components are the symmetric Krawtchouk arrays on $N+1$ and $N$ points (Corollary~\ref{cor:parity} with $q=r=1$), so this case is covered by inequalities alone.
+
+The reversal route cannot reach systems whose diagonal increases at the top. If $b_{N-1}<b_N$, the reversed array has $g'(1,1;1)=(b'_1-b'_0)/a'_0=(b_{N-1}-b_N)/a'_0<0$, so condition (b) of Theorem~\ref{thm:deep} fails. In particular it fails for the Krawtchouk arrays with $r<1$ and for \eqref{eq:qarray} with $p_0<1/2$, whose deep coefficients are positive only through cancellation in the formula of Theorem~\ref{thm:deep}. Miclo's palindromic criterion~\cite[Theorem~31]{miclo2015} requires $2^nP(n,n+1)$ to be nonincreasing on $[0,N/2]$, which the symmetric Krawtchouk chain violates.
 
 \section{Open problems}\label{sec:open}
 
