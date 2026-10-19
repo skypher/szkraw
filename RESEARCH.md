@@ -198,6 +198,22 @@ The natural conjecture "constant ratio b/c with r ≤ 1/2 and convex profile d i
 
 The follow-up candidate with log-convex increments (step ratios nondecreasing) is also false: steps 1 (×14), (21/20)^1..4 give exact g(18,18;18) < 0 at r = 1/2; near r = 1, steps 1,1,1,31/30 fail at r = 9/10. No monotone-shape condition tested survives for all N at fixed r.
 
+## Deep triples: lightcone certificates and other approaches (negative results)
+
+deep_certificates.py (not called from verify.py; the linear programs need numpy and scipy and run in floating point, the other checks are exact) tests four proposed routes to an inequality criterion for the deep triples of Theorem 7.13. Fix k, put u(x,y) = g(x,y;k), and call v a certificate for the deep point (n,m) if <Hu,v> = 0 expresses u(n,m) as a combination of other values with coefficients (H*v)(p) that are nonnegative wherever u(p) is already known to be nonnegative and zero elsewhere. Counts below are deep triples (n,m,k) with n >= m.
+
+- Tilted reversal (insert T between the two factors of Theorem 7.13): vacuous. The top-row factor W[t][z] = g(N,N−t;z) is triangular with positive diagonal, so T = W always works and merely reproduces the deep coefficients; the existence of T is equivalent to (P). The explicit choice T = W at r = 1 keeps T⁻¹W ≥ 0 but gives negative entries in the other factor (min −1/2 at N = 4, r = 1/2; −8 at N = 6, r = 1/5).
+- Site-dependent tower generators y_j ∈ {1, −r_j}: Y = Σ y_j has N+1 distinct values only when all r_j are equal (8 values for r = (1/2,1/2,1/2,2/5), 15 for generic r_j at N = 4), so the generated system is no longer an (N+1)-point system.
+- Curvature compensated by the diagonal: on the N = 14 counterexample profile (P) holds for r ≤ 2/5 and at r = 1 but fails at r = 1/2 and 7/10. More diagonal does repair the curvature, but the admissible set is not convex in the coefficients, and a threshold "deviation ≤ ε(N,r)" reduces to the perturbation criterion; no precise criterion was formulated.
+- Lightcone weights on the backward cone {j < m, |i−n| < m−j}:
+  - Free weights certify every deep point of Krawtchouk at N = 5 and 8 for r = 1, 1/2, 1/5 (90/90 at N = 8), even when only non-deep values (given by Theorem 7.10) are used ("one-shot"). The search is sound: it refuses the negative coefficient g(14,14;14) of the N = 14 counterexample. So the product-weight obstruction recorded in MISSION.md does not extend to general weights.
+  - The weights must depend on the coefficients. No single v serves r = 1/5 and r = 1/2 (41/90 at N = 8, 14/27 at N = 5; failures already at N = 4). The same holds after renormalizing by σ_n = r^{n/2} or in Szwarc's normalization (3.9). Since H*v is linear in the coefficients for fixed v, no criterion consisting of linear inequalities in the coefficients obtained this way contains the Krawtchouk segment.
+  - Szwarc's checkerboard support, with free weights, certifies 90/90 at r = 1 but 24/90 for every tested r < 1, including r = 99/100. Nonnegative weights certify 24/90 at r = 1 and 51/90 at r = 1/2. One-coordinate weights (functions of i+j, i−j, i or j) certify at most 21/90.
+  - The canonical Riemann function (H*v = 0 at every deep point except the apex, obtained by marching; exact arithmetic) satisfies the identity u(n,m) = Σ flux·u exactly, but its flux onto the non-deep boundary is negative at most deep points, already for symmetric Krawtchouk (flux −7 at (8,8,1), r = 1; nonnegative at 4/90).
+  - By Farkas, one-shot certificates at all deep points are equivalent to a maximum principle for H (solutions nonnegative off the deep corner are nonnegative on it). On 60 random perturbed Krawtchouk arrays (N = 6) it held exactly when (P) held (32 both, 28 neither, 0 disagreements), so it is a restatement of (P), not a weaker target.
+
+Conclusion: every lightcone variant tested either fails or is as hard as (P). A criterion covering asymmetric Krawtchouk and Q_n with p_0 < 1/2 must use the increasing diagonal actively rather than absorb it into positive margins.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.

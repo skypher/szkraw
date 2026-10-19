@@ -43,7 +43,9 @@ Verification scope
 ------------------
 The proofs use no sorry, admit or project-specific axioms. The audited declarations
 depend only on Lean's propext, Classical.choice and Quot.sound. Exact Python checks
-are diagnostics, not a substitute for all-size proofs. The earlier independent
+are diagnostics, not a substitute for all-size proofs.
+deep_certificates.py records negative results on the open deep-triple problem;
+its linear programs need numpy and scipy and are not part of make diagnostics. The earlier independent
 AI mathematical review is archived in REVIEW.md and reviews/; it is not human
 peer review and is not a substitute for the Lean kernel checks.
 
