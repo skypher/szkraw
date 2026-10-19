@@ -197,3 +197,7 @@ Status: Section 7 has no Lean formalization and no independent review. An earlie
 The natural conjecture "constant ratio b/c with r ≤ 1/2 and convex profile d implies nonnegative linearization" survives random sampling and adversarial optimization up to N = 10, but is false: one-kink convex profiles give exact counterexamples g(14,14;14) < 0 at r = 1/2 (N = 14) and g(20,20;20) < 0 at r = 2/5 (N = 20), replayed in verify.py. Float scans suggest the admissible r for convex profiles decreases with N. A general inequality-type criterion for finite systems remains open; Theorem 7.8 shows that one for nonsymmetric systems would transfer to symmetric systems.
 
 The follow-up candidate with log-convex increments (step ratios nondecreasing) is also false: steps 1 (×14), (21/20)^1..4 give exact g(18,18;18) < 0 at r = 1/2; near r = 1, steps 1,1,1,31/30 fail at r = 9/10. No monotone-shape condition tested survives for all N at fixed r.
+
+## Prior art: Miclo 2015
+
+L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
