@@ -175,3 +175,16 @@ The setup issue was subsequently fixed and the full build above passed.
 Documentation changes leave the proof fingerprint unchanged; Lean sources,
 toolchain, dependency manifest and CI implementation changes invalidate it.
 The workflow's manual `rebuild` option bypasses the verdict cache.
+
+## Szwarc's quadratic system (Section 7)
+
+Problem 2 of Szwarc's survey (printed pp. 125–126) also introduces the symmetric recurrence yQ_{2n} = (N−n)Q_{2n+1} + nQ_{2n−1}, yQ_{2n−1} = (1−p_0)Q_{2n} + p_0Q_{2n−2} with Q_{2n}(y) = K_n(y²), and asks for a general criterion that would handle it. Sections 2–6 did not address this system. Section 7 adds:
+
+- Theorem 7.1: nonnegative linearization of the stochastic form of Q for all N ≥ 1 and 0 < p_0 ≤ 1/2, with g(2,2;2) < 0 for p_0 > 1/2. Proof: a graded module V = A ⊕ ⊕_l f_lA over the q = 1 algebra, with edge idempotents f_l = (r + y_l)/(1+r) satisfying y_l f_l = f_l, and an A-linear operator Y realizing the recurrence. The even part recovers Corollary 6.1 through Szwarc's quadratic route.
+- Lemma 7.4: margin (rs/8)^N on the symmetric triangle support for 0 < p_0 < 1/2.
+- Lemma 7.5: Theorem 5.3's estimate stated for any reference with nonnegative linearization, a lower bound α on upward coefficients, and a margin δ.
+- Theorem 7.6: every symmetric stochastic array within η = ½(rs/8)^N(16N)^{−2N} of Szwarc's array (0 < p_0 < 1/2) has nonnegative linearization. Corollary 7.7 gives arrays outside both the Szwarc and geometric families.
+
+Exact diagnostics: szwarc_check.py, called from verify.py, checks Theorem 7.1 and Lemma 7.4 on 42 arrays (N ≤ 7), sharpness for p_0 ∈ {3/5, 9/10}, the identities of Lemmas 7.2–7.3 and the product mechanism U_mU_n = Σ g U_k in the graded model (N ≤ 4, including r > 1), and the margin of Theorem 7.6 on 18 rational symmetric perturbations (N ≤ 3). These are diagnostics, not the proof.
+
+Status: Section 7 has no Lean formalization and no independent review. An earlier exploratory approach through Szwarc's discrete hyperbolic certificates (checkerboard cones on the finite grid) was abandoned; in particular, the vanishing g(m,n;k) = 0 for m+n+k > 2M holds for symmetric Krawtchouk but is false in general and is not used anywhere.

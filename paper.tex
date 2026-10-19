@@ -7,8 +7,8 @@
 \usepackage[breaklinks=true,linktocpage=true]{hyperref}
 \hypersetup{colorlinks=true,linkcolor=purple,urlcolor=purple,citecolor=blue!80!black,
 pdfauthor={Leslie P. Polzer},pdftitle={Coefficient criteria for finite nonnegative linearization},
-pdfsubject={Recurrence conditions and quantitative stability for finite orthogonal polynomials},
-pdfkeywords={orthogonal polynomials, Krawtchouk polynomials, nonnegative linearization, hypergroups, Lean}}
+pdfsubject={Recurrence conditions, quadratic systems and quantitative stability for finite orthogonal polynomials},
+pdfkeywords={orthogonal polynomials, Krawtchouk polynomials, nonnegative linearization, quadratic transformation, hypergroups, Lean}}
 \medmuskip=4mu
 \thickmuskip=8mu
 \setlength{\emergencystretch}{2em}
@@ -30,7 +30,7 @@ pdfkeywords={orthogonal polynomials, Krawtchouk polynomials, nonnegative lineari
 \author{Leslie P. Polzer}
 \newcommand{\authoraffiliation}{Independent Researcher}
 \newcommand{\authoremail}{polzer@fastmail.com}
-\date{October 18, 2026}
+\date{October 19, 2026}
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{\z@}{-3.5ex \@plus -1ex \@minus -.2ex}{2.3ex \@plus .2ex}{\normalfont\large\bfseries}}
 \renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\enspace}
@@ -52,9 +52,9 @@ pdfkeywords={orthogonal polynomials, Krawtchouk polynomials, nonnegative lineari
 \maketitle
 
 \begin{abstract}
-We give two sufficient criteria stated directly in the coefficients of a finite stochastic three-term recurrence. The first assumes that the sum of its diagonal and downward coefficients has positive geometric increments with ratio $q\geq1$, and that the ratio of those coefficients is constant and nonnegative. A finite algebra construction gives nonnegative linearization, including products beyond the terminating degree. This includes the full positive Krawtchouk range and the dual $q$-Krawtchouk family with nonconstant increments. The underlying quadratic algebra occurs in Koelink's work on type B Hecke algebras. The second criterion gives explicit perturbation inequalities admitting a relatively open neighborhood of recurrence arrays around every Krawtchouk system in the interior of the positive linearization range. Neither criterion requires computing general linearization coefficients.
+We give two sufficient criteria stated directly in the coefficients of a finite stochastic three-term recurrence. The first assumes that the sum of its diagonal and downward coefficients has positive geometric increments with ratio $q\geq1$, and that the ratio of those coefficients is constant and nonnegative. A finite algebra construction gives nonnegative linearization, including products beyond the terminating degree. This includes the full positive Krawtchouk range and the dual $q$-Krawtchouk family with nonconstant increments. The underlying quadratic algebra occurs in Koelink's work on type B Hecke algebras. The second criterion gives explicit perturbation inequalities admitting a relatively open neighborhood of recurrence arrays around every Krawtchouk system in the interior of the positive linearization range. For Szwarc's symmetric quadratic system of length $2N+1$, a graded version of the algebra proves nonnegative linearization for $p_0\leq1/2$, and a third criterion admits explicit symmetric neighborhoods of it. None of the criteria requires computing general linearization coefficients.
 \vskip5pt
-\noindent\textbf{Keywords.}\enspace Finite orthogonal polynomials; nonnegative linearization; Krawtchouk polynomials; dual $q$-Krawtchouk polynomials; polynomial hypergroups.
+\noindent\textbf{Keywords.}\enspace Finite orthogonal polynomials; nonnegative linearization; Krawtchouk polynomials; dual $q$-Krawtchouk polynomials; quadratic transformation; polynomial hypergroups.
 \vskip5pt
 \noindent\textbf{MSC2020 Classification.}\enspace 33C45; 33D45; 42C05.
 \end{abstract}
@@ -67,7 +67,7 @@ Nonnegative linearization (property (P)) asks whether the product of two orthogo
 
 The Krawtchouk case is classical. Eagleson~\cite{eagleson} studied positive definite sequences for these polynomials in 1969; Szwarc~\cite[\S5, Problem~2]{szwarc} records the nonnegative-linearization range as $0<p_0\leq1/2$ for binomial weights $\binom Njp_0^{N-j}(1-p_0)^j$ when normalized at $j=0$.\footnote{The linked author version, \S5, Problem~2, printed p.~125, uses inconsistent parameter conventions: its displayed weights have mean $N(1-p)$, whereas its degree-zero recurrence gives $K_1(x)=(x-pN)/((1-p)N)$. Thus the displayed weights give $\int K_1\,d\mu=(1-2p)/(1-p)$. Corollary~\ref{cor:kraw} derives our weights and normalization directly.} Our proof below fixes that convention directly from a two-point model. It does not treat Krawtchouk positivity itself as a new result.
 
-Recurrence methods also have a long history. In the second note of his 1969 report, Askey~\cite[Part~II, Theorem~1 and Corollary~1]{askey} gives finite recurrence conditions leading to a hyperbolic difference-equation maximum principle. The stated polynomial conclusion concerns products with degree sum at most $N$. Szwarc's later characterization~\cite[Theorem~1]{szwarc2003} treats finite as well as infinite systems through an auxiliary discrete hyperbolic problem. His 2005 survey nevertheless asks for criteria for finite systems, including Krawtchouk~\cite[\S5, Problem~2]{szwarc}. Here we seek structural assumptions on the recurrence coefficients that imply positivity for every finite product.
+Recurrence methods also have a long history. In the second note of his 1969 report, Askey~\cite[Part~II, Theorem~1 and Corollary~1]{askey} gives finite recurrence conditions leading to a hyperbolic difference-equation maximum principle. The stated polynomial conclusion concerns products with degree sum at most $N$. Szwarc's later characterization~\cite[Theorem~1]{szwarc2003} treats finite as well as infinite systems through an auxiliary discrete hyperbolic problem. His 2005 survey nevertheless asks for criteria for finite systems, including Krawtchouk and its quadratic system $Q_n$ (Section~\ref{sec:szwarc})~\cite[\S5, Problem~2]{szwarc}. Here we seek structural assumptions on the recurrence coefficients that imply positivity for every finite product.
 
 Koelink~\cite[Theorems~3.1(ii) and 7.8]{koelink} constructed a triangular quadratic algebra associated with the type B Hecke algebra, and identified the corresponding $q$-Krawtchouk spherical functions. The dual recurrence in that construction is the geometric family used below. Our algebraic proof extracts its positive multiplication mechanism and expresses the resulting sufficient condition as two scalar patterns in a stochastic recurrence: a constant ratio and geometric increments. No priority is claimed for the algebra or for the resulting named family. For comparison, Miclo~\cite[Proposition~3.3]{miclo} gives a spectral characterization of the hypergroup property at a boundary point for irreducible finite birth--death chains by entrywise nonnegativity of products of transition matrices shifted by eigenvalues of their leading principal submatrices.
 
@@ -388,6 +388,140 @@ The $q=1$ case follows directly from the construction above, without division by
 
 The geometric criterion covers the full positive Krawtchouk range, including the symmetric endpoint. The perturbation criterion allows freely varying coefficients around each Krawtchouk array in the interior of the positive linearization range; its stated radius is conservative and decreases with $N$. Both hypotheses can be checked using a number of arithmetic comparisons proportional to $N$, without forming any general product coefficients or testing polynomial matrices. The proofs use positive algebra multiplication, a lower bound from a single positive term, and a norm estimate. They provide sufficient conditions, not a characterization of all finite systems with property (P). The geometric parameter family and underlying algebra predate Szwarc's survey; this paper makes no claim of historical priority for these constructions or criteria.
 
+\section{Szwarc's quadratic system}\label{sec:szwarc}
+
+Problem~2 of~\cite[\S5]{szwarc} does not stop at the Krawtchouk recurrence. With his parameter written as $p_0$, Szwarc introduces the symmetric recurrence of length $2N+1$
+\begin{equation}\label{eq:szwarc-q}
+yQ_{2n}=(N-n)Q_{2n+1}+nQ_{2n-1},\qquad
+yQ_{2n-1}=(1-p_0)Q_{2n}+p_0Q_{2n-2},
+\end{equation}
+records that $Q_{2n}(y)$ is the Krawtchouk polynomial $K_n(y^2)$ of his recurrence, states that the $Q_n$ have nonnegative linearization for $p_0\leq1/2$, and asks for a general criterion that would handle this case. His Theorem~3.3 for infinite symmetric systems does not apply. In the normalization \eqref{eq:szwarc-q} its monotonicity hypotheses hold, and its hypothesis $\alpha_n\leq\gamma_n$ holds at odd indices exactly when $p_0\leq1/2$; at an even index $2n$ it reads $n\leq N-n$ and fails in the upper half. Some failure of this kind is forced in every finite system, whose terminal upward coefficient vanishes. This section proves the positivity of \eqref{eq:szwarc-q} by a graded version of the algebra of Section~\ref{sec:algebra}, and then gives an explicit coefficient criterion for symmetric finite systems near \eqref{eq:szwarc-q}.
+
+Put $M=2N$, $R_{2n}(t)=Q_{2n}(\sqrt Nt)$ and $R_{2n-1}(t)=\sqrt N\,Q_{2n-1}(\sqrt Nt)$. Substitution in \eqref{eq:szwarc-q} shows that the $R_k$ satisfy \eqref{eq:recurrence}, with $N$ replaced by $M$, for the array
+\begin{equation}\label{eq:qarray}
+b_k=0,\qquad
+(a_{2n},c_{2n})=\Big(\frac{N-n}{N},\frac nN\Big),\qquad
+(a_{2n-1},c_{2n-1})=(1-p_0,\,p_0).
+\end{equation}
+It satisfies \eqref{eq:basic} with $M$ in place of $N$ whenever $0<p_0<1$. The two normalizations differ by positive factors and a positive dilation, so they have the same product coefficients up to positive factors.
+
+\begin{theorem}[Szwarc's quadratic system]\label{thm:szwarc}
+Let $N\geq1$ and $0<p_0\leq1/2$. The array \eqref{eq:qarray} has a symmetric positive orthogonality measure on $2N+1$ points, and for all $0\leq m,n\leq 2N$
+\[
+R_mR_n=\sum_{k=0}^{2N}g(m,n;k)R_k,\qquad g(m,n;k)\geq0,\qquad\sum_k g(m,n;k)=1
+\]
+on that support. If $1/2<p_0<1$, then $g(2,2;2)<0$.
+\end{theorem}
+
+Throughout this section put $r=p_0/(1-p_0)$, so that $0<r\leq1$ exactly when $p_0\leq1/2$. Let $A$ be the commutative algebra generated by $y_1,\ldots,y_N$ subject to $y_j^2=(1-r)y_j+r$. This is the algebra of Section~\ref{sec:algebra} with $q=1$ after the rescaling $y_j=z_j/p$ used in Lemma~\ref{lem:margin}. Its squarefree monomials $y_S$ form a basis, and for $r\leq1$ all multiplication coefficients are nonnegative. Call an element of $A$ nonnegative if its coefficients in this basis are nonnegative.
+
+\begin{lemma}[Edge idempotents]\label{lem:edge}
+For $1\leq l\leq N$ put $f_l=(r+y_l)/(1+r)$. Then $y_lf_l=f_l$ and $f_l^2=f_l$. The ideal $f_lA$ has basis $f_ly_S$, $S\subseteq\{1,\ldots,N\}\setminus\{l\}$, and $f_l u$ has nonnegative coefficients in this basis whenever $u\in A$ is nonnegative.
+\end{lemma}
+\begin{proof}
+First $(1+r)y_lf_l=ry_l+(1-r)y_l+r=(1+r)f_l$. Then $(1+r)f_l^2=rf_l+y_lf_l=(1+r)f_l$. Let $A'$ be generated by the $y_j$ with $j\neq l$, so that $A=A'\oplus y_lA'$. Since $f_ly_l=f_l$, $f_lA=f_lA'$. The map $u\mapsto f_lu=(ru+y_lu)/(1+r)$ is injective on $A'$ by the direct sum, which gives the basis. For the last claim, $f_ly_S=f_ly_{S\setminus\{l\}}$ for every $S$.
+\end{proof}
+
+Let $V=A\oplus\bigoplus_{l=1}^Nf_lA$, on which $A$ acts by multiplication in every summand, and call a vector nonnegative if all of its coordinates are nonnegative in the bases above. Define the $A$-linear operator
+\[
+Y(u;v_1,\ldots,v_N)=\Big(\frac1N\sum_{l=1}^Nv_l\,;\,f_1u,\ldots,f_Nu\Big).
+\]
+Put $U_{2n}=\binom Nn^{-1}\sum_{|S|=n}y_S\in A$ for $0\leq n\leq N$. For $0\leq n\leq N-1$, let $U_{2n+1}$ be the vector in $\bigoplus_lf_lA$ whose $l$th coordinate is $\binom{N-1}n^{-1}\sum f_ly_S$, summed over $S\subseteq\{1,\ldots,N\}\setminus\{l\}$ with $|S|=n$.
+
+\begin{lemma}[Three-term action]\label{lem:qthree}
+With $U_{-1}=U_{2N+1}=0$ and the coefficients \eqref{eq:qarray}, $YU_k=a_kU_{k+1}+c_kU_{k-1}$ for $0\leq k\leq2N$.
+\end{lemma}
+\begin{proof}
+The $l$th coordinate of $Y\sum_{|S|=n}y_S$ is $\sum_{S\not\ni l}f_ly_S+\sum_{S'\not\ni l}f_ly_{S'}$, with $|S|=n$ and $|S'|=n-1$, because $f_ly_S=f_ly_{S\setminus\{l\}}$. Dividing by $\binom Nn$ and using $\binom{N-1}n/\binom Nn=(N-n)/N$ and $\binom{N-1}{n-1}/\binom Nn=n/N$ gives the even case. For the odd case, $(1+r)f_ly_S=ry_S+y_{S\cup\{l\}}$ when $l\notin S$. Each $n$-set occurs for $N-n$ choices of $l$ and each $(n+1)$-set for $n+1$ choices, so
+\[
+YU_{2n+1}=\frac{r(N-n)\binom Nn U_{2n}+(n+1)\binom N{n+1}U_{2n+2}}{N(1+r)\binom{N-1}n}
+=\frac{rU_{2n}+U_{2n+2}}{1+r}.
+\]
+Finally $r/(1+r)=p_0$ and $1/(1+r)=1-p_0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:szwarc}]
+Lemma~\ref{lem:finite} gives a positive measure on the $2N+1$ zeros of the terminal polynomial $T(t)=tR_{2N}(t)-R_{2N-1}(t)$. Since $b\equiv0$, the matrix $J$ is conjugate to $-J$ by $\operatorname{diag}((-1)^i)$, which fixes $e_0$; hence the measure is symmetric and $R_k(-t)=(-1)^kR_k(t)$. Put $\Phi(f)=f(Y)U_0$, where $U_0=(1;0,\ldots,0)$. Lemma~\ref{lem:qthree} gives $\Phi(R_k)=U_k$ for $k\leq2N$ and $\Phi(T)=YU_{2N}-U_{2N-1}=0$. Every polynomial vanishing on the support is a multiple of $T$, so $\Phi$ maps it to zero. Hence the product identity on the support becomes
+\[
+R_m(Y)R_n(Y)U_0=\sum_kg(m,n;k)U_k.
+\]
+The supports of the $U_k$ in the bases of $V$ are nonempty and disjoint: $U_{2n}$ uses the $y_S$ with $|S|=n$, and $U_{2n+1}$ uses the $f_ly_S$ with $l\notin S$, $|S|=n$. Each basis vector lies in exactly one of them, with positive coefficient. Consequently $g(m,n;k)\geq0$ for every $k$ whenever the left side is nonnegative.
+
+Suppose $m$ is even. Since polynomials in $Y$ commute and $Y$ is $A$-linear,
+\[
+R_m(Y)R_n(Y)U_0=R_n(Y)(U_mU_0)=U_m\,R_n(Y)U_0=U_mU_n.
+\]
+Here $U_m\in A$ and $U_n$ are nonnegative, so their product is nonnegative by the positivity of $A$ and Lemma~\ref{lem:edge}. The same holds when $n$ is even, since $g(m,n;k)=g(n,m;k)$. If $m,n$ are odd and $k$ is odd, then $g(m,n;k)=0$ by symmetry of the measure. If $m,n$ are odd and $k$ is even, then $g(m,n;k)\int R_k^2\,d\mu=\int R_mR_nR_k\,d\mu=g(k,m;n)\int R_n^2\,d\mu\geq0$. The point $t=1$ belongs to the support because $J\boldsymbol1=\boldsymbol1$, and $R_k(1)=1$, so the coefficients sum to one.
+
+For $1/2<p_0<1$ we have $r>1$. The identities above are purely algebraic and remain valid, but $A$ is no longer positive. In particular $U_2^2=N^{-2}\big((1-r)\sum_jy_j+Nr+2\sum_{i<j}y_iy_j\big)$, whose $U_2$ coefficient $g(2,2;2)=(1-r)/N$ is negative.
+\end{proof}
+
+Since $Y^2$ acts on $A$ by multiplication by $N^{-1}\sum_lf_l=(r+X)/(1+r)$, with $X=N^{-1}\sum_ly_l$, the even part of the theorem is Corollary~\ref{cor:kraw}: $R_{2n}(t)=K_n\big((1+r)t^2-r\big)$ in the normalization of that corollary. Thus Theorem~\ref{thm:szwarc} recovers the full positive Krawtchouk range by Szwarc's quadratic route. At $p_0=1/2$ the operator $Y$ is the normalized adjacency operator of the subdivided $N$-cube seen from a vertex, and the theorem reduces to counting in that graph.
+
+\begin{lemma}[Margin for the quadratic system]\label{lem:qmargin}
+Let $0<p_0<1/2$ and $s=\min(r,1-r)$. For the array \eqref{eq:qarray},
+\[
+g(m,n;k)\geq(rs/8)^N\qquad\text{whenever }|m-n|\leq k\leq m+n\text{ and }m+n+k\text{ is even}.
+\]
+All other coefficients vanish.
+\end{lemma}
+\begin{proof}
+The vanishing statements are Lemma~\ref{lem:finite} and the symmetry used above. We use $\binom Nk\leq2^N$ throughout. Up to the order of $m,n$, there are three cases.
+
+If $m,n,k$ are even, the coefficient is a Krawtchouk coefficient computed in $A$, so Lemma~\ref{lem:margin} gives the lower bound $(s/4)^N\geq(rs/8)^N$.
+
+Let $m=2a$, $n=2b+1$ and $k=2c+1$, so that
+\[
+\max(a-b-1,\,b-a)\leq c\leq\min(a+b,\,N-1).
+\]
+Fix $l$ and a set $U\not\ni l$ with $|U|=c$. The $l$th coordinate of $U_mU_n$ is
+\[
+\binom Na^{-1}\binom{N-1}b^{-1}\sum_{|T|=a}\ \sum_{S\not\ni l,\ |S|=b}f_l\,y_{T\setminus\{l\}}\,y_S .
+\] Every monomial coefficient of $y_{T\setminus\{l\}}y_S$ is a product of at most $N-1$ factors from $\{r,1-r\}$, and is therefore at least $s^{N-1}$. Put $a'=|T\setminus\{l\}|$, which can equal $a-1$ when $a\geq1$ and $a$ when $a\leq N-1$. In the $N-1$ coordinates other than $l$, sets of sizes $a'$ and $b$ with overlap $o$, retaining the linear term on $t\leq o$ overlap coordinates, give monomials of size $a'+b-2o+t$. As $o$ ranges over its admissible values these sizes fill the interval $\big[|a'-b|,\min(a'+b,N-1)\big]$. The two admissible values of $a'$ cover every $c$ above. Hence $f_ly_U$ has coefficient at least $s^{N-1}\binom Na^{-1}\binom{N-1}b^{-1}$, and comparison with $U_k$ gives
+\[
+g(m,n;k)\geq\binom{N-1}c\frac{s^{N-1}}{\binom Na\binom{N-1}b}\geq\frac{2s^{N-1}}{4^N}\geq\Big(\frac s4\Big)^N.
+\]
+
+Finally let $m=2b+1$, $n=2c+1$ and $k=2a$. With $\pi_i$ as in the proof of Lemma~\ref{lem:finite}, \eqref{eq:qarray} gives $\pi_{2a}=\binom Nar^{-a}$ and $\pi_{2c+1}=\binom{N-1}cr^{-c}/p_0$. Orthogonality gives
+\[
+g(2b+1,2c+1;2a)=g(2a,2b+1;2c+1)\frac{\pi_{2a}}{\pi_{2c+1}}
+\geq\frac{2s^{N-1}}{4^N}\cdot\frac{p_0r^N}{2^{N-1}}
+\geq\frac{2s^{N-1}r^{N+1}}{8^N},
+\]
+using $r^{c-a}\geq r^N$ and $p_0\geq r/2$. Since $s\leq r$, the last quantity is at least $(rs/8)^N$.
+\end{proof}
+
+The proof of Theorem~\ref{thm:perturbation} uses only three properties of its reference: nonnegative linearization with sums one, a lower bound for the upward coefficients, and a margin on the known support. We record it in that generality.
+
+\begin{lemma}[Stability of a reference with a margin]\label{lem:stability}
+Let $a,b,c$ satisfy \eqref{eq:basic} on the indices $0,\ldots,M$, have nonnegative linearization, and satisfy $a_i\geq\alpha$ for $i<M$, where $0<\alpha\leq1$. Suppose $g(m,n;k)\geq\delta>0$ on a set $\Sigma$ of index triples. Let $\widetilde a,\widetilde b,\widetilde c$ satisfy \eqref{eq:basic}, with $\widetilde b_i\geq0$, and differ from $a,b,c$ by at most $\eta$ in every entry. If $\eta\leq\alpha/2$ and $\eta(8/\alpha)^M\leq\delta/2$, then $|\widetilde g(m,n;k)-g(m,n;k)|\leq\delta/2$ for all $m,n,k$; in particular $\widetilde g\geq\delta/2$ on $\Sigma$.
+\end{lemma}
+\begin{proof}
+Repeat the proof of Theorem~\ref{thm:perturbation} with $N$ replaced by $M$. Now $\widetilde a_m\geq\alpha/2$, so the subtracted recurrences give $e_{m+1}\leq(4e_m+2e_{m-1}+12\eta)/\alpha$. With $L=8/\alpha\geq8$, induction gives $e_m\leq\eta L^m$: the base case is $e_1\leq3\eta$, and the step needs $4L^m+2L^{m-1}+12\leq8L^m$, which holds for $m\geq1$. Every entry of $\widetilde B_m-B_m$ is therefore at most $\eta L^M\leq\delta/2$, and \eqref{eq:matrix-product} identifies these entries with the product coefficients.
+\end{proof}
+
+Theorem~\ref{thm:perturbation} is the case $M=N$, $\alpha=1/N$ and $\delta=(s/4)^N$ of this lemma.
+
+\begin{theorem}[Symmetric criterion near Szwarc's system]\label{thm:symmetric}
+Let $N\geq1$, $0<p_0<1/2$, $r=p_0/(1-p_0)$, $s=\min(r,1-r)$, and
+\[
+\eta=\frac12\Big(\frac{rs}8\Big)^N(16N)^{-2N}.
+\]
+Let $c_k$ be the downward coefficients in \eqref{eq:qarray}. Take real numbers $\widetilde c_1,\ldots,\widetilde c_{2N-1}$ with $|\widetilde c_k-c_k|\leq\eta$, and put $\widetilde c_0=0$, $\widetilde c_{2N}=1$, $\widetilde b_k=0$ and $\widetilde a_k=1-\widetilde c_k$. The resulting symmetric finite system has nonnegative linearization with sums one. Moreover $\widetilde g(m,n;k)\geq\frac12(rs/8)^N$ whenever $|m-n|\leq k\leq m+n$ and $m+n+k$ is even, and $\widetilde g(m,n;k)=0$ otherwise.
+\end{theorem}
+\begin{proof}
+The perturbed array satisfies \eqref{eq:basic} with $M=2N$: $\widetilde a_k\geq1/N-\eta>0$ for even $k<2N$, $\widetilde a_k\geq1/2-\eta>0$ for odd $k$, and $\widetilde c_k\geq\min(p_0,1/N)-\eta>0$ for $k>0$. Theorem~\ref{thm:szwarc} shows that the reference has nonnegative linearization, and $a_k\geq1/(2N)$ for $k<2N$. Lemma~\ref{lem:qmargin} gives the margin $\delta=(rs/8)^N$ on the stated set. Apply Lemma~\ref{lem:stability} with $\alpha=1/(2N)$: then $\eta\leq\alpha/2$ and $\eta(16N)^{2N}=\delta/2$. Off the stated set, $\widetilde g$ vanishes by Lemma~\ref{lem:finite} and by the symmetry of the perturbed measure, which holds because $\widetilde b\equiv0$. The sums equal one because $\widetilde R_m(1)=1$ and $1$ lies in the support.
+\end{proof}
+
+\begin{corollary}[Symmetric systems outside both families]\label{cor:symmetric-new}
+For $N\geq2$, $0<p_0<1/2$ and $0<h\leq\eta$, the array obtained from \eqref{eq:qarray} by $c_1\mapsto p_0+h$, $a_1\mapsto1-p_0-h$ has nonnegative linearization. It is neither of the form \eqref{eq:qarray} nor of the form \eqref{eq:parameters}. More generally, Theorem~\ref{thm:symmetric} admits a relatively open set of symmetric stochastic arrays, with $2N-1$ free coefficients, around each array \eqref{eq:qarray} with $0<p_0<1/2$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:symmetric} applies. The odd downward coefficients $c_1=p_0+h$ and $c_3=p_0$ differ, so the array is not of the form \eqref{eq:qarray}; here $N\geq2$ ensures $3<2N$. In \eqref{eq:parameters}, on $2N+1$ indices, the downward coefficients $c_i=r[i]_q/[2N]_q$ are strictly increasing, whereas $c_3<c_1$.
+\end{proof}
+
+The quadratic map of~\cite[\S3.5]{szwarc} transfers these conclusions to nonsymmetric systems. If a symmetric finite system has nonnegative linearization, then its even polynomials, written in the variable $t^2$, form a finite system with nonnegative linearization: products of even polynomials involve only even polynomials. Theorem~\ref{thm:symmetric} therefore also yields nonsymmetric finite systems with nonnegative linearization, namely the quadratic transforms of the arrays it admits; their recurrence coefficients are given by the formula of~\cite[\S3.5]{szwarc}.
+
 \section{Open problems}\label{sec:open}
 
 \paragraph{Inequalities beyond geometric increments.}
@@ -397,20 +531,23 @@ The geometric criterion imposes exact equalities, whereas the perturbation crite
 For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius for which every admissible stochastic perturbation has property (P). The bound in Theorem~\ref{thm:perturbation} comes from a single-term lower margin and a worst-case recurrence amplification. Both estimates discard substantial information. A useful improvement would retain a transparent coefficient test and describe its dependence on both $N$ and the bias parameter.
 
 \paragraph{The symmetric endpoint.}
-At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Determine perturbation directions and structural constraints that preserve positivity at this boundary. The task is to control coefficients emerging from those zeros, as well as the already positive coefficients; continuity alone does not give such control.
+At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Symmetric perturbations preserve the parity zeros, and Theorem~\ref{thm:symmetric} exploits this for Szwarc's quadratic system when $p_0<1/2$. At $p_0=1/2$, and for the symmetric Krawtchouk array, further coefficients on the parity support vanish. Determine perturbation directions and structural constraints that preserve positivity there; continuity alone does not control coefficients emerging from those zeros.
+
+\paragraph{A monotonicity criterion for finite systems.}
+Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. For \eqref{eq:szwarc-q} all their hypotheses except $\alpha_n\leq\gamma_n$ at the upper even indices hold. Find inequality hypotheses of this kind, valid for finite systems including the terminal indices, that cover Theorem~\ref{thm:szwarc} without the exact algebraic structure used here.
 
 \paragraph{Other finite families.}
 Find analogous coefficient regions around other finite orthogonal systems and compare their geometry with the Krawtchouk neighborhoods. An algebra with a positive basis may supply the reference margin, but a recurrence criterion must express the resulting admissible deformations without requiring the unknown product coefficients as input.
 
 \section*{AI-use disclosure}
 
-OpenAI Codex was used to develop the proof arguments, search and check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean translation. Separate AI-assisted reviews checked the algebraic proof, boundary cases, normalizations, and quantitative estimates; these reviews are not human peer review. The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. Statements about machine verification refer only to the specific compiled Lean declarations and their documented dependencies, not to the presence of a Lean project or to numerical agreement.
+OpenAI Codex was used to develop the proof arguments, search and check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean translation. Separate AI-assisted reviews checked the algebraic proof, boundary cases, normalizations, and quantitative estimates; these reviews are not human peer review. Anthropic Claude was used to analyse Szwarc's Problem~2 against the survey text, to explore discrete hyperbolic certificates numerically, and to develop and draft Section~\ref{sec:szwarc} together with its exact diagnostics; that section has not been independently reviewed. The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. Statements about machine verification refer only to the specific compiled Lean declarations and their documented dependencies, not to the presence of a Lean project or to numerical agreement.
 
 \section*{Code and formalization}
 
 The companion source tree contains \path{probe.py} and \path{verify.py}. The command
 \begin{quote}\verb|python3 -u verify.py --max-n 7|\end{quote}
-compares recurrence-matrix multiplication with direct multiplication modulo the terminal polynomial on exact rational inputs, checks the perturbation lower bounds, and replays two rejected coefficient-profile tests. These computations are diagnostics and do not replace the proofs at arbitrary size.
+compares recurrence-matrix multiplication with direct multiplication modulo the terminal polynomial on exact rational inputs, checks the perturbation lower bounds, and replays two rejected coefficient-profile tests. It also checks Theorem~\ref{thm:szwarc}, the margin of Lemma~\ref{lem:qmargin} and the negative coefficient for $p_0>1/2$ on exact Szwarc arrays, the identities of Lemma~\ref{lem:qthree} in the graded model, and the lower bound of Theorem~\ref{thm:symmetric} on rational symmetric perturbations. These computations are diagnostics and do not replace the proofs at arbitrary size.
 
 The Lean development formalizes the two main criteria as follows:
 \begin{center}
@@ -420,7 +557,7 @@ Theorem~\ref{thm:criterion}: geometric criterion & \path{Szkraw.geometric_criter
 Theorem~\ref{thm:perturbation}: perturbation & \path{Szkraw.perturbation_criterion}
 \end{tabular}
 \end{center}
-The first includes a positive finite orthogonality measure, distinct support points, the terminal relation, and all finite product identities. The second includes the explicit radius, positive triangle margin, and exact zeros outside the triangle. Both have compiled proofs without added axioms or admitted goals.
+The first includes a positive finite orthogonality measure, distinct support points, the terminal relation, and all finite product identities. The second includes the explicit radius, positive triangle margin, and exact zeros outside the triangle. Both have compiled proofs without added axioms or admitted goals. The results of Section~\ref{sec:szwarc} have not been formalized.
 
 The companion code is available at \url{https://github.com/skypher/szkraw}; the fixed revision cited in~\cite{code} identifies the reviewed proof and audit code. Run \verb|make lean| to build the development and \verb|make axioms| to build and audit the principal statements. The latter invokes \path{lean/CheckAxioms.lean}, which rejects dependencies outside \path{propext}, \path{Classical.choice}, and \path{Quot.sound} and tests rejection of unexpected axioms. The toolchain and dependencies are pinned in \path{lean/lean-toolchain} and \path{lean/lake-manifest.json}. The declaration-by-declaration correspondence, auxiliary formalization coverage, and verification commands are recorded in \path{RESEARCH.md} at that revision. Historical attribution and the open problems are prose claims, not machine-verified statements.
 

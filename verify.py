@@ -6,6 +6,7 @@ import argparse
 from fractions import Fraction as F
 from random import Random
 from probe import linearization, first_negative
+import szwarc_check
 
 def qint(n, q):
     return sum((q**j for j in range(n)), F(0))
@@ -119,7 +120,11 @@ def main():
                                 assert matrices[m][n][k]==0
                 perturbed_count+=1
         print(f'N={N}: perturbed lower margin replayed; cumulative systems={perturbed_count}',flush=True)
-    print(f'Exact diagnostic replay ended: {count} geometric systems, {perturbed_count} perturbed systems; two counterexamples reproduced.',flush=True)
+    for N in range(1,args.max_n+1):
+        a,b,c=szwarc_check.szwarc_array(N,F(1,5))
+        assert linearization(a,b,c)==quotient_products(a,b,c),(N,'Szwarc quotient mismatch')
+    szwarc_count,szwarc_pert=szwarc_check.run(args.max_n,args.perturbations)
+    print(f'Exact diagnostic replay ended: {count} geometric systems, {perturbed_count} perturbed systems; two counterexamples reproduced; {szwarc_count} Szwarc arrays, {szwarc_pert} symmetric perturbations.',flush=True)
 
 if __name__=='__main__':
     main()
