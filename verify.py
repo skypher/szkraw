@@ -127,6 +127,8 @@ def main():
     split_count=szwarc_check.run_decomposition(min(args.max_n,6),args.perturbations)
     low_count,deep_neg=szwarc_check.run_low(200)
     print(f'Low-product theorem: {low_count} random arrays satisfying its hypotheses; convex profiles negative only at deep triples ({deep_neg} entries)',flush=True)
+    palin_count=szwarc_check.run_reversal(40)
+    print(f'Deep-reduction formula verified on 40 generic arrays; monotone palindromic arrays with (P): {palin_count}',flush=True)
     for N,r,x in szwarc_check.convex_counterexamples():
         print(f'Convex-profile counterexample: N={N}, r={r}, g(N,N;N)={float(x):.3e} < 0',flush=True)
     print(f'Exact diagnostic replay ended: {count} geometric systems, {perturbed_count} perturbed systems; two counterexamples reproduced; {szwarc_count} Szwarc arrays, {szwarc_pert} symmetric perturbations, {split_count} parity-split arrays.',flush=True)

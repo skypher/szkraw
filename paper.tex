@@ -605,6 +605,43 @@ Take $\sigma_n=r^{n/2}$. Then $\alpha_n=\sqrt r\,d_n$ and $\gamma_n=\sqrt r\,(1-
 
 For such profiles, positivity can therefore fail only on triples with all pairwise sums above $N$. The convex counterexamples recorded in Section~\ref{sec:open} fail at $(N,N,N)$, which is such a triple.
 
+\paragraph{Deep triples and reversal.}
+Call $(n,m,k)$ deep if each two of its indices have sum greater than $N$. The reversed array $a'_i=c_{N-i}$, $b'_i=b_{N-i}$, $c'_i=a_{N-i}$ defines polynomials $R'_i$ with $R'_0=1$ and the same recurrence form; its matrix is $\Pi J\Pi$, where $\Pi$ reverses the order of the indices. Write $g'$ for its product coefficients.
+
+\begin{lemma}[Reversal identity]\label{lem:reversal}
+On the support, $R_NR'_t=R_{N-t}$ for $0\leq t\leq N$.
+\end{lemma}
+\begin{proof}
+From $e_0^{\mathsf T}R_i(J)=e_i^{\mathsf T}$ for the array and for its reversal, $e_N^{\mathsf T}R'_t(J)=e_{N-t}^{\mathsf T}$. Hence $e_0^{\mathsf T}R_N(J)R'_t(J)=e_N^{\mathsf T}R'_t(J)=e_0^{\mathsf T}R_{N-t}(J)$. Both matrices commute with $J$ and $e_0$ is cyclic, so $R_N(J)R'_t(J)=R_{N-t}(J)$, which is the claim on the spectrum.
+\end{proof}
+
+\begin{theorem}[Deep reduction]\label{thm:deep}
+For every array satisfying \eqref{eq:basic} and every deep triple $(x,y,z)$,
+\[
+g(x,y;z)=\sum_{t=0}^Ng'(N-x,N-y;t)\,g(N,N-t;z).
+\]
+Moreover $g(N,N;N-l)$ is the coefficient of $R'_l$ in $R_N$. Hence all coefficients are nonnegative if (a) $g\geq0$ on non-deep triples, (b) $g'(i,j;t)\geq0$ whenever $i+j<N$, and (c) $R_N$ is a nonnegative combination of $R'_0,\ldots,R'_N$.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:reversal}, $R_x=R_NR'_{N-x}$ and $R_y=R_NR'_{N-y}$ on the support. Expanding $R'_{N-x}R'_{N-y}=\sum_tg'(N-x,N-y;t)R'_t$ and using Lemma~\ref{lem:reversal} again gives $R_xR_y=\sum_tg'(N-x,N-y;t)R_NR_{N-t}$. Expanding $R_NR_{N-t}$ gives the formula. Writing $R_N=\sum_le_lR'_l$, Lemma~\ref{lem:reversal} gives $R_N^2=\sum_le_lR_{N-l}$, so $e_l=g(N,N;N-l)$. For the last statement, $(N-x)+(N-y)<N$, so (b) makes the weights $g'$ nonnegative. It remains to see $g(N,n;z)\geq0$. If $(N,n,z)$ is not deep this is (a). Otherwise $n+z>N$, and $g(N,n;z)$ is a positive multiple of $g(n,z;N)=\sum_tg'(N-n,N-z;t)\,g(N,N-t;N)$; here $g(N,N-t;N)$ is a positive multiple of $g(N,N;N-t)$, which is nonnegative by (c).
+\end{proof}
+
+\begin{theorem}[Palindromic criterion]\label{thm:palindromic}
+Let $a,b,c$ satisfy \eqref{eq:basic} with $a_n=c_{N-n}$ and $b_n=b_{N-n}$ for all $n$, and satisfy the hypotheses of Theorem~\ref{thm:low} for some positive $\sigma$. Then the system has nonnegative linearization.
+\end{theorem}
+\begin{proof}
+The reversed array equals the array, so $R'=R$ and $g'=g$. Theorem~\ref{thm:low} gives $g\geq0$ on all non-deep triples, in particular $g'(i,j;t)\geq0$ for $i+j<N$. Since $R_N=R'_N$ is a single reversed polynomial, $g(N,N;\cdot)\geq0$. Theorem~\ref{thm:deep} gives the deep triples.
+\end{proof}
+
+\begin{corollary}[Monotone palindromic systems]\label{cor:palin}
+Let $b\equiv0$, $a_n=1-c_n$, and let $0=c_0<c_1\leq c_2\leq\cdots\leq c_N=1$ satisfy $c_n+c_{N-n}=1$. Then the system has nonnegative linearization. This includes the symmetric Krawtchouk array $c_n=n/N$.
+\end{corollary}
+\begin{proof}
+The array is palindromic. With $\sigma\equiv1$, $\alpha_n=c_n$ is nondecreasing, $\beta\equiv0$ and $\alpha_n+\gamma_n=1$. If $j\leq i$ and $i+j\leq N-2$, then $j<N-i$, so $\alpha_j=c_j\leq c_{N-i}=1-c_i=\gamma_i$. Theorem~\ref{thm:palindromic} applies.
+\end{proof}
+
+The hypotheses of Corollary~\ref{cor:palin} are inequalities in the coefficients. They contain the symmetric Krawtchouk endpoint, where the perturbation criterion of Section~\ref{sec:perturbation} gives no neighbourhood and where the convex counterexamples of Section~\ref{sec:open} show that convexity alone does not suffice. Miclo's palindromic criterion~\cite[Theorem~31]{miclo2015} requires $2^nP(n,n+1)$ to be nonincreasing on $[0,N/2]$, which the symmetric Krawtchouk chain violates.
+
 \section{Open problems}\label{sec:open}
 
 \paragraph{Inequalities beyond geometric increments.}

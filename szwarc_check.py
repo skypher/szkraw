@@ -274,3 +274,43 @@ def run_low(samples, rng_seed=29):
                         assert min(n+k, n+x, k+x) > N
                         deep_negative += 1
     return tested, deep_negative
+
+# --- Lemma 7.12, Theorems 7.13-7.14, Corollary 7.15 ------------------------------
+def reversed_array(a, b, c):
+    N = len(a)-1
+    return [c[N-i] for i in range(N+1)], [b[N-i] for i in range(N+1)], [a[N-i] for i in range(N+1)]
+
+def check_deep_formula(a, b, c):
+    N = len(a)-1
+    g = linearization(a, b, c); gp = linearization(*reversed_array(a, b, c))
+    for x in range(N+1):
+        for y in range(N+1):
+            if x+y <= N: continue
+            for z in range(N+1):
+                assert g[x][y][z] == sum(gp[N-x][N-y][t]*g[N][N-t][z] for t in range(N+1))
+        for l in range(N+1):
+            pass
+    return True
+
+def run_reversal(samples, rng_seed=31):
+    rng = Random(rng_seed)
+    for _ in range(samples):          # Theorem 7.13 on generic arrays
+        N = rng.randint(2, 6)
+        c = [F(0)] + [F(rng.randint(1, 9), 10) for _ in range(N)]
+        b = [F(0)] + [F(rng.randint(0, 9), 10)*(1-x) for x in c[1:]]
+        a = [1-b[i]-c[i] for i in range(N+1)]; a[N] = F(0); b[N] = 1-c[N]
+        check_deep_formula(a, b, c)
+    count = 0
+    for _ in range(4*samples):        # Corollary 7.15
+        N = rng.randint(2, 10); h = N//2
+        vals = sorted(F(rng.randint(1, 49), 100) for _ in range(h))
+        c = [F(0)]*(N+1); c[N] = F(1)
+        for n in range(1, h+1): c[n] = vals[n-1]
+        if N % 2 == 0: c[N//2] = F(1, 2)
+        for n in range(1, N):
+            if n > N-n: c[n] = 1-c[N-n]
+        if any(c[i] > c[i+1] for i in range(N)): continue
+        g = linearization([1-x for x in c], [F(0)]*(N+1), c)
+        assert all(x >= 0 for G in g for row in G for x in row)
+        count += 1
+    return count
