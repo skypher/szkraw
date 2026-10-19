@@ -221,8 +221,10 @@ def run_decomposition(max_n, perturbations, rng_seed=713):
 def convex_counterexamples():
     """Section 8: convex profiles with constant ratio fail at the terminal product."""
     out = []
-    for N, j, lam, r in [(14, 7, F(6,5), F(1,2)), (20, 12, F(21,20), F(2,5))]:
-        inc = [F(1)]*j + [lam]*(N-j); d = [F(0)]
+    cases = [(14, [F(1)]*7 + [F(6,5)]*7, F(1,2)), (20, [F(1)]*12 + [F(21,20)]*8, F(2,5)),
+             (18, [F(1)]*14 + [F(21,20)**t for t in range(1,5)], F(1,2))]
+    for N, inc, r in cases:
+        d = [F(0)]
         for x in inc: d.append(d[-1]+x)
         d = [x/d[-1] for x in d]
         g = linearization([1-x for x in d], [(1-r)*x for x in d], [r*x for x in d])
