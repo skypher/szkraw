@@ -52,7 +52,7 @@ pdfkeywords={orthogonal polynomials, Krawtchouk polynomials, nonnegative lineari
 \maketitle
 
 \begin{abstract}
-We give two sufficient criteria stated directly in the coefficients of a finite stochastic three-term recurrence. The first assumes that the sum of its diagonal and downward coefficients has positive geometric increments with ratio $q\geq1$, and that the ratio of those coefficients is constant and nonnegative. A finite algebra construction gives nonnegative linearization, including products beyond the terminating degree. This includes the full positive Krawtchouk range and the dual $q$-Krawtchouk family with nonconstant increments. The underlying quadratic algebra occurs in Koelink's work on type B Hecke algebras. The second criterion gives explicit perturbation inequalities admitting a relatively open neighborhood of recurrence arrays around every Krawtchouk system in the interior of the positive linearization range. For Szwarc's symmetric quadratic system of length $2N+1$, a graded version of the algebra proves nonnegative linearization for $p_0\leq1/2$, and a third criterion admits explicit symmetric neighborhoods of it. None of the criteria requires computing general linearization coefficients.
+We give two sufficient criteria stated directly in the coefficients of a finite stochastic three-term recurrence. The first assumes that the sum of its diagonal and downward coefficients has positive geometric increments with ratio $q\geq1$, and that the ratio of those coefficients is constant and nonnegative. A finite algebra construction gives nonnegative linearization, including products beyond the terminating degree. This includes the full positive Krawtchouk range and the dual $q$-Krawtchouk family with nonconstant increments. The underlying quadratic algebra occurs in Koelink's work on type B Hecke algebras. The second criterion gives explicit perturbation inequalities admitting a relatively open neighborhood of recurrence arrays around every Krawtchouk system in the interior of the positive linearization range. For symmetric finite systems, a quadratic decomposition reduces positivity to two nonsymmetric finite systems. This yields a parity-split criterion covering Szwarc's quadratic system for $p_0\leq1/2$ and a $q$-analogue, and explicit symmetric neighborhoods. None of the criteria requires computing general linearization coefficients.
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Finite orthogonal polynomials; nonnegative linearization; Krawtchouk polynomials; dual $q$-Krawtchouk polynomials; quadratic transformation; polynomial hypergroups.
 \vskip5pt
@@ -520,7 +520,59 @@ For $N\geq2$, $0<p_0<1/2$ and $0<h\leq\eta$, the array obtained from \eqref{eq:q
 Theorem~\ref{thm:symmetric} applies. The odd downward coefficients $c_1=p_0+h$ and $c_3=p_0$ differ, so the array is not of the form \eqref{eq:qarray}; here $N\geq2$ ensures $3<2N$. In \eqref{eq:parameters}, on $2N+1$ indices, the downward coefficients $c_i=r[i]_q/[2N]_q$ are strictly increasing, whereas $c_3<c_1$.
 \end{proof}
 
-The quadratic map of~\cite[\S3.5]{szwarc} transfers these conclusions to nonsymmetric systems. If a symmetric finite system has nonnegative linearization, then its even polynomials, written in the variable $t^2$, form a finite system with nonnegative linearization: products of even polynomials involve only even polynomials. Theorem~\ref{thm:symmetric} therefore also yields nonsymmetric finite systems with nonnegative linearization, namely the quadratic transforms of the arrays it admits; their recurrence coefficients are given by the formula of~\cite[\S3.5]{szwarc}.
+\paragraph{A criterion for all symmetric finite systems.}
+Szwarc uses the quadratic transformation~\cite[\S3.5]{szwarc} to pass from a symmetric system to its even part. For finite systems the converse direction also works: positivity of a symmetric system follows from positivity of two nonsymmetric finite systems, both read off from its coefficients. Any criterion for nonsymmetric finite systems therefore becomes a criterion for symmetric ones.
+
+\begin{theorem}[Quadratic decomposition]\label{thm:decomp}
+Let $N\geq2$, and let $a_k,c_k$ $(0\leq k\leq2N)$ with $b\equiv0$ satisfy \eqref{eq:basic} with $2N$ in place of $N$. Put $a_k=c_k=0$ for $k\notin[0,2N]$, and define the even component
+\[
+\hat a_n=a_{2n}a_{2n+1},\quad \hat b_n=c_{2n}a_{2n-1}+a_{2n}c_{2n+1},\quad \hat c_n=c_{2n}c_{2n-1}\qquad(0\leq n\leq N)
+\]
+and the odd component
+\[
+\check a_n=a_{2n+1}a_{2n+2},\quad \check b_n=a_{2n+1}c_{2n+2}+c_{2n+1}a_{2n},\quad \check c_n=c_{2n+1}c_{2n}\qquad(0\leq n<N).
+\]
+After the affine normalization $(\hat a_n,\hat b_n,\hat c_n)\mapsto(\hat a_n,\hat b_n-\hat b_0,\hat c_n)/\hat a_0$, and likewise for the odd component, these arrays satisfy \eqref{eq:basic} on the indices $0,\ldots,N$ and $0,\ldots,N-1$. If both have nonnegative linearization, so does the symmetric array. More precisely, with $\hat g$ and $\check g$ the product coefficients of the components and terms with indices out of range omitted,
+\[
+g(2a,2b;2c)=\hat g(a,b;c),\qquad
+g(2a,2b+1;2c+1)=a_{2a}\,\check g(a,b;c)+c_{2a}\,\check g(a-1,b;c),
+\]
+the coefficients with $m+n+k$ odd vanish, and $g(2a+1,2b+1;2c)\int R_{2c}^2\,d\mu=g(2c,2a+1;2b+1)\int R_{2b+1}^2\,d\mu$. Conversely, nonnegative linearization of the symmetric array implies that of its even component.
+\end{theorem}
+\begin{proof}
+By symmetry $R_{2n}(t)=P_n(t^2)$ and $R_{2n+1}(t)=tL_n(t^2)$ for polynomials $P_n$, $L_n$ of degree $n$. Applying \eqref{eq:recurrence} twice gives, with $x=t^2$,
+\[
+xP_n=\hat a_nP_{n+1}+\hat b_nP_n+\hat c_nP_{n-1},\qquad
+xL_n=\check a_nL_{n+1}+\check b_nL_n+\check c_nL_{n-1}.
+\]
+The row sums of the components equal $a_{2n}+c_{2n}=1$ and $a_{2n+1}+c_{2n+1}=1$; the coefficients $\hat a_n,\check a_n$ are positive below the last index and vanish there, and $\hat c_n,\check c_n>0$ for $n\geq1$. Hence the normalized arrays, which describe the same polynomials in the variable $(x-\hat b_0)/\hat a_0$ (respectively $(x-\check b_0)/\check a_0$), satisfy \eqref{eq:basic}. The terminal relation $tR_{2N}=c_{2N}R_{2N-1}$ on the support $\Sigma$ of the symmetric system, applied once and twice, gives the terminal relations of $P$ on $\{t^2:t\in\Sigma\}$ and of $L$ on $\{t^2:t\in\Sigma,\ t\neq0\}$. These sets have $N+1$ and $N$ points, because $\Sigma$ is symmetric with $2N+1$ points and contains $0$. By Lemma~\ref{lem:finite} they are the supports of the two components.
+
+The identity $tR_{2n}=a_{2n}R_{2n+1}+c_{2n}R_{2n-1}$ gives $P_n=a_{2n}L_n+c_{2n}L_{n-1}$ on the support of $L$; for $n=N$ it is the terminal relation, with $a_{2N}=0$. Hence, on $\Sigma\setminus\{0\}$,
+\[
+R_{2a}R_{2b+1}=t\big(a_{2a}L_aL_b+c_{2a}L_{a-1}L_b\big)=\sum_c\big(a_{2a}\check g(a,b;c)+c_{2a}\check g(a-1,b;c)\big)R_{2c+1},
+\]
+and both sides vanish at $t=0$. Similarly $R_{2a}R_{2b}=(P_aP_b)(t^2)=\sum_c\hat g(a,b;c)R_{2c}$ on $\Sigma$. Uniqueness of expansions on $\Sigma$ gives the displayed formulas. The vanishing for $m+n+k$ odd and the relation for two odd indices follow from the symmetry of the measure and from $g(m,n;k)\int R_k^2\,d\mu=\int R_mR_nR_k\,d\mu$, exactly as in the proof of Theorem~\ref{thm:szwarc}. The converse holds because $\hat g(a,b;c)=g(2a,2b;2c)$.
+\end{proof}
+
+Combined with Theorem~\ref{thm:criterion}, the decomposition gives a parity-split criterion of the same shape as Szwarc's Theorem~3.3: separate conditions on the even-indexed and the odd-indexed coefficients.
+
+\begin{corollary}[Parity-split criterion]\label{cor:parity}
+Let $N\geq1$ and let a symmetric array $(b\equiv0)$ on the indices $0,\ldots,2N$ satisfy \eqref{eq:basic}. Suppose that
+\begin{enumerate}
+\item the odd downward coefficients are constant, $c_{2n+1}=p_0$, with $0<p_0\leq1/2$;
+\item the even downward coefficients $d_n=c_{2n}$ have positive increments $d_n-d_{n-1}$, $1\leq n\leq N$, forming a geometric progression with ratio $q\geq1$.
+\end{enumerate}
+Then the array has nonnegative linearization. With $r=p_0/(1-p_0)$, its even component is \eqref{eq:parameters} with parameters $(N,q,r)$ and its odd component is \eqref{eq:parameters} with parameters $(N-1,q,r/q)$. If $1/2<p_0<1$ in (i) and (ii) holds, then $g(2,2;2)<0$.
+\end{corollary}
+\begin{proof}
+For $N=1$ this is Theorem~\ref{thm:szwarc}. Let $N\geq2$. The even component has $\hat a_n=(1-d_n)(1-p_0)$, $\hat b_n=d_n(1-p_0)+(1-d_n)p_0$ and $\hat c_n=d_np_0$, so $\hat a_0=1-p_0$, $\hat b_0=p_0$, and its normalization is $(1-d_n,\,(1-r)d_n,\,rd_n)$. This satisfies Theorem~\ref{thm:criterion} with $\beta=(1-r)/r\geq0$. For the odd component, $\check a_n=(1-p_0)(1-d_{n+1})$, $\check b_n=(1-p_0)d_{n+1}+p_0(1-d_n)$ and $\check c_n=p_0d_n$. Geometric increments give $d_{n+1}-d_1=qd_n$, so the normalization is
+\[
+\Big(\frac{1-d_{n+1}}{1-d_1},\ \frac{(q-r)d_n}{1-d_1},\ \frac{rd_n}{1-d_1}\Big).
+\]
+Its ratio $\beta=(q-r)/r$ is constant and nonnegative, and its profile $qd_n/(1-d_1)$ has geometric increments with ratio $q$. Theorem~\ref{thm:criterion} applies to both components, and Theorem~\ref{thm:decomp} concludes. Lemma~\ref{lem:parameters} identifies the parameters. For $p_0>1/2$, $g(2,2;2)=\hat g(1,1;1)$ is the normalized diagonal coefficient $(1-r)d_1<0$ (for $N=1$ see Theorem~\ref{thm:szwarc}).
+\end{proof}
+
+With $q=1$ the corollary is Szwarc's system \eqref{eq:qarray}, and it recovers Theorem~\ref{thm:szwarc}, including the Krawtchouk polynomials as its even component. For $q>1$ it gives a three-parameter family of symmetric finite systems with nonnegative linearization whose even components are the dual $q$-Krawtchouk arrays of Corollary~\ref{cor:additional}. Theorem~\ref{thm:decomp} also transfers the perturbation criteria: a symmetric array has nonnegative linearization whenever its two normalized components satisfy the hypotheses of Theorem~\ref{thm:perturbation}, or those of Lemma~\ref{lem:stability} around any reference with a margin. Conversely, the even component of every array admitted by Theorem~\ref{thm:symmetric} is a nonsymmetric finite system with nonnegative linearization.
 
 \section{Open problems}\label{sec:open}
 
@@ -533,8 +585,8 @@ For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius 
 \paragraph{The symmetric endpoint.}
 At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Symmetric perturbations preserve the parity zeros, and Theorem~\ref{thm:symmetric} exploits this for Szwarc's quadratic system when $p_0<1/2$. At $p_0=1/2$, and for the symmetric Krawtchouk array, further coefficients on the parity support vanish. Determine perturbation directions and structural constraints that preserve positivity there; continuity alone does not control coefficients emerging from those zeros.
 
-\paragraph{A monotonicity criterion for finite systems.}
-Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. For \eqref{eq:szwarc-q} all their hypotheses except $\alpha_n\leq\gamma_n$ at the upper even indices hold. Find inequality hypotheses of this kind, valid for finite systems including the terminal indices, that cover Theorem~\ref{thm:szwarc} without the exact algebraic structure used here.
+\paragraph{Monotonicity-type criteria for finite systems.}
+Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. By Theorem~\ref{thm:decomp}, any criterion of this kind for nonsymmetric finite systems, valid including the terminal indices, immediately gives one for symmetric finite systems. Find such inequality hypotheses that contain the geometric criterion.
 
 \paragraph{Other finite families.}
 Find analogous coefficient regions around other finite orthogonal systems and compare their geometry with the Krawtchouk neighborhoods. An algebra with a positive basis may supply the reference margin, but a recurrence criterion must express the resulting admissible deformations without requiring the unknown product coefficients as input.

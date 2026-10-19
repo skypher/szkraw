@@ -124,7 +124,8 @@ def main():
         a,b,c=szwarc_check.szwarc_array(N,F(1,5))
         assert linearization(a,b,c)==quotient_products(a,b,c),(N,'Szwarc quotient mismatch')
     szwarc_count,szwarc_pert=szwarc_check.run(args.max_n,args.perturbations)
-    print(f'Exact diagnostic replay ended: {count} geometric systems, {perturbed_count} perturbed systems; two counterexamples reproduced; {szwarc_count} Szwarc arrays, {szwarc_pert} symmetric perturbations.',flush=True)
+    split_count=szwarc_check.run_decomposition(min(args.max_n,6),args.perturbations)
+    print(f'Exact diagnostic replay ended: {count} geometric systems, {perturbed_count} perturbed systems; two counterexamples reproduced; {szwarc_count} Szwarc arrays, {szwarc_pert} symmetric perturbations, {split_count} parity-split arrays.',flush=True)
 
 if __name__=='__main__':
     main()

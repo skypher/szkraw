@@ -148,3 +148,72 @@ def run(max_n, perturbations, rng_seed=411):
                 pert += 1
         print(f'N={N}: symmetric perturbations keep margin; cumulative={pert}', flush=True)
     return count, pert
+
+# --- Theorem 7.8 and Corollary 7.9 ----------------------------------------
+def qint(n, q):
+    return sum((q**j for j in range(n)), F(0))
+
+def geometric(N, q, r):
+    d = [qint(i, q)/qint(N, q) for i in range(N+1)]
+    return [1-x for x in d], [(1-r)*x for x in d], [r*x for x in d]
+
+def parity_split_array(N, q, p0):
+    """Symmetric array of Corollary 7.9: c_{2n}=[n]_q/[N]_q, c_{2n+1}=p0."""
+    a, c = [], []
+    for k in range(2*N+1):
+        x = qint(k//2, q)/qint(N, q) if k % 2 == 0 else p0
+        c.append(x); a.append(1-x)
+    return a, [F(0)]*(2*N+1), c
+
+def components(a, c):
+    """Normalized even and odd components of Theorem 7.8."""
+    M = len(a)-1; N = M//2
+    A = lambda k: a[k] if 0 <= k <= M else F(0)
+    C = lambda k: c[k] if 0 <= k <= M else F(0)
+    even = ([A(2*n)*A(2*n+1) for n in range(N+1)],
+            [C(2*n)*A(2*n-1)+A(2*n)*C(2*n+1) for n in range(N+1)],
+            [C(2*n)*C(2*n-1) for n in range(N+1)])
+    odd = ([A(2*n+1)*A(2*n+2) for n in range(N)],
+           [A(2*n+1)*C(2*n+2)+C(2*n+1)*A(2*n) for n in range(N)],
+           [C(2*n+1)*C(2*n) for n in range(N)])
+    def normalize(u, dg, l):
+        return [x/u[0] for x in u], [(x-dg[0])/u[0] for x in dg], [x/u[0] for x in l]
+    return normalize(*even), normalize(*odd)
+
+def check_decomposition(a, c):
+    """Verify the coefficient formulas of Theorem 7.8 for one symmetric array."""
+    N = (len(a)-1)//2
+    g = linearization(a, [F(0)]*len(a), c)
+    even, odd = components(a, c)
+    ge, go = linearization(*even), linearization(*odd)
+    for x in range(N+1):
+        for y in range(N+1):
+            for z in range(N+1):
+                assert g[2*x][2*y][2*z] == ge[x][y][z]
+        for y in range(N):
+            for z in range(N):
+                expected = (a[2*x]*go[x][y][z] if x < N else 0) + (c[2*x]*go[x-1][y][z] if x > 0 else 0)
+                assert g[2*x][2*y+1][2*z+1] == expected
+    return g
+
+def run_decomposition(max_n, perturbations, rng_seed=713):
+    count = 0
+    rng = Random(rng_seed)
+    for N in range(2, max_n+1):
+        for q in [F(1), F(3,2), F(2)]:
+            for p0 in [F(1,5), F(2,5), F(1,2)]:
+                r = p0/(1-p0)
+                a, b, c = parity_split_array(N, q, p0)
+                even, odd = components(a, c)
+                assert even == geometric(N, q, r) and odd == geometric(N-1, q, r/q)
+                g = check_decomposition(a, c)
+                assert all(x >= 0 for G in g for row in G for x in row)
+                count += 1
+            a, b, c = parity_split_array(N, q, F(3,5))
+            assert linearization(a, b, c)[2][2][2] < 0
+        for sample in range(perturbations):     # formulas on generic symmetric arrays
+            c = [F(0)] + [F(rng.randint(1, 9), 10) for _ in range(2*N-1)] + [F(1)]
+            a = [1-x for x in c]
+            check_decomposition(a, c)
+        print(f'N={N}: parity-split arrays (P), components geometric(N,q,r), geometric(N-1,q,r/q); decomposition formulas exact; cumulative={count}', flush=True)
+    return count
