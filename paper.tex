@@ -574,6 +574,37 @@ Its ratio $\beta=(q-r)/r$ is constant and nonnegative, and its profile $qd_n/(1-
 
 With $q=1$ the corollary is Szwarc's system \eqref{eq:qarray}, and it recovers Theorem~\ref{thm:szwarc}, including the Krawtchouk polynomials as its even component. For $q>1$ it gives a three-parameter family of symmetric finite systems with nonnegative linearization whose even components are the dual $q$-Krawtchouk arrays of Corollary~\ref{cor:additional}. Theorem~\ref{thm:decomp} also transfers the perturbation criteria: a symmetric array has nonnegative linearization whenever its two normalized components satisfy the hypotheses of Theorem~\ref{thm:perturbation}, or those of Lemma~\ref{lem:stability} around any reference with a margin. Conversely, the even component of every array admitted by Theorem~\ref{thm:symmetric} is a nonsymmetric finite system with nonnegative linearization.
 
+\paragraph{Products of low total degree.}
+Szwarc's inequality method~\cite[Theorems~3.2 and~3.4]{szwarc} survives the passage to finite systems for all products whose two factors have total degree at most $N$. Only the terminal coefficients are excluded from its hypotheses. Write a finite system in a positive renormalization $P_n=R_n/\sigma_n$ $(\sigma_0=1)$ as $xP_n=\gamma_nP_{n+1}+\beta_nP_n+\alpha_nP_{n-1}$, so that $\gamma_n=a_n\sigma_{n+1}/\sigma_n$, $\beta_n=b_n$, $\alpha_n=c_n\sigma_{n-1}/\sigma_n$ and $\gamma_N=0$.
+
+\begin{theorem}[Low products]\label{thm:low}
+Let $a,b,c$ satisfy \eqref{eq:basic}. Suppose that for some positive $\sigma$,
+\begin{enumerate}
+\item $\beta_n$ is nondecreasing for $0\leq n\leq N-1$, and $\alpha_n$ is nondecreasing for $0\leq n\leq N$;
+\item $\alpha_n+\gamma_n$ is nondecreasing for $0\leq n\leq N-2$;
+\item $\gamma_i\geq\alpha_j$ whenever $0\leq j\leq i$ and $i+j\leq N-2$.
+\end{enumerate}
+Then $g(n,m;k)\geq0$ whenever $n+m\leq N$. Consequently a product coefficient can be negative only for a triple $(n,m,k)$ in which each two indices have sum greater than $N$.
+\end{theorem}
+\begin{proof}
+Coefficients in two positive normalizations differ by positive factors, so we may work with the polynomials $\widetilde P_n$ of~\cite[(3.9)]{szwarc}, which satisfy $x\widetilde P_n=\alpha_{n+1}\widetilde P_{n+1}+\beta_n\widetilde P_n+\gamma_{n-1}\widetilde P_{n-1}$ with $\alpha_{N+1}=0$. Fix $k$ and let $u(n,m)$ be the coefficient of $\widetilde P_k$ in $\widetilde P_n\widetilde P_m$. Multiplying the product by $x$ in the two ways shows $Hu=0$ at every point of $\{0,\ldots,N\}^2$, where $H=L_1-L_2$ is the operator of~\cite[\S3.4]{szwarc} built from these coefficients, and $u(n,0)=\boldsymbol1_{n=k}$, $u(n,m)=u(m,n)$.
+
+We prove $u(n,m)\geq0$ for $n\geq m$, $n+m\leq N$, by induction on $m$, following~\cite[Theorem~3.4]{szwarc}. Let $v$ be the indicator of the points $(i,j)$ with $j<m$, $|i-n|<m-j$ and $n+m-i-j$ odd. Every point in the support of $v$ satisfies $j<i$ and $i+j\leq n+m-1\leq N-1$, so $\langle Hu,v\rangle=0$ involves only rows where the finite recurrence holds. Hence $0=\langle u,H^*v\rangle$, and every point in the support of $H^*v$ has $i+j\leq n+m\leq N$. The computation of~\cite[\S3.4]{szwarc} gives the values of $H^*v$. At $(n,m)$ it is $-\alpha_m<0$. At the other points it is one of
+\[
+\beta_i-\beta_j,\quad (\alpha_i+\gamma_i)-(\alpha_j+\gamma_j),\quad \alpha_i-\alpha_j,\quad \gamma_i-\alpha_j,
+\]
+with $j\leq i$. The first occurs only for $i\leq N-1$. The second occurs only at interior points, where $i+j\leq n+m-2\leq N-2$. The third occurs on the edge $i+j=n+m$. The last occurs on the edge $i-j=n-m$, where $i+j\leq N-2$. Hypotheses (i)--(iii) make all of these nonnegative, and all such points have second coordinate less than $m$. By the induction hypothesis and $u(i,0)\geq0$, $\alpha_mu(n,m)=\sum_{(i,j)\neq(n,m)}(H^*v)(i,j)u(i,j)\geq0$. For the last statement, $g(n,m;k)$, $g(n,k;m)$ and $g(m,k;n)$ are positive multiples of $\int R_nR_mR_k\,d\mu$.
+\end{proof}
+
+\begin{corollary}[Convex profiles]\label{cor:convex-low}
+Let $b_i=(1-r)d_i$, $c_i=rd_i$, $a_i=1-d_i$ with $0<r\leq1$ and a convex profile $0=d_0<d_1<\cdots<d_N=1$, that is, with nondecreasing increments. Then $g(n,m;k)\geq0$ whenever two of $n,m,k$ have sum at most $N$. This includes every array \eqref{eq:parameters}.
+\end{corollary}
+\begin{proof}
+Take $\sigma_n=r^{n/2}$. Then $\alpha_n=\sqrt r\,d_n$ and $\gamma_n=\sqrt r\,(1-d_n)$, so $\alpha$ and $\beta=(1-r)d$ are nondecreasing and $\alpha_n+\gamma_n=\sqrt r$ is constant. Convexity and $d_0=0$ give $d_i+d_j\leq d_{i+j}$, so $\gamma_i-\alpha_j=\sqrt r\,(1-d_i-d_j)\geq\sqrt r\,(1-d_{i+j})>0$ for $i+j\leq N-2$. Theorem~\ref{thm:low} applies.
+\end{proof}
+
+For such profiles, positivity can therefore fail only on triples with all pairwise sums above $N$. The convex counterexamples recorded in Section~\ref{sec:open} fail at $(N,N,N)$, which is such a triple.
+
 \section{Open problems}\label{sec:open}
 
 \paragraph{Inequalities beyond geometric increments.}
@@ -586,7 +617,7 @@ For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius 
 At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Symmetric perturbations preserve the parity zeros, and Theorem~\ref{thm:symmetric} exploits this for Szwarc's quadratic system when $p_0<1/2$. At $p_0=1/2$, and for the symmetric Krawtchouk array, further coefficients on the parity support vanish. Determine perturbation directions and structural constraints that preserve positivity there; continuity alone does not control coefficients emerging from those zeros.
 
 \paragraph{Monotonicity-type criteria for finite systems.}
-Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. For finite systems, property (P) at the boundary point is the hypergroup property of the corresponding birth--death chain, and Miclo~\cite[Theorem~31 and Proposition~6]{miclo2015} adapts the wave-equation argument of Bakry and Huet to give inequality conditions for chains that are symmetric under $n\mapsto N-n$ and sufficiently convex. Those conditions exclude the Krawtchouk recurrence and the system \eqref{eq:szwarc-q}. By Theorem~\ref{thm:decomp}, any criterion of this kind for nonsymmetric finite systems, valid including the terminal indices, immediately gives one for symmetric finite systems. Find such inequality hypotheses that contain the geometric criterion. Convexity of the profile does not suffice even with a constant ratio and $r$ bounded away from $1$: for $d$ with increments $1$ at the first seven steps and $6/5$ at the remaining seven ($N=14$), exact arithmetic gives $g(14,14;14)<0$ at $r=1/2$, and the analogous profile with $N=20$, twelve unit increments and $21/20$ afterwards gives $g(20,20;20)<0$ at $r=2/5$. Log-convex increments fail as well: fourteen unit increments followed by $(21/20)^t$, $t=1,\ldots,4$, give $g(18,18;18)<0$ at $r=1/2$. The admissible bias for such profiles therefore shrinks with $N$, and the terminal product is where positivity fails.
+Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. For finite systems, property (P) at the boundary point is the hypergroup property of the corresponding birth--death chain, and Miclo~\cite[Theorem~31 and Proposition~6]{miclo2015} adapts the wave-equation argument of Bakry and Huet to give inequality conditions for chains that are symmetric under $n\mapsto N-n$ and sufficiently convex. Those conditions exclude the Krawtchouk recurrence and the system \eqref{eq:szwarc-q}. By Theorem~\ref{thm:decomp}, any criterion of this kind for nonsymmetric finite systems, valid including the terminal indices, immediately gives one for symmetric finite systems. Theorem~\ref{thm:low} supplies such hypotheses for all triples except those whose pairwise sums all exceed $N$; the remaining task is to control these deep triples by inequalities that contain the geometric criterion. Convexity of the profile does not suffice even with a constant ratio and $r$ bounded away from $1$: for $d$ with increments $1$ at the first seven steps and $6/5$ at the remaining seven ($N=14$), exact arithmetic gives $g(14,14;14)<0$ at $r=1/2$, and the analogous profile with $N=20$, twelve unit increments and $21/20$ afterwards gives $g(20,20;20)<0$ at $r=2/5$. Log-convex increments fail as well: fourteen unit increments followed by $(21/20)^t$, $t=1,\ldots,4$, give $g(18,18;18)<0$ at $r=1/2$. The admissible bias for such profiles therefore shrinks with $N$, and the terminal product is where positivity fails.
 
 \paragraph{Other finite families.}
 Find analogous coefficient regions around other finite orthogonal systems and compare their geometry with the Krawtchouk neighborhoods. An algebra with a positive basis may supply the reference margin, but a recurrence criterion must express the resulting admissible deformations without requiring the unknown product coefficients as input.

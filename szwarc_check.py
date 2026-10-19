@@ -231,3 +231,46 @@ def convex_counterexamples():
         assert g[N][N][N] < 0
         out.append((N, r, g[N][N][N]))
     return out
+
+# --- Theorem 7.10 and Corollary 7.11 (low products) -------------------------
+def low_hypotheses(gam, bet, alp):
+    N = len(gam)-1
+    mu = [alp[i]+gam[i] for i in range(N+1)]
+    return (all(bet[i] <= bet[i+1] for i in range(N-1)) and all(alp[i] <= alp[i+1] for i in range(N))
+            and all(mu[i] <= mu[i+1] for i in range(N-2))
+            and all(gam[i] >= alp[j] for i in range(N+1) for j in range(i+1) if i+j <= N-2))
+
+def run_low(samples, rng_seed=29):
+    rng = Random(rng_seed); tested = 0
+    while tested < samples:
+        N = rng.randint(2, 8)
+        alp = [F(0)]
+        for i in range(N): alp.append(alp[-1] + F(rng.randint(0, 4), 8) + (F(1, 8) if i == 0 else 0))
+        bet = [F(0)]
+        for i in range(N): bet.append(bet[-1] + F(rng.randint(0, 3), 8))
+        m = F(rng.randint(8, 20), 8); gam = []
+        for i in range(N+1):
+            m += F(rng.randint(0, 2), 8); gam.append(m - alp[i])
+        gam[N] = F(0)
+        if any(x <= 0 for x in gam[:N]) or not low_hypotheses(gam, bet, alp): continue
+        g = linearization(gam, bet, alp)
+        for n in range(N+1):
+            for k in range(N+1):
+                for x in range(N+1):
+                    if min(n+k, n+x, k+x) <= N: assert g[n][k][x] >= 0
+        tested += 1
+    # convex profiles, including the Section 8 counterexamples: negative entries only at deep triples
+    deep_negative = 0
+    for N, inc, r in [(14, [F(1)]*7 + [F(6,5)]*7, F(1,2)), (18, [F(1)]*14 + [F(21,20)**t for t in range(1,5)], F(1,2)),
+                      (8, [F(1)]*8, F(1)), (6, [F(2)**t for t in range(6)], F(1,3))]:
+        d = [F(0)]
+        for x in inc: d.append(d[-1]+x)
+        d = [x/d[-1] for x in d]
+        g = linearization([1-x for x in d], [(1-r)*x for x in d], [r*x for x in d])
+        for n in range(N+1):
+            for k in range(N+1):
+                for x in range(N+1):
+                    if g[n][k][x] < 0:
+                        assert min(n+k, n+x, k+x) > N
+                        deep_negative += 1
+    return tested, deep_negative
