@@ -125,6 +125,8 @@ def main():
         assert linearization(a,b,c)==quotient_products(a,b,c),(N,'Szwarc quotient mismatch')
     szwarc_count,szwarc_pert=szwarc_check.run(args.max_n,args.perturbations)
     split_count=szwarc_check.run_decomposition(min(args.max_n,6),args.perturbations)
+    for N,r,x in szwarc_check.convex_counterexamples():
+        print(f'Convex-profile counterexample: N={N}, r={r}, g(N,N;N)={float(x):.3e} < 0',flush=True)
     print(f'Exact diagnostic replay ended: {count} geometric systems, {perturbed_count} perturbed systems; two counterexamples reproduced; {szwarc_count} Szwarc arrays, {szwarc_pert} symmetric perturbations, {split_count} parity-split arrays.',flush=True)
 
 if __name__=='__main__':

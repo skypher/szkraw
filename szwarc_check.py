@@ -217,3 +217,15 @@ def run_decomposition(max_n, perturbations, rng_seed=713):
             check_decomposition(a, c)
         print(f'N={N}: parity-split arrays (P), components geometric(N,q,r), geometric(N-1,q,r/q); decomposition formulas exact; cumulative={count}', flush=True)
     return count
+
+def convex_counterexamples():
+    """Section 8: convex profiles with constant ratio fail at the terminal product."""
+    out = []
+    for N, j, lam, r in [(14, 7, F(6,5), F(1,2)), (20, 12, F(21,20), F(2,5))]:
+        inc = [F(1)]*j + [lam]*(N-j); d = [F(0)]
+        for x in inc: d.append(d[-1]+x)
+        d = [x/d[-1] for x in d]
+        g = linearization([1-x for x in d], [(1-r)*x for x in d], [r*x for x in d])
+        assert g[N][N][N] < 0
+        out.append((N, r, g[N][N][N]))
+    return out
