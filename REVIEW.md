@@ -209,3 +209,11 @@ Fixes, applied with the reviewer's text:
 3. Below 83/400 only the cases not excluded by the four examples are called unresolved.
 
 Current paper.tex SHA-256: `8bc78d6849e5bb465b456801ffeba4703b20c4f37537026d34d7399b1e1ae733`. A confirmation round on this text follows.
+
+## Confirmation of the round-10 fixes (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_d679b131-b1ed-41d6-b1fd-8209e2a804af`. Brief: `reviews/limits-review11-brief.md`. Answer: `reviews/limits-review11-answer.md`.
+
+**Verdict: PASS** for the sign-pattern passage: both fixes applied, no new error. Reviewed source: paper.tex at commit b1b3549, SHA-256 `8bc78d6849e5bb465b456801ffeba4703b20c4f37537026d34d7399b1e1ae733` (the reviewer did not recompute the hash).
+
+After this PASS, only the AI-use disclosure changed ("nine rounds" → "eleven rounds"); the diff against b1b3549 touches that one line alone. Current paper.tex SHA-256: `01300c3eebf583c6a3d190609b22d9e41218358e16b51af6f74a9b35344c783c`.
