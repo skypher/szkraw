@@ -73,7 +73,7 @@ Koelink~\cite[Theorems~3.1(ii) and 7.8]{koelink} constructed a triangular quadra
 
 The second criterion is quantitative stability. Around each Krawtchouk array in the interior of the positive linearization range ($0<r<1$, equivalently $0<p_0<1/2$), we exhibit an explicit radius in the space of recurrence coefficients within which all finite products remain nonnegative. Its proof uses one positive term to obtain a reference margin, an error recurrence to control perturbations, and orthogonality to preserve exact zeros outside the triangle support. The resulting neighborhoods contain independently varying coefficient arrays, rather than only a reparametrized classical family. The radius is deliberately conservative and depends on $N$; no uniform stability radius at the symmetric endpoint is asserted.
 
-Section~\ref{sec:criterion} states the geometric criterion. Sections~\ref{sec:algebra} and~\ref{sec:normalization} give its algebraic proof. Section~\ref{sec:perturbation} proves the perturbation inequalities, including explicit nongeometric examples. Section~\ref{sec:applications} fixes the Krawtchouk normalization and compares the geometric recurrence with Koelink's construction. The final section lists questions left by these sufficient conditions.
+Section~\ref{sec:criterion} states the geometric criterion. Sections~\ref{sec:algebra} and~\ref{sec:normalization} give its algebraic proof. Section~\ref{sec:perturbation} proves the perturbation inequalities, including explicit nongeometric examples. Section~\ref{sec:applications} fixes the Krawtchouk normalization and compares the geometric recurrence with Koelink's construction. Section~\ref{sec:szwarc} treats Szwarc's quadratic system and inequality hypotheses away from the deepest products. Section~\ref{sec:limits} proves that criteria acting uniformly in $N$ must carry equalities near the symmetric endpoint, shows that the stability radius of Theorem~\ref{thm:perturbation} has the optimal order in $1-r$, and records exact counterexamples to inequality shape conditions at smaller $r$. The final section lists questions left by these results.
 
 \section{Statement and conventions}\label{sec:criterion}
 For integers $j\geq0$ put $[j]_q=1+q+\cdots+q^{j-1}$, with $[0]_q=0$; in particular $[j]_1=j$.
@@ -646,32 +646,166 @@ Combined with Theorem~\ref{thm:decomp}, Corollary~\ref{cor:palin} gives an inequ
 
 The reversal route cannot reach systems whose diagonal increases at the top. If $b_{N-1}<b_N$, the reversed array has $g'(1,1;1)=(b'_1-b'_0)/a'_0=(b_{N-1}-b_N)/a'_0<0$, so condition (b) of Theorem~\ref{thm:deep} fails. In particular it fails for the Krawtchouk arrays with $r<1$ and for \eqref{eq:qarray} with $p_0<1/2$, whose deep coefficients are positive only through cancellation in the formula of Theorem~\ref{thm:deep}. Miclo's palindromic criterion~\cite[Theorem~31]{miclo2015} requires $2^nP(n,n+1)$ to be nonincreasing on $[0,N/2]$, which the symmetric Krawtchouk chain violates.
 
+\section{Limits of inequality criteria}\label{sec:limits}
+
+Theorems~\ref{thm:low} and~\ref{thm:palindromic} control every triple except the deep ones by inequalities, and Section~\ref{sec:open} records shape conditions that fail on deep triples. This section shows that the failure is structural near the symmetric endpoint. A criterion that acts on all sizes $N$ by one rule cannot be a pure inequality criterion there: to first order it must impose exact equalities. Write $K_{N,r}$ for the Krawtchouk array \eqref{eq:parameters} with $q=1$, and use the coordinates $b_1,\ldots,b_{N-1},c_1,\ldots,c_N$ of a stochastic array with $b_0=0$, $a_0=1$, $a_N=0$, $b_N=1-c_N$ and $a_n=1-b_n-c_n$ otherwise. An affine change of $x$ reduces every finite system to this form. A direction $v=(\delta b_1,\ldots,\delta b_{N-1},\delta c_1,\ldots,\delta c_N)$ changes these coordinates; we put $\delta b_0=\delta c_0=0$ and $\delta b_N=-\delta c_N$.
+
+\begin{lemma}[Corner value]\label{lem:corner-value}
+For $0<r\leq1$, the array $K_{N,r}$ has $g(N,N;N)=(1-r)^N$.
+\end{lemma}
+\begin{proof}
+In the model of Lemma~\ref{lem:margin}, $U_N=y_1\cdots y_N$ is the only normalized basis element containing $y_{\{1,\ldots,N\}}$, and $U_N^2=\prod_i\bigl((1-r)y_i+r\bigr)$ has coefficient $(1-r)^N$ at that monomial.
+\end{proof}
+
+Thus the corner coefficient vanishes at $r=1$, where it is a structural zero, together with the other perimeter and parity zeros of the palindromic array. The next lemma computes its first-order change exactly.
+
+\begin{lemma}[Corner identity]\label{lem:corner}
+Let $N\geq2$ and $s_N=(-1)^{\lfloor N/2\rfloor+1}\binom{N-1}{\lfloor(N-1)/2\rfloor}^{-1}$. Put $F=\delta b+2\delta c$ if $N$ is even and $F=\delta b$ if $N$ is odd. Then
+\[
+\frac{d}{d\varepsilon}\,g(N,N;N)\Big|_{K_{N,1}+\varepsilon v,\ \varepsilon=0}=s_N\sum_{n=0}^N(-1)^n\binom NnF(n).
+\]
+\end{lemma}
+\begin{proof}
+At $K_{N,1}$ the nodes are $\lambda_j=1-2j/N$, with masses $w_j=2^{-N}\binom Nj$ and $\pi_n=\binom Nn$ in Lemma~\ref{lem:finite}. Moreover $\binom Nn R_n(\lambda_j)$ is the binary Krawtchouk polynomial, so that
+\begin{equation}\label{eq:kraw-gf}
+\sum_{j=0}^N w_jR_n(\lambda_j)s^j=2^{-N}(1+s)^{N-n}(1-s)^n.
+\end{equation}
+The vectors $u_j=(R_n(\lambda_j))_n$ and $v_j=(w_j\pi_nR_n(\lambda_j))_n$ are right and left eigenvectors of $J$ with $v_i^\mathsf Tu_j=\boldsymbol1_{i=j}$. Since $R_N(\lambda_j)=(-1)^j$, the matrix $\Pi=R_N(J)$ reverses the indices. Let $J_\varepsilon=J+\varepsilon E$ be the perturbed recurrence matrix and $R_N^\varepsilon$ the perturbed polynomial. The matrix $R_N^\varepsilon(J_\varepsilon)$ commutes with $J_\varepsilon$ and has first row $e_N^\mathsf T$, by \eqref{eq:matrix-product}. Its derivative $X$ at $\varepsilon=0$ therefore satisfies $[J,X]=[\Pi,E]$ and $e_0^\mathsf TX=0$. In the eigenbasis, $X_{ij}=v_i^\mathsf TXu_j$ equals $((-1)^i-(-1)^j)E_{ij}/(\lambda_i-\lambda_j)$ for $i\neq j$, where $E_{ij}=v_i^\mathsf TEu_j$, and $\sum_iX_{ij}=0$. By \eqref{eq:matrix-product} the derivative in the lemma is $X_{NN}=\sum_{i,j}(-1)^{i+j}X_{ij}w_j$, and eliminating $X_{jj}$ gives
+\[
+X_{NN}=-2\sum_{i+j\ \mathrm{odd}}X_{ij}w_j=N\sum_{i\neq j}E_{ij}w_j\frac{(-1)^i-(-1)^j}{i-j}.
+\]
+Perturbing row $n$ alone means $E=e_n\rho^\mathsf T$ and $E_{ij}=w_i\pi_nR_n(\lambda_i)\,\rho^\mathsf Tu_j$. Write $\mathrm i$ for the imaginary unit and insert
+\[
+\frac{(-1)^i-(-1)^j}{i-j}=-\pi\int_0^1\sin\pi\bigl(\theta i+(1-\theta)j\bigr)\,d\theta,
+\]
+which also vanishes for $i=j$. Then
+\begin{gather*}
+X_{NN}=-\pi N\pi_n\int_0^1\operatorname{Im}\bigl(A(\theta)B(\theta)\bigr)\,d\theta,\\
+A=\sum_iw_iR_n(\lambda_i)e^{\mathrm i\pi\theta i},\qquad
+B=\sum_jw_j(\rho^\mathsf Tu_j)e^{\mathrm i\pi(1-\theta)j},
+\end{gather*}
+and both sums are given by \eqref{eq:kraw-gf}. Put $\phi=\pi\theta/2$.
+\begin{itemize}
+\item Coordinate $b_n$, $1\leq n<N$, so $\rho=e_n-e_{n+1}$. Then
+\[
+AB=-(-1)^n\,\mathrm i^{N-1}\cos^N\!\phi\,\sin^{N-1}\!\phi\,e^{-\mathrm i\phi},
+\]
+and $X_{NN}=s_N(-1)^n\binom Nn$. The integral reduces to $\int_0^{\pi/2}\cos^{N+1}\!\phi\,\sin^{N-1}\!\phi\,d\phi$ ($N$ even) or $\int_0^{\pi/2}\cos^{N}\!\phi\,\sin^{N}\!\phi\,d\phi$ ($N$ odd), and each equals $|s_N|/(2N)$.
+\item Coordinate $c_n$, $1\leq n<N$, so $\rho=e_{n-1}-e_{n+1}$. Now $B$ acquires the factor $e^{\mathrm i\phi}/\cos\phi$, and the integrand carries $\sin((N-1)\pi/2)$. The contribution vanishes for odd $N$. For even $N$ it is twice that of $b_n$, since the two beta integrals have ratio $2$.
+\item Coordinate $c_N$, so $\rho=e_{N-1}-e_N$ in row $N$. The same computation with $n=N$ gives $s_N$.
+\end{itemize}
+Summing these contributions with the conventions $\delta b_0=\delta c_0=0$ and $\delta b_N=-\delta c_N$ gives the stated alternating sum.
+\end{proof}
+
+\begin{definition}\label{def:rule}
+A \emph{uniform rule} is a pair of functions $\beta,\gamma$ on $[0,1]$. It defines, for each $N$, the direction $v_N$ with $\delta b_n=\beta(n/N)$ for $1\leq n<N$ and $\delta c_n=\gamma(n/N)$ for $1\leq n\leq N$. A set of arrays \emph{admits} the rule at the symmetric endpoint if for all large $N$ it contains $K_{N,1}+\varepsilon v_N$ for all small $\varepsilon>0$. Put
+\[
+L_{\mathrm{even}}=\beta(0)+2\gamma(0)+\beta(1)+\gamma(1),\qquad L_{\mathrm{odd}}=\beta(0)-\beta(1)-\gamma(1).
+\]
+\end{definition}
+
+\begin{theorem}[Forced equalities for uniform criteria]\label{thm:uniform}
+Let $\beta,\gamma$ be polynomials. If a set of arrays with property (P) admits the rule $(\beta,\gamma)$ at the symmetric endpoint, then $L_{\mathrm{even}}=L_{\mathrm{odd}}=0$. If $L_{\mathrm{even}}=L_{\mathrm{odd}}=0$, the first-order change of $g(N,N;N)$ along $v_N$ vanishes for every $N$ above the degrees of $\beta$ and $\gamma$.
+\end{theorem}
+\begin{proof}
+For a polynomial $p$ of degree less than $N$, $\sum_{n=0}^N(-1)^n\binom Nnp(n/N)=0$. Only boundary terms survive in Lemma~\ref{lem:corner}: the derivative equals $-s_NL_{\mathrm{even}}$ for even $N$ and $-s_NL_{\mathrm{odd}}$ for odd $N$. The sign of $s_N$ changes from $N$ to $N+2$. If, for instance, $L_{\mathrm{even}}\neq0$, then the derivative is negative for every large even $N$ in one residue class modulo $4$. For such $N$, $g(N,N;N)<0$ at $K_{N,1}+\varepsilon v_N$ for all small $\varepsilon>0$, since the coefficient vanishes at $\varepsilon=0$.
+\end{proof}
+
+The known positive deformations satisfy both equalities: the Krawtchouk direction $\beta(x)=x$, $\gamma(x)=-x$, palindromic deformations with $\beta=0$ and $\gamma$ odd about $\tfrac12$ (Corollary~\ref{cor:palin}), and the geometric direction $\beta=0$, $\gamma(x)=x(x-1)$ (Theorem~\ref{thm:criterion}). Consequently, for every $d\geq0$, no set of arrays with property (P) admits all rules of an open subset of the polynomial rules of degree at most $d$. In this precise sense, every criterion that acts uniformly in $N$ and contains the symmetric Krawtchouk systems carries equalities. The geometric criterion and Corollary~\ref{cor:palin} are of this mixed type.
+
+The polynomial hypothesis can be replaced by analyticity on a fixed region. Let $U(x)=\int_0^1\log|x-t|\,dt$ and $\Omega=\{x\in\mathbb C:U(x)\leq-1\}$, the region of convergence of equispaced interpolation. It contains $[0,1]$, has corners at $0$ and $1$, and meets the line $\operatorname{Re}x=\tfrac12$ at $\operatorname{Im}x=\pm0.2628\ldots$.
+
+\begin{lemma}[N\"orlund--Rice bound]\label{lem:nr}
+If $f$ is analytic on an open set containing $\Omega$, then $\sum_{n=0}^N(-1)^n\binom Nnf(n/N)=O(\sqrt N\,e^{-\eta N})$ for some $\eta>0$.
+\end{lemma}
+\begin{proof}
+The residues of $1/\prod_{k=0}^N(x-k/N)$ give
+\[
+\sum_{n=0}^N(-1)^n\binom Nnf(n/N)=(-1)^N\frac{N!}{N^N}\,\frac1{2\pi i}\oint_\Gamma\frac{f(x)\,dx}{\prod_{k=0}^N(x-k/N)}
+\]
+for any cycle $\Gamma$ in the domain of $f$ that winds once around $[0,1]$. Since $U$ is continuous and tends to $\infty$, the compact sets $\{U\leq-1+t\}$ shrink to $\Omega$ as $t\downarrow0$. Choose $\eta>0$ with $\{U\leq-1+3\eta\}$ inside the domain of $f$, and take $\Gamma$ in $\{-1+\eta<U<-1+3\eta\}$ winding once around $\{U\leq-1+\eta\}$. On $\Gamma$ the function $t\mapsto\log|x-t|$ has a bounded derivative on $[0,1]$, so a Riemann-sum estimate gives $\sum_k\log|x-k/N|\geq NU(x)-C\geq N(-1+\eta)-C$. Stirling's bound $N!/N^N\leq e\sqrt Ne^{-N}$ completes the proof.
+\end{proof}
+
+\begin{corollary}\label{cor:analytic-rules}
+Theorem~\ref{thm:uniform} holds for $\beta,\gamma$ analytic on an open set containing $\Omega$.
+\end{corollary}
+\begin{proof}
+By Lemma~\ref{lem:nr}, the alternating sum of $\beta+2\gamma$ or $\beta$ tends to $0$. The derivative in Lemma~\ref{lem:corner} is therefore $s_N(-L_{\mathrm{even}}+o(1))$ for even $N$ and $s_N(-L_{\mathrm{odd}}+o(1))$ for odd $N$. The argument of Theorem~\ref{thm:uniform} applies.
+\end{proof}
+
+Deformations may also depend on $N$ in other ways. For one fixed $N$, nothing can be excluded: the cone of first-order directions that keep property (P) at $K_{N,1}$ has nonempty interior. Exact computation confirms this for $N\leq10$: a direction with strictly positive first-order change at every structural zero exists, and the arrays $K_{N,1}+\varepsilon v$ have property (P) for $\varepsilon=10^{-3}$ and $10^{-5}$. The corner nevertheless constrains every family that is regular in $N$.
+
+\begin{proposition}[Families depending on $N$]\label{prop:families}
+Let $v_N$ be directions such that a set with property (P) contains $K_{N,1}+\varepsilon v_N$ for all large $N$ and small $\varepsilon>0$, and let $A_N$ be the alternating sum in Lemma~\ref{lem:corner} for $v_N$. Then $s_NA_N\geq0$ for all large $N$.
+\begin{enumerate}
+\item If the even-indexed (or odd-indexed) terms $A_N$ have eventually constant sign, they vanish for all large such $N$.
+\item Suppose $\delta b_n=\beta(n/N)+p_n+q_{N-n}$ and $\delta c_n=\gamma(n/N)+p'_n+q'_{N-n}$, with $\beta,\gamma$ as in Corollary~\ref{cor:analytic-rules} and finitely supported boundary layers $p,q,p',q'$ independent of $N$. Then $q'_0=L_{\mathrm{even}}=L_{\mathrm{odd}}$, $p_k=q_k$ and $p'_k+q'_k=-p_k$ for $k\geq1$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+A negative first-order change of $g(N,N;N)$ excludes $K_{N,1}+\varepsilon v_N$ for small $\varepsilon$, so $s_NA_N\geq0$. Part (1) follows because the sign of $s_N$ alternates along each parity class. In (2), the layers contribute $\sum_{k\geq1}(-1)^k\binom Nk\bigl[p_k+q_k+2(p'_k+q'_k)\bigr]+q'_0$ for even $N$ and $\sum_{k\geq1}(-1)^k\binom Nk(p_k-q_k)+q'_0$ for odd $N$. These are polynomials in $N$, and the bulk contributes $-L+o(1)$. Part (1) forces every coefficient of these polynomials to vanish, since the binomial coefficients $\binom Nk$ are linearly independent as polynomials in $N$.
+\end{proof}
+
+Thus a separate adjustment of the top coefficient $c_N$ reduces the two bulk equalities to the single equality $\gamma(0)+\beta(1)+\gamma(1)=0$. The boundary layers must be palindromic to first order. Families escaping part~(1) must make the sign of $A_N$ follow $N\bmod4$.
+
+Criteria that cover $r<1$ but not $r=1$ are thin near $r=1$.
+
+\begin{proposition}[Thinness near the symmetric endpoint]\label{prop:thin}
+Fix $N\geq2$ and a direction $v$ along which the first-order change $\dot g$ of $g(N,N;N)$ at $K_{N,1}$ is negative. There are $r_*<1$ and $C,c>0$ such that $K_{N,r}+\varepsilon v$ lacks property (P) whenever $r_*<r<1$ and $C(1-r)^N\leq\varepsilon\leq c$.
+\end{proposition}
+\begin{proof}
+The function $G(r,\varepsilon)=g(N,N;N)$ at $K_{N,r}+\varepsilon v$ is rational and smooth near $(1,0)$. By Lemma~\ref{lem:corner-value}, $G(r,0)=(1-r)^N$, and $\partial_\varepsilon G(r,0)\to\dot g$ as $r\to1$. A uniform second-order Taylor bound gives $G\leq(1-r)^N-\tfrac38|\dot g|\varepsilon<0$ in the stated range.
+\end{proof}
+
+\begin{corollary}[Optimal order of the stability radius]\label{cor:radius-order}
+For $N\geq2$ let $\rho_N(r)$ be the largest $\rho$ such that every array satisfying \eqref{eq:basic} with $\widetilde b_i\geq0$ and with left side of \eqref{eq:closeness} at most $\rho$ has property (P). Then $\rho_N(r)$ is of exact order $(1-r)^N$ as $r\to1$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:perturbation} gives $\rho_N(r)\geq\eta_N(r)=\tfrac12((1-r)/(32N))^N$ for $r\geq\tfrac12$. For the upper bound, choose a constant rule whose value of $L_{\mathrm{even}}$ ($N$ even) or $L_{\mathrm{odd}}$ ($N$ odd) has the sign of $s_N$. Its direction $v$ has $\dot g<0$ by Lemma~\ref{lem:corner}. For $\varepsilon=C(1-r)^N$ as in Proposition~\ref{prop:thin}, the array $K_{N,r}+\varepsilon v$ lacks property (P), lies within $\varepsilon\max|v|$ of $K_{N,r}$, and has nonnegative diagonal for $r$ near $1$, because $\varepsilon$ is small compared with $b_1=(1-r)/N$.
+\end{proof}
+
+\paragraph{Computations away from $r=1$.}
+The following findings are exact computations, not proofs. They are reproduced by \path{rigidity_probe.py} and \path{smallr_probe.py}. Here $g(N,N;N)$ is computed from column $N$ of the product table, an $O(N^2)$-operation recurrence, so sizes in the hundreds are cheap.
+\begin{itemize}
+\item For fixed $r\in(\tfrac12,1)$ the first-order change of $g(N,N;N)$ along simple rules is of order $2^{-N}$ with signs of period $4$, while the coefficient itself is $(1-r)^N$. Fixed-size deformations accordingly fail at $r=4/5$ for every $N$ from $6$ to $14$, and at $r=19/20$ for every $N$ from $4$ to $14$.
+\item Below $r=\tfrac12$, counterexamples to shape conditions appear only at large $N$, roughly $N\approx5/r^2$. For constant-ratio arrays with convex profile, one-kink counterexamples ($m$ unit increments, then $1+\delta$) have $g(N,N;N)<0$ at
+\begin{center}
+\begin{tabular}{@{}lccccccc@{}}
+$r$&$2/5$&$1/3$&$3/10$&$1/4$&$2/7$&$1/5$&$1/10$\\
+$N$&$20$&$40$&$40$&$60$&$80$&$100$&$500$
+\end{tabular}
+\end{center}
+Concave profiles fail for $N\leq18$ at every tested $r$.
+\item Convex profiles with log-concave increments (step ratios nonincreasing and at least $1$) contain Krawtchouk, every geometric profile, and smooth convex profiles, and they exclude the one-kink counterexamples. Yet $k$ steps of ratio $1+1/(2N)$ followed by flat increments give $g(N,N;N)<0$ at $(r,N,k)=(\tfrac12,80,40)$, $(\tfrac25,32,22)$ and $(\tfrac13,90,62)$ in exact arithmetic. In $80$- and $150$-digit arithmetic the same happens at $(\tfrac14,250,175)$ and $(\tfrac15,500,400)$.
+\end{itemize}
+Every inequality shape class tested for constant-ratio arrays thus fails at every tested $r$ between $1/10$ and $\tfrac12$. Only smooth deformations, which finitely many local inequalities cannot enforce, survived the corner up to $N=200$.
+
 \section{Open problems}\label{sec:open}
 
 \paragraph{Inequalities beyond geometric increments.}
 The geometric criterion imposes exact equalities, whereas the perturbation criterion provides small neighborhoods. Find direct inequalities on successive recurrence coefficients that cover larger nonclassical regions while retaining the full Krawtchouk range. The terminating row and products of degree sum greater than $N$ must remain part of the conclusion.
 
 \paragraph{Sharper stability radii.}
-For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius for which every admissible stochastic perturbation has property (P). The bound in Theorem~\ref{thm:perturbation} comes from a single-term lower margin and a worst-case recurrence amplification. Both estimates discard substantial information. A useful improvement would retain a transparent coefficient test and describe its dependence on both $N$ and the bias parameter.
+For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius for which every admissible stochastic perturbation has property (P). Corollary~\ref{cor:radius-order} shows that the order $(1-r)^N$ as $r\to1$ is optimal; the dependence on $N$, and on $r$ away from $1$, remains open. The bound in Theorem~\ref{thm:perturbation} comes from a single-term lower margin and a worst-case recurrence amplification. Both estimates discard substantial information. A useful improvement would retain a transparent coefficient test and describe its dependence on both $N$ and the bias parameter.
 
 \paragraph{The symmetric endpoint.}
-At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Symmetric perturbations preserve the parity zeros, and Theorem~\ref{thm:symmetric} exploits this for Szwarc's quadratic system when $p_0<1/2$. At $p_0=1/2$, and for the symmetric Krawtchouk array, further coefficients on the parity support vanish. Determine perturbation directions and structural constraints that preserve positivity there; continuity alone does not control coefficients emerging from those zeros.
+At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Symmetric perturbations preserve the parity zeros, and Theorem~\ref{thm:symmetric} exploits this for Szwarc's quadratic system when $p_0<1/2$. At $p_0=1/2$, and for the symmetric Krawtchouk array, further coefficients on the parity support vanish. Determine perturbation directions and structural constraints that preserve positivity there; continuity alone does not control coefficients emerging from those zeros. For each fixed $N\leq10$ the admissible first-order directions form a cone with nonempty interior, but Theorem~\ref{thm:uniform} and Proposition~\ref{prop:families} show that no rule acting uniformly in $N$ reaches that interior through an open set. A description of the cone for all $N$ is open.
 
 \paragraph{Monotonicity-type criteria for finite systems.}
-Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. For finite systems, property (P) at the boundary point is the hypergroup property of the corresponding birth--death chain, and Miclo~\cite[Theorem~31 and Proposition~6]{miclo2015} adapts the wave-equation argument of Bakry and Huet to give inequality conditions for chains that are symmetric under $n\mapsto N-n$ and sufficiently convex. Those conditions exclude the Krawtchouk recurrence and the system \eqref{eq:szwarc-q}. By Theorem~\ref{thm:decomp}, any criterion of this kind for nonsymmetric finite systems, valid including the terminal indices, immediately gives one for symmetric finite systems. Theorem~\ref{thm:low} supplies such hypotheses for all triples except those whose pairwise sums all exceed $N$; the remaining task is to control these deep triples by inequalities that contain the geometric criterion. Convexity of the profile does not suffice even with a constant ratio and $r$ bounded away from $1$: for $d$ with increments $1$ at the first seven steps and $6/5$ at the remaining seven ($N=14$), exact arithmetic gives $g(14,14;14)<0$ at $r=1/2$, and the analogous profile with $N=20$, twelve unit increments and $21/20$ afterwards gives $g(20,20;20)<0$ at $r=2/5$. Log-convex increments fail as well: fourteen unit increments followed by $(21/20)^t$, $t=1,\ldots,4$, give $g(18,18;18)<0$ at $r=1/2$. The admissible bias for such profiles therefore shrinks with $N$, and the terminal product is where positivity fails. Szwarc-type certificates do not resolve the deep triples either. For each Krawtchouk array tested ($N\leq8$, $r\in\{1,1/2,1/5\}$) every deep coefficient is a nonnegative combination of non-deep coefficients through the relations $Hu=0$ on a backward cone, but the weights must depend on the coefficients: no single weight serves $r=1/5$ and $r=1/2$, so no family of linear inequalities obtained this way contains the Krawtchouk range. Checkerboard-supported weights fail for every tested $r<1$, and the canonical weight solving $H^*v=0$ on the deep region has negative boundary flux. On random perturbed arrays the existence of such certificates coincided with property (P).
+Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are open conditions of monotonicity type for infinite systems. For finite systems, property (P) at the boundary point is the hypergroup property of the corresponding birth--death chain, and Miclo~\cite[Theorem~31 and Proposition~6]{miclo2015} adapts the wave-equation argument of Bakry and Huet to give inequality conditions for chains that are symmetric under $n\mapsto N-n$ and sufficiently convex. Those conditions exclude the Krawtchouk recurrence and the system \eqref{eq:szwarc-q}. By Theorem~\ref{thm:decomp}, any criterion of this kind for nonsymmetric finite systems, valid including the terminal indices, immediately gives one for symmetric finite systems. Theorem~\ref{thm:low} supplies such hypotheses for all triples except those whose pairwise sums all exceed $N$; the remaining task is to control these deep triples by inequalities that contain the geometric criterion. Convexity of the profile does not suffice even with a constant ratio and $r$ bounded away from $1$: for $d$ with increments $1$ at the first seven steps and $6/5$ at the remaining seven ($N=14$), exact arithmetic gives $g(14,14;14)<0$ at $r=1/2$, and the analogous profile with $N=20$, twelve unit increments and $21/20$ afterwards gives $g(20,20;20)<0$ at $r=2/5$. Log-convex increments fail as well: fourteen unit increments followed by $(21/20)^t$, $t=1,\ldots,4$, give $g(18,18;18)<0$ at $r=1/2$. The admissible bias for such profiles therefore shrinks with $N$, and the terminal product is where positivity fails. Section~\ref{sec:limits} explains part of this: near $r=1$ every criterion acting uniformly in $N$ must impose equalities, and below $r=\tfrac12$ the convex, concave and log-concave convex shape classes all have exact counterexamples once $N$ is of order $5/r^2$. Two questions remain. First, prove the exponential thinness observed for fixed $r\in(\tfrac12,1)$. Second, decide whether any inequality criterion, necessarily one that enforces smoothness of the profile, covers a range $0<r\leq r_0$ for all $N$. Szwarc-type certificates do not resolve the deep triples either. For each Krawtchouk array tested ($N\leq8$, $r\in\{1,1/2,1/5\}$) every deep coefficient is a nonnegative combination of non-deep coefficients through the relations $Hu=0$ on a backward cone, but the weights must depend on the coefficients: no single weight serves $r=1/5$ and $r=1/2$, so no family of linear inequalities obtained this way contains the Krawtchouk range. Checkerboard-supported weights fail for every tested $r<1$, and the canonical weight solving $H^*v=0$ on the deep region has negative boundary flux. On random perturbed arrays the existence of such certificates coincided with property (P).
 
 \paragraph{Other finite families.}
 Find analogous coefficient regions around other finite orthogonal systems and compare their geometry with the Krawtchouk neighborhoods. An algebra with a positive basis may supply the reference margin, but a recurrence criterion must express the resulting admissible deformations without requiring the unknown product coefficients as input.
 
 \section*{AI-use disclosure}
 
-OpenAI Codex was used to develop the proof arguments, search and check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean translation. Separate AI-assisted reviews checked the algebraic proof, boundary cases, normalizations, and quantitative estimates; these reviews are not human peer review. Anthropic Claude was used to analyse Szwarc's Problem~2 against the survey text, to explore discrete hyperbolic certificates numerically, and to develop and draft Section~\ref{sec:szwarc} together with its exact diagnostics; that section has not been independently reviewed. The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. Statements about machine verification refer only to the specific compiled Lean declarations and their documented dependencies, not to the presence of a Lean project or to numerical agreement.
+OpenAI Codex was used to develop the proof arguments, search and check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean translation. Separate AI-assisted reviews checked the algebraic proof, boundary cases, normalizations, and quantitative estimates; these reviews are not human peer review. Anthropic Claude was used to analyse Szwarc's Problem~2 against the survey text, to explore discrete hyperbolic certificates numerically, and to develop and draft Sections~\ref{sec:szwarc} and~\ref{sec:limits} together with their exact diagnostics; these sections have not been independently reviewed. The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. Statements about machine verification refer only to the specific compiled Lean declarations and their documented dependencies, not to the presence of a Lean project or to numerical agreement.
 
 \section*{Code and formalization}
 
 The companion source tree contains \path{probe.py} and \path{verify.py}. The command
 \begin{quote}\verb|python3 -u verify.py --max-n 7|\end{quote}
-compares recurrence-matrix multiplication with direct multiplication modulo the terminal polynomial on exact rational inputs, checks the perturbation lower bounds, and replays two rejected coefficient-profile tests. It also checks Theorem~\ref{thm:szwarc}, the margin of Lemma~\ref{lem:qmargin} and the negative coefficient for $p_0>1/2$ on exact Szwarc arrays, the identities of Lemma~\ref{lem:qthree} in the graded model, and the lower bound of Theorem~\ref{thm:symmetric} on rational symmetric perturbations. These computations are diagnostics and do not replace the proofs at arbitrary size.
+compares recurrence-matrix multiplication with direct multiplication modulo the terminal polynomial on exact rational inputs, checks the perturbation lower bounds, and replays two rejected coefficient-profile tests. It also checks Theorem~\ref{thm:szwarc}, the margin of Lemma~\ref{lem:qmargin} and the negative coefficient for $p_0>1/2$ on exact Szwarc arrays, the identities of Lemma~\ref{lem:qthree} in the graded model, and the lower bound of Theorem~\ref{thm:symmetric} on rational symmetric perturbations. These computations are diagnostics and do not replace the proofs at arbitrary size. For Section~\ref{sec:limits}, \path{rigidity_probe.py} checks Lemma~\ref{lem:corner} exactly for $N\leq20$, the predicted failures of Theorem~\ref{thm:uniform}, the boundary layers of Proposition~\ref{prop:families}, the region of Lemma~\ref{lem:nr} and the fixed-$r$ computations, and \path{smallr_probe.py} replays the small-$r$ counterexamples.
 
 The Lean development formalizes the two main criteria as follows:
 \begin{center}
