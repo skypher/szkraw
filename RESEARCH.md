@@ -527,6 +527,16 @@ Scratch: runs/ql_proof/tower*.py.
   So chains in an ordered tower force σ_3 = σ_2² (geometric); Q's positivity needs a different mechanism.
 - *Structural picture.* Mixtures of geometric profiles have σ_k = E[X^{k−1}], a moment sequence, hence log-convex. The failing segment arrays K(N,r) → G(N,q,r) are exactly the two-point mixtures (masses at X = 0 and X = q − 1). Geometric profiles (log-linear) are the common boundary. Empirically: log-convex fails (segment), the boundary is Theorem 2.1, log-concave passes (all tests so far). A proof will likely need a model in which the chain weight depends on chain length (σ_{u+1}/σ_u = ρ_u nonincreasing), not on position.
 
+## Log-concave Newton criterion: exact certificate for small N (2026-10-22)
+
+lc_certificate.py (tracked); scratch runs/ql_proof/lc_poly*.py.
+- *Parametrization.* σ_1 = 1, σ_{k+1} = σ_k ρ_k, ρ_k = x_k + x_{k+1} + … + x_{N−1} with x_i ≥ 0: this gives every nonnegative log-concave sequence with σ_1 = 1. With r = R/(R+W), R, W > 0, the whole criterion region (constant ratio, log-concave Newton profile) is the nonnegative orthant in (R, W, x).
+- *Fraction-free recurrence.* Multiplying each step of the linearization recurrence by (R+W)(D_N − D_m) keeps every entry polynomial: g(m,n;k) = P_{mnk}/Q_m with Q_m = Π_{m′<m}(R+W)(D_N − D_{m′}). Q_m has positive coefficients because D_N − D_{m′} = Σ_k (C(N,k) − C(m′,k))σ_k. If every P_{mnk} has nonnegative coefficients, (P) holds for every member at that N.
+- *Result.* All numerators have nonnegative coefficients for N = 2, 3, 4, 5 (11, 23, 42, 69 nonzero coefficients). So the criterion is proved for N ≤ 5, for all 0 < r < 1 and all log-concave σ. At random rational points the certificate values equal the exact linearization coefficients (N = 3, 4).
+- *Control.* With ρ nondecreasing (log-convex σ, which contains the failing segment arrays) the same test has negative numerator terms: at N = 4 only g(4,4;4) (6 of 817 terms), at N = 5 the triples (4,5;5), (5,5;4), (5,5;5). These are exactly the corner and deep triples where failures occur at larger N, so the test discriminates.
+- N = 6: a first run vanished at step m = 4 after 15 min, at the same moment as several unrelated processes on the machine restarted (cause unknown, possibly memory pressure). It is rerun with W = 1 (the numerators are homogeneous in (R, W)) under a 24 GB address-space cap; memory use was 0.13 GB at step 3.
+- Naming: the candidate constrains the Newton coefficients Δ^k d(0) of the profile. It is not the refuted "log-concave increments" class of Section 9; those counterexamples have Newton coefficients of both signs and are excluded.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
