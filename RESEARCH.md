@@ -298,6 +298,26 @@ Admissible directions already known satisfy both equalities: the Krawtchouk dire
 
 What remains outside the disproof: families whose corner sums oscillate exactly with period 4 in N, including rules with singularities inside Ω tuned to that period (the corner alone cannot exclude these; other structural zeros might); criteria valid only for r ≤ ½; and the equality-type criteria of the paper, which exist.
 
+## The symmetric endpoint: interior directions for every N (2026-10-21)
+
+symmetric_probe.py (exact). Work in measure coordinates: a finite system is its orthogonality measure μ (nodes x₀ > … > x_N, positive weights), with R_n(x₀) = 1 at the top node; product coefficients are invariant under affine changes of x. K(N,1) is the binomial measure 2^{−N}C(N,j) at x_j = 1 − 2j/N.
+
+**Lemma (top mass).** For any finite system, let μ_ε = μ − εδ_{x₀}. If ∫R_xR_yR_z dμ = 0, then
+  d/dε|₀ ∫R^ε_xR^ε_yR^ε_z dμ_ε = 2 − [T_x(y,z) + T_y(x,z) + T_z(x,y)],  T_x(y,z) = Σ_{k≥x} g(y,z;k).
+*Proof.* Write R^ε_n = R_n + εQ_n + O(ε²), so deg Q_n ≤ n and Q_n(x₀) = 0. First-order orthogonality gives ∫Q_n p dμ = p(x₀) for deg p < n. Hence the R_k-coefficient of Q_n is π_k = 1/∫R_k²dμ for k < n, and Q_n = Σ_{k<n} π_k(R_k − R_n). The derivative is −R_xR_yR_z(x₀) + Σ ∫Q_x R_yR_z dμ (three terms). Each term is Σ_{k<x} π_k∫R_kR_yR_z dμ = Σ_{k<x} g(y,z;k) = 1 − T_x(y,z), since the row sums are 1 and ∫R_xR_yR_z dμ = 0. ∎ Checked exactly at every structural zero of K(N,1) for N ≤ 8.
+
+**Zeros of K(N,1).** The Boolean model of Lemma 5.2 gives g(m,n;k) = Σ_j H(m,n;j) C(j,s) r^{j−s}(1−r)^s for K(N,r), with H(m,n;j) = C(m,j)C(N−m,n−j)/C(N,n) and s = k − m − n + 2j (checked exactly, N = 3, 5, 7). At r = 1 only s = 0 survives. So a triangle coefficient of K(N,1) vanishes exactly when m+n+k is odd (parity zero) or m+n+k > 2N (perimeter zero).
+
+**Theorem (interior directions).** For every N ≥ 2 there is Λ_N < ∞ with the following property. Let the measure be that of K(N, 1 − Λε) with the top mass lowered by ε, where Λ > Λ_N. Then every triangle coefficient is strictly positive for all small ε > 0, so by Lemma 7.5, with Σ the whole triangle, an open set of arrays near it has (P). In particular K(N,1) lies in the closure of the interior of the (P)-region for every N, and the first-order cone T_N has nonempty interior for every N. This replaces the restriction to N ≤ 10.
+*Proof.* Both moves are smooth in (r, ε) near (1, 0), and nonzero coefficients stay positive, so only the zeros matter. Rates are first-order changes along each move.
+- At a perimeter zero the three tails vanish: g(y,z;k) = 0 for k > 2N − y − z, and x > 2N − y − z. So the top-mass rate is 2π_z > 0. The Krawtchouk rate is ≥ 0, since g ≥ 0 for r ≤ 1 and g = 0 at r = 1.
+- At an odd zero with m+n+k ≤ 2N + 1, the Krawtchouk rate is the s = 1 term, H(m,n;j)·j with j = (1+m+n−k)/2. Here j ≥ 1, and j lies in [max(0, m+n−N), min(m,n)] because k − |m−n| is odd and m+n+k ≤ 2N+1. So the rate is strictly positive.
+- These two cases cover all zeros. Take Λ_N = max over zeros with negative top-mass rate of (−top rate)/(Krawtchouk rate). ∎
+
+Exact values: Λ_N = 4, 10, 18, 28, 52, 90, 165, 309.4, 554.1 for N = 4,…,12, then 1027.5, 1853.7, 3549, 6750.5 for N = 13,…,16. The worst zeros are low odd triples such as (1,1,1), (2,2,3), (3,3,3). With Λ = 2Λ_N + 1 and ε = 10⁻¹² every triangle coefficient is strictly positive (exact, N = 3–16). Λ_N grows roughly like 1.9^N, so the interior near this path is thin.
+
+**In recurrence coefficients**, lowering the top mass is δc_n = −C(N−1, n−1) and δb_n = −C(N,n)(N−2n)/N, with a absorbing the rest (exact for N = 2–12; proof pending). This is a binomially concentrated deformation, of width √N around the middle index, not a smooth function of n/N. That is consistent with Theorem 8.4: the interior at the symmetric endpoint is reachable, but not by polynomial or analytic uniform rules.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
