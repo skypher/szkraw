@@ -17,6 +17,11 @@ Checks:
 5. Consequence for polynomial uniform rules (degree < N): the derivative is -s_N L_even (N even) or
    -s_N L_odd (N odd), L_even = beta(0)+2gamma(0)+beta(1)+gamma(1), L_odd = beta(0)-beta(1)-gamma(1);
    s_N changes sign from N to N+2, so L != 0 breaks (P) near K(N,1) for infinitely many N (checked exactly).
+6. Boundary layers: with c_N changed separately by L (possible when L_even = L_odd), the corner slack vanishes.
+7. r < 1: g(N,N;N) = (1-r)^N at K(N,r); a fixed-size rule fails at fixed r in (1/2, 1) for many N
+   (r = 4/5, eps = 1/100; r = 19/20, eps = 1/1000) but not at r = 1/2 for N <= 14.
+8. Noerlund-Rice region (mpmath): D_N[f] = sum (-1)^n C(N,n) f(n/N) decays when the poles of f lie outside
+   the football Omega = {U <= -1}, U(x) = int_0^1 log|x-t| dt, and grows when they lie inside.
 """
 import argparse
 from fractions import Fraction as F
@@ -163,6 +168,61 @@ def uniform_rule_signs(beta, gamma, Ns, eps=F(1, 10**6)):
         out.append((N, (g[N][N][N] > 0) - (g[N][N][N] < 0), all(x >= 0 for G in g for row in G for x in row)))
     return out
 
+def krawr(N, r):
+    d = [F(i, N) for i in range(N+1)]
+    return [1-x for x in d], [(1-r)*x for x in d], [r*x for x in d]
+
+def rule_at(N, r, beta, gamma, eps):
+    a, b, c = krawr(N, r); A, B, Cc = list(a), list(b), list(c)
+    for n in range(1, N):
+        B[n] += eps*beta(F(n, N)); A[n] -= eps*beta(F(n, N))
+    for n in range(1, N+1):
+        Cc[n] += eps*gamma(F(n, N))
+        if n < N: A[n] -= eps*gamma(F(n, N))
+        else: B[N] -= eps*gamma(F(n, N))
+    return A, B, Cc
+
+def fixed_r_report():
+    ok = all(linearization(*krawr(N, r))[N][N][N] == (1-r)**N for N in range(1, 11) for r in (F(1, 3), F(1, 2), F(9, 10)))
+    print(f'7. g(N,N;N) = (1-r)^N at K(N,r) for N <= 10, r in {{1/3, 1/2, 9/10}}: {ok}', flush=True)
+    for r, eps in ((F(19, 20), F(1, 1000)), (F(4, 5), F(1, 100)), (F(1, 2), F(1, 100))):
+        res = []
+        for N in range(4, 15):
+            g = linearization(*rule_at(N, r, lambda x: F(1), lambda x: F(0), eps))
+            P = all(x >= 0 for G in g for row in G for x in row)
+            res.append(f'{N}:' + ('ok' if P else ('corner<0' if g[N][N][N] < 0 else 'noP')))
+        print(f'7. r={r}, rule beta=1, gamma=0, eps={eps}: ' + ' '.join(res), flush=True)
+
+def layer_report():
+    for N in range(4, 13):
+        C, Z = zero_gradients(N); g = dict(Z)[(N, N, N)]
+        with_layer = [F(1) if k == 'b' else (F(-1, 2) if n < N else F(0)) for k, n in C]
+        without = [F(1) if k == 'b' else F(-1, 2) for k, n in C]
+        a = sum(x*y for x, y in zip(g, with_layer)); b = sum(x*y for x, y in zip(g, without))
+        assert a == 0 and b == -s_N(N)/2
+    print('6. bulk rule beta=1, gamma=-1/2 (L_even = L_odd = 1/2): corner slack -s_N/2 without layer, 0 with dc_N layer, N = 4..12', flush=True)
+
+def football_report():
+    try:
+        import mpmath as mp
+    except ImportError:
+        print('8. mpmath not available; skipping'); return
+    mp.mp.dps = 120
+    def U(z):
+        f = lambda w: w*mp.log(w) if w != 0 else mp.mpf(0)
+        return mp.re(f(z) - f(z-1)) - 1
+    lo, hi = mp.mpf(0), mp.mpf(1)
+    for _ in range(100):
+        mid = (lo+hi)/2
+        if U(mp.mpc(0.5, mid)) < -1: lo = mid
+        else: hi = mid
+    print(f'8. football Omega crosses Re x = 1/2 at Im x = +-{float(lo):.4f}', flush=True)
+    for y in (0.2, 0.25, 0.28, 0.35):
+        f = lambda x, y=y: 1/((x-mp.mpf(0.5))**2 + mp.mpf(y)**2)
+        vals = [mp.fsum(((-1)**n)*mp.binomial(N, n)*f(mp.mpf(n)/N) for n in range(N+1)) for N in (20, 40, 80, 120)]
+        print(f'8. f = 1/((x-1/2)^2+{y}^2) ({"inside" if U(mp.mpc(0.5, y)) < -1 else "outside"} Omega): '
+              f'|D_N| for N = 20, 40, 80, 120: ' + ' '.join(f'{float(abs(v)):.1e}' for v in vals), flush=True)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.parse_args()
@@ -172,6 +232,9 @@ def main():
                          ('beta=x, gamma=-x (Krawtchouk direction, L=0)', lambda x: x, lambda x: -x)):
         res = uniform_rule_signs(be, ga, range(4, 15))
         print(f'5. {name}: sign of g(N,N;N), (P): ' + ' '.join(f'N={N}:{ {1: "+", -1: "-", 0: "0"}[sg] }{"" if P else "/noP"}' for N, sg, P in res), flush=True)
+    layer_report()
+    fixed_r_report()
+    football_report()
     rows, w, combo = constant_rule_certificate()
     print(f'3. constant rule: slack rows {[[str(x) for x in r] for r in rows]}, weights {[str(x) for x in w]}, '
           f'combination {[str(x) for x in combo]}', flush=True)
