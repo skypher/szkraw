@@ -480,6 +480,26 @@ signpattern_probe.py; Section 9. Class: d_n = b_n + c_n, ρ_n = c_n/d_n; S_1, S_
 - Search record (runs/ratio_class/). Small exact tables, linear profile with monotone b and c: rising ratio fails at N = 3 (ρ ≤ 1) and N = 5 (ρ ≤ ½); falling ratio fails at N = 3 (ρ ≤ 1) and N = 8 (ρ ≤ ½). For ρ ≤ ¼ nothing for N ≤ 12 (random members); structured ratio ramps near the top fail at N = 80–120. Concave constant-ratio profiles fail at N = 20 for every r from 1/10 to ⅘.
 - Open: ρ_max < 83/400 (rising ratio from ρ = 1/10: nothing up to N = 300), criteria with conditions on higher differences, mixed conditions, and conditions applied at only some indices.
 
+## Higher-order sign classes and the smooth survivors Q, L, QL (2026-10-22)
+
+Scratch: runs/smooth/. Extend the sign-pattern class by S_3 for Δ³d and S_4 for Δ²ρ. Every sign set contains 0, so a witness whose higher differences vanish lies in every class its lower-order signs allow. The decisive witnesses are therefore polynomial ones: a quadratic profile (increments 1 + t·i/N) and a linear ratio (ρ_n = r + κn/N).
+- Killed (exact, full tables or confirmed corners):
+  - S_1 ∋ negative: concave quadratic (increments 1 + t(N−i)/N), N = 3, every r from 1/5 to 1.
+  - S_1 = {0}, S_2 ∋ negative: linear profile with linearly falling ratio, r ≥ 2/3 (N = 3–9; corners to N = 320 confirmed at two precisions); no failure at r ≤ ½ up to N = 320.
+  - S_1 ∋ positive, S_3 ∋ positive: the segment arrays (increments 1 + t q^{i−N}, all differences ≥ 0), r ≥ 2/7.
+  - S_1 ∋ positive, S_3 ∋ negative: increments rising linearly to a plateau, r ≥ 2/3 (N = 4–6).
+  - S_1 = {0}, S_2 ∋ positive, S_4 ∋ positive: ratio constant then ramp (the "rising" witness).
+  - S_1 = {0}, S_2 ∋ positive, S_4 ∋ negative: ratio rising then flat, r ≥ 1/5 (N = 4–6).
+- Survivors: the classes with S_3 = {0} (or S_1 = {0}), S_4 = {0}, S_1 ∈ {[0,∞), {0}}, S_2 ∈ {[0,∞), {0}}. Their members are exactly the two-parameter family
+  QL(t, κ): increments 1 + t·i/N (t ≥ 0), ratio ρ_n = r + κn/N (κ ≥ 0),
+  with Q = (κ = 0), L = (t = 0), K(N,r) = (t = κ = 0). No member has failed:
+  - exact full tables (all g(m,n;k)): N = 3–16 on grids at r from 1/5 to 19/20; 280 random members with N = 8–20, r from 0.01 to 0.99, t up to 998, κ up to (1−r)/2; 45 random members at N = 24, 30, 40; 20 at N = 50, 60;
+  - corners: Q at r from 0.1 to 0.95 for N ≤ 320 (smallest ratio to (1−r)^N about 1.1, at r = 0.1); L for N ≤ 320; 48 random QL members for N = 100–640.
+- The cap κ ≤ (1−r)/2 (b nondecreasing) is not the exact boundary: κ up to 1.5·(1−r)/2 has no failure for N ≤ 14 (r = ⅕, ½, ⅘), while κ = 1 − r (so b_N = 0) fails at N = 3.
+- Not classical, apparently. For N = 4, r = ⅓ the characteristic polynomials of L (κ = 1/6), Q (t = 1) and QL have irreducible cubic or quartic factors, whereas Krawtchouk and the classical families have rational nodes for rational parameters.
+- Consequence. Within sign conditions on Δ²d, Δ³d, Δρ, Δ²ρ (with monotone a, b, c), every inequality-only class is refuted at large enough ρ_max. The only classes not refuted are equality-type classes whose members form QL, and QL appears to have (P).
+- Conjecture: QL(t, κ) has (P) for all N ≥ 1, 0 < r < 1, t ≥ 0 and 0 ≤ κ ≤ (1−r)/2. A proof would give a new two-parameter family of finite systems with nonnegative linearization, a smooth (polynomial) deformation of Krawtchouk outside the geometric family.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
