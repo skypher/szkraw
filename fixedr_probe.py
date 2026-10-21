@@ -11,6 +11,9 @@ Checks:
 2. the asymptotic form, by least squares over N = 30..60 (relative residual);
 3. exact corner g(N,N;N) at eps_N = 3 (1-r)^N / |derivative| along the sign of the terminal direction that makes the
    first-order change negative: -2 (1-r)^N means the linear regime, i.e. (P) fails at exponentially small size.
+4. Raising the top mass of K(N,r) to (1+tau) w_0 (exact for every tau): g(N,N;N) =
+   [(1+tau)^2 (I - w_0) + w_0] / [(1+tau)(h - w_0) + w_0], I = (r(1-r))^N, h = r^N, w_0 = (r/(1+r))^N,
+   negative exactly for tau > tau* = (1 - (1-r^2)^N)^(-1/2) - 1; the array moves by at most 3 tau max_n w_n.
 """
 import argparse
 import math
@@ -43,6 +46,23 @@ def corner(a, b, c):
         prev, cur = cur, nxt
     return cur[N]
 
+def raised_top(N, r, tau):
+    from symmetric_probe import recurrence_from_measure, kraw_measure
+    x, w = kraw_measure(N, r); w = list(w); w0 = w[0]; w[0] += tau*w0
+    a, b, c = recurrence_from_measure(x, w); b0 = b[0]
+    return [ai/(1-b0) for ai in a], [(bi-b0)/(1-b0) for bi in b], [ci/(1-b0) for ci in c]
+
+def check_raised(N, r, tau):
+    from math import comb
+    from probe import linearization
+    a, b, c = raised_top(N, r, tau)
+    g = linearization(a, b, c)
+    I, h, w0 = (r*(1-r))**N, r**N, (r/(1+r))**N
+    exact = g[N][N][N] == ((1+tau)**2*(I - w0) + w0)/((1+tau)*(h - w0) + w0)
+    dist = max(max(abs(a[n] - (1 - F(n, N))), abs(b[n] - (1-r)*F(n, N)), abs(c[n] - r*F(n, N))) for n in range(N+1))
+    wmax = max(F(comb(N, n))*r**(N-n)/(1+r)**N for n in range(N+1))
+    return exact, g[N][N][N], dist <= 3*tau*wmax, all(x >= 0 for x in b)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.parse_args()
@@ -70,6 +90,12 @@ def main():
             c[N] += sgn*eps; b[N] -= sgn*eps
             out.append(f'{N}:{float(corner(a, b, c)/(1-r)**N):+.2f}')
         print(f'3. r={r}: g(N,N;N)/(1-r)^N at eps_N = 3(1-r)^N/|derivative|: ' + ' '.join(out), flush=True)
+    for N, r in ((8, F(1, 5)), (8, F(1, 2)), (10, F(4, 5)), (12, F(2, 5)), (14, F(1, 10))):
+        tstar = 1/math.sqrt(1 - float((1 - r*r)**N)) - 1
+        lo, hi = F(tstar*0.99).limit_denominator(10**12), F(tstar*1.01).limit_denominator(10**12)
+        e1, g1, d1, b1 = check_raised(N, r, lo); e2, g2, d2, b2 = check_raised(N, r, hi)
+        print(f'4. N={N} r={r}: tau*={tstar:.3e}; formula exact {e1 and e2}; corner at 0.99 tau* {float(g1):+.2e}, at 1.01 tau* {float(g2):+.2e}; '
+              f'distance <= 3 tau max w_n: {d1 and d2}; diagonal >= 0: {b1 and b2}', flush=True)
 
 if __name__ == '__main__':
     main()

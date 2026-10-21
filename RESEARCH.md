@@ -342,6 +342,14 @@ where γ runs from w = 1 to w = −r through the upper half-plane (substitute w 
 **Genuine (not only first-order) failure.** The exact corner at ε_N = 3ε*, along the sign of the terminal direction that makes the first-order change negative, is −2.00·(1−r)^N for r = 4/5 (all N = 16–40) and r = 19/20 (all N = 8–40). These are exact rational counterexamples at sizes down to 1.1·10⁻¹⁵ (r = 4/5, N = 40) and 4·10⁻⁴¹ (r = 19/20, N = 40); second-order terms are negligible there. At r = 3/5, where ρ/(1−r) = 1.19, second order still interferes at these sizes (signs mixed up to N = 40).
 - Open: a second-order bound (for example |G″| ≪ ρ^N/ε* on [0, 3ε*]) that would make the exponential thinness a theorem for every r ∈ (½, 1).
 
+**Exact thinness for every r ∈ (0,1): raising the top mass.** The top-mass deformation is exact in ε, not just first order: for μ^τ = μ + τw₀δ_{x₀},
+- R_n^τ = (1 + εS_n)R_n − εΣ_{j<n}π_jR_j with ε = τw₀ (normalization at x₀, and orthogonality via the reproducing property of Σ_{j<n}π_jR_j);
+- on the support, Σ_{j≤N}π_jR_j = 1_{x₀}/w₀ (dual orthogonality), so R_N^τ = (1+τ)R_N − τ1_{x₀}.
+
+Hence, exactly for every τ > 0,
+  g(N,N;N) = [(1+τ)²(I − w₀) + w₀]/[(1+τ)(h − w₀) + w₀],  I = (r(1−r))^N, h = r^N, w₀ = (r/(1+r))^N.
+This is negative exactly when τ > τ* = (1 − (1−r²)^N)^{−1/2} − 1, with τ* ≤ (1−r²)^N once (1−r²)^N ≤ ½. The coefficients move by a_n(1+εS_n)/(1+εS_{n+1}) and c_n(1+εS_{n+1})/(1+εS_n), so each by at most τw_n, since επ_n = τw_n. The affine renormalization to b₀ = 0 adds at most ε. So the stability radius satisfies ρ_N(r) ≤ 3τ*·max_n w_n = O((1−r²)^N/√N) for every fixed r ∈ (0,1). This holds below ½ too, because the direction is a binomial bump, not a uniform rule. Exact checks (fixedr_probe.py item 4): the formula is exact, the sign flips between 0.99τ* and 1.01τ*, and the distance and nonnegative-diagonal conditions hold for (N,r) = (8,⅕), (8,½), (10,⅘), (12,⅖), (14,1/10).
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
