@@ -20,6 +20,8 @@ Checks:
 6. Boundary layers: with c_N changed separately by L (possible when L_even = L_odd), the corner slack vanishes.
 7. r < 1: g(N,N;N) = (1-r)^N at K(N,r); a fixed-size rule fails at fixed r in (1/2, 1) for many N
    (r = 4/5, eps = 1/100; r = 19/20, eps = 1/1000) but not at r = 1/2 for N <= 14.
+9. Below r = 1/2: fixed-size smooth rules keep (P) at r in {1/5, 1/3, 2/5} (N <= 16); kinked rules at r = 2/5
+   fail from N = 17 for convex kinks and survive for the concave kink, and all survive at r = 1/5 (N <= 26).
 8. Noerlund-Rice region (mpmath): D_N[f] = sum (-1)^n C(N,n) f(n/N) decays when the poles of f lie outside
    the football Omega = {U <= -1}, U(x) = int_0^1 log|x-t| dt, and grows when they lie inside.
 """
@@ -223,6 +225,21 @@ def football_report():
         print(f'8. f = 1/((x-1/2)^2+{y}^2) ({"inside" if U(mp.mpc(0.5, y)) < -1 else "outside"} Omega): '
               f'|D_N| for N = 20, 40, 80, 120: ' + ' '.join(f'{float(abs(v)):.1e}' for v in vals), flush=True)
 
+def below_half_report():
+    rules = (('beta=1', lambda x: F(1), lambda x: F(0)), ('gamma=x', lambda x: F(0), lambda x: x))
+    for r in (F(1, 5), F(1, 3), F(2, 5)):
+        ok = all(all(x >= 0 for G in linearization(*rule_at(N, r, be, ga, sg*F(1, 100))) for row in G for x in row)
+                 for _, be, ga in rules for sg in (1, -1) for N in range(4, 17, 2))
+        print(f'9. r={r}: rules beta=+-1, gamma=+-x at eps=1/100 keep (P) for even N <= 16: {ok}', flush=True)
+    kinks = (('beta=|x-2/5|', lambda x: abs(x - F(2, 5)), lambda x: F(0)),
+             ('gamma=(x-3/5)_+', lambda x: F(0), lambda x: max(F(0), x - F(3, 5))),
+             ('gamma=-(x-3/5)_+', lambda x: F(0), lambda x: -max(F(0), x - F(3, 5))))
+    for r in (F(1, 5), F(2, 5)):
+        for name, be, ga in kinks:
+            first = next((N for N in range(8, 27, 3)
+                          if not all(x >= 0 for G in linearization(*rule_at(N, r, be, ga, F(1, 20))) for row in G for x in row)), None)
+            print(f'9. r={r} kinked rule {name}, eps=1/20: first failing N in 8, 11, ..., 26: {first}', flush=True)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.parse_args()
@@ -235,6 +252,7 @@ def main():
     layer_report()
     fixed_r_report()
     football_report()
+    below_half_report()
     rows, w, combo = constant_rule_certificate()
     print(f'3. constant rule: slack rows {[[str(x) for x in r] for r in rows]}, weights {[str(x) for x in w]}, '
           f'combination {[str(x) for x in combo]}', flush=True)
