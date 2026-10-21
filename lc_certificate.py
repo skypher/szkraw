@@ -6,8 +6,8 @@ g(m,n;k) = P_mnk / Q_m with Q_m = prod_{m'<m} (R+W)(D_N - D_m'), which has posit
 nonnegative coefficients (a sufficient condition; P need not be reduced).
 The criterion: b_i/c_i constant, and the profile d_n = b_n + c_n has Newton coefficients sigma_k = Delta^k d(0) that are
 nonnegative and log-concave (sigma_{k+1}/sigma_k nonincreasing). With rho_k = x_k + ... + x_{N-1} and x_i >= 0 every such
-sequence with sigma_1 = 1 arises, so a passing size proves property (P) for all members at that N. Passing sizes: N <= 5
-(about 30 s for N = 5). The same test with rho nondecreasing (log-convex) fails from N = 4 on, at the corner and deep triples.
+sequence with sigma_1 = 1 arises, so a passing size proves property (P) for all members at that N. Passing sizes: N <= 6
+(about 30 s for N = 5; N = 6 took 91 min and 1.4 GB with W = 1). The same test with rho nondecreasing (log-convex) fails from N = 4 on, at the corner and deep triples.
 """
 import sys, time, threading
 import sympy as sp
