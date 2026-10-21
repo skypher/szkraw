@@ -1,0 +1,6 @@
+Scoped review round 8 via pro-cli (ChatGPT Pro): round-7 fix and the Section 9 nonconvexity passage
+job id: job_411d76f4-e856-42ea-ba9d-d69ef1030fcb
+model: gpt-6-pro
+created: 2026-10-21T15:05:30.837Z
+brief: reviews/limits-review8-brief.md
+answer: reviews/limits-review8-answer.md
