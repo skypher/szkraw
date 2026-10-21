@@ -157,3 +157,15 @@ Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_7c82e24a-f063-42c1-9
 **Verdict: PASS** for Proposition 8.12, Corollary 8.13, the remark after it, and both updated Section 9 sentences, with no new error and no further fixes. Reviewed source: paper.tex at commit 0c9d8ff, SHA-256 `c0924d406b290f3a2ba6b31083f28e55127cf5568e7dffc7234fef1feffd12b4`.
 
 After this PASS, only the AI-use disclosure sentence changed ("four rounds" → "six rounds"); the diff against 0c9d8ff touches that one line alone. Current paper.tex SHA-256: `50d3921d72cdd03c6f347916df5e28eecb0efc509bd4ba310bb24638743941ed`.
+
+## Review round 7: terminal-row correction (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_8f5956b2-d2b4-4000-8120-19f6302b831c`. Brief: `reviews/limits-review7-brief.md` (paper.tex at commit b65fcad). Answer: `reviews/limits-review7-answer.md`.
+
+Scope: the remark after Corollary 8.13 (r = ½ is a threshold for the first-order term only; exact terminal-row failures at and below ½) and the replacement Section 9 sentence.
+
+**Verdict: PASS WITH MINOR FIXES.** Independent checks by the reviewer: exact recomputation of the four terminal-row cases by polynomial arithmetic modulo the terminal polynomial, independent of `corner()` (three negative, one positive, as stated); the polynomial dependence on e (degree at most N); and, in each negative case, g₀ + e·g₁ > 0, so the sign reversal is caused by the higher-order terms. Section 9 passes, and no remaining threshold claim at r = ½ for finite perturbations was found in Sections 7–9.
+
+Fix, applied with the reviewer's text: the Taylor-coefficient sentence now states the computed range (orders 1–4, r = ½, N = 30–77, six-size windows, factors 0.503, 0.593, 0.640, 0.676) and that it is a finite-range observation, not an asymptotic statement.
+
+Current paper.tex SHA-256: `dd91e3ee75f5488a94043694aad5f76caa4895aa1acbc05959f644c9d9378be6`.
