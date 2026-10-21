@@ -55,3 +55,18 @@ The asymmetric reference has strictly positive free coefficients, including term
 | 5. Paper proof, boundaries and independent review | PASS for this exact version, using the detailed new checks above and the archived review of unchanged material. |
 
 The abstract and final scope paragraph match these results: the radius is explicit, conservative, size-dependent, and positive around each asymmetric reference. No characterization of all property-(P) systems, radius uniform in N, or positive perturbation radius at the symmetric endpoint is claimed. The geometric algebra's known provenance is retained. The mathematical criteria meet the recorded mission; this review neither asserts nor establishes historical priority for the perturbation argument or a broader historical resolution of Szwarc's intended problem.
+
+# Independent review of Sections 7 and 8 (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_acdafd9c-0fd4-4730-bc5c-1c2892ba8009`, fresh temporary chat. Brief: `reviews/limits-review-brief.md` (paper.tex at commit 693b1e9, SHA-256 `a38a620ae9b945e400a3cbc7b6f853c4ba7824dba32d902a5f395045239f0a38`). Full answer: `reviews/limits-review-answer.md`.
+
+**Verdict: FAIL** for that source. The reviewer re-derived the identities independently and ran its own exact checks. It found the main mathematics sound:
+- correct: Theorems 7.1, 7.6, 7.8, 7.10, 7.13, 7.14 and their lemmas and corollaries; Lemma 8.1; Lemma 8.2 (corner identity, re-derived, with exact gradients for N = 2, 3, 4); Theorem 8.4; Proposition 8.8;
+- correct with fixable gaps: Corollary 7.9 at N = 1, Lemma 7.12's reversed normalization, Definition 8.3's quantifiers, Lemma 8.5's contour construction, Corollary 8.9's norm and admissibility argument;
+- incorrect or overstated: Corollary 8.6 (only the necessary equalities extend to analytic rules); Proposition 8.7(1) (false for weak signs; the reviewer gave admissible directions as a counterexample); the period-4 sign claim away from r = 1 (refuted exactly at r = 4/5); several scope sentences presenting a narrower result as a general disproof; "inequalities alone" after Corollary 7.15; the reversal paragraph (needs N ≥ 3, and Szwarc's array has b ≡ 0); the paragraph applying Lemma 7.5 to arbitrary references; and several computational overstatements.
+
+All defects were corrected in paper.tex (SHA-256 `2af3459bdb7e4d541ab9c697ef210880112030307131ceb7c186054ce0d4d65b`), mostly with the reviewer's replacement text. Two deviations:
+- **Fixed-N interior claim:** restricted to the computed sizes N ≤ 10. The reviewer's suggested general argument does not reach odd-parity deep zeros, where both of its directions have zero first-order change.
+- **Reviewer-supplied facts, rechecked exactly before use:** the K_{2,1} example (g(2,2;2) = −2ε/(½ − ε)), Szwarc's reversed g'(2,2;2) = (2p₀ − 1)/(Np₀) for N = 3, 4 and p₀ = 1/3, 2/5, and the first-order values 512/1875 (N = 4) and −71936/5859375 (N = 8) at r = 4/5.
+
+RESEARCH.md was narrowed to the same scope. A follow-up review of the corrected source is required before any acceptance claim.
