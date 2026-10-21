@@ -9,7 +9,9 @@ R_n normalized by R_n(x_0) = 1. Product coefficients are invariant under affine 
 2. Boolean formula g(m,n;k) = sum_j H(m,n;j) C(j,s) r^(j-s) (1-r)^s, s = k-m-n+2j, for K(N,r).
 3. Interior: lowering the top mass by eps and r by Lambda*eps makes every triangle coefficient strictly positive
    once Lambda exceeds an explicit Lambda_N (checked exactly for N <= 12).
-4. In recurrence coefficients, lowering the top mass is dc_n = -C(N-1,n-1), db_n = -C(N,n)(N-2n)/N.
+4. In recurrence coefficients, lowering the top mass of any finite system changes (a_n, b_n, c_n) at rate
+   pi_n (a_n, c_n - a_n, -c_n) (proof in RESEARCH.md); for K(N,1) this is
+   dc_n = -C(N-1,n-1), db_n = -C(N,n)(N-2n)/N. Checked on K(N,1), N <= 12, and on random measures.
 """
 import argparse
 from fractions import Fraction as F
@@ -89,6 +91,23 @@ def top_in_recurrence(N):
     dc_ok = all(abs((c1[n]-c0[n])/TINY + (comb(N-1, n-1) if n else 0)) < F(1, 10**20) for n in range(N+1))
     return db_ok and dc_ok
 
+def top_formula_random(seed=4, trials=6):
+    from random import Random
+    rng = Random(seed); worst = F(0)
+    for _ in range(trials):
+        N = rng.choice([3, 5, 7, 9])
+        x = sorted({F(rng.randint(-100, 100), 37) for _ in range(3*N)}, reverse=True)[:N+1]
+        w = [F(rng.randint(1, 50)) for _ in range(len(x))]
+        N = len(x) - 1
+        a, b, c = recurrence_from_measure(x, w)
+        pi = [1/sum(w)]
+        for n in range(N): pi.append(pi[-1]*a[n]/c[n+1])
+        w2 = list(w); w2[0] -= TINY
+        a1, b1, c1 = recurrence_from_measure(x, w2)
+        worst = max([worst] + [max(abs((a1[n]-a[n])/TINY - pi[n]*a[n]), abs((b1[n]-b[n])/TINY - pi[n]*(c[n]-a[n])),
+                                   abs((c1[n]-c[n])/TINY + pi[n]*c[n])) for n in range(N+1)])
+    return worst
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.parse_args()
@@ -101,6 +120,7 @@ def main():
         print(f'3. N={N}: Lambda_N = {float(lam_N):.6g}; all triangle coefficients > 0 at eps = 1e-12, Lambda = 2 Lambda_N + 1: {mn > 0}', flush=True)
     print('4. top-mass lowering = (db_n, dc_n) = (-C(N,n)(N-2n)/N, -C(N-1,n-1)), N = 2..12:',
           all(top_in_recurrence(N) for N in range(2, 13)), flush=True)
+    print(f'4. general formula pi_n (a_n, c_n - a_n, -c_n) on random measures: max deviation {float(top_formula_random()):.1e} (step 1e-30)', flush=True)
 
 if __name__ == '__main__':
     main()
