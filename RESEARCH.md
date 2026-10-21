@@ -342,6 +342,33 @@ where γ runs from w = 1 to w = −r through the upper half-plane (substitute w 
 **Genuine (not only first-order) failure.** The exact corner at ε_N = 3ε*, along the sign of the terminal direction that makes the first-order change negative, is −2.00·(1−r)^N for r = 4/5 (all N = 16–40) and r = 19/20 (all N = 8–40). These are exact rational counterexamples at sizes down to 1.1·10⁻¹⁵ (r = 4/5, N = 40) and 4·10⁻⁴¹ (r = 19/20, N = 40); second-order terms are negligible there. At r = 3/5, where ρ/(1−r) = 1.19, second order still interferes at these sizes (signs mixed up to N = 40).
 - Open: a second-order bound (for example |G″| ≪ ρ^N/ε* on [0, 3ε*]) that would make the exponential thinness a theorem for every r ∈ (½, 1).
 
+**Higher-order terms (2026-10-21, later).** Cheap test of the planned proof (first-order asymptotics plus a remainder bound); it fails near ½.
+- Along the terminal row g(N,N;N) is an exact polynomial in ε, since the linearization recurrence divides only by a_0, …, a_{N−1}. It had degree N in the cases checked (N = 6, 10, 16 at r = 3/5, 4/5; scratch runs/terminal/).
+- Envelope growth rates of the Taylor coefficients |g_k| in N (windows of six consecutive N, N = 30–77):
+
+  | r | k=1 | k=2 | k=3 | k=4 | linear regime needs k=2 below ρ²/(1−r) |
+  |---|---|---|---|---|---|
+  | 1/3 | 0.647 | 0.632 | 0.658 | 0.686 | 0.510 |
+  | 1/2 | 0.503 | 0.593 | 0.640 | 0.676 | 0.500 |
+  | 11/20 | 0.488 | 0.583 | 0.641 | 0.686 | 0.524 |
+  | 3/5 | 0.474 | 0.580 | 0.642 | 0.692 | 0.564 |
+  | 13/20 | 0.472 | 0.581 | 0.658 | 0.702 | 0.626 |
+  | 7/10 | 0.470 | 0.591 | 0.665 | 0.715 | 0.720 |
+  | 4/5 | 0.469 | 0.608 | 0.687 | 0.743 | 1.089 |
+
+  For k ≥ 2 the rates are nearly independent of r and increase with k (0.80 at k = 8 for r = ½ and ⅓). The linear regime (first-order term dominant at ε ≈ ε*) needs rate_k < ρ^k/(1−r)^{k−1} for every k ≥ 2. It holds at r ≥ 13/20 and fails at r ≤ 3/5. So first-order asymptotics plus a remainder bound can at best prove terminal-row thinness for r above about 0.62, not on all of (½, 1).
+- No threshold at ½ for finite perturbations. When rate_k > 1 − r, the k-th order term alone gives a failure size of order ((1−r)^N/|g_k|)^{1/k}, exponentially small if the signs cooperate. Exact first failures on a log grid (step 10^{0.1}):
+
+  | r | N = 20 | 40 | 60 | 80 | 100 | 120 |
+  |---|---|---|---|---|---|---|
+  | 1/2 | 2.0e−2 | 1.3e−2 | 6.3e−4 | 1.3e−4 | 6.3e−3 | 6.3e−6 |
+  | 2/5 | 5.0e−2 | 7.9e−2 | 1.0e−2 | 2.0e−2 | 3.2e−3 | 3.2e−3 |
+  | 1/3 | 6.3e−2 | 1.3e−1 | 7.9e−2 | 2.0e−2 | 1.6e−2 | 1.6e−2 |
+  | 1/4 | — | — | — | 7.9e−2 | 5.0e−2 | 3.2e−2 |
+
+  The sizes oscillate with N but decrease at r = ½ and, more slowly, below it. Exact witnesses (fixedr_probe.py item 6, direct recurrence): g(120,120;120) < 0 at ε = −6.3·10⁻⁶ (r = ½; still positive at −5·10⁻⁶), g(100,100;100) < 0 at ε = −3.2·10⁻³ (r = ⅖), g(120,120;120) < 0 at ε = −1.6·10⁻² (r = ⅓), all with the basic conditions.
+- Consequence for the paper: r = ½ is where the first-order comparison changes, not a threshold for terminal-row perturbations. The remark after Corollary 8.13 and the Section 9 question were corrected accordingly. Whether the terminal-row slice is exponentially thin for every r ∈ (0,1) is open; a proof would need the Taylor coefficients of every order, not a single remainder bound. Given Corollary 8.13 (exact, all r), this line was not pursued further.
+
 **Exact thinness for every r ∈ (0,1): raising the top mass.** The top-mass deformation is exact in ε, not just first order: for μ^τ = μ + τw₀δ_{x₀},
 - R_n^τ = (1 + εS_n)R_n − εΣ_{j<n}π_jR_j with ε = τw₀ (normalization at x₀, and orthogonality via the reproducing property of Σ_{j<n}π_jR_j);
 - on the support, Σ_{j≤N}π_jR_j = 1_{x₀}/w₀ (dual orthogonality), so R_N^τ = (1+τ)R_N − τ1_{x₀}.

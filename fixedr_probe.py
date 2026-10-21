@@ -14,6 +14,10 @@ Checks:
 4. Raising the top mass of K(N,r) to (1+tau) w_0 (exact for every tau): g(N,N;N) =
    [(1+tau)^2 (I - w_0) + w_0] / [(1+tau)(h - w_0) + w_0], I = (r(1-r))^N, h = r^N, w_0 = (r/(1+r))^N,
    negative exactly for tau > tau* = (1 - (1-r^2)^N)^(-1/2) - 1; the array moves by at most 3 tau max_n w_n.
+5. Along the terminal row g(N,N;N) is a polynomial in the perturbation e (the recurrence divides only by a_0..a_{N-1}).
+   Growth rates of its Taylor coefficients |g_k|, k = 1..4, at r = 1/2 (envelope over windows of six consecutive N,
+   N = 30..77): the rate increases with k, so r = 1/2 is a threshold for the first-order term only.
+6. Exact terminal-row failures at and below r = 1/2: g(N,N;N) < 0 at the stated e, with all basic conditions.
 """
 import argparse
 import math
@@ -43,6 +47,29 @@ def corner(a, b, c):
             if i: v += c[i]*cur[i-1]
             if i < N: v += a[i]*cur[i+1]
             nxt.append(v/a[m])
+        prev, cur = cur, nxt
+    return cur[N]
+
+def corner_poly(N, r):
+    """g(N,N;N) at K(N,r) with c_N -> c_N + e, b_N -> b_N - e, as exact coefficients in e."""
+    def add(p, q):
+        return [(p[i] if i < len(p) else 0) + (q[i] if i < len(q) else 0) for i in range(max(len(p), len(q)))]
+    def mul(p, q):
+        out = [F(0)]*(len(p) + len(q) - 1)
+        for i, x in enumerate(p):
+            for j, y in enumerate(q): out[i+j] += x*y
+        return out
+    a, b, c = krawr(N, r)
+    B = [[x] for x in b]; C = [[x] for x in c]
+    B[N] = [b[N], F(-1)]; C[N] = [c[N], F(1)]
+    prev = [[F(0)] for _ in range(N+1)]; cur = [[F(int(i == N))] for i in range(N+1)]
+    for m in range(N):
+        nxt = []
+        for i in range(N+1):
+            v = add(mul(add(B[i], [-x for x in B[m]]), cur[i]), [-x for x in mul(C[m], prev[i])])
+            if i: v = add(v, mul(C[i], cur[i-1]))
+            if i < N: v = add(v, [a[i]*x for x in cur[i+1]])
+            nxt.append([x/a[m] for x in v])
         prev, cur = cur, nxt
     return cur[N]
 
@@ -96,6 +123,24 @@ def main():
         e1, g1, d1, b1 = check_raised(N, r, lo); e2, g2, d2, b2 = check_raised(N, r, hi)
         print(f'4. N={N} r={r}: tau*={tstar:.3e}; formula exact {e1 and e2}; corner at 0.99 tau* {float(g1):+.2e}, at 1.01 tau* {float(g2):+.2e}; '
               f'distance <= 3 tau max w_n: {d1 and d2}; diagonal >= 0: {b1 and b2}', flush=True)
+    r, W = F(1, 2), 6
+    logs = []
+    for N in range(30, 78):
+        p = corner_poly(N, r)
+        logs.append([math.log(abs(float(p[k]))) for k in range(1, 5)])
+    rates = []
+    for k in range(4):
+        env = [max(range(i, i+W), key=lambda j: logs[j][k]) for i in range(0, len(logs) - W + 1, W)]
+        rates.append(math.exp((logs[env[-1]][k] - logs[env[0]][k])/(env[-1] - env[0])))
+    print('5. r=1/2: growth rates of the Taylor coefficients g_1..g_4 in N: ' + ', '.join(f'{x:.3f}' for x in rates)
+          + ' (g(N,N;N) = (1/2)^N)', flush=True)
+    for N, r, e in ((120, F(1, 2), F(-63, 10**7)), (120, F(1, 2), F(-5, 10**6)), (100, F(2, 5), F(-32, 10**4)),
+                    (120, F(1, 3), F(-16, 10**3))):
+        a, b, c = krawr(N, r); b, c = list(b), list(c)
+        c[N] += e; b[N] -= e
+        basic = (all(x > 0 for x in a[:N]) and all(x >= 0 for x in b) and all(x > 0 for x in c[1:])
+                 and all(a[n] + b[n] + c[n] == 1 for n in range(N+1)))
+        print(f'6. N={N} r={r} e={float(e):.1e}: basic conditions {basic}; g(N,N;N) = {float(corner(a, b, c)):+.3e}', flush=True)
 
 if __name__ == '__main__':
     main()
