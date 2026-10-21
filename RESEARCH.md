@@ -516,6 +516,17 @@ Scratch: runs/ql_proof/; tracked ql_symbolic.py.
   - It is an inequality criterion except for the constant ratio (an equality). The rising linear ratio (L) suggests the ratio condition can also be relaxed; not yet formulated.
 - *Proof idea.* In the geometric tower algebra the raising coefficient of E_1E_k is [k+1]_q = Σ_u C(k+1,u)σ_u: nonempty subsets U of a (k+1)-set weighted by σ_{|U|}. A tower whose square relations carry higher-order terms z_j z_U (U above j) with weights λ_{|U|} ≥ 0 would give D(k+1) = Σ_u C(k+1,u)σ_u after full reduction. The open question is whether log-concavity of σ is exactly what makes the required λ nonnegative, and whether the lowering coefficients (the ν_j) can be chosen so that E_1E_k closes on the E's.
 
+## Tower-algebra route for the log-concave criterion: negative (2026-10-22)
+
+Scratch: runs/ql_proof/tower*.py.
+- *Target.* In the normalization of Theorem 2.1, the criterion needs a commutative algebra with a positive squarefree basis z_S in which E_1E_k = D(k+1)E_{k+1} + (p−1)D(k)E_k + p(D(N) − D(k−1))E_{k−1}, D(n) = Σ_u C(n,u)σ_u. The geometric σ_u = (q−1)^{u−1} gives Theorem 2.1's coefficients exactly. Gauge-invariant form: β_k = τ(1−r)D(k)/D(N) and α_{k−1}γ_k = τ² r D(k)(D(N) − D(k−1))/D(N)².
+- *Constraint.* Square relations cannot contain z_j z_U with |U| ≥ 2: when U misses T these produce E_{k+2}, and nonnegative coefficients cannot cancel. Higher Newton coefficients must come from chains of degree-one raisings.
+- *Ansatz tested (N = 3).* z_j² = Σ_{l>j}(λ_{jl} z_j z_l + η_{jl} z_l) + Σ_{j<l<m} θ_{jlm} z_l z_m + μ_j z_j + ν_j, all coefficients ≥ 0, position-dependent, gauge-invariant targets.
+  - Solvable (residual 10⁻²⁶ to 10⁻³⁰) exactly for geometric σ: (1,1,1) gives λ ≡ 1, ν = 8,4,2; (1,½,¼) gives λ ≡ ½, ν = 4.5,3,2. These are Theorem 2.1's algebra.
+  - Not solvable for Q, σ = (1,½,0), nor for the log-concave σ = (1,½,⅛): best least-squares residual 6.8·10⁻³ and 1.6·10⁻³ over 300 random starts. Exact symbolic solving with fixed gauge also has no solution.
+  So chains in an ordered tower force σ_3 = σ_2² (geometric); Q's positivity needs a different mechanism.
+- *Structural picture.* Mixtures of geometric profiles have σ_k = E[X^{k−1}], a moment sequence, hence log-convex. The failing segment arrays K(N,r) → G(N,q,r) are exactly the two-point mixtures (masses at X = 0 and X = q − 1). Geometric profiles (log-linear) are the common boundary. Empirically: log-convex fails (segment), the boundary is Theorem 2.1, log-concave passes (all tests so far). A proof will likely need a model in which the chain weight depends on chain length (σ_{u+1}/σ_u = ρ_u nonincreasing), not on position.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
