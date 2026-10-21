@@ -546,6 +546,23 @@ Scratch: runs/ql_proof/ratio_lc.py, ratio_lin.py, ratio_lin_big.py. The profile 
 - *Quadratic convex ratios* ρ_n = r + κn/N + μC(n,2)/N², total rise (1−r)/2, quadratic share ¼ to 1 (share 1: θ_1 = 0, not log-concave): exact full tables N = 4–16 at r = ⅕, ½, ⅘, no failure. On the ratio side, what kills is kinks (ramp, rise-then-flat: Newton coefficients of both signs) and strong top acceleration (exponential-type, θ_2/θ_1 ≈ 2.8), the same two mechanisms as for profiles. Smooth convex rises of size O(1) spread over n/N pass.
 - Current candidate: profile with nonnegative log-concave Newton coefficients, and ratio linear and nondecreasing with slope at most (1−r)/2. The ratio side is still an equality (Δ²ρ = 0) with one inequality parameter. Whether some convexity of ρ with small Newton quotients (θ_2/θ_1 = O(1/N)) is allowed is open.
 
+## An inequality-only candidate (2026-10-22)
+
+Scratch: runs/ql_proof/ratio_diag.py, cand_A.py, candA_adv.py.
+- *Diagnosis.* The five ratio failures with b nondecreasing (previous section) all have log-concave Newton coefficients for d. For c they have non-log-concave coefficients or internal zeros, and for b negative Newton coefficients. Requiring b's Newton coefficients nonnegative would exclude L (Δ²b = −2κ/N² < 0), which passes. So the condition goes on c.
+- *Candidate A′ (inequalities only).*
+  (i) σ^d_k = Δ^k d(0) ≥ 0, log-concave in k, without internal zeros;
+  (ii) σ^c_k = Δ^k c(0) ≥ 0, log-concave in k, without internal zeros;
+  (iii) 0 < c_n ≤ d_n;
+  (iv) b_n nondecreasing.
+  Krawtchouk satisfies all four (d, c, b linear). So does every geometric array of Theorem 2.1 (c = r d), and so do Q and L (L: σ^c = (r/N + κ/N², 2κ/N², 0, …); (iv) holds for κ ≲ (1−r)/2). It rejects small quadratic ratios (σ^c_2² < σ^c_1σ^c_3 unless μ ≥ 3rN²/4), which pass; it is meant as a sufficient condition.
+- *Without (iv):* 8 of 280 random members fail at N = 4–10, all with ρ_N = 0.89–0.93 at the triple (N−1, N; N). So (iv) is needed.
+- *Tests of A′ (no failure):*
+  - exact full tables: 280 random members (N = 4–16, seed 1) and 240 (N = 5–20, seed 7);
+  - fixed-point corners: 120 random members at N = 50, 100, 200, 400, negatives recomputed at +800 bits.
+  Adversarial pairs (d and c geometric or truncated geometric with different q, scaled ρ_N) are running.
+- *If A′ holds for all N, it is an inequality criterion for finite systems that contains the full positive Krawtchouk range and the geometric family*, the open item of MISSION.md. Caution: small-r failures in earlier classes only appeared at large N; full tables beyond N = 20 have not yet been run for A′.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
