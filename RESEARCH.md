@@ -562,6 +562,8 @@ Scratch: runs/ql_proof/ratio_diag.py, cand_A.py, candA_adv.py.
   - exact full tables: 280 random members (N = 4–16, seed 1) and 240 (N = 5–20, seed 7);
   - fixed-point corners: 120 random members at N = 50, 100, 200, 400, negatives recomputed at +800 bits.
   Adversarial pairs (d and c geometric or truncated geometric with different q, scaled ρ_N) are running.
+- *Each condition is needed.* Dropping (i) (candidate A″: c log-concave Newton, b with arbitrary nonnegative increments, d = b + c) gives 25 failures among 400 exact members (N = 3–12, runs/ql_proof/cand_A2.py), all with d not log-concave, some already at N = 3. Dropping (iv) gives the high-ρ_N failures above, and dropping (ii) the accelerating-ratio failures.
+- *Certificate route.* A′'s region is not an orthant in any obvious parametrization: (i) and (ii) are orthants in Newton variables, but (iii) and (iv) are then polynomial constraints. A small-N certificate would need a Handelman-type representation of each numerator as a nonnegative combination of constraint products (σ^d_k, σ^c_k, the log-concavity gaps σ_k² − σ_{k−1}σ_{k+1}, d_n − c_n, b_{n+1} − b_n). That is a linear program per coefficient; not attempted yet.
 - *If A′ holds for all N, it is an inequality criterion for finite systems that contains the full positive Krawtchouk range and the geometric family*, the open item of MISSION.md. Caution: small-r failures in earlier classes only appeared at large N; full tables beyond N = 20 have not yet been run for A′.
 
 ## Prior art: Miclo 2015
