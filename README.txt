@@ -44,8 +44,8 @@ Verification scope
 The proofs use no sorry, admit or project-specific axioms. The audited declarations
 depend only on Lean's propext, Classical.choice and Quot.sound. Exact Python checks
 are diagnostics, not a substitute for all-size proofs.
-deep_certificates.py and deep_order.py record probes of the open deep-triple problem;
-neither is part of make diagnostics, and the linear programs in the first need numpy and scipy. The earlier independent
+deep_certificates.py, deep_order.py and path_model.py record probes of the open deep-triple problem;
+none is part of make diagnostics, and their linear programs need numpy and scipy. The earlier independent
 AI mathematical review is archived in REVIEW.md and reviews/; it is not human
 peer review and is not a substitute for the Lean kernel checks.
 

@@ -219,6 +219,18 @@ Two further exact probes (deep_order.py, needs only probe.py):
 
 Conclusion: every lightcone variant tested either fails or is as hard as (P). A criterion covering asymmetric Krawtchouk and Q_n with p_0 < 1/2 must use the increasing diagonal actively rather than absorb it into positive margins.
 
+## Deep triples: path models and the mirror pairing (2026-10-21)
+
+path_model.py (exact except the linear programs, which need numpy and scipy) tests signed path counting with sign-reversing pairings as a route to an inequality criterion. Results for Krawtchouk unless stated:
+
+- Viennot expansion (monomer–dimer tilings × lattice paths, level weight b_h − b_i). Low products already cancel heavily (positive mass up to 2.1·10³ times the net value at N = 6), although Szwarc's theorem proves them; the expansion gives no location for the deep obstruction. Zeng's colored-derangement model (SIAM J. Math. Anal. 21, 1990) likewise does not show Krawtchouk positivity without symmetric functions.
+- Szwarc lightcone expansion (normalization (3.9), σ_n = r^(n/2), r = s² rational). For every deep apex the only negative weights are γ_x − α_y = s(1 − d_x − d_y) on the cone edge x − y = n − m at points with x + y ≥ N − 1, i.e. hypothesis (iii) of Theorem 7.10 failing past the antidiagonal. Truncation at the ceiling creates no negative weight.
+- Mirror pairing M(x,y) = (N−y, N−x). If λ_i = a_{i−1}c_i is palindromic (all Krawtchouk arrays; not the geometric q > 1 arrays), a normalization with A_{N−i} = C_i exists and each defect pairs with a side-edge weight of exactly opposite sign. At r = 1 the values also agree and the cancellation is exact. In general w = u − u∘M satisfies Hw = −(e_x − e_y)·u∘M with e_i = b_i − b_{N−i}, vanishes on x + y = N, and the source has a fixed sign when e is nondecreasing; so the rising diagonal enters as a signed source.
+- Mirror dominance (w ≥ 0 for x + y > N) holds exactly for Krawtchouk at N = 4, 6, 8, 10 and r ∈ {1/25, 1/4, 81/100, 9801/10000}. With Theorem 7.10 it implies (P). But on 293 random palindromic-λ arrays with e nondecreasing and nonnegative low products it held exactly when (P) held (238 both, 55 neither), so it is a restatement of (P) in that class, not a weaker target; and that class is not a criterion. None of b nondecreasing, c nondecreasing, λ concave, λ log-concave separates the 55 failures (34–53 failures remain under each).
+- Maximum-principle certificates for w (coefficient-only sign conditions, induction over high points) exist at every high apex for t = 1/s − s = 4 (r ≈ 0.056), N = 4, 6, 8, but fail near (N,N) for t = 1/2 (r ≈ 0.61), and no single certificate serves both values. The mirror pairing therefore shrinks the obstruction to a corner near (N,N) without removing it.
+
+Conclusion: signed path counting yields one genuine structure (the mirror involution, which removes the side-edge defects exactly for palindromic λ) but no criterion; the remaining corner problem is again equivalent to (P) on tested arrays.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
