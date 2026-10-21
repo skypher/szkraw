@@ -318,6 +318,30 @@ Exact values: Λ_N = 4, 10, 18, 28, 52, 90, 165, 309.4, 554.1 for N = 4,…,12, 
 
 **In recurrence coefficients (any finite system).** Lowering the top mass changes the recurrence normalized by R_n(x₀) = 1 at rate (δa_n, δb_n, δc_n) = π_n(a_n, c_n − a_n, −c_n). *Proof.* With Q_n as above, π^ε_n = π_n(1 + ε(2S_n + π_n)) + O(ε²), where S_n = Σ_{k<n} π_k. Differentiate c_n = π_{n−1}∫xR_nR_{n−1}dμ and b_n = π_n∫xR_n²dμ, using xR_m = a_mR_{m+1} + b_mR_m + c_mR_{m−1}, the row sums a_m + b_m + c_m = x₀ and detailed balance π_{n−1}a_{n−1} = π_nc_n. The S-terms cancel: δc_n = −π_{n−1}a_{n−1} = −π_nc_n and δb_n = π_n(b_n + 2c_n − x₀) = π_n(c_n − a_n), and δa_n follows from the row sums. ∎ For K(N,1) this is δc_n = −C(N−1, n−1) and δb_n = −C(N,n)(N−2n)/N (exact for N = 2–12, and on random measures to 10⁻⁴³). This is a binomially concentrated deformation, of width √N around the middle index, not a smooth function of n/N. That is consistent with Theorem 8.4: the interior at the symmetric endpoint is reachable, but not by polynomial or analytic uniform rules.
 
+## Fixed r ∈ (½, 1): the corner derivative at K(N,r) and the threshold ½ (2026-10-21)
+
+fixedr_probe.py (exact derivatives; mpmath quadrature; numpy fit).
+
+**Exact formula.** At K(N,r), R_N(λ_j) = (−r)^j, π_n = C(N,n) r^{−n} and w_j = C(N,j) r^{N−j}/(1+r)^N. The Boolean model gives Σ_j w_j R_n(λ_j) s^j = (r+s)^{N−n} r^n (1−s)^n/(1+r)^N. Repeat Lemma 8.2's argument with Π replaced by R_N(J), whose eigenvalues are (−r)^j, and use (z^i − z^j)/(i − j) = L∫₀¹ z^{θi+(1−θ)j} dθ with z = −r, L = ln r + iπ. Since R_{N−1}(λ_j) − R_N(λ_j) = (−r)^{j−1} j(1+r)/N, the first-order change of g(N,N;N) along the terminal coordinate (δc_N = 1, δb_N = −1) is
+  ġ_N(r) = N(−r)/(1+r)^{2N} ∫_γ [h₁(w)^N/(w(w−r²)) + r h₂(w)^N/(w(w+r³))] dw,
+  h₁(w) = (1+rw)(1−r²/w),  h₂(w) = (1−w)(1+r³/w),
+where γ runs from w = 1 to w = −r through the upper half-plane (substitute w = e^{θL}). This matches the exact derivative to relative error 10⁻¹³ for N = 2–12 and r ∈ {½, 3/5, 4/5, 19/20, 1}. At r = 1 it reduces to Lemma 8.2's terminal value s_N.
+
+**Asymptotics (steepest descent; written argument, not yet reviewed).**
+- h₁ has zeros at r² and −1/r and saddles at w = ±i√r, with h₁(i√r) = (1 + i r^{3/2})².
+- h₂ has zeros at 1 and −r³ and saddles at w = ±i r^{3/2}, with h₂(i r^{3/2}) = (1 − i r^{3/2})².
+- Both saddle moduli are 1 + r³. The endpoints have |h| = (1−r)(1+r)², which is below 1 + r³ exactly when r > ½, because (1−r)(1+r)² − (1 + r³) = r(1+r)(1 − 2r).
+- On [r², 1] and [−1/r, −r], respectively [−r, −r³], h is real and monotone between 0 and the endpoint value. So for r > ½ the two endpoints lie in different valleys of |h_k| below the saddle level, and the path must cross the upper saddle.
+- The two saddle values are complex conjugates. Hence
+  ġ_N(r) = √N ρ(r)^N (2|c| cos(2Nφ + ψ) + o(1)),  ρ(r) = (1 − r + r²)/(1 + r),  φ = arctan r^{3/2},
+  for some c ≠ 0. A least-squares fit over N = 30–60 has relative residual 0.2–0.3% at r = 3/5, 4/5, 19/20, with |c| ≈ 1.9–2.0.
+- Since 0 < 2φ ≤ π/2, cos(2Nφ + ψ) ≤ −½ for infinitely many N.
+
+**Threshold.** g(N,N;N) = (1−r)^N, and ρ(r) > 1 − r ⇔ r > ½ (equality at ½). For r ∈ (½, 1) the corner's first-order sensitivity exceeds its value by a factor of order √N(ρ/(1−r))^N, with negative sign infinitely often. The first-order zero crossing along the terminal direction therefore lies at ε* = (1−r)^N/|ġ_N|, exponentially small in N. This explains the earlier numerics exactly: bounded ratio at r = ½, growth like (ρ/(1−r))^N above it.
+
+**Genuine (not only first-order) failure.** The exact corner at ε_N = 3ε*, along the sign of the terminal direction that makes the first-order change negative, is −2.00·(1−r)^N for r = 4/5 (all N = 16–40) and r = 19/20 (all N = 8–40). These are exact rational counterexamples at sizes down to 1.1·10⁻¹⁵ (r = 4/5, N = 40) and 4·10⁻⁴¹ (r = 19/20, N = 40); second-order terms are negligible there. At r = 3/5, where ρ/(1−r) = 1.19, second order still interferes at these sizes (signs mixed up to N = 40).
+- Open: a second-order bound (for example |G″| ≪ ρ^N/ε* on [0, 3ε*]) that would make the exponential thinness a theorem for every r ∈ (½, 1).
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
