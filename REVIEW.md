@@ -70,3 +70,32 @@ All defects were corrected in paper.tex (SHA-256 `2af3459bdb7e4d541ab9c697ef2108
 - **Reviewer-supplied facts, rechecked exactly before use:** the K_{2,1} example (g(2,2;2) = −2ε/(½ − ε)), Szwarc's reversed g'(2,2;2) = (2p₀ − 1)/(Np₀) for N = 3, 4 and p₀ = 1/3, 2/5, and the first-order values 512/1875 (N = 4) and −71936/5859375 (N = 8) at r = 4/5.
 
 RESEARCH.md was narrowed to the same scope. A follow-up review of the corrected source is required before any acceptance claim.
+
+## Follow-up review of the corrected source (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_f304a6a7-9bfa-47bf-8ce0-c39719c41801`. Brief: `reviews/limits-rereview-brief.md` (paper.tex at commit 4381af5, with the first report quoted). Answer: `reviews/limits-rereview-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer found no remaining substantive defect in the numbered results of Sections 7 and 8. It marked 32 of the first report's defects fixed and 6 partly fixed. Its independent exact checks reproduced:
+- the Szwarc reversal values;
+- both first-order values at r = 4/5;
+- the corner gradient through N = 20;
+- every listed rational counterexample;
+- strict first-order directions for 1 ≤ N ≤ 10 with property (P) at both stated sizes.
+
+It also reproduced the two high-precision examples numerically.
+
+It listed eight minor corrections:
+1. the parameter range 0 < ε < ½ in the K_{2,1} example;
+2. the first computational bullet (failure of period four, not general nonperiodicity);
+3. keeping the analytic-domain restriction in the introduction and Section 9;
+4. Miclo's small-size exceptions in Section 9;
+5. removing the size-scaling inference in Section 9;
+6. restating the certificate experiments as numerical findings;
+7. normalizing the quadratic profiles and qualifying reproducibility;
+8. two wording clarifications (boundary layers; the end of Corollary 8.9's proof).
+
+All eight were applied with the reviewer's wording. Two search reports not reproduced by tracked scripts (a concave-profile scan and a smooth-ratio scan) were removed from the paper and kept in RESEARCH.md.
+
+**Correction of the author's objection.** The author had rejected the first report's fixed-N interior argument. That objection was mistaken. It applies to lowering the mass at both endpoints ±1, which keeps b ≡ 0. The report's argument lowers the mass at the top endpoint only. That one-endpoint construction is exactly the one the author later found independently (RESEARCH.md, "The symmetric endpoint"). It is now in the paper as Lemma 8.7 (lowering the top mass) and Proposition 8.8 (interior points near the symmetric endpoint), replacing the restriction to N ≤ 10.
+
+The new lemma and proposition were written after this review and have not been reviewed. Current paper.tex SHA-256: `82b83184e99b870207e9e682638f51c07b0842df065ddf94d8b7720738714aec`.
