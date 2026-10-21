@@ -250,6 +250,14 @@ endpoint_probe.py (exact; the first-order formulas use sympy) tests polynomial c
 
 Conclusion: polynomial certificates explain the Krawtchouk range and locate the difficulty at the symmetric endpoint: as r → 1 the deep coefficients leave the forced zeros with first-order slopes given by N-dependent forms in the profile, and every shape cone tested (monotone, convex, log-convex, U-shaped, concave) fails these for large enough N, consistent with the convex counterexamples above. This also settles the expansion test proposed as "tool 3": the leading terms are not positive combinations of products of increments.
 
+## Toward a disproof: first-order structure at the symmetric endpoint (2026-10-21)
+
+Goal set by the user: if no inequality criterion exists, prove that. A disproof can only exclude a precisely defined class. In the broad sense, inequality-defined criteria covering the full Krawtchouk range already exist: an equality is two inequalities, and the neighbourhoods of Theorem 5.3 are inequalities. rigidity_probe.py tests two candidate classes at K(N,1), in stochastic coordinates b_1..b_{N−1}, c_1..c_N (b_0 = 0 without loss of generality). Any convex set of arrays with (P) containing K(N,1) lies in K(N,1) + T_N, where T_N = {v : ∇g_p·v ≥ 0 at every structural zero p} (the parity and perimeter zeros in the triangle).
+
+- Fixed N: no rigidity. T_N has no implicit equalities for N = 3–10, so it is full-dimensional. For an interior direction v, every first-order slack is strictly positive (exact), and K(N,1) + εv has (P) exactly for ε = 10⁻³ and 10⁻⁵ (N = 4, 6, 8, 10). So sets with (P) and nonempty interior touch the symmetric endpoint, and the disproof "every criterion through K(N,1) is forced into equalities" is false. The interior shrinks with N (LP margin 0.36, 0.21, 0.12, 0.067, 0.037, 0.020, 0.011 for N = 4, 6, …, 16).
+- N-uniform rules: δb_n = β(n/N), δc_n = γ(n/N), with the same β, γ for every N. For polynomials of degree d, an interior rule exists for all 3 ≤ N ≤ d+2 and for no range 3 ≤ N ≤ d+3 (d = 3, 5, …, 13; degree 1 fails already for N = 3, 4). For constant rules, an exact certificate settles it: the slacks at g(3,3;3) (N = 3) and g(4,6;6), g(6,6;6) (N = 7) have the positive combination (247/960, 41/64, 1) vanishing identically, forcing β₀ = γ₀ = 0.
+- Open: whether a non-polynomial smooth rule is interior for every N. Finite-dimensional tests cannot decide it. It needs the large-N limit of the constraints, which is the remaining step toward a disproof for N-uniform criteria.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
