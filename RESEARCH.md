@@ -258,6 +258,29 @@ Goal set by the user: if no inequality criterion exists, prove that. A disproof 
 - N-uniform rules: δb_n = β(n/N), δc_n = γ(n/N), with the same β, γ for every N. For polynomials of degree d, an interior rule exists for all 3 ≤ N ≤ d+2 and for no range 3 ≤ N ≤ d+3 (d = 3, 5, …, 13; degree 1 fails already for N = 3, 4). For constant rules, an exact certificate settles it: the slacks at g(3,3;3) (N = 3) and g(4,6;6), g(6,6;6) (N = 7) have the positive combination (247/960, 41/64, 1) vanishing identically, forcing β₀ = γ₀ = 0.
 - Open: whether a non-polynomial smooth rule is interior for every N. Finite-dimensional tests cannot decide it. It needs the large-N limit of the constraints, which is the remaining step toward a disproof for N-uniform criteria.
 
+## Disproof for N-uniform criteria at the symmetric endpoint (2026-10-21)
+
+Class excluded. A *uniform rule* is a pair of functions (β, γ) on [0,1] acting on every size at once by δb_n = β(n/N) (1 ≤ n ≤ N−1) and δc_n = γ(n/N) (1 ≤ n ≤ N), in the stochastic coordinates above (a_n absorbs the change, b_N = 1 − c_N). A criterion *admits* the rule at the symmetric endpoint if, for all large N, it contains K(N,1) + εv_N for all small ε > 0. Result: a valid criterion admits only rules satisfying two exact equalities. In particular no valid criterion admits an open set of polynomial rules. Every criterion that is uniform in N and contains the symmetric Krawtchouk systems is therefore of mixed type: its admissible smooth deformations at r = 1 obey equalities. Criteria with built-in equalities (Theorem 2.1, Corollary 7.15) are not excluded and do exist.
+
+**Lemma (corner identity).** At K(N,1), the first-order change of g(N,N;N) in direction v is
+
+  ġ = s_N Σ_{n=0}^{N} (−1)^n C(N,n) F_N(n),  s_N = (−1)^{⌊N/2⌋+1} / C(N−1, ⌊(N−1)/2⌋),
+
+with F_N = δb + 2δc for even N, F_N = δb for odd N, and conventions δb_0 = δc_0 = 0, δb_N = −δc_N.
+
+*Proof.* At K(N,1), R_N(λ_j) = (−1)^j, so R_N(J) = Π (index reversal). Let X = d/dε R_N(J + εE). Commutation and the fixed first row (R_N R_0 = R_N) give [J, X] = [Π, E] and e_0ᵀX = 0. Use the eigenbasis u_j = (R_n(λ_j))_n, v_j = (w_j h_n R_n(λ_j))_n, with λ_j = 1 − 2j/N, w_j = C(N,j)/2^N, h_n = C(N,n). Then X_ij = ((−1)^i − (−1)^j)E_ij/(λ_i − λ_j) for i ≠ j, and Σ_i X_ij = 0. Hence ġ = X_NN = 2N Σ_{i+j odd} (−1)^i E_ij w_j/(i − j). For a perturbation of row n, E = e_n rᵀ and E_ij = w_i h_n R_n(λ_i)(r·u_j). Write ((−1)^i − (−1)^j)/(i − j) = −π∫₀¹ sin π(θi + (1−θ)j) dθ, and use Σ_i C(N,i)R_n(λ_i)s^i = (1+s)^{N−n}(1−s)^n. The double sum becomes Im of a product of two generating functions at s = e^{iπθ} and s = −e^{−iπθ}, and evaluates to (−1)^n times a beta integral independent of n:
+- r = e_n − e_{n+1} (coordinate b_n): ġ = 2N C(N,n)(−1)^n (−1)^{⌊N/2⌋+1} I_N, with I_N = ∫₀^{π/2} cos^{N+1}φ sin^{N−1}φ dφ (N even) or ∫ cos^N φ sin^N φ dφ (N odd);
+- r = e_{n−1} − e_{n+1} (coordinate c_n, n < N): twice that for N even (the ratio of the two beta integrals is 2), zero for N odd;
+- coordinate c_N (r = e_{N−1} − e_N): ġ = 2N(−1)^{⌊N/2⌋+1}I_N.
+
+Finally 2N·I_N = 1/C(N−1, ⌊(N−1)/2⌋). ∎ (rigidity_probe.py item 4 checks the identity exactly for N = 2–20.)
+
+**Theorem.** Let β, γ be polynomials, and put L_even = β(0) + 2γ(0) + β(1) + γ(1) and L_odd = β(0) − β(1) − γ(1). For N > deg, Σ_{n=0}^{N}(−1)^n C(N,n)p(n/N) = 0 for every polynomial p of degree < N. So only boundary values survive in the Lemma: ġ = −s_N L_even (N even) and ġ = −s_N L_odd (N odd). Since s_N changes sign from N to N+2, L_even ≠ 0 (resp. L_odd ≠ 0) gives ġ < 0 for every large N in one residue class mod 4 among the even (resp. odd) N. Then g(N,N;N) < 0 at K(N,1) + εv_N for small ε > 0, so (P) fails. If L_even = L_odd = 0, then ġ = 0 for N > deg, so no polynomial rule lies in the interior of T_N for large N; this explains the "degree d works only up to N = d+2" pattern above. ∎ (Exact checks, item 5: β = 1, γ = 0 and β = 0, γ = x fail with the predicted signs for N = 4–14; the Krawtchouk direction β = x, γ = −x has L_even = L_odd = 0.)
+
+Admissible directions already known satisfy both equalities: the Krawtchouk direction, palindromic b = 0 deformations (γ odd about ½, γ(0) = γ(1) = 0), and the geometric q-direction (β = 0, γ = x(x−1)).
+
+Limits of the statement: it is first order at r = 1 and concerns deformation rules of the scaling form above. For a rule analytic on a neighbourhood of the lens {x : ∫₀¹ log|x−t| dt ≤ −1}, Nörlund–Rice integrals make the interior alternating sum tend to 0, which gives the same two equalities in the limit (sketch, not checked here). The theorem does not exclude criteria that contain K(N,1) but admit no open set of uniform rules, criteria that cover only r < 1, or the paper's equality-type criteria.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.

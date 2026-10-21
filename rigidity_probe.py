@@ -11,6 +11,12 @@ Checks:
 2. N-uniform deformation rules delta b_n = beta(n/N), delta c_n = gamma(n/N) with beta, gamma polynomials
    of degree <= d: largest M with an interior rule for all 3 <= N <= M (linear programs; numpy, scipy).
 3. Exact certificate that no nonzero constant rule lies in T_3 and T_7.
+4. Corner identity (proved in RESEARCH.md for every N; checked here exactly for N <= 20): the derivative of
+   g(N,N;N) at K(N,1) is s_N * sum_{n=0}^N (-1)^n C(N,n) F_N(n), with F_N = db + 2 dc (N even), db (N odd),
+   db_0 = dc_0 = 0, db_N = -dc_N, and s_N = (-1)^(floor(N/2)+1) / C(N-1, floor((N-1)/2)).
+5. Consequence for polynomial uniform rules (degree < N): the derivative is -s_N L_even (N even) or
+   -s_N L_odd (N odd), L_even = beta(0)+2gamma(0)+beta(1)+gamma(1), L_odd = beta(0)-beta(1)-gamma(1);
+   s_N changes sign from N to N+2, so L != 0 breaks (P) near K(N,1) for infinitely many N (checked exactly).
 """
 import argparse
 from fractions import Fraction as F
@@ -125,9 +131,47 @@ def constant_rule_certificate():
     combo = [sum(wi*r[j] for wi, r in zip(w, rows)) for j in range(2)]
     return rows, w, combo
 
+def s_N(N):
+    from math import comb
+    return F((-1)**(N//2 + 1), comb(N-1, (N-1)//2))
+
+def corner_identity(N):
+    """Exact gradient of g(N,N;N) at K(N,1) equals the alternating binomial stencil."""
+    from math import comb
+    C, Z = zero_gradients(N)
+    g = dict(Z)[(N, N, N)]
+    want = []
+    for kind, n in C:
+        if kind == 'b': want.append(s_N(N)*(-1)**n*comb(N, n))
+        elif n < N: want.append(2*s_N(N)*(-1)**n*comb(N, n) if N % 2 == 0 else F(0))
+        else: want.append(s_N(N))
+    return list(g) == want
+
+def uniform_rule_signs(beta, gamma, Ns, eps=F(1, 10**6)):
+    """Sign of g(N,N;N) at K(N,1) + eps*v_N for the rule (beta, gamma), and whether (P) holds there."""
+    out = []
+    for N in Ns:
+        a, b, c = kraw1(N)
+        A, B, Cc = list(a), list(b), list(c)
+        for n in range(1, N):
+            B[n] += eps*beta(F(n, N)); A[n] -= eps*beta(F(n, N))
+        for n in range(1, N+1):
+            Cc[n] += eps*gamma(F(n, N))
+            if n < N: A[n] -= eps*gamma(F(n, N))
+            else: B[N] -= eps*gamma(F(n, N))
+        g = linearization(A, B, Cc)
+        out.append((N, (g[N][N][N] > 0) - (g[N][N][N] < 0), all(x >= 0 for G in g for row in G for x in row)))
+    return out
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.parse_args()
+    print('4. corner identity exact for N = 2..20:', all(corner_identity(N) for N in range(2, 21)), flush=True)
+    for name, be, ga in (('beta=1, gamma=0 (L_even=2, L_odd=0)', lambda x: F(1), lambda x: F(0)),
+                         ('beta=0, gamma=x (L_even=1, L_odd=-1)', lambda x: F(0), lambda x: x),
+                         ('beta=x, gamma=-x (Krawtchouk direction, L=0)', lambda x: x, lambda x: -x)):
+        res = uniform_rule_signs(be, ga, range(4, 15))
+        print(f'5. {name}: sign of g(N,N;N), (P): ' + ' '.join(f'N={N}:{ {1: "+", -1: "-", 0: "0"}[sg] }{"" if P else "/noP"}' for N, sg, P in res), flush=True)
     rows, w, combo = constant_rule_certificate()
     print(f'3. constant rule: slack rows {[[str(x) for x in r] for r in rows]}, weights {[str(x) for x in w]}, '
           f'combination {[str(x) for x in combo]}', flush=True)
