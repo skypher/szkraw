@@ -1,0 +1,6 @@
+Third review round (minor fixes; Lemma 8.7 and Proposition 8.8) via pro-cli (ChatGPT Pro)
+job id: job_1a1000b0-ef7f-4b24-af90-89e8a17924b4
+model: gpt-6-pro (reasoning standard)
+created: 2026-10-21T12:32:21.442Z
+brief: reviews/limits-review3-brief.md (paper.tex at commit 34952d5, second report and diff quoted)
+answer: reviews/limits-review3-answer.md (written when the job completes)
