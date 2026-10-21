@@ -212,6 +212,11 @@ deep_certificates.py (not called from verify.py; the linear programs need numpy 
   - The canonical Riemann function (H*v = 0 at every deep point except the apex, obtained by marching; exact arithmetic) satisfies the identity u(n,m) = Σ flux·u exactly, but its flux onto the non-deep boundary is negative at most deep points, already for symmetric Krawtchouk (flux −7 at (8,8,1), r = 1; nonnegative at 4/90).
   - By Farkas, one-shot certificates at all deep points are equivalent to a maximum principle for H (solutions nonnegative off the deep corner are nonnegative on it). On 60 random perturbed Krawtchouk arrays (N = 6) it held exactly when (P) held (32 both, 28 neither, 0 disagreements), so it is a restatement of (P), not a weaker target.
 
+Two further exact probes (deep_order.py, needs only probe.py):
+
+- Order of vanishing at the symmetric endpoint. For Krawtchouk with N = 5, 6, 8, every deep coefficient g(m,n;k) vanishes as r → 1 to order exactly max(m+n+k−2N, (m+n+k) mod 2) in 1−r, that is, in the diagonal b = (1−r)d (159/159 deep triples; order read off exact values at 1−r = 10⁻³ and 10⁻⁴). On the hypercube model at r = 1 the zeros are the perimeter bound d(0,x)+d(x,y)+d(y,0) ≤ 2N; for r < 1 each unit of excess costs one diagonal factor. A certificate for the deep triples must therefore reproduce a zero of order m+n+k−2N in the diagonal, which certificates with weights linear in the coefficients do not do (consistent with the coefficient-dependence found above). It points to expansions in which every deep configuration carries at least m+n+k−2N diagonal (level-step) weights: path models of Viennot type, or the Boolean model of Lemma 5.2.
+- No comparison in the top diagonal. Raising b_N (with c_N lowered) changes deep coefficients in both directions (e.g. N = 8, r = 1/5: 21 up, 61 down, 8 unchanged); raising b_{N−1} likewise. So "more diagonal at the top" does not monotonically help, and a comparison principle in the terminal coefficients is not available.
+
 Conclusion: every lightcone variant tested either fails or is as hard as (P). A criterion covering asymmetric Krawtchouk and Q_n with p_0 < 1/2 must use the increasing diagonal actively rather than absorb it into positive margins.
 
 ## Prior art: Miclo 2015
