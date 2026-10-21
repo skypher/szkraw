@@ -500,6 +500,22 @@ Scratch: runs/smooth/. Extend the sign-pattern class by S_3 for Δ³d and S_4 fo
 - Consequence. Within sign conditions on Δ²d, Δ³d, Δρ, Δ²ρ (with monotone a, b, c), every inequality-only class is refuted at large enough ρ_max. The only classes not refuted are equality-type classes whose members form QL, and QL appears to have (P).
 - Conjecture: QL(t, κ) has (P) for all N ≥ 1, 0 < r < 1, t ≥ 0 and 0 ≤ κ ≤ (1−r)/2. A proof would give a new two-parameter family of finite systems with nonnegative linearization, a smooth (polynomial) deformation of Krawtchouk outside the geometric family.
 
+## Toward a proof of QL; a candidate inequality criterion (2026-10-22)
+
+Scratch: runs/ql_proof/; tracked ql_symbolic.py.
+- *QL proved for N ≤ 6 (exact, symbolic).* With the slack s = (1−r)/2 − κ ≥ 0, each linearization coefficient of QL(t, κ) is a rational function of (κ, s, t). After homogenizing numerator and denominator on the simplex r + 2κ + 2s = 1, both are polynomials in (r, κ, s, t) with nonnegative coefficients. Checked for Q, L, QL at N = 3, 4, 5, 6: 23, 42, 69, 106 nonzero coefficients per family and size, none failing. This proves (P) for QL at these N for all 0 < r < 1, t ≥ 0, 0 ≤ κ ≤ (1−r)/2. Manifest positivity of this kind is the usual trace of a combinatorial model.
+- *Q in Newton form.* d_n ∝ n + τC(n+1,2) = (1+τ)(n + σC(n,2)) with τ = t/N, σ = τ/(1+τ). So Q is the profile n + σC(n,2), a "truncated q-number" ([n]_q = Σ_k C(n,k)(q−1)^{k−1}). Q keeps (P) for every σ ≥ 0, not only σ < 1: exact full tables for σ = 1, 2, 5, 20, 100, N ≤ 14, r = ⅕, ½, ⅘, 19/20. (σ ≥ 1 corresponds to t ≤ −N with the increments renormalized.)
+- *Candidate criterion (constant ratio + log-concave Newton profile).* Write σ_k = Δ^k d(0), so d_n = Σ_k C(n,k)σ_k. The candidate: b_i/c_i constant, and (σ_1, …, σ_N) nonnegative and log-concave without internal zeros (σ_k² ≥ σ_{k−1}σ_{k+1}).
+  - Contains: Krawtchouk (σ = (1,0,…)), every geometric profile (σ_k = (q−1)^{k−1}), Q (σ = (1,σ,0,…)), truncated geometric profiles, and much more.
+  - Excludes every known failing family: one-kink, concave, log-concave-increment and log-convex counterexamples (Newton coefficients of both signs); the segment arrays 1 + t q^{i−N} (σ_2² < σ_1σ_3); the absolutely monotone end kinks (internal zeros).
+  - Tests, all passed:
+    - exact full tables for 750 random log-concave σ, N = 3–12, r = ⅕, ½, ⅘;
+    - fixed-point full tables for 544 adversarial members (truncated geometric with q − 1 up to 3 and cut-offs K = 2, 3, N/4, N/2; two-level ratio sequences; smoothly decaying ratios; random nonincreasing ratios), N = 16, 20, 24, 30, r = 0.1, 0.2, 0.5, 0.8, negatives recomputed at +800 bits;
+    - fixed-point corners for 680 such members at N = 50, 100, 200, 400 and r = 0.1, 0.2, ⅓, ½, 0.8 (smallest ratio to (1−r)^N: 14.9).
+    The full-table code finds the known counterexamples, for instance the segment value −7.851·10⁻⁶.
+  - It is an inequality criterion except for the constant ratio (an equality). The rising linear ratio (L) suggests the ratio condition can also be relaxed; not yet formulated.
+- *Proof idea.* In the geometric tower algebra the raising coefficient of E_1E_k is [k+1]_q = Σ_u C(k+1,u)σ_u: nonempty subsets U of a (k+1)-set weighted by σ_{|U|}. A tower whose square relations carry higher-order terms z_j z_U (U above j) with weights λ_{|U|} ≥ 0 would give D(k+1) = Σ_u C(k+1,u)σ_u after full reduction. The open question is whether log-concavity of σ is exactly what makes the required λ nonnegative, and whether the lowering coefficients (the ν_j) can be chosen so that E_1E_k closes on the E's.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
