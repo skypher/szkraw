@@ -99,3 +99,21 @@ All eight were applied with the reviewer's wording. Two search reports not repro
 **Correction of the author's objection.** The author had rejected the first report's fixed-N interior argument. That objection was mistaken. It applies to lowering the mass at both endpoints ±1, which keeps b ≡ 0. The report's argument lowers the mass at the top endpoint only. That one-endpoint construction is exactly the one the author later found independently (RESEARCH.md, "The symmetric endpoint"). It is now in the paper as Lemma 8.7 (lowering the top mass) and Proposition 8.8 (interior points near the symmetric endpoint), replacing the restriction to N ≤ 10.
 
 The new lemma and proposition were written after this review and have not been reviewed. Current paper.tex SHA-256: `82b83184e99b870207e9e682638f51c07b0842df065ddf94d8b7720738714aec`.
+
+## Third review round: minor fixes and the new Lemma 8.7 / Proposition 8.8 (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_1a1000b0-ef7f-4b24-af90-89e8a17924b4`. Brief: `reviews/limits-review3-brief.md` (paper.tex at commit 34952d5, with the second report and the diff quoted). Answer: `reviews/limits-review3-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** All eight corrections from the second round were applied correctly.
+- **Lemma 8.7.** The mathematics is correct. The reviewer re-derived it through the exact identity R_n^ε = (1 − εS_n)R_n + εΣ_{j<n}π_jR_j, including the terminal and initial rows and non-probability measures.
+- **Proposition 8.8.** The all-N construction is correct. The reviewer checked the reference-zero derivatives and thresholds for N = 1–10 independently, and exact curves with Λ = Λ_N + 1, ε = 10⁻¹⁰ have strictly positive triangle coefficients.
+- **Λ_N.** The seven reported values were confirmed.
+
+Required fixes, all applied with the reviewer's wording:
+1. state the measure and coordinate conventions of Lemma 8.7 (0 ≤ ε < μ({x₀}), unrescaled π_n^ε, fixed coordinate);
+2. define Λ_N with an empty-set convention (Λ₂ = Λ₃ = 0) and state the summation range of the overlap formula;
+3. insert the affine normalization y = (1 − ε)x + ε and the smallness conditions before applying Lemma 7.5 (relatively open neighborhood);
+4. replace the closing remark: no growth or thickness claim, the fixed-coordinate rates, and the normalized top-mass direction, which the author re-derived before use;
+5. fix two Section 9 sentences (triangle support and the N = 1 case; the concave examples no longer supplied).
+
+RESEARCH.md was adjusted to the same scope. Current paper.tex SHA-256: `5b08e105f3c0996b864813771ebc5528e24ffaeedcd10174a08551be2aa37010`.
