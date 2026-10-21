@@ -369,6 +369,18 @@ where γ runs from w = 1 to w = −r through the upper half-plane (substitute w 
   The sizes oscillate with N but decrease at r = ½ and, more slowly, below it. Exact witnesses (fixedr_probe.py item 6, direct recurrence): g(120,120;120) < 0 at ε = −6.3·10⁻⁶ (r = ½; still positive at −5·10⁻⁶), g(100,100;100) < 0 at ε = −3.2·10⁻³ (r = ⅖), g(120,120;120) < 0 at ε = −1.6·10⁻² (r = ⅓), all with the basic conditions.
 - Consequence for the paper: r = ½ is where the first-order comparison changes, not a threshold for terminal-row perturbations. The remark after Corollary 8.13 and the Section 9 question were corrected accordingly. Whether the terminal-row slice is exponentially thin for every r ∈ (0,1) is open; a proof would need the Taylor coefficients of every order, not a single remainder bound. Given Corollary 8.13 (exact, all r), this line was not pursued further.
 
+**All orders along the terminal row: node form (2026-10-22).** Scratch runs/terminal_nodes/.
+- Exact form. The terminal perturbation (c_N + ε, b_N − ε) leaves R_0, …, R_N unchanged and only moves the measure: nodes y_j(ε) are the zeros of P_ε = P + ε(R_N − R_{N−1}), P = (z − b_N)R_N − c_N R_{N−1}; weights w_j(ε) = 1/Σ_n π_n^ε R_n(y_j)², π_N^ε = π_N c_N/(c_N + ε). Then g(ε) = π_N^ε Σ_j w_j(ε) R_N(y_j)³. This is the residue form of g = π_N^ε ∮ R_N³ m_ε dz with m_ε − m_0 = ε(z−1)W/(P P_ε) (the Casoratian identity SP − QT = (z − b_N − c_N)W and b_N + c_N = 1). It matches the exact polynomial to 16 digits at (N,r,ε) = (20,½,−1/100) and (40,⅘,−10⁻⁹).
+- Mechanism at the known crossings. Node shifts are tiny relative to the spacing (1+r)/N: 3·10⁻⁵ at (r,N) = (½,120), 0.02 at (⅖,100), 0.12 at (⅓,120). Writing R_N(y_j) = r_j + Δ_j with r_j = (−r)^j, |Δ_j/r_j| ≤ 8·10⁻⁵ at (½,120), yet the sums Σ w_j r_j^{3−k}Δ_j^k are all of order g(0) = (1−r)^N, because Σ w_j r_j³ cancels exponentially (terms of size ((1+r²)/(1+r))^N against (1−r)^N) while the Δ-sums cancel less. The weight change alone moves the r_j³ sum by +19% at (½,120) and by −287% at (⅘,40).
+- Orders that matter (exact polynomial, terms γ_k ε^k/g(0) at the first negative ε):
+  - (½,120): k = 1: +2·10⁻⁴, k = 2: −0.43, k = 3: −1.06, k = 4: +0.11; four orders give 1%.
+  - (½,60): crossing driven by k = 2, 3 (−0.54, +1.53); five orders for 1%.
+  - (⅖,100): k = 4–6 dominate (−0.34, −0.77, −0.57); nine orders for 1%.
+  - (⅓,120): k = 6 is +1.1 and seventeen orders are needed.
+  - (⅘,40): linear only.
+  So the dominant order at the crossing rises as r decreases. At r = ½ a proof would need asymptotics of γ_2 and γ_3 (explicit double sums over nodes through R_N′(x_j), P′(x_j) and the weight derivatives) plus a node-wise tail bound, which is feasible because the shifts are 10⁻⁵ of the spacing. Below ½ the shifts approach the spacing and the problem is genuinely nonlinear.
+- Next concrete step (not started): closed forms at K(N,r) for δy_j = −εT(x_j)/P′(x_j), with P′(x_j) = κ((1+r)/N)^N(−1)^j j!(N−j)!, T(x_j) = −(−r)^{j−1}j(1+r)/N, R_N′(x_j) from R_N(z) = Σ_{k≤N} C(J,k)(−1−r)^k, J = N(1−z)/(1+r), and the first-order weight change. Then Laplace asymptotics of γ_2, γ_3 at r = ½. Open whether the dominant order stays bounded in N at fixed r < ½.
+
 **Exact thinness for every r ∈ (0,1): raising the top mass.** The top-mass deformation is exact in ε, not just first order: for μ^τ = μ + τw₀δ_{x₀},
 - R_n^τ = (1 + εS_n)R_n − εΣ_{j<n}π_jR_j with ε = τw₀ (normalization at x₀, and orthogonality via the reproducing property of Σ_{j<n}π_jR_j);
 - on the support, Σ_{j≤N}π_jR_j = 1_{x₀}/w₀ (dual orthogonality), so R_N^τ = (1+τ)R_N − τ1_{x₀}.
