@@ -1,11 +1,12 @@
 """Nonconvexity of property (P) at fixed (N, r) (Section 9); exact, diagnostics.
 
 K(N,r) = G(N,1,r) and the geometric array G(N,q,r) of (eq:parameters), q > 1, are both admitted by Theorem 2.1
-(constant ratio b_i/c_i = (1-r)/r, geometric increments). The convex combination (1-lam) K + lam G is again a
-stochastic constant-ratio array with b_0 = 0; its increments are proportional to 1 + t q^(i-N), not geometric, where
-t = lam (q^N - 1)/((1-lam) N (q-1) q^(N-1)). For each listed (r, N, q, t) it has g(N,N;N) < 0 in exact arithmetic.
-So no criterion whose admitted set is convex, such as a system of linear inequalities in the coefficients, admits
-both K(N,r) and G(N,q,r) at these sizes.
+(constant ratio b_i/c_i = (1-r)/r, geometric increments). For 0 < lam < 1 the convex combination (1-lam) K + lam G
+is again a stochastic constant-ratio array with b_0 = 0; its increments are proportional to 1 + t q^(i-N), not
+geometric, where t = lam N (q-1) q^(N-1)/((1-lam) (q^N - 1)). For each listed (r, N, q, t) it has g(N,N;N) < 0 in
+exact arithmetic. So, for each of these exactly certified choices, no sufficient criterion for property (P) whose
+admitted set is convex, in particular none defined by linear inequalities in the coefficients, can admit both
+K(N,r) and G(N,q,r). The high-precision case below is not an exact certificate and is not covered by this claim.
 
 Option --all adds the exact cases (3/10, 200, 2, 5) and (2/7, 200, 10, 5) (about 1 and 6 minutes) and the case
 (1/4, 500, 3, 10) in 150- and 300-digit arithmetic (not an exact sign certificate). Option --scan R: high-precision

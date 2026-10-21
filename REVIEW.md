@@ -169,3 +169,19 @@ Scope: the remark after Corollary 8.13 (r = ½ is a threshold for the first-orde
 Fix, applied with the reviewer's text: the Taylor-coefficient sentence now states the computed range (orders 1–4, r = ½, N = 30–77, six-size windows, factors 0.503, 0.593, 0.640, 0.676) and that it is a finite-range observation, not an asymptotic statement.
 
 Current paper.tex SHA-256: `dd91e3ee75f5488a94043694aad5f76caa4895aa1acbc05959f644c9d9378be6`.
+
+## Review round 8: round-7 fix and the Section 9 nonconvexity passage (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_411d76f4-e856-42ea-ba9d-d69ef1030fcb`. Brief: `reviews/limits-review8-brief.md` (paper.tex at commit d87857f). Answer: `reviews/limits-review8-answer.md`.
+
+**Item 1 (round-7 fix): PASS.**
+
+**Item 2 (new Section 9 passage: the segment from K(N,r) to the geometric array G(N,q,r) leaves property (P)): PASS WITH MINOR FIXES.** Independent checks by the reviewer: the algebra of the combination (stochastic, b₀ = 0, constant ratio, increments ∝ 1 + t q^{i−N}); all seven exact negative corners, recomputed by an integer-scaled row recurrence independent of the supplied routine; and the 150/300-digit value −1.2454570392…·10²³ at (¼, 500, 3, 10).
+
+Fixes, applied with the reviewer's text:
+1. The displayed formula for t was inverted; the correct one is t = λN(q−1)q^{N−1}/((1−λ)(q^N−1)), with q > 1. The script already used the correct relation; its docstring is corrected too.
+2. The opening sentence now says that the set with (P) need not be convex.
+3. The conclusion is restricted to the seven exactly certified choices and to sufficient criteria for (P); the N = 500 case is not covered by it.
+4. The final sentence is worded as an observation on the tested (N,q,t) grid.
+
+Current paper.tex SHA-256: `a2d66cc1076ac8484fe06d21da679f5e853050b95577e9e780d5958958abce57`. A confirmation round on this text follows.
