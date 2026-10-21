@@ -327,7 +327,7 @@ fixedr_probe.py (exact derivatives; mpmath quadrature; numpy fit).
   h₁(w) = (1+rw)(1−r²/w),  h₂(w) = (1−w)(1+r³/w),
 where γ runs from w = 1 to w = −r through the upper half-plane (substitute w = e^{θL}). This matches the exact derivative to relative error 10⁻¹³ for N = 2–12 and r ∈ {½, 3/5, 4/5, 19/20, 1}. At r = 1 it reduces to Lemma 8.2's terminal value s_N.
 
-**Asymptotics (steepest descent; written argument, not yet reviewed).**
+**Asymptotics (formal steepest descent; not proved).** The fifth review accepts the saddle moduli and the algebra Q(r) − (1−r) = r(2r−1)/(1+r), but not a proved asymptotic: oscillatory cancellation and the endpoint contributions (factor 1 − r) would have to be controlled. The paper states this only as heuristic evidence.
 - h₁ has zeros at r² and −1/r and saddles at w = ±i√r, with h₁(i√r) = (1 + i r^{3/2})².
 - h₂ has zeros at 1 and −r³ and saddles at w = ±i r^{3/2}, with h₂(i r^{3/2}) = (1 − i r^{3/2})².
 - Both saddle moduli are 1 + r³. The endpoints have |h| = (1−r)(1+r)², which is below 1 + r³ exactly when r > ½, because (1−r)(1+r)² − (1 + r³) = r(1+r)(1 − 2r).

@@ -132,3 +132,20 @@ Reviewed source: paper.tex at commit 8a38efb, SHA-256 `5b08e105f3c0996b864813771
 After the PASS, only the AI-use disclosure sentence changed: it now says Sections 7 and 8 were reviewed in four rounds, instead of "not independently reviewed". The diff against the reviewed commit touches that sentence alone, and no mathematical text changed. Current paper.tex SHA-256: `c7f01cd5d98f0d833a8c50bd2d8f777e277b181b19ae6b6d3b3cca6125bb495c`.
 
 This is an AI review, not human peer review. Under MISSION.md criterion 5, Sections 7 and 8 have now been independently reviewed. Their scope is as corrected during review. The inequality-only form of Szwarc's question remains open apart from the proved obstruction for polynomial and analytic uniform rules.
+
+## Review round 5: Proposition 8.12, Corollary 8.13 and remark (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_2687c28c-65a8-499a-9666-fc9b6135dcef`. Brief: `reviews/limits-review5-brief.md` (paper.tex at commit 9973c6f). Answer: `reviews/limits-review5-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The statements of Proposition 8.12 and Corollary 8.13 are correct. The reviewer's independent checks:
+- 200 exact-rational raised-mass checks by discrete Gram–Schmidt (N = 1–10, five biases, τ ∈ {1/1000, ½, 2, 100}), confirming the stronger normalized bound 2τ max w_n;
+- an independent derivation of the terminal-row contour formula (84 cases, N = 1–14);
+- the exact counterexample at size exactly 10⁻¹⁵ (r = 4/5, N = 40).
+
+Fixes, applied with the reviewer's text after the author re-derived the normalized coefficient formulas:
+1. Proposition 8.12: the final normalization estimate did not hold for arbitrary τ (counterexample to the argument, not the statement: N = 1, r = ½, τ = 4), so it was replaced by the exact normalized formulas with bound ε + t_n ≤ 2τ max w_n.
+2. Corollary 8.13: the proof was replaced, with τ* < x strictly, positivity from the exact coefficient formulas, and the limit τ ↓ τ*.
+3. The remark now describes the saddle factor as a formal oscillatory envelope, not a proved threshold.
+4. One Section 9 sentence now distinguishes an upper bound on ball radii from a construction of positive balls.
+
+Current paper.tex SHA-256: `c0924d406b290f3a2ba6b31083f28e55127cf5568e7dffc7234fef1feffd12b4`. A confirmation round on this exact text follows.
