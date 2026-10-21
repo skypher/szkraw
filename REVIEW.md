@@ -185,3 +185,9 @@ Fixes, applied with the reviewer's text:
 4. The final sentence is worded as an observation on the tested (N,q,t) grid.
 
 Current paper.tex SHA-256: `a2d66cc1076ac8484fe06d21da679f5e853050b95577e9e780d5958958abce57`. A confirmation round on this text follows.
+
+## Confirmation of the round-8 fixes (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_6126ebdb-e696-40f0-a8fd-a19bb54d9019`. Brief: `reviews/limits-review9-brief.md`. Answer: `reviews/limits-review9-answer.md`.
+
+**Verdict: PASS** for the Section 9 nonconvexity passage. All fixes are applied, the t-formula agrees with the script, and no new error was found. Reviewed source: paper.tex at commit 32c4488, SHA-256 `a2d66cc1076ac8484fe06d21da679f5e853050b95577e9e780d5958958abce57` (the reviewer did not recompute the hash; numerical experiments were not rerun in this round, having been recomputed independently in round 8).
