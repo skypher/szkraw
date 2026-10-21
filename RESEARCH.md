@@ -469,6 +469,17 @@ Corollary 8.13 excludes criteria with a margin around K(N,r), so a surviving ine
 - *Terminal row.* The exact terminal-row failures (only c_N, b_N changed) occur in both directions: at r = ½, upward at 1.3·10⁻⁴ (N = 80) and downward at 6.3·10⁻⁶ (N = 120, still with c monotone, since 6.3·10⁻⁶ < r/N). So no criterion that leaves c_N one-sidedly free at K(N,r) for all large N survives at r = ½; at r = ⅓ only downward failures were found (N ≤ 120), and those already break monotonicity of c.
 - *Reading.* Every tested relaxation of Krawtchouk that keeps K on the boundary but frees some coordinates fails at a deep triple: profile shape (convex, log-concave, absolutely monotone, geometric mixtures, bounded step ratio), ratio shape, bottom rows, terminal row. The question as stated in MISSION.md needs a precise notion of "inequality criterion" before a disproof can be a theorem; the natural target is shape criteria (finitely many inequalities on finite differences of the coefficient sequences, uniform in N), for which the end-acceleration and terminal-row failures are the candidate mechanisms. Not yet formalized.
 
+## Sign-pattern shape criteria: complete kill table (2026-10-22)
+
+signpattern_probe.py; Section 9. Class: d_n = b_n + c_n, ρ_n = c_n/d_n; S_1, S_2 ∈ {[0,∞), (−∞,0], {0}, ℝ}. Conditions: a decreasing, b and c nondecreasing, Δ²d_n ∈ S_1, Δρ_n ∈ S_2 at every index, ρ_n ≤ ρ_max. Every class contains K(N,r) for r ≤ ρ_max, and S_1 = S_2 = {0} is the Krawtchouk family.
+- Kill result: for every (S_1,S_2) ≠ ({0},{0}) and ρ_max ≥ 83/400 there is an exact array in the class with g(N,N;N) < 0. The case split is complete:
+  - S_1 ∋ positive: convex, ratio 1/5, N = 100;
+  - S_1 ∋ negative: concave, ratio 1/10, N = 20;
+  - S_1 = {0}, S_2 ∋ positive: linear profile, rising ratio, N = 120, max ρ 83/400;
+  - S_1 = {0}, S_2 ∋ negative: linear profile, falling ratio, N = 80.
+- Search record (runs/ratio_class/). Small exact tables, linear profile with monotone b and c: rising ratio fails at N = 3 (ρ ≤ 1) and N = 5 (ρ ≤ ½); falling ratio fails at N = 3 (ρ ≤ 1) and N = 8 (ρ ≤ ½). For ρ ≤ ¼ nothing for N ≤ 12 (random members); structured ratio ramps near the top fail at N = 80–120. Concave constant-ratio profiles fail at N = 20 for every r from 1/10 to ⅘.
+- Open: ρ_max < 83/400 (rising ratio from ρ = 1/10: nothing up to N = 300), criteria with conditions on higher differences, mixed conditions, and conditions applied at only some indices.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
