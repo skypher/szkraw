@@ -20,8 +20,8 @@ Checks:
 6. Boundary layers: with c_N changed separately by L (possible when L_even = L_odd), the corner slack vanishes.
 7. r < 1: g(N,N;N) = (1-r)^N at K(N,r); a fixed-size rule fails at fixed r in (1/2, 1) for many N
    (r = 4/5, eps = 1/100; r = 19/20, eps = 1/1000) but not at r = 1/2 for N <= 14.
-9. Below r = 1/2: fixed-size smooth rules keep (P) at r in {1/5, 1/3, 2/5} (N <= 16); kinked rules at r = 2/5
-   fail from N = 17 for convex kinks and survive for the concave kink, and all survive at r = 1/5 (N <= 26).
+9. Below r = 1/2, small N only (N <= 26): additive rules at fixed size, valid only while N < 1/eps; these
+   checks are superseded by smallr_probe.py, which tests valid deformations at N ~ 5/r^2.
 8. Noerlund-Rice region (mpmath): D_N[f] = sum (-1)^n C(N,n) f(n/N) decays when the poles of f lie outside
    the football Omega = {U <= -1}, U(x) = int_0^1 log|x-t| dt, and grows when they lie inside.
 """
