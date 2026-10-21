@@ -1,0 +1,6 @@
+Scoped review of the terminal-row correction via pro-cli (ChatGPT Pro)
+job id: job_8f5956b2-d2b4-4000-8120-19f6302b831c
+model: gpt-6-pro
+created: 2026-10-21T14:21:38.192Z
+brief: reviews/limits-review7-brief.md
+answer: reviews/limits-review7-answer.md
