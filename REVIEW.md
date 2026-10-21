@@ -117,3 +117,18 @@ Required fixes, all applied with the reviewer's wording:
 5. fix two Section 9 sentences (triangle support and the N = 1 case; the concave examples no longer supplied).
 
 RESEARCH.md was adjusted to the same scope. Current paper.tex SHA-256: `5b08e105f3c0996b864813771ebc5528e24ffaeedcd10174a08551be2aa37010`.
+
+## Final confirmation round (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_1fc62ef6-f6b5-4834-9b97-20d877ec12af`. Brief: `reviews/limits-review4-brief.md` (paper.tex at commit 8a38efb, with the third report and the diff quoted). Answer: `reviews/limits-review4-answer.md`.
+
+**Verdict: PASS** for Sections 7 and 8, with no further corrections requested. Specifically:
+- all third-round fixes are correctly applied, including the two adapted sentences;
+- no new error was found;
+- the reviewer's fresh exact rational checks for N = 1–10 confirm the thresholds, reference-zero derivatives, initial and terminal conventions, and strict triangle positivity.
+
+Reviewed source: paper.tex at commit 8a38efb, SHA-256 `5b08e105f3c0996b864813771ebc5528e24ffaeedcd10174a08551be2aa37010`.
+
+After the PASS, only the AI-use disclosure sentence changed: it now says Sections 7 and 8 were reviewed in four rounds, instead of "not independently reviewed". The diff against the reviewed commit touches that sentence alone, and no mathematical text changed. Current paper.tex SHA-256: `c7f01cd5d98f0d833a8c50bd2d8f777e277b181b19ae6b6d3b3cca6125bb495c`.
+
+This is an AI review, not human peer review. Under MISSION.md criterion 5, Sections 7 and 8 have now been independently reviewed. Their scope is as corrected during review. The inequality-only form of Szwarc's question remains open apart from the proved obstruction for polynomial and analytic uniform rules.
