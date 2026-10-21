@@ -149,3 +149,11 @@ Fixes, applied with the reviewer's text after the author re-derived the normaliz
 4. One Section 9 sentence now distinguishes an upper bound on ball radii from a construction of positive balls.
 
 Current paper.tex SHA-256: `c0924d406b290f3a2ba6b31083f28e55127cf5568e7dffc7234fef1feffd12b4`. A confirmation round on this exact text follows.
+
+## Confirmation of the round-5 fixes (2026-10-21)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_7c82e24a-f063-42c1-9766-5c6929b99d3e`. Brief: `reviews/limits-review6-brief.md`. Answer: `reviews/limits-review6-answer.md`.
+
+**Verdict: PASS** for Proposition 8.12, Corollary 8.13, the remark after it, and both updated Section 9 sentences, with no new error and no further fixes. Reviewed source: paper.tex at commit 0c9d8ff, SHA-256 `c0924d406b290f3a2ba6b31083f28e55127cf5568e7dffc7234fef1feffd12b4`.
+
+After this PASS, only the AI-use disclosure sentence changed ("four rounds" → "six rounds"); the diff against 0c9d8ff touches that one line alone. Current paper.tex SHA-256: `50d3921d72cdd03c6f347916df5e28eecb0efc509bd4ba310bb24638743941ed`.
