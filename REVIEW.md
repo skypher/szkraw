@@ -191,3 +191,5 @@ Current paper.tex SHA-256: `a2d66cc1076ac8484fe06d21da679f5e853050b95577e9e780d5
 Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_6126ebdb-e696-40f0-a8fd-a19bb54d9019`. Brief: `reviews/limits-review9-brief.md`. Answer: `reviews/limits-review9-answer.md`.
 
 **Verdict: PASS** for the Section 9 nonconvexity passage. All fixes are applied, the t-formula agrees with the script, and no new error was found. Reviewed source: paper.tex at commit 32c4488, SHA-256 `a2d66cc1076ac8484fe06d21da679f5e853050b95577e9e780d5958958abce57` (the reviewer did not recompute the hash; numerical experiments were not rerun in this round, having been recomputed independently in round 8).
+
+After this PASS, only the AI-use disclosure changed ("six rounds" → "nine rounds"); the diff against 32c4488 touches that one line alone. Current paper.tex SHA-256: `f82512701842bc7d901cb4a8a7bc46f4898d9de942fa80198ad4009f4e280c0d`.
