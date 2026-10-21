@@ -1,0 +1,6 @@
+Scoped review round 10 via pro-cli (ChatGPT Pro): sign-pattern shape criteria in Section 9
+job id: job_019a8793-d8d2-4517-9cb7-ef835978d9b7
+model: gpt-6-pro
+created: 2026-10-21T18:28:52.714Z
+brief: reviews/limits-review10-brief.md
+answer: reviews/limits-review10-answer.md
