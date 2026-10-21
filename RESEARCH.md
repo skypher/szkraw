@@ -231,6 +231,21 @@ path_model.py (exact except the linear programs, which need numpy and scipy) tes
 
 Conclusion: signed path counting yields one genuine structure (the mirror involution, which removes the side-edge defects exactly for palindromic λ) but no criterion; the remaining corner problem is again equivalent to (P) on tested arrays.
 
+## Deep triples: polynomial certificates near the symmetric endpoint (2026-10-21)
+
+endpoint_probe.py (exact; the first-order formulas use sympy) tests polynomial certificates in the coefficients. In Szwarc's normalization (3.9) with σ_n = r^(n/2), divided by √r, the Krawtchouk array is x P_n = d_{n+1}P_{n+1} + t d_nP_n + (1−d_{n−1})P_{n−1} with t = 1/√r − √r: only the diagonal depends on r. Families studied: (c_{n+1}, B_n, 1−c_{n−1}) with c palindromic and increasing; B = 0 is Corollary 7.15's class and B = t·c contains every Krawtchouk array.
+
+- Krawtchouk: every product coefficient is a polynomial in t with nonnegative coefficients and lowest power exactly max(m+n+k−2N, parity) (N = 4, 6, 8, 10). This is the Boolean model of Lemma 5.2 rewritten (the t^s term collects the configurations with s retained overlap coordinates), not a new mechanism.
+- Palindromic B = 0: g(x,y;z) = g(N−x,N−y;z) exactly (from R_N R_{N−t} = R_t), so g = 0 whenever x+y+z > 2N, for every profile c. Krawtchouk is special only in the order to which deep coefficients vanish as t → 0 (the excess); for other profiles it is 1 (or the parity), and the sign of the first t-derivative depends on c.
+- Free diagonal on the Krawtchouk off-diagonal part: first-order terms at deep entries are palindromic forms with zero sum, including fourth differences of the increments (g(5,5;5) ≈ (δ₁−4δ₂+6δ₃−4δ₄+δ₅)/6). A nondecreasing diagonal does not suffice: N = 3, B = (0, 1/10, 1/10, 1/10) gives g(3,3;3) = −1/20.
+- Diagonal locked to the profile, B = t·c: d/dt g(3,N;N) at t = 0 equals (3c₁−1)/c₁ (N = 3), (4c₁−1)/c₁ (N = 4), (1−c₁)(2c₁−c₂)/(c₁c₂(1−c₂)) (N = 5), i.e. first increment ≥ second, with equality at Krawtchouk. The tangent cone at Krawtchouk in half-increment drops d_s = δ_s − δ_{s+1} is 0 ≤ d₁ ≤ κ_N d₂ with κ_N = 3, 2, 5/3 for N = 5, 6, 7, plus conditions on later drops at N = 7.
+- Shape conditions tested for "(P) for all t ≥ 0" (exact root counting on (0,∞)):
+  - U-shaped increments (shrinking toward the middle): all 90 random arrays pass for N ≤ 5; fails from N = 6 (increments (97,87,85,85,87,97): g(5,6;6) < 0 at t = 1/10).
+  - Concave, decreasing half-increments: 138 of 140 random arrays pass up to N = 14, and the strong form (nonnegative t-coefficients) already fails at N = 11 without loss of (P). Exact counterexamples at N = 13 (middle increment 1/487) and N = 14: half-increments (88,88,87,86,85,77,50) at t = 11/200 (r ≈ 0.95) give g(7,14;14) ≈ −3.1·10⁻³.
+  - Concavity is not necessary either: drops (2,1,…,1) pass up to N = 12.
+
+Conclusion: polynomial certificates explain the Krawtchouk range and locate the difficulty at the symmetric endpoint: as r → 1 the deep coefficients leave the forced zeros with first-order slopes given by N-dependent forms in the profile, and every shape cone tested (monotone, convex, log-convex, U-shaped, concave) fails these for large enough N, consistent with the convex counterexamples above. This also settles the expansion test proposed as "tool 3": the leading terms are not positive combinations of products of increments.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
