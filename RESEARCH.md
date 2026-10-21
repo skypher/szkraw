@@ -537,6 +537,13 @@ lc_certificate.py (tracked); scratch runs/ql_proof/lc_poly*.py.
 - N = 6: a first run vanished at step m = 4 after 15 min, at the same moment as several unrelated processes on the machine restarted (cause unknown, possibly memory pressure). It is rerun with W = 1 (the numerators are homogeneous in (R, W)) under a 24 GB address-space cap; memory use was 0.13 GB at step 3.
 - Naming: the candidate constrains the Newton coefficients Δ^k d(0) of the profile. It is not the refuted "log-concave increments" class of Section 9; those counterexamples have Newton coefficients of both signs and are excluded.
 
+## Relaxing the constant ratio (2026-10-22)
+
+Scratch: runs/ql_proof/ratio_lc.py, ratio_lin.py, ratio_lin_big.py. The profile always has nonnegative log-concave Newton coefficients.
+- *Ratio with log-concave Newton coefficients* (ρ_n = r + Σ_{k≥1} C(n,k)θ_k, θ nonnegative log-concave, scaled so ρ_N = r + f(1−r)/2, f ∈ {¼, ½, 1}). Exact full tables, 420 random members, N = 4–20: 22 fail. 17 of them have b decreasing somewhere. The 5 with b nondecreasing are all at r = 0.80–0.92, e.g. g(7,7;7) = −2.3·10⁻⁶ (N = 7, r = 21/25). The failing ratios accelerate: θ_2/θ_1 ≈ 2.8. Exponential-type ratio growth near the top acts like end acceleration of the profile. So log-concave Newton coefficients are not the right ratio condition.
+- *Linear rising ratio* (ρ_n = r + κn/N, 0 ≤ κ ≤ (1−r)/2) with a log-concave Newton profile: 225 random members, N = 4–20, exact full tables, no failure. Large-N fixed-point tests running.
+- Current candidate: profile with nonnegative log-concave Newton coefficients, and ratio linear and nondecreasing with slope at most (1−r)/2. The ratio side is still an equality (Δ²ρ = 0) with one inequality parameter. Whether some convexity of ρ with small Newton quotients (θ_2/θ_1 = O(1/N)) is allowed is open.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
