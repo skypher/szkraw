@@ -21,3 +21,4 @@ import Szkraw.AlgebraProducts
 import Szkraw.LCSequences
 import Szkraw.LogConcaveStatement
 import Szkraw.LCDetours
+import Szkraw.LCInduction

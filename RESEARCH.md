@@ -674,7 +674,8 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
 - lean/Szkraw/LogConcaveStatement.lean proves `padNewton_lcnz`: the hypothesis of Theorem 8.1 gives `LCNZ` for (0, ν_1, …, ν_N, 0, …).
 - Both are in the root import, and `lake build Szkraw` succeeds with no `sorry`.
 - F6 is done: lean/Szkraw/LCDetours.lean defines the weights `Wt u p q ℓ a` (= W_{p,q}(ℓ,a), with f_n(ℓ) = iterShift) and proves the integer inequalities `coeffA`, `coeffB`, `coeffC`, the detour bounds `detourA_first` and `detour_second` (generic in p, q), and the three inequalities of Lemma 8.4 (`lemma_8_4_A`, `lemma_8_4_B`, `lemma_8_4_C`) for every j ≥ 1 and all ℓ, a. The build is green with no `sorry`.
-- Remaining for Section 8: F1–F4 (rescaling, symmetry and E-normalization, the coefficientwise kernel relation, the kernel identity of Lemma 8.2), F7 (operator induction) and F8 (assembly and axiom audit).
+- F7 is done: lean/Szkraw/LCInduction.lean defines the moves, the even/odd inflows `Pin`/`Qin` and the recurrence `KernelRec` (8.1). It proves `dd_pos`, `sign_split`, `odd_dom` (2·grp_j ≤ grp_{j−1} for odd j, from Lemma 8.4 and the invariant at the three intermediate nodes), `Qin_le_half_Pin`, and `kernel_nonneg`: every solution of (8.1) with ω(0,·) ≥ 0, support in ℓ + a ≤ N and T ≥ d_n (n ≤ N) is nonnegative. No `sorry`.
+- Remaining for Section 8: F1–F4 (rescaling, symmetry and E-normalization, the kernel identity: the actual kernel satisfies (8.1) with the support property) and F8 (assembly and axiom audit).
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 
