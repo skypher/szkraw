@@ -269,3 +269,12 @@ Reviewer: ChatGPT Pro (gpt-6-pro), job `job_29123ec7-c5f1-40ca-b730-4d8ed04eb03f
 3. the disclosure now says that for each section the final confirmation round on the corrected text returned PASS (round 14 itself was PASS WITH MINOR FIXES).
 A final confirmation round follows.
 Current paper.tex SHA-256: `222b12954ff29bd3cc715fec0fbd15432de304f2bcc7a515ab2e73493b5b65ee`.
+
+## Round 16: final confirmation for Section 8 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_9f6db0a3-2434-4879-9bc2-1b081f6ba54f`. Brief: `reviews/limits-review16-brief.md`. Answer: `reviews/limits-review16-answer.md`. Reviewed source: commit c985974.
+
+**Verdict: PASS** for Section 8 (Theorem 8.1, the log-concave Newton criterion): the three round-15 items are applied, nothing else in Section 8 changed, and no error was introduced.
+
+After this PASS, only non-mathematical text changed, at the user's request: the machine-verification sentence of the AI-use disclosure was rewritten in plain words, and the formalization paragraph now says that Sections 7 and 8 are not yet formalized and that formalizing them is planned. Section 8 itself is unchanged.
+Current paper.tex SHA-256: `8ac2403ae031c8c0a8ba6827b1cc3195ab9d1eef51a732515f487557bb004ec0`.
