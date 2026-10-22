@@ -614,3 +614,32 @@ Scope:
 **Verdict: PASS.** No fixes required. Scope notes, both disclosed in the paper:
 - `profile_last_le` covers profiles whose Newton coefficients are log-concave, not every convex profile;
 - the statement that linear-profile arrays are arrays of Proposition 8.8 is not formalized.
+
+## Review round 22: Theorem 8.12, Corollary 8.13, the cubic counterexample (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_ef9e0fd0-9044-451a-9e36-af9e65e86c7d`. Brief: `reviews/round22-brief.md`. Answer: `reviews/round22-answer.md`.
+
+Scope:
+- Part 1, mathematics: the proofs of Theorem 8.12 and Corollary 8.13, which were derived here without consultation.
+- Part 2, Lean fidelity: `lowdeg_matrix`, `lowdeg_newton_lc`, `lowdeg_ratio_matrix`, `cubic_ratio_fails`.
+- Part 3, text: the new open-problem text and the abstract sentence.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- Part 1: both proofs are valid. The reviewer checked them independently: the identity symbolically, and 20 arrays exactly with N ≤ 10 (8,710 coefficients, M ≥ 0), reproducing the N = 4 coefficient and all five frontier witnesses.
+- Part 2: all four Lean statements MATCH.
+
+Fixes, all applied:
+1. "A bound on r alone does not restore (P)" became "Even the bound r ≤ 9/10 does not …".
+2. "Log-concavity of (r,t,τ,σ)" became "log-concavity without internal zeros of (r,t,τ,σ)".
+3. The cubic search is now described as sampled arrays with rσ = u·tτ, listing the tested values. The t = τ = 0 diagnostic is attributed to cubic_diag.py, with its parameters.
+4. The Newton-product question is stated for nonnegative, log-concave sequences without internal zeros, as "we leave open whether". The trials are described exactly: ρ₀ > 0, ν₀ = 0, ν₁ > 0, product coefficients through order N.
+5. The higher-degree sentence now says "the H_j need not vanish … requires additional estimates".
+6. The abstract and the introductory sentence now carry the full hypotheses.
+7. A TeX splice inside `\path{Szkraw.quad_key_red}` (from my scope-sentence insertion) was repaired; the sentence now follows its paragraph.
+
+Also in the remark:
+- "Nonnegativity of the ratio's Newton coefficients alone does not suffice": the cubic vector satisfies the local log-concavity inequalities and fails no-internal-zeros.
+- r > 0 and ε ≥ 0 are now specified for exponential ratios.
+- thmQ_check.py is described as checking Lemma 8.3 with i = 2.
+
+Evidence limitation: commands, seeds and summary lines of all cited searches are now archived in runs/varratio/RUNS.md.

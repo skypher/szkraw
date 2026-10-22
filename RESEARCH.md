@@ -1301,7 +1301,7 @@ Proof:
 Status:
 - Machine-verified: `Szkraw.lowdeg_matrix`, `Szkraw.lowdeg_newton_lc`, `Szkraw.lowdeg_ratio_matrix` (lean/Szkraw/VRLowDegree.lean), axiom audit clean.
 - Exact checks of every step: runs/varratio/thmQ_check.py (160 members, N ≤ 10).
-- Review round 22 (reviews/round22-brief.md, job `job_ef9e0fd0-9044-451a-9e36-af9e65e86c7d`) is pending. It covers the proofs, Lean fidelity including `cubic_ratio_fails`, and the open-problem text.
+- Review round 22 (job `job_ef9e0fd0-9044-451a-9e36-af9e65e86c7d`): PASS WITH MINOR FIXES. The proofs are valid, all four Lean statements MATCH, and the seven text fixes are applied (REVIEW.md).
 - Sharpness: the N = 4 cubic counterexample has a linear profile and nonnegative but non-log-concave Newton coefficients of ρ.
 
 **Conjecture (G).** On every log-concave Newton profile, ratios with log-concave Newton coefficients and nondecreasing b have (P). Exact evidence, all from finished runs:
