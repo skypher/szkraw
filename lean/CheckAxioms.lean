@@ -38,6 +38,8 @@ example : Szkraw.Stmt_logconcave_matrix := Szkraw.logconcave_matrix
 example : Szkraw.Stmt_logconcave := Szkraw.logconcave_criterion
 example : Szkraw.Stmt_all_products := Szkraw.all_products
 example : Szkraw.Stmt_heavy_top := Szkraw.heavy_top
+example : Szkraw.Stmt_low_products := Szkraw.low_products
+example : Szkraw.Stmt_convex_low := Szkraw.convex_low
 
 assert_allowed_axioms Szkraw.geometric_matrix_positivity
 assert_allowed_axioms Szkraw.error_amplification
@@ -80,3 +82,7 @@ assert_allowed_axioms Szkraw.logconcave_criterion
 assert_allowed_axioms Szkraw.product_symm
 assert_allowed_axioms Szkraw.all_products
 assert_allowed_axioms Szkraw.heavy_top
+assert_allowed_axioms Szkraw.low_products
+assert_allowed_axioms Szkraw.convex_low
+assert_allowed_axioms Szkraw.geometric_convex
+assert_allowed_axioms Szkraw.piW_entry

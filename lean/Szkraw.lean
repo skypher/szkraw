@@ -27,3 +27,4 @@ import Szkraw.KernelPoly
 import Szkraw.LCAssembly
 import Szkraw.ConeArgument
 import Szkraw.AllProducts
+import Szkraw.LowProducts

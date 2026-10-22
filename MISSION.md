@@ -26,7 +26,7 @@ A product formula only for Krawtchouk, a reformulation of positivity as equally 
 
 ## Status (2026-10-22)
 
-Section numbers refer to paper.tex. No §7 result is independently reviewed, so criterion 5 is unmet for §7. Lean (2026-10-22): Theorem 7.12 (`Szkraw.all_products`, the cone argument) and Corollary 7.13 (`Szkraw.heavy_top`) are machine-verified, axiom audit clean; the rest of §7 is not yet formalized.
+Section numbers refer to paper.tex. No §7 result is independently reviewed, so criterion 5 is unmet for §7. Lean (2026-10-22): Theorem 7.10 (`Szkraw.low_products`, including the two-of-three consequence), Corollary 7.11 (`Szkraw.convex_low`, `Szkraw.geometric_convex`), Theorem 7.12 (`Szkraw.all_products`) and Corollary 7.13 (`Szkraw.heavy_top`) are machine-verified, axiom audit clean; the rest of §7 is not yet formalized.
 
 - Criteria 1–4 are met by §§2–6 in their exact (geometric) and perturbative forms: Theorems 2.1 and 5.3, Corollaries 6.1 and 6.2, Lean-checked and AI-reviewed.
 - Criterion 6 is met in equality form by Theorem 7.1 (graded algebra; all N, all p ≤ 1/2; sharp) and Corollary 7.9 (parity-split criterion: constant odd downward coefficients p ≤ 1/2 and geometric even increments; q = 1 is Q_n). Theorem 7.6 adds explicit symmetric neighbourhoods for p < 1/2.

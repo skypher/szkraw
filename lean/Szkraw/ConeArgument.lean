@@ -166,8 +166,9 @@ theorem Hadj_vD_nonneg {N : ℕ} (h : ConeHyp α β γ N) {n m i j : ℕ} (hn : 
       unfold vD; split_ifs <;> nlinarith
     linarith
 
-/-- `H^*v` vanishes at points with `j ≥ m` or `i < j`, other than the apex. -/
-theorem Hadj_vD_zero {n m i j : ℕ} (hmn : m ≤ n) (hne : ¬(i = n ∧ j = m)) (h : m ≤ j ∨ i < j) :
+/-- `H^*v` vanishes at points with `j ≥ m`, `i < j` or `i + j > n + m`, other than the apex. -/
+theorem Hadj_vD_zero {n m i j : ℕ} (hmn : m ≤ n) (hne : ¬(i = n ∧ j = m))
+    (h : m ≤ j ∨ i < j ∨ n + m < i + j) :
     Hadj α β γ (vD n m) i j = 0 := by
   unfold Hadj
   have e1 : (if 1 ≤ i then α i * vD n m (i - 1) j else 0) = 0 := by
@@ -261,7 +262,7 @@ theorem cone_nonneg {N : ℕ} (h : ConeHyp α β γ N) (hγN : γ N = 0)
         · rw [hout i j (Or.inl hiN), zero_mul]
         push Not at hiN
         by_cases hfar : m ≤ j ∨ i < j
-        · rw [Hadj_vD_zero hmn hne hfar, mul_zero]
+        · rw [Hadj_vD_zero hmn hne (hfar.elim Or.inl (fun h => Or.inr (Or.inl h))), mul_zero]
         push Not at hfar
         exact mul_nonneg (ih j hfar.1 i hfar.2) (Hadj_vD_nonneg h hnN hmn hiN hne)
       have hαm := hαpos m hm1 (by omega)
@@ -271,6 +272,128 @@ theorem cone_nonneg {N : ℕ} (h : ConeHyp α β γ N) (hγN : γ N = 0)
   rcases le_total m n with hmn | hnm
   · exact main m n hmn
   · rw [hsym]; exact main n m hnm
+
+/-- Hypotheses of Theorem 7.10 (Low products), on the ranges reached by products of total degree
+at most `N`. -/
+structure ConeHypLow (α β γ : ℕ → ℝ) (N : ℕ) : Prop where
+  α_nonneg : ∀ i, i ≤ N → 0 ≤ α i
+  γ_nonneg : ∀ i, i ≤ N → 0 ≤ γ i
+  β_mono : ∀ j i, j ≤ i → i + 1 ≤ N → β j ≤ β i
+  α_mono : ∀ j i, j ≤ i → i ≤ N → α j ≤ α i
+  αγ_mono : ∀ j i, j ≤ i → i + 2 ≤ N → α j + γ j ≤ α i + γ i
+  edge : ∀ j i, j ≤ i → i + j + 2 ≤ N → α j ≤ γ i
+
+/-- `H^*v ≥ 0` away from the apex, for `n + m ≤ N`, under the hypotheses of Theorem 7.10. -/
+theorem Hadj_vD_nonneg_low {N : ℕ} (h : ConeHypLow α β γ N) {n m i j : ℕ} (hnm : n + m ≤ N)
+    (hmn : m ≤ n) (hi : i ≤ N) (hne : ¬(i = n ∧ j = m)) : 0 ≤ Hadj α β γ (vD n m) i j := by
+  unfold Hadj
+  by_cases hD : j < m ∧ n + j < i + m ∧ i + j < n + m ∧ (n + m - i - j) % 2 = 1
+  · have e1 : (if 1 ≤ i then α i * vD n m (i - 1) j else 0) = 0 := by
+      split_ifs
+      · rw [vD_zero (i := i - 1) (j := j) (by omega), mul_zero]
+      · rfl
+    have e2 : (if 1 ≤ j then α j * vD n m i (j - 1) else 0) = 0 := by
+      split_ifs
+      · rw [vD_zero (i := i) (j := j - 1) (by omega), mul_zero]
+      · rfl
+    rw [e1, e2, vD_pos hD, vD_zero (i := i + 1) (j := j) (by omega),
+      vD_zero (i := i) (j := j + 1) (by omega)]
+    have := h.β_mono j i (by omega) (by omega)
+    linarith
+  rw [vD_zero hD]
+  have hα := h.α_nonneg i hi
+  have hγ := h.γ_nonneg i hi
+  by_cases hE : j + 1 < m ∧ n + (j + 1) < i + m ∧ i + (j + 1) < n + m ∧ (n + m - i - (j + 1)) % 2 = 1
+  · rw [vD_pos hE, if_pos (by omega : 1 ≤ i), vD_pos (by omega), vD_pos (by omega)]
+    by_cases hj : 1 ≤ j
+    · rw [if_pos hj, vD_pos (by omega)]
+      have := h.αγ_mono j i (by omega) (by omega)
+      linarith
+    · rw [if_neg hj]
+      have := h.αγ_mono 0 i (by omega) (by omega)
+      have := h.α_nonneg 0 (by omega)
+      have hj0 : j = 0 := by omega
+      subst hj0
+      linarith
+  rw [vD_zero hE]
+  by_cases hC : 1 ≤ j ∧ j - 1 < m ∧ n + (j - 1) < i + m ∧ i + (j - 1) < n + m ∧
+      (n + m - i - (j - 1)) % 2 = 1
+  · rw [if_pos hC.1, vD_pos hC.2]
+    by_cases hA : 1 ≤ i ∧ j < m ∧ n + j < (i - 1) + m ∧ (i - 1) + j < n + m ∧
+        (n + m - (i - 1) - j) % 2 = 1
+    · rw [if_pos hA.1, vD_pos hA.2]
+      have := h.α_mono j i (by omega) hi
+      have hB : 0 ≤ γ i * vD n m (i + 1) j := by
+        unfold vD; split_ifs <;> nlinarith
+      linarith
+    · have hB : j < m ∧ n + j < (i + 1) + m ∧ (i + 1) + j < n + m ∧
+          (n + m - (i + 1) - j) % 2 = 1 := by omega
+      rw [vD_pos hB]
+      have := h.edge j i (by omega) (by omega)
+      have hA0 : 0 ≤ (if 1 ≤ i then α i * vD n m (i - 1) j else 0) := by
+        split_ifs
+        · unfold vD; split_ifs <;> nlinarith
+        · exact le_refl 0
+      linarith
+  · have hC0 : (if 1 ≤ j then α j * vD n m i (j - 1) else 0) = 0 := by
+      split_ifs with hj
+      · rw [vD_zero (by omega), mul_zero]
+      · rfl
+    rw [hC0]
+    have hA0 : 0 ≤ (if 1 ≤ i then α i * vD n m (i - 1) j else 0) := by
+      split_ifs
+      · unfold vD; split_ifs <;> nlinarith
+      · exact le_refl 0
+    have hB : 0 ≤ γ i * vD n m (i + 1) j := by
+      unfold vD; split_ifs <;> nlinarith
+    linarith
+
+/-- **Cone argument for low products** (Theorem 7.10): `u(n,m) ≥ 0` whenever `n + m ≤ N`. Only
+`Hu = 0` on the square is used, never the terminal coefficients. -/
+theorem cone_nonneg_low {N : ℕ} (h : ConeHypLow α β γ N)
+    (hαpos : ∀ m, 1 ≤ m → m ≤ N → 0 < α m) (u : ℕ → ℕ → ℝ)
+    (hH : ∀ i j, i ≤ N → j ≤ N → Hop α β γ u i j = 0)
+    (hsym : ∀ i j, u i j = u j i) (h0 : ∀ i, 0 ≤ u i 0) : ∀ n m, n + m ≤ N → 0 ≤ u n m := by
+  have main : ∀ m n, m ≤ n → n + m ≤ N → 0 ≤ u n m := by
+    intro m
+    induction m using Nat.strong_induction_on with
+    | _ m ih =>
+      intro n hmn hnm
+      rcases Nat.eq_zero_or_pos m with hm0 | hm1
+      · subst hm0; exact h0 n
+      set B := 2 * N + 2 with hB
+      have hv : ∀ i j, B ≤ i + 1 ∨ B ≤ j + 1 → vD n m i j = 0 := by
+        intro i j hij; exact vD_zero (by omega)
+      have hsum := by_parts α β γ B (by omega) u (vD n m) hv
+      have hz : ∑ i ∈ range B, ∑ j ∈ range B, Hop α β γ u i j * vD n m i j = 0 := by
+        apply sum_eq_zero; intro i _; apply sum_eq_zero; intro j _
+        by_cases hD : j < m ∧ n + j < i + m ∧ i + j < n + m ∧ (n + m - i - j) % 2 = 1
+        · rw [hH i j (by omega) (by omega), zero_mul]
+        · rw [vD_zero hD, mul_zero]
+      rw [hz, ← Finset.sum_product'] at hsum
+      have hmem : (n, m) ∈ range B ×ˢ range B := by
+        simp only [Finset.mem_product, Finset.mem_range]; omega
+      rw [← Finset.add_sum_erase _ _ hmem] at hsum
+      simp only at hsum
+      rw [Hadj_vD_apex hm1] at hsum
+      have hrest : 0 ≤ ∑ p ∈ (range B ×ˢ range B).erase (n, m),
+          u p.1 p.2 * Hadj α β γ (vD n m) p.1 p.2 := by
+        apply sum_nonneg
+        rintro ⟨i, j⟩ hp
+        simp only [Finset.mem_erase, ne_eq, Prod.mk.injEq] at hp
+        have hne : ¬(i = n ∧ j = m) := hp.1
+        by_cases hfar : m ≤ j ∨ i < j ∨ n + m < i + j
+        · rw [Hadj_vD_zero hmn hne hfar, mul_zero]
+        push Not at hfar
+        exact mul_nonneg (ih j hfar.1 i hfar.2.1 (by omega))
+          (Hadj_vD_nonneg_low h hnm hmn (by omega) hne)
+      have hαm := hαpos m hm1 (by omega)
+      have : α m * u n m ≥ 0 := by linarith
+      exact nonneg_of_mul_nonneg_right (by linarith) hαm
+  intro n m hnm
+  rcases le_total m n with hmn | hnm'
+  · exact main m n hmn hnm
+  · rw [hsym]; exact main n m hnm' (by omega)
 
 end cone
 

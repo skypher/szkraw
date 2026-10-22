@@ -98,14 +98,65 @@ theorem Gk_rel (v : Coefficients N) (ha : ∀ i, i < N → v.a i ≠ 0) (haN : v
 noncomputable def wS (v : Coefficients N) (σ : ℕ → ℝ) (m : ℕ) : ℝ :=
   ∏ l ∈ range m, (v.a l * σ (l + 1)) / (v.c (l + 1) * σ l)
 
-theorem all_products : Stmt_all_products := by
-  intro N v hv σ hσ hβ hα hαγ hedge
+/-- The rescaled coefficient array `u(i,j) = w_i w_j g(i,j;k)`. -/
+noncomputable def uS (v : Coefficients N) (σ : ℕ → ℝ) (k : Fin (N + 1)) (i j : ℕ) : ℝ :=
+  wS v σ i * wS v σ j * Gk v k i j
+
+section rescaled
+
+variable {v : Coefficients N} {σ : ℕ → ℝ}
+
+theorem wS_pos (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) : ∀ m, m ≤ N → 0 < wS v σ m := by
+  intro m hm; apply prod_pos; intro l hl; rw [Finset.mem_range] at hl
+  exact div_pos (mul_pos (hv.2.2.2.2.2.2.1 l (by omega)) (hσ (l + 1) (by omega)))
+    (mul_pos (hv.2.2.2.2.2.2.2 (l + 1) (by omega) (by omega)) (hσ l (by omega)))
+
+theorem alphaS_nonneg (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) :
+    ∀ i, i ≤ N → 0 ≤ alphaS v σ i := fun i hi => by
+  unfold alphaS; split_ifs with h
+  · exact le_refl 0
+  · exact div_nonneg (mul_nonneg (hv.2.2.2.2.2.2.2 i (by omega) hi).le (hσ (i - 1) (by omega)).le)
+      (hσ i hi).le
+
+theorem alphaS_pos (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) :
+    ∀ m, 1 ≤ m → m ≤ N → 0 < alphaS v σ m := fun m h1 hm => by
+  unfold alphaS; rw [if_neg (by omega)]
+  exact div_pos (mul_pos (hv.2.2.2.2.2.2.2 m (by omega) hm) (hσ (m - 1) (by omega))) (hσ m hm)
+
+theorem gammaS_nonneg (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) :
+    ∀ i, i ≤ N → 0 ≤ gammaS v σ i := fun i hi => by
+  unfold gammaS
+  rcases Nat.lt_or_ge i N with h | h
+  · exact div_nonneg (mul_nonneg (hv.2.2.2.2.2.2.1 i h).le (hσ (i + 1) (by omega)).le) (hσ i hi).le
+  · rw [show i = N by omega, hv.2.2.2.2.1]; simp
+
+theorem gammaS_top (hv : Admissible v) : gammaS v σ N = 0 := by
+  unfold gammaS; rw [hv.2.2.2.2.1]; simp
+
+theorem uS_out (k : Fin (N + 1)) : ∀ i j, N < i ∨ N < j → uS v σ k i j = 0 := by
+  intro i j h; unfold uS Gk; rw [dif_neg (by omega), mul_zero]
+
+theorem uS_symm (hv : Admissible v) (k : Fin (N + 1)) : ∀ i j, uS v σ k i j = uS v σ k j i := by
+  intro i j; unfold uS
+  rw [Gk_symm v (fun i hi => (hv.2.2.2.2.2.2.1 i hi).ne') k i j]; ring
+
+theorem uS_zero (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) (k : Fin (N + 1)) :
+    ∀ i, 0 ≤ uS v σ k i 0 := by
+  intro i
+  unfold uS
+  by_cases hi : i ≤ N
+  · unfold Gk; rw [dif_pos ⟨hi, by omega⟩]
+    have hz : productMatrix v i ⟨0, by omega⟩ k = if k.val = i then 1 else 0 :=
+      row_zero v (fun i hi => (hv.2.2.2.2.2.2.1 i hi).ne') i hi k
+    rw [hz]
+    have := wS_pos hv hσ i hi; have := wS_pos hv hσ 0 (by omega)
+    split_ifs <;> positivity
+  · unfold Gk; rw [dif_neg (by omega), mul_zero]
+
+theorem uS_hop (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) (k : Fin (N + 1)) :
+    ∀ i j, i ≤ N → j ≤ N → Hop (alphaS v σ) v.b (gammaS v σ) (uS v σ k) i j = 0 := by
   obtain ⟨hN, _, _, hc0, haN, _, hapos, hcpos⟩ := hv
   have ha : ∀ i, i < N → v.a i ≠ 0 := fun i hi => (hapos i hi).ne'
-  have hw_pos : ∀ m, m ≤ N → 0 < wS v σ m := by
-    intro m hm; apply prod_pos; intro l hl; rw [Finset.mem_range] at hl
-    exact div_pos (mul_pos (hapos l (by omega)) (hσ (l + 1) (by omega)))
-      (mul_pos (hcpos (l + 1) (by omega) (by omega)) (hσ l (by omega)))
   have hw_succ : ∀ m, wS v σ (m + 1) = wS v σ m * ((v.a m * σ (m + 1)) / (v.c (m + 1) * σ m)) :=
     fun m => prod_range_succ _ _
   -- the identities `α_{m+1} w_{m+1} = a_m w_m` and `γ_{m-1} w_{m-1} = c_m w_m`
@@ -122,94 +173,72 @@ theorem all_products : Stmt_all_products := by
     have := hσ m' (by omega); have := hσ (m' + 1) (by omega)
     have := hcpos (m' + 1) (by omega) (by omega)
     field_simp
+  intro i j hi hj
+  have rel := Gk_rel v ha haN k i j hi hj
+  unfold Hop uS
+  have tA : ∀ x y, x ≤ N → alphaS v σ (x + 1) * (wS v σ (x + 1) * wS v σ y * Gk v k (x + 1) y) =
+      wS v σ x * wS v σ y * (v.a x * Gk v k (x + 1) y) := by
+    intro x y hx
+    rcases Nat.lt_or_ge x N with h | h
+    · rw [← mul_assoc, ← mul_assoc, idA x h]; ring
+    · unfold Gk; rw [dif_neg (by omega)]; ring
+  have tA' : ∀ x y, y ≤ N → alphaS v σ (y + 1) * (wS v σ x * wS v σ (y + 1) * Gk v k x (y + 1)) =
+      wS v σ x * wS v σ y * (v.a y * Gk v k x (y + 1)) := by
+    intro x y hy
+    rcases Nat.lt_or_ge y N with h | h
+    · have := idA y h
+      calc alphaS v σ (y + 1) * (wS v σ x * wS v σ (y + 1) * Gk v k x (y + 1))
+          = wS v σ x * (alphaS v σ (y + 1) * wS v σ (y + 1)) * Gk v k x (y + 1) := by ring
+        _ = _ := by rw [this]; ring
+    · unfold Gk; rw [dif_neg (by omega)]; ring
+  have tC : ∀ x y, x ≤ N → (if 1 ≤ x then gammaS v σ (x - 1) * (wS v σ (x - 1) * wS v σ y *
+      Gk v k (x - 1) y) else 0) = wS v σ x * wS v σ y *
+      (if 1 ≤ x then v.c x * Gk v k (x - 1) y else 0) := by
+    intro x y hx
+    split_ifs with h
+    · have := idC x h hx
+      calc gammaS v σ (x - 1) * (wS v σ (x - 1) * wS v σ y * Gk v k (x - 1) y)
+          = (gammaS v σ (x - 1) * wS v σ (x - 1)) * wS v σ y * Gk v k (x - 1) y := by ring
+        _ = _ := by rw [this]; ring
+    · ring
+  have tC' : ∀ x y, y ≤ N → (if 1 ≤ y then gammaS v σ (y - 1) * (wS v σ x * wS v σ (y - 1) *
+      Gk v k x (y - 1)) else 0) = wS v σ x * wS v σ y *
+      (if 1 ≤ y then v.c y * Gk v k x (y - 1) else 0) := by
+    intro x y hy
+    split_ifs with h
+    · have := idC y h hy
+      calc gammaS v σ (y - 1) * (wS v σ x * wS v σ (y - 1) * Gk v k x (y - 1))
+          = wS v σ x * (gammaS v σ (y - 1) * wS v σ (y - 1)) * Gk v k x (y - 1) := by ring
+        _ = _ := by rw [this]; ring
+    · ring
+  rw [tA i j hi, tA' i j hj, tC i j hi, tC' i j hj]
+  linear_combination (wS v σ i * wS v σ j) * rel
+
+/-- Nonnegativity of `u(m,n)` transfers to `g(m,n;k)`. -/
+theorem product_nonneg_of_uS (hv : Admissible v) (hσ : ∀ n, n ≤ N → 0 < σ n) (k : Fin (N + 1))
+    (m : ℕ) (hm : m ≤ N) (n : Fin (N + 1)) (h : 0 ≤ uS v σ k m n.val) : 0 ≤ productMatrix v m n k := by
+  unfold uS Gk at h
+  rw [dif_pos ⟨hm, by omega⟩] at h
+  have hpos := mul_pos (wS_pos hv hσ m hm) (wS_pos hv hσ n.val (by omega))
+  have e : (⟨n.val, by omega⟩ : Fin (N + 1)) = n := Fin.ext rfl
+  rw [e] at h
+  exact nonneg_of_mul_nonneg_right (by linarith) hpos
+
+end rescaled
+
+theorem all_products : Stmt_all_products := by
+  intro N v hv σ hσ hβ hα hαγ hedge
   have hcone : ConeHyp (alphaS v σ) v.b (gammaS v σ) N :=
-    { α_nonneg := fun i hi => by
-        unfold alphaS; split_ifs with h
-        · exact le_refl 0
-        · exact div_nonneg (mul_nonneg (hcpos i (by omega) hi).le (hσ (i - 1) (by omega)).le)
-            (hσ i hi).le
-      γ_nonneg := fun i hi => by
-        unfold gammaS
-        rcases Nat.lt_or_ge i N with h | h
-        · exact div_nonneg (mul_nonneg (hapos i h).le (hσ (i + 1) (by omega)).le) (hσ i hi).le
-        · rw [show i = N by omega, haN]; simp
+    { α_nonneg := alphaS_nonneg hv hσ
+      γ_nonneg := gammaS_nonneg hv hσ
       β_mono := hβ
       α_mono := hα
       αγ_mono := hαγ
       edge := hedge }
-  have hγN : gammaS v σ N = 0 := by unfold gammaS; rw [haN]; simp
-  have hαpos : ∀ m, 1 ≤ m → m ≤ N → 0 < alphaS v σ m := by
-    intro m h1 hm
-    unfold alphaS; rw [if_neg (by omega)]
-    exact div_pos (mul_pos (hcpos m (by omega) hm) (hσ (m - 1) (by omega))) (hσ m hm)
   intro m hm n k
-  set u : ℕ → ℕ → ℝ := fun i j => wS v σ i * wS v σ j * Gk v k i j with hu
-  have hout : ∀ i j, N < i ∨ N < j → u i j = 0 := by
-    intro i j h; simp only [hu]; unfold Gk; rw [dif_neg (by omega), mul_zero]
-  have hsym : ∀ i j, u i j = u j i := by
-    intro i j; simp only [hu]; rw [Gk_symm v ha k i j]; ring
-  have h0 : ∀ i, 0 ≤ u i 0 := by
-    intro i
-    simp only [hu]
-    by_cases hi : i ≤ N
-    · unfold Gk; rw [dif_pos ⟨hi, by omega⟩]
-      have hz : productMatrix v i ⟨0, by omega⟩ k = if k.val = i then 1 else 0 :=
-        row_zero v ha i hi k
-      rw [hz]
-      have := hw_pos i hi; have := hw_pos 0 (by omega)
-      split_ifs <;> positivity
-    · unfold Gk; rw [dif_neg (by omega), mul_zero]
-  have hH : ∀ i j, i ≤ N → j ≤ N → Hop (alphaS v σ) v.b (gammaS v σ) u i j = 0 := by
-    intro i j hi hj
-    have rel := Gk_rel v ha haN k i j hi hj
-    unfold Hop
-    simp only [hu]
-    -- convert each term
-    have tA : ∀ x y, x ≤ N → alphaS v σ (x + 1) * (wS v σ (x + 1) * wS v σ y * Gk v k (x + 1) y) =
-        wS v σ x * wS v σ y * (v.a x * Gk v k (x + 1) y) := by
-      intro x y hx
-      rcases Nat.lt_or_ge x N with h | h
-      · rw [← mul_assoc, ← mul_assoc, idA x h]; ring
-      · unfold Gk; rw [dif_neg (by omega)]; ring
-    have tA' : ∀ x y, y ≤ N → alphaS v σ (y + 1) * (wS v σ x * wS v σ (y + 1) * Gk v k x (y + 1)) =
-        wS v σ x * wS v σ y * (v.a y * Gk v k x (y + 1)) := by
-      intro x y hy
-      rcases Nat.lt_or_ge y N with h | h
-      · have := idA y h
-        calc alphaS v σ (y + 1) * (wS v σ x * wS v σ (y + 1) * Gk v k x (y + 1))
-            = wS v σ x * (alphaS v σ (y + 1) * wS v σ (y + 1)) * Gk v k x (y + 1) := by ring
-          _ = _ := by rw [this]; ring
-      · unfold Gk; rw [dif_neg (by omega)]; ring
-    have tC : ∀ x y, x ≤ N → (if 1 ≤ x then gammaS v σ (x - 1) * (wS v σ (x - 1) * wS v σ y *
-        Gk v k (x - 1) y) else 0) = wS v σ x * wS v σ y *
-        (if 1 ≤ x then v.c x * Gk v k (x - 1) y else 0) := by
-      intro x y hx
-      split_ifs with h
-      · have := idC x h hx
-        calc gammaS v σ (x - 1) * (wS v σ (x - 1) * wS v σ y * Gk v k (x - 1) y)
-            = (gammaS v σ (x - 1) * wS v σ (x - 1)) * wS v σ y * Gk v k (x - 1) y := by ring
-          _ = _ := by rw [this]; ring
-      · ring
-    have tC' : ∀ x y, y ≤ N → (if 1 ≤ y then gammaS v σ (y - 1) * (wS v σ x * wS v σ (y - 1) *
-        Gk v k x (y - 1)) else 0) = wS v σ x * wS v σ y *
-        (if 1 ≤ y then v.c y * Gk v k x (y - 1) else 0) := by
-      intro x y hy
-      split_ifs with h
-      · have := idC y h hy
-        calc gammaS v σ (y - 1) * (wS v σ x * wS v σ (y - 1) * Gk v k x (y - 1))
-            = wS v σ x * (gammaS v σ (y - 1) * wS v σ (y - 1)) * Gk v k x (y - 1) := by ring
-          _ = _ := by rw [this]; ring
-      · ring
-    rw [tA i j hi, tA' i j hj, tC i j hi, tC' i j hj]
-    linear_combination (wS v σ i * wS v σ j) * rel
-  have hnn := cone_nonneg hcone hγN hαpos u hout hH hsym h0 m n.val
-  simp only [hu] at hnn
-  unfold Gk at hnn
-  rw [dif_pos ⟨hm, by omega⟩] at hnn
-  have hpos := mul_pos (hw_pos m hm) (hw_pos n.val (by omega))
-  have e : (⟨n.val, by omega⟩ : Fin (N + 1)) = n := Fin.ext rfl
-  rw [e] at hnn
-  exact nonneg_of_mul_nonneg_right (by linarith) hpos
+  exact product_nonneg_of_uS hv hσ k m hm n
+    (cone_nonneg hcone (gammaS_top hv) (alphaS_pos hv hσ) (uS v σ k) (uS_out k) (uS_hop hv hσ k)
+      (uS_symm hv k) (uS_zero hv hσ k) m n.val)
 
 /-- Hypotheses of Corollary 7.13: constant ratio `c_i = r d_i` (`0 < r ≤ 1`), an increasing
 profile, and `d_{N-1} ≤ 1/2`. -/
