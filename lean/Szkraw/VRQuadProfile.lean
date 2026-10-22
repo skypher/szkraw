@@ -482,7 +482,7 @@ theorem quadprofile_matrix : Stmt_quadprofile := by
 
 /-- **After Proposition 8.10**: for the arrays of Proposition 8.10 without the monotonicity
 hypothesis, `b` is nondecreasing exactly when `t(N+R) + τ(C(N,2) + (N-1)R) ≤ 1 - r`, where
-`R = d_{N-1}/(1 - d_{N-1})`. -/
+`R = d_{N-1}/(1 - d_{N-1})`. The assumption `r > 0` is not needed. -/
 theorem quadprofile_bmono_iff {N : ℕ} (vv : Coefficients N) (hv : Admissible vv) {ν1 ν2 r t τ : ℝ}
     (h1 : 0 < ν1) (h2 : 0 ≤ ν2) (ht : 0 ≤ t) (hτ : 0 ≤ τ)
     (hd : ∀ i, i ≤ N → profile vv i = ν1 * i + ν2 * (i.choose 2 : ℝ))

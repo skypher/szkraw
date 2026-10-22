@@ -40,6 +40,13 @@ theorem geometric_family_hypotheses (N : ℕ) (hN : 1 ≤ N) (p q : ℝ)
     conv_lhs => rw [he,pow_succ]
     ring
 
+/-- For `N = 1` the coefficients `(eq:parameters)` do not depend on `q`, so one may choose `q = 1`. -/
+theorem geometric_coefficients_N_one (p q : ℝ) (i : ℕ) (hi : i ≤ 1) :
+    (geometricCoefficients 1 p q).a i = (geometricCoefficients 1 p 1).a i ∧
+    (geometricCoefficients 1 p q).b i = (geometricCoefficients 1 p 1).b i ∧
+    (geometricCoefficients 1 p q).c i = (geometricCoefficients 1 p 1).c i := by
+  interval_cases i <;> simp [geometricCoefficients, qInteger]
+
 /-- Its first two increments differ, hence no Krawtchouk reference has this coefficient profile. -/
 theorem geometric_not_kraw (N : ℕ) (hN : 2 ≤ N) (p q : ℝ)
     (hp : 1 ≤ p) (hq : 1 < q) :

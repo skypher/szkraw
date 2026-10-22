@@ -68,9 +68,10 @@ theorem single_perturbation_close (N : ℕ) (hN : 2 ≤ N) (h : ℝ)
     · simp [hi1]
       simpa only [one_div] using hη
 
-theorem single_perturbation_not_geometric (N : ℕ) (hN : 2 ≤ N) (h : ℝ) (hh : 0 < h) :
-    ¬ Geometric (singlePerturbation N h) := by
-  rintro ⟨β,q,hβ,hq,hratio,hinc,hrec⟩
+/-- The constant-ratio hypothesis of the geometric criterion fails: `b_1/c_1 ≠ b_N/c_N`. -/
+theorem single_perturbation_not_constant_ratio (N : ℕ) (hN : 2 ≤ N) (h : ℝ) (hh : 0 < h) :
+    ¬ ∃ β : ℝ, ∀ i, 0 < i → i ≤ N → (singlePerturbation N h).b i = β * (singlePerturbation N h).c i := by
+  rintro ⟨β,hratio⟩
   have hn1 : N ≠ 1 := by omega
   have hn : (N : ℝ) ≠ 0 := by exact_mod_cast (by omega : N ≠ 0)
   have hlast := hratio N (by omega) le_rfl
@@ -84,15 +85,22 @@ theorem single_perturbation_not_geometric (N : ℕ) (hN : 2 ≤ N) (h : ℝ) (hh
   norm_num [he] at hfirst
   linarith
 
+theorem single_perturbation_not_geometric (N : ℕ) (hN : 2 ≤ N) (h : ℝ) (hh : 0 < h) :
+    ¬ Geometric (singlePerturbation N h) := by
+  rintro ⟨β,q,hβ,hq,hratio,hinc,hrec⟩
+  exact single_perturbation_not_constant_ratio N hN h hh ⟨β,hratio⟩
+
 /-- The paper's explicit finite examples outside the geometric family. -/
 theorem nongeometric_perturbation_example (N : ℕ) (hN : 2 ≤ N) (h : ℝ)
     (hh : 0 < h) (hhb : h ≤ (1/4 : ℝ)*((64*(N : ℝ))⁻¹)^N) :
     Admissible (singlePerturbation N h) ∧ ¬ Geometric (singlePerturbation N h) ∧
+    (¬ ∃ β : ℝ, ∀ i, 0 < i → i ≤ N → (singlePerturbation N h).b i = β * (singlePerturbation N h).c i) ∧
     FiniteRealization (singlePerturbation N h) ∧ MatrixPositivity (singlePerturbation N h) ∧
     PerturbationMargin (singlePerturbation N h) (1/2) := by
   have ha := single_perturbation_admissible N hN h hh hhb
   have hc := single_perturbation_close N hN h hh hhb
   have ht := perturbation_criterion N _ (1/2) ha (by norm_num) (by norm_num) hc
-  exact ⟨ha,single_perturbation_not_geometric N hN h hh,ht.1,ht.2.1,ht.2.2⟩
+  exact ⟨ha,single_perturbation_not_geometric N hN h hh,single_perturbation_not_constant_ratio N hN h hh,
+    ht.1,ht.2.1,ht.2.2⟩
 
 end Szkraw

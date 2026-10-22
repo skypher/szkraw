@@ -327,7 +327,7 @@ theorem rhoN_mono {r t τ : ℝ} (ht : 0 ≤ t) (hτ : 0 ≤ τ) {i j : ℕ} (h 
   linarith
 
 /-- **After Theorem 8.11**: for the arrays of Theorem 8.11 without the monotonicity hypothesis, `b` is
-nondecreasing exactly when `t(N+R) + τ(C(N,2) + (N-1)R) ≤ 1 - r`, where `R = d_{N-1}/(1 - d_{N-1})`. -/
+nondecreasing exactly when `t(N+R) + τ(C(N,2) + (N-1)R) ≤ 1 - r`, where `R = d_{N-1}/(1 - d_{N-1})`. The assumption `r > 0` is not needed. -/
 theorem quadratic_bmono_iff {N : ℕ} (vv : Coefficients N) (hv : Admissible vv) {r t τ : ℝ}
     (ht : 0 ≤ t) (hτ : 0 ≤ τ)
     (hc : ∀ i, i ≤ N → vv.c i = (r + t * i + τ * (i.choose 2 : ℝ)) * profile vv i)

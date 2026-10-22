@@ -570,3 +570,21 @@ Fixes applied:
 2. The first boundary evaluation now reads 𝓕(q)/(q(1+q)); it had q^n(1+q).
 3. The second boundary evaluation now reads 𝓕(q)/q²; it had q^{n+1}. The printed divisors were correct for the residual of (eq:quad-B), which is q^{n−1}𝓕(q).
 4. Optional clarifications: at w = 0 the expression equals h₀(K_nAB − L_npC); and only φ_n, h_n, v_n, w_n are claimed nonnegative, not ψ_n.
+
+## Lean statement fidelity, round 14 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_aa9ef75d-4d73-4e65-b3c5-5c6ea7b61a07`. Brief: `reviews/lean-fidelity14-brief.md`. Answer: `reviews/lean-fidelity14-answer.md`.
+
+Scope:
+- Theorem 8.11: `quadratic_ratio_matrix`, with `QuadRatioHyp`;
+- the equivalence after Theorem 8.11: `quadratic_bmono_iff`;
+- the equivalence after Proposition 8.10: `quadprofile_bmono_iff` (left over from round 13);
+- the cited auxiliaries (`leibniz_quad`, `quadB_seq`, `cert_nonneg`, `QuadSetting.key`, `quad_key_red`, `ResumWeights2`, `resum_nonneg2`, `gkernel_resum2`), the table rows, scope sentences and disclosure.
+
+**Verdict: PASS WITH MINOR FIXES.** Every statement matches; the two equivalences are slightly stronger than the paper, since they do not need r > 0.
+
+Fixes applied:
+1. Both equivalence scope sentences, and the docstrings of `quadprofile_bmono_iff` and `quadratic_bmono_iff`, now say that the Lean statement omits r > 0.
+2. The key-inequality citation now reads "on Ω for a ≥ 3 (QuadSetting.key), together with its reduced auxiliary inequality (quad_key_red)".
+3. The disclosure now reads "Results and prose remarks not covered by those listed Lean theorems", since the two equivalences are prose claims that are machine-verified.
+4. Optional fix applied: `quadprofile_bmono_iff` added to the table row of Proposition 8.10.
