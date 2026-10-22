@@ -142,3 +142,5 @@ assert_allowed_axioms Szkraw.Uvec_top
 assert_allowed_axioms Szkraw.productMatrix_contDiffAt
 assert_allowed_axioms Szkraw.thinness
 assert_allowed_axioms Szkraw.corner_identity
+assert_allowed_axioms Szkraw.forced_equalities
+assert_allowed_axioms Szkraw.forced_vanishing

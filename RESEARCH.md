@@ -743,7 +743,11 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - Certificate: Z_{mn} = C(N,n)(−1)^{n+s}/(2C(N−1,s)) for m + n = 2s + 1, and 0 for m + n even. It satisfies ZJ − JZ = e_N e_Nᵀ on the columns n ≥ 1 (`zMat_comm`), and the closed form was found from exact computation (runs/corner_deriv/zf.py).
   - Hence X_NN = tr((ZΠ − ΠZ)E) (`cornerX_trace`). Only W_{n±1,n} and W_{nn} enter, and these give the paper's coefficients. The formula was checked against dual-number derivatives for N ≤ 12 (runs/corner_deriv/zclosed.py).
 - Section 9 numbering (from paper.aux): Lemma 9.1 corner value, Lemma 9.2 corner identity, Definition 9.3, Theorem 9.4, Lemma 9.5 (Nörlund–Rice), Corollary 9.6 (analytic rules), Lemma 9.7 (top mass), Proposition 9.8 (interior), Proposition 9.9 (families), Proposition 9.10 (thinness), Corollary 9.11 (radius order), Proposition 9.12, Corollary 9.13.
-- Remaining formalization: Section 9 beyond Lemmas 9.1–9.2 and Proposition 9.10.
+- Theorem 9.4 (2026-10-22), lean/Szkraw/UniformRules.lean:
+  - `alt_sum_poly` comes from Mathlib's forward differences. `rule_sum` gives the boundary terms −L_even and −L_odd.
+  - `neg_right_of_deriv` is the sign step, and the residue class of N mod 4 is picked by `exists_sign_index`.
+  - N = 1 is handled directly: g(1,1;1) = −εγ(1).
+- Remaining formalization: Section 9 beyond Lemmas 9.1–9.2, Theorem 9.4 and Proposition 9.10.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
