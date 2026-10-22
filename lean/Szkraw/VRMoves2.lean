@@ -54,9 +54,9 @@ section Moves2
 variable {cc : ℕ → ℝ} {N : ℕ} {A B C : ℕ → ℕ → ℕ → ℝ} {s : ℕ → ℕ → ℝ}
 
 /-- Hypotheses of the resummation, on `Ω = {ℓ + a ≤ N}`: the `A`-weights of positive index split
-as `H - V`; the weights `A₀, B, C, H, V` and the straight weight `s` are nonnegative; the
-`B`, `C`, `H` and `V` moves are dominated by detours through `B₀`; and the key inequality
-controls `H₁`. -/
+as `H - V - W`; the weights `A₀, B, C, H, V, W` and the straight weight `s` are nonnegative; the
+`B`, `C`, `H`, `V` (constant `4`) and `W` (constant `3`) moves are dominated by detours through `B₀`;
+and the key inequality controls `H₁`. -/
 structure ResumWeights2 (cc : ℕ → ℝ) (A B C H V W : ℕ → ℕ → ℕ → ℝ) (s : ℕ → ℕ → ℝ) (N : ℕ) : Prop where
   cc_pos : ∀ n, 1 ≤ n → 0 < cc n
   split : ∀ j ℓ a, 1 ≤ j → ℓ + a ≤ N → A j ℓ a = H j ℓ a - V j ℓ a - W j ℓ a
@@ -77,7 +77,7 @@ structure ResumWeights2 (cc : ℕ → ℝ) (A B C H V W : ℕ → ℕ → ℕ �
       cc (ℓ + 1) * W 1 ℓ a
 
 /-- **Resummation induction.** Every solution of the generic kernel recurrence with nonnegative
-initial values and the support property is nonnegative under `ResumWeights`. -/
+initial values and the support property is nonnegative under `ResumWeights2`. -/
 theorem gkernel_resum2 {H V W : ℕ → ℕ → ℕ → ℝ} {ω : ℕ → ℕ → ℝ} (hN : 1 ≤ N)
     (hw : ResumWeights2 cc A B C H V W s N) (hrec : GenRec cc A B C s ω)
     (h0 : ∀ a, 0 ≤ ω 0 a) (hsupp : ∀ ℓ a, N < ℓ + a → ω ℓ a = 0) : ∀ ℓ a, 0 ≤ ω ℓ a := by
