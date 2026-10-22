@@ -144,3 +144,4 @@ assert_allowed_axioms Szkraw.thinness
 assert_allowed_axioms Szkraw.corner_identity
 assert_allowed_axioms Szkraw.forced_equalities
 assert_allowed_axioms Szkraw.forced_vanishing
+assert_allowed_axioms Szkraw.radius_order

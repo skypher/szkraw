@@ -747,7 +747,10 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - `alt_sum_poly` comes from Mathlib's forward differences. `rule_sum` gives the boundary terms −L_even and −L_odd.
   - `neg_right_of_deriv` is the sign step, and the residue class of N mod 4 is picked by `exists_sign_index`.
   - N = 1 is handled directly: g(1,1;1) = −εγ(1).
-- Remaining formalization: Section 9 beyond Lemmas 9.1–9.2, Theorem 9.4 and Proposition 9.10.
+- Corollary 9.11 (2026-10-22), lean/Szkraw/RadiusOrder.lean:
+  - ρ_N(r) = sSup of the stable radii. Lower bound: `perturbation_matrix_positivity` with η_N(r) = ½((1 − r)/(32N))^N for r ≥ ½.
+  - Upper bound: `thinness` along the terminal direction δc_N = −sgn(s_N), whose derivative is −|s_N| by `corner_identity`. At ε = C(1 − r)^N ≤ min(c, 1 − r) this array is admissible with b ≥ 0, lies within ε of K_{N,r}, and lacks (P).
+- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Lemma 9.7, Propositions 9.8, 9.9 and 9.12, and Corollary 9.13.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
