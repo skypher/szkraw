@@ -1284,3 +1284,34 @@ Prompted by the user's question why the deep-product conditions need a constant 
 - Consult round 8 (reviews/consult-J-brief.md, job `job_2a1069be-b5ea-4c77-835f-fd785f7d5838`) asks for a proof of (C3), or the cleanest provable condition, and for the degree-D generalization rρ_{k+1} ≤ u·ρ₁ρ_k (k ≥ 2). That generalization is under test in ratio_degree_test.py.
 
 **Answer to the user's question.** The ratio restriction is necessary, not an artifact of the proof. Every shape class closed under raising the top ratio fails at r = 2/5. Near r = 1, among polynomial ratios with nonnegative Newton coefficients only degree ≤ 2 survives unconditionally.
+
+## Theorem 8.12 and Corollary 8.13: ratios of any degree on low-degree profiles (2026-10-23, derived here)
+
+**Theorem 8.12.** Assume d_i = ν₁i + ν₂C(i,2) (ν₁ > 0, ν₂ ≥ 0), the Newton coefficients of c are log-concave without internal zeros, and b is nondecreasing. Then (P) holds.
+
+Proof:
+- f_n = 0 for n ≥ 3, so every b-move A_j with j ≥ 1 equals −B̃_j, where B̃_j = W^φ_{2j+1,j}.
+- The C-moves vanish for j ≥ 1, and C′₀ = C(a,2)ν₂.
+- With H = 0 and V_j = B̃_j, the Theorem 8.9 resummation applies. The B-detour (constant 4) and the B̃-detour (quotient jm(m−1)/(2(m−j−1)) ≥ 10) come from Lemma 8.3 (lc-ineq) for φ. The key inequality is trivial.
+
+**Corollary 8.13.** Let ρ have nonnegative log-concave Newton coefficients without internal zeros and ρ₀ > 0. Then the Newton coefficients of c = ρd are log-concave. This is Lemma (NP) for degree-two profiles.
+- κ_k = k·e_k, where e_k = (ν₁ + h(k−1))s_k + h(k−1)s_{k−1}, s_k = ρ_k + ρ_{k−1} and h = ν₂/2.
+- e_k² − e_{k−1}e_{k+1} is a sum of six nonnegative terms (identity `lowdeg_lc_identity`).
+
+Status:
+- Machine-verified: `Szkraw.lowdeg_matrix`, `Szkraw.lowdeg_newton_lc`, `Szkraw.lowdeg_ratio_matrix` (lean/Szkraw/VRLowDegree.lean), axiom audit clean.
+- Exact checks of every step: runs/varratio/thmQ_check.py (160 members, N ≤ 10).
+- Review round 22 (reviews/round22-brief.md, job `job_ef9e0fd0-9044-451a-9e36-af9e65e86c7d`) is pending. It covers the proofs, Lean fidelity including `cubic_ratio_fails`, and the open-problem text.
+- Sharpness: the N = 4 cubic counterexample has a linear profile and nonnegative but non-log-concave Newton coefficients of ρ.
+
+**Conjecture (G).** On every log-concave Newton profile, ratios with log-concave Newton coefficients and nondecreasing b have (P). Exact evidence, all from finished runs:
+- (P) in full tables for N ≤ 16, r ≤ 99/100: 2,844 arrays.
+- Rows g(m,N;k) at N = 24 and 40.
+- M ≥ 0 for N ≤ 10.
+- Lemma (NP) in general: 13,000 random exact trials, N ≤ 16 (newton_product_lc.py).
+
+Measured constants for (G), runs/varratio/g_ingredients.py: lcphi ≥ 1, B ≥ 25, V ≥ 82, Ŵ ≥ 11; key ratio ≥ 2.9 even with γ = 0.
+
+Missing for (G): a proof of (NP) for general profiles, and the H-move key inequality. (NP) is equivalent to log-concavity of the union product κ_k = Σ_{S∪T=[k]} ρ_{|S|}ν_{|T|}. For exchangeable random sets this is ultra-log-concavity of |X∪Y|; Walkup's 1976 paper on unions of random sets may contain it, but this has not been confirmed.
+
+**Consult round 8 (cubic, external cross-check only, not verified here).** reviews/consult-J-answer.md claims (C3) with u = 1 by a repaired summed B-detour. It reports that the pointwise cubic quad-B fails at (ℓ, n) = (0, 2), with an explicit N = 4 witness.
