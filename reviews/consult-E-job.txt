@@ -1,0 +1,5 @@
+Research consult round 3 via pro-cli (ChatGPT Pro)
+job id: job_51fb971c-3838-40d7-90b6-7835181e9bf4
+model: gpt-6-pro
+brief: reviews/consult-E-brief.md
+answer: reviews/consult-E-answer.md
