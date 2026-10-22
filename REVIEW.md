@@ -258,3 +258,14 @@ Fixes applied:
 5. Remark 8.5 spells out the Bernstein degree elevation.
 Also changed: the AI-use disclosure ("fourteen rounds", plus the independence sentence). A confirmation round follows.
 Current paper.tex SHA-256: `07697127592d9af0c43813e13910c4ffa8b23f8af3ff986555b3edc67d461663`.
+
+## Round 15: confirmation of the round-14 fixes (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_29123ec7-c5f1-40ca-b730-4d8ed04eb03f`. Brief: `reviews/limits-review15-brief.md`. Answer: `reviews/limits-review15-answer.md`. Reviewed source: commit fac94b6.
+
+**Verdict: PASS WITH MINOR FIXES.** Fixes 1–5 are correct and there is no new proof-breaking error; Theorem 8.1's argument stays intact. Three small items, applied:
+1. the mixture formula's range is now 2 ≤ k ≤ N, consistent with the zero extension;
+2. the punctuation slip "equality), The" is now "equality). The";
+3. the disclosure now says that for each section the final confirmation round on the corrected text returned PASS (round 14 itself was PASS WITH MINOR FIXES).
+A final confirmation round follows.
+Current paper.tex SHA-256: `222b12954ff29bd3cc715fec0fbd15432de304f2bcc7a515ab2e73493b5b65ee`.
