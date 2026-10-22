@@ -139,3 +139,5 @@ assert_allowed_axioms Szkraw.edge_idempotents
 assert_allowed_axioms Szkraw.cube_model
 assert_allowed_axioms Szkraw.three_term_action
 assert_allowed_axioms Szkraw.Uvec_top
+assert_allowed_axioms Szkraw.productMatrix_contDiffAt
+assert_allowed_axioms Szkraw.thinness

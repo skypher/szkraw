@@ -735,7 +735,10 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - Lemma 7.2 (`edge_idempotents`) holds for every commutative ℝ-algebra with y_j² = (1 − r)y_j + r and a basis B with B S = y_S, for r ≠ −1. The basis claim is linear independence of the f_l y_S (l ∉ S), proved through the coordinate at S ∪ {l}, together with span = `Ideal.span {f_l}`.
   - `cube_model` gives such an algebra: the functions on {1, −r}^N. The y_S span because each point indicator is Π_j (α_j + β_j y_j), and 2^N of them match the dimension.
   - Lemma 7.3 (`three_term_action`) uses only the relations. V sits inside A × A^N. Two double counts (`count_out`, `count_in`) do the odd case.
-- Remaining formalization: Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
+- Proposition 9.9 (2026-10-22), lean/Szkraw/Thinness.lean:
+  - Section 9 coordinates are `stochArray`, and `krawDir N δb δc r ε` is K_{N,r} + εv. `ProductSmooth.lean` shows that every g is C^n where a_0, …, a_{m−1} ≠ 0.
+  - Proof: G(r, ε) is C¹ near (1, 0), so ∂_ε G is continuous and below D/2 on a ball. The mean value inequality and G(r, 0) = (1 − r)^N (Lemma 9.1) finish it, with C = 4/|D|, c = δ/2 and r_* = 1 − δ/2.
+- Remaining formalization: Section 9 beyond Lemma 9.1 and Proposition 9.9. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

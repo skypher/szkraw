@@ -334,3 +334,20 @@ Scope:
 **Verdict: PASS WITH MINOR FIXES (documentation only).** All declarations match. The identities for all real parameters are stronger than the paper. The Bernstein coefficients of the paper are B_s/C(D,s), and the reviewer finds no missing coverage in the combined remark declarations. No Lean proposition or paper scope sentence needs to change.
 
 Fix applied: the docstrings of `twoParam` and `twoParam_poly` now write the recurrence variable as z, so that y is used only as a parameter.
+
+## Lean statement fidelity, round 5 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_1f049526-e1f9-4898-bc70-078ed00231a8`. Brief: `reviews/lean-fidelity5-brief.md`. Answer: `reviews/lean-fidelity5-answer.md`.
+
+Scope:
+- Lemma 7.2: `edge_idempotents`, `cube_model`;
+- Lemma 7.3: `three_term_action`, `Uvec_top`;
+- their scope sentences.
+
+**Verdict: PASS WITH MINOR FIXES.** All claims match. The reviewer finds no missing conclusion for either lemma; the parameter ranges are wider than the paper's.
+
+Dispositions:
+1. The reviewer asked that the hypothesis `hB : ∀ S, B S = y_S` be included in `edge_idempotents`. It already is: the brief showed the section variable but left out the `include hB` line. `#check @Szkraw.edge_idempotents` lists `hB` as a hypothesis, so only the excerpt was wrong and the Lean statement is unchanged.
+2. The Lemma 7.3 scope sentence now states N ≥ 1, p_0 < 1, r = p_0/(1 − p_0), that there is no basis hypothesis, that the identity holds in A × A^N and restricts to V, and that `Uvec_top` states U_{2N+1} = 0 separately.
+
+Not yet reviewed: `thinness` (Proposition 9.9) and `productMatrix_contDiffAt`, added after this brief.
