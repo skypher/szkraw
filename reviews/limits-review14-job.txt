@@ -1,0 +1,6 @@
+Review round 14 (Section 8, Theorem 8.1) via pro-cli (ChatGPT Pro), fresh temporary session
+job id: job_74fa2ec7-b789-4e94-87ee-107bfad9c9fe
+model: gpt-6-pro
+brief: reviews/limits-review14-brief.md
+answer: reviews/limits-review14-answer.md
+Note: the key ideas of Section 8 came from ChatGPT Pro consultation rounds 3-4; this reviewer is the same model family (independence limited).
