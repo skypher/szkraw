@@ -669,6 +669,10 @@ Proof architecture (each step a separate file and lemma):
 - F7 *Operator induction* on Ω: ω ≥ 0 and ω ≥ ½𝒫ω by strong induction on ℓ, with 𝒫² ≥ 4𝒬 entrywise. Here matching is indexwise (the three detour pairs), so no general operator theory is needed.
 - F8 *Assembly:* ω ≥ 0 ⇒ L' ≥ 0 ⇒ H ≥ 0 ⇒ g ≥ 0, giving `Stmt_logconcave_matrix`, then the axiom audit in lean/CheckAxioms.lean.
 Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and F8. Formalization of Section 7 follows.
+*Progress.*
+- F5 is done: lean/Szkraw/LCSequences.lean proves the `LCNZ` predicate, one-step and iterated balanced products, preservation under shift sums, the binomial form `iterShift u ℓ i = Σ_h C(ℓ,h)u(i+h)` (that is, f_i(ℓ)), and `lemma_8_3`.
+- lean/Szkraw/LogConcaveStatement.lean proves `padNewton_lcnz`: the hypothesis of Theorem 8.1 gives `LCNZ` for (0, ν_1, …, ν_N, 0, …).
+- Both are in the root import, and `lake build Szkraw` succeeds with no `sorry`.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 

@@ -1,4 +1,5 @@
 import Szkraw.Statements
+import Szkraw.LCSequences
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Data.Nat.Choose.Basic
 
@@ -41,5 +42,49 @@ linearization coefficient `g(m,n;k) = productMatrix v m n k` is nonnegative. -/
 def Stmt_logconcave_matrix : Prop :=
   ∀ (N : ℕ) (v : Coefficients N), Admissible v → ConstantRatioLogConcave v →
     MatrixPositivity v
+
+end Szkraw
+
+namespace Szkraw
+
+/-- The padded Newton sequence `(0, ν 1, …, ν N, 0, …)`. -/
+noncomputable def padNewton (N : ℕ) (ν : ℕ → ℝ) (i : ℕ) : ℝ := if 1 ≤ i ∧ i ≤ N then ν i else 0
+
+theorem padNewton_lcnz {N : ℕ} {ν : ℕ → ℝ} (h : LogConcaveNoInternalZeros N ν) :
+    LCNZ (padNewton N ν) := by
+  obtain ⟨h1, hnn, hlc, hz⟩ := h
+  refine ⟨?_, ?_, ?_⟩
+  · intro i; unfold padNewton; split_ifs with hi
+    · exact hnn i hi.1 hi.2
+    · exact le_rfl
+  · intro i
+    unfold padNewton
+    by_cases hi0 : i = 0
+    · subst hi0; simp only [Nat.one_le_iff_ne_zero, ne_eq, not_true_eq_false, false_and, if_false,
+        zero_mul]; positivity
+    by_cases hiN : i + 2 ≤ N
+    · rw [if_pos ⟨by omega, by omega⟩, if_pos ⟨by omega, by omega⟩, if_pos ⟨by omega, by omega⟩]
+      have := hlc (i + 1) (by omega) (by omega)
+      simpa using this
+    · rw [if_neg (by omega : ¬(1 ≤ i + 2 ∧ i + 2 ≤ N)), mul_zero]; positivity
+  · intro i j k hij hjk hi hk
+    unfold padNewton at *
+    split_ifs at hi with hi'
+    swap; · exact absurd hi (lt_irrefl 0)
+    split_ifs at hk with hk'
+    swap; · exact absurd hk (lt_irrefl 0)
+    rw [if_pos ⟨by omega, by omega⟩]
+    -- ν j > 0: otherwise ν vanishes from j on, contradicting ν k > 0
+    by_contra hj
+    have hj0 : ν j = 0 := le_antisymm (not_lt.mp hj) (hnn j (by omega) (by omega))
+    have : ∀ m, j ≤ m → m ≤ N → ν m = 0 := by
+      intro m hjm hmN
+      induction m with
+      | zero => omega
+      | succ m ih =>
+        rcases Nat.eq_or_lt_of_le hjm with e | e
+        · rw [← e]; exact hj0
+        · exact hz m (by omega) (by omega) (ih (by omega) (by omega))
+    rw [this k hjk hk'.2] at hk; exact lt_irrefl 0 hk
 
 end Szkraw
