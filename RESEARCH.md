@@ -775,7 +775,20 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - `path_deriv_pos`, `interior_points`, `interior_measure`;
     - `interior_open`, the stability neighborhood.
   - AffineInvariance.lean: g is invariant under y = s x + β.
-- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6 and Proposition 9.9 (2). All three rest on contour integrals over general cycles, which Mathlib lacks (it has rectangle Cauchy–Goursat but no general Cauchy formula).
+- Lemma 9.5 (2026-10-22). Mathlib has Cauchy–Goursat for rectangles but no Cauchy formula for general cycles, so the cycle is a union of grid squares.
+  - RectCauchy.lean: Cauchy's formula for rectangles (`rectInt_cauchy`, via `dslope`).
+  - GridCauchy.lean: interior edges cancel (`gridSum_bound`); the grid Cauchy formula for off-grid points (`gridSum_cauchy`).
+  - NorlundU.lean: U (`Ulog`), its closed form x log|x| + (1 − x)log|x − 1| − 1 + y(arctan((1−x)/y) + arctan(x/y)), continuity, U ≤ −1 on [0,1], U ≥ log dist, and the Riemann bound Σ_k log|x − k/N| ≥ N U(x) − 1/d + log d (`riemann_lower`).
+  - NorlundResidue.lean: partial fractions of 1/ω_N via Lagrange interpolation, w_k = N^N(−1)^{N−k}C(N,k)/N!, and the residue identity on a grid (`residue_identity`).
+  - Norlund.lean: a margin η with {U ≤ −1 + η} plus a δ-neighbourhood inside D (`exists_margin`). The grid has mesh 1/M and origin √2 + √2 i, so no node k/N is on a grid line. S is the set of squares meeting {U ≤ −1 + η}. Boundary edges lie in the compact set E = (∪S) ∩ {U ≥ −1 + η}, which has positive distance from [0,1]. Stirling from Mathlib's antitone `stirlingSeq`. Result: `norlund_rice`.
+- Corollary 9.6 and Proposition 9.9 (2) (2026-10-22), AnalyticRules.lean:
+  - `AnalyticOnOmega β`: β on [0,1] is the restriction of a function complex differentiable on an open set containing Ω.
+  - `corner_sum_gen`: the alternating sum of Lemma 9.2 for any direction, with boundary corrections at n = 0, N.
+  - `families_boundary_layers`: Proposition 9.9 (2). For large N, A_N = D_N + Q(N) with Q a binomial polynomial (`binomPoly`). A nonzero Q has an eventual strict sign (`poly_eventual_sign`), which part (1) excludes. So Q = 0, and the binomials C(X, k) are independent (`binom_indep`).
+  - `analytic_forced_equalities`: Proposition 9.9 (2) with zero layers.
+  - `analytic_rule_small`: the derivative is at most |s_N| C √N e^{−ηN} in absolute value.
+  - `expRule_deriv`: the example has derivative s_N(1 − e^{1/N})^N ≠ 0.
+- Every numbered result of Section 9 is now machine-verified, audit clean.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
