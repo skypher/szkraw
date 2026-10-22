@@ -1483,3 +1483,12 @@ Proof architecture for (G), all pieces now proved except the last:
 - Still open:
   - a symbolic proof of coef_n ≥ 0 for all a. For large a and fixed n, N_n/C(a,n) ≈ a·(2^{n+1} − 2n − 4)/(n+1), against a need of ≈ (4n−9)a/2. The tight cases are small n (3, 4) with k = 1, where the helper terms 4(n−2)C(n,k+1) and 2(n−1)(a−n)C(n,k) are needed.
   - the endpoint z = 1/u₂, which uses u_n ≤ u₂u_{n−1}, as in Theorem 8.9.
+
+**Key inequality: the nonnegative-Newton relaxation also fails; (G) stays sound (2026-10-23).**
+- z = 1/w endpoint: exact identity w²L_k(1/w) = w(1+w)L_k(0) + wY′[c₁a − c₂ + c₁Y] − 4c₁(1+w)H_*, checked in 17,167 cases (runs/varratio/key_zmax_reduce.py).
+- LP certificates (products u_iu_j ≥ u_{i+j−1}, the endpoint ratio bound u_n ≤ u₂u_{n−1}, and both times u₂) exist for all a ≤ 7 (key_zmax_lp.py). The termwise version fails only at the u₂ coefficient (k = 1, a ≥ 14).
+- Cause: L₁(1/w) < 0 for geometric u with small w (−309 at a = 14, w = 10⁻³; −7,723 at a = 20), even with the strong α bound. So the weakened key (K′) is false on the cone of ratios with merely nonnegative Newton coefficients.
+- This is not a problem for (G). A pure k = 1 ray has Newton coefficients (ρ(ℓ), 0, τ), which (G) excludes, since LC with P₀ = ρ(ℓ) forces P₁² ≥ ρ(ℓ)P₂.
+- Adversarial realizable (G) arrays in exactly this regime (geometric profiles with w = 10⁻², 10⁻³; ratios r·B^x with B up to 100; N = 16, 20): (P) holds and the full key ratio is ≥ 1.8·10⁴ (runs/varratio/g_adversarial.py).
+- Consequence: a proof of the key must use LC of (ρ(ℓ), Δρ(ℓ), Δ²ρ(ℓ), …) including the coupling to ρ(ℓ) = 1 − α − Σs, and/or the Δρ terms of B₀ dropped in (K′). The extreme-ray method does not apply directly, because the LC set is not a cone.
+- What remains valid: the z = 0 endpoints and the k = 0 ray (Theorem 8.9). The key for (G) remains OPEN.
