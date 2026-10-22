@@ -1387,7 +1387,7 @@ Consequences:
 
 Status: in paper.tex as Proposition 8.14. Review round 23 is pending; not yet machine-verified.
 
-Novelty is NOT established. Walkup (1976, J. Appl. Prob. 13, 76–85, doi:10.2307/3212667) treats binomial convolution of Pólya frequency sequences and the probability that a union of independent random subsets is the whole set. Only its abstract was accessible, so it may contain this result or a special case. The paper cites it as related work and claims no novelty. The full text is needed, for example through a library.
+Round 23 (PASS WITH MINOR FIXES): the result is Walkup (1976), Theorem 2 (PF₂-preserving double-binomial convolution), per the reviewer, who matched search-indexed text. The paper credits Walkup; our part is the self-contained proof and its use here. Earlier note: novelty is NOT established. Walkup (1976, J. Appl. Prob. 13, 76–85, doi:10.2307/3212667) treats binomial convolution of Pólya frequency sequences and the probability that a union of independent random subsets is the whole set. Only its abstract was accessible, so it may contain this result or a special case. The paper cites it as related work and claims no novelty. The full text is needed, for example through a library.
 
 ## Conjecture (G): stress tests and the detours (2026-10-23)
 

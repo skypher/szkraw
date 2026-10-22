@@ -643,3 +643,15 @@ Also in the remark:
 - thmQ_check.py is described as checking Lemma 8.3 with i = 2.
 
 Evidence limitation: commands, seeds and summary lines of all cited searches are now archived in runs/varratio/RUNS.md.
+
+## Review round 23: Proposition 8.14 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_9ccb6eb3-f2b9-4304-8448-4f7e13f1fa8a`. Brief: `reviews/round23-brief.md`. Answer: `reviews/round23-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer checked every step of the self-contained proof: the layer cake, the two-step identity, T1–T3, and all five cases. Its independent exact checker passed 39,973 boxes, 359,757 ordered-step contributions and 599,595 bracket checks through k = 10.
+
+Fixes, all applied:
+1. Domain and zero extension stated; the identically zero case and infinite supports covered.
+2. The final sentence now refers to the nine ordered-step contributions; individual T_c(p) can be negative.
+3. The second bracket of the (1,1),(1,1) case is written out.
+4. **Attribution: the result is Walkup (1976), Theorem 2**, the double-binomial convolution preserving PF₂. The paper now credits Walkup and presents the proof as self-contained. The reviewer matched the theorem against search-indexed text but did not obtain the full scan; neither did we.
