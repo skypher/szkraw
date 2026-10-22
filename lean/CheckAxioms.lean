@@ -170,3 +170,4 @@ assert_allowed_axioms Szkraw.interior_open
 assert_allowed_axioms Szkraw.rectInt_inv
 assert_allowed_axioms Szkraw.rectInt_cauchy
 assert_allowed_axioms Szkraw.gridSum_bound
+assert_allowed_axioms Szkraw.gridSum_cauchy

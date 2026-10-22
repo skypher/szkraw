@@ -82,4 +82,77 @@ theorem gridSum_bound (f : ℂ → ℂ) (S : Finset (ℤ × ℤ)) :
       have b4 := norm_sum_le (S \ shiftSet S (1, 0)) (vEdge c h f)
       linarith
 
+/-- The closed square `p`. -/
+def sqSet (p : ℤ × ℤ) : Set ℂ :=
+  [[(sqLo c h p).re, (sqLo c h (p.1 + 1, p.2 + 1)).re]] ×ℂ [[(sqLo c h p).im, (sqLo c h (p.1 + 1, p.2 + 1)).im]]
+
+/-- The square containing `a`. -/
+noncomputable def sqIdx (a : ℂ) : ℤ × ℤ := (⌊(a.re - c.re) / h⌋, ⌊(a.im - c.im) / h⌋)
+
+/-- `a` lies on no grid line. -/
+def OffGrid (a : ℂ) : Prop :=
+  (∀ i : ℤ, (a.re - c.re) / h ≠ i) ∧ ∀ j : ℤ, (a.im - c.im) / h ≠ j
+
+variable {c h}
+
+theorem sqLo_re (p : ℤ × ℤ) : (sqLo c h p).re = c.re + p.1 * h := by simp [sqLo]
+theorem sqLo_im (p : ℤ × ℤ) : (sqLo c h p).im = c.im + p.2 * h := by simp [sqLo]
+
+/-- An off-grid point lies strictly inside its square. -/
+theorem inside_sqIdx (hh : 0 < h) {a : ℂ} (ha : OffGrid c h a) :
+    (sqLo c h (sqIdx c h a)).re < a.re ∧ a.re < (sqLo c h ((sqIdx c h a).1 + 1, (sqIdx c h a).2 + 1)).re ∧
+      (sqLo c h (sqIdx c h a)).im < a.im ∧ a.im < (sqLo c h ((sqIdx c h a).1 + 1, (sqIdx c h a).2 + 1)).im := by
+  simp only [sqLo_re, sqLo_im, sqIdx, Int.cast_add, Int.cast_one]
+  have f1 := Int.floor_le ((a.re - c.re) / h)
+  have f2 := Int.lt_floor_add_one ((a.re - c.re) / h)
+  have f3 := Int.floor_le ((a.im - c.im) / h)
+  have f4 := Int.lt_floor_add_one ((a.im - c.im) / h)
+  have g1 : (⌊(a.re - c.re) / h⌋ : ℝ) < (a.re - c.re) / h := lt_of_le_of_ne f1 (Ne.symm (ha.1 _))
+  have g3 : (⌊(a.im - c.im) / h⌋ : ℝ) < (a.im - c.im) / h := lt_of_le_of_ne f3 (Ne.symm (ha.2 _))
+  rw [lt_div_iff₀ hh] at g1 g3
+  rw [div_lt_iff₀ hh] at f2 f4
+  refine ⟨by linarith, by linarith, by linarith, by linarith⟩
+
+/-- An off-grid point lies outside every other closed square. -/
+theorem not_mem_sqSet (hh : 0 < h) {a : ℂ} (ha : OffGrid c h a) {p : ℤ × ℤ} (hp : p ≠ sqIdx c h a) :
+    a ∉ sqSet c h p := by
+  rintro ⟨hre, him⟩
+  simp only [Set.mem_preimage, sqLo_re, sqLo_im, Int.cast_add, Int.cast_one] at hre him
+  rw [Set.uIcc_of_le (by nlinarith)] at hre him
+  apply hp
+  refine Prod.ext ?_ ?_
+  · show p.1 = ⌊(a.re - c.re) / h⌋
+    rw [eq_comm, Int.floor_eq_iff]
+    constructor
+    · rw [le_div_iff₀ hh]; linarith [hre.1]
+    · rw [div_lt_iff₀ hh]
+      rcases eq_or_lt_of_le hre.2 with h' | h'
+      · exact absurd (by rw [h']; push_cast; field_simp; ring : (a.re - c.re) / h = ((p.1 + 1 : ℤ) : ℝ)) (ha.1 _)
+      · linarith
+  · show p.2 = ⌊(a.im - c.im) / h⌋
+    rw [eq_comm, Int.floor_eq_iff]
+    constructor
+    · rw [le_div_iff₀ hh]; linarith [him.1]
+    · rw [div_lt_iff₀ hh]
+      rcases eq_or_lt_of_le him.2 with h' | h'
+      · exact absurd (by rw [h']; push_cast; field_simp; ring : (a.im - c.im) / h = ((p.2 + 1 : ℤ) : ℝ)) (ha.2 _)
+      · linarith
+
+/-- **Grid Cauchy formula**: for `f` holomorphic on an open set containing the squares of `S`
+and `a` off the grid, `Σ_{p ∈ S} ∮_{∂p} f(x)/(x - a) dx = 2πi f(a)` if `a`'s square is in `S`,
+and `0` otherwise. -/
+theorem gridSum_cauchy (hh : 0 < h) (f : ℂ → ℂ) (D : Set ℂ) (hD : IsOpen D) (hf : DifferentiableOn ℂ f D)
+    (S : Finset (ℤ × ℤ)) (hS : ∀ p ∈ S, sqSet c h p ⊆ D) {a : ℂ} (ha : OffGrid c h a) :
+    ∑ p ∈ S, sqInt c h (fun x => f x * (x - a)⁻¹) p =
+      if sqIdx c h a ∈ S then 2 * Real.pi * I * f a else 0 := by
+  have hzero : ∀ p ∈ S, p ≠ sqIdx c h a → sqInt c h (fun x => f x * (x - a)⁻¹) p = 0 := by
+    intro p hp hne
+    apply rectInt_eq_zero
+    exact (hf.mono (hS p hp)).mul (inv_sub_diffOn a _ (not_mem_sqSet hh ha hne))
+  split_ifs with hin
+  · rw [sum_eq_single (sqIdx c h a) (fun p hp hne => hzero p hp hne) (fun h' => absurd hin h')]
+    obtain ⟨h1, h2, h3, h4⟩ := inside_sqIdx hh ha
+    exact rectInt_cauchy f D hD hf a _ _ h1 h2 h3 h4 (hS _ hin)
+  · exact sum_eq_zero fun p hp => hzero p hp (fun h' => hin (h' ▸ hp))
+
 end Szkraw
