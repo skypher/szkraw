@@ -1258,3 +1258,29 @@ Source: consult round 7 (reviews/consult-I-answer.md). The class (Q) is fully pr
   - the computational statements in the open problems (kinked ratio at N = 120, cubic and steep ratios);
   - the heuristics of Section 9 away from r = 1;
   - the remark that linear-profile arrays of Theorem 8.9 are arrays of Proposition 8.8.
+
+## Beyond quadratic ratios: where the ratio restriction comes from (2026-10-23)
+
+Prompted by the user's question why the deep-product conditions need a constant or specially shaped ratio. All checks are exact; scripts are in runs/varratio/ and logs in runs/varratio/logs (gitignored).
+
+**Theorem 8.11 is sharp in the ratio degree.** For N = 4, d_i = i/4 and ρ(x) = 19/20 + C(x,3)/320, b = (0, 1/80, 1/40, 9/256, 3/80) is nondecreasing but g(4,4;4) = −14011/30720000. This is machine-verified (`Szkraw.cubic_ratio_fails`, lean/Szkraw/CubicRatioExample.lean) and stated in the paper's open problems.
+
+**Frontier (linear profiles, κ = λ·κ_max, λ ∈ {1/2, 1}, b nondecreasing).**
+- Pure cubics C(x,3) and (x/N)³: the failing bias drops with N. They fail at r = 19/20 and 47/50 from N = 4, at 23/25 from N = 16, and at 9/10 from N = 48 for C(x,3) and N = 64 for (x/N)³. Clean witnesses with κ = 1/80: g(48,48;48) < 0 and g(64,64;63) < 0. So no fixed bias cap rescues cubics.
+- Steeper ratios fail at smaller r:
+  - (x/N)⁴ from r = 4/5 (N = 15);
+  - (x/N)⁶ at r = 3/5 (N = 40);
+  - 2^{x−N}, 3^{x−N} and 10^{x−N} at r = 1/2 (N = 40);
+  - raising only ρ_N by (1−r)/N: r = 1/2 (N = 30, 40) and r = 2/5 (N = 120); no failure at r ≤ 1/3 up to N = 300.
+- Prescribed curvature h = Δ²ρ (ratio_frontier.py families h*): constant h (quadratic) and linear h (cubic C(x+1,3)) never failed up to N = 120 at r ≤ 9/10. Decreasing, saturating, kinked and step-shaped h fail from r ≈ 1/2 to 9/10.
+- Clean witnesses: runs/varratio/frontier_examples.py.
+
+**Conjecture (C3) and why the Theorem 8.11 route fails for pure cubics.** Write ρ(x) = r + tx + τC(x,2) + σC(x,3) with t, τ, σ ≥ 0, and require rσ ≤ u·tτ (a consequence of log-concavity of (r, t, τ, σ)).
+- (P) found no failure in any of these tests:
+  - 9,000 random arrays, full tables, N = 4–18, u ≤ 64, r ≤ 99/100;
+  - rows g(m,N;k) at N = 24–96, u ≤ 16.
+- The Theorem 8.11 resummation M is ≥ 0 for u ≤ 4 (N ≤ 13, every r tested). It has negative entries at u = 16 for r ≥ 4/5.
+- For t = τ = 0 the operator M < 0 at every r. The only negative block is R = U + P²/4 − Q, from the B-detour at ℓ = 0: φ₂(0) has no σ term since d₀ = 0, while φ₄(0) does. So Q is linear in σ and P² is quadratic in σ (cubic_diag.py).
+- Consult round 8 (reviews/consult-J-brief.md, job `job_2a1069be-b5ea-4c77-835f-fd785f7d5838`) asks for a proof of (C3), or the cleanest provable condition, and for the degree-D generalization rρ_{k+1} ≤ u·ρ₁ρ_k (k ≥ 2). That generalization is under test in ratio_degree_test.py.
+
+**Answer to the user's question.** The ratio restriction is necessary, not an artifact of the proof. Every shape class closed under raising the top ratio fails at r = 2/5. Near r = 1, among polynomial ratios with nonnegative Newton coefficients only degree ≤ 2 survives unconditionally.
