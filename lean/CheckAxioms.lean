@@ -230,3 +230,10 @@ assert_allowed_axioms Szkraw.quad_key_red
 assert_allowed_axioms Szkraw.cert_nonneg
 assert_allowed_axioms Szkraw.FQ_nonneg
 assert_allowed_axioms Szkraw.quadB_seq
+assert_allowed_axioms Szkraw.leibniz_quad
+assert_allowed_axioms Szkraw.detour_gen
+assert_allowed_axioms Szkraw.QuadSetting.domB
+assert_allowed_axioms Szkraw.QuadSetting.key
+assert_allowed_axioms Szkraw.quad_kernel_nonneg
+assert_allowed_axioms Szkraw.quadratic_ratio_matrix
+assert_allowed_axioms Szkraw.quadratic_bmono_iff

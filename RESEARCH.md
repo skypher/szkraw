@@ -1229,7 +1229,16 @@ Source: consult round 7 (reviews/consult-I-answer.md). The class (Q) is fully pr
 - verify_consultI_expand.py: both boundary reductions and every w-coefficient, n = 2–8. While checking this I corrected my own transcription of [w³] to use A(0).
 
 **Status.**
-- Paper: Theorem 8.11 is written; review round 21 is running.
-- Lean:
-  - done: the generic layer (`resum_nonneg2`, `gkernel_resum2`);
-  - next: the concrete weights, the key inequality with W, and the weighted B-detour, which is the largest piece.
+- Paper: Theorem 8.11 is written; review round 21: PASS WITH MINOR FIXES (applied).
+- Lean (2026-10-23), complete, axiom audit clean:
+  - `quadratic_ratio_matrix`: Theorem 8.11 (hypothesis `QuadRatioHyp`, statement `Stmt_quadratic_ratio`);
+  - `quadratic_bmono_iff`: the equivalence stated after Theorem 8.11.
+- Lean files:
+  - VRResum2.lean, VRMoves2.lean: the resummation with the third family W (`resum_nonneg2`, `gkernel_resum2`).
+  - VRQuadCert.lean: the certificate (eq:quad-cert), `cert_nonneg`.
+  - VRQuadB.lean, VRQuadB2.lean: 𝓕(q) ≥ 0 at the geometric configuration (`FQ_nonneg`) and the weighted B-detour for log-concave sequences (`quadB_seq`).
+  - VRQuadKey.lean: the reduced key inequality with surplus (`quad_key_red`).
+  - VRQuadLeib.lean: Δ^k of shift sums and the quadratic Leibniz rule in every order (`leibniz_quad`).
+  - VRQuadDetours.lean: the setting `QuadSetting`, the split ψ = h − v − w, a detour lemma with an index-dependent factor (`detour_gen`), and the B, C′, H, V, W detours.
+  - VRQuadMain.lean: the identities 4H₁ − 2V₁ = 4αH_* + 2sT + 4τZ and W₁ = τW_*, α u₁ ≥ s u₀, the key inequality (`QuadSetting.key`), the kernel, the main theorem and the equivalence.
+- The Lean proof uses the detour constant 4 for B, C′, H and V and 3 for W (the paper's 10, 9/2, 6 are not needed).
