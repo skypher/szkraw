@@ -1242,3 +1242,19 @@ Source: consult round 7 (reviews/consult-I-answer.md). The class (Q) is fully pr
   - VRQuadDetours.lean: the setting `QuadSetting`, the split ψ = h − v − w, a detour lemma with an index-dependent factor (`detour_gen`), and the B, C′, H, V, W detours.
   - VRQuadMain.lean: the identities 4H₁ − 2V₁ = 4αH_* + 2sT + 4τZ and W₁ = τW_*, α u₁ ≥ s u₀, the key inequality (`QuadSetting.key`), the kernel, the main theorem and the equivalence.
 - The Lean proof uses the detour constant 4 for B, C′, H and V and 3 for W (the paper's 10, 9/2, 6 are not needed).
+
+## Formalization coverage, 2026-10-23
+
+- Theorem 8.11 is machine-verified (`quadratic_ratio_matrix`, `quadratic_bmono_iff`); Lean fidelity round 14: PASS WITH MINOR FIXES (applied).
+- The lemmas and corollaries of Sections 2–6 were already formalized as steps of Theorems 2.1 and 5.3 (correspondence table above). They are now listed in the paper's Lean table, with scope sentences. Fidelity round 15: PASS.
+  - New small declarations: `geometric_coefficients_N_one` (the N = 1 remark of Lemma 2.2) and the conjunct "no constant ratio" in `nongeometric_perturbation_example`.
+  - Proposition 6.3 compares with Koelink's construction and is declared unformalized.
+- Remarks and examples now formalized; fidelity round 16 pending:
+  - after Theorem 8.9: `profile_last_le`, `affine_range_remarks`, `affEx_remark` (N = 4 example);
+  - Theorem 8.11: `quadExample_remark` (Newton coefficients of c not log-concave), `quadB_unit_fails` (eq:quad-B with constant 1 fails at N = 20, inside the class of the theorem);
+  - open problems: `openEx1_fails` (g(3,3;3) = −3/2002), `openEx2_fails` (g(3,3;3) = −1/24).
+- Not formalized:
+  - Proposition 6.3;
+  - the computational statements in the open problems (kinked ratio at N = 120, cubic and steep ratios);
+  - the heuristics of Section 9 away from r = 1;
+  - the remark that linear-profile arrays of Theorem 8.9 are arrays of Proposition 8.8.
