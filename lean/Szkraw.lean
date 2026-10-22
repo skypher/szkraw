@@ -41,3 +41,4 @@ import Szkraw.LCRemark
 import Szkraw.EdgeIdempotents
 import Szkraw.ProductSmooth
 import Szkraw.Thinness
+import Szkraw.CornerIdentity

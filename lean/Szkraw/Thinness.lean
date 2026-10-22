@@ -6,7 +6,7 @@ import Mathlib.Analysis.Calculus.FDeriv.Prod
 import Mathlib.Tactic.FunProp
 
 /-!
-# Proposition 9.9: thinness near the symmetric endpoint
+# Proposition 9.10: thinness near the symmetric endpoint
 
 Section 9 uses the coordinates `b_1, …, b_{N-1}, c_1, …, c_N` of a stochastic array with
 `a_0 = 1`, `b_0 = c_0 = 0`, `a_N = 0`, `b_N = 1 - c_N` and `a_n = 1 - b_n - c_n` otherwise
@@ -110,7 +110,7 @@ theorem cornerG_hasDerivAt_snd {r t : ℝ} (hp : (r, t) ∈ upwardNonzero N δb 
     (hasDerivAt_const t r).prodMk (hasDerivAt_id t)
   exact hd.hasFDerivAt.comp_hasDerivAt t hl
 
-/-- **Proposition 9.9** (Thinness near the symmetric endpoint): if the first-order change of
+/-- **Proposition 9.10** (Thinness near the symmetric endpoint): if the first-order change of
 `g(N,N;N)` along `v` at `K_{N,1}` is negative, there are `r_* < 1` and `C, c > 0` such that
 `K_{N,r} + ε v` is an admissible array lacking property (P), with `g(N,N;N) < 0`, whenever
 `r_* < r < 1` and `C (1 - r)^N ≤ ε ≤ c`. -/

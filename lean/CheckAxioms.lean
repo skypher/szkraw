@@ -141,3 +141,4 @@ assert_allowed_axioms Szkraw.three_term_action
 assert_allowed_axioms Szkraw.Uvec_top
 assert_allowed_axioms Szkraw.productMatrix_contDiffAt
 assert_allowed_axioms Szkraw.thinness
+assert_allowed_axioms Szkraw.corner_identity

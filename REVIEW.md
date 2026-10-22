@@ -350,4 +350,4 @@ Dispositions:
 1. The reviewer asked that the hypothesis `hB : ∀ S, B S = y_S` be included in `edge_idempotents`. It already is: the brief showed the section variable but left out the `include hB` line. `#check @Szkraw.edge_idempotents` lists `hB` as a hypothesis, so only the excerpt was wrong and the Lean statement is unchanged.
 2. The Lemma 7.3 scope sentence now states N ≥ 1, p_0 < 1, r = p_0/(1 − p_0), that there is no basis hypothesis, that the identity holds in A × A^N and restricts to V, and that `Uvec_top` states U_{2N+1} = 0 separately.
 
-Not yet reviewed: `thinness` (Proposition 9.9) and `productMatrix_contDiffAt`, added after this brief.
+Not yet reviewed: `thinness` (Proposition 9.10) and `productMatrix_contDiffAt`, added after this brief.
