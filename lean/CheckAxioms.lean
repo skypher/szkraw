@@ -158,3 +158,4 @@ assert_allowed_axioms Szkraw.spectral_top_node
 assert_allowed_axioms Szkraw.lower_measure
 assert_allowed_axioms Szkraw.lower_rates
 assert_allowed_axioms Szkraw.lower_triple
+assert_allowed_axioms Szkraw.affine_product

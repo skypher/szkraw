@@ -351,3 +351,25 @@ Dispositions:
 2. The Lemma 7.3 scope sentence now states N ≥ 1, p_0 < 1, r = p_0/(1 − p_0), that there is no basis hypothesis, that the identity holds in A × A^N and restricts to V, and that `Uvec_top` states U_{2N+1} = 0 separately.
 
 Not yet reviewed: `thinness` (Proposition 9.10) and `productMatrix_contDiffAt`, added after this brief.
+
+## Lean statement fidelity, round 6 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5e070c3a-36fa-45f4-9a92-87ab25b36884`. Brief: `reviews/lean-fidelity6-brief.md`. Answer: `reviews/lean-fidelity6-answer.md`.
+
+Scope: Section 9.
+- Lemma 9.2 (`corner_identity`).
+- Definition 9.3 and Theorem 9.4 (`forced_equalities`, `forced_vanishing`).
+- Lemma 9.7 (`spectral_top_node`, `lower_measure`, `lower_rates`, `lower_triple`).
+- Proposition 9.9, first statement and part (1).
+- Proposition 9.10 (`thinness`).
+- Corollary 9.11 (`radius_order`).
+- Proposition 9.12 (`raise_measure`, `raise_corner`, `raise_sign`, `raise_bound`).
+- Corollary 9.13 (`radius_exp`, `radius_exp_asymp`).
+- The updated scope sentences.
+
+**Verdict: PASS.** Every declaration matches.
+- Scope notes, all already disclosed in the paper:
+  - Lemma 9.7 is stated for the spectral realization;
+  - ρ_N(r) is a supremum, and its attainment is not asserted;
+  - part (2) of Proposition 9.9 is not formalized.
+- No fixes are required.
