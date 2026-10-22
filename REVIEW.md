@@ -217,3 +217,13 @@ Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_d679b131-b1ed-41d6-b
 **Verdict: PASS** for the sign-pattern passage: both fixes applied, no new error. Reviewed source: paper.tex at commit b1b3549, SHA-256 `8bc78d6849e5bb465b456801ffeba4703b20c4f37537026d34d7399b1e1ae733` (the reviewer did not recompute the hash).
 
 After this PASS, only the AI-use disclosure changed ("nine rounds" → "eleven rounds"); the diff against b1b3549 touches that one line alone. Current paper.tex SHA-256: `01300c3eebf583c6a3d190609b22d9e41218358e16b51af6f74a9b35344c783c`.
+
+## Round 12: Theorem 7.12 (All products) and Corollary 7.13 (Heavy top step) (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_0cf69d14-bfe6-4545-bcbb-66b3952257dc`. Brief: `reviews/limits-review12-brief.md`. Answer: `reviews/limits-review12-answer.md`. Reviewed source: paper.tex at commit 88c1b4d.
+
+**Verdict: PASS WITH MINOR FIXES.** Theorem 7.12 and Corollary 7.13 are correct, including the truncated cone at i = N. The reviewer independently classified the stencil symbolically for all 1540 cones with 1 ≤ m ≤ n ≤ N ≤ 20 and verified the N = 2 sharpness identity. The fixes concern the surrounding prose:
+1. The sentence before Theorem 7.12 said the restriction n + m ≤ N is needed only for (iii). That is false: the extended (ii) is also needed. The reviewer's counterexample: N = 2, σ ≡ 1, a = (1, 3/10, 0), b = (0, 2/5, 2/5), c = (0, 3/10, 3/5) satisfies Theorem 7.10 and the enlarged (iii) but has g(2,2;2) = −2/5, which was rechecked here. The sentence is replaced with the reviewer's text.
+2. Section 8: the reference to Theorem 7.12 now mentions its strengthened conditions (i)–(iii), and the Krawtchouk exclusion is qualified by N ≥ 3 (reviewer's text).
+3. The compensation remark after Corollary 7.13 now refers to negative weighted contributions (reviewer's text).
+Current paper.tex SHA-256: `fde2e1394fb3ecf45b5b407bf0b37e14beac026cf7ceddca6f19067c7213bfc7`. A confirmation round on the fixes follows.
