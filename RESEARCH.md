@@ -789,6 +789,7 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - `analytic_rule_small`: the derivative is at most |s_N| C √N e^{−ηN} in absolute value.
   - `expRule_deriv`: the example has derivative s_N(1 − e^{1/N})^N ≠ 0.
 - Every numbered result of Section 9 is now machine-verified, audit clean.
+- Prose consequences in Section 9 (2026-10-22, LimitsRemarks.lean and RadiusExp.lean): `no_open_rule_set` (after Theorem 9.4; rules as coefficient vectors, the constant term of β shifts L_even by 2t), `boundary_layers_palindromic` (after Proposition 9.9), `radius_no_uniform` (after Corollary 9.13, via `stableRadii_le`, split out of the proof of `radius_exp`). Not formalized: the description of Ω (corners, vertical tangents, ±0.2628…), and the computations and heuristics away from r = 1.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

@@ -44,11 +44,10 @@ theorem tauStar_bounds {x : ℝ} (hx0 : 0 < x) (hx : x ≤ 1 / 2) :
     rw [one_div] at this
     rwa [add_comm] at this
 
-/-- **Corollary 9.13** (Exponentially small stability radius). -/
-theorem radius_exp (hN : 1 ≤ N) (hr : 0 < r) (hr1 : r < 1) (hx : (1 - r ^ 2) ^ N ≤ 1 / 2)
+/-- Every stable radius is at most `3 τ_N^* max_n w_n`. -/
+theorem stableRadii_le (hN : 1 ≤ N) (hr : 0 < r) (hr1 : r < 1) (hx : (1 - r ^ 2) ^ N ≤ 1 / 2)
     (hx2 : 3 * (1 - r ^ 2) ^ N ≤ (1 - r) / N) :
-    stabilityRadius N r ≤ 3 * tauStar N r * univ.sup' univ_nonempty (kw N r) ∧
-      3 * tauStar N r * univ.sup' univ_nonempty (kw N r) ≤ 3 * (1 - r ^ 2) ^ N := by
+    ∀ ρ ∈ stableRadii N r, ρ ≤ 3 * tauStar N r * univ.sup' univ_nonempty (kw N r) := by
   have hr1' := hr1.le
   set x := (1 - r ^ 2) ^ N with hxdef
   set W := univ.sup' univ_nonempty (kw N r) with hWdef
@@ -83,20 +82,32 @@ theorem radius_exp (hN : 1 ≤ N) (hr : 0 < r) (hr1 : r < 1) (hx : (1 - r ^ 2) ^
     · obtain ⟨h1, h2, h3⟩ := hbd i hi
       exact ⟨h1.trans hge, h2.trans hge, h3.trans hge⟩
   -- hence every stable radius is at most `3 τ* W`
-  have hbound : ∀ ρ ∈ stableRadii N r, ρ ≤ 3 * tauStar N r * W := by
-    intro ρ hρ
-    by_contra hlt
-    push Not at hlt
-    set τ := (tauStar N r + min x (ρ / (3 * W))) / 2
-    have hm1 : tauStar N r < min x (ρ / (3 * W)) := by
-      refine lt_min hτx ?_
-      rw [lt_div_iff₀ (by positivity)]; linarith
-    have h1 : tauStar N r < τ := by simp only [τ]; linarith
-    have h2 : τ < min x (ρ / (3 * W)) := by simp only [τ]; linarith
-    have h3 : τ < ρ / (3 * W) := lt_of_lt_of_le h2 (min_le_right _ _)
-    have := hbad τ h1 (lt_of_lt_of_le h2 (min_le_left _ _)) ρ hρ
-    rw [lt_div_iff₀ (by positivity)] at h3
-    linarith
+  intro ρ hρ
+  by_contra hlt
+  push Not at hlt
+  set τ := (tauStar N r + min x (ρ / (3 * W))) / 2
+  have hm1 : tauStar N r < min x (ρ / (3 * W)) := by
+    refine lt_min hτx ?_
+    rw [lt_div_iff₀ (by positivity)]; linarith
+  have h1 : tauStar N r < τ := by simp only [τ]; linarith
+  have h2 : τ < min x (ρ / (3 * W)) := by simp only [τ]; linarith
+  have h3 : τ < ρ / (3 * W) := lt_of_lt_of_le h2 (min_le_right _ _)
+  have := hbad τ h1 (lt_of_lt_of_le h2 (min_le_left _ _)) ρ hρ
+  rw [lt_div_iff₀ (by positivity)] at h3
+  linarith
+
+/-- **Corollary 9.13** (Exponentially small stability radius). -/
+theorem radius_exp (hN : 1 ≤ N) (hr : 0 < r) (hr1 : r < 1) (hx : (1 - r ^ 2) ^ N ≤ 1 / 2)
+    (hx2 : 3 * (1 - r ^ 2) ^ N ≤ (1 - r) / N) :
+    stabilityRadius N r ≤ 3 * tauStar N r * univ.sup' univ_nonempty (kw N r) ∧
+      3 * tauStar N r * univ.sup' univ_nonempty (kw N r) ≤ 3 * (1 - r ^ 2) ^ N := by
+  have hr1' := hr1.le
+  set x := (1 - r ^ 2) ^ N with hxdef
+  set W := univ.sup' univ_nonempty (kw N r) with hWdef
+  have hx0 : 0 < x := pow_pos (by nlinarith) N
+  have hW1 : W ≤ 1 := kw_le_one hN hr hr1'
+  obtain ⟨hτ0, hτx⟩ := tauStar_bounds hx0 hx
+  have hbound := stableRadii_le hN hr hr1 hx hx2
   have hη : perturbationRadius N r ∈ stableRadii N r := by
     refine ⟨by unfold perturbationRadius; positivity, fun v hv hb hw => ?_⟩
     exact perturbation_matrix_positivity N v r hv hr hr1 ⟨hb, hw⟩
@@ -125,5 +136,27 @@ theorem radius_exp_asymp (hr : 0 < r) (hr1 : r < 1) :
     rw [le_div_iff₀ hN0]; linarith
   obtain ⟨h, h'⟩ := radius_exp (by omega) hr hr1 ha hx2
   exact h.trans h'
+
+/-- Consequence of Corollary 9.13: for fixed `0 < r < 1`, no radius `ρ > 0` is stable for all
+large `N`. Thus no set of arrays with property (P) contains coefficient balls of a radius
+independent of `N` around all `K_{N,r}`. -/
+theorem radius_no_uniform (hr : 0 < r) (hr1 : r < 1) {ρ : ℝ} (hρ : 0 < ρ) :
+    ∃ N₀, ∀ N, N₀ ≤ N → ρ ∉ stableRadii N r := by
+  have hq0 : 0 ≤ 1 - r ^ 2 := by nlinarith
+  have hq1 : 1 - r ^ 2 < 1 := by nlinarith
+  have hlim := tendsto_pow_atTop_nhds_zero_of_lt_one hq0 hq1
+  have h1 := hlim.eventually (ge_mem_nhds (by norm_num : (0 : ℝ) < 1 / 2))
+  have h2 := (tendsto_self_mul_const_pow_of_lt_one hq0 hq1).eventually
+    (ge_mem_nhds (by linarith : (0 : ℝ) < (1 - r) / 3))
+  have h3 := hlim.eventually (gt_mem_nhds (by linarith : (0 : ℝ) < ρ / 3))
+  obtain ⟨N₀, hN₀⟩ := eventually_atTop.mp ((h1.and h2).and h3)
+  refine ⟨N₀ + 1, fun N hN hmem => ?_⟩
+  obtain ⟨⟨ha, hb⟩, hc⟩ := hN₀ N (by omega)
+  have hN0 : (0 : ℝ) < N := by exact_mod_cast (by omega : 0 < N)
+  have hx2 : 3 * (1 - r ^ 2) ^ N ≤ (1 - r) / N := by
+    rw [le_div_iff₀ hN0]; linarith
+  have h := stableRadii_le (by omega) hr hr1 ha hx2 ρ hmem
+  have h' := (radius_exp (by omega) hr hr1 ha hx2).2
+  linarith
 
 end Szkraw

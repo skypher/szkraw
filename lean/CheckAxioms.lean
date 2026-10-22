@@ -191,3 +191,7 @@ assert_allowed_axioms Szkraw.analytic_rule_small
 assert_allowed_axioms Szkraw.expRule_analytic
 assert_allowed_axioms Szkraw.expRule_L
 assert_allowed_axioms Szkraw.expRule_deriv
+assert_allowed_axioms Szkraw.stableRadii_le
+assert_allowed_axioms Szkraw.radius_no_uniform
+assert_allowed_axioms Szkraw.no_open_rule_set
+assert_allowed_axioms Szkraw.boundary_layers_palindromic
