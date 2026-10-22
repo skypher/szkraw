@@ -581,10 +581,39 @@ Scratch: runs/ql_proof/ratio_diag.py, cand_A.py, candA_adv.py.
 
 Scratch: runs/ql_proof/corner_bern*.py, full_bern.py, full_bern_big.py.
 - For a fixed profile, every g(m,n;k) of the constant-ratio array (a = 1 − d, b = (1−r)d, c = rd) is a polynomial in r of degree ≤ m. The N ≤ 6 certificate (lc_certificate.py) proves more than (P): the numerators have nonnegative coefficients in (R, W), so every g(m,n;k) has nonnegative Bernstein coefficients of degree m in r. Equivalently g(m,n;k) = E[w_{mnk}(J)] with J ~ Binomial(m, r) and weights w ≥ 0 that depend only on the profile (binomial thinning). For Krawtchouk, the corner (1−r)^N is the case w = δ_0.
-- *Conjecture (B).* For every profile with nonnegative log-concave Newton coefficients and every N, all g(m,n;k) have nonnegative degree-m Bernstein coefficients in r. This implies the constant-ratio criterion for all r ∈ [0, 1].
+- *Conjecture (B) (a route, not the target).* For every profile with nonnegative log-concave Newton coefficients and every N, all g(m,n;k) have nonnegative degree-m Bernstein coefficients in r. (B) implies the constant-ratio criterion for all r ∈ [0, 1]. The target stays property (P). (B) is stronger, because a polynomial can be nonnegative on [0, 1] with some negative Bernstein coefficients, so a failure of (B) would not refute the criterion. (B) is worth pursuing only because it is the form an induction can carry, and the N ≤ 6 certificate already has it.
 - *Evidence (exact rational arithmetic, all triples).* Full tables at N = 6, 8, 10 (13 boundary profiles each: geometric, truncated geometric with K = 2, 3, N/2, two-level; x ∈ {1/10, 1, 9}) and at N = 16, 20, 24, 30 (15 profiles each, including random log-concave quotients): no negative Bernstein coefficient on any triple. Corners only: 96 boundary profiles at N = 10–40 and random log-concave profiles at N = 8–30, none negative.
 - *Control.* On the segment arrays d = (1−λ)n/N + λ(10^n − 1)/(10^N − 1) (log-convex Newton coefficients), λ = 1/20 gives 7, 18, 37 triples with negative Bernstein coefficients at N = 6, 8, 10, all of them deep. Non-deep triples have nonnegative Bernstein coefficients even there, which suggests a Bernstein form of Corollary 7.11. At larger N the corner of these arrays has negative middle coefficients (N = 19, λ = 1/20: j = 5–7 and 12–16), while β_1 and the top coefficients stay nonnegative. So the small-N picture (only the top two coefficients need log-concavity) does not persist, and the hypothesis that every corner coefficient is a nonnegative combination of N·a_{N−1} − 1 and one top quantity is false for general convex profiles by N = 19.
 - *Route.* An all-N proof of (B) needs either a binomial-thinning construction (each of m steps independently a "down" with probability r) with nonnegative weights for log-concave Newton profiles, or a coefficientwise version, in (R, W), of the maximum-principle argument of Theorem 7.10 together with a deep-triple argument. The homogeneous recurrence is a_mG_{m+1}(i) = W(d_i − d_m)G_m(i) + Rd_iG_m(i−1) + (R+W)a_iG_m(i+1) − R(R+W)d_mG_{m−1}(i), with G_m = (R+W)^m g_m; its only negative term is the last.
+
+## Non-deep triples in Bernstein form: proof for all N (2026-10-22)
+
+runs/ql_proof/bern_nondeep.py (exact check of the identity and of the term classification: 2540 identities, N = 3–8, convex random profiles and random r, 0 failures, deep pairs included).
+
+*Proposition.* Constant ratio (a = 1 − d, b = (1−r)d, c = rd) with 0 = d_0 < d_1 < … < d_N = 1 and d_i + d_j ≤ 1 whenever i + j ≤ N − 2 (implied by convexity). If n ≥ m and n + m ≤ N, then for every k, g(n,m;k) is a polynomial in r with nonnegative Bernstein coefficients of degree m. Every non-deep triple has g(n,m;k) equal to a polynomial with nonnegative Bernstein coefficients in some degree ≤ N.
+
+*Proof.*
+1. *Transposed normalization.* q_n = κ_nR_n with κ_n = Π_{t<n} a_t/c_{t+1} = r^{−n}A_n, where A_n = Π_{t<n}(1 − d_t)/d_{t+1} does not depend on r. On the support, x q_n = c_{n+1}q_{n+1} + b_nq_n + a_{n−1}q_{n−1} for 0 ≤ n ≤ N (c_{N+1} := 0; at n = N this is the terminal relation). Fix k. Let u(i,j) be the coefficient of q_k in q_iq_j, and ĝ(i,j) = u(i,j) r^{i+j−k} = g(i,j;k)A_iA_j/A_k. Then ĝ(i,0) = δ_{ik}. Computing x q_i q_j in two ways gives Hu = 0 on {0,…,N}², with H = L_1 − L_2 and Lu(i) = c_{i+1}u(i+1) + b_iu(i) + a_{i−1}u(i−1).
+2. *Cone and weights.* Let i_0 = n − m + 1 and S = {(i,j): 0 ≤ j < m, |i − n| < m − j, i ≡ n + m − j − 1 (mod 2), i ≤ N}, with v(i,j) = r^{(i+j−i_0)/2} on S (an integer power) and 0 elsewhere. Then 0 = ⟨Hu, v⟩ = ⟨u, H*v⟩, where H*v(i,j) = c_iv(i−1,j) + a_iv(i+1,j) + (b_i − b_j)v(i,j) − c_jv(i,j−1) − a_jv(i,j+1).
+3. *Interior terms vanish.* At a point off S with all four neighbours in S, H*v = r^e[rd_i + r(1 − d_i) − rd_j − r(1 − d_j)] = 0. This is the point of the weight √r per step, and it is what makes α + γ constant in Corollary 7.11. At i = N nothing new appears, because a_N = 0.
+4. *Remaining terms.*
+   - On S: (1 − r)(d_i − d_j)v(i,j).
+   - Right edge i + j = n + m (i ≤ N): r(d_i − d_j)v(i−1,j).
+   - Left edge i − j = n − m: r(1 − d_i − d_j)v(i,j−1) for j ≥ 1, and a_{n−m} at (n−m, 0).
+   - At (n,m): −r^m d_m.
+5. *The identity.* Multiplying by r^{n+m−k}:
+   d_m ĝ(n,m) = Σ_{(i,j)∈S} (1−r) r^{(n+m−1−i−j)/2}(d_i − d_j) ĝ(i,j) + Σ_{j<m} (d_{n+m−j} − d_j) ĝ(n+m−j, j) + Σ_{1≤j<m} r^{m−j}(1 − d_{n−m+j} − d_j) ĝ(n−m+j, j) + r^m(1 − d_{n−m}) ĝ(n−m, 0).
+   Every point used has j < m, i ≥ j and i + j ≤ n + m.
+6. *Induction on m.* Assume each ĝ(i,j) has nonnegative Bernstein coefficients of degree j.
+   - Each term is a nonnegative profile constant times r^p(1−r)^q ĝ(i,j) with p + q + j ≤ m. On S, i ≥ n − m + j + 1 gives (n+m−1−i−j)/2 ≤ m − j − 1.
+   - The constants are nonnegative: d_i ≥ d_j for i ≥ j; on the left edge i + j = n − m + 2j ≤ n + m − 2 ≤ N − 2, so 1 − d_i − d_j ≥ 0.
+   - Products of Bernstein-nonnegative polynomials are Bernstein-nonnegative in the sum of the degrees (multiply the homogenized forms in (R, W)), and degree elevation keeps nonnegativity.
+   - So ĝ(n,m) has nonnegative Bernstein coefficients of degree m.
+7. *Other triples.* g(n,m;k)h_k is symmetric, with h_k = ∫R_k² dμ = r^k/A_k. So ĝ(n,m;k) r^k A_k is symmetric in all three indices, and the other two orderings of a triple are r^{±s} times positive constants times ĝ(n,m;k). If P = r^sQ is Bernstein-nonnegative in degree p, then Q is Bernstein-nonnegative in degree p − s (divide the homogenized form by R^s). ∎
+
+This proves (B) on all non-deep triples for every convex profile, log-concave or not. It is consistent with the controls: the segment arrays have negative Bernstein coefficients only on deep triples.
+
+*Deep pairs: where the identity breaks.* The identity of step 5 holds verbatim for deep pairs too (checked). The truncation i ≤ N only removes right-edge terms, which are nonnegative. The only negative terms are on the left edge: r^{m−j}(d_i + d_j − 1)ĝ(i,j) with i = n − m + j and d_i + d_j > 1 (so i + j ≥ N − 1). For Krawtchouk the coefficient is (i + j − N)/N. So positivity on deep triples is exactly the question of whether the S-terms and the right-edge terms outweigh this left-edge deficit. Log-concavity must enter there, since the log-convex segment arrays fail.
 
 ## Prior art: Miclo 2015
 
