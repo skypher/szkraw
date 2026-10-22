@@ -167,3 +167,5 @@ assert_allowed_axioms Szkraw.gen_g_deriv
 assert_allowed_axioms Szkraw.interior_points
 assert_allowed_axioms Szkraw.interior_measure
 assert_allowed_axioms Szkraw.interior_open
+assert_allowed_axioms Szkraw.rectInt_inv
+assert_allowed_axioms Szkraw.rectInt_cauchy
