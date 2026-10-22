@@ -599,3 +599,18 @@ Scope: the lemmas and corollaries of Sections 2–6, which were formalized as st
 - the declaration that Proposition 6.3 (comparison with Koelink) is not formalized, and the new scope sentences.
 
 **Verdict: PASS.** No fixes required. Scope notes, all disclosed in the paper: Lemma 3.3 is stated for k ≥ 1 (k = 0 is trivial); Proposition 3.4 omits generation by E₁ and independence of the E_k; the neighbourhood in Corollary 5.4 asserts realization, positivity and margin.
+
+## Lean statement fidelity, round 16 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_07baf284-18c4-48f2-80b2-fd3567328a01`. Brief: `reviews/lean-fidelity16-brief.md`. Answer: `reviews/lean-fidelity16-answer.md`.
+
+Scope:
+- the remarks after Theorem 8.9: `profile_last_le`, `affine_range_remarks`, `affEx_remark`;
+- the example after Theorem 8.11: `quadExample_remark`;
+- eq:quad-B with constant 1 fails at N = 20: `quadB_unit_fails`;
+- the two N = 3 counterexamples in the open problems: `openEx1_fails`, `openEx2_fails`;
+- the new table rows and scope sentences.
+
+**Verdict: PASS.** No fixes required. Scope notes, both disclosed in the paper:
+- `profile_last_le` covers profiles whose Newton coefficients are log-concave, not every convex profile;
+- the statement that linear-profile arrays are arrays of Proposition 8.8 is not formalized.

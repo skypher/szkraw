@@ -1249,7 +1249,7 @@ Source: consult round 7 (reviews/consult-I-answer.md). The class (Q) is fully pr
 - The lemmas and corollaries of Sections 2–6 were already formalized as steps of Theorems 2.1 and 5.3 (correspondence table above). They are now listed in the paper's Lean table, with scope sentences. Fidelity round 15: PASS.
   - New small declarations: `geometric_coefficients_N_one` (the N = 1 remark of Lemma 2.2) and the conjunct "no constant ratio" in `nongeometric_perturbation_example`.
   - Proposition 6.3 compares with Koelink's construction and is declared unformalized.
-- Remarks and examples now formalized; fidelity round 16 pending:
+- Remarks and examples now formalized; fidelity round 16: PASS.
   - after Theorem 8.9: `profile_last_le`, `affine_range_remarks`, `affEx_remark` (N = 4 example);
   - Theorem 8.11: `quadExample_remark` (Newton coefficients of c not log-concave), `quadB_unit_fails` (eq:quad-B with constant 1 fails at N = 20, inside the class of the theorem);
   - open problems: `openEx1_fails` (g(3,3;3) = −3/2002), `openEx2_fails` (g(3,3;3) = −1/24).
