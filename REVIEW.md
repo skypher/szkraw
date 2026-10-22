@@ -534,3 +534,19 @@ Checked: the monotonicity of R_i; the increment formula; the reduction to (eq:af
 Fixes applied:
 1. The "exactly when" sentence of Theorem 8.9 now says that nondecreasing b is equivalent to κ(N + d_{N−1}/(1 − d_{N−1})) ≤ N(1 − r). It no longer reads as a characterization of (P).
 2. Strict enlargement of the κ range for nonlinear profiles is now stated for r < 1 only.
+
+## Lean statement fidelity, round 13 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_e84f571e-0902-473b-8b75-8dc9172eda9e`. Brief: `reviews/lean-fidelity13-brief.md`. Answer: `reviews/lean-fidelity13-answer.md`.
+
+Scope:
+- Theorem 8.9 as strengthened: `affine_matrix`, with `AffineRatioHyp` (nondecreasing b);
+- its equivalence with the endpoint inequality: `affine_bmono_iff`;
+- Proposition 8.10: `quadprofile_matrix`, with `QuadProfileHyp`;
+- the table rows and scope sentences.
+
+**Verdict: PASS.** All statements match, and no fixes were required.
+- Scope note: the remarks after Theorem 8.9 (linear-profile bound, range inclusion, the N = 4 example) are prose and have no separate Lean declarations.
+- The reviewer's duplicate-declaration remark refers to the brief's excerpt of the signature, not to the source.
+
+Not covered: `quadprofile_bmono_iff`, the endpoint equivalence after Proposition 8.10. It was formalized after this brief was sent, and the scope sentence now cites it. It should go into the next fidelity round.
