@@ -735,6 +735,15 @@ It matches the symbolic-exponent operator computation term by term for K = 3, 4,
 - G_1 = {W3 jump, W4a, W4b} are the quartic jumps; G_2 is positive again, and so on.
 - The alternation comes from h_n(S, Z) = Σ_j (−1)^j C(n−j, j)S^{n−2j}Z^j in (z^{n+1} − w^{n+1})/(z − w).
 - Cubic needs only G_0 and the single W_{3,1} term. Quartic needs G_1 dominated by two-step G_0∘G_0 detours, which is exactly where LC enters.
+*Degree-K G_1 inequalities and the half-inflow induction on full-degree profiles (runs/general/gK_local.py, gK_geo.py, general_check.py).*
+- The three G_1 inequalities (I3), (I4a), (I4b), with the closed-form weights (A = W_{1,0}, B = W_{2,0}, B' = W_{2,1}; jumps W_{3,1}, W_{4,1}, W_{4,2}), hold on grids of random LC σ of degree K = 4–7. Minimum ratios: (I3) 2.77, 2.23, 1.96, 1.90; (I4a) 5.49, 3.20, 2.58, 2.34; (I4b) 10.9, 6.6, 5.2, 4.7. They fail at internal zeros for every K.
+- Geometric limit (all degrees), closed form at a = 0: the ratio for (I3) and (I4a) is ((6 + 4ρ + ρ²)/4)·(1+ρ)^r/((1+ρ)^r − 1), which tends to (6 + 4ρ + ρ²)/4 ≥ 3/2 as r → ∞. The grid confirms 1.642 at ρ = 0.1, r = 39. So the G_1 domination has a uniform margin ≥ 3/2 even at infinite degree.
+- Full-degree profiles, exact, node by node (general recurrence with all groups G_j):
+  - the closed form reproduces every true L_{mn}^k at N = 6, 8, 10;
+  - c ≥ 0, and the half-inflow hypothesis D_rc_{r,a} ≥ ½·(G_0 inflow) holds at every node for geometric (ρ = 1/10, 1), random LC, two-level LC and log-convex profiles at N = 6, 8, 10, 12;
+  - the total odd-group demand at a node is at most 1/2.55 of ½·(G_0 inflow) (LC cases 4.8–15);
+  - the internal-zero control fails at every N.
+  So the κ = ½ scheme has plenty of slack. The missing step is a uniform proof of the source-wise domination for all odd groups G_{2j+1} (G_1 via G_0∘G_0 is done numerically with margin ≥ 3/2; G_3 via G_2∘G_0 or G_0^4 not yet set up).
 *Shifted basis S' = S + tZ (runs/general/shifted_basis.py).* The Krawtchouk kernel is (1 + Z)^{N−k}S'^k. Expanding the kernel in S'^aZ^r gives:
 - degree 3: every move nonnegative; the cubic jump becomes two positive moves +σ_3t. This is a one-line proof of the cubic theorem: c' ≥ 0, and (z + w + tzw)^a(zw)^r has nonnegative coefficients, so L ≥ 0;
 - degree 4: (+2,−4) negative, (+3,−4) mixed;
