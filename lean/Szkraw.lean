@@ -56,3 +56,6 @@ import Szkraw.LowerGeneric
 import Szkraw.Interior
 import Szkraw.RectCauchy
 import Szkraw.GridCauchy
+import Szkraw.NorlundU
+import Szkraw.NorlundResidue
+import Szkraw.Norlund

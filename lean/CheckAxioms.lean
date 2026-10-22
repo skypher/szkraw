@@ -171,3 +171,12 @@ assert_allowed_axioms Szkraw.rectInt_inv
 assert_allowed_axioms Szkraw.rectInt_cauchy
 assert_allowed_axioms Szkraw.gridSum_bound
 assert_allowed_axioms Szkraw.gridSum_cauchy
+assert_allowed_axioms Szkraw.Ulog_eq
+assert_allowed_axioms Szkraw.continuous_Ulog
+assert_allowed_axioms Szkraw.riemann_lower
+assert_allowed_axioms Szkraw.partial_fractions
+assert_allowed_axioms Szkraw.sum_nodeW
+assert_allowed_axioms Szkraw.residue_identity
+assert_allowed_axioms Szkraw.exists_margin
+assert_allowed_axioms Szkraw.factorial_le_stirling
+assert_allowed_axioms Szkraw.norlund_rice
