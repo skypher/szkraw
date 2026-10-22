@@ -416,12 +416,13 @@ theorem frontier_omega_sigma (z : ℂ) : (1 - starRingEnd ℂ z) ∈ frontier Om
 
 /-- **The corner of `Ω` at `0`.** Near `0`, `Ω` is the region `x ≥ a(b)` to the right of a curve
 `x = a(b)`, which is the frontier of `Ω` there. The curve has a vertical tangent at `0`
-(`a(b)/b → 0`), and `a` is not analytic at `0`. -/
+(`a(b)/b → 0`), `a(b) > b / (2 log (1/b))` for small `b > 0`, and `a` is not analytic at `0`. -/
 theorem omega_corner_zero :
     ∃ β > 0, ∃ a : ℝ → ℝ, a 0 = 0 ∧ (∀ b, |b| < β → 0 ≤ a b ∧ a b ≤ |b|) ∧
       (∀ x b : ℝ, |x| < β → |b| < β → ((x : ℂ) + b * I ∈ Omega ↔ a b ≤ x)) ∧
       (∀ x b : ℝ, |x| < β → |b| < β → ((x : ℂ) + b * I ∈ frontier Omega ↔ x = a b)) ∧
-      Tendsto (fun b => a b / b) (𝓝[≠] 0) (𝓝 0) ∧ ¬AnalyticAt ℝ a 0 := by
+      Tendsto (fun b => a b / b) (𝓝[≠] 0) (𝓝 0) ∧
+      (∀ b : ℝ, 0 < b → b < β → b / (2 * Real.log b⁻¹) < a b) ∧ ¬AnalyticAt ℝ a 0 := by
   set β := min (1 / 8 : ℝ) (Real.exp (-5)) with hβdef
   have hβ0 : 0 < β := lt_min (by norm_num) (Real.exp_pos _)
   have hβ8 : β ≤ 1 / 8 := min_le_left _ _
@@ -575,7 +576,7 @@ theorem omega_corner_zero :
       have := lt_of_lt_of_le hlb ((le_abs_self _).trans hCb)
       rwa [div_lt_iff₀ (by positivity)] at this
     nlinarith [mul_pos hbpos (sub_pos.mpr hsmall)]
-  exact ⟨β, hβ0, a, ha0, fun b hb => ⟨(ha b hb).1, (ha b hb).2.1⟩, hkey, hfront, htan, hnotan⟩
+  exact ⟨β, hβ0, a, ha0, fun b hb => ⟨(ha b hb).1, (ha b hb).2.1⟩, hkey, hfront, htan, hlower, hnotan⟩
 
 /-- **The corner of `Ω` at `1`**, the mirror image of the corner at `0` under `z ↦ 1 - z̄`. -/
 theorem omega_corner_one :
@@ -583,7 +584,7 @@ theorem omega_corner_one :
       (∀ x b : ℝ, |x - 1| < β → |b| < β → ((x : ℂ) + b * I ∈ Omega ↔ x ≤ a b)) ∧
       (∀ x b : ℝ, |x - 1| < β → |b| < β → ((x : ℂ) + b * I ∈ frontier Omega ↔ x = a b)) ∧
       Tendsto (fun b => (a b - 1) / b) (𝓝[≠] 0) (𝓝 0) ∧ ¬AnalyticAt ℝ a 0 := by
-  obtain ⟨β, hβ, a, ha0, -, hmem, hfr, htan, hna⟩ := omega_corner_zero
+  obtain ⟨β, hβ, a, ha0, -, hmem, hfr, htan, -, hna⟩ := omega_corner_zero
   refine ⟨β, hβ, fun b => 1 - a b, by simp [ha0], fun x b hx hb => ?_, fun x b hx hb => ?_, ?_, ?_⟩
   · have hx' : |1 - x| < β := by rwa [abs_sub_comm]
     have h := hmem (1 - x) b hx' hb

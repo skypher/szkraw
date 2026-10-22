@@ -419,3 +419,18 @@ Fixes applied, both in the Section 9 text and in the scope sentence:
 1. The open sets of polynomial rules are now "nonempty", with "for every d ∈ ℕ" in the scope sentence.
 2. The palindromic relations are qualified "for k ≥ 1 and N ≥ k + K + 1, where K bounds the supports of p, q, p', q'".
 3. The radius claim now reads "for every fixed r ∈ (0,1)" and "a positive radius independent of N".
+
+## Lean statement fidelity, round 10 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_4fab9036-bda4-4ee9-ae8b-38d2dcb041a5`. Brief: `reviews/lean-fidelity10-brief.md`. Answer: `reviews/lean-fidelity10-answer.md`.
+
+Scope: the description of Ω before Lemma 9.5 (`Omega`, `omega_contains`, `omega_half_line`, `omega_corner_zero`, `omega_corner_one`) and its scope sentence.
+
+**Verdict: PASS WITH MINOR FIXES (documentation only).** All four statements match.
+- `omega_half_line` matches under the closed-segment reading of "meets the line Re x = ½ at ±0.26276…".
+- On the analyticity question, the reviewer finds `¬AnalyticAt ℝ a 0` adequate for "nonanalytic boundary point", for regular analytic parametrizations. The graph has tangent direction i, so any regular analytic parametrization of the boundary germ would make a analytic by analytic inversion.
+
+Fixes applied:
+1. The reviewer asked to delete the scope sentence's claim a(b) > b/(2 log(1/b)) unless a declaration supplied it. Instead, the bound is now a conclusion of `omega_corner_zero`, and the sentence states it.
+2. The mirror-image claim at 1 now cites the symmetry declarations `Ulog_one_sub`, `Ulog_conj` and `frontier_omega_sigma`.
+3. The certified bounds are described as the method of proof of `omega_half_line`, not as part of its statement.
