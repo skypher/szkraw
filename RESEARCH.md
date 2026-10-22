@@ -724,6 +724,22 @@ Support r + a ≤ N is preserved (the jumps lower r + a). ∎
 *Exact node-by-node check (quartic_check.py).* N = 4, 5, 6, 8 with four LC profiles (including geometric x = 2): the recurrence reproduces every L_{mn}^k, c ≥ 0, and the half-inflow hypothesis holds at every node. The control σ = (1, 0, 0, 1/100) has negative c and hypothesis failures at every N tested (3 at N = 4, up to 46 at N = 8). Two non-LC quartic profiles without internal zeros pass at these N (not discriminating).
 *Meaning.* This is the first all-N result in which log-concavity is used: in degree 4 it is exactly what makes the B·B detours dominate the σ_4 jumps. The binomial-basis form of the weights suggests a uniform description for every degree; the general LC theorem would follow from the analogous local inequalities for all jump types.
 
+## General kernel recurrence in closed form (verified for degree K ≤ 7, 2026-10-22)
+
+runs/general/general_formula.py, general_moves.py, schur_moves.py, kernel_factor.py.
+For any profile D_i = Σ_k C(i,k)σ_k (σ_1 = 1), with W_{i,j}(r,a) = Σ_{i'≥i, j'≥0} C(i'−i+j, j)C(a,i')C(r,j')σ_{i'+j'} (all coefficients ≥ 0):
+  D_{r+1}c_{r+1,a} = (T − D_{r+a})c_{r,a} + Σ_{j≥0} (−1)^j G_j,
+  G_j = t·W_{2j+1,j}(r−j, a+2j+1)·c_{r−j,a+2j+1} + W_{2j+2,j}(r−j, a+2j+2)·c_{r−j,a+2j+2} + W_{2j+2,j+1}(r−j−1, a+2j+2)·c_{r−j−1,a+2j+2}.
+It matches the symbolic-exponent operator computation term by term for K = 3, 4, 5, 6, 7.
+- G_0 = {A, B, B'} are the positive moves.
+- G_1 = {W3 jump, W4a, W4b} are the quartic jumps; G_2 is positive again, and so on.
+- The alternation comes from h_n(S, Z) = Σ_j (−1)^j C(n−j, j)S^{n−2j}Z^j in (z^{n+1} − w^{n+1})/(z − w).
+- Cubic needs only G_0 and the single W_{3,1} term. Quartic needs G_1 dominated by two-step G_0∘G_0 detours, which is exactly where LC enters.
+*Uniform route.* An alternating-series argument: G_j dominated by (j+1)-fold compositions of G_0 under LC, or a resummation Σ(−1)^jG_j = G_0∘(1 + X)^{−1} with a transformed unknown that satisfies a positive recurrence.
+*Negative results.*
+- The two-variable Schur basis Z^r h_a gives more negative moves already in the cubic case.
+- The kernel factors as (S + tZ)^k·G only for k ≤ 1. For Krawtchouk it is (1 + vZ)^{N−k}(S + uZ)^k for every k.
+
 ## Toward the general argument for (D)/(Γ): layers and dead ends (2026-10-22)
 
 - *Layers of (Γ).* H = Σ_j Γ_j v^j u^{s−2j}.
