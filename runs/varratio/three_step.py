@@ -32,11 +32,11 @@ def mul(X, Y):
             out[(x, z)] = out.get((x, z), F(0)) + w1 * w2
     return out
 
-rng = random.Random(int(sys.argv[2]))
+rng = random.Random(int(sys.argv[2])); NS = [int(x) for x in sys.argv[3].split(",")] if len(sys.argv) > 3 else [4, 5, 6, 7, 8]
 grid = [(F(1, 2), F(0)), (F(1, 2), F(1, 8)), (F(1, 3), F(2, 9)), (F(2, 5), F(1, 6)), (F(1, 3), F(1, 9))]
 viol = {g: 0 for g in grid}; tot = 0; worst = {g: None for g in grid}
 for trial in range(int(sys.argv[1])):
-    N = rng.choice([4, 5, 6, 7, 8])
+    N = rng.choice(NS)
     a_, b, c = lmember(rng, N, False)
     P, Q = PQ(b, c)
     if not Q: continue
