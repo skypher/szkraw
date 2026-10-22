@@ -258,7 +258,7 @@ theorem poly_zero_of_no_sign {A D : ℕ → ℝ} {Q : ℝ[X]} {par N₁ : ℕ} (
 /-! ### Proposition 9.9 (2) -/
 
 /-- **Proposition 9.9 (2)** (boundary layers): let `δb_n = β(n/N) + p_n + q_{N-n}` for
-`1 ≤ n ≤ N - 1` and `δc_n = γ(n/N) + p'_n + q'_{N-n}` for `1 ≤ n ≤ N`, with `β, γ` analytic on an
+`1 ≤ n ≤ N - 1` and `δc_n = γ(n/N) + p'_n + q'_{N-n}` for `1 ≤ n ≤ N`, for all large `N`, with `β, γ` analytic on an
 open set containing `Ω` and finitely supported boundary layers `p, q, p', q'` independent of `N`.
 If a set with property (P) contains `K_{N,1} + ε v_N` for all large `N` and small `ε > 0`, then
 `q'_0 = L_even = L_odd`, `p_k = q_k` and `p'_k + q'_k = -p_k` for `k ≥ 1`. -/
@@ -266,28 +266,32 @@ theorem families_boundary_layers (S : (N : ℕ) → Set (Coefficients N))
     (hS : ∀ N, ∀ v ∈ S N, MatrixPositivity v) {β γ : ℝ → ℝ} (hβ : AnalyticOnOmega β)
     (hγ : AnalyticOnOmega γ) {p q p' q' : ℕ → ℝ} {K : ℕ} (hp : ∀ k, K < k → p k = 0)
     (hq : ∀ k, K < k → q k = 0) (hp' : ∀ k, K < k → p' k = 0) (hq' : ∀ k, K < k → q' k = 0)
-    {vb vc : ℕ → ℕ → ℝ} (hvb : ∀ N n, 1 ≤ n → n < N → vb N n = β (n / N) + p n + q (N - n))
-    (hvc : ∀ N n, 1 ≤ n → n ≤ N → vc N n = γ (n / N) + p' n + q' (N - n))
+    {vb vc : ℕ → ℕ → ℝ} (hvb : ∃ N₁, ∀ N, N₁ ≤ N → ∀ n, 1 ≤ n → n < N → vb N n = β (n / N) + p n + q (N - n))
+    (hvc : ∃ N₁, ∀ N, N₁ ≤ N → ∀ n, 1 ≤ n → n ≤ N → vc N n = γ (n / N) + p' n + q' (N - n))
     (hfam : ContainsFamily S vb vc) :
     q' 0 = Leven β γ ∧ q' 0 = Lodd β γ ∧ (∀ k, 1 ≤ k → p k = q k) ∧ ∀ k, 1 ≤ k → p' k + q' k = -p k := by
+  obtain ⟨N₁, hvb⟩ := hvb
+  obtain ⟨N₂, hvc⟩ := hvc
   set ae : ℕ → ℝ := fun k => (-1) ^ k * (p k + 2 * p' k + q k + 2 * q' k)
   set ce : ℝ := β 0 + p 0 + 2 * γ 0 + 2 * p' 0 + (β 1 + q 0 + γ 1 + q' 0)
   set ao : ℕ → ℝ := fun k => (-1) ^ k * (p k - q k)
   set co : ℝ := β 0 + p 0 - (β 1 + q 0 + γ 1 + q' 0)
   -- the alternating sum for large `N`
-  have hA : ∀ N, max 2 (K + 1) ≤ N → altSum vb vc N =
+  have hA : ∀ N, max (max 2 (K + 1)) (max N₁ N₂) ≤ N → altSum vb vc N =
       if N % 2 = 0 then DN N (fun x => β x + 2 * γ x) + (binomPoly ae K ce).eval (N : ℝ)
       else DN N β + (binomPoly ao K co).eval (N : ℝ) := by
     intro N hN
-    have hN2 : 2 ≤ N := le_trans (le_max_left _ _) hN
-    have hKN : K + 1 ≤ N := le_trans (le_max_right _ _) hN
+    have hN2 : 2 ≤ N := by have := le_max_left (max 2 (K + 1)) (max N₁ N₂); omega
+    have hKN : K + 1 ≤ N := by have := le_max_left (max 2 (K + 1)) (max N₁ N₂); omega
+    have hN₁ : N₁ ≤ N := by have := le_max_right (max 2 (K + 1)) (max N₁ N₂); omega
+    have hN₂ : N₂ ≤ N := by have := le_max_right (max 2 (K + 1)) (max N₁ N₂); omega
     have hN0 : (N : ℝ) ≠ 0 := by exact_mod_cast (by omega : N ≠ 0)
     set fb : ℕ → ℝ := fun n => β (n / N) + p n + q (N - n)
     set fc : ℕ → ℝ := fun n => γ (n / N) + p' n + q' (N - n)
     have hcongr : altSum vb vc N =
         ∑ n ∈ range (N + 1), (-1 : ℝ) ^ n * (N.choose n : ℝ) * cornerF N fb fc n := by
       refine sum_congr rfl fun n hn => ?_
-      rw [cornerF_congr (δb' := fb) (δc' := fc) (fun m h1 h2 => hvb N m h1 h2) (fun m h1 h2 => hvc N m h1 h2)
+      rw [cornerF_congr (δb' := fb) (δc' := fc) (fun m h1 h2 => hvb N hN₁ m h1 h2) (fun m h1 h2 => hvc N hN₂ m h1 h2)
         (Nat.lt_succ_iff.mp (mem_range.mp hn))]
     have hqN : q N = 0 := hq N (by omega)
     have hq'N : q' N = 0 := hq' N (by omega)
@@ -367,8 +371,8 @@ theorem analytic_forced_equalities (S : (N : ℕ) → Set (Coefficients N))
     (hγ : AnalyticOnOmega γ) (hadm : AdmitsRule S β γ) : Leven β γ = 0 ∧ Lodd β γ = 0 := by
   have h := families_boundary_layers S hS hβ hγ (p := fun _ => 0) (q := fun _ => 0) (p' := fun _ => 0)
     (q' := fun _ => 0) (K := 0) (fun _ _ => rfl) (fun _ _ => rfl) (fun _ _ => rfl) (fun _ _ => rfl)
-    (vb := fun N n => β (n / N)) (vc := fun N n => γ (n / N)) (fun _ _ _ _ => by ring)
-    (fun _ _ _ _ => by ring) hadm
+    (vb := fun N n => β (n / N)) (vc := fun N n => γ (n / N)) ⟨0, fun _ _ _ _ _ => by ring⟩
+    ⟨0, fun _ _ _ _ _ => by ring⟩ hadm
   exact ⟨h.1.symm, h.2.1.symm⟩
 
 /-- **Corollary 9.6**, second statement: when `L_even = L_odd = 0`, the first-order change of
