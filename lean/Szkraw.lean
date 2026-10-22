@@ -55,3 +55,4 @@ import Szkraw.KrawOne
 import Szkraw.LowerGeneric
 import Szkraw.Interior
 import Szkraw.RectCauchy
+import Szkraw.GridCauchy
