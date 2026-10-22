@@ -1123,4 +1123,10 @@ Sources: reviews/consult-G-brief.md, reviews/consult-G-answer.md (job c48ab1eb).
 
 **Scope.** For a linear profile it coincides with Proposition 8.8's κ range.
 
-**Paper.** Theorem 8.9. Review round 19 and the Lean formalization are next.
+**Paper.** Theorem 8.9. Review round 19: PASS WITH MINOR FIXES (index ranges, truncation of κ̂, detours on Ω; applied).
+
+**Lean (2026-10-22).** `Szkraw.affine_matrix` proves the statement (`Stmt_affine`). The axiom audit is clean.
+- *Files.* VRResum.lean holds the abstract matrix resummation. VRMoves.lean puts the move operators on {0..N}² and links them to the recurrence. VRAffine*.lean holds the Leibniz rule, κ̂, the detours, the key inequality and the assembly.
+- *Simplifications against the paper.*
+  - The detour constant is 4 for every family; 6 is not needed.
+  - The key inequality keeps only the products (1,n−1) and (n−1,1) for n ≥ 3 and (2,n−2) for n ≥ 4. This gives the coefficient 2n + C(n,2)[n ≥ 4] in place of γ_n, and the coefficient comparison still holds: at n ≥ 4 the bracket is (α − t(a−1))Q + t(a−1)(n² − 9n + 24)/2 + t(n−1)(2n−6) ≥ 0, with Q = (n² − 5n + 16)/2.

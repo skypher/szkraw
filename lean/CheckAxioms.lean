@@ -208,3 +208,10 @@ assert_allowed_axioms Szkraw.matrixPositivity_of_kernel
 assert_allowed_axioms Szkraw.varyratio_matrix
 assert_allowed_axioms Szkraw.varyratio_weights
 assert_allowed_axioms Szkraw.quadratic_matrix
+assert_allowed_axioms Szkraw.resum_nonneg
+assert_allowed_axioms Szkraw.gkernel_resum
+assert_allowed_axioms Szkraw.affU_lcnz
+assert_allowed_axioms Szkraw.affU_leibniz
+assert_allowed_axioms Szkraw.AffSetting.key
+assert_allowed_axioms Szkraw.affine_kernel_nonneg
+assert_allowed_axioms Szkraw.affine_matrix

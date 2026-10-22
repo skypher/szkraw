@@ -67,3 +67,10 @@ import Szkraw.VRInduction
 import Szkraw.VRDetours
 import Szkraw.VRAssembly
 import Szkraw.VRCorollaries
+import Szkraw.VRResum
+import Szkraw.VRMoves
+import Szkraw.VRAffine
+import Szkraw.VRAffineDetours
+import Szkraw.VRAffineWeights
+import Szkraw.VRAffineKey
+import Szkraw.VRAffineMain

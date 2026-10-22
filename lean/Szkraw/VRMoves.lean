@@ -270,7 +270,7 @@ structure ResumWeights (cc : ℕ → ℝ) (A B C H V : ℕ → ℕ → ℕ → �
   key : ∀ ℓ a, ℓ + a ≤ N → 3 ≤ a → 4 * cc (ℓ + 1) * H 1 ℓ a ≤
     A 0 ℓ a * B 0 (ℓ + 1) (a - 1) + B 0 ℓ a * A 0 (ℓ + 1) (a - 2) + 2 * cc (ℓ + 1) * V 1 ℓ a
 
-theorem sign_split {M : Type*} [AddCommGroup M] [Module ℝ M] (R : Finset ℕ) (X : ℕ → M) :
+theorem sign_split_mat {M : Type*} [AddCommGroup M] [Module ℝ M] (R : Finset ℕ) (X : ℕ → M) :
     ∑ j ∈ R, (-1 : ℝ) ^ j • X j = ∑ j ∈ R.filter Even, X j - ∑ j ∈ R.filter Odd, X j := by
   rw [← sum_filter_add_sum_filter_not R Even]
   have h1 : ∑ j ∈ R.filter Even, (-1 : ℝ) ^ j • X j = ∑ j ∈ R.filter Even, X j :=
@@ -328,7 +328,7 @@ theorem gkernel_resum {H V : ℕ → ℕ → ℕ → ℝ} {ω : ℕ → ℕ → 
       exact smv_congr fun ℓ a hla _ => hw.split j ℓ a hj hla
     unfold Tmat
     simp only [smul_add, sum_add_distrib]
-    rw [sign_split, sign_split, sign_split]
+    rw [sign_split_mat, sign_split_mat, sign_split_mat]
     -- the `A`-family
     have hEvenA : ∑ j ∈ R.filter Even, fA j = A0 + Hp - Vm := by
       have hs : R.filter Even = insert 0 (R.filter (fun j => Even j ∧ 2 ≤ j)) := by
