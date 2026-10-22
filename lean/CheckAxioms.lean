@@ -219,3 +219,7 @@ assert_allowed_axioms Szkraw.affine_bmono_iff
 assert_allowed_axioms Szkraw.Fz_nonneg
 assert_allowed_axioms Szkraw.G_nonneg
 assert_allowed_axioms Szkraw.AffSetting.alpha_ge
+assert_allowed_axioms Szkraw.iterShift_padNewton
+assert_allowed_axioms Szkraw.fwdDiff_quad_mul
+assert_allowed_axioms Szkraw.phi2_phi2
+assert_allowed_axioms Szkraw.quadprofile_matrix

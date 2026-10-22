@@ -43,6 +43,6 @@ Section numbers refer to paper.tex. §7 was independently reviewed by AI. The ro
     - Review rounds 19 and 20: PASS WITH MINOR FIXES (applied).
     - Machine-verified: `Szkraw.affine_matrix` and `Szkraw.affine_bmono_iff`, axiom audit clean.
     - Lean fidelity: round 12 covered the first version; the strengthened statement is still pending.
-  - Proposition 8.10 (2026-10-23): profiles of Newton degree ≤ 2 with any convex quadratic ratio and nondecreasing b have (P). Review round 20 PASS; the Lean formalization is next.
+  - Proposition 8.10 (2026-10-23): profiles of Newton degree ≤ 2 with any convex quadratic ratio and nondecreasing b have (P). Review round 20 PASS; machine-verified (`Szkraw.quadprofile_matrix`, axiom audit clean); Lean fidelity pending.
   - Still open: other varying ratios, e.g. nonlinear increasing ratios.
 - Prior art: Miclo, *On the Markov commutator* (arXiv:1505.02540), Theorem 31, gives inequality conditions for palindromic, strongly convex birth–death chains; it excludes Krawtchouk and Q_n.

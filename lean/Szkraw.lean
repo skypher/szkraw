@@ -76,3 +76,4 @@ import Szkraw.VRAffineKey
 import Szkraw.VRAffineEnds
 import Szkraw.VRAffineKey2
 import Szkraw.VRAffineMain
+import Szkraw.VRQuadProfile
