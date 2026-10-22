@@ -1315,3 +1315,33 @@ Measured constants for (G), runs/varratio/g_ingredients.py: lcphi ≥ 1, B ≥ 2
 Missing for (G): a proof of (NP) for general profiles, and the H-move key inequality. (NP) is equivalent to log-concavity of the union product κ_k = Σ_{S∪T=[k]} ρ_{|S|}ν_{|T|}. For exchangeable random sets this is ultra-log-concavity of |X∪Y|; Walkup's 1976 paper on unions of random sets may contain it, but this has not been confirmed.
 
 **Consult round 8 (cubic, external cross-check only, not verified here).** reviews/consult-J-answer.md claims (C3) with u = 1 by a repaired summed B-detour. It reports that the pointwise cubic quad-B fails at (ℓ, n) = (0, 2), with an explicit N = 4 witness.
+
+## Lemma (NP): degree-3 profiles proved; general case reduced to condition (*) (2026-10-23, derived here)
+
+Statement (NP): ρ and ν are nonnegative, log-concave and without internal zeros, with ρ₀ > 0, ν₀ = 0 and ν₁ > 0. Then κ_k = Σ_{S∪T=[k]} ρ_{|S|}ν_{|T|}, the Newton coefficients of c = ρd, are log-concave without internal zeros.
+- Exchangeable form: the union of independent permutation-invariant random sets preserves ULC(n) size laws.
+- Walkup (1976) treats binomial convolution and covering probabilities of unions. Its abstract does not state this; the full text was not accessible.
+
+**Degree 3 (proved).** Take ν = (0, ν₁, ν₂, ν₃) with ν₂² ≥ ν₁ν₃ and s_k = ρ_{k−1} + ρ_k (s is LC with s₀ > 0). Then κ_k = k·e_k with
+- e_k = A_k s_k + B_k s_{k−1} + C_k s_{k−2};
+- A_k = ν₁ + (k−1)ν₂/2 + (k−1)(k−2)ν₃/6;
+- B_k = (k−1)ν₂/2 + (k−1)(k−2)ν₃/3;
+- C_k = (k−1)(k−2)ν₃/6.
+
+e itself need not be LC; κ is.
+
+Certificate (runs/np/deg3_cert.py, symbolic identity exact):
+- Q = k²e_k² − (k²−1)e_{k−1}e_{k+1} equals Σλ_{ij}(x_ix_j − x_{i−1}x_{j+1}) + Σμ_{ij}x_ix_j, with x = (s_{k−3},…,s_{k+1}).
+- Each multiplier is a product of factors nonnegative at integers k ≥ 2, or becomes a sum of nonnegative terms after ν₁ν₃ ≤ ν₂².
+- λ₂₂ = max(0, λ₁₃ − [x₁x₃]) and μ₁₃ = max(0, [x₁x₃] − λ₁₃). The second case occurs, for example at k = 3 with ν₃ > ν₂, and then needs [x₂²] ≥ (k−2)ν₂²·(…) ≥ 0.
+- Exact checks: deg3_cert_check.py (400 random rational points, both cases, 0 failures); deg3_test.py (6,000 exact trials with arbitrary LC s and shift sums).
+
+**General case: reduction.** Write κ_k = Σ_j M_k(j)s_j with M_k(j) = Σ_n C(k,n)C(n−1,k−j)ν_n. A certificate built only from LC differences s_as_b − s_{a−1}s_{b+1} and products exists iff condition (*) holds:
+- S(α,β) = Σ_{a=α}^{β} [M_k(a)M_k(α+β−a) − M_{k−1}(a)M_{k+1}(α+β−a)] ≥ 0 for all α ≤ β and k ≥ 2.
+- (*) is the central-segment condition on each anti-diagonal of Q_k = κ_k² − κ_{k−1}κ_{k+1}. It is a statement about ν alone, and it then gives (NP) for every LC s.
+- Generating function: M_k(z) = (z^k/w)·Σ_n C(k,n)ν_n w^n with w = (1+z)/z.
+- Exact test (runs/np/central_sums.py): profile degrees D = 2–6, k ≤ 14, 300 random LC ν each. The minimum central sum is 0, never negative.
+
+Next:
+- prove (*), where log-concavity of ν must enter, as ν₂² ≥ ν₁ν₃ does in degree 3;
+- alternatively, a degree-3 profile theorem. Only H₁ = C(a,3)(1−ρ(ℓ+3))ν₃ survives there, C′_j = 0 for j ≥ 1, and A_j = −B̃_j for j ≥ 2.
