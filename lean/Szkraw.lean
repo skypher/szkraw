@@ -62,3 +62,8 @@ import Szkraw.Norlund
 import Szkraw.AnalyticRules
 import Szkraw.LimitsRemarks
 import Szkraw.OmegaShape
+import Szkraw.VRKernel
+import Szkraw.VRInduction
+import Szkraw.VRDetours
+import Szkraw.VRAssembly
+import Szkraw.VRCorollaries
