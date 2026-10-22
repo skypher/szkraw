@@ -321,3 +321,16 @@ Scope:
 Fix applied: the scope sentence now says "every finite realization of an array satisfying (2.1) with b ≡ 0".
 
 Not yet reviewed: `corner_value` (Lemma 9.1), added after this brief.
+
+## Lean statement fidelity, round 4 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_0b783a78-345b-4053-a9ee-c2f06e58cc9e`. Brief: `reviews/lean-fidelity4-brief.md`. Answer: `reviews/lean-fidelity4-answer.md`.
+
+Scope:
+- the remark after Theorem 8.1: `lc_twoParam`, `lc_bernstein`, `constantRatio_twoParam`, `LCProfile`;
+- Lemma 9.1: `corner_value`;
+- their scope sentences.
+
+**Verdict: PASS WITH MINOR FIXES (documentation only).** All declarations match. The identities for all real parameters are stronger than the paper. The Bernstein coefficients of the paper are B_s/C(D,s), and the reviewer finds no missing coverage in the combined remark declarations. No Lean proposition or paper scope sentence needs to change.
+
+Fix applied: the docstrings of `twoParam` and `twoParam_poly` now write the recurrence variable as z, so that y is used only as a parameter.

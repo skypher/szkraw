@@ -223,7 +223,7 @@ structure LCProfile (N : ℕ) (d : ℕ → ℝ) : Prop where
   lt1 : ∀ i, i < N → d i < 1
   lc : LogConcaveNoInternalZeros N (newtonCoeff d)
 
-/-- The array `y p_i = a_i p_{i+1} + x d_i p_i + y d_i p_{i-1}` with `a_i = 1 - d_i`. -/
+/-- The array `z p_i = (1 - d_i) p_{i+1} + x d_i p_i + y d_i p_{i-1}`. -/
 def twoParam (N : ℕ) (d : ℕ → ℝ) (x y : ℝ) : Coefficients N :=
   ⟨fun i => 1 - d i, fun i => x * d i, fun i => y * d i⟩
 
@@ -559,7 +559,7 @@ theorem twoParam_poly_pos (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) :
     symm; apply sum_eq_zero; intro j _; rw [if_neg (by omega)]; ring
 
 /-- **Remark after Theorem 8.1**: every linearization coefficient of
-`y p_i = a_i p_{i+1} + x d_i p_i + y d_i p_{i-1}` (`a_i = 1 - d_i`) is
+`z p_i = (1 - d_i) p_{i+1} + x d_i p_i + y d_i p_{i-1}` is
 `Σ_j h_j x^{D-2j} y^j` with `h_j ≥ 0`, `D = m + n - k`, for all real `x` and `y`; it vanishes for
 `k > m + n`. -/
 theorem twoParam_poly (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) :
