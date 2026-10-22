@@ -36,3 +36,5 @@ import Szkraw.SzwarcMargin
 import Szkraw.SymmetricMeasure
 import Szkraw.ParityParams
 import Szkraw.CornerValue
+import Szkraw.LCGraded
+import Szkraw.LCRemark

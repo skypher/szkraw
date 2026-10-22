@@ -722,7 +722,16 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - `szwarc_full`: Theorem 7.1 in full.
   - lean/Szkraw/ParityParams.lean: `ps_d_formula` (d_n = [n]_q/[N]_q), `ps_even_params` ((N,q,r)) and `ps_odd_params` ((N−1,q,r/q)) in the Lean parametrization `geometricCoefficients N (1/r) q` of (2.3).
 - Section 9: Lemma 9.1 (`corner_value`, g(N,N;N) = (1−r)^N for K_{N,r}, 0 < r ≤ 1) is proved via the Boolean model. `boolean_matrix_coefficient` now assumes r ≤ 1 instead of r < 1, since only r ≤ 1 was used.
-- Remaining formalization: the remark after Theorem 8.1, Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), and Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
+- The remark after Theorem 8.1 (2026-10-22):
+  - lean/Szkraw/LCGraded.lean: `kernel_nonnegG`, the operator induction coefficientwise in t. The t-factor becomes the indicator τ_p, and the A-moves read degree p − 1.
+  - lean/Szkraw/LCRemark.lean:
+    - `kerFnG` is the graded kernel, with recurrence, support, and degree/parity (`kerFnG_deg`: Ω(ℓ,a,p) = 0 unless k + p ≤ a + 2ℓ with even parity);
+    - `kernel_unique`, and `kerFn_eq_poly`: the kernel at real t is Σ_p Ω_p t^p;
+    - `product_twoParam`: the product identity for (1 − d, ρt·d, ρ²·d);
+    - `twoParam_poly` / `lc_twoParam`: g = Σ_j h_j x^{D−2j} y^j with h_j ≥ 0, for real x and y > 0;
+    - `bern_term` and `logconcave_bernstein` / `lc_bernstein`: the Bernstein form for 0 < r ≤ 1;
+    - `constantRatio_twoParam`: the arrays of Theorem 8.1 are twoParam N d (1 − r) r.
+- Remaining formalization: Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), and Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

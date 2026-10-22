@@ -36,6 +36,8 @@ example : Szkraw.Stmt_perturbation := Szkraw.perturbation_criterion
 example : Szkraw.Stmt_kraw_triangle_margin := Szkraw.kraw_triangle_margin
 example : Szkraw.Stmt_logconcave_matrix := Szkraw.logconcave_matrix
 example : Szkraw.Stmt_logconcave := Szkraw.logconcave_criterion
+example : Szkraw.Stmt_lc_twoParam := Szkraw.lc_twoParam
+example : Szkraw.Stmt_lc_bernstein := Szkraw.lc_bernstein
 example : Szkraw.Stmt_all_products := Szkraw.all_products
 example : Szkraw.Stmt_heavy_top := Szkraw.heavy_top
 example : Szkraw.Stmt_low_products := Szkraw.low_products
@@ -129,3 +131,7 @@ assert_allowed_axioms Szkraw.ps_d_formula
 assert_allowed_axioms Szkraw.ps_even_params
 assert_allowed_axioms Szkraw.ps_odd_params
 assert_allowed_axioms Szkraw.corner_value
+assert_allowed_axioms Szkraw.kernel_nonnegG
+assert_allowed_axioms Szkraw.lc_twoParam
+assert_allowed_axioms Szkraw.lc_bernstein
+assert_allowed_axioms Szkraw.constantRatio_twoParam
