@@ -498,3 +498,14 @@ Fixes applied:
 2. The four-term identity is now stated for the zero-extended sequence κ̂_i = p_iν_i + q_iν_{i−1}; κ is its truncation at N, and truncation preserves log-concavity and interval support.
 3. The detours are asserted for source nodes in Ω, with ℓ + n + 2 ≤ N in the mixed products.
 4. "violate the hypotheses" became "need not satisfy the hypotheses".
+
+## Lean statement fidelity, round 12 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_b46aaa74-bd38-46f6-805e-90ef281f5349`. Brief: `reviews/lean-fidelity12-brief.md`. Answer: `reviews/lean-fidelity12-answer.md`.
+
+Scope: Theorem 8.9 (`affine_matrix`, with `AffineRatioHyp`), the new table row, and the scope sentence.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- Hypotheses, conclusion and table row: all MATCH. The cross-multiplied bound (2N−1)κ ≤ N(1−r) is equivalent to the paper's bound because N ≥ 1, and the existential packaging of r, κ loses no cases.
+
+Fix applied: the scope sentence now states the Newton log-concavity hypothesis on the profile explicitly, instead of relying on "as in Theorem 8.1". No change to the Lean statement was needed.
