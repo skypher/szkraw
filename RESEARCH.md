@@ -1447,3 +1447,19 @@ Proof architecture for (G), all pieces now proved except the last:
 - Reduction to Theorem 8.9's key by truncating ρ to r + tx fails as a monotonicity statement. The truncation keeps b nondecreasing, but in 319 of 1,428 exact sources the key slack of ρ is below that of its truncation, though still positive (runs/varratio/key_truncation.py).
 - Comparison with slope s = Δρ(ℓ+a−1), using convexity of ρ: A₀(ℓ,a) = αX − δ_a u₀ with δ_a ≤ as, and A₀(ℓ+1,a−2) = (α+s)X′ − δ′D with δ′ ≤ (a−2)s. So the LHS dominates the 8.9 expression with t → s, and H₁ ≤ its slope-s version. But V₁ ≤ V₁^{lin(s)}, since Δρ(ℓ+n−1) ≤ s. The deficit Σ(m−1)(a−m)y_m(s − Δρ(ℓ+m)) cannot be paid termwise by 4Σ(n−2)y_nΣ_{i≥n}(s − Δρ(ℓ+i)).
 - Next: a certificate in the variables u_n (LC) and P_k = Δ^kρ(ℓ) (LC in k), together with b-monotonicity, in the style of the proof of Proposition 8.14.
+
+**Key inequality: reduction to kinked ratios (2026-10-23).**
+1. **Weakening.** Use B₀ ≥ ρ(ℓ+1)Y and B₀′ ≥ ρ(ℓ+1)Y′ and divide by ρ(ℓ+1). The key follows from (K′): A₀(ℓ,a)Y′ + Y·A₀(ℓ+1,a−2) ≥ D(4H₁ − γV₁).
+   - runs/varratio/key_weak.py, minimum ratios at γ = 2: (G) families 2.74 (steep), 3.61 (mixed), 4.12 (linear); general convex ratios 3.0.
+   - Concave ratios fail (0.977) and arbitrary monotone ratios pass narrowly (1.26), so convexity is the right hypothesis.
+2. **Linearity.** Fix u_n = f_n(ℓ). Then (K′) is linear in α = 1−ρ(ℓ+a) and s_i = Δρ(ℓ+i):
+   - 1 − ρ(ℓ+n) = α + Σ_{i≥n}s_i;
+   - A₀(ℓ,a) = αX − (Σ_{i<a}s_i)u₀;
+   - A₀(ℓ+1,a−2) = (α + s_{a−1})X′ − (Σ_{i=1}^{a−2}s_i)D;
+   - V₁ = Σ_{m=2}^{a−1}(m−1)(a−m)s_m y_m.
+3. **Cone.** A convex ratio means s is nondecreasing, a nonnegative combination of steps e^{(q)}. Monotone b at the top gives α ≥ s_{a−1}R_{ℓ+a−1} ≥ s_{a−1}u₀/u₁. The coefficient of α is ≥ 0 (Theorem 8.9). Hence (K′) holds for all convex ratios iff L_q := L(u₀/u₁, e^{(q)}) ≥ 0 for q = 0, …, a−1.
+   - L_q is the key for the kinked ratio ρ(ℓ+n) = ρ(ℓ) + (n−q)⁺.
+   - q = 0 is Theorem 8.9's endpoint inequality, already proved.
+   - Each L_q is concave in z = u₀, so the endpoints z = 0 and z = 1/u₂ suffice.
+   - Exact test (runs/varratio/key_extreme.py, 34,110 cases with a ≤ 14, γ ∈ {2, 8/3}): no failure, and K_α ≥ 0 always.
+4. Remaining: prove L_q(0) ≥ 0 and L_q(1/u₂) ≥ 0 for q ≥ 1. For q ≤ 2, L_q − L₀ ≥ 0 directly. For q ≥ 3 the reduced V-help (fewer s_m) must be paid from the surplus of L₀ and from 4Σ(n−2)(q−n)y_n.
