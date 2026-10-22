@@ -473,3 +473,14 @@ Scope:
 **Verdict: PASS.** All statements match; no fixes required. Scope notes:
 - In Corollary 8.7 the constant-weight conclusion b = w₀c gives the constant ratio 1/(1 + w₀).
 - In Proposition 8.8 with N = 1, the second-order parameters are undetermined, but choosing them zero matches the paper's convention.
+
+## Round 18: Proposition 8.8 (quadratic arrays) (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3810e3f8-f75f-4f3d-bacb-280fae14b5c3`. Brief: `reviews/limits-review18-brief.md`. Answer: `reviews/limits-review18-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- *The argument.* The recurrence is unconditional, with no circular use of Theorem 8.6. The higher moves vanish, and the j = 0 weights are correct. Sources outside Ω contribute zero.
+- *Reviewer's exact audit.* 1,368 quadratic arrays (660,744 table entries), 0 negatives and 0 recurrence mismatches. A further 180 general arrays matched the unrestricted recurrence.
+- *Witnesses.* The reviewer gave exact witnesses for each dropped hypothesis, at N = 2, 2 and 3.
+
+Fix applied: the linear-profile sentence now says "for N ≥ 2", with the direct N = 1 argument (R_1² = c_1R_0 + b_1R_1).
