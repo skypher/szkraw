@@ -406,3 +406,16 @@ Fixes applied:
 2. The grid sentence now names the construction: an axis-parallel grid with mesh 1/M and origin √2(1+i). Irrational origin coordinates alone would not keep the nodes off the grid lines for an arbitrary mesh.
 
 Not covered by this round: the three prose consequences (`no_open_rule_set`, `boundary_layers_palindromic`, `radius_no_uniform`), added after the brief was sent.
+
+## Lean statement fidelity, round 9 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_a216cc35-4227-473c-85e9-1624d7661f2f`. Brief: `reviews/lean-fidelity9-brief.md`. Answer: `reviews/lean-fidelity9-answer.md`.
+
+Scope: the three prose consequences of Section 9 (`no_open_rule_set`, `boundary_layers_palindromic`, `radius_no_uniform`) and their scope sentence.
+
+**Verdict: PASS WITH MINOR FIXES (documentation only).** All three match. `boundary_layers_palindromic` gives only the necessary equality, not a converse. `radius_no_uniform` is stronger than the prose: it excludes every positive radius for all large N.
+
+Fixes applied, both in the Section 9 text and in the scope sentence:
+1. The open sets of polynomial rules are now "nonempty", with "for every d ∈ ℕ" in the scope sentence.
+2. The palindromic relations are qualified "for k ≥ 1 and N ≥ k + K + 1, where K bounds the supports of p, q, p', q'".
+3. The radius claim now reads "for every fixed r ∈ (0,1)" and "a positive radius independent of N".
