@@ -691,7 +691,10 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - `Szkraw.logconcave_criterion : Stmt_logconcave`, which adds the finite realization as in `geometric_criterion`;
   - lean/CheckAxioms.lean: only propext, Classical.choice and Quot.sound; `lake build Szkraw` is green with no `sorry`.
 - Scope: the Lean statement is the paper's Theorem 8.1 (nonnegative linearization). The remark after its proof (nonnegative coefficients of the two-parameter system in (u,v), Bernstein coefficients in r) is not formalized. It would need ω as a polynomial in t with nonnegative coefficients. The paper's code-and-formalization section and AI-use disclosure now state this scope.
-- Remaining formalization: that remark, Section 7 (the heavy-top criterion Theorem 7.12 and Corollary 7.13, and the other proved statements), and the provable statements of Section 9.
+- Section 7 (2026-10-22):
+  - lean/Szkraw/ConeArgument.lean proves Szwarc's cone argument on a finite square (`cone_nonneg`). It contains: the operator `Hop` and its transpose `Hadj`; summation by parts (`by_parts`); the cone indicator `vD`; the pointwise signs `Hadj_vD_nonneg`, `Hadj_vD_zero` and `Hadj_vD_apex`; and the induction on the second index.
+  - lean/Szkraw/AllProducts.lean proves `Gk_rel` (x acts on either factor; the case m = N follows from symmetry, with no separate terminal relation needed) and the rescaling w_m = Π a_lσ_{l+1}/(c_{l+1}σ_l). From these it proves Theorem 7.12 (`Szkraw.all_products : Stmt_all_products`) and Corollary 7.13 (`Szkraw.heavy_top : Stmt_heavy_top`), both in matrix form, with an axiom audit clean.
+- Remaining formalization: that remark, the rest of Section 7 (Theorems 7.1, 7.6, 7.8, 7.10, 7.15, 7.16 and their lemmas and corollaries), and the provable statements of Section 9.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 
