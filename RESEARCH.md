@@ -728,8 +728,8 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - `kerFnG` is the graded kernel, with recurrence, support, and degree/parity (`kerFnG_deg`: Ω(ℓ,a,p) = 0 unless k + p ≤ a + 2ℓ with even parity);
     - `kernel_unique`, and `kerFn_eq_poly`: the kernel at real t is Σ_p Ω_p t^p;
     - `product_twoParam`: the product identity for (1 − d, ρt·d, ρ²·d);
-    - `twoParam_poly` / `lc_twoParam`: g = Σ_j h_j x^{D−2j} y^j with h_j ≥ 0, for real x and y > 0;
-    - `bern_term` and `logconcave_bernstein` / `lc_bernstein`: the Bernstein form for 0 < r ≤ 1;
+    - `twoParam_poly` / `lc_twoParam`: g = Σ_j h_j x^{D−2j} y^j with h_j ≥ 0, for all real x and y: first for y > 0 through the kernel at t = x/√y, then for all y because g is a polynomial in y (`product_poly_all`);
+    - `bern_term` and `logconcave_bernstein` / `lc_bernstein`: the Bernstein form, for all real r;
     - `constantRatio_twoParam`: the arrays of Theorem 8.1 are twoParam N d (1 − r) r.
 - Remaining formalization: Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), and Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.

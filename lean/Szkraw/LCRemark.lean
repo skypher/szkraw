@@ -356,6 +356,76 @@ theorem ehat_eq (d : ℕ → ℝ) {ρ : ℝ} (_hρ : ρ ≠ 0) (i : ℕ) : ehat 
     rw [h1, h2, ih, pow_succ]
     ring
 
+/-! ### Polynomial dependence on `y` -/
+
+section allY
+
+open Polynomial
+
+variable {N : ℕ} (d : ℕ → ℝ) (x : ℝ)
+
+/-- The recurrence matrix of `twoParam N d x y` with `y` an indeterminate. -/
+noncomputable def recPoly : Matrix (Fin (N + 1)) (Fin (N + 1)) ℝ[X] := fun i j =>
+  if j.val = i.val + 1 then C (1 - d i.val)
+  else if j = i then C (x * d i.val)
+  else if i.val = j.val + 1 then C (d i.val) * X else 0
+
+/-- `matrixPair (twoParam N d x y)` with `y` an indeterminate. -/
+noncomputable def pairPoly : ℕ → Matrix (Fin (N + 1)) (Fin (N + 1)) ℝ[X] ×
+    Matrix (Fin (N + 1)) (Fin (N + 1)) ℝ[X]
+  | 0 => (0, 1)
+  | n + 1 => let t := pairPoly n
+      (t.2, C (1 - d n)⁻¹ • ((recPoly d x - C (x * d n) • (1 : Matrix _ _ ℝ[X])) * t.2 -
+        (C (d n) * X) • t.1))
+
+theorem recPoly_eval (y : ℝ) (i j : Fin (N + 1)) :
+    (recPoly d x i j).eval y = recurrenceMatrix (twoParam N d x y) i j := by
+  simp only [recPoly, recurrenceMatrix]
+  split_ifs <;> (simp only [eval_C, eval_mul, eval_X, eval_zero, twoParam]; try ring)
+
+theorem pairPoly_eval (y : ℝ) : ∀ n,
+    (∀ i j, ((pairPoly (N := N) d x n).1 i j).eval y = (matrixPair (twoParam N d x y) n).1 i j) ∧
+    (∀ i j, ((pairPoly (N := N) d x n).2 i j).eval y = (matrixPair (twoParam N d x y) n).2 i j)
+  | 0 => by
+    refine ⟨fun i j => by simp [pairPoly, matrixPair], fun i j => ?_⟩
+    simp only [pairPoly, matrixPair, Matrix.one_apply]
+    split_ifs <;> simp
+  | n + 1 => by
+    obtain ⟨ih1, ih2⟩ := pairPoly_eval y n
+    refine ⟨fun i j => ih2 i j, fun i j => ?_⟩
+    simp only [pairPoly, matrixPair, Matrix.smul_apply, Matrix.sub_apply, Matrix.mul_apply, smul_eq_mul,
+      eval_mul, eval_C, eval_sub, eval_finsetSum, eval_X, ih1, ih2, recPoly_eval, Matrix.one_apply]
+    simp only [twoParam]
+    congr 1; congr 1
+    · apply sum_congr rfl; intro l _
+      congr 1
+      split_ifs <;> simp
+    · ring
+
+/-- For fixed `x`, `g(m,n;k)` of `twoParam N d x y` is a polynomial in `y`. -/
+theorem product_poly_y (m : ℕ) (n k : Fin (N + 1)) :
+    ∃ P : ℝ[X], ∀ y, productMatrix (twoParam N d x y) m n k = P.eval y :=
+  ⟨(pairPoly d x m).2 n k, fun y => ((pairPoly_eval d x y m).2 n k).symm⟩
+
+/-- An identity `g(m,n;k) = Σ_j h_j x^{D-2j} y^j` for `y > 0` holds for all real `y`. -/
+theorem product_poly_all (m : ℕ) (n k : Fin (N + 1)) (D : ℕ) (h : ℕ → ℝ)
+    (H : ∀ y : ℝ, 0 < y → productMatrix (twoParam N d x y) m n k =
+      ∑ j ∈ range (D / 2 + 1), h j * x ^ (D - 2 * j) * y ^ j) (y : ℝ) :
+    productMatrix (twoParam N d x y) m n k = ∑ j ∈ range (D / 2 + 1), h j * x ^ (D - 2 * j) * y ^ j := by
+  obtain ⟨P, hP⟩ := product_poly_y d x m n k
+  set Q : ℝ[X] := ∑ j ∈ range (D / 2 + 1), C (h j * x ^ (D - 2 * j)) * X ^ j
+  have hQ : ∀ z, Q.eval z = ∑ j ∈ range (D / 2 + 1), h j * x ^ (D - 2 * j) * z ^ j := fun z => by
+    simp [Q, eval_finsetSum]
+  have hPQ : P = Q := by
+    apply Polynomial.eq_of_infinite_eval_eq
+    apply Set.Infinite.mono _ (Set.Ioi_infinite (0 : ℝ))
+    intro z hz
+    show P.eval z = Q.eval z
+    rw [← hP, hQ, H z hz]
+  rw [hP, hPQ, hQ]
+
+end allY
+
 section poly
 
 variable {N : ℕ} {d : ℕ → ℝ} (hd : LCProfile N d)
@@ -402,10 +472,8 @@ theorem Lcoef_zero (k : ℕ) (m n p : ℕ) (h : ¬(k + p ≤ m + n ∧ (m + n + 
     rw [kerFnG_deg hu hu1 r a p hc, zero_mul]
   · rw [mul_zero]
 
-/-- **Remark after Theorem 8.1**: every linearization coefficient of
-`y p_i = a_i p_{i+1} + x d_i p_i + y d_i p_{i-1}` (`a_i = 1 - d_i`) is
-`Σ_j h_j x^{D-2j} y^j` with `h_j ≥ 0`, `D = m + n - k`; it vanishes for `k > m + n`. -/
-theorem twoParam_poly (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) :
+/-- The two-parameter form for `y > 0`, through the kernel at `t = x/√y`. -/
+theorem twoParam_poly_pos (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) :
     ∃ h : ℕ → ℝ, (∀ j, 0 ≤ h j) ∧ (m + n.val < k.val → ∀ j, h j = 0) ∧
       ∀ x y : ℝ, 0 < y → productMatrix (twoParam N d x y) m n k =
         ∑ j ∈ range ((m + n.val - k.val) / 2 + 1), h j * x ^ (m + n.val - k.val - 2 * j) * y ^ j := by
@@ -490,6 +558,17 @@ theorem twoParam_poly (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) :
   · rw [sum_eq_zero (fun p _ => by rw [if_neg (by omega)])]
     symm; apply sum_eq_zero; intro j _; rw [if_neg (by omega)]; ring
 
+/-- **Remark after Theorem 8.1**: every linearization coefficient of
+`y p_i = a_i p_{i+1} + x d_i p_i + y d_i p_{i-1}` (`a_i = 1 - d_i`) is
+`Σ_j h_j x^{D-2j} y^j` with `h_j ≥ 0`, `D = m + n - k`, for all real `x` and `y`; it vanishes for
+`k > m + n`. -/
+theorem twoParam_poly (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) :
+    ∃ h : ℕ → ℝ, (∀ j, 0 ≤ h j) ∧ (m + n.val < k.val → ∀ j, h j = 0) ∧
+      ∀ x y : ℝ, productMatrix (twoParam N d x y) m n k =
+        ∑ j ∈ range ((m + n.val - k.val) / 2 + 1), h j * x ^ (m + n.val - k.val - 2 * j) * y ^ j := by
+  obtain ⟨h, hh, hz, H⟩ := twoParam_poly_pos hd m hm n k
+  exact ⟨h, hh, hz, fun x y => product_poly_all d x m n k _ h (H x) y⟩
+
 end poly
 
 /-! ### Bernstein coefficients in `r` -/
@@ -530,19 +609,19 @@ theorem bern_term (D j : ℕ) (hj : 2 * j ≤ D) (r : ℝ) :
         rw [e, pow_add]; ring
 
 /-- **Remark after Theorem 8.1**, Bernstein form: for the arrays of Theorem 8.1 every `g(m,n;k)`,
-as a function of `r`, is `Σ_s B_s r^s (1-r)^{D-s}` with `B_s ≥ 0` (`B_s / C(D,s)` are the Bernstein
+as a function of `r`, is `Σ_s B_s r^s (1-r)^{D-s}` with `B_s ≥ 0`, as an identity for all real `r` (`B_s / C(D,s)` are the Bernstein
 coefficients of degree `D = m + n - k`). -/
 theorem logconcave_bernstein {N : ℕ} {d : ℕ → ℝ} (hd : LCProfile N d) (m : ℕ) (hm : m ≤ N)
     (n k : Fin (N + 1)) :
-    ∃ B : ℕ → ℝ, (∀ s, 0 ≤ B s) ∧ ∀ r : ℝ, 0 < r → r ≤ 1 →
+    ∃ B : ℕ → ℝ, (∀ s, 0 ≤ B s) ∧ ∀ r : ℝ,
       productMatrix (twoParam N d (1 - r) r) m n k =
         ∑ s ∈ range (m + n.val - k.val + 1), B s * r ^ s * (1 - r) ^ (m + n.val - k.val - s) := by
   obtain ⟨h, hh, _, hpoly⟩ := twoParam_poly hd m hm n k
   set D := m + n.val - k.val
   refine ⟨fun s => ∑ j ∈ range (D / 2 + 1), h j * (if j ≤ s then ((j.choose (s - j) : ℕ) : ℝ) else 0),
     fun s => sum_nonneg (fun j _ => mul_nonneg (hh j) (by split_ifs <;> positivity)), ?_⟩
-  intro r hr _
-  rw [hpoly (1 - r) r hr]
+  intro r
+  rw [hpoly (1 - r) r]
   have e : ∀ j ∈ range (D / 2 + 1), h j * (1 - r) ^ (D - 2 * j) * r ^ j =
       h j * ∑ s ∈ range (D + 1), (if j ≤ s then ((j.choose (s - j) : ℕ) : ℝ) else 0) * r ^ s * (1 - r) ^ (D - s) := by
     intro j hj
@@ -559,7 +638,7 @@ theorem logconcave_bernstein {N : ℕ} {d : ℕ → ℝ} (hd : LCProfile N d) (m
 def Stmt_lc_twoParam : Prop :=
   ∀ (N : ℕ) (d : ℕ → ℝ), LCProfile N d → ∀ m, m ≤ N → ∀ n k : Fin (N + 1),
     ∃ h : ℕ → ℝ, (∀ j, 0 ≤ h j) ∧ (m + n.val < k.val → ∀ j, h j = 0) ∧
-      ∀ x y : ℝ, 0 < y → productMatrix (twoParam N d x y) m n k =
+      ∀ x y : ℝ, productMatrix (twoParam N d x y) m n k =
         ∑ j ∈ range ((m + n.val - k.val) / 2 + 1), h j * x ^ (m + n.val - k.val - 2 * j) * y ^ j
 
 theorem lc_twoParam : Stmt_lc_twoParam := fun _ _ hd m hm n k => twoParam_poly hd m hm n k
@@ -567,7 +646,7 @@ theorem lc_twoParam : Stmt_lc_twoParam := fun _ _ hd m hm n k => twoParam_poly h
 /-- The remark after Theorem 8.1, Bernstein form. -/
 def Stmt_lc_bernstein : Prop :=
   ∀ (N : ℕ) (d : ℕ → ℝ), LCProfile N d → ∀ m, m ≤ N → ∀ n k : Fin (N + 1),
-    ∃ B : ℕ → ℝ, (∀ s, 0 ≤ B s) ∧ ∀ r : ℝ, 0 < r → r ≤ 1 →
+    ∃ B : ℕ → ℝ, (∀ s, 0 ≤ B s) ∧ ∀ r : ℝ,
       productMatrix (twoParam N d (1 - r) r) m n k =
         ∑ s ∈ range (m + n.val - k.val + 1), B s * r ^ s * (1 - r) ^ (m + n.val - k.val - s)
 
