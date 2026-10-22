@@ -306,3 +306,18 @@ Scope: Theorem 2.1 (`geometric_criterion`), Theorem 5.3 (`perturbation_criterion
 - The scope sentence for Corollary 7.7 now says that its neighbourhood claim follows from the positive-radius coefficient box of `symmetric_criterion`, and that openness and dimension are not stated separately in Lean.
 
 Declarations added after this brief and still to be reviewed: `szwarc_full`, `realization_symmetric`, `ps_even_params`, `ps_odd_params`.
+
+## Lean statement fidelity, round 3 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_a5dc6254-6cbf-4277-83bd-ca7a7c1647f6`. Brief: `reviews/lean-fidelity3-brief.md`. Answer: `reviews/lean-fidelity3-answer.md`.
+
+Scope:
+- Theorem 7.1 in full: `szwarc_full` and `realization_symmetric`;
+- the Corollary 7.9 parameter identification: `ps_d_formula`, `ps_even_params`, `ps_odd_params`;
+- their scope sentences.
+
+**Verdict: PASS WITH MINOR FIXES.** All declarations match; several are stronger than the paper. Symmetry is proved for every realization, and the parameter lemmas omit the hypothesis p_0 ≤ 1/2. No Lean statement needs to change.
+
+Fix applied: the scope sentence now says "every finite realization of an array satisfying (2.1) with b ≡ 0".
+
+Not yet reviewed: `corner_value` (Lemma 9.1), added after this brief.
