@@ -677,6 +677,26 @@ runs/general/kernel_general.py, kernel_general2.py, kernel_coeffs.py, kernel_coe
   So in general the kernel is a signed path sum, and an all-N proof would show that the positive moves dominate (a sign-reversing pairing).
 - *Kernel positivity, observed.* Recovering c_{r,a} from the true L_{mn}^k: A_rc_{r,a} ≥ 0 coefficientwise for cubic profiles (1, x, θx²), θ ∈ {0, ½, 1, 3/2, 3} (LC and not LC), N = 4–8, and for geometric, random LC and log-convex profiles at N = 6, 8, 10. It fails for the control σ = (30, 0, 0, 1) (min −97889 at N = 4, k = 4) and for (1, 0, 0, 1/100). Kernel positivity therefore seems to hold well beyond LC at small N. It must fail for the log-convex segment arrays at the N where they violate (P) (N ≥ 19 for the known ones). The class on which the kernel stays positive for all N is the natural target, and LC is the conjectured sufficient condition.
 
+## Cubic profiles: (Γ) and (P) for all N, with σ_2, σ_3 ≥ 0 only (proved here, 2026-10-22; not yet in the paper or reviewed)
+
+runs/general/cubic_forms.py, cubic_local.py, cubic_check.py.
+**Theorem.** Let D_i = i + σ_2C(i,2) + σ_3C(i,3) with σ_2, σ_3 ≥ 0, d = D/D_N, and a = 1 − d, b = (1−r)d, c = rd. Then for every N ≥ 1 every H_{mn}^k(u,v) has nonnegative coefficients (Γ). Hence the Bernstein form (B) and property (P) hold for all r ∈ [0,1]. Log-concavity is not needed in degree 3.
+*Proof.*
+1. *Kernel recurrence.* As in the quadratic case, K_k = Σ c_{r,a}S^aZ^r with c_{0,a} = [a = k], and the kernel equation gives, for the new node (r+1, a):
+   D_{r+1}c_{r+1,a} = (T − D_{r+a})c_{r,a} + B'(r−1,a+2)c_{r−1,a+2} + t(D_{r+a+1} − D_r)c_{r,a+1} + B(r,a+2)c_{r,a+2} − σ_3 t C(a+3,3) c_{r−1,a+3},
+   with B(r,a) = C(a,2)(σ_2 + rσ_3) + C(a,3)σ_3 and B'(r,a) = C(a,2)(σ_2 + rσ_3) + 2C(a,3)σ_3.
+   - The coefficients were computed symbolically from (ℒ_z − ℒ_w)(S^aZ^r)/(z − w): 324 coefficients for a ≤ 8, r ≤ 5, 0 mismatches.
+   - They are polynomials of total degree ≤ 3 in (a, r), since ℒ has order 3, so the grid determines them.
+   - Check: the recurrence reproduces the true L_{mn}^k for all m, n, k at N = 3–10, including σ_3 ≫ σ_2².
+2. *Support.* c_{r,a} = 0 for r + a > N: the only move that raises r + a has weight T − D_{r+a}, which is 0 at r + a = N, and the jump lowers r + a. All weights other than the jump are ≥ 0 on the support.
+3. *Induction.* Write V_t(r,a), V_B(r,a) for the t-inflow t(D_{r+a} − D_{r−1})c_{r−1,a+1} and the B-inflow B(r−1,a+2)c_{r−1,a+2} into node (r, a). Hypothesis H(r): c_{r,a} ≥ 0 and D_rc_{r,a} ≥ ½(V_t + V_B), coefficientwise in t. H(0) and H(1) hold, since there is no jump into level 1. Step: by H(r) at (r, a+1) and (r, a+2), V_t(r+1,a) + V_B(r+1,a) ≥ (t/(2D_r))[(D_{r+a+1} − D_r)B(r−1,a+3) + B(r,a+2)(D_{r+a+2} − D_{r−1})]c_{r−1,a+3}. The local inequality
+   (D_{r+a+1} − D_r)B(r−1,a+3) + (D_{r+a+2} − D_{r−1})B(r,a+2) ≥ 4 D_r σ_3 C(a+3,3)   (r ≥ 1, a ≥ 0)
+   holds because the difference, written in (r − 1, a, σ_2, σ_3), has 58 terms, all with nonnegative coefficients (cubic_local.py). Its sharp case is r = 1, a = 0, σ_3 → 0, where the ratio tends to 4. So ½(V_t + V_B) ≥ J for the jump J = σ_3tC(a+3,3)c_{r−1,a+3}. With the other terms nonnegative, D_{r+1}c_{r+1,a} ≥ ½(V_t + V_B) ≥ 0, which is H(r+1).
+4. *Conclusion.* L_{mn}^k = Σ_r C(m+n−2r, m−r)c_{r,m+n−2r} ≥ 0 and H = (e_k/(e_me_n))L, so (Γ). Weighted homogeneity gives the (u,v) form, and r ∈ [0,1] gives (B) and (P). ∎
+*Checks.* H(r), the jump domination and c ≥ 0 hold at every node of the explicit recurrence for N = 3, 4, 5, 6, 8, 10 and (σ_2, σ_3) ∈ {(0,1), (1/10,10), (1,1), (2,1/3), (0,100), (5,0)} (cubic_check.py).
+*Scope.* A two-parameter family containing Krawtchouk (σ_2 = σ_3 = 0) and the quadratic family. It is still not an inequality-only class (Δ⁴d ≡ 0), but its proof is local: one negative move, dominated by two positive detours with factor 4. Degree 4 adds negative moves of type (+2,−3) and (+2,−4); the natural conjecture is that LC is what makes the analogous local domination work in degree ≥ 4.
+*To do before the paper.* Derive the recurrence coefficients in closed form for symbolic (a, r) (currently a degree argument plus a grid), and run a review round.
+
 ## Toward the general argument for (D)/(Γ): layers and dead ends (2026-10-22)
 
 - *Layers of (Γ).* H = Σ_j Γ_j v^j u^{s−2j}.
