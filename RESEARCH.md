@@ -1210,3 +1210,26 @@ Files:
 - VRAffineEnds.lean: the normalized endpoint bounds and Fz_nonneg.
 - VRAffineKey2.lean: rescaling, the identities X′ = (a−2)u₁ + J and 4H₁ − 2V₁ = 4αH_* + 2tT, alpha_ge, and the new key inequality.
 - VRQuadProfile.lean: iterShift_padNewton (shift sums equal finite differences on Ω), the quadratic Leibniz rule, phi2_phi2, and the assembly.
+
+## Theorem 8.11: convex quadratic ratio on any log-concave Newton profile (2026-10-23)
+
+Source: consult round 7 (reviews/consult-I-answer.md). The class (Q) is fully proved: a log-concave Newton profile, ρ(x) = r + tx + τC(x,2), and nondecreasing b give (P). Theorem 8.11 contains Theorem 8.9 (τ = 0) and Proposition 8.10.
+
+**New ingredients.**
+- *Weighted B-detour (eq:quad-B).* (n+1)(n+2)φ₂(ℓ)φ_n(ℓ+1) ≥ 8(n−1)c_{ℓ+1}φ_{n+2}(ℓ). Summing it gives exactly 4cB_j ≤ B₀B′_{j−1}.
+  - The unit-constant version is false: for N = 20, d_i = (2^i − 1)/(2^20 − 1), r = ½, t = 0, τ = 10⁻³, at (ℓ,n) = (16,2).
+  - The proof first reduces to a geometric tail (concavity in y = u_{n+1}/u_n), then to z = min(ℓ, 1/q). It finishes with the polynomial certificate K_nAB − L_npC ≥ 0 (an s-monotone square completion plus a table for n = 2–6) and two w-expansions with nonnegative coefficients.
+- *Key inequality (eq:quad-key)* with −2V₁ − W₁. It reuses the Theorem 8.9 interpolation with s = Δρ(ℓ+a−1) in place of t, keeps the surplus (2/3)sD(a−2)y₂, and adds τ-terms that are nonnegative coefficient by coefficient.
+- *Resummation constants.* V detour 9/2 and W detour 3, leaving (5/9)V₁ and (1/3)W₁; after the key inequality, GAG ≥ ½(GA₀ + A₀G) + (1/18)GV₁G + (1/12)GW₁G.
+
+**Independent checks (exact or symbolic), 0 failures.**
+- verify_consultI.py: N = 4–13, all ingredients plus M ≥ 0 and (P) for N ≤ 9.
+- verify_consultI_local.py: 30,000 local configurations with ℓ ≤ 200; minimum ratio 1.107.
+- verify_consultI_poly.py: the certificate identity, s-monotonicity, U_n and the table.
+- verify_consultI_expand.py: both boundary reductions and every w-coefficient, n = 2–8. While checking this I corrected my own transcription of [w³] to use A(0).
+
+**Status.**
+- Paper: Theorem 8.11 is written; review round 21 is running.
+- Lean:
+  - done: the generic layer (`resum_nonneg2`, `gkernel_resum2`);
+  - next: the concrete weights, the key inequality with W, and the weighted B-detour, which is the largest piece.
