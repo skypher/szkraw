@@ -721,7 +721,8 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - `realization_symmetric`: every finite realization of an array with b ≡ 0 is symmetric. The reflected node is a root of the terminal polynomial, which has degree N + 1, and the weights solve an invertible system with det(R_m(x_t)) ≠ 0 by the Gram identity;
     - `szwarc_full`: Theorem 7.1 in full.
   - lean/Szkraw/ParityParams.lean: `ps_d_formula` (d_n = [n]_q/[N]_q), `ps_even_params` ((N,q,r)) and `ps_odd_params` ((N−1,q,r/q)) in the Lean parametrization `geometricCoefficients N (1/r) q` of (2.3).
-- Remaining formalization: that remark, Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), and the provable statements of Section 9.
+- Section 9: Lemma 9.1 (`corner_value`, g(N,N;N) = (1−r)^N for K_{N,r}, 0 < r ≤ 1) is proved via the Boolean model. `boolean_matrix_coefficient` now assumes r ≤ 1 instead of r < 1, since only r ≤ 1 was used.
+- Remaining formalization: the remark after Theorem 8.1, Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), and Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

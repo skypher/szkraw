@@ -128,3 +128,4 @@ assert_allowed_axioms Szkraw.szwarc_full
 assert_allowed_axioms Szkraw.ps_d_formula
 assert_allowed_axioms Szkraw.ps_even_params
 assert_allowed_axioms Szkraw.ps_odd_params
+assert_allowed_axioms Szkraw.corner_value

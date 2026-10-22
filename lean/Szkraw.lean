@@ -35,3 +35,4 @@ import Szkraw.Stability
 import Szkraw.SzwarcMargin
 import Szkraw.SymmetricMeasure
 import Szkraw.ParityParams
+import Szkraw.CornerValue

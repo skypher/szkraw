@@ -4,7 +4,7 @@ namespace Szkraw
 
 /-- Identify the selected Boolean coordinate with the actual finite product coefficient. -/
 theorem boolean_matrix_coefficient (N : ℕ) (hN : 1 ≤ N) (r : ℝ)
-    (hr : 0 < r) (hr1 : r < 1) (m : ℕ) (hm : m ≤ N)
+    (hr : 0 < r) (hr1 : r ≤ 1) (m : ℕ) (hm : m ≤ N)
     (n k : Fin (N+1)) (b : Fin N → Bool) (hb : bitsWeight N b = k.val) :
     booleanProduct r N m n.val b * (N.choose k.val : ℝ) =
       productMatrix (krawCoefficients N r) m n k * (N.choose m : ℝ) * (N.choose n.val : ℝ) := by
