@@ -227,3 +227,11 @@ Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_0cf69d14-bfe6-4545-b
 2. Section 8: the reference to Theorem 7.12 now mentions its strengthened conditions (i)–(iii), and the Krawtchouk exclusion is qualified by N ≥ 3 (reviewer's text).
 3. The compensation remark after Corollary 7.13 now refers to negative weighted contributions (reviewer's text).
 Current paper.tex SHA-256: `fde2e1394fb3ecf45b5b407bf0b37e14beac026cf7ceddca6f19067c7213bfc7`. A confirmation round on the fixes follows.
+
+## Round 13: confirmation of the round-12 fixes (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_40cd4f22-24f2-4e5f-85eb-d8368f7e23ed`. Brief: `reviews/limits-review13-brief.md`. Answer: `reviews/limits-review13-answer.md`.
+
+**Verdict: PASS** for Theorem 7.12, Corollary 7.13 and the changed Section 8 sentence: all three fixes are applied correctly and introduce no new error. Reviewed source: commit f52442b, paper.tex SHA-256 `fde2e1394fb3ecf45b5b407bf0b37e14beac026cf7ceddca6f19067c7213bfc7` (the reviewer did not recompute the hash).
+
+After this PASS, only the AI-use disclosure changed ("twelve rounds" → "thirteen rounds"). Current paper.tex SHA-256: `2b4fa0ce51d4607d9c38ab900660f9f4b2732c38e273fa40088a4f69f4853b19`.
