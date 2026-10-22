@@ -1177,3 +1177,36 @@ which was ≥ 0 at all 3,480 sources (N = 5–10, t at the largest value keeping
 - *Identity (exact, checked on 200 random sequences).* A₁ = W^b_{3,1}(ℓ,a) = (a−2)A₀ − a·A₀″, because Σ_{n≥3}(n−2)C(a,n)Δⁿ = aΔE^{a−1} − 2E^a + 2 + aΔ with E = 1 + Δ. Hence 4H₁ − 2V₁ = 4A₁ + 2V₁, and
   E_mid = A₀(Y′ − 4(a−2)D) + A₀″(Y + 4aD) − 2DV₁ = A₀″(Y + Y′ + 8D) + (Δb_ℓ + Δb_{ℓ+a−1})(Y′ − 4(a−2)D) − 2DV₁.
   For a linear profile every term cancels exactly: H₁ = 0, and for quadratic b, (a−2)A₀ = a·A₀″. A proof under nondecreasing b must therefore use the shape of b = σd and the log-concavity of u; Φ ≥ 0 is the cleanest form found so far.
+
+## Consult round 6 and the strengthened Theorem 8.9 (2026-10-23)
+
+Source: reviews/consult-H-answer.md. I verified it independently in runs/varratio/verify_consultH.py, with 0 failures:
+- 5,088 sequence checks;
+- 450 arrays at the new maximal slope;
+- the key inequality at 4,526 sources;
+- (P) for N ≤ 8;
+- 72 quadratic-profile arrays, (P) and M ≥ 0.
+
+**Theorem 8.9 strengthened.** The hypothesis is now only that b is nondecreasing.
+- *Equivalent condition.* b nondecreasing ⇔ the last increment is ≥ 0 ⇔ κ(N + R) ≤ N(1−r), with R = d_{N−1}/(1−d_{N−1}). The step uses that R_i = d_i/f_1(i) is nondecreasing.
+- *Key inequality.* It reduces to (eq:affine-red), which is affine in α with α-coefficient K ≥ 0. Then α ≥ tu₀/u₁, and at that minimum the difference is (t/u₁)·G with G = u₁³F(u₀/u₁). F is concave on [0, 1/q], so the two endpoint bounds suffice.
+- *Relation to my own probe.* My earlier lemma Φ ≥ 0 is the same reduction using the weaker bound α ≥ t·a·u₀/X.
+
+**Proposition 8.10 (new).** Profiles of Newton degree ≤ 2, any convex quadratic ratio, and nondecreasing b give (P). The only negative move is B₁, and P² ≥ 6Q.
+
+**Mixed detours for general convex quadratic ratios (class (Q)).** The constants are H 10, V 9/2, W 3 (optimal), C′ 6. Still open for (Q): the B-detour (Newton(c) need not be log-concave) and the key inequality (22) with −(20/9)V₁ − (4/3)W₁.
+
+**Reviews.**
+- Round 20: PASS WITH MINOR FIXES. The reviewer checked 340,251 coefficients with 0 negatives. Fixes: "exactly when" now refers to monotone b, and the strict enlargement is stated for r < 1.
+
+**Lean, all with a clean axiom audit.**
+- `affine_matrix`: the new hypothesis, b nondecreasing.
+- `affine_bmono_iff`: the equivalence for Theorem 8.9.
+- `quadprofile_matrix`: Proposition 8.10.
+- `quadprofile_bmono_iff`: the equivalence stated after Proposition 8.10.
+
+Files:
+- VRAffineWeights.lean: AffSetting now has the field hb in place of the slope bound.
+- VRAffineEnds.lean: the normalized endpoint bounds and Fz_nonneg.
+- VRAffineKey2.lean: rescaling, the identities X′ = (a−2)u₁ + J and 4H₁ − 2V₁ = 4αH_* + 2tT, alpha_ge, and the new key inequality.
+- VRQuadProfile.lean: iterShift_padNewton (shift sums equal finite differences on Ω), the quadratic Leibniz rule, phi2_phi2, and the assembly.
