@@ -695,7 +695,7 @@ runs/general/cubic_forms.py, cubic_local.py, cubic_check.py.
 4. *Conclusion.* L_{mn}^k = Σ_r C(m+n−2r, m−r)c_{r,m+n−2r} ≥ 0 and H = (e_k/(e_me_n))L, so (Γ). Weighted homogeneity gives the (u,v) form, and r ∈ [0,1] gives (B) and (P). ∎
 *Checks.* H(r), the jump domination and c ≥ 0 hold at every node of the explicit recurrence for N = 3, 4, 5, 6, 8, 10 and (σ_2, σ_3) ∈ {(0,1), (1/10,10), (1,1), (2,1/3), (0,100), (5,0)} (cubic_check.py).
 *Scope.* A two-parameter family containing Krawtchouk (σ_2 = σ_3 = 0) and the quadratic family. It is still not an inequality-only class (Δ⁴d ≡ 0), but its proof is local: one negative move, dominated by two positive detours with factor 4. Degree 4 adds negative moves of type (+2,−3) and (+2,−4); the natural conjecture is that LC is what makes the analogous local domination work in degree ≥ 4.
-*To do before the paper.* Derive the recurrence coefficients in closed form for symbolic (a, r) (currently a degree argument plus a grid), and run a review round.
+*Recurrence coefficients for symbolic (a, r).* runs/general/cubic_symbolic.py derives them with symbolic exponents: chain rule with ∂_zS = 1, ∂_zZ = w; antisymmetric part divided by z − w via (z^d − w^d)/(z − w) = h_{d−1}(S, Z). The result matches all six closed forms identically. *To do before the paper:* a review round.
 
 ## Toward the general argument for (D)/(Γ): layers and dead ends (2026-10-22)
 
