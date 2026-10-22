@@ -49,7 +49,25 @@ def check(d, co, stats):
                     rhs = cc * (4 * H1 - gV * V1 - gW * Wh1)
                     if rhs > 0: upd('key' + gname, lhs / rhs)
 
+def steep_member(rng, N):
+    sg = lc_seq(rng, N)
+    Dd = [sum(math.comb(n, k) * sg[k - 1] for k in range(1, n + 1)) for n in range(N + 1)]
+    d = [z / Dd[N] for z in Dd]
+    B = F(rng.choice([2, 3, 10, 100]))
+    def okb(r):
+        rh = lambda x: r * B ** x
+        bb = [(1 - rh(i)) * d[i] for i in range(N + 1)]
+        return rh(N) <= 1 and all(bb[i + 1] >= bb[i] for i in range(N))
+    lo, hi = F(0), 1 / B ** N
+    if okb(hi): lo = hi
+    else:
+        for _ in range(30):
+            mid = (lo + hi) / 2; lo, hi = (mid, hi) if okb(mid) else (lo, mid)
+    r = lo * rng.choice([F(1), F(1, 2)])
+    return d, [r * (B - 1) ** k for k in range(N + 1)]
+
 def member(rng, N, fam):
+    if fam == 'steep': return steep_member(rng, N)
     sg = lc_seq(rng, N)
     Dd = [sum(math.comb(n, k) * sg[k - 1] for k in range(1, n + 1)) for n in range(N + 1)]
     d = [z / Dd[N] for z in Dd]

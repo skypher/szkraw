@@ -1388,3 +1388,31 @@ Consequences:
 Status: in paper.tex as Proposition 8.14. Review round 23 is pending; not yet machine-verified.
 
 Novelty is NOT established. Walkup (1976, J. Appl. Prob. 13, 76–85, doi:10.2307/3212667) treats binomial convolution of Pólya frequency sequences and the probability that a union of independent random subsets is the whole set. Only its abstract was accessible, so it may contain this result or a special case. The paper cites it as related work and claims no novelty. The full text is needed, for example through a library.
+
+## Conjecture (G): stress tests and the detours (2026-10-23)
+
+**Steep exponential ratios.** ρ(x) = r·B^x has geometric Newton coefficients r(B−1)^k, so it lies in (G) for every base B. With r tiny, monotone b allows steep bases. Tests (runs/varratio/steep_exp_test.py, B ∈ {2, 3, 10, 100}, linear / geometric / random LC profiles):
+- full tables, N ≤ 14: no failure;
+- rows g(m,N;k), N = 20–60: no failure.
+
+Ingredient constants on these arrays (g_ingredients.py, family `steep`, N ≤ 10): B ≥ 14, V ≥ 148, Ŵ ≥ 36, key ratio (γ = 0) ≥ 21.
+
+**V-detour for general ratios (proved, pointwise).**
+- Claim: φ₂(ℓ)·v_n(ℓ+1) ≥ n/(n+2)·c_{ℓ+1}·v_{n+2}(ℓ), with v_n = nΔρ(ℓ+n−1)f_{n−1}, for every ratio whose Newton coefficients are log-concave.
+- Proof:
+  - φ₂(ℓ) ≥ ρ(ℓ+2)f₂(ℓ), and Lemma 8.3 for f gives f₂(ℓ)f_{n−1}(ℓ+1) ≥ d_{ℓ+1}f_{n+1}(ℓ).
+  - For y ≥ x: Δρ(y+1)/Δρ(y) = 1 + Δ²ρ(y)/Δρ(y) ≤ 1 + Δρ(y)/ρ(y) ≤ ρ(x+1)/ρ(x).
+  - The first step is LC of j ↦ Δ^jρ(y), a y-fold shift sum of (ρ_j). The second is LC of x ↦ ρ(x) = Σ_i C(x,i)ρ_i, the binomial convolution of (ρ_i) with the constant sequence (Walkup / Liggett).
+  - Take x = ℓ+1 and y = ℓ+n.
+- Consequence: the coefficient sums give the V-detour constant 6, as in Theorem 8.9.
+
+**Ŵ-detour (open).** Here ŵ_n = Σ_{j≥2}C(n,j)Δ^jρ(ℓ+n−j)f_{n−j}.
+- Pointwise per component: target components j ≤ n get the factor C(n,j)/C(n+2,j). The extra components j = n+1, n+2 are covered by the 2Δρ·f₁ and Δ²ρ·f₀ terms of φ₂, using LC in j.
+- The component j = n gets only 2/((n+1)(n+2)), so the coefficient quotient at m = 2J+1 drops to 1 < 2.
+- A summed argument (like the proof of quad-B in Theorem 8.11) or a better assignment of φ₂-terms is needed. Measured constants are ≥ 11 (mixed) and ≥ 36 (steep).
+
+**H-detour and C′-detour:** as in Theorem 8.11 (constants 10 and 6); they hold for general ratios unchanged.
+
+**B-detour:** Proposition 8.14 together with Lemma 8.3.
+
+**Key inequality for general ratios: open.**
