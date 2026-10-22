@@ -654,6 +654,37 @@ Brief and answer: reviews/consult-D-brief.md, reviews/consult-D-answer.md (job 8
 - *Missing.* An all-m family of minor certificates that closes under the D recursion.
 - *(D) is manifestly positive in LC coordinates for N ≤ 5 (proved; runs/ql_proof/d_cert.py).* With σ_{k+1} = σ_kρ_k and ρ_k = x_k + … + x_{N−1} (x ≥ 0 is exactly LC), the fraction-free numerators D_nP_m[n−1] − D_m(D_N − D_{m−1})P_{m−1}[n] of D_{mn}^k (times D_NQ_m > 0) have nonnegative coefficients in (t, x) for all m < n ≤ k: 3, 7 and 13 nonzero numerators at N = 3, 4, 5. So (D), (Γ), (B) and (P) hold for every LC constant-ratio profile at N ≤ 5. N = 6 passes as well (22 numerators, 164 s with sparse-ring arithmetic and pruning to the entries that are needed; runs/ql_proof/d_cert_fast.py), so (D) is proved for N ≤ 6. N = 7 would take about 7 h at the observed growth (×160 per step) and is not run. The m = 1 case has an all-N proof in these coordinates: the numerator of φ(n) − φ(1) is (D_N − D_n)(D_n − 1) + D_n(δ_n − 1), and each factor has nonnegative coefficients (δ_n − 1 = Σ_{k≥2} C(n−1,k−1)σ_k).
 
+## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
+
+Sources: reviews/consult-F-brief.md, reviews/consult-F-answer.md (job d4354a3a); checks runs/general/uniform_check.py, general_check.py, general_formula.py.
+
+**Theorem.** Let 0 = d_0 < d_1 < … < d_N = 1 and let σ_k = Δ^kd(0) (k ≥ 1) be nonnegative and log-concave without internal zeros. Let 0 < r ≤ 1 and a_i = 1 − d_i, b_i = (1−r)d_i, c_i = rd_i. Then the system has nonnegative linearization. More strongly, every H_{mn}^k(u,v) of the two-parameter system has nonnegative coefficients (Γ), so every g(m,n;k) has nonnegative Bernstein coefficients in r.
+
+*Proof.* Normalize σ_1 = 1, and let D_i = Σ_kC(i,k)σ_k, T = D_N.
+1. *Kernel (round 3).* With E_i = e_ip_i, e_r = Π_{j<r}(T − D_j)/Π_{j≤r}D_j, Y = T·x and F = ΣE_iz^i: YF = ℒ_zF, where ℒ_z = (z^{−1} + t − z)D(θ_z) + Tz and D(θ) = Σ_kσ_kC(θ,k). This is exact because T − D_N = 0. Associativity gives (ℒ_z − ℒ_w)K_k = 0 for K_k = ΣL_{mn}^kz^mw^n = Σc_{r,a}S^aZ^r (S = z + w, Z = zw), c_{0,a} = [a = k], and H = (e_k/(e_me_n))L.
+2. *Recurrence in closed form, every degree (derived here).*
+   - By Vandermonde, C(θ_z,k)(S^aZ^r) = Σ_{i+j=k} C(r,j)C(a,i)z^iS^{a−i}Z^r.
+   - Hence (ℒ_z − ℒ_w)(S^aZ^r)/(z − w) = T S^aZ^r + Σ_{i+j=k} σ_kC(r,j)C(a,i)S^{a−i}Z^r·[h_{i−2} + t h_{i−1} − h_i], with h_n = (z^{n+1} − w^{n+1})/(z − w) = Σ_l (−1)^l C(n−l,l) S^{n−2l}Z^l, h_{−1} = 0 and h_{−2} = −Z^{−1}.
+   - Collecting terms with f_n(r) = Σ_hC(r,h)σ_{n+h} (so f_0 = D_r) and W_{p,q}(r,a) = Σ_{n≥p}C(n−p+q,q)C(a,n)f_n(r):
+     D_{r+1}c_{r+1,a} = (T − D_{r+a})c_{r,a} + Σ_{j≥0}(−1)^j G_j, where
+     G_j = tA_j(r−j, a+2j+1)c_{r−j,a+2j+1} + B_j(r−j, a+2j+2)c_{r−j,a+2j+2} + C_j(r−j−1, a+2j+2)c_{r−j−1,a+2j+2},
+     with A_j = W_{2j+1,j}, B_j = W_{2j+2,j}, C_j = W_{2j+2,j+1}.
+   - Checks: term by term against the symbolic operator for K ≤ 7; the recurrence reproduces every true L at full degree for N ≤ 10.
+3. *Support.* c_{r,a} = 0 for r + a > N, since only the straight move raises r + a and its weight T − D_{r+a} vanishes at r + a = N.
+4. *LC lemma.* (0, σ_1, σ_2, …) is log-concave without internal zeros, and v_i = u_i + u_{i+1} preserves this. The LC gap of v is a sum of three nonnegative terms. So g_i = f_i(r) is LC in i for each r. Balanced products give g_ig_l ≥ g_0g_{i+l} and g_ig_{l+1} ≥ g_1g_{i+l} for i, l ≥ 1. Adding, with g_0 + g_1 = D_{r+1}:
+   (1) f_i(r)f_l(r+1) ≥ D_{r+1}f_{i+l}(r)   (i, l ≥ 1).
+5. *Local inequalities, every j ≥ 1.* Keep A_0 ≥ a f_1(r) and B_0 ≥ C(a,2)f_2(r), expand the second steps, apply (1), and use C(a,s)C(a−s,n−s) = C(a,n)C(n,s). Then:
+   - A_0(r,a)B_{j−1}(r+1,a−1) + B_0(r,a)A_{j−1}(r+1,a−2) ≥ 4D_{r+1}A_j(r,a);
+   - B_0(r,a)B_{j−1}(r+1,a−2) ≥ 4D_{r+1}B_j(r,a);
+   - B_0(r,a)C_{j−1}(r+1,a−2) ≥ 4D_{r+1}C_j(r,a).
+   Coefficientwise in C(a,m)f_m(r), the ratios are jm(m+1)/(2(m−j−1)), jm(m−1)/(2(m−j−2)) and (j+1)m(m−1)/(2(m−j−1)) on m ≥ 2j+1 or 2j+2. They are ≥ 5, 5, 6 (minimum at j = 1), hence ≥ 4. (Checked by hand.)
+6. *Operator inequality and induction.* On Ω_N = {r + a ≤ N}, with every move normalized by D at its destination, write c = b + (U + P − Q)c. Here U is the straight move, P is all even groups (G_0, G_2, …), and Q is the magnitude of all odd groups. All three are nonnegative and raise r. Each odd jump has its own two-step detours inside P², with intermediate node at level r+1 and denominator D_{r+1}: A_j via A_0∘B_{j−1} and B_0∘A_{j−1}; B_j via B_0∘B_{j−1}; C_j via B_0∘C_{j−1}. The detour pairs differ by type and j, so none is used twice. By step 5, P² ≥ 4Q entrywise and coefficientwise in t. Induction on the level gives c ≥ 0 and c ≥ ½Pc: Qc ≤ ¼P²c ≤ ½Pc, so c ≥ b + Uc + ½Pc ≥ ½Pc ≥ 0.
+7. *Conclusion.* K_k has nonnegative coefficients in (t, S, Z), hence in (t, z, w). L ≥ 0 and H = (e_k/(e_me_n))L give (Γ). Weighted homogeneity gives the (u,v) form, and u = 1 − r, v = r gives (P) with nonnegative Bernstein coefficients. ∎
+
+*Exact checks of the new steps (uniform_check.py).* (1) on 60 random LC σ of degrees 3–12: 19,440 instances, 0 failures. The internal-zero control (1,0,0,1/100) violates (1) 22 times. (2) for j = 1..4: 70,560 instances, 0 failures. P² ≥ 4Q entrywise on Ω_N for 8 random LC profiles at N = 6–10: 0 violations. Earlier: the induction invariant (with G_0 alone) held node by node to N = 12 (general_check.py).
+*Relation to earlier results.* This contains Krawtchouk (σ = (1,0,…)), every geometric array of Theorem 2.1 (σ_k = (q−1)^{k−1}), Q, the quadratic, cubic and quartic families, and all LC profiles. The log-convex segment counterexamples are excluded. The N ≤ 6 certificate (lc_certificate.py) and the earlier evidence (thousands of tables, N ≤ 400 corners) are consistent with it.
+*Mission relevance.* This is the inequality-type criterion for the profile asked for in MISSION.md's open item: the hypotheses are nonnegativity and log-concavity of the Newton coefficients of d, which are checkable inequalities, together with constant ratio b_i/c_i. It covers asymmetric Krawtchouk (r < 1) on deep triples. The constant ratio is still an equality condition. Next: write the paper section and run an independent review round.
+
 ## Quadratic profiles: (D), (Γ), (B), (P) proved for all N (consult round 3, verified, 2026-10-22)
 
 Brief and answer: reviews/consult-E-brief.md, reviews/consult-E-answer.md (job 51fb971c). Independent check: runs/general/quad_check.py.
