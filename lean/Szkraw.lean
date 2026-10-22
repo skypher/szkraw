@@ -73,4 +73,6 @@ import Szkraw.VRAffine
 import Szkraw.VRAffineDetours
 import Szkraw.VRAffineWeights
 import Szkraw.VRAffineKey
+import Szkraw.VRAffineEnds
+import Szkraw.VRAffineKey2
 import Szkraw.VRAffineMain

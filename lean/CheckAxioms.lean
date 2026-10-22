@@ -215,3 +215,7 @@ assert_allowed_axioms Szkraw.affU_leibniz
 assert_allowed_axioms Szkraw.AffSetting.key
 assert_allowed_axioms Szkraw.affine_kernel_nonneg
 assert_allowed_axioms Szkraw.affine_matrix
+assert_allowed_axioms Szkraw.affine_bmono_iff
+assert_allowed_axioms Szkraw.Fz_nonneg
+assert_allowed_axioms Szkraw.G_nonneg
+assert_allowed_axioms Szkraw.AffSetting.alpha_ge

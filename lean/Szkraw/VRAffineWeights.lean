@@ -15,18 +15,19 @@ namespace Szkraw
 
 open Finset
 
-/-- The setting of Theorem 8.9 for the padded Newton sequence `ν` of the profile. -/
+/-- The Newton sequence of `b`. -/
+noncomputable def affW (N : ℕ) (r t : ℝ) (ν : ℕ → ℝ) (i : ℕ) : ℝ := ν i - affU N r t ν i
+
+/-- The setting of Theorem 8.9 for the padded Newton sequence `ν` of the profile: `b`, whose values
+are `dd (affW N r t ν) m` for `m ≤ N`, is nondecreasing. -/
 structure AffSetting (N : ℕ) (r t : ℝ) (ν : ℕ → ℝ) : Prop where
   hN : 1 ≤ N
   hr : 0 < r
   ht : 0 ≤ t
-  hts : (2 * (N : ℝ) - 1) * t ≤ 1 - r
+  hb : ∀ m, m < N → dd (affW N r t ν) m ≤ dd (affW N r t ν) (m + 1)
   hν : LCNZ ν
   hν0 : ν 0 = 0
   hν1 : 0 < ν 1
-
-/-- The Newton sequence of `b`. -/
-noncomputable def affW (N : ℕ) (r t : ℝ) (ν : ℕ → ℝ) (i : ℕ) : ℝ := ν i - affU N r t ν i
 
 /-- `h_n(ℓ) = (s - t(ℓ+n)) f_n(ℓ)`. -/
 noncomputable def hFn (r t : ℝ) (ν : ℕ → ℝ) (ℓ n : ℕ) : ℝ := (1 - r - t * ((ℓ : ℝ) + n)) * Szkraw.iterShift ν ℓ n
@@ -50,12 +51,6 @@ section Weights
 variable {N : ℕ} {r t : ℝ} {ν : ℕ → ℝ} (S : AffSetting N r t ν)
 include S
 
-theorem AffSetting.s_ge (m : ℕ) (hm : m ≤ N) : t * m ≤ 1 - r := by
-  have h := S.hts
-  have hN : (1 : ℝ) ≤ N := by exact_mod_cast S.hN
-  have : (m : ℝ) ≤ N := by exact_mod_cast hm
-  nlinarith [S.ht]
-
 theorem AffSetting.f_nonneg (ℓ n : ℕ) : 0 ≤ Szkraw.iterShift ν ℓ n := iterShift_nonneg S.hν ℓ n
 
 theorem AffSetting.U_lcnz : LCNZ (affU N r t ν) := affU_lcnz S.hr S.ht S.hν S.hν0
@@ -73,6 +68,23 @@ theorem AffSetting.dd_W {ℓ : ℕ} (hℓ : ℓ ≤ N) : dd (affW N r t ν) ℓ 
   have := S.dd_U hℓ
   unfold dd at this
   rw [this]; ring
+
+theorem AffSetting.b_chain {ℓ k : ℕ} (h : ℓ + k ≤ N) : dd (affW N r t ν) ℓ ≤ dd (affW N r t ν) (ℓ + k) := by
+  induction k with
+  | zero => simp
+  | succ k ih => exact le_trans (ih (by omega)) (S.hb (ℓ + k) (by omega))
+
+theorem AffSetting.s_ge (m : ℕ) (hm : m ≤ N) : t * m ≤ 1 - r := by
+  have h0 : dd (affW N r t ν) 0 = 0 := by
+    show affW N r t ν 0 = 0
+    unfold affW; rw [affU_zero S.hν0, S.hν0]; ring
+  have hc := S.b_chain (ℓ := 0) (k := N) (by omega)
+  rw [h0, zero_add, S.dd_W le_rfl] at hc
+  have hd : 0 < dd ν N := dd_pos S.hν S.hν1 S.hN
+  have h1 : 0 ≤ 1 - r - t * N := by
+    by_contra hneg; push Not at hneg; nlinarith
+  have : (m : ℝ) ≤ N := by exact_mod_cast hm
+  nlinarith [S.ht]
 
 theorem AffSetting.psi_split {ℓ n : ℕ} (h : ℓ + n ≤ N) :
     Szkraw.iterShift (affW N r t ν) ℓ n = hFn r t ν ℓ n - vFn t ν ℓ n := by
@@ -177,27 +189,8 @@ theorem AffSetting.A0_eq {ℓ a : ℕ} (h : ℓ + a ≤ N) :
   push_cast; ring
 
 theorem AffSetting.A0_nn {ℓ a : ℕ} (h : ℓ + a ≤ N) : 0 ≤ Wt (affW N r t ν) 1 0 ℓ a := by
-  rcases Nat.eq_zero_or_pos a with ha | ha
-  · subst ha; rw [Wt_eq_zero _ _ _ _ (by norm_num)]
-  rw [S.A0_eq h, Wt_one_zero]
-  have hinc := S.dd_incr ℓ a
-  have hle := S.dd_le ℓ
-  have hf := S.f_nonneg ℓ 1
-  have hα : t * (2 * (ℓ : ℝ) + a) ≤ 1 - r := by
-    have h1 : 2 * ℓ + a ≤ 2 * N - 1 := by omega
-    have h2 : ((2 * ℓ + a : ℕ) : ℝ) ≤ 2 * (N : ℝ) - 1 := by
-      have : ((2 * ℓ + a : ℕ) : ℝ) ≤ ((2 * N - 1 : ℕ) : ℝ) := by exact_mod_cast h1
-      rw [Nat.cast_sub (by have := S.hN; omega)] at this; push_cast at this ⊢; linarith
-    push_cast at h2
-    nlinarith [S.hts, S.ht]
-  have hα0 : 0 ≤ 1 - r - t * ((ℓ : ℝ) + a) := by nlinarith [S.ht, (Nat.cast_nonneg ℓ : (0 : ℝ) ≤ ℓ)]
-  have ha' : (0 : ℝ) ≤ a := Nat.cast_nonneg a
-  have p1 : 0 ≤ (1 - r - t * ((ℓ : ℝ) + a)) * (dd ν (ℓ + a) - dd ν ℓ - a * Szkraw.iterShift ν ℓ 1) :=
-    mul_nonneg hα0 (by linarith)
-  have p2 : 0 ≤ t * a * (ℓ * Szkraw.iterShift ν ℓ 1 - dd ν ℓ) := mul_nonneg (mul_nonneg S.ht ha') (by linarith)
-  have p3 : 0 ≤ a * Szkraw.iterShift ν ℓ 1 * (1 - r - t * (2 * (ℓ : ℝ) + a)) :=
-    mul_nonneg (mul_nonneg ha' hf) (by linarith)
-  nlinarith [p1, p2, p3]
+  rw [Wt_one_zero]
+  linarith [S.b_chain h]
 
 /-! ### Nonnegativity of `H` and `V` -/
 
