@@ -666,6 +666,17 @@ Brief and answer: reviews/consult-E-brief.md, reviews/consult-E-answer.md (job 5
 - *Verification here.* Exact arithmetic at N = 3, 4, 5, 6, 8, 10 and x ∈ {1/3, 1, 7/2}: the kernel recurrence reproduces every L_{mn}^k (all m, n, k; 2808 identities per x across these N), the support and positivity claims hold, the D identity and the factorization W = (w − z)B_k hold (954 identities per x), and both terminal formulas hold. I re-derived by hand the operator identity YF = ℒ_zF, including the vanishing boundary term. The consult reports a check through N = 18 over Z[t, x].
 - *Status.* This is an all-N theorem for a non-geometric one-parameter family through Krawtchouk. It is still of equality type (σ_3 = 0); the LC class itself is not done. Generalization: for any profile D(θ) = Σ_k (σ_k/k!) z^k ∂_z^k, the same kernel equation holds with a higher-order operator, and the question becomes positivity of the resulting recurrence for c_{r,a} under LC.
 
+## The symmetric kernel for general profiles (2026-10-22)
+
+runs/general/kernel_general.py, kernel_general2.py, kernel_coeffs.py, kernel_coeffs2.py.
+- *General kernel equation.* For any profile D_i = Σ_k C(i,k)σ_k, D(θ) = Σ_k (σ_k/k!) z^k ∂_z^k, and ℒ_z = (1 + tz − z²) Σ_k (σ_k/k!) z^{k−1}∂_z^k + Tz is exact on polynomials of degree ≤ N. So K_k = Σ c_{r,a} S^aZ^r again satisfies (ℒ_z − ℒ_w)K_k = 0, and c is determined by c_{0,a} = [a = k] through a recurrence on the (r, a) grid (new node (r+1, a) from the equation at (r, a)).
+- *Moves (computed symbolically).*
+  - Quadratic: (+1,0) with T − D_{r+a}; (+1,−1) with t·(…); (+1,−2); (+2,−2); all positive.
+  - Cubic adds one negative move, (+2,−3) with weight −σ_3 t C(a,3) (from the t z³∂³ term); the other coefficients are positive combinations of σ_1..σ_3.
+  - Quartic: (+2,−3) becomes −t(…σ_3, σ_4…), and a new (+2,−4) has weight −σ_4 C(a,4)-type.
+  So in general the kernel is a signed path sum, and an all-N proof would show that the positive moves dominate (a sign-reversing pairing).
+- *Kernel positivity, observed.* Recovering c_{r,a} from the true L_{mn}^k: A_rc_{r,a} ≥ 0 coefficientwise for cubic profiles (1, x, θx²), θ ∈ {0, ½, 1, 3/2, 3} (LC and not LC), N = 4–8, and for geometric, random LC and log-convex profiles at N = 6, 8, 10. It fails for the control σ = (30, 0, 0, 1) (min −97889 at N = 4, k = 4) and for (1, 0, 0, 1/100). Kernel positivity therefore seems to hold well beyond LC at small N. It must fail for the log-convex segment arrays at the N where they violate (P) (N ≥ 19 for the known ones). The class on which the kernel stays positive for all N is the natural target, and LC is the conjectured sufficient condition.
+
 ## Toward the general argument for (D)/(Γ): layers and dead ends (2026-10-22)
 
 - *Layers of (Γ).* H = Σ_j Γ_j v^j u^{s−2j}.
