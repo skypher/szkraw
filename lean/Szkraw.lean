@@ -22,3 +22,4 @@ import Szkraw.LCSequences
 import Szkraw.LogConcaveStatement
 import Szkraw.LCDetours
 import Szkraw.LCInduction
+import Szkraw.RowZero
