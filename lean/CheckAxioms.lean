@@ -125,3 +125,6 @@ assert_allowed_axioms Szkraw.szwarc_even_kraw
 assert_allowed_axioms Szkraw.szwarc_odd_kraw
 assert_allowed_axioms Szkraw.realization_symmetric
 assert_allowed_axioms Szkraw.szwarc_full
+assert_allowed_axioms Szkraw.ps_d_formula
+assert_allowed_axioms Szkraw.ps_even_params
+assert_allowed_axioms Szkraw.ps_odd_params
