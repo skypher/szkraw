@@ -38,6 +38,11 @@ Section numbers refer to paper.tex. §7 was independently reviewed by AI. The ro
   - Hypotheses: c has log-concave Newton coefficients, and b's Newton coefficients are c's times nonincreasing weights w_k ≥ 0 (or, more generally, satisfy two mixed inequalities).
   - Conclusion: nonnegative linearization in the paper's own normalization. The ratio c_i/(b_i+c_i) is then nondecreasing, and constant w is Theorem 8.1.
   - Status: proof written, exact checks pass. Machine-verified (`varyratio_matrix`, `varyratio_weights`, and `quadratic_matrix` for Proposition 8.8, the quadratic arrays); axiom audit clean. AI review round 17 (Theorem 8.6, Corollary 8.7): PASS WITH MINOR FIXES (applied). Round 18 (Proposition 8.8): PASS WITH MINOR FIXES (applied). Large-N exact tests (N = 15–25): 597 arrays satisfying the hypotheses, 0 failures.
-  - Theorem 8.9 (2026-10-22): linearly increasing ratios ρ_i = r + κi/N, with κ ≤ N(1−r)/(2N−1), and log-concave Newton profiles have (P). This closes the curved-profile case. Written proof from consult round 5; verified exactly here; review round 19 PASS WITH MINOR FIXES (applied); machine-verified (`Szkraw.affine_matrix`, axiom audit clean); Lean fidelity round 12 PASS WITH MINOR FIXES (applied).
+  - Theorem 8.9 (2026-10-22, strengthened 2026-10-23): linearly increasing ratios ρ_i = r + κi/N on log-concave Newton profiles have (P) whenever b is nondecreasing. That condition is equivalent to κ(N + d_{N−1}/(1−d_{N−1})) ≤ N(1−r); the first version assumed κ ≤ N(1−r)/(2N−1). This closes the curved-profile case.
+    - Proof: consult rounds 5–6, verified exactly here.
+    - Review rounds 19 and 20: PASS WITH MINOR FIXES (applied).
+    - Machine-verified: `Szkraw.affine_matrix` and `Szkraw.affine_bmono_iff`, axiom audit clean.
+    - Lean fidelity: round 12 covered the first version; the strengthened statement is still pending.
+  - Proposition 8.10 (2026-10-23): profiles of Newton degree ≤ 2 with any convex quadratic ratio and nondecreasing b have (P). Review round 20 PASS; the Lean formalization is next.
   - Still open: other varying ratios, e.g. nonlinear increasing ratios.
 - Prior art: Miclo, *On the Markov commutator* (arXiv:1505.02540), Theorem 31, gives inequality conditions for palindromic, strongly convex birth–death chains; it excludes Krawtchouk and Q_n.

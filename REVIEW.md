@@ -509,3 +509,28 @@ Scope: Theorem 8.9 (`affine_matrix`, with `AffineRatioHyp`), the new table row, 
 - Hypotheses, conclusion and table row: all MATCH. The cross-multiplied bound (2N−1)κ ≤ N(1−r) is equivalent to the paper's bound because N ≥ 1, and the existential packaging of r, κ loses no cases.
 
 Fix applied: the scope sentence now states the Newton log-concavity hypothesis on the profile explicitly, instead of relying on "as in Theorem 8.1". No change to the Lean statement was needed.
+
+## Round 20: Theorem 8.9 strengthened (nondecreasing b), Proposition 8.10 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_6521a562-61c6-4217-af03-d43e66513276`. Brief: `reviews/limits-review20-brief.md`. Answer: `reviews/limits-review20-answer.md`.
+
+Independence caveat: the new key-inequality proof and Proposition 8.10 came from consult round 6 with the same model. The author re-verified them in exact arithmetic first (runs/varratio/verify_consultH.py).
+
+**Verdict: PASS WITH MINOR FIXES.** Both proofs pass, and no dependence on the old slope bound remains.
+
+Checked: the monotonicity of R_i; the increment formula; the reduction to (eq:affine-red), including the index shift for V₁; K ≥ 0; the minimization at α = tu₀/u₁; the endpoint estimates (no double counting in YJ; the coefficients L_n and E_n); the resummation; and Proposition 8.10's move inventory and its bound P² ≥ 6Q.
+
+**Reviewer's independent exact tests (Fraction):**
+- 314 arrays: 340,251 linearization coefficients, all nonnegative;
+- the key inequality at 4,241 sources;
+- detours at 3,432 sources;
+- 900 endpoint sequence cases;
+- M ≥ 0 and the resummation identity at N = 4, 6, 8.
+
+**Outside the boundary.** The certificate fails as soon as b stops being monotone, since M_{(N,0),(N−1,1)} = (b_N − b_{N−1})/c_N < 0, but (P) can survive.
+- N = 2, d = (0, ½, 1), r = ½, κ = 2/5: b is not monotone, yet (P) holds.
+- d = (0, 1/7, 3/7, 1), r = κ = ½: g(3,3;3) = −1/24.
+
+Fixes applied:
+1. The "exactly when" sentence of Theorem 8.9 now says that nondecreasing b is equivalent to κ(N + d_{N−1}/(1 − d_{N−1})) ≤ N(1 − r). It no longer reads as a characterization of (P).
+2. Strict enlargement of the κ range for nonlinear profiles is now stated for r < 1 only.
