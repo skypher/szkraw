@@ -615,6 +615,8 @@ This proves (B) on all non-deep triples for every convex profile, log-concave or
 
 *Deep pairs: where the identity breaks.* The identity of step 5 holds verbatim for deep pairs too (checked). The truncation i ≤ N only removes right-edge terms, which are nonnegative. The only negative terms are on the left edge: r^{m−j}(d_i + d_j − 1)ĝ(i,j) with i = n − m + j and d_i + d_j > 1 (so i + j ≥ N − 1). For Krawtchouk the coefficient is (i + j − N)/N. So positivity on deep triples is exactly the question of whether the S-terms and the right-edge terms outweigh this left-edge deficit. Log-concavity must enter there, since the log-convex segment arrays fail.
 
+*The endpoint r = 1 (b ≡ 0, c = d; runs/ql_proof/r1_test.py).* This is the top Bernstein coefficient. Exact full tables for N = 4–12: random convex profiles fail in 3 of 30 cases at N = 8 (e.g. g(6,8;8) ≈ −6.8·10⁻⁷), while random log-concave and random log-convex Newton profiles pass (130 each). So the r = 1 endpoint needs more than convexity, but not log-concavity specifically. The segment failures (log-convex, small r) are a different mechanism: their bad Bernstein coefficients are in the middle.
+
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
