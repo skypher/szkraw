@@ -1,0 +1,23 @@
+All declaration names below are in `Szkraw`. Theorems 2.1 and 5.3 retain their earlier acceptance; their signatures were not resupplied.
+
+| Paper claim | Lean declaration | Assessment | Reason |
+|---|---|---|---|
+| Theorems 2.1 and 5.3 | `geometric_criterion`, `perturbation_criterion` | MATCH | Prior acceptance retained, not independently rechecked here. |
+| Lemma 2.2: coefficient parametrization | `geometric_parameters`, `geometric_coefficients_admissible`, `geometric_family_hypotheses`, `geometric_coefficients_N_one` | MATCH | Substitution \(p=1/r\) gives exactly the formulas and parameter ranges. Under admissibility, `b i = β * c i` is equivalent to the ratio condition. The new declaration gives independence of \(q\) on all indices \(i\le1\), with weaker assumptions than required. |
+| Lemma 3.1: basis and positivity | `squarefreeBasis`, `squarefree_basis_apply`, `squarefree_product_nonneg` | MATCH | Supplies the squarefree basis and nonnegative multiplication coordinates under precisely the required parameter bounds. |
+| Lemma 3.2: positive associative inner product | `squarefree_trace_diagonal`, `tower_trace_square_pos`, `tower_trace_self_adjoint` | MATCH | The diagonal weights have the correct cardinality and exponent. Strict positivity for nonzero vectors and the self-adjointness identity express the claimed properties of the trace pairing. |
+| Lemma 3.3: three-term multiplication | `elementary_three_term`, `elementary_one` | MATCH, SCOPE NOTED | Lean’s `k+1` is the paper’s positive index. All three coefficients agree, including the terminal case. The \(k=0\) case reduces to the identity using \(E_0=1\) and \([1]_q=1\); the presentation is accurately disclosed. |
+| Proposition 3.4: positive subalgebra | `elementary_products` | MATCH, SCOPE NOTED | States existence of nonnegative product expansions. Generation by \(E_1\) and independence of the \(E_k\) are not separately asserted; both omissions are explicitly disclosed. |
+| Lemma 4.1: positive normalization | `towerCharacter`, `tower_character_generator`, `tower_character_elementary`, `normalizer_pos`, `normalizer_one`, `character_normalizer_ratio` | MATCH | Gives the algebra character, correct generator evaluations, identification with \(t_k\), positivity for \(k\le N\), and the stated ratio for \(k<N\). The equation \(t_0=1\) is supplied by the definition. |
+| Lemma 5.1: finite realization and triangle support | `finite_realization`, `product_triangle_zero` | MATCH | Supplies exactly \(N+1\) distinct, positively weighted points and the product identity with the stated row convention. `Triangle`, together with `Fin (N+1)`, is equivalent to \(\lvert m-n\rvert\le k\le\min(m+n,N)\). No positivity assumption is imposed on product coefficients. |
+| Lemma 5.2: uniform positive margin | `kraw_triangle_margin` | MATCH | Same parameter range, triangle restriction and lower bound \((\min(r,1-r)/4)^N\). The two coefficient definitions agree on \(i\le N\) when \(q=1\). |
+| Corollary 5.4: nongeometric systems and neighborhood | `nongeometric_perturbation_example`, `relatively_open_coefficient_neighborhood` | MATCH, SCOPE NOTED | The explicit perturbation and bound on \(h\) agree. The new conjunct excludes **every real** constant ratio, sufficient for the paper’s claim. The neighborhood declaration asserts realization, positivity and margin—not explicitly all perturbation hypotheses—and the scope sentence accurately describes its conclusion. |
+| Corollary 6.1: full positive Krawtchouk range | `full_krawtchouk_binomial_range`, `binomial_normalized_at_zero`, `binomial_node_probability_convention` | MATCH | \(p=(1-p_0)/p_0\) gives \(r=p_0/(1-p_0)\). The weights, affine nodes, normalization at \(j=0\), and complete range \(0<p_0\le1/2\) agree. The excluded sharpness remark is not part of the corollary statement. |
+| Corollary 6.2: dual \(q\)-Krawtchouk case | `additional_geometric_class` | MATCH | Correct ranges under \(r=1/p\). Disagreement of the \(b_i+c_i\) profile with every real-parameter Krawtchouk array is sufficient to exclude equality of recurrence arrays; the scope sentence accurately specifies this formulation. |
+| Proposition 6.3: literature comparison | None | MATCH, SCOPE NOTED | Explicitly declared unformalized. This assessment concerns the disclosure, not verification of the comparison. |
+
+**Encoding and disclosures:** The tower identification is consistent: coordinate `i` represents \(z_{i+1}\), adjoined at stage \(N-i\), with exponent \(N-1-i\). The subset, trace, elementary-sum and normalizer identifications are accurate. The new table rows and scope sentences do not overstate the supplied declarations.
+
+**Exact fixes:** None required.
+
+**Overall verdict: PASS.**

@@ -588,3 +588,14 @@ Fixes applied:
 2. The key-inequality citation now reads "on Ω for a ≥ 3 (QuadSetting.key), together with its reduced auxiliary inequality (quad_key_red)".
 3. The disclosure now reads "Results and prose remarks not covered by those listed Lean theorems", since the two equivalences are prose claims that are machine-verified.
 4. Optional fix applied: `quadprofile_bmono_iff` added to the table row of Proposition 8.10.
+
+## Lean statement fidelity, round 15 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_c8dac65e-630b-4243-a33c-1278086f0f86`. Brief: `reviews/lean-fidelity15-brief.md`. Answer: `reviews/lean-fidelity15-answer.md`.
+
+Scope: the lemmas and corollaries of Sections 2–6, which were formalized as steps of Theorems 2.1 and 5.3 and are now listed in the Lean table:
+- Lemma 2.2 (with the new `geometric_coefficients_N_one`), Lemmas 3.1–3.3, Proposition 3.4, Lemma 4.1, Lemmas 5.1–5.2;
+- Corollary 5.4 (`nongeometric_perturbation_example`, now also stating that no constant ratio exists; `relatively_open_coefficient_neighborhood`), Corollaries 6.1 and 6.2;
+- the declaration that Proposition 6.3 (comparison with Koelink) is not formalized, and the new scope sentences.
+
+**Verdict: PASS.** No fixes required. Scope notes, all disclosed in the paper: Lemma 3.3 is stated for k ≥ 1 (k = 0 is trivial); Proposition 3.4 omits generation by E₁ and independence of the E_k; the neighbourhood in Corollary 5.4 asserts realization, positivity and margin.
