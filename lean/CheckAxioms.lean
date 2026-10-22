@@ -152,3 +152,5 @@ assert_allowed_axioms Szkraw.raise_measure
 assert_allowed_axioms Szkraw.raise_corner
 assert_allowed_axioms Szkraw.raise_sign
 assert_allowed_axioms Szkraw.raise_bound
+assert_allowed_axioms Szkraw.radius_exp
+assert_allowed_axioms Szkraw.radius_exp_asymp

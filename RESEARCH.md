@@ -757,7 +757,10 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - the changed system `ueps` with recurrence `epsRaw` (`ueps_rel`), orthogonality for w + εδ (`ueps_orth`), and normalization `epsNorm` with `ueps_eval`;
     - `eps_corner_value`: g̃(N,N;N)((1+τ)(h − w_0) + w_0) = (1+τ)²(I − w_0) + w_0.
   - lean/Szkraw/RaiseTopMass.lean: the K_{N,r} instance (π_n = C(N,n)/rⁿ, h = r^N, I = (r(1 − r))^N, w_n = w_0 π_n); `raise_measure`, `raise_corner`, `raise_sign`, `raise_bound`.
-- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Lemma 9.7, Proposition 9.8, Proposition 9.9 (2) and Corollary 9.13.
+- Corollary 9.13 (2026-10-22), lean/Szkraw/RadiusExp.lean:
+  - `radius_exp`: every τ ∈ (τ*, x) gives an array within 3τW of K_{N,r} that satisfies (2.1), has b ≥ 0 and lacks (P).
+  - `radius_exp_asymp`: for fixed r, take large N, using (1 − r²)^N → 0 and N(1 − r²)^N → 0.
+- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Lemma 9.7, Proposition 9.8 and Proposition 9.9 (2).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
