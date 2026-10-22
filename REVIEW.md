@@ -373,3 +373,18 @@ Scope: Section 9.
   - ρ_N(r) is a supremum, and its attainment is not asserted;
   - part (2) of Proposition 9.9 is not formalized.
 - No fixes are required.
+
+## Lean statement fidelity, round 7 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_c4410848-34e4-4299-8578-0526ee6f842c`. Brief: `reviews/lean-fidelity7-brief.md`. Answer: `reviews/lean-fidelity7-answer.md`.
+
+Scope:
+- Proposition 9.8: `interior_points`, `interior_measure`, `interior_open`, `lamN`;
+- the supporting `kraw_g_formula`, `kraw1_zero`, `kraw1_pos`, `kraw_deriv_neg`;
+- the scope sentence.
+
+**Verdict: PASS WITH MINOR FIXES (documentation only).** All statements match, and no part of Proposition 9.8 is missing.
+
+Fixes applied:
+1. The docstring of `kraw_deriv_neg` now states the bound m + n + k ≤ 2N + 1.
+2. The scope sentence now says "a coefficient box of some positive radius". It describes Λ_N as bounding the absolute rate ratios with nonzero r-rate.

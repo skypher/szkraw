@@ -236,8 +236,8 @@ theorem kraw1_pos (hN : 1 ≤ N) (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) (h
   exact mul_pos (kraw_const_pos m n k hm (by omega) (by omega))
     (countP_one_pos m n k (by omega) h1 h2 h3 heven hle)
 
-/-- For `m + n + k` odd on the triangle, `g(m,n;k)` of `K_{N,r}` has negative `r`-derivative at
-`r = 1`. -/
+/-- For `m + n + k` odd on the triangle and `m + n + k ≤ 2 * N + 1`, `g(m,n;k)` of `K_{N,r}` has
+negative `r`-derivative at `r = 1`. -/
 theorem kraw_deriv_neg (hN : 1 ≤ N) (m : ℕ) (hm : m ≤ N) (n k : Fin (N + 1)) (h1 : m ≤ n.val + k.val)
     (h2 : n.val ≤ m + k.val) (h3 : k.val ≤ m + n.val) (hodd : (m + n.val + k.val) % 2 = 1)
     (hle : m + n.val + k.val ≤ 2 * N + 1) :
