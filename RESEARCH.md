@@ -1345,3 +1345,12 @@ Certificate (runs/np/deg3_cert.py, symbolic identity exact):
 Next:
 - prove (*), where log-concavity of ν must enter, as ν₂² ≥ ν₁ν₃ does in degree 3;
 - alternatively, a degree-3 profile theorem. Only H₁ = C(a,3)(1−ρ(ℓ+3))ν₃ survives there, C′_j = 0 for j ≥ 1, and A_j = −B̃_j for j ≥ 2.
+
+**General (NP) reduced to binomial inequalities (**) (2026-10-23).** S(α,β) is bilinear in ν: S = Σ ν_nν_m W_{n,m}. Index the s-window by offsets i ∈ [i₀, σ′−i₀] and put F(lo,hi) = Σ_{i=lo}^{hi} C(n−1,i)C(m−1,σ′−i). Then:
+- W_{n,m} = C(k,n)C(k,m)·F(i₀, σ′−i₀) − C(k−1,n)C(k+1,m)·F(i₀−1, σ′−i₀−1).
+- Symmetrized: W^sym_{n,m} = 2C(k,n)C(k,m)F(win) − C(k−1,n)C(k+1,m)F(win−1) − C(k−1,m)C(k+1,n)F(win+1).
+
+Abel summation in ν along anti-diagonals n + m = τ uses LC of ν (pair products increase toward the centre). It gives S ≥ 0 whenever every central partial sum of W^sym is ≥ 0. Call that (**).
+- (**) contains no free sequences. Together with the s-step, it implies (NP) for every LC s and every LC ν.
+- Exact test (runs/np/double_cert.py): all k ≤ 20 and all windows, 2,014 cases, no negative central sum. The minimum is 0.
+- Open: a proof of (**). It is a family of partial-Vandermonde inequalities in (k, window, τ, n₀).
