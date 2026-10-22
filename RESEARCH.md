@@ -708,8 +708,15 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - `evenComp_admissible` and `oddComp_admissible` (N ≥ 2);
     - `decomp_positivity` (for N ≥ 1; the odd component is trivial at N = 1) and `decomp_converse`.
   - lean/Szkraw/ParitySplit.lean proves Corollary 7.9: `ps_even_geometric` and `ps_odd_geometric` (both normalized components satisfy Theorem 2.1's hypotheses), `parity_split` and `parity_split_sharp`. It also proves Theorem 7.1 through Corollary 7.9 with q = 1: `szwarcCoefficients`, `szwarc_admissible`, `szwarc_system` (finite realization and positivity, p ≤ 1/2) and `szwarc_sharp` (g(2,2;2) < 0 for 1/2 < p < 1).
-- Remaining formalization: that remark, Theorem 7.6, Corollary 7.7, Lemmas 7.2–7.5 (the graded algebra, the margin and stability), the symmetry of the measure in Theorem 7.1, the parameter identification in Corollary 7.9, and the provable statements of Section 9.
-- Pending: independent review that each Lean statement matches the paper's statement (consult via pro-cli).
+  - lean/Szkraw/Stability.lean proves Lemma 7.5: `amplification_general` (e_m ≤ η(8/α)^m) and `stability`.
+  - lean/Szkraw/SzwarcMargin.lean proves:
+    - `szwarc_even_kraw` and `szwarc_odd_kraw`: the components of (7.2) have the product matrices of K_N(r) and K_{N−1}(r);
+    - `szwarc_piW_even` and `szwarc_piW_odd`: π_{2c} = C(N,c)r^{−c} and π_{2b+1} = C(N−1,b)r^{−b}/p;
+    - Lemma 7.4 (`szwarc_margin`): the margin goes through the decomposition and `kraw_triangle_margin`, not the paper's graded-algebra count; two odd indices use π and exact binomials, since the 1/N-loss bound fails for N > 8;
+    - Theorem 7.6 (`symmetric_criterion`, η = ½(rs/8)^N(16N)^{−2N}, α = 1/(2N));
+    - Corollary 7.7 (`symmetric_new`, with `geometric_congr`).
+- Remaining formalization: that remark, Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), the symmetry of the measure in Theorem 7.1, the parameter identification in Corollary 7.9, and the provable statements of Section 9.
+- Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 

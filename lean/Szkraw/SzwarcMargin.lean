@@ -1,6 +1,7 @@
 import Szkraw.ParitySplit
 import Szkraw.Stability
 import Szkraw.KrawtchoukMargin
+import Szkraw.GeometricApplications
 
 /-!
 # Lemma 7.4 (Margin for the quadratic system), Theorem 7.6 and Corollary 7.7
@@ -255,7 +256,7 @@ theorem szwarc_odd_margin (col : Fin (N - 1 + 1)) (x y : ℕ) (hx : x ≤ N - 1)
 end margin
 
 /-- The final arithmetic for two odd indices. -/
-theorem oo_arith {X p rN rb rc C T : ℝ} (hX : 0 ≤ X) (hp : 0 < p) (hrN : 0 ≤ rN) (hrc : 0 < rc)
+theorem oo_arith {X p rN rb rc C T : ℝ} (hX : 0 ≤ X) (hp : 0 < p) (_hrN : 0 ≤ rN) (hrc : 0 < rc)
     (hrb : 0 < rb) (hC : 0 < C) (hCT : C ≤ T) (hr : rN * rc ≤ rb) :
     p * rN * X / T ≤ X / rc / (C / (rb * p)) := by
   have hT : 0 < T := lt_of_lt_of_le hC hCT
@@ -459,5 +460,225 @@ theorem szwarc_margin : Stmt_szwarc_margin := by
                 mul_le_mul hl hm' hX (le_trans (by positivity) hl)
             _ ≤ _ := le_add_of_nonneg_left t1
     linarith
+
+/-! ### Theorem 7.6 and Corollary 7.7 -/
+
+/-- The radius `η = ½ (rs/8)^N (16N)^{-2N}` of Theorem 7.6. -/
+noncomputable def symEta (N : ℕ) (p : ℝ) : ℝ :=
+  (1 / 2) * (p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) / 8) ^ N / (16 * (N : ℝ)) ^ (2 * N)
+
+/-- **Theorem 7.6** (Symmetric criterion near Szwarc's system). -/
+def Stmt_symmetric : Prop :=
+  ∀ (N : ℕ), 1 ≤ N → ∀ p : ℝ, 0 < p → p < 1 / 2 → ∀ w : Coefficients (2 * N),
+    (∀ k, k ≤ 2 * N → w.b k = 0) → (∀ k, k ≤ 2 * N → w.a k = 1 - w.c k) → w.c 0 = 0 →
+    w.c (2 * N) = 1 →
+    (∀ k, 1 ≤ k → k + 1 ≤ 2 * N → |w.c k - (szwarcCoefficients N p).c k| ≤ symEta N p) →
+    Admissible w ∧ FiniteRealization w ∧ MatrixPositivity w ∧
+    (∀ m, m ≤ 2 * N → ∀ n k : Fin (2 * N + 1), Triangle m n.val k.val ∧ (m + n.val + k.val) % 2 = 0 →
+      (1 / 2) * (p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) / 8) ^ N ≤ productMatrix w m n k) ∧
+    (∀ m, m ≤ 2 * N → ∀ n k : Fin (2 * N + 1), ¬(Triangle m n.val k.val ∧ (m + n.val + k.val) % 2 = 0) →
+      productMatrix w m n k = 0)
+
+set_option maxHeartbeats 1000000 in
+theorem symmetric_criterion : Stmt_symmetric := by
+  intro N hN p hp hp2 w hwb hwa hwc0 hwcN hclose
+  set v := szwarcCoefficients N p with hv_def
+  have hv := szwarc_admissible N hN p hp (by linarith)
+  have hq : 0 < 1 - p := by linarith
+  have hr0 : 0 < p / (1 - p) := div_pos hp hq
+  have hr1 : p / (1 - p) < 1 := by rw [div_lt_one hq]; linarith
+  have hr2 : p / (1 - p) ≤ 2 * p := by rw [div_le_iff₀ hq]; nlinarith
+  have hs0 : 0 < min (p / (1 - p)) (1 - p / (1 - p)) := lt_min hr0 (by linarith)
+  have hsr : min (p / (1 - p)) (1 - p / (1 - p)) ≤ p / (1 - p) := min_le_left _ _
+  set δ := (p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) / 8) ^ N with hδ
+  have hx0 : 0 < p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) / 8 := by positivity
+  have hx1 : p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) / 8 ≤ p / 4 := by
+    have hs1 : min (p / (1 - p)) (1 - p / (1 - p)) ≤ 1 := le_trans hsr hr1.le
+    have : p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) ≤ p / (1 - p) * 1 :=
+      mul_le_mul_of_nonneg_left hs1 hr0.le
+    linarith
+  have hδ0 : 0 < δ := pow_pos hx0 N
+  have hδx : δ ≤ p / (1 - p) * min (p / (1 - p)) (1 - p / (1 - p)) / 8 := by
+    rw [hδ]; exact pow_le_of_le_one hx0.le (by linarith) (by omega)
+  have hN1 : (1 : ℝ) ≤ N := by exact_mod_cast hN
+  set D := (16 * (N : ℝ)) ^ (2 * N) with hD
+  have hD1 : 16 * (N : ℝ) ≤ D := by
+    rw [hD]; calc 16 * (N : ℝ) = (16 * (N : ℝ)) ^ 1 := (pow_one _).symm
+      _ ≤ _ := pow_le_pow_right₀ (by linarith) (by omega)
+  have hDpos : 0 < D := by linarith
+  have hη : symEta N p = δ / 2 / D := by unfold symEta; rw [← hδ, ← hD]; ring
+  have hη0 : 0 ≤ symEta N p := by rw [hη]; positivity
+  -- `η ≤ δ / (32 N)` and `δ ≤ 1`
+  have hηN : symEta N p ≤ 1 / (32 * N) := by
+    rw [hη, div_div, div_le_div_iff₀ (by positivity) (by positivity)]
+    have : δ ≤ 1 := by linarith
+    nlinarith
+  have hηp : symEta N p < p := by
+    have h1 : symEta N p ≤ δ / 32 := by
+      rw [hη, div_div, div_le_div_iff₀ (by positivity) (by norm_num)]; nlinarith
+    linarith
+  -- the coefficient perturbation
+  have hvc : ∀ k, k ≤ 2 * N → v.a k = 1 - v.c k := fun k hk => by
+    have := hv.2.2.2.2.2.1 k hk; rw [show v.b k = 0 from rfl] at this; linarith
+  have hcl : ∀ k, k ≤ 2 * N → |w.c k - v.c k| ≤ symEta N p := by
+    intro k hk
+    rcases Nat.eq_zero_or_pos k with h0 | h0
+    · rw [h0, hwc0, hv.2.2.2.1, sub_zero, abs_zero]; exact hη0
+    rcases Nat.lt_or_ge k (2 * N) with h1 | h1
+    · exact hclose k h0 (by omega)
+    · have hkN : k = 2 * N := by omega
+      rw [hkN, hwcN, szwarc_c_even]
+      have : (N : ℝ) / N = 1 := div_self (by linarith)
+      rw [this, sub_self, abs_zero]; exact hη0
+  -- `w` satisfies (basic)
+  have hw : Admissible w := by
+    refine ⟨by omega, by rw [hwa 0 (by omega), hwc0]; ring, hwb 0 (by omega), hwc0,
+      by rw [hwa _ le_rfl, hwcN]; ring, fun i hi => by rw [hwa i hi, hwb i hi]; ring, ?_, ?_⟩
+    · intro i hi
+      rw [hwa i (by omega)]
+      have h := (abs_le.mp (hcl i (by omega))).2
+      obtain ⟨n, rfl | rfl⟩ : ∃ n, i = 2 * n ∨ i = 2 * n + 1 := ⟨i / 2, by omega⟩
+      · rw [szwarc_c_even] at h
+        have hn : (n : ℝ) + 1 ≤ N := by exact_mod_cast (show n + 1 ≤ N by omega)
+        have : (n : ℝ) / N ≤ 1 - 1 / N := by
+          rw [div_le_iff₀ (by linarith), sub_mul, one_div_mul_cancel (by linarith)]; linarith
+        have : 1 / (32 * (N : ℝ)) < 1 / N := by
+          apply one_div_lt_one_div_of_lt (by linarith); linarith
+        linarith
+      · rw [szwarc_c_odd] at h; linarith
+    · intro i h0 hi
+      rcases Nat.lt_or_ge i (2 * N) with h1 | h1
+      · have h := (abs_le.mp (hcl i (by omega))).1
+        obtain ⟨n, rfl | rfl⟩ : ∃ n, i = 2 * n ∨ i = 2 * n + 1 := ⟨i / 2, by omega⟩
+        · rw [szwarc_c_even] at h
+          have hn : (1 : ℝ) ≤ n := by exact_mod_cast (show 1 ≤ n by omega)
+          have : 1 / (N : ℝ) ≤ (n : ℝ) / N := div_le_div_of_nonneg_right hn (by linarith)
+          have : 1 / (32 * (N : ℝ)) < 1 / N := by
+            apply one_div_lt_one_div_of_lt (by linarith); linarith
+          linarith
+        · rw [szwarc_c_odd] at h; linarith
+      · rw [show i = 2 * N by omega, hwcN]; norm_num
+  -- apply Lemma 7.5 with `α = 1/(2N)` and the margin of Lemma 7.4
+  have hα : (0 : ℝ) < 1 / (2 * N) := by positivity
+  have hα1 : 1 / (2 * (N : ℝ)) ≤ 1 := by rw [div_le_one (by linarith)]; linarith
+  have hαa : ∀ i, i < 2 * N → 1 / (2 * (N : ℝ)) ≤ v.a i := by
+    intro i hi
+    obtain ⟨n, rfl | rfl⟩ : ∃ n, i = 2 * n ∨ i = 2 * n + 1 := ⟨i / 2, by omega⟩
+    · rw [szwarc_a_even]
+      have hn : (n : ℝ) + 1 ≤ N := by exact_mod_cast (show n + 1 ≤ N by omega)
+      rw [div_le_div_iff₀ (by linarith) (by linarith)]; nlinarith
+    · rw [szwarc_a_odd]
+      have : 1 / (2 * (N : ℝ)) ≤ 1 / 2 := by
+        apply one_div_le_one_div_of_le (by norm_num); linarith
+      linarith
+  have hmargin := szwarc_margin N hN p hp hp2
+  have hcoeff : ∀ i, i ≤ 2 * N → |w.a i - v.a i| ≤ symEta N p ∧ |w.b i - v.b i| ≤ symEta N p ∧
+      |w.c i - v.c i| ≤ symEta N p := by
+    intro i hi
+    have e1 : w.a i - v.a i = -(w.c i - v.c i) := by rw [hwa i hi, hvc i hi]; ring
+    have e2 : w.b i - v.b i = 0 := by rw [hwb i hi]; show (0 : ℝ) - 0 = 0; ring
+    refine ⟨?_, ?_, hcl i hi⟩
+    · rw [e1, abs_neg]; exact hcl i hi
+    · rw [e2, abs_zero]; exact hη0
+  have hηα : symEta N p ≤ 1 / (2 * (N : ℝ)) / 2 := by
+    have e : 1 / (2 * (N : ℝ)) / 2 = 1 / (4 * N) := by field_simp; ring
+    rw [e]
+    have : 1 / (32 * (N : ℝ)) ≤ 1 / (4 * N) := by
+      apply one_div_le_one_div_of_le (by positivity); linarith
+    linarith
+  have hηδ : symEta N p * (8 / (1 / (2 * (N : ℝ)))) ^ (2 * N) ≤ δ / 2 := by
+    have e : 8 / (1 / (2 * (N : ℝ))) = 16 * N := by field_simp; ring
+    rw [e, ← hD, hη, div_mul_cancel₀ _ hDpos.ne']
+  have hstab := stability (2 * N) v w (1 / (2 * N)) δ (symEta N p)
+    (fun m n k => Triangle m n k ∧ (m + n + k) % 2 = 0) hv
+    (szwarc_system N hN p hp (by linarith)).2 hα hα1 hαa hδ0
+    (fun m hm n k hs => (hmargin m hm n k).1 hs) hw (fun i hi => (hwb i hi).ge) hcoeff hηα hηδ
+  have hzero : ∀ m, m ≤ 2 * N → ∀ n k : Fin (2 * N + 1),
+      ¬(Triangle m n.val k.val ∧ (m + n.val + k.val) % 2 = 0) → productMatrix w m n k = 0 := by
+    intro m hm n k hnot
+    by_cases htri : Triangle m n.val k.val
+    · have h' : ¬(m + n.val + k.val) % 2 = 0 := fun h => hnot ⟨htri, h⟩
+      have := Gk_parity w hw hwb k m n.val (by omega)
+      unfold Gk at this; rw [dif_pos ⟨hm, by omega⟩] at this; exact this
+    · exact product_triangle_zero w hw m hm n k htri
+  refine ⟨hw, finite_realization w hw, ?_, fun m hm n k hs => by have := hstab.2 m hm n k hs; linarith, hzero⟩
+  intro m hm n k
+  by_cases hs : Triangle m n.val k.val ∧ (m + n.val + k.val) % 2 = 0
+  · have := hstab.2 m hm n k hs; linarith
+  · rw [hzero m hm n k hs]
+
+/-- The array of Corollary 7.7: (7.2) with `c_1 ↦ p_0 + h`, `a_1 ↦ 1 - p_0 - h`. -/
+noncomputable def perturbedSzwarc (N : ℕ) (p h : ℝ) : Coefficients (2 * N) :=
+  ⟨fun k => if k = 1 then 1 - p - h else (szwarcCoefficients N p).a k,
+   fun k => (szwarcCoefficients N p).b k,
+   fun k => if k = 1 then p + h else (szwarcCoefficients N p).c k⟩
+
+/-- `Geometric` only depends on the coefficients with indices `0, …, N`. -/
+theorem geometric_congr {K : ℕ} {v w : Coefficients K} (hb : ∀ i, i ≤ K → v.b i = w.b i)
+    (hc : ∀ i, i ≤ K → v.c i = w.c i) (hg : Geometric v) : Geometric w := by
+  obtain ⟨β, q, hβ, hq, h1, h2, h3⟩ := hg
+  refine ⟨β, q, hβ, hq, fun i hi hiK => ?_, fun i hi hiK => ?_, fun i hi hiK => ?_⟩
+  · rw [← hb i hiK, ← hc i hiK]; exact h1 i hi hiK
+  · rw [← hb i hiK, ← hc i hiK, ← hb (i - 1) (by omega), ← hc (i - 1) (by omega)]; exact h2 i hi hiK
+  · rw [← hb (i + 1) (by omega), ← hc (i + 1) (by omega), ← hb i (by omega), ← hc i (by omega),
+      ← hb (i - 1) (by omega), ← hc (i - 1) (by omega)]
+    exact h3 i hi hiK
+
+/-- **Corollary 7.7** (Symmetric systems outside both families). -/
+theorem symmetric_new (N : ℕ) (hN : 2 ≤ N) (p : ℝ) (hp : 0 < p) (hp2 : p < 1 / 2) (h : ℝ)
+    (hh : 0 < h) (hhη : h ≤ symEta N p) :
+    MatrixPositivity (perturbedSzwarc N p h) ∧
+    (∀ p' : ℝ, ¬ ∀ k, k ≤ 2 * N → (perturbedSzwarc N p h).c k = (szwarcCoefficients N p').c k) ∧
+    ¬ Geometric (perturbedSzwarc N p h) ∧
+    (∀ p' q' : ℝ, 1 ≤ p' → 1 ≤ q' → ¬ ∀ k, k ≤ 2 * N →
+      (perturbedSzwarc N p h).b k = (geometricCoefficients (2 * N) p' q').b k ∧
+      (perturbedSzwarc N p h).c k = (geometricCoefficients (2 * N) p' q').c k) := by
+  have hc3 : (perturbedSzwarc N p h).c 3 = p := by
+    show (if (3 : ℕ) = 1 then p + h else (szwarcCoefficients N p).c (2 * 1 + 1)) = p
+    rw [if_neg (by omega), szwarc_c_odd]
+  have hc1 : (perturbedSzwarc N p h).c 1 = p + h := by
+    show (if (1 : ℕ) = 1 then p + h else (szwarcCoefficients N p).c 1) = p + h; rw [if_pos rfl]
+  have hbz : ∀ k, (perturbedSzwarc N p h).b k = 0 := fun _ => rfl
+  have hnotgeo : ¬ Geometric (perturbedSzwarc N p h) := by
+    rintro ⟨β, q, _, _, _, h2, _⟩
+    have i2 := h2 2 (by omega) (by omega)
+    have i3 := h2 3 (by omega) (by omega)
+    simp only [hbz, zero_add, show (2 : ℕ) - 1 = 1 by rfl, show (3 : ℕ) - 1 = 2 by rfl] at i2 i3
+    rw [hc1] at i2; rw [hc3] at i3
+    linarith
+  refine ⟨?_, ?_, hnotgeo, ?_⟩
+  · have := symmetric_criterion N (by omega) p hp hp2 (perturbedSzwarc N p h) (fun k _ => hbz k)
+      (fun k hk => by
+        show (if k = 1 then 1 - p - h else (szwarcCoefficients N p).a k) =
+          1 - (if k = 1 then p + h else (szwarcCoefficients N p).c k)
+        split_ifs
+        · ring
+        · have := (szwarc_admissible N (by omega) p hp (by linarith)).2.2.2.2.2.1 k hk
+          rw [show (szwarcCoefficients N p).b k = 0 from rfl] at this; linarith)
+      (by show (if (0 : ℕ) = 1 then p + h else (szwarcCoefficients N p).c 0) = 0
+          rw [if_neg (by omega)]; exact (szwarc_admissible N (by omega) p hp (by linarith)).2.2.2.1)
+      (by show (if 2 * N = 1 then p + h else (szwarcCoefficients N p).c (2 * N)) = 1
+          rw [if_neg (by omega), szwarc_c_even, div_self (by positivity)])
+      (fun k hk1 hk2 => by
+        show |(if k = 1 then p + h else (szwarcCoefficients N p).c k) - (szwarcCoefficients N p).c k| ≤ _
+        split_ifs with hk
+        · subst hk
+          rw [show (szwarcCoefficients N p).c 1 = p from szwarc_c_odd 0]
+          rw [show p + h - p = h by ring, abs_of_pos hh]; exact hhη
+        · rw [sub_self, abs_zero]; unfold symEta
+          have : 0 < p / (1 - p) := div_pos hp (by linarith)
+          have : 0 < min (p / (1 - p)) (1 - p / (1 - p)) := lt_min this (by
+            rw [sub_pos, div_lt_one (by linarith)]; linarith)
+          positivity)
+    exact this.2.2.1
+  · intro p' hall
+    have e1 := hall 1 (by omega)
+    have e3 := hall 3 (by omega)
+    rw [hc1, show (1 : ℕ) = 2 * 0 + 1 by rfl, szwarc_c_odd] at e1
+    rw [hc3, show (3 : ℕ) = 2 * 1 + 1 by rfl, szwarc_c_odd] at e3
+    linarith
+  · intro p' q' hp' hq' hall
+    exact hnotgeo (geometric_congr (fun i hi => (hall i hi).1.symm) (fun i hi => (hall i hi).2.symm)
+      (geometric_family_hypotheses (2 * N) (by omega) p' q' hp' hq'))
 
 end Szkraw

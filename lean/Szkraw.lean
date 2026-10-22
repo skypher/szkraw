@@ -31,3 +31,5 @@ import Szkraw.LowProducts
 import Szkraw.Reversal
 import Szkraw.QuadDecomp
 import Szkraw.ParitySplit
+import Szkraw.Stability
+import Szkraw.SzwarcMargin
