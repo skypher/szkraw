@@ -159,3 +159,7 @@ assert_allowed_axioms Szkraw.lower_measure
 assert_allowed_axioms Szkraw.lower_rates
 assert_allowed_axioms Szkraw.lower_triple
 assert_allowed_axioms Szkraw.affine_product
+assert_allowed_axioms Szkraw.kraw_g_formula
+assert_allowed_axioms Szkraw.kraw1_zero
+assert_allowed_axioms Szkraw.kraw1_pos
+assert_allowed_axioms Szkraw.kraw_deriv_neg
