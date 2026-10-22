@@ -484,3 +484,17 @@ Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3810e3f8-f75f-4f3d-bacb-280fae14b5c3
 - *Witnesses.* The reviewer gave exact witnesses for each dropped hypothesis, at N = 2, 2 and 3.
 
 Fix applied: the linear-profile sentence now says "for N ≥ 2", with the direct N = 1 argument (R_1² = c_1R_0 + b_1R_1).
+
+## Round 19: Theorem 8.9 (linearly increasing ratio) (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_1e1c1a1d-55a5-4d9b-b39c-a9c272e9415b`. Brief: `reviews/limits-review19-brief.md` (the full theorem and proof inline; the cited commit predates the theorem). Answer: `reviews/limits-review19-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- *Checked and passed:* the split A_j = H_j − V_j, the nonnegativity of A₀, the four detours and their coefficient ratios (minima 5, 10, 6, 6), the key inequality (coefficient difference zero at n = 2, 2α − 2t(a−1) at n = 3, nonnegative for n ≥ 4), the five operator inequalities, and the resummation.
+- *Reviewer's exact audit.* An independent `Fraction` verifier ran on 912 arrays (386 at the upper bound on κ), with 0 failures. Outside the bound, 39 of 225 arrays failed (P); for example, d_i = i/3 with r = κ = 1/2 gives g(3,3;3) = −1/18.
+
+Fixes applied:
+1. The Leibniz formulas are stated for 1 ≤ n ≤ N − ℓ, which covers every index used on Ω. Outside that range they can fail, because the Newton coefficients of b and c are truncated at N.
+2. The four-term identity is now stated for the zero-extended sequence κ̂_i = p_iν_i + q_iν_{i−1}; κ is its truncation at N, and truncation preserves log-concavity and interval support.
+3. The detours are asserted for source nodes in Ω, with ℓ + n + 2 ≤ N in the mixed products.
+4. "violate the hypotheses" became "need not satisfy the hypotheses".
