@@ -1156,3 +1156,24 @@ Question: which increasing ratios ρ_i = c_i/d_i keep (P) beyond Theorem 8.9? Al
 - the key inequality under nondecreasing b only, which would also sharpen Theorem 8.9.
 
 Candidate theorem (Q): a log-concave Newton profile, ρ(x) = r + tx + τC(x,2) with t, τ ≥ 0, and nondecreasing b imply (P).
+
+### Key inequality without the slope bound (τ = 0): reduction found (2026-10-22)
+
+Scripts: key_slack.py, key_alpha.py, T_test.py, Phi_test.py.
+
+**Where the Theorem 8.9 chain loses.** Replace only B₀ and B₀′ by ρ′Y and ρ′Y′, and stop there. What remains is
+E_mid = A₀Y′ + YA₀″ − D(4H₁ − 2V₁),
+which was ≥ 0 at all 3,480 sources (N = 5–10, t at the largest value keeping b nondecreasing), including 961 sources with α < t(a−1). The full Theorem 8.9 reduction fails at 372 of those sources, because it drops tYX′ and t·a·u₁Y′ and then needs α ≥ t(a−1) at n = 3.
+
+**Linear structure.** With α = 1 − ρ(ℓ+a), E_mid is exactly α·Aα + t·T.
+- Aα = XY′ + YX′ − 4DΣ(n−2)C(a,n)u_n is ≥ 0 by the Γ-bound, since g_n ≥ 4(n−2).
+- T is a quadratic form in u = f(ℓ). Its negative terms are u₀u_m (m ≥ 3) and u₁u_m (m ≥ 4).
+- T ≥ 0 held at all tested sources, but it fails for geometric u with small ratio and a ≥ 5. Example: u_k = 10^{−2k}, a = 5 gives T/Aα ≈ −0.94.
+
+**Using A₀ ≥ 0.** Nondecreasing b gives A₀ ≥ 0, that is αX ≥ t·a·u₀. Then α·Aα + t·T ≥ (t/X)·Φ with Φ = a·u₀·Aα + X·T, a cubic form.
+- Φ ≥ 0 held on 36,312 adversarial log-concave sequences: geometric with ratio 10^{−5} to 10, two-ratio sequences, random ratios, u₀ scaled from 10^{−3} to 10⁴, a = 3–14.
+- So the sharpened Theorem 8.9 (nondecreasing b in place of (2N−1)t ≤ s) reduces to one lemma: Φ ≥ 0 for nonnegative log-concave sequences.
+- The other uses of the slope bound only need ρ ≤ 1: h_n ≥ 0 and s − t(ℓ+n+2) ≥ 0 in the H detour. A₀ ≥ 0 is nondecreasing b itself.
+- *Identity (exact, checked on 200 random sequences).* A₁ = W^b_{3,1}(ℓ,a) = (a−2)A₀ − a·A₀″, because Σ_{n≥3}(n−2)C(a,n)Δⁿ = aΔE^{a−1} − 2E^a + 2 + aΔ with E = 1 + Δ. Hence 4H₁ − 2V₁ = 4A₁ + 2V₁, and
+  E_mid = A₀(Y′ − 4(a−2)D) + A₀″(Y + 4aD) − 2DV₁ = A₀″(Y + Y′ + 8D) + (Δb_ℓ + Δb_{ℓ+a−1})(Y′ − 4(a−2)D) − 2DV₁.
+  For a linear profile every term cancels exactly: H₁ = 0, and for quadratic b, (a−2)A₀ = a·A₀″. A proof under nondecreasing b must therefore use the shape of b = σd and the log-concavity of u; Φ ≥ 0 is the cleanest form found so far.
