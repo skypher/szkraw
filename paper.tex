@@ -682,15 +682,16 @@ The reversal route cannot reach systems whose diagonal increases at the top once
 
 Theorem~\ref{thm:criterion} requires the increments of the profile $d_i=b_i+c_i$ to be geometric. This section replaces that equality by inequalities on the Newton coefficients of the profile, for arrays with constant ratio $b_i/c_i$. Write
 \[
-\nu_k=\sum_{i=0}^k(-1)^{k-i}\binom ki d_i\qquad(k\geq1),\qquad\text{so that}\qquad d_n=\sum_{k=1}^n\binom nk\nu_k\quad(0\leq n\leq N).
+\nu_k=\sum_{i=0}^k(-1)^{k-i}\binom ki d_i\quad(1\leq k\leq N),\qquad d_n=\sum_{k=1}^n\binom nk\nu_k\quad(0\leq n\leq N);
 \]
+below we put $\nu_0=0$ and $\nu_k=0$ for $k>N$.
 We say that $(\nu_k)_{1\leq k\leq N}$ is \emph{log-concave without internal zeros} if all $\nu_k\geq0$, the indices with $\nu_k>0$ form an interval $\{1,\ldots,K\}$, and $\nu_k^2\geq\nu_{k-1}\nu_{k+1}$ for $2\leq k\leq N-1$. Note $\nu_1=d_1>0$.
 
 \begin{theorem}[Log-concave Newton criterion]\label{thm:lc}
 Let $0=d_0<d_1<\cdots<d_N=1$ have Newton coefficients that are log-concave without internal zeros, let $0<r\leq1$, and put $a_i=1-d_i$, $b_i=(1-r)d_i$, $c_i=rd_i$. Then the system has nonnegative linearization.
 \end{theorem}
 
-The hypotheses are inequalities in the profile. They hold for the Krawtchouk arrays ($\nu=(1/N,0,\ldots,0)$), for all arrays of Theorem~\ref{thm:criterion} ($\nu_k$ proportional to $(q-1)^{k-1}$, log-concave with equality), and for every profile with $\nu_k=0$ for $k\geq3$, that is, every convex quadratic profile. The hypotheses exclude the known counterexamples: the convex counterexamples of Section~\ref{sec:open} have Newton coefficients of both signs, and the combinations $(1-\lambda)K_{N,r}+\lambda G_{N,q,r}$ of Section~\ref{sec:limits} with $0<\lambda<1$ have $\nu_k$ proportional to $(q-1)^k$ for $k\geq2$ but $\nu_1$ larger than $\nu_2/(q-1)$, so $\nu_2^2<\nu_1\nu_3$.
+The hypotheses are inequalities in the profile. They hold for the Krawtchouk arrays ($\nu=(1/N,0,\ldots,0)$), for all arrays of Theorem~\ref{thm:criterion} ($\nu_k$ proportional to $(q-1)^{k-1}$, log-concave with equality), The hypotheses also hold for every admissible convex quadratic profile: $\nu_1>0$, $\nu_2\geq0$ when $N\geq2$, and $\nu_k=0$ for $3\leq k\leq N$. The hypotheses exclude the known counterexamples with constant ratio. The convex counterexamples recorded in Section~\ref{sec:open} have Newton coefficients of both signs. For the combinations $(1-\lambda)K_{N,r}+\lambda G_{N,q,r}$ discussed there, with $q>1$, $N\geq3$ and $0<\lambda<1$, one has $\nu_1=(1-\lambda)/N+\lambda/[N]_q$ and $\nu_k=\lambda(q-1)^{k-1}/[N]_q$ for $k\geq2$, so $\nu_2^2-\nu_1\nu_3=-\lambda(1-\lambda)(q-1)^2/(N[N]_q)<0$.
 
 \paragraph{A rescaled system and a kernel.}
 Fix $r$ and put $t=(1-r)/\sqrt r\geq0$. If $p_i$ is defined by $p_0=1$ and $yp_i=a_ip_{i+1}+td_ip_i+d_ip_{i-1}$ $(0\leq i<N)$, then $R_i(x)=r^{i/2}p_i(x/\sqrt r)$, so the coefficients $H_{mn}^k$ in $p_mp_n=\sum_kH_{mn}^kp_k$ on the support satisfy $g(m,n;k)=r^{(m+n-k)/2}H_{mn}^k$. It suffices to show $H_{mn}^k\geq0$. Put
@@ -730,7 +731,7 @@ Since $S^aZ^\ell=\sum_i\binom ai z^{\ell+i}w^{\ell+a-i}$, Vandermonde's identity
 \[
 d(\theta_z)\,S^aZ^\ell=\sum_{p,q\geq0}\nu_{p+q}\binom\ell q\binom ap\,z^pS^{a-p}Z^\ell .
 \]
-Hence $(\mathcal L_z-\mathcal L_w)S^aZ^\ell$ equals $(z-w)S^aZ^\ell$ plus $\sum_{p,q}\nu_{p+q}\binom\ell q\binom ap S^{a-p}Z^\ell$ times $(z^{p-1}-w^{p-1})+t(z^p-w^p)-(z^{p+1}-w^{p+1})$. Divide by $z-w$, using $\chi_n=(z^{n+1}-w^{n+1})/(z-w)=\sum_{j\geq0}(-1)^j\binom{n-j}jS^{n-2j}Z^j$ for $n\geq0$, $\chi_{-1}=0$ and $(z^{-1}-w^{-1})/(z-w)=-Z^{-1}$. Since $\sum_q\binom\ell q\nu_{p+q}=f_p(\ell)$, the quotient is
+Hence $(\mathcal L_z-\mathcal L_w)S^aZ^\ell$ equals $(z-w)S^aZ^\ell$ plus $\sum_{p,q}\nu_{p+q}\binom\ell q\binom ap S^{a-p}Z^\ell$ times $(z^{p-1}-w^{p-1})+t(z^p-w^p)-(z^{p+1}-w^{p+1})$. Divide by $z-w$, using $\chi_n=(z^{n+1}-w^{n+1})/(z-w)=\sum_{0\leq j\leq\lfloor n/2\rfloor}(-1)^j\binom{n-j}jS^{n-2j}Z^j$ for $n\geq0$, $\chi_{-1}=0$ and $(z^{-1}-w^{-1})/(z-w)=-Z^{-1}$. Since $\sum_q\binom\ell q\nu_{p+q}=f_p(\ell)$, the quotient is
 \[
 \begin{aligned}
 &-d_\ell S^aZ^{\ell-1}+a_{\ell+a}S^aZ^\ell\\
@@ -789,7 +790,7 @@ Hence all $\omega_{\ell,a}\geq0$, so $K_k$ has nonnegative coefficients in $z,w$
 \end{proof}
 
 \begin{remark}
-The argument is valid coefficientwise in $t$. With independent parameters in $yp_i=a_ip_{i+1}+ud_ip_i+vd_ip_{i-1}$, weighted homogeneity ($\deg y=\deg u=1$, $\deg v=2$) then shows that each linearization coefficient is a polynomial in $(u,v)$ with nonnegative coefficients. Consequently every $g(m,n;k)$ of the array of Theorem~\ref{thm:lc}, as a function of $r$, has nonnegative Bernstein coefficients. The diagnostics \path{lc_kernel_check.py} verify Lemmas~\ref{lem:kernel-rec}--\ref{lem:detours} and the matching $\mathcal P^2\geq4\mathcal Q$ in exact arithmetic on random log-concave profiles.
+The argument is valid coefficientwise in $t$. With independent parameters in $yp_i=a_ip_{i+1}+ud_ip_i+vd_ip_{i-1}$, weighted homogeneity ($\deg y=\deg u=1$, $\deg v=2$) then shows that each linearization coefficient is a polynomial in $(u,v)$ with nonnegative coefficients: for $D=m+n-k\geq0$ it has the form $\sum_{0\leq j\leq\lfloor D/2\rfloor}h_ju^{D-2j}v^j$ with $h_j\geq0$, and it vanishes for $D<0$. Consequently every $g(m,n;k)$ of the array of Theorem~\ref{thm:lc}, as a function of $r$, equals $\sum_jh_jr^j(1-r)^{D-2j}$; multiplying the $j$-th term by $(r+(1-r))^j=1$ shows that its coefficients in the Bernstein basis of degree $D$ are $\binom Ds^{-1}\sum_{j\leq s\leq2j}h_j\binom j{s-j}\geq0$. The diagnostics \path{lc_kernel_check.py} verify Lemmas~\ref{lem:kernel-rec}--\ref{lem:detours} and the matching $\mathcal P^2\geq4\mathcal Q$ in exact arithmetic on random log-concave profiles.
 \end{remark}
 
 \section{Limits of inequality criteria}\label{sec:limits}
@@ -1049,7 +1050,7 @@ Find analogous coefficient regions around other finite orthogonal systems and co
 
 \section*{AI-use disclosure}
 
-OpenAI Codex was used to develop the proof arguments, search and check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean translation. Separate AI-assisted reviews checked the algebraic proof, boundary cases, normalizations, and quantitative estimates; these reviews are not human peer review. Anthropic Claude was used to analyse Szwarc's Problem~2 against the survey text, to explore discrete hyperbolic certificates numerically, and to develop and draft Sections~\ref{sec:szwarc}, \ref{sec:lc} and~\ref{sec:limits} together with their exact diagnostics. The kernel recurrence and the operator inequality of Section~\ref{sec:lc} arose in research consultations with ChatGPT Pro; the closed form of the recurrence for every degree and the exact checks were completed with Claude. These two sections were then reviewed in thirteen rounds by ChatGPT Pro (an AI review with independent exact checks, not human peer review); the first round failed, the corrections are recorded in \path{REVIEW.md}, and the final rounds on the corrected text returned PASS. The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. Statements about machine verification refer only to the specific compiled Lean declarations and their documented dependencies, not to the presence of a Lean project or to numerical agreement.
+OpenAI Codex was used to develop the proof arguments, search and check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean translation. Separate AI-assisted reviews checked the algebraic proof, boundary cases, normalizations, and quantitative estimates; these reviews are not human peer review. Anthropic Claude was used to analyse Szwarc's Problem~2 against the survey text, to explore discrete hyperbolic certificates numerically, and to develop and draft Sections~\ref{sec:szwarc}, \ref{sec:lc} and~\ref{sec:limits} together with their exact diagnostics. The kernel recurrence and the operator inequality of Section~\ref{sec:lc} arose in research consultations with ChatGPT Pro; the closed form of the recurrence for every degree and the exact checks were completed with Claude. The review of Section~\ref{sec:lc} was therefore carried out by the same system that proposed its key steps. These sections were then reviewed in fourteen rounds by ChatGPT Pro (an AI review with independent exact checks, not human peer review); the first round failed, the corrections are recorded in \path{REVIEW.md}, and the final rounds on the corrected text returned PASS. The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. Statements about machine verification refer only to the specific compiled Lean declarations and their documented dependencies, not to the presence of a Lean project or to numerical agreement.
 
 \section*{Code and formalization}
 

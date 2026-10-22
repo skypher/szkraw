@@ -235,3 +235,26 @@ Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, job `job_40cd4f22-24f2-4e5f-8
 **Verdict: PASS** for Theorem 7.12, Corollary 7.13 and the changed Section 8 sentence: all three fixes are applied correctly and introduce no new error. Reviewed source: commit f52442b, paper.tex SHA-256 `fde2e1394fb3ecf45b5b407bf0b37e14beac026cf7ceddca6f19067c7213bfc7` (the reviewer did not recompute the hash).
 
 After this PASS, only the AI-use disclosure changed ("twelve rounds" → "thirteen rounds"). Current paper.tex SHA-256: `2b4fa0ce51d4607d9c38ab900660f9f4b2732c38e273fa40088a4f69f4853b19`.
+
+## Round 14: Section 8 (Log-concave profiles), Theorem 8.1 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro) through pro-cli, fresh temporary session, job `job_74fa2ec7-b789-4e94-87ee-107bfad9c9fe`. Brief: `reviews/limits-review14-brief.md`. Answer: `reviews/limits-review14-answer.md`. Reviewed source: commit aadd520. Independence caveat: the key steps of Section 8 (the kernel recurrence and the operator inequality P² ≥ 4Q) came from ChatGPT Pro consultation rounds 3–4 (`reviews/consult-E-answer.md`, `reviews/consult-F-answer.md`). The closed form of the recurrence for every degree and the exact checks were done by Claude.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer found no proof-breaking error. It checked line by line:
+- the rescaling and the terminal relation;
+- the generating-function identity and the kernel equation;
+- the support argument, with an explicit triangular formula;
+- Lemma 8.2, including the sign bookkeeping of the C_j family;
+- Lemma 8.3, including the leading zero and the balanced-product inequalities;
+- Lemma 8.4: all coefficients, the quotients and the integer minima 5, 5, 6;
+- the matching P² ≥ 4Q (displacements distinct, intermediate nodes in Ω, denominators, powers of t);
+- the non-circularity of the induction.
+Independent exact tests by the reviewer, by direct linearization and not through (8.1): 36 arrays at N = 20, 24, 30, 32 and r ∈ {1/4, 2/5, 1}, 551,382 coefficients (129,963 deep), none negative. Also at N = 20, 24: kernel recurrence, induction invariant and P² ≥ 4Q checks (11,910 / 12,976 / 2,645 instances), all passing. Negative controls fail as expected: increments ∝ 1 + 10^{i−20} (positive but not log-concave Newton coefficients) give g(20,20;20) ≈ −7.85·10⁻⁶ at r = 1/2; the one-kink profile gives g(20,20;20) ≈ −2.07·10⁻⁵ at r = 2/5.
+Fixes applied:
+1. The Newton definition range is 1 ≤ k ≤ N, with the zero extension stated.
+2. The overbroad sentence on quadratic profiles is replaced by the reviewer's text (ν_2 ≥ 0 is required; d = (0, 3/4, 1) shows why).
+3. The mixtures now require q > 1, N ≥ 3, with the exact value ν_2² − ν_1ν_3 = −λ(1−λ)(q−1)²/(N[N]_q), and cite Section 10, not Section 9.
+4. The χ_n sum range is written as 0 ≤ j ≤ ⌊n/2⌋.
+5. Remark 8.5 spells out the Bernstein degree elevation.
+Also changed: the AI-use disclosure ("fourteen rounds", plus the independence sentence). A confirmation round follows.
+Current paper.tex SHA-256: `07697127592d9af0c43813e13910c4ffa8b23f8af3ff986555b3edc67d461663`.
