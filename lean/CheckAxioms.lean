@@ -154,3 +154,7 @@ assert_allowed_axioms Szkraw.raise_sign
 assert_allowed_axioms Szkraw.raise_bound
 assert_allowed_axioms Szkraw.radius_exp
 assert_allowed_axioms Szkraw.radius_exp_asymp
+assert_allowed_axioms Szkraw.spectral_top_node
+assert_allowed_axioms Szkraw.lower_measure
+assert_allowed_axioms Szkraw.lower_rates
+assert_allowed_axioms Szkraw.lower_triple

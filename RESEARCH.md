@@ -760,7 +760,10 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
 - Corollary 9.13 (2026-10-22), lean/Szkraw/RadiusExp.lean:
   - `radius_exp`: every τ ∈ (τ*, x) gives an array within 3τW of K_{N,r} that satisfies (2.1), has b ≥ 0 and lacks (P).
   - `radius_exp_asymp`: for fixed r, take large N, using (1 − r²)^N → 0 and N(1 − r²)^N → 0.
-- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Lemma 9.7, Proposition 9.8 and Proposition 9.9 (2).
+- Lemma 9.7 (2026-10-22), lean/Szkraw/LowerTopMass.lean:
+  - `spectral_top_node`: 1 is a node, being the (N + 2)-nd root of the terminal polynomial.
+  - The lowered system is `epsRaw … (-ε)`, identified in `lower_measure`. `lower_rates` is part (1), from the quotient rule. `lower_triple` is part (2), via Q_a = K_a − S_a R_a and `lower_Qsum`.
+- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Proposition 9.8 and Proposition 9.9 (2).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
