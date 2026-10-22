@@ -24,9 +24,9 @@ Explicit formulas, exact computations, and known Krawtchouk product expansions m
 
 A product formula only for Krawtchouk, a reformulation of positivity as equally difficult matrix inequalities, or numerical checks alone do not satisfy the mission. A symmetric-only result is intermediate progress, not a replacement for coverage of the full positive Krawtchouk range.
 
-## Status (2026-10-19)
+## Status (2026-10-22)
 
-Section numbers refer to paper.tex. Nothing in §7 is Lean-formalized or independently reviewed, so criterion 5 is unmet for §7.
+Section numbers refer to paper.tex. Nothing in §7 is Lean-formalized or independently reviewed, so criterion 5 is unmet for §7. Lean work on §7 started 2026-10-22 (Theorem 7.12 first).
 
 - Criteria 1–4 are met by §§2–6 in their exact (geometric) and perturbative forms: Theorems 2.1 and 5.3, Corollaries 6.1 and 6.2, Lean-checked and AI-reviewed.
 - Criterion 6 is met in equality form by Theorem 7.1 (graded algebra; all N, all p ≤ 1/2; sharp) and Corollary 7.9 (parity-split criterion: constant odd downward coefficients p ≤ 1/2 and geometric even increments; q = 1 is Q_n). Theorem 7.6 adds explicit symmetric neighbourhoods for p < 1/2.
@@ -34,5 +34,5 @@ Section numbers refer to paper.tex. Nothing in §7 is Lean-formalized or indepen
   - Theorem 7.10: Szwarc’s inequalities, with no condition on the terminal coefficients, give g(n,m;k) ≥ 0 whenever two of the three indices sum to at most N, for every finite system.
   - Theorems 7.15–7.16 and Corollary 7.17: a deep-triple reduction through the reversed system; palindromic systems satisfying Theorem 7.10’s inequalities have (P). This covers symmetric Krawtchouk (r = 1) by inequalities alone.
   - Theorem 7.8: any symmetric system has (P) when its two quadratic components do, so Q_n at p = 1/2 is covered by inequalities.
-- Deep triples, status 2026-10-22: settled by inequalities on the profile for constant-ratio arrays (Theorem 8.1 of paper.tex: b_i/c_i constant and Newton coefficients of d_i = b_i + c_i nonnegative and log-concave without internal zeros imply nonnegative linearization for every N and every product; reviewed, PASS; Lean formalization in progress). This covers asymmetric Krawtchouk (r < 1) and, through Theorem 7.8, Q_n with p < 1/2. The fully open version, allowing a varying ratio b_i/c_i, remains open.
+- Deep triples, status 2026-10-22: settled by inequalities on the profile for constant-ratio arrays (Theorem 8.1 of paper.tex: b_i/c_i constant and Newton coefficients of d_i = b_i + c_i nonnegative and log-concave without internal zeros imply nonnegative linearization for every N and every product; AI-reviewed, PASS, by the same system that proposed its key steps; machine-verified in Lean 2026-10-22 as `Szkraw.logconcave_criterion` (finite realization and nonnegative linearization), axiom audit clean; the remark after its proof, on two-parameter and Bernstein coefficients, is not formalized). This covers asymmetric Krawtchouk (r < 1) and, through Theorem 7.8, Q_n with p < 1/2. The fully open version, allowing a varying ratio b_i/c_i, remains open.
 - Prior art: Miclo, *On the Markov commutator* (arXiv:1505.02540), Theorem 31, gives inequality conditions for palindromic, strongly convex birth–death chains; it excludes Krawtchouk and Q_n.
