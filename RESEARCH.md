@@ -1416,3 +1416,29 @@ Ingredient constants on these arrays (g_ingredients.py, family `steep`, N ≤ 10
 **B-detour:** Proposition 8.14 together with Lemma 8.3.
 
 **Key inequality for general ratios: open.**
+
+**Ŵ-detour proved, so conjecture (G) reduces to one key inequality (2026-10-23).**
+
+Pointwise bound (runs/varratio/what_pointwise.py, 1,008 exact checks):
+- Pair the terms of φ₂(ℓ) Leibniz-style with the components of ŵ_n(ℓ+1):
+  - ρ(ℓ+2)f₂ × component j feeds target j;
+  - 2Δρ(ℓ+1)f₁ × component j−1 feeds target j;
+  - Δ²ρ(ℓ)f₀ × component n feeds target n+2.
+- Each piece is bounded with LC of j ↦ Δ^jρ, LC of x ↦ ρ(x) (binomial convolution), and Lemma 8.3 for f (index pairs (2,·) and (1,·)).
+- Result: φ₂(ℓ)ŵ_n(ℓ+1) ≥ c_{ℓ+1}Σ_j θ_{n,j}w^{(j)}_{n+2}(ℓ), with
+  - θ_{n,2} = C(n,2)/C(n+2,2);
+  - θ_{n,j} = 1 − j(j−1)/((n+1)(n+2)) for 3 ≤ j ≤ n;
+  - θ_{n,n+1} = 2/(n+2);
+  - θ_{n,n+2} = 1.
+
+Summed detour: every quotient θ·m(m−1)J/(2(m−J−1)) is > 2 (infimum 2 as m → ∞, J = 2), so G(Ŵ₊ − Ŵ₋)G ≥ 0 with no key contribution (γ_W = 0).
+
+Proof architecture for (G), all pieces now proved except the last:
+- B: Proposition 8.14 and Lemma 8.3 (constant 4).
+- C′: constant 6.
+- H: constant 10.
+- V: constant 6, which allows γ_V ≤ 8/3 in the key.
+- Ŵ: constant 2.
+- Key (OPEN): A₀(ℓ,a)B₀(ℓ+1,a−1) + B₀(ℓ,a)A₀(ℓ+1,a−2) ≥ c_{ℓ+1}(4H₁ − γV₁) with γ ≤ 8/3.
+  - Measured on (G) arrays: ratio ≥ 2.88 (linear, γ = 2), ≥ 3.0 (mixed), ≥ 25 (steep).
+  - With γ = 0 it FAILS (0.845 on linear ratios), so the V surplus is needed. Theorem 8.9 proved this key for linear ratios and Theorem 8.11 for quadratic ratios.

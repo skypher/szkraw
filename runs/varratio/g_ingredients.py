@@ -68,6 +68,19 @@ def steep_member(rng, N):
 
 def member(rng, N, fam):
     if fam == 'steep': return steep_member(rng, N)
+    if fam == 'lin':  # rho = r + t x at the largest t keeping b nondecreasing (or a fraction)
+        sg = lc_seq(rng, N)
+        Dd = [sum(math.comb(n, k) * sg[k - 1] for k in range(1, n + 1)) for n in range(N + 1)]
+        d = [z / Dd[N] for z in Dd]
+        r = F(rng.choice([1, 10, 30, 50, 80, 90, 95, 99])) / 100
+        def okb(t):
+            bb = [(1 - r - t * i) * d[i] for i in range(N + 1)]
+            return r + t * N <= 1 and all(bb[i + 1] >= bb[i] for i in range(N))
+        lo, hi = F(0), (1 - r) / N
+        for _ in range(30):
+            mid = (lo + hi) / 2; lo, hi = (mid, hi) if okb(mid) else (lo, mid)
+        t = lo * rng.choice([F(1), F(1), F(1, 2)])
+        return d, [r, t] + [F(0)] * (N - 1)
     sg = lc_seq(rng, N)
     Dd = [sum(math.comb(n, k) * sg[k - 1] for k in range(1, n + 1)) for n in range(N + 1)]
     d = [z / Dd[N] for z in Dd]
