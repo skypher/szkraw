@@ -1034,3 +1034,26 @@ Then the system has nonnegative linearization.
 - Candidate B′ (b, c each Newton log-concave) fails because b's Newton coefficients extend beyond c's support (c linear, b cubic), which violates MI.
 - The linear-rising-ratio family L is not covered: b = (1−ρ)d is concave, so β_2 < 0. Theorem S needs b's Newton coefficients nonnegative. Its ratios c/(b+c) rise because b's Newton weights decay faster than c's.
 - The conditions are on the paper's coefficients directly; no rescaling is needed.
+
+## Quadratic arrays and the curved linear-ratio family (2026-10-22)
+
+Scripts: runs/varratio/quadratic.py, lfamily.py, lfamily_diag.py, signed_dom.py, omega_sign.py.
+
+**Proposition 8.8 (quadratic arrays).**
+- *Statement.* Let b_n = β_1 n + β_2 C(n,2) and c_n = κ_1 n + κ_2 C(n,2), with κ_2 ≥ 0, κ_2 + β_2 ≥ 0 and b nondecreasing. Then (P) holds.
+- *Proof.* In the Theorem 8.6 recurrence, which holds for every array, every move with j ≥ 1 vanishes. The j = 0 weights are Δ^a b(ℓ), C(a,2)κ_2 and C(a,2)(κ_2 + β_2).
+- *Exact tests.* 1,050 members, 0 failures. Dropping one hypothesis at a time:
+
+  | Hypothesis dropped | Failures |
+  |---|---|
+  | c convex | 61 of 1,050 |
+  | d convex | 183 of 1,034 |
+  | b nondecreasing | 291 of 1,038 |
+
+  Each control fails already at N ≤ 3.
+- *Scope.* It covers the linear profile with a linearly rising ratio whenever κ ≤ (1−r)N/(2N−1).
+
+**Curved profile with linear ratio (open).**
+- *Which moves fail.* B and C moves stay nonnegative. Only A moves with j ≥ 1 (from b's Newton coefficients of order ≥ 3) go negative: A_1 364 times, A_2 136, A_3 20, across 77 of 200 members. Negative odd-j moves help. The harmful ones are negative even-j moves.
+- *Signed domination.* Merge the moves per node pair and split by the sign of the contribution. Then P² ≥ 4Q fails on 156 of 2,938 negative entries, some with no two-step detour at all (ratio 0). For criterion S the worst ratio is 9.57.
+- *But the kernel stays nonnegative.* ω_{ℓ,a} ≥ 0 on all 150 tested members. So a stronger induction (longer detours, another invariant, or another basis) may still work.
