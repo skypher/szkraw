@@ -1130,3 +1130,29 @@ Sources: reviews/consult-G-brief.md, reviews/consult-G-answer.md (job c48ab1eb).
 - *Simplifications against the paper.*
   - The detour constant is 4 for every family; 6 is not needed.
   - The key inequality keeps only the products (1,n−1) and (n−1,1) for n ≥ 3 and (2,n−2) for n ≥ 4. This gives the coefficient 2n + C(n,2)[n ≥ 4] in place of γ_n, and the coefficient comparison still holds: at n ≥ 4 the bracket is (α − t(a−1))Q + t(a−1)(n² − 9n + 24)/2 + t(n−1)(2n−6) ≥ 0, with Q = (n² − 5n + 16)/2.
+
+## Nonlinear increasing ratios: probes (2026-10-22)
+
+Question: which increasing ratios ρ_i = c_i/d_i keep (P) beyond Theorem 8.9? All runs use exact arithmetic. Scripts are in runs/varratio/; logs are in runs/varratio/logs (gitignored).
+
+**Fail.**
+- *Concave ratios fail at N = 3.* d_i = i/3 and ρ = (1/2, 3/4, 5/6), with b_i = 1/6 for i ≥ 1 (nondecreasing), give g(3,3;3) = −1/24. In paper.tex, open problems.
+- *Many concave and kinked ratios fail at N ≤ 9.* These were quadratic concave and piecewise-linear kinked ratios, with κ at ½ or 1 times the largest value keeping b nondecreasing.
+- *A steep convex ratio fails.* ρ = r + κ2^{n−N} on a linear profile fails from N = 8.
+
+**No failure found.** Families: linear, convex quadratic, cubic (n/N)³, and linear-plus-quadratic ratios. Profiles: linear, geometric increments, and polynomial (Newton coefficients (1, k/N) or (1, k/N, (k/N)²)). Ranges: r = 1/10 to 19/20, κ up to the largest value keeping b nondecreasing.
+- *Full tables (all m, n, k), N ≤ 26:* about 2,600 arrays, `nonlinear_probe.py`.
+- *Row g(m,N;k), N = 20–150:* about 2,100 arrays, `rowN_probe.py`. This O(N²) row check reproduces the paper's N = 120 kink failure. It is not a full check of (P).
+- *Linear ratios above the Theorem 8.9 bound* (1.2–1.7 times, curved profiles) also pass when b is nondecreasing.
+
+**Proof structure (`resum_test.py`, `resum_random.py`, `quad_ingredients.py`).**
+- *M ≥ 0.* The operator M = G(U + P²/4 − Q + C + A)G of the Theorem 8.9 proof is ≥ 0 on 310 random convex-quadratic members (N = 4–12), including linear ratios above the bound.
+- *Calibration.* M has negative entries for concave, kinked and cubic ratios. For cubic ratios on linear profiles this happens even though (P) holds.
+- *Ingredients* (180 random members, N = 4–11). ψ_n = h_n − v_n − w_n, with w_n = C(n,2)τf_{n−2}. Detours hold with constants 4 for B, H, V and C′ and 2 for W. The key inequality A₀B₀′ + B₀A₀″ ≥ c(4H₁ − 2V₁) holds.
+- *What fails.* Only the log-concavity of Newton(c), in about 60% of members; for example d_i = i/4 and ρ = 1/2 + C(i,2)/40 give Newton(c) = (1/8, 1/80, 3/160, 0).
+
+**Next.** Consult round 6 (reviews/consult-H-brief.md, job `job_5653b833-122f-4d57-a07e-80fdaa0ef975`) asks for proofs of two steps:
+- the B-detour without log-concavity of Newton(c);
+- the key inequality under nondecreasing b only, which would also sharpen Theorem 8.9.
+
+Candidate theorem (Q): a log-concave Newton profile, ρ(x) = r + tx + τC(x,2) with t, τ ≥ 0, and nondecreasing b imply (P).
