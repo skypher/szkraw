@@ -52,3 +52,5 @@ import Szkraw.LowerTopMass
 import Szkraw.AffineInvariance
 import Szkraw.KrawCube
 import Szkraw.KrawOne
+import Szkraw.LowerGeneric
+import Szkraw.Interior

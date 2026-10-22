@@ -163,3 +163,7 @@ assert_allowed_axioms Szkraw.kraw_g_formula
 assert_allowed_axioms Szkraw.kraw1_zero
 assert_allowed_axioms Szkraw.kraw1_pos
 assert_allowed_axioms Szkraw.kraw_deriv_neg
+assert_allowed_axioms Szkraw.gen_g_deriv
+assert_allowed_axioms Szkraw.interior_points
+assert_allowed_axioms Szkraw.interior_measure
+assert_allowed_axioms Szkraw.interior_open

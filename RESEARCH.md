@@ -763,7 +763,19 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
 - Lemma 9.7 (2026-10-22), lean/Szkraw/LowerTopMass.lean:
   - `spectral_top_node`: 1 is a node, being the (N + 2)-nd root of the terminal polynomial.
   - The lowered system is `epsRaw … (-ε)`, identified in `lower_measure`. `lower_rates` is part (1), from the quotient rule. `lower_triple` is part (2), via Q_a = K_a − S_a R_a and `lower_Qsum`.
-- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Proposition 9.8 and Proposition 9.9 (2).
+- Proposition 9.8 (2026-10-22):
+  - KrawCube.lean:
+    - y_S y_T = Σ_{J⊆S∩T}(1 − r)^{|J|} r^{|S∩T|−|J|} y_{(SΔT)∪J};
+    - the Krawtchouk action of U_k = e_k/C(N, k);
+    - `kraw_g_formula`, the explicit g(m,n;k) of K_{N,r} as a count.
+  - KrawOne.lean: at r = 1, g vanishes exactly for m + n + k odd or > 2N (`kraw1_zero`, `kraw1_pos`). Its r-derivative is negative on odd triples with m + n + k ≤ 2N + 1 (`kraw_deriv_neg`).
+  - LowerGeneric.lean: Lemma 9.7 (2) for any data. `gen_g_deriv`: on a zero triple, g' ‖R_k‖² = 2 − ΣT.
+  - Interior.lean:
+    - the explicit smooth family `lowK` and `lamN`;
+    - `path_deriv_pos`, `interior_points`, `interior_measure`;
+    - `interior_open`, the stability neighborhood.
+  - AffineInvariance.lean: g is invariant under y = s x + β.
+- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6 and Proposition 9.9 (2). All three rest on contour integrals over general cycles, which Mathlib lacks (it has rectangle Cauchy–Goursat but no general Cauchy formula).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
