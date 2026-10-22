@@ -90,7 +90,7 @@ theorem FQ_nonneg_y {n : ℕ} (hn : 2 ≤ n) {r t τ ℓ q z y : ℝ} (hr : 0 < 
   nlinarith [mul_nonneg a1 hF00, mul_nonneg a2 hFq]
 
 
-theorem LCNZ.zero_above (hv : LCNZ v') (h1 : 0 < v' 1) {n : ℕ} (hn : 1 ≤ n) (h : v' n = 0) {k : ℕ} (hk : n ≤ k) :
+theorem LCNZ.zero_above {v' : ℕ → ℝ} (hv : LCNZ v') (h1 : 0 < v' 1) {n : ℕ} (hn : 1 ≤ n) (h : v' n = 0) {k : ℕ} (hk : n ≤ k) :
     v' k = 0 := by
   by_contra hc
   have hpos : 0 < v' k := lt_of_le_of_ne (hv.1 k) (Ne.symm hc)
