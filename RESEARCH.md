@@ -673,6 +673,8 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
 - F5 is done: lean/Szkraw/LCSequences.lean proves the `LCNZ` predicate, one-step and iterated balanced products, preservation under shift sums, the binomial form `iterShift u ℓ i = Σ_h C(ℓ,h)u(i+h)` (that is, f_i(ℓ)), and `lemma_8_3`.
 - lean/Szkraw/LogConcaveStatement.lean proves `padNewton_lcnz`: the hypothesis of Theorem 8.1 gives `LCNZ` for (0, ν_1, …, ν_N, 0, …).
 - Both are in the root import, and `lake build Szkraw` succeeds with no `sorry`.
+- F6 is done: lean/Szkraw/LCDetours.lean defines the weights `Wt u p q ℓ a` (= W_{p,q}(ℓ,a), with f_n(ℓ) = iterShift) and proves the integer inequalities `coeffA`, `coeffB`, `coeffC`, the detour bounds `detourA_first` and `detour_second` (generic in p, q), and the three inequalities of Lemma 8.4 (`lemma_8_4_A`, `lemma_8_4_B`, `lemma_8_4_C`) for every j ≥ 1 and all ℓ, a. The build is green with no `sorry`.
+- Remaining for Section 8: F1–F4 (rescaling, symmetry and E-normalization, the coefficientwise kernel relation, the kernel identity of Lemma 8.2), F7 (operator induction) and F8 (assembly and axiom audit).
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 
