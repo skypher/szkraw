@@ -1363,3 +1363,26 @@ Abel summation in ν along anti-diagonals n + m = τ uses LC of ν (pair product
   - In 1D this proves the claim: a′ > b on the outflow face.
   - In 2D, 11,156 of 455,248 terms are negative (6,718 boundary points still negative after grouping), so a finer pairing is needed.
 - Open: a proof of (**′), i.e. 2D hypergeometric peakedness.
+
+## PROPOSITION 8.14 (NP), general case: proved (2026-10-23, derived here)
+
+Statement: nonnegative, log-concave Newton coefficients without internal zeros are preserved under pointwise products. In ULC language: |S∪T| is ULC(n) when S and T are independent, permutation-invariant, and have ULC(n) sizes. Full proof in paper.tex, Proposition 8.14.
+
+Proof route:
+1. Layer-cake (Abel) decomposition in both sequences reduces it to D_c(B) ≥ 0 for centred boxes.
+2. One-line identity: D_c(B) = Σ_{e,e′∈E}[V_{e+e′}(B−e) − V_{e+e′}(B)], with V_s(p) = H_{k−1}(p)H_{k−1}(c−s−p), the balanced multivariate hypergeometric law.
+3. Properties of V:
+   - (T1) windowed marginals are LC (a binomial row times a convolution of a truncated binomial with a binomial);
+   - (T2) RR2 and central symmetry give V(x,y′) ≥ V(x,y) for x ≤ μ₁ and y, y′ symmetric about μ₂ with y ≤ y′;
+   - (T3) an LC sequence that is heavier on the right of μ₁ is nondecreasing up to μ₁.
+4. Five case reductions; the other four are transposes.
+
+Exact checks:
+- two_step.py: the identity and all nine term signs, k ≤ 9.
+- case_proofs.py: every bracket, plus T1 and T2, for k ≤ 6 (38,280 checks).
+
+Consequences:
+- Lemma 8.3 (lc-ineq) holds for φ on every log-concave Newton profile with a ratio whose Newton coefficients are log-concave, so the B-detour holds for all arrays in conjecture (G).
+- Remaining for (G): the H, V and Ŵ detours and the key inequality, for general ratios.
+
+Status: in paper.tex as Proposition 8.14. Review round 23 is pending; not yet machine-verified.
