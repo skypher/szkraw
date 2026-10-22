@@ -4,7 +4,7 @@ In Szwarc's normalization (3.9) with sigma_n = r^(n/2), the Krawtchouk array bec
 sqrt r, x P_n = d_{n+1} P_{n+1} + t d_n P_n + (1 - d_{n-1}) P_{n-1} with t = 1/sqrt(r) - sqrt(r).
 Only the diagonal depends on r, so every product coefficient is a polynomial in t. We study the
 families (A, B, C) = (c_{n+1}, B_n, 1 - c_{n-1}) with c palindromic (c_n + c_{N-n} = 1, increasing):
-B = 0 is the class of Corollary 7.15, and B = t c contains every Krawtchouk array (c_n = n/N).
+B = 0 is the class of Corollary 7.17, and B = t c contains every Krawtchouk array (c_n = n/N).
 Coefficients of (A, B, C) are positive multiples of those of its stochastic normalization, since
 A_n, C_n > 0 make the recurrence polynomials positive at the top of the spectrum.
 

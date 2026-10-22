@@ -275,7 +275,7 @@ def run_low(samples, rng_seed=29):
                         deep_negative += 1
     return tested, deep_negative
 
-# --- Lemma 7.12, Theorems 7.13-7.14, Corollary 7.15 ------------------------------
+# --- Lemma 7.14, Theorems 7.15-7.16, Corollary 7.17 ------------------------------
 def reversed_array(a, b, c):
     N = len(a)-1
     return [c[N-i] for i in range(N+1)], [b[N-i] for i in range(N+1)], [a[N-i] for i in range(N+1)]
@@ -294,14 +294,14 @@ def check_deep_formula(a, b, c):
 
 def run_reversal(samples, rng_seed=31):
     rng = Random(rng_seed)
-    for _ in range(samples):          # Theorem 7.13 on generic arrays
+    for _ in range(samples):          # Theorem 7.15 on generic arrays
         N = rng.randint(2, 6)
         c = [F(0)] + [F(rng.randint(1, 9), 10) for _ in range(N)]
         b = [F(0)] + [F(rng.randint(0, 9), 10)*(1-x) for x in c[1:]]
         a = [1-b[i]-c[i] for i in range(N+1)]; a[N] = F(0); b[N] = 1-c[N]
         check_deep_formula(a, b, c)
     count = 0
-    for _ in range(4*samples):        # Corollary 7.15
+    for _ in range(4*samples):        # Corollary 7.17
         N = rng.randint(2, 10); h = N//2
         vals = sorted(F(rng.randint(1, 49), 100) for _ in range(h))
         c = [F(0)]*(N+1); c[N] = F(1)
