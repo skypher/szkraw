@@ -20,3 +20,4 @@ import Szkraw.CoefficientNeighborhood
 import Szkraw.AlgebraProducts
 import Szkraw.LCSequences
 import Szkraw.LogConcaveStatement
+import Szkraw.LCDetours
