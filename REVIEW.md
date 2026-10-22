@@ -294,3 +294,15 @@ Fixes applied:
 The reviewer also asked for the Newton-coefficient convention ν_k = Δ^k d(0). The paper already states it at the start of Section 8; the brief's excerpt omitted it.
 
 Open: the types of `geometric_criterion` and `perturbation_criterion` (Theorems 2.1 and 5.3) were not in the brief and remain unreviewed. They go into round 2, together with the new Section 7 formalizations.
+
+## Lean statement fidelity, round 2 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_1d119642-84ec-4f90-8451-15194851b613`. Brief: `reviews/lean-fidelity2-brief.md`. Answer: `reviews/lean-fidelity2-answer.md`.
+
+Scope: Theorem 2.1 (`geometric_criterion`), Theorem 5.3 (`perturbation_criterion`), Lemma 7.4 (`szwarc_margin`), Lemma 7.5 (`stability`), Theorem 7.6 (`symmetric_criterion`) and Corollary 7.7 (`symmetric_new`), and the updated scope text.
+
+**Verdict: PASS WITH MINOR FIXES.** Theorems 2.1, 5.3 and 7.6 and Lemma 7.5 match; Corollary 7.7 matches with its scope noted. No Lean statement needs to change. Fixes applied:
+- Lemma 7.4 now defines r = p_0/(1−p_0) in its own statement. Before, it relied on the section's standing convention, which the excerpt did not show.
+- The scope sentence for Corollary 7.7 now says that its neighbourhood claim follows from the positive-radius coefficient box of `symmetric_criterion`, and that openness and dimension are not stated separately in Lean.
+
+Declarations added after this brief and still to be reviewed: `szwarc_full`, `realization_symmetric`, `ps_even_params`, `ps_odd_params`.
