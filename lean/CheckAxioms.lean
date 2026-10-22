@@ -145,3 +145,6 @@ assert_allowed_axioms Szkraw.corner_identity
 assert_allowed_axioms Szkraw.forced_equalities
 assert_allowed_axioms Szkraw.forced_vanishing
 assert_allowed_axioms Szkraw.radius_order
+assert_allowed_axioms Szkraw.families_sign
+assert_allowed_axioms Szkraw.families_weak_sign
+assert_allowed_axioms Szkraw.families_no_strict_sign
