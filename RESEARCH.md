@@ -1442,3 +1442,8 @@ Proof architecture for (G), all pieces now proved except the last:
 - Key (OPEN): A₀(ℓ,a)B₀(ℓ+1,a−1) + B₀(ℓ,a)A₀(ℓ+1,a−2) ≥ c_{ℓ+1}(4H₁ − γV₁) with γ ≤ 8/3.
   - Measured on (G) arrays: ratio ≥ 2.88 (linear, γ = 2), ≥ 3.0 (mixed), ≥ 25 (steep).
   - With γ = 0 it FAILS (0.845 on linear ratios), so the V surplus is needed. Theorem 8.9 proved this key for linear ratios and Theorem 8.11 for quadratic ratios.
+
+**Key inequality for (G): first attempts (2026-10-23).**
+- Reduction to Theorem 8.9's key by truncating ρ to r + tx fails as a monotonicity statement. The truncation keeps b nondecreasing, but in 319 of 1,428 exact sources the key slack of ρ is below that of its truncation, though still positive (runs/varratio/key_truncation.py).
+- Comparison with slope s = Δρ(ℓ+a−1), using convexity of ρ: A₀(ℓ,a) = αX − δ_a u₀ with δ_a ≤ as, and A₀(ℓ+1,a−2) = (α+s)X′ − δ′D with δ′ ≤ (a−2)s. So the LHS dominates the 8.9 expression with t → s, and H₁ ≤ its slope-s version. But V₁ ≤ V₁^{lin(s)}, since Δρ(ℓ+n−1) ≤ s. The deficit Σ(m−1)(a−m)y_m(s − Δρ(ℓ+m)) cannot be paid termwise by 4Σ(n−2)y_nΣ_{i≥n}(s − Δρ(ℓ+i)).
+- Next: a certificate in the variables u_n (LC) and P_k = Δ^kρ(ℓ) (LC in k), together with b-monotonicity, in the style of the proof of Proposition 8.14.
