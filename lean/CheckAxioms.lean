@@ -223,3 +223,4 @@ assert_allowed_axioms Szkraw.iterShift_padNewton
 assert_allowed_axioms Szkraw.fwdDiff_quad_mul
 assert_allowed_axioms Szkraw.phi2_phi2
 assert_allowed_axioms Szkraw.quadprofile_matrix
+assert_allowed_axioms Szkraw.quadprofile_bmono_iff

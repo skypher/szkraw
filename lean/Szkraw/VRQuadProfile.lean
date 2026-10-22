@@ -479,4 +479,122 @@ theorem quadprofile_matrix : Stmt_quadprofile := by
   exact gkernel_resum hN hw (genRec_of hu_nn hu1)
     (fun a => by rw [kerFnV_zero]; split_ifs <;> norm_num) (kerFnV_supp hu_nn hu1 N hk' hT)
 
+
+/-- **After Proposition 8.10**: for the arrays of Proposition 8.10 without the monotonicity
+hypothesis, `b` is nondecreasing exactly when `t(N+R) + τ(C(N,2) + (N-1)R) ≤ 1 - r`, where
+`R = d_{N-1}/(1 - d_{N-1})`. -/
+theorem quadprofile_bmono_iff {N : ℕ} (vv : Coefficients N) (hv : Admissible vv) {ν1 ν2 r t τ : ℝ}
+    (h1 : 0 < ν1) (h2 : 0 ≤ ν2) (ht : 0 ≤ t) (hτ : 0 ≤ τ)
+    (hd : ∀ i, i ≤ N → profile vv i = ν1 * i + ν2 * (i.choose 2 : ℝ))
+    (hc : ∀ i, i ≤ N → vv.c i = (r + t * i + τ * (i.choose 2 : ℝ)) * profile vv i) :
+    (∀ i, i < N → vv.b i ≤ vv.b (i + 1)) ↔
+      t * (N + profile vv (N - 1) / (1 - profile vv (N - 1))) +
+        τ * ((N.choose 2 : ℝ) + ((N : ℝ) - 1) * (profile vv (N - 1) / (1 - profile vv (N - 1)))) ≤ 1 - r := by
+  obtain ⟨hN, _, hb0, hc0, haN, hsum, hapos, hcpos⟩ := hv
+  have hdQ : ∀ i, i ≤ N → profile vv i = dQ ν1 ν2 i := hd
+  have hbv : ∀ i, i ≤ N → vv.b i = (1 - gQ r t τ i) * dQ ν1 ν2 i := fun i hi => by
+    have e : vv.b i = profile vv i - vv.c i := by simp [profile]
+    rw [e, hc i hi, ← hdQ i hi]; unfold gQ; ring
+  have hf : ∀ i, dQ ν1 ν2 (i + 1) - dQ ν1 ν2 i = ν1 + ν2 * i := fun i => by rw [dQ_succ]; ring
+  have hg : ∀ i, gQ r t τ (i + 1) - gQ r t τ i = t + τ * i := fun i => by
+    unfold gQ
+    rw [show (2 : ℕ) = 1 + 1 from rfl, Nat.choose_succ_succ, Nat.choose_one_right]; push_cast; ring
+  -- `b_{i+1} - b_i = (1 - ρ(i+1)) f₁(i) - (t + τ i) d_i`
+  have hinc : ∀ i, i < N → vv.b (i + 1) - vv.b i =
+      (1 - gQ r t τ (i + 1)) * (ν1 + ν2 * i) - (t + τ * i) * dQ ν1 ν2 i := fun i hi => by
+    rw [hbv (i + 1) hi, hbv i hi.le, ← hf i, ← hg i]; ring
+  have hfpos : ∀ i : ℕ, 0 < ν1 + ν2 * (i : ℝ) := fun i => by positivity
+  -- `d_i/f₁(i)` is nondecreasing
+  have hc2 : ∀ n : ℕ, (n.choose 2 : ℝ) = (n : ℝ) * ((n : ℝ) - 1) / 2 := fun n => by
+    rcases Nat.eq_zero_or_pos n with h | h
+    · subst h; simp
+    · have := choose_two_mul n
+      have h' : ((n.choose 2 * 2 : ℕ) : ℝ) = ((n * (n - 1) : ℕ) : ℝ) := by rw [this]
+      push_cast [Nat.cast_sub (show 1 ≤ n by omega)] at h'; linarith
+  have hR : ∀ i j : ℕ, i ≤ j → dQ ν1 ν2 i * (ν1 + ν2 * j) ≤ dQ ν1 ν2 j * (ν1 + ν2 * i) := fun i j hij => by
+    unfold dQ
+    rw [hc2 i, hc2 j]
+    have hij' : (i : ℝ) ≤ j := by exact_mod_cast hij
+    have hi0 : (0 : ℝ) ≤ i := Nat.cast_nonneg i
+    have e : (ν1 * j + ν2 * ((j : ℝ) * ((j : ℝ) - 1) / 2)) * (ν1 + ν2 * i) -
+        (ν1 * i + ν2 * ((i : ℝ) * ((i : ℝ) - 1) / 2)) * (ν1 + ν2 * j) =
+        ν1 ^ 2 * ((j : ℝ) - i) + ν1 * ν2 * (((j : ℝ) - i) * ((i : ℝ) + j - 1) / 2) +
+          ν2 ^ 2 * ((i : ℝ) * j * ((j : ℝ) - i) / 2) := by ring
+    have t1 : 0 ≤ ν1 ^ 2 * ((j : ℝ) - i) := mul_nonneg (sq_nonneg _) (by linarith)
+    have t2 : 0 ≤ ν1 * ν2 * (((j : ℝ) - i) * ((i : ℝ) + j - 1) / 2) := by
+      rcases Nat.eq_zero_or_pos j with hj | hj
+      · have : i = 0 := by omega
+        subst this; subst hj; simp
+      · have : (1 : ℝ) ≤ j := by exact_mod_cast hj
+        exact mul_nonneg (mul_nonneg h1.le h2) (div_nonneg (mul_nonneg (by linarith) (by linarith)) (by norm_num))
+    have t3 : 0 ≤ ν2 ^ 2 * ((i : ℝ) * j * ((j : ℝ) - i) / 2) :=
+      mul_nonneg (sq_nonneg _) (div_nonneg (mul_nonneg (mul_nonneg hi0 (by linarith)) (by linarith)) (by norm_num))
+    linarith
+  -- the last increment
+  have hNm : ((N - 1 : ℕ) : ℝ) = (N : ℝ) - 1 := by push_cast [Nat.cast_sub (show 1 ≤ N by omega)]; ring
+  have hd1 : 1 - profile vv (N - 1) = ν1 + ν2 * ((N - 1 : ℕ) : ℝ) := by
+    have hdN : profile vv N = 1 := by
+      have := hsum N le_rfl; rw [haN] at this; simp [profile]; linarith
+    have := hf (N - 1)
+    rw [show N - 1 + 1 = N by omega, ← hdQ N le_rfl, ← hdQ (N - 1) (by omega), hdN] at this
+    linarith
+  set D := profile vv (N - 1) with hD
+  set P := 1 - D with hP
+  have hPpos : 0 < P := by rw [hd1]; exact hfpos _
+  have hgN : gQ r t τ N = r + t * N + τ * (N.choose 2 : ℝ) := rfl
+  have hlast : (0 ≤ vv.b N - vv.b (N - 1)) ↔
+      t * (N + D / P) + τ * ((N.choose 2 : ℝ) + ((N : ℝ) - 1) * (D / P)) ≤ 1 - r := by
+    have hi := hinc (N - 1) (by omega)
+    rw [show N - 1 + 1 = N by omega, ← hdQ (N - 1) (by omega), hNm] at hi
+    rw [hNm] at hd1
+    rw [hi, ← hD, ← hd1, hgN]
+    have key : t * (N + D / P) + τ * ((N.choose 2 : ℝ) + ((N : ℝ) - 1) * (D / P)) - (1 - r) =
+        -((1 - (r + t * N + τ * (N.choose 2 : ℝ))) * P - (t + τ * ((N : ℝ) - 1)) * D) / P := by
+      field_simp; ring
+    constructor
+    · intro h
+      have : t * (N + D / P) + τ * ((N.choose 2 : ℝ) + ((N : ℝ) - 1) * (D / P)) - (1 - r) ≤ 0 := by
+        rw [key, neg_div]; exact neg_nonpos.mpr (div_nonneg h hPpos.le)
+      linarith
+    · intro h
+      have : -((1 - (r + t * N + τ * (N.choose 2 : ℝ))) * P - (t + τ * ((N : ℝ) - 1)) * D) / P ≤ 0 := by
+        rw [← key]; linarith
+      rw [neg_div, neg_nonpos] at this
+      by_contra hneg; push Not at hneg
+      have := div_neg_of_neg_of_pos hneg hPpos; linarith
+  constructor
+  · intro hb
+    have h1' := hb (N - 1) (by omega)
+    rw [show N - 1 + 1 = N by omega] at h1'
+    exact hlast.mp (by linarith)
+  · intro hk i hi
+    have hl := hlast.mpr hk
+    have hl' := hinc (N - 1) (by omega)
+    rw [show N - 1 + 1 = N by omega, hNm] at hl'
+    have hA : (t + τ * ((N : ℝ) - 1)) * dQ ν1 ν2 (N - 1) ≤ (1 - gQ r t τ N) * (ν1 + ν2 * ((N : ℝ) - 1)) := by linarith
+    have hch := hR i (N - 1) (by omega)
+    rw [hNm] at hch
+    have hfi := hfpos i
+    have hfN : 0 < ν1 + ν2 * ((N : ℝ) - 1) := by rw [← hNm]; exact hfpos _
+    have hdi := dQ_nonneg h1 h2 i
+    have hiN : (i : ℝ) ≤ (N : ℝ) - 1 := by rw [← hNm]; exact_mod_cast (show i ≤ N - 1 by omega)
+    have hρ : gQ r t τ (i + 1) ≤ gQ r t τ N := gQ_mono ht hτ (by omega)
+    have hti : 0 ≤ t + τ * (i : ℝ) := by positivity
+    -- `(t + τ i) d_i f₁(N-1) ≤ (t + τ(N-1)) d_{N-1} f₁(i) ≤ (1 - ρ(N)) f₁(N-1) f₁(i)`
+    have k1 : (t + τ * (i : ℝ)) * (dQ ν1 ν2 i * (ν1 + ν2 * ((N : ℝ) - 1))) ≤
+        (t + τ * (i : ℝ)) * (dQ ν1 ν2 (N - 1) * (ν1 + ν2 * i)) := mul_le_mul_of_nonneg_left hch hti
+    have k2 : (t + τ * (i : ℝ)) * dQ ν1 ν2 (N - 1) ≤ (t + τ * ((N : ℝ) - 1)) * dQ ν1 ν2 (N - 1) :=
+      mul_le_mul_of_nonneg_right (by nlinarith) (dQ_nonneg h1 h2 _)
+    have k3 : (t + τ * (i : ℝ)) * dQ ν1 ν2 i * (ν1 + ν2 * ((N : ℝ) - 1)) ≤
+        (1 - gQ r t τ (i + 1)) * (ν1 + ν2 * i) * (ν1 + ν2 * ((N : ℝ) - 1)) := by
+      have a1 := mul_le_mul_of_nonneg_right k2 hfi.le
+      have a2 := mul_le_mul_of_nonneg_right hA hfi.le
+      have a3 : (1 - gQ r t τ N) * (ν1 + ν2 * ((N : ℝ) - 1)) * (ν1 + ν2 * i) ≤
+          (1 - gQ r t τ (i + 1)) * (ν1 + ν2 * ((N : ℝ) - 1)) * (ν1 + ν2 * i) :=
+        mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right (by linarith) hfN.le) hfi.le
+      nlinarith
+    have k4 := le_of_mul_le_mul_right k3 hfN
+    have := hinc i hi
+    linarith
+
 end Szkraw
