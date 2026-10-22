@@ -1,0 +1,6 @@
+Review round 12 (Theorem 7.12, Corollary 7.13) via pro-cli (ChatGPT Pro)
+job id: job_0cf69d14-bfe6-4545-bcbb-66b3952257dc
+model: gpt-6-pro
+created: 2026-10-22T02:07:03Z
+brief: reviews/limits-review12-brief.md
+answer: reviews/limits-review12-answer.md
