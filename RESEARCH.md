@@ -751,7 +751,13 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - ρ_N(r) = sSup of the stable radii. Lower bound: `perturbation_matrix_positivity` with η_N(r) = ½((1 − r)/(32N))^N for r ≥ ½.
   - Upper bound: `thinness` along the terminal direction δc_N = −sgn(s_N), whose derivative is −|s_N| by `corner_identity`. At ε = C(1 − r)^N ≤ min(c, 1 − r) this array is admissible with b ≥ 0, lies within ε of K_{N,r}, and lacks (P).
 - Proposition 9.9, first statement and part (1) (2026-10-22), lean/Szkraw/Families.lean: `families_sign`, `families_weak_sign`, `families_no_strict_sign`. These use `corner_deriv_nonneg`; s_N < 0 for N ≡ 0, 1 (mod 4) and s_N > 0 for N ≡ 2, 3.
-- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Lemma 9.7, Proposition 9.8, Proposition 9.9 (2), Proposition 9.12 and Corollary 9.13.
+- Proposition 9.12 (2026-10-22):
+  - lean/Szkraw/TopMass.lean (generic, for any admissible array with nodes, weights, top node, eigen relation and orthogonality):
+    - `piw_balance`, `kerT_cd` (Christoffel–Darboux at x_0 = 1), `dual_orth`, `kerT_top`;
+    - the changed system `ueps` with recurrence `epsRaw` (`ueps_rel`), orthogonality for w + εδ (`ueps_orth`), and normalization `epsNorm` with `ueps_eval`;
+    - `eps_corner_value`: g̃(N,N;N)((1+τ)(h − w_0) + w_0) = (1+τ)²(I − w_0) + w_0.
+  - lean/Szkraw/RaiseTopMass.lean: the K_{N,r} instance (π_n = C(N,n)/rⁿ, h = r^N, I = (r(1 − r))^N, w_n = w_0 π_n); `raise_measure`, `raise_corner`, `raise_sign`, `raise_bound`.
+- Remaining formalization: Lemma 9.5 (Nörlund–Rice, complex analysis), Corollary 9.6, Lemma 9.7, Proposition 9.8, Proposition 9.9 (2) and Corollary 9.13.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

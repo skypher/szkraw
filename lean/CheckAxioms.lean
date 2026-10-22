@@ -148,3 +148,7 @@ assert_allowed_axioms Szkraw.radius_order
 assert_allowed_axioms Szkraw.families_sign
 assert_allowed_axioms Szkraw.families_weak_sign
 assert_allowed_axioms Szkraw.families_no_strict_sign
+assert_allowed_axioms Szkraw.raise_measure
+assert_allowed_axioms Szkraw.raise_corner
+assert_allowed_axioms Szkraw.raise_sign
+assert_allowed_axioms Szkraw.raise_bound
