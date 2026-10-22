@@ -90,4 +90,5 @@ import Szkraw.VRQuadExample
 import Szkraw.QuadBUnitFails
 import Szkraw.OpenExamples
 import Szkraw.CubicRatioExample
+import Szkraw.VRLowDegree
 import Szkraw.VRAffineRemarks

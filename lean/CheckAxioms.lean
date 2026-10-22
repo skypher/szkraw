@@ -244,6 +244,9 @@ assert_allowed_axioms Szkraw.quadB_unit_fails
 assert_allowed_axioms Szkraw.openEx1_fails
 assert_allowed_axioms Szkraw.openEx2_fails
 assert_allowed_axioms Szkraw.cubic_ratio_fails
+assert_allowed_axioms Szkraw.lowdeg_matrix
+assert_allowed_axioms Szkraw.lowdeg_newton_lc
+assert_allowed_axioms Szkraw.lowdeg_ratio_matrix
 assert_allowed_axioms Szkraw.profile_last_le
 assert_allowed_axioms Szkraw.affine_range_remarks
 assert_allowed_axioms Szkraw.affEx_remark
