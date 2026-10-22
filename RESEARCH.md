@@ -1081,3 +1081,16 @@ At β = 0 this is Theorem 8.6's P² ≥ 4Q.
 | ⅓ | 2/9 | 518 | — |
 
 **Next.** Prove Q ≤ ⅛P² + 1/16·P³ analytically for the curved linear-ratio family, or for a natural class containing it. The negative A_j weights must be bounded by A_0·B_0^j-type products.
+- Larger N, with (α, β) = (½, ⅛):
+
+  | N | Members | Negative entries | Violations | Worst margin |
+  |---|---|---|---|---|
+  | 9 | 25 | 1,173 | 0 | 1.63 |
+  | 10 | 25 | 1,378 | 0 | 1.36 |
+  | 11 | 25 | 2,185 | 0 | 1.43 |
+  | 12 | 25 | 3,052 | 0 | **1.009** |
+  | 13 | 20 | 3,068 | 0 | 1.23 |
+  | 14 | 20 | 3,244 | 0 | 1.09 |
+  | 16 | 20 | 4,438 | 0 | 1.31 |
+
+  The β = 0 invariant (Theorem 8.6's P² ≥ 4Q) fails on 100–230 entries at each of these N. So the three-step term is essential, and the margin is thin. A proof needs either sharp local inequalities or an invariant with more slack.
