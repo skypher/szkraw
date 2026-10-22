@@ -654,6 +654,15 @@ Brief and answer: reviews/consult-D-brief.md, reviews/consult-D-answer.md (job 8
 - *Missing.* An all-m family of minor certificates that closes under the D recursion.
 - *(D) is manifestly positive in LC coordinates for N ≤ 5 (proved; runs/ql_proof/d_cert.py).* With σ_{k+1} = σ_kρ_k and ρ_k = x_k + … + x_{N−1} (x ≥ 0 is exactly LC), the fraction-free numerators D_nP_m[n−1] − D_m(D_N − D_{m−1})P_{m−1}[n] of D_{mn}^k (times D_NQ_m > 0) have nonnegative coefficients in (t, x) for all m < n ≤ k: 3, 7 and 13 nonzero numerators at N = 3, 4, 5. So (D), (Γ), (B) and (P) hold for every LC constant-ratio profile at N ≤ 5. N = 6 passes as well (22 numerators, 164 s with sparse-ring arithmetic and pruning to the entries that are needed; runs/ql_proof/d_cert_fast.py), so (D) is proved for N ≤ 6. N = 7 would take about 7 h at the observed growth (×160 per step) and is not run. The m = 1 case has an all-N proof in these coordinates: the numerator of φ(n) − φ(1) is (D_N − D_n)(D_n − 1) + D_n(δ_n − 1), and each factor has nonnegative coefficients (δ_n − 1 = Σ_{k≥2} C(n−1,k−1)σ_k).
 
+## Toward the general argument for (D)/(Γ): layers and dead ends (2026-10-22)
+
+- *Layers of (Γ).* H = Σ_j Γ_j v^j u^{s−2j}.
+  - The v⁰ layer is nonnegative for every increasing profile and every N. At v = 0 the support is the node set {u d_0, …, u d_N}, and P_k is a positive multiple of the Newton polynomial Π_{j<k}(x − u d_j). For m ≥ n, multiplying P_m by the factors (x − u d_j), j = 0..n−1 in order, uses only (x − u d_j)N_{m'} = N_{m'+1} + u(d_{m'} − d_j)N_{m'} with m' ≥ m ≥ j. This is the consult's "Newton system at v = 0".
+  - The u⁰ layer (t⁰) is the r = 1 system (b ≡ 0, c = d). The middle layers mix the two.
+- *Monic form and Askey.* With q_i = (Π_{j<i}a_j)P_i: x q_i = q_{i+1} + t d_i q_i + φ_i q_{i−1}, φ_i = d_i a_{i−1}, and D ∝ φ_n q_mq_{n−1} − φ_m q_{m−1}q_n. The φ-monotone criterion is Askey's classical sufficient condition (β_n, φ_n nondecreasing), here for finite systems. For Krawtchouk, φ is unimodal, and the deep triples are exactly where Askey's monotonicity fails.
+- *Dead end: the r = 1 layer via quadratic decomposition.* At r = 1 the array is symmetric, so Theorem 7.8 reduces it to two half-size components (runs/general/r1_components.py). The components' diagonal coefficients b̂ are not nondecreasing up to the terminal index already for Krawtchouk at N = 6, 8, 10 (and for most LC profiles), so Theorem 7.12 does not apply to them for any σ. The components do have (P) in all tested cases.
+- *Literature.* Młotkowski–Szwarc, Constr. Approx. 17 (2001), treat discrete measures with infinite support. Szwarc's later survey still poses the finite problem.
+
 ## Fusion-algebra models (2026-10-22, prompted by the user)
 
 - (P) for a finite system with R_k(1) = 1 says exactly that the span of R_0..R_N, with the product on the support, is a finite commutative hypergroup (structure constants g ≥ 0 summing to 1). A fusion algebra with integer structure constants gives one after normalization.
