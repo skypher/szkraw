@@ -1057,3 +1057,27 @@ Scripts: runs/varratio/quadratic.py, lfamily.py, lfamily_diag.py, signed_dom.py,
 - *Which moves fail.* B and C moves stay nonnegative. Only A moves with j ≥ 1 (from b's Newton coefficients of order ≥ 3) go negative: A_1 364 times, A_2 136, A_3 20, across 77 of 200 members. Negative odd-j moves help. The harmful ones are negative even-j moves.
 - *Signed domination.* Merge the moves per node pair and split by the sign of the contribution. Then P² ≥ 4Q fails on 156 of 2,938 negative entries, some with no two-step detour at all (ratio 0). For criterion S the worst ratio is 9.57.
 - *But the kernel stays nonnegative.* ω_{ℓ,a} ≥ 0 on all 150 tested members. So a stronger induction (longer detours, another invariant, or another basis) may still work.
+
+## Curved profile, linear ratio: a three-step invariant (2026-10-22, numerical)
+
+Script: runs/varratio/three_step.py.
+
+**The invariant.** Suppose ω ≥ αPω + βP²ω holds at all lower levels, with α(1−α) ≥ β ≥ 0. Then
+Pω ≥ αP²ω + βP³ω, and ω = Uω + Pω − Qω gives (1−α)Pω − βP²ω ≥ (α(1−α) − β)P²ω + (1−α)βP³ω.
+So the invariant propagates when, entrywise,
+  Q ≤ (α(1−α) − β) P² + (1−α) β P³.
+At β = 0 this is Theorem 8.6's P² ≥ 4Q.
+
+**Why three steps.** An A_j move has displacement (j+1, −(2j+1)), which is A_0 followed by j copies of B_0. So positive (j+1)-step detours always exist, even where two-step detours do not.
+
+**Test** (curved family, N = 4–8, 60 members, 722 negative entries):
+
+| α | β | Violations | Worst margin |
+|---|---|---|---|
+| ½ | 0 | 43 | — |
+| ½ | ⅛ | 0 | 1.48 |
+| ⅓ | 1/9 | 0 | 1.31 |
+| 2/5 | 1/6 | 2 | — |
+| ⅓ | 2/9 | 518 | — |
+
+**Next.** Prove Q ≤ ⅛P² + 1/16·P³ analytically for the curved linear-ratio family, or for a natural class containing it. The negative A_j weights must be bounded by A_0·B_0^j-type products.
