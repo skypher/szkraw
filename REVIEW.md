@@ -459,3 +459,17 @@ Fixes applied:
 7. "Strictly increasing" was added to the exclusion of linear ratios, with a pointer to Proposition 8.8.
 
 Not covered by this round: Proposition 8.8 (quadratic arrays), which was added after the brief.
+
+## Lean statement fidelity, round 11 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_7091a9bb-954b-4624-9d34-ddce7980f34c`. Brief: `reviews/lean-fidelity11-brief.md`. Answer: `reviews/lean-fidelity11-answer.md`.
+
+Scope:
+- Theorem 8.6: `varyratio_matrix`, with `VaryRatioHyp` and `MixedIneq`;
+- Corollary 8.7: `varyratio_weights`, with `WeightHyp`;
+- Proposition 8.8: `quadratic_matrix`, with `QuadHyp`;
+- the table rows and scope sentences.
+
+**Verdict: PASS.** All statements match; no fixes required. Scope notes:
+- In Corollary 8.7 the constant-weight conclusion b = w₀c gives the constant ratio 1/(1 + w₀).
+- In Proposition 8.8 with N = 1, the second-order parameters are undetermined, but choosing them zero matches the paper's convention.
