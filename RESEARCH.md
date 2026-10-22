@@ -1094,3 +1094,12 @@ At β = 0 this is Theorem 8.6's P² ≥ 4Q.
   | 16 | 20 | 4,438 | 0 | 1.31 |
 
   The β = 0 invariant (Theorem 8.6's P² ≥ 4Q) fails on 100–230 entries at each of these N. So the three-step term is essential, and the margin is thin. A proof needs either sharp local inequalities or an invariant with more slack.
+- **Four-step invariant** (runs/varratio/four_step.py). The invariant ω ≥ α₁Pω + α₂P²ω + α₃P³ω propagates if, entrywise,
+  Q ≤ (α₁(1−α₁) − α₂)P² + ((1−α₁)α₂ − α₃)P³ + (1−α₁)α₃P⁴.
+
+  | (α₁, α₂, α₃) | N = 12 | N = 13 | N = 14 | N = 16 |
+  |---|---|---|---|---|
+  | (½, 1/12, 1/48) | 1.34 | 1.52 | 1.57 | 1.44 |
+  | (½, 3/32, 1/64) | 1.26 | 1.43 | 1.47 | 1.35 |
+
+  The entries are worst margins; there are no violations in either row. Margins are noticeably wider than with (½, ⅛, 0), which gives 1.009 at N = 12. This is the best target so far for a proof.
