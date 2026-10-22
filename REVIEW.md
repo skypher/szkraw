@@ -434,3 +434,28 @@ Fixes applied:
 1. The reviewer asked to delete the scope sentence's claim a(b) > b/(2 log(1/b)) unless a declaration supplied it. Instead, the bound is now a conclusion of `omega_corner_zero`, and the sentence states it.
 2. The mirror-image claim at 1 now cites the symmetry declarations `Ulog_one_sub`, `Ulog_conj` and `frontier_omega_sigma`.
 3. The certified bounds are described as the method of proof of `omega_half_line`, not as part of its statement.
+
+## Round 17: Theorem 8.6 (varying ratio) and Corollary 8.7 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_ecd2c015-e591-4d8f-9e45-31fc4bdac7ce`. Brief: `reviews/limits-review17-brief.md`. Answer: `reviews/limits-review17-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer checked the normalization, the generator, the divided-difference formula with both p = 0 terms, the kernel recurrence, the detours, the matching and the corollary, and found no substantive failure.
+
+The reviewer's own exact checks, which import no author code:
+- 23,250 kernel/direct coefficients, 0 mismatches;
+- 26,667 detour inequalities, 0 violations;
+- 7,447 nonzero Q entries of P² ≥ 4Q, 0 violations;
+- direct linearization at N = 2, 3, 4, 15, 20, 0 failures among arrays satisfying the hypotheses.
+
+They also gave an exact failure when the mixed hypotheses are dropped (N = 3, b = (0,0,0,1)/13, c = (0,4,8,12)/13, g(3,3;3) = −1/195).
+
+Fixes applied:
+1. The corollary proof now begins "Set w_0 = w_1".
+2. The pairing (x,y) ↦ (y+1,x−1) is stated as a bijection onto the terms with i+1 ≤ x ≤ y, and the zero cases are written out.
+3. The "multiplying gives" step is written out.
+4. The ratio is divided only for 1 ≤ ℓ < N.
+5. The endpoint convention x E_0 = c_1E_1, x E_N = b_NE_N + a_{N−1}E_{N−1} is stated.
+6. The detour inequalities are stated for 0 ≤ ℓ ≤ N−1, with negative second arguments read as zero.
+7. "Strictly increasing" was added to the exclusion of linear ratios, with a pointer to Proposition 8.8.
+
+Not covered by this round: Proposition 8.8 (quadratic arrays), which was added after the brief.
