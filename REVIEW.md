@@ -550,3 +550,23 @@ Scope:
 - The reviewer's duplicate-declaration remark refers to the brief's excerpt of the signature, not to the source.
 
 Not covered: `quadprofile_bmono_iff`, the endpoint equivalence after Proposition 8.10. It was formalized after this brief was sent, and the scope sentence now cites it. It should go into the next fidelity round.
+
+## Round 21: Theorem 8.11 (convex quadratic ratio) (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_acc16a98-3b96-4df2-b811-6e09c63ce857`. Brief: `reviews/limits-review21-brief.md`. Answer: `reviews/limits-review21-answer.md`.
+
+Independence caveat: the weighted B-detour, its certificate and the key inequality came from consult round 7 with the same model. The author re-verified them in exact and symbolic arithmetic first (runs/varratio/verify_consultI*.py).
+
+**Verdict: PASS WITH MINOR FIXES.**
+- *Passed:* monotonicity and the Leibniz formulas, the split and its signs, the four mixed detours (minima 10, 9/2, 3, 6), the summation of (eq:quad-B), the tail and z reductions (the interval for z is a valid relaxation), the certificate (all 25 table entries), the w-coefficients (symbolic in general n), the key inequality with its surplus, and the resummation constants and composition order.
+- *Reviewer's independent exact tests:*
+  - 216 members up to N = 20, including adversarial ones;
+  - 396,226 linearization coefficients, all nonnegative;
+  - 12 full operator checks;
+  - 15,000 local configurations, ℓ up to 10⁶, with minimum ratio ≈ 1.040.
+
+Fixes applied:
+1. The certificate (eq:quad-cert) is stated for real h ≥ 1 (h = 1 + 1/q need not be an integer); the proof is unchanged.
+2. The first boundary evaluation now reads 𝓕(q)/(q(1+q)); it had q^n(1+q).
+3. The second boundary evaluation now reads 𝓕(q)/q²; it had q^{n+1}. The printed divisors were correct for the residual of (eq:quad-B), which is q^{n−1}𝓕(q).
+4. Optional clarifications: at w = 0 the expression equals h₀(K_nAB − L_npC); and only φ_n, h_n, v_n, w_n are claimed nonnegative, not ψ_n.
