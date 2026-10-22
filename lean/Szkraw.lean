@@ -33,3 +33,4 @@ import Szkraw.QuadDecomp
 import Szkraw.ParitySplit
 import Szkraw.Stability
 import Szkraw.SzwarcMargin
+import Szkraw.SymmetricMeasure

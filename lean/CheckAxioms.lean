@@ -45,6 +45,7 @@ example : Szkraw.Stmt_palindromic := Szkraw.palindromic
 example : Szkraw.Stmt_palin_mono := Szkraw.palin_mono
 example : Szkraw.Stmt_parity_split := Szkraw.parity_split
 example : Szkraw.Stmt_szwarc := Szkraw.szwarc_system
+example : Szkraw.Stmt_szwarc_full := Szkraw.szwarc_full
 example : Szkraw.Stmt_stability := Szkraw.stability
 example : Szkraw.Stmt_szwarc_margin := Szkraw.szwarc_margin
 example : Szkraw.Stmt_symmetric := Szkraw.symmetric_criterion
@@ -122,3 +123,5 @@ assert_allowed_axioms Szkraw.symmetric_criterion
 assert_allowed_axioms Szkraw.symmetric_new
 assert_allowed_axioms Szkraw.szwarc_even_kraw
 assert_allowed_axioms Szkraw.szwarc_odd_kraw
+assert_allowed_axioms Szkraw.realization_symmetric
+assert_allowed_axioms Szkraw.szwarc_full

@@ -715,7 +715,12 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - Lemma 7.4 (`szwarc_margin`): the margin goes through the decomposition and `kraw_triangle_margin`, not the paper's graded-algebra count; two odd indices use π and exact binomials, since the 1/N-loss bound fails for N > 8;
     - Theorem 7.6 (`symmetric_criterion`, η = ½(rs/8)^N(16N)^{−2N}, α = 1/(2N));
     - Corollary 7.7 (`symmetric_new`, with `geometric_congr`).
-- Remaining formalization: that remark, Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), the symmetry of the measure in Theorem 7.1, the parameter identification in Corollary 7.9, and the provable statements of Section 9.
+  - lean/Szkraw/SymmetricMeasure.lean proves:
+    - `poly_parity`: R_m(−y) = (−1)^m R_m(y) for b ≡ 0;
+    - `poly_coeff`: deg R_m ≤ m with nonzero leading coefficient;
+    - `realization_symmetric`: every finite realization of an array with b ≡ 0 is symmetric. The reflected node is a root of the terminal polynomial, which has degree N + 1, and the weights solve an invertible system with det(R_m(x_t)) ≠ 0 by the Gram identity;
+    - `szwarc_full`: Theorem 7.1 in full.
+- Remaining formalization: that remark, Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), the parameter identification in Corollary 7.9, and the provable statements of Section 9.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
