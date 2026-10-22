@@ -82,3 +82,4 @@ import Szkraw.VRMoves2
 import Szkraw.VRQuadKey
 import Szkraw.VRQuadCert
 import Szkraw.VRQuadB
+import Szkraw.VRQuadB2

@@ -229,3 +229,4 @@ assert_allowed_axioms Szkraw.gkernel_resum2
 assert_allowed_axioms Szkraw.quad_key_red
 assert_allowed_axioms Szkraw.cert_nonneg
 assert_allowed_axioms Szkraw.FQ_nonneg
+assert_allowed_axioms Szkraw.quadB_seq
