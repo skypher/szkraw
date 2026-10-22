@@ -388,3 +388,21 @@ Scope:
 Fixes applied:
 1. The docstring of `kraw_deriv_neg` now states the bound m + n + k ≤ 2N + 1.
 2. The scope sentence now says "a coefficient box of some positive radius". It describes Λ_N as bounding the absolute rate ratios with nonzero r-rate.
+
+## Lean statement fidelity, round 8 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_c9639ce0-6f65-4abf-858e-9514baf989dd`. Brief: `reviews/lean-fidelity8-brief.md`. Answer: `reviews/lean-fidelity8-answer.md`.
+
+Scope:
+- Lemma 9.5: `norlund_rice`, with `Ulog` and `altBinom`;
+- Corollary 9.6: `analytic_forced_equalities`, `analytic_rule_small`, `expRule_analytic`, `expRule_L`, `expRule_deriv`, with `AnalyticOnOmega` and `DN`, and `analytic_rule_deriv` for context;
+- Proposition 9.9 (2): `families_boundary_layers`;
+- the new table rows and scope sentences.
+
+**Verdict: PASS WITH MINOR FIXES (documentation only).** All Lean statements match. No Lean statement changes are required.
+
+Fixes applied:
+1. The scope sentence now says that only the first statement of Corollary 9.6 is obtained from Proposition 9.9 (2) with zero boundary layers.
+2. The grid sentence now names the construction: an axis-parallel grid with mesh 1/M and origin √2(1+i). Irrational origin coordinates alone would not keep the nodes off the grid lines for an arbitrary mesh.
+
+Not covered by this round: the three prose consequences (`no_open_rule_set`, `boundary_layers_palindromic`, `radius_no_uniform`), added after the brief was sent.
