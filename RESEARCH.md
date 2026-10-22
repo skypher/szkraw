@@ -1474,3 +1474,12 @@ Proof architecture for (G), all pieces now proved except the last:
   - but L_k ≥ C(a−1,k)L₀ fails in 1,926 cases, so the rays do not reduce to Theorem 8.9.
 - z = 0 endpoint in closed form: L_k(0) = Y[C(a−1,k)J + c_k] + 2Σ(m−1)(a−m)C(m,k)y_m − 4Σ(n−2)(C(a,k+1) − C(n,k+1))y_n, with c_k = C(a−1,k)(ka−k−1)/(k+1). A termwise proof with Theorem 8.9's two-product lower bound for YJ fails for mid n; a proof must keep all products u_iu_j ≥ u_{i+j−1} in YJ.
 - Status: (G) ⟸ the endpoint inequalities L_k(0) ≥ 0 and L_k(1/u₂) ≥ 0 for k ≥ 1. These are explicit quadratic inequalities in an LC sequence u (u₁ = 1), with binomial coefficients in a and k. OPEN.
+
+**Key inequality, endpoint z = 0 for the binomial rays (k ≥ 1).** With u₁ = 1 and LC, u_iu_j ≥ u_{i+j−1}. Summing over all products in YJ gives YJ ≥ Σ_n N_n u_n, with N_n = C(2a−1,n+1) − C(a,n+1) − (a−1)C(a,n) − aC(a−1,n) − C(a−1,n+1) (Vandermonde).
+- Exact identity, 3,094 checks: L_k(0) = C(a−1,k)(YJ − ΣN_nu_n) + Σ_n coef_n u_n, where
+  - coef_n = C(a−1,k)N_n + c_kC(a,n) + 2(n−1)(a−n)C(n,k)C(a,n)[n ≤ a−1] − 4(n−2)C(a,n)Σ_{i=n}^{a−1}C(i,k)[n ≥ 3];
+  - c_k = C(a−1,k)(ka−k−1)/(k+1).
+- coef_n ≥ 0 for all 3 ≤ a ≤ 60, 1 ≤ k < a, 2 ≤ n ≤ a: 70,209 coefficients (runs/varratio/key_z0_termwise.py). Hence L_k(0) ≥ 0 there.
+- Still open:
+  - a symbolic proof of coef_n ≥ 0 for all a. For large a and fixed n, N_n/C(a,n) ≈ a·(2^{n+1} − 2n − 4)/(n+1), against a need of ≈ (4n−9)a/2. The tight cases are small n (3, 4) with k = 1, where the helper terms 4(n−2)C(n,k+1) and 2(n−1)(a−n)C(n,k) are needed.
+  - the endpoint z = 1/u₂, which uses u_n ≤ u₂u_{n−1}, as in Theorem 8.9.
