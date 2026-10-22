@@ -1103,3 +1103,24 @@ At β = 0 this is Theorem 8.6's P² ≥ 4Q.
   | (½, 3/32, 1/64) | 1.26 | 1.43 | 1.47 | 1.35 |
 
   The entries are worst margins; there are no violations in either row. Margins are noticeably wider than with (½, ⅛, 0), which gives 1.009 at N = 12. This is the best target so far for a proof.
+
+## THEOREM 8.9: linearly increasing ratio with a log-concave profile (2026-10-22; consult round 5, verified exactly)
+
+Sources: reviews/consult-G-brief.md, reviews/consult-G-answer.md (job c48ab1eb). Verifier: runs/varratio/affine_verify.py (independent of the consultant's verifier).
+
+**Statement.** d has log-concave Newton coefficients without internal zeros, ρ_i = r + κi/N with 0 < r ≤ 1 and 0 ≤ κ ≤ N(1−r)/(2N−1), c = ρd, b = (1−ρ)d. Then (P) holds.
+
+**Proof idea.**
+- *Split.* Split each A_j (j ≥ 1) into H_j − V_j: h_n = (s − t(ℓ+n))f_n and v_n = t n f_{n−1}, both ≥ 0.
+- *Lowest move.* Keep A_0 = b_{ℓ+a} − b_ℓ ≥ 0, which follows from convexity of d.
+- *Detours.* B_0 dominates B, H, V and C moves with factors 4, 6, 6, 6. The new key inequality is A_0B_0 + B_0A_0 + 2V_1 ≥ 4H_1.
+- *Resummation.* With G = (I − P/2)⁻¹ and M = G(U + P²/4 − Q + C + A)G ≥ 0, one has ω = G Σ M^q G β ≥ 0.
+- *Free bonus.* Newton(c) is automatically log-concave, by an exact four-term identity checked symbolically.
+
+**Checks.**
+- I checked the operator algebra and the inequalities (6), (8) and (9) by hand.
+- Exact verifier, 200 members, N = 3–10, a third at the κ endpoint: every inequality, M ≥ 0, ω = G Σ M^q G β, ω ≥ 0 and (P) pass, with 0 failures.
+
+**Scope.** For a linear profile it coincides with Proposition 8.8's κ range.
+
+**Paper.** Theorem 8.9. Review round 19 and the Lean formalization are next.
