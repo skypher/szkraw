@@ -697,6 +697,33 @@ runs/general/cubic_forms.py, cubic_local.py, cubic_check.py.
 *Scope.* A two-parameter family containing Krawtchouk (σ_2 = σ_3 = 0) and the quadratic family. It is still not an inequality-only class (Δ⁴d ≡ 0), but its proof is local: one negative move, dominated by two positive detours with factor 4. Degree 4 adds negative moves of type (+2,−3) and (+2,−4); the natural conjecture is that LC is what makes the analogous local domination work in degree ≥ 4.
 *Recurrence coefficients for symbolic (a, r).* runs/general/cubic_symbolic.py derives them with symbolic exponents: chain rule with ∂_zS = 1, ∂_zZ = w; antisymmetric part divided by z − w via (z^d − w^d)/(z − w) = h_{d−1}(S, Z). The result matches all six closed forms identically. *To do before the paper:* a review round.
 
+## Quartic LC profiles: (Γ) and (P) for all N (proved here, 2026-10-22; not reviewed)
+
+runs/general/cubic_symbolic.py (K = 4), quartic_local_fast.py, quartic_poly.py, quartic_I4b.py, quartic_binom.py, quartic_weights.py, quartic_check.py.
+**Theorem.** Let D_i = i + σ_2C(i,2) + σ_3C(i,3) + σ_4C(i,4) with (1, σ_2, σ_3, σ_4) nonnegative and log-concave without internal zeros. Then for every N, (Γ) holds; hence (B) and (P) hold for all r ∈ [0,1].
+*Recurrence (symbolic exponents; node (r+1, a); weights in the binomial basis C(a,i)C(r,j)):*
+- positive moves:
+  - (r,a) → (r+1,a): T − D_{r+a};
+  - (r,a) → (r+1,a−1): t·A, with A(r,a) = D_{r+a} − D_r = Σ_{i≥1} C(a,i)C(r,j)σ_{i+j};
+  - (r,a) → (r+1,a−2): B = Σ_{i≥2} C(a,i)C(r,j)σ_{i+j};
+  - (r,a) → (r+2,a−2): B' = Σ_{i≥2} (i−1)C(a,i)C(r,j)σ_{i+j};
+- negative moves (jumps):
+  - (r,a) → (r+2,a−3): −t·W3, with W3 = C(a,3)σ_3 + C(a,3)C(r,1)σ_4 + 2C(a,4)σ_4;
+  - (r,a) → (r+2,a−4) and (r,a) → (r+3,a−4): −W4 each, with W4 = C(a,4)σ_4.
+- Checked: the (+1, 0) weight is T − D_{r+a}, and the defining term is −D_r.
+*Induction.* Every node keeps half of each positive inflow: D_rc_{r,a} ≥ ½(V_t + V_B + V_{B'}). Each jump into (r+1, a) is paid from the halves of the inflows of the intermediate nodes on its two-step detours, source by source. The sources (r−1, a+3), (r−1, a+4), (r−2, a+4) are different, so the demands add up within each inflow type. The three local inequalities, with κ = ½:
+- (I3), r ≥ 1: ¼[A(r,a+1)B(r−1,a+3) + B(r,a+2)A(r−1,a+3)] ≥ D_r W3(r−1,a+3);
+- (I4a), r ≥ 1: ¼B(r,a+2)B(r−1,a+4) ≥ D_r W4;
+- (I4b), r ≥ 2: ¼[B(r,a+2)B'(r−2,a+4)D_{r−1} + B'(r−1,a+2)B(r−2,a+4)D_r] ≥ W4 D_rD_{r−1}.
+In LC coordinates (σ_2 = ρ_1, σ_3 = ρ_1ρ_2, σ_4 = ρ_1ρ_2ρ_3, ρ_1 = x_1 + x_2 + x_3, ρ_2 = x_2 + x_3, ρ_3 = x_3):
+- (I3) and (I4a) have nonnegative coefficients in (r−1, a, x): 1233 and 1065 terms;
+- (I4b) is nonnegative at r = 2 (623 terms) and r = 3 (899 terms) as polynomials in (a, x), and for r = 4 + p in (p, a, x) (6190 terms);
+- in raw σ coordinates all three have negative coefficients.
+The grid minima of LHS/RHS on random LC σ are 2.77, 5.49 and 10.9. The inequalities fail without LC, at internal zeros such as σ = (1, 0, 0, 0.01).
+Support r + a ≤ N is preserved (the jumps lower r + a). ∎
+*Exact node-by-node check (quartic_check.py).* N = 4, 5, 6, 8 with four LC profiles (including geometric x = 2): the recurrence reproduces every L_{mn}^k, c ≥ 0, and the half-inflow hypothesis holds at every node. The control σ = (1, 0, 0, 1/100) has negative c and hypothesis failures at every N tested (3 at N = 4, up to 46 at N = 8). Two non-LC quartic profiles without internal zeros pass at these N (not discriminating).
+*Meaning.* This is the first all-N result in which log-concavity is used: in degree 4 it is exactly what makes the B·B detours dominate the σ_4 jumps. The binomial-basis form of the weights suggests a uniform description for every degree; the general LC theorem would follow from the analogous local inequalities for all jump types.
+
 ## Toward the general argument for (D)/(Γ): layers and dead ends (2026-10-22)
 
 - *Layers of (Γ).* H = Σ_j Γ_j v^j u^{s−2j}.
