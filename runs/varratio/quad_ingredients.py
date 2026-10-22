@@ -46,6 +46,8 @@ def check(d, r, t, tau):
                 lhs = A0 * W(fc, 2, 0, l + 1, a - 1) + B0 * A0b
                 rhs = cc * (4 * W(h, 3, 1, l, a) - 2 * W(v, 3, 1, l, a))
                 if lhs < rhs: bad.append(('key', l, a, float(lhs - rhs)))
+                rhs22 = cc * (4 * W(h, 3, 1, l, a) - F(20, 9) * W(v, 3, 1, l, a) - F(4, 3) * W(w, 3, 1, l, a))
+                if lhs < rhs22: bad.append(('key22', l, a, float(lhs - rhs22)))
     return bad
 
 if __name__ == '__main__':
