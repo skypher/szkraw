@@ -675,7 +675,23 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
 - Both are in the root import, and `lake build Szkraw` succeeds with no `sorry`.
 - F6 is done: lean/Szkraw/LCDetours.lean defines the weights `Wt u p q ℓ a` (= W_{p,q}(ℓ,a), with f_n(ℓ) = iterShift) and proves the integer inequalities `coeffA`, `coeffB`, `coeffC`, the detour bounds `detourA_first` and `detour_second` (generic in p, q), and the three inequalities of Lemma 8.4 (`lemma_8_4_A`, `lemma_8_4_B`, `lemma_8_4_C`) for every j ≥ 1 and all ℓ, a. The build is green with no `sorry`.
 - F7 is done: lean/Szkraw/LCInduction.lean defines the moves, the even/odd inflows `Pin`/`Qin` and the recurrence `KernelRec` (8.1). It proves `dd_pos`, `sign_split`, `odd_dom` (2·grp_j ≤ grp_{j−1} for odd j, from Lemma 8.4 and the invariant at the three intermediate nodes), `Qin_le_half_Pin`, and `kernel_nonneg`: every solution of (8.1) with ω(0,·) ≥ 0, support in ℓ + a ≤ N and T ≥ d_n (n ≤ N) is nonnegative. No `sorry`.
-- Remaining for Section 8: F1–F4 (rescaling, symmetry and E-normalization, the kernel identity: the actual kernel satisfies (8.1) with the support property) and F8 (assembly and axiom audit).
+- F2 (partly) is done: lean/Szkraw/RowZero.lean proves `row_zero` (row 0 of p_m(J) is e_m when a_i ≠ 0, i < N) and `product_symm` (g(m,n;k) = g(n,m;k) for m, n ≤ N). The final route does not need them.
+- F4 is done, in converse form: lean/Szkraw/KernelPoly.lean works in ℝ[z,w] (`P2`, coefficient map `cf`, `Ecf` = coefficient of z^iw^j(z+w)^b(zw)^r) and proves:
+  - `theta_z` (the Vandermonde step D(θ_z)S^aZ^r = Σ_i f_i(r)C(a,i)z^iS^{a−i}Z^r);
+  - `Lz_mono`, `Lw_mono`, `image_diff`: ℒ_z(S^aZ^r) − ℒ_w(S^aZ^r) = (z − w)M(S^aZ^r), with h_n = Σ(−1)^lC(n−l,l)S^{n−2l}Z^l (`hh_rec`, `hh_spec`);
+  - `cf_Mu`, `sum_Gi`: the coefficients of M(S^aZ^r) are the W-weights of (8.1);
+  - `kernel_poly_zero` and `kernel_star`: every solution of (8.1) with the support property gives an array L with ℒ_zL = ℒ_wL coefficientwise.
+- F1, F3 and F8 are done in lean/Szkraw/LCAssembly.lean:
+  - `kerFn` defines ω by (8.1) with ω(0,a) = [a = k]; `kerFn_rec` and `kerFn_supp` give the recurrence and the support;
+  - `newton_forward` and `dd_padNewton` show D_i = d_i for i ≤ N;
+  - `product_eq_of_rec`: an array satisfying the entry recurrence of p_m(J) with p_0(J) = 1 equals `productMatrix`;
+  - the rescaled array ê_k L/(ê_m ê_n), with ê_{i+1} = ê_i(1 − d_i)/(√r d_{i+1}), satisfies that recurrence (`conv_up`, `conv_mid`, `conv_down` with t = (1 − r)/√r), so g(m,n;k) = ê_k L_{mn}^k/(ê_m ê_n) ≥ 0.
+- **Theorem 8.1 is machine-verified (2026-10-22):**
+  - `Szkraw.logconcave_matrix : Stmt_logconcave_matrix`;
+  - `Szkraw.logconcave_criterion : Stmt_logconcave`, which adds the finite realization as in `geometric_criterion`;
+  - lean/CheckAxioms.lean: only propext, Classical.choice and Quot.sound; `lake build Szkraw` is green with no `sorry`.
+- Scope: the Lean statement is the paper's Theorem 8.1 (nonnegative linearization). The remark after its proof (nonnegative coefficients of the two-parameter system in (u,v), Bernstein coefficients in r) is not formalized. It would need ω as a polynomial in t with nonnegative coefficients. The paper's code-and-formalization section and AI-use disclosure now state this scope.
+- Remaining formalization: that remark, Section 7 (the heavy-top criterion Theorem 7.12 and Corollary 7.13, and the other proved statements), and the provable statements of Section 9.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 

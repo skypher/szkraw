@@ -43,6 +43,12 @@ def Stmt_logconcave_matrix : Prop :=
   ∀ (N : ℕ) (v : Coefficients N), Admissible v → ConstantRatioLogConcave v →
     MatrixPositivity v
 
+/-- Theorem 8.1 in the form of the geometric criterion: finite realization (orthogonality
+measure, terminal relation, product identities) together with matrix positivity. -/
+def Stmt_logconcave : Prop :=
+  ∀ (N : ℕ) (v : Coefficients N), Admissible v → ConstantRatioLogConcave v →
+    FiniteRealization v ∧ MatrixPositivity v
+
 end Szkraw
 
 namespace Szkraw

@@ -34,6 +34,8 @@ example : Szkraw.Stmt_error_amplification := Szkraw.error_amplification
 example : Szkraw.Stmt_geometric := Szkraw.geometric_criterion
 example : Szkraw.Stmt_perturbation := Szkraw.perturbation_criterion
 example : Szkraw.Stmt_kraw_triangle_margin := Szkraw.kraw_triangle_margin
+example : Szkraw.Stmt_logconcave_matrix := Szkraw.logconcave_matrix
+example : Szkraw.Stmt_logconcave := Szkraw.logconcave_criterion
 
 assert_allowed_axioms Szkraw.geometric_matrix_positivity
 assert_allowed_axioms Szkraw.error_amplification
@@ -71,3 +73,6 @@ assert_allowed_axioms Szkraw.binomial_product_identity
 assert_allowed_axioms Szkraw.full_krawtchouk_binomial_range
 assert_allowed_axioms Szkraw.relatively_open_coefficient_neighborhood
 assert_allowed_axioms Szkraw.elementary_products
+assert_allowed_axioms Szkraw.logconcave_matrix
+assert_allowed_axioms Szkraw.logconcave_criterion
+assert_allowed_axioms Szkraw.product_symm
