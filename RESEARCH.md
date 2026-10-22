@@ -1463,3 +1463,14 @@ Proof architecture for (G), all pieces now proved except the last:
    - Each L_q is concave in z = u₀, so the endpoints z = 0 and z = 1/u₂ suffice.
    - Exact test (runs/varratio/key_extreme.py, 34,110 cases with a ≤ 14, γ ∈ {2, 8/3}): no failure, and K_α ≥ 0 always.
 4. Remaining: prove L_q(0) ≥ 0 and L_q(1/u₂) ≥ 0 for q ≥ 1. For q ≤ 2, L_q − L₀ ≥ 0 directly. For q ≥ 3 the reduced V-help (fewer s_m) must be paid from the surplus of L₀ and from 4Σ(n−2)(q−n)y_n.
+
+**Key inequality: the convex relaxation is too weak; the binomial-ray reduction works (2026-10-23).**
+- Kinked convex extreme rays fail: L(R_top, e^{(5)}) = −410 at a = 15, z = 1/u₂, geometric u (runs/varratio/key_endpoints.py). So (K′) is not implied by convexity plus monotone b, and the key genuinely uses more of the ratio's structure. This is not a counterexample to (G), since kinks have Newton coefficients of mixed sign.
+- With nonnegative Newton coefficients at ℓ (P_k = Δ^kρ(ℓ) ≥ 0, which (G) provides), s_i = Σ_k C(i,k)P_{k+1} lies in the simplicial cone spanned by the binomial rays b^{(k)} = (C(i,k))_i.
+- Hence, with α ≥ s_{a−1}u₀/u₁ and K_α ≥ 0: L(α, s) ≥ Σ_k P_{k+1}·L_k(z), where L_k(z) := L(C(a−1,k)z, b^{(k)}). Each L_k is concave in z, so the endpoints z = 0 and z = 1/u₂ suffice.
+- L₀ is Theorem 8.9's F(z) (proved). For k ≥ 1:
+  - runs/varratio/key_binom_rays.py: endpoints min 0.63 (weak α) and 1.785 (strong α), always at k = 0;
+  - runs/varratio/key_binom_dom.py: L_k ≥ 0 in all 79,620 cases with a ≤ 16;
+  - but L_k ≥ C(a−1,k)L₀ fails in 1,926 cases, so the rays do not reduce to Theorem 8.9.
+- z = 0 endpoint in closed form: L_k(0) = Y[C(a−1,k)J + c_k] + 2Σ(m−1)(a−m)C(m,k)y_m − 4Σ(n−2)(C(a,k+1) − C(n,k+1))y_n, with c_k = C(a−1,k)(ka−k−1)/(k+1). A termwise proof with Theorem 8.9's two-product lower bound for YJ fails for mid n; a proof must keep all products u_iu_j ≥ u_{i+j−1} in YJ.
+- Status: (G) ⟸ the endpoint inequalities L_k(0) ≥ 0 and L_k(1/u₂) ≥ 0 for k ≥ 1. These are explicit quadratic inequalities in an LC sequence u (u₁ = 1), with binomial coefficients in a and k. OPEN.
