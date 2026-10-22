@@ -1354,3 +1354,12 @@ Abel summation in ν along anti-diagonals n + m = τ uses LC of ν (pair product
 - (**) contains no free sequences. Together with the s-step, it implies (NP) for every LC s and every LC ν.
 - Exact test (runs/np/double_cert.py): all k ≤ 20 and all windows, 2,014 cases, no negative central sum. The minimum is 0.
 - Open: a proof of (**). It is a family of partial-Vandermonde inequalities in (k, window, τ, n₀).
+
+**Cleaner reduction (**′) and the flow argument (2026-10-23).** Apply 2D Abel summation directly to ρ and ν, with no shift-sum. Both sequences are LC, so the pair products ρ_iρ_{c₁−i} and ν_jν_{c₂−j} are layer-cake sums of central windows. Hence (NP) follows from (**′).
+- (**′): for all k ≥ 1, centres c ∈ ℤ² and boxes B symmetric about c/2, Σ_{p∈B}[H_k(p)H_k(c−p) − H_{k−1}(p)H_{k+1}(c−p)] ≥ 0, where H_k(i,j) = [y^iw^j](y+w+yw)^k = C(k,i)C(i,k−j).
+- Exact check (runs/np/trinomial_boxes.py): all 31,764 boxes with k ≤ 9; none negative. Over the whole plane the two sums are equal.
+- Probabilistic form: given S = c, the 2k trinomial steps are a uniform arrangement of a fixed multiset (counts 2k−c₂, 2k−c₁, c₁+c₂−2k). (**′) says the k-step partial sum lands in a centred box at least as often as the (k−1)-step partial sum, a peakedness statement for a multivariate hypergeometric. By reversal symmetry this is equivalent to D(B) = P(A_k∈B) − ½[P(A_{k−1}∈B) + P(A_{k+1}∈B)] ≥ 0.
+- Flow identity (exact, runs/np/flow_terms.py): D(B) = Σ_e Σ_{a′∈Out_e} H_{k−1}(a′)H_{k−1}(b)[r_k(a′) − r_k(b)], with b = c−a′−e and r_k(i,j) = H_k/H_{k−1} = k(i+j−k+1)/((k−i)(k−j)), increasing in i and j.
+  - In 1D this proves the claim: a′ > b on the outflow face.
+  - In 2D, 11,156 of 455,248 terms are negative (6,718 boundary points still negative after grouping), so a finer pairing is needed.
+- Open: a proof of (**′), i.e. 2D hypergeometric peakedness.
