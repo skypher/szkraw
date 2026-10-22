@@ -654,6 +654,22 @@ Brief and answer: reviews/consult-D-brief.md, reviews/consult-D-answer.md (job 8
 - *Missing.* An all-m family of minor certificates that closes under the D recursion.
 - *(D) is manifestly positive in LC coordinates for N ≤ 5 (proved; runs/ql_proof/d_cert.py).* With σ_{k+1} = σ_kρ_k and ρ_k = x_k + … + x_{N−1} (x ≥ 0 is exactly LC), the fraction-free numerators D_nP_m[n−1] − D_m(D_N − D_{m−1})P_{m−1}[n] of D_{mn}^k (times D_NQ_m > 0) have nonnegative coefficients in (t, x) for all m < n ≤ k: 3, 7 and 13 nonzero numerators at N = 3, 4, 5. So (D), (Γ), (B) and (P) hold for every LC constant-ratio profile at N ≤ 5. N = 6 passes as well (22 numerators, 164 s with sparse-ring arithmetic and pruning to the entries that are needed; runs/ql_proof/d_cert_fast.py), so (D) is proved for N ≤ 6. N = 7 would take about 7 h at the observed growth (×160 per step) and is not run. The m = 1 case has an all-N proof in these coordinates: the numerator of φ(n) − φ(1) is (D_N − D_n)(D_n − 1) + D_n(δ_n − 1), and each factor has nonnegative coefficients (δ_n − 1 = Σ_{k≥2} C(n−1,k−1)σ_k).
 
+## Formalization plan for Section 8 (Theorem 8.1) (2026-10-22)
+
+User decision: formalize every paper result once done (memory: formalize-everything). The work is done here, without Codex agents. Statement file: lean/Szkraw/LogConcaveStatement.lean (compiles): `profile`, `newtonCoeff`, `LogConcaveNoInternalZeros`, `ConstantRatioLogConcave`, and
+`Stmt_logconcave_matrix : ∀ N v, Admissible v → ConstantRatioLogConcave v → MatrixPositivity v`,
+which uses the existing `productMatrix v m n k = g(m,n;k)` (R_m(J) row n) and `MatrixPositivity`.
+Proof architecture (each step a separate file and lemma):
+- F1 *Rescaling.* With w = (a, t·d, d), t = (1−r)/√r: J_v = √r D J_w D^{−1}, D = diag(r^{i/2}), hence productMatrix v m n k = r^{(m+n−k)/2}·productMatrix w m n k. Pure matrix algebra on the existing `matrixPair` recursion (w is not `Admissible`; `productMatrix` is defined for any coefficients).
+- F2 *Symmetry and E-normalization.* e_0^T R_n(J) = e_n^T (needs a_i ≠ 0), hence productMatrix w m n k = productMatrix w n m k. Then L_{mn}^k = (e_me_n/e_k)·H with e_i = Π_{j<i} a_j/d_{j+1}.
+- F3 *Coefficientwise kernel relation.* d_{m+1}L_{m+1,n} + t d_mL_{mn} + a_{m−1}L_{m−1,n} = (same with m and n exchanged), with boundary conventions, from `product_recurrence` and F2; L_{m,0} = δ_{mk}. Uniqueness: these determine L.
+- F4 *Kernel identity (the main formal work).* Define ω by recurrence (8.1) (recursion on ℓ) and L'_{mn} = Σ_ℓ C(m+n−2ℓ, m−ℓ)ω_{ℓ,m+n−2ℓ}. Show L' satisfies F3, so L' = L. This is Lemma 8.2 read backwards. Plan: polynomial identities in ℝ[z,w] per monomial S^aZ^ℓ with symbolic a and ℓ; Vandermonde in the form C(ℓ+i,k) = Σ C(ℓ,q)C(i,p); the expansion of (z^{n+1} − w^{n+1})/(z − w) in S, Z (prove by induction via χ_n = Sχ_{n−1} − Zχ_{n−2}).
+- F5 *Lemma 8.3* (LC preserved by v_i = u_i + u_{i+1}; balanced products; the inequality f_i(ℓ)f_l(ℓ+1) ≥ d_{ℓ+1}f_{i+l}(ℓ)). Finite sequences over ℝ.
+- F6 *Lemma 8.4* (three detour inequalities): binomial identities plus termwise comparison with quotients ≥ 4.
+- F7 *Operator induction* on Ω: ω ≥ 0 and ω ≥ ½𝒫ω by strong induction on ℓ, with 𝒫² ≥ 4𝒬 entrywise. Here matching is indexwise (the three detour pairs), so no general operator theory is needed.
+- F8 *Assembly:* ω ≥ 0 ⇒ L' ≥ 0 ⇒ H ≥ 0 ⇒ g ≥ 0, giving `Stmt_logconcave_matrix`, then the axiom audit in lean/CheckAxioms.lean.
+Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and F8. Formalization of Section 7 follows.
+
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 
 Sources: reviews/consult-F-brief.md, reviews/consult-F-answer.md (job d4354a3a); checks runs/general/uniform_check.py, general_check.py, general_formula.py.
