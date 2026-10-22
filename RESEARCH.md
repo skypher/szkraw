@@ -978,3 +978,59 @@ runs/fusion/tower_w.py, tower_gauge.py.
 ## Prior art: Miclo 2015
 
 L. Miclo, On the Markov commutator, arXiv:1505.02540, Theorem 31 and Proposition 6: inequality conditions (palindromic birth-death chains, second differences of the potential >= 2 ln 2, or the condition (H)) implying the hypergroup property at the boundary, which is property (P) for the associated finite orthogonal polynomials. Krawtchouk and Szwarc Q_n are not covered. Now cited in Section 8.
+
+## THEOREM: a varying-ratio log-concave criterion (2026-10-22; derived here, exact checks; not yet reviewed or formalized)
+
+Scratch: runs/varratio/ (stoch.py, hform.py, mixed.py, kernel_check.py, logs/).
+
+**Setting (the paper's stochastic normalization).** a_i + b_i + c_i = 1, b_0 = c_0 = 0, a_0 = 1, a_N = 0, a_i > 0 for i < N, c_i > 0 for i ≥ 1. Newton coefficients ν_k = Δ^k c(0), β_k = Δ^k b(0) (k ≥ 1), with f_n(ℓ) = Σ_h C(ℓ,h)ν_{n+h} and g_n(ℓ) = Σ_h C(ℓ,h)β_{n+h} (so f_0(ℓ) = c_ℓ).
+
+**Theorem S.** Suppose:
+- (i) ν is log-concave without internal zeros;
+- (ii) β_k ≥ 0;
+- (iii) the mixed inequalities hold for 0 ≤ ℓ ≤ N−1:
+  - MI1: g_1(ℓ) f_n(ℓ+1) ≥ c_{ℓ+1} g_{n+1}(ℓ) for n ≥ 2;
+  - MI2: f_2(ℓ) g_n(ℓ+1) ≥ c_{ℓ+1} g_{n+2}(ℓ) for n ≥ 1.
+
+Then the system has nonnegative linearization.
+
+**Corollary S.** (iii) holds when β_k = w_kν_k with w_1 ≥ w_2 ≥ … ≥ 0. Then:
+- the ratio c_i/(b_i + c_i) is nondecreasing in i;
+- w constant is Theorem 8.1;
+- the conditions are inequalities in the paper's own coefficients b and c.
+
+*Proof of Theorem S.*
+1. *Generator.* E_i = e_iR_i with e_{i+1}/e_i = a_i/c_{i+1} gives yE_i = c_{i+1}E_{i+1} + b_iE_i + a_{i−1}E_{i−1}. So 𝓛_z = z⁻¹c(θ) + b(θ) + z(1 − b(θ) − c(θ)). As in Theorem 8.1, the kernel K_k = Σω_{ℓ,a}S^aZ^ℓ satisfies (𝓛_z − 𝓛_w)K_k = 0, with ω_{0,a} = [a = k] and support ℓ + a ≤ N.
+2. *Recurrence.* By Vandermonde, (𝓛_z − 𝓛_w)S^aZ^ℓ/(z − w) = S^aZ^ℓ + Σ_p C(a,p)S^{a−p}Z^ℓ[f_p(ℓ)(χ_{p−2} − χ_p) + g_p(ℓ)(χ_{p−1} − χ_p)], with χ_{−2} = −Z⁻¹ and χ_{−1} = 0. Collecting terms gives
+   c_{ℓ+1}ω_{ℓ+1,a} = a_{ℓ+a}ω_{ℓ,a} + Σ_j (−1)^j [A^β_j(ℓ−j, a+2j+1)ω_{ℓ−j,a+2j+1} + B_j(ℓ−j, a+2j+2)ω_{ℓ−j,a+2j+2} + (C_j + C^β_j)(ℓ−j−1, a+2j+2)ω_{ℓ−j−1,a+2j+2}].
+   Here A^β_j = W^β_{2j+1,j}, C^β_j = W^β_{2j+2,j+1}, and B_j, C_j are as in Section 8 with ν = Newton(c). The straight weight is 1 − c_{ℓ+a} − b_{ℓ+a} = a_{ℓ+a}. The constant term of b drops out.
+3. *Local inequalities.*
+   - A^β_0B_{j−1} + B_0A^β_{j−1} ≥ 4c_{ℓ+1}A^β_j follows from MI1 and MI2.
+   - B_0B_{j−1} ≥ 4c_{ℓ+1}B_j follows from Lemma 8.3 for ν.
+   - B_0(C_{j−1} + C^β_{j−1}) ≥ 4c_{ℓ+1}(C_j + C^β_j) follows from Lemma 8.3 and MI2.
+
+   The binomial bookkeeping and the quotients ≥ 5, 5, 6 are those of Lemma 8.4.
+4. *Operator inequality and induction.* These are verbatim from Section 8. C and C^β have the same displacement and are merged into one move; displacements stay distinct across types and j. Then ω ≥ 0, L ≥ 0, and g(m,n;k) = L e_k/(e_me_n) ≥ 0. ∎
+
+*Proof of Corollary S.* Let G_i = f_i(ℓ) and H_i = g_i(ℓ).
+1. (R): H_iG_{i+1} − H_{i+1}G_i = Σ_{x,y≥i} c_xc_yν_xν_{y+1}(w_x − w_{y+1}) with c_x = C(ℓ, x−i).
+   - Terms with x ≤ y are ≥ 0.
+   - Pair each term with x ≥ y+2 with (y+1, x−1). The pair sums to ν_xν_{y+1}(w_{y+1} − w_x)(c_{y+1}c_{x−1} − c_xc_y) ≥ 0, since w is nonincreasing and binomials are log-concave.
+   - So H_{i+1}G_i ≤ H_iG_{i+1}.
+2. MI1: chaining (R) gives H_{n+1}G_1 ≤ H_1G_{n+1}. Lemma 8.3 (i = 1, l = n) gives (G_0 + G_1)G_{n+1} ≤ G_1(G_n + G_{n+1}).
+3. MI2: H_n ≥ H_{n+2}G_n/G_{n+2} and H_{n+1} ≥ H_{n+2}G_{n+1}/G_{n+2}, together with Lemma 8.3 (i = 2, l = n).
+4. Zero cases follow from the support being an interval. ∎
+
+*Exact checks.*
+- **Kernel recurrence (kernel_check.py):** reproduces direct linearization on 3,670 coefficients of arbitrary arrays, with 0 mismatches.
+- **P² ≥ 4Q entrywise:** 1,075 Q entries for Corollary S members at N = 4–10, 0 violations. Spike controls that violate MI have 60 violations.
+- **(P) directly (stoch.py):**
+  - N = 2–5: about 6,900 MI members over five generators, 0 failures; all 26 failures violate MI.
+  - N = 6–12: class M 1,750 members (1,230 with varying ratio) and class rand 1,092 MI members, 0 failures.
+- **h-form version (a + c = 1, hform.py, mixed.py):** the same picture, with 4,267 MI members at N = 6–12 and 0 failures.
+
+*Relation to earlier attempts.*
+- Candidate A′ fails because b = (0,1,1,1)/91 has Newton coefficients of both signs.
+- Candidate B′ (b, c each Newton log-concave) fails because b's Newton coefficients extend beyond c's support (c linear, b cubic), which violates MI.
+- The linear-rising-ratio family L is not covered: b = (1−ρ)d is concave, so β_2 < 0. Theorem S needs b's Newton coefficients nonnegative. Its ratios c/(b+c) rise because b's Newton weights decay faster than c's.
+- The conditions are on the paper's coefficients directly; no rescaling is needed.
