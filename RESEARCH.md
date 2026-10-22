@@ -699,7 +699,17 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - lean/Szkraw/Reversal.lean holds the matrix tools: `commute_product` (X J = J X implies X p_m(J) = p_m(J) X); `eq_of_row_zero` and `eq_of_row_N` (e_0 and e_N are cyclic); `product_identity` (p_m(J)p_n(J) = Σ_k g(m,n;k)p_k(J)). For the reversed array: `revCoeff` and `revPerm` with `J_rev` (J' = ΠJΠ), and `Rp t = Π p'_t(J') Π`, which equals p'_t(J).
   - Proved there: Lemma 7.14 (`reversal_identity`) and Theorem 7.15 (`deep_formula` for all x, y ≤ N; `top_expansion` R_N = Σ g(N,N;N−l)R'_l; the criterion `deep_reduction`).
   - Also proved: Theorem 7.16 (`palindromic`, via `product_congr` and `conj_product_fixed`) and Corollary 7.17 (`palin_mono`; `palin_mono_kraw` for the symmetric Krawtchouk array).
-- Remaining formalization: that remark, Theorems 7.1, 7.6 and 7.8, Corollaries 7.7 and 7.9, Lemmas 7.2–7.5, and the provable statements of Section 9.
+  - lean/Szkraw/QuadDecomp.lean proves Theorem 7.8 for symmetric arrays on 0..2N:
+    - `Gk_rel_sym`, the if-free entry relation;
+    - `Gk_parity`: g = 0 when m + n + k is odd;
+    - `even_block`: g(2a,2b;2c) equals the even component's coefficient, from four instances of the entry relation and `product_eq_of_rec`;
+    - `odd_block`: g(m,n;2c+1) is given by the candidate `Hodd`, built from the odd component, which satisfies the big recurrence (`product_eq_of_rec_col`);
+    - `product_normalize`: the affine normalization has the same product matrices;
+    - `evenComp_admissible` and `oddComp_admissible` (N ≥ 2);
+    - `decomp_positivity` (for N ≥ 1; the odd component is trivial at N = 1) and `decomp_converse`.
+  - lean/Szkraw/ParitySplit.lean proves Corollary 7.9: `ps_even_geometric` and `ps_odd_geometric` (both normalized components satisfy Theorem 2.1's hypotheses), `parity_split` and `parity_split_sharp`. It also proves Theorem 7.1 through Corollary 7.9 with q = 1: `szwarcCoefficients`, `szwarc_admissible`, `szwarc_system` (finite realization and positivity, p ≤ 1/2) and `szwarc_sharp` (g(2,2;2) < 0 for 1/2 < p < 1).
+- Remaining formalization: that remark, Theorem 7.6, Corollary 7.7, Lemmas 7.2–7.5 (the graded algebra, the margin and stability), the symmetry of the measure in Theorem 7.1, the parameter identification in Corollary 7.9, and the provable statements of Section 9.
+- Pending: independent review that each Lean statement matches the paper's statement (consult via pro-cli).
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 

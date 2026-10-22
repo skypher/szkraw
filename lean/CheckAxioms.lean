@@ -43,6 +43,8 @@ example : Szkraw.Stmt_convex_low := Szkraw.convex_low
 example : Szkraw.Stmt_deep_reduction := Szkraw.deep_reduction
 example : Szkraw.Stmt_palindromic := Szkraw.palindromic
 example : Szkraw.Stmt_palin_mono := Szkraw.palin_mono
+example : Szkraw.Stmt_parity_split := Szkraw.parity_split
+example : Szkraw.Stmt_szwarc := Szkraw.szwarc_system
 
 assert_allowed_axioms Szkraw.geometric_matrix_positivity
 assert_allowed_axioms Szkraw.error_amplification
@@ -97,3 +99,17 @@ assert_allowed_axioms Szkraw.palindromic
 assert_allowed_axioms Szkraw.palin_mono
 assert_allowed_axioms Szkraw.palin_mono_kraw
 assert_allowed_axioms Szkraw.product_identity
+assert_allowed_axioms Szkraw.even_block
+assert_allowed_axioms Szkraw.odd_block
+assert_allowed_axioms Szkraw.Gk_parity
+assert_allowed_axioms Szkraw.product_normalize
+assert_allowed_axioms Szkraw.evenComp_admissible
+assert_allowed_axioms Szkraw.oddComp_admissible
+assert_allowed_axioms Szkraw.decomp_positivity
+assert_allowed_axioms Szkraw.decomp_converse
+assert_allowed_axioms Szkraw.parity_split
+assert_allowed_axioms Szkraw.parity_split_sharp
+assert_allowed_axioms Szkraw.ps_even_geometric
+assert_allowed_axioms Szkraw.ps_odd_geometric
+assert_allowed_axioms Szkraw.szwarc_system
+assert_allowed_axioms Szkraw.szwarc_sharp
