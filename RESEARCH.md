@@ -735,6 +735,11 @@ It matches the symbolic-exponent operator computation term by term for K = 3, 4,
 - G_1 = {W3 jump, W4a, W4b} are the quartic jumps; G_2 is positive again, and so on.
 - The alternation comes from h_n(S, Z) = Σ_j (−1)^j C(n−j, j)S^{n−2j}Z^j in (z^{n+1} − w^{n+1})/(z − w).
 - Cubic needs only G_0 and the single W_{3,1} term. Quartic needs G_1 dominated by two-step G_0∘G_0 detours, which is exactly where LC enters.
+*Shifted basis S' = S + tZ (runs/general/shifted_basis.py).* The Krawtchouk kernel is (1 + Z)^{N−k}S'^k. Expanding the kernel in S'^aZ^r gives:
+- degree 3: every move nonnegative; the cubic jump becomes two positive moves +σ_3t. This is a one-line proof of the cubic theorem: c' ≥ 0, and (z + w + tzw)^a(zw)^r has nonnegative coefficients, so L ≥ 0;
+- degree 4: (+2,−4) negative, (+3,−4) mixed;
+- degree 5: (+2,−4), (+3,−5) negative and (+2,−3), (+3,−4), (+4,−5) mixed.
+So a fixed shift helps but does not remove the alternation. A profile-dependent family of shifted bases (like Π_{j<a}(S + tλ_jZ), with λ chosen to fit the geometric kernel) is the next idea.
 *Uniform route.* An alternating-series argument: G_j dominated by (j+1)-fold compositions of G_0 under LC, or a resummation Σ(−1)^jG_j = G_0∘(1 + X)^{−1} with a transformed unknown that satisfies a positive recurrence.
 *Negative results.*
 - The two-variable Schur basis Z^r h_a gives more negative moves already in the cubic case.
