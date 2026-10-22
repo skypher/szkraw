@@ -278,3 +278,19 @@ Reviewer: ChatGPT Pro (gpt-6-pro), job `job_9f6db0a3-2434-4879-9bc2-1b081f6ba54f
 
 After this PASS, only non-mathematical text changed, at the user's request: the machine-verification sentence of the AI-use disclosure was rewritten in plain words, and the formalization paragraph now says that Sections 7 and 8 are not yet formalized and that formalizing them is planned. Section 8 itself is unchanged.
 Current paper.tex SHA-256: `8ac2403ae031c8c0a8ba6827b1cc3195ab9d1eef51a732515f487557bb004ec0`.
+
+## Lean statement fidelity, round 1 (2026-10-22)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_db9c2283-7f70-48e2-9dde-34a92f92e1a0`. Brief: `reviews/lean-fidelity-brief.md`. Answer: `reviews/lean-fidelity-answer.md`.
+
+The task was to check that each Lean statement listed in the paper's code-and-formalization section says what the paper's statement says. Proofs were not reviewed; they are checked by Lean.
+
+**Verdict: PASS WITH MINOR FIXES** for the supplied declarations. Theorems 7.1, 7.8, 7.10, 7.12, 7.15, 7.16 and 8.1, Corollaries 7.9, 7.11, 7.13 and 7.17, and Lemma 7.14 match; the declared scope exclusions are accurate. No Lean statement needs to change.
+
+Fixes applied:
+- The scope sentence for Corollary 7.9 now says that the component statements are for N ≥ 2, and that `parity_split` also covers N = 1.
+- The code section now names the three axioms the audit reports.
+
+The reviewer also asked for the Newton-coefficient convention ν_k = Δ^k d(0). The paper already states it at the start of Section 8; the brief's excerpt omitted it.
+
+Open: the types of `geometric_criterion` and `perturbation_criterion` (Theorems 2.1 and 5.3) were not in the brief and remain unreviewed. They go into round 2, together with the new Section 7 formalizations.
