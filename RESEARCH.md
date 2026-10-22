@@ -789,7 +789,16 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - `analytic_rule_small`: the derivative is at most |s_N| C √N e^{−ηN} in absolute value.
   - `expRule_deriv`: the example has derivative s_N(1 − e^{1/N})^N ≠ 0.
 - Every numbered result of Section 9 is now machine-verified, audit clean.
-- Prose consequences in Section 9 (2026-10-22, LimitsRemarks.lean and RadiusExp.lean): `no_open_rule_set` (after Theorem 9.4; rules as coefficient vectors, the constant term of β shifts L_even by 2t), `boundary_layers_palindromic` (after Proposition 9.9), `radius_no_uniform` (after Corollary 9.13, via `stableRadii_le`, split out of the proof of `radius_exp`). Not formalized: the description of Ω (corners, vertical tangents, ±0.26276…), and the computations and heuristics away from r = 1.
+- Prose consequences in Section 9 (2026-10-22, LimitsRemarks.lean and RadiusExp.lean): `no_open_rule_set` (after Theorem 9.4; rules as coefficient vectors, the constant term of β shifts L_even by 2t), `boundary_layers_palindromic` (after Proposition 9.9), `radius_no_uniform` (after Corollary 9.13, via `stableRadii_le`, split out of the proof of `radius_exp`). Not formalized: the computations and heuristics away from r = 1.
+- The description of Ω (2026-10-22), OmegaShape.lean:
+  - `omega_contains`: Ω contains [0,1].
+  - `omega_half_line`: on Re x = ½, U(½ + iy) = k(|y|) − 1 with k(y) = ½log(¼+y²) + πy − 2y·arctan 2y, and k' = π − 2arctan 2y > 0. Certified signs come from the log series with Mathlib's error bound, the alternating arctan series, log 2 to 9 digits and π to 6 digits: k(0.26276) ≤ −5.2·10⁻⁶ and k(0.26277) ≥ 1.6·10⁻⁵. So 1/2 + iy ∈ Ω iff |y| ≤ y₀ for some y₀ in (0.26276, 0.26277).
+  - `omega_corner_zero`:
+    - ∂U/∂x = log|z| − log|z − 1| < 0 for Re z < ½, so x ↦ U(x + ib) is strictly decreasing there.
+    - The boundary function a(b) is the root of U(a(b) + ib) = −1, which exists by the intermediate value theorem.
+    - Vertical tangent: U(ε|b| + ib) < −1 for |b| < e^{−4/ε−1}.
+    - Nonanalyticity: U(b/(2log(1/b)) + ib) > −1 for 0 < b ≤ 1/8, so a(b) > b/(2log(1/b)). An analytic a with a(0) = 0 and a'(0) = 0 would satisfy a(b) = O(b²), and b·log(1/b) → 0.
+  - `omega_corner_one`: the mirror image under z ↦ 1 − z̄, which preserves U and the frontier of Ω.
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

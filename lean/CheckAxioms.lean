@@ -195,3 +195,7 @@ assert_allowed_axioms Szkraw.stableRadii_le
 assert_allowed_axioms Szkraw.radius_no_uniform
 assert_allowed_axioms Szkraw.no_open_rule_set
 assert_allowed_axioms Szkraw.boundary_layers_palindromic
+assert_allowed_axioms Szkraw.omega_contains
+assert_allowed_axioms Szkraw.omega_half_line
+assert_allowed_axioms Szkraw.omega_corner_zero
+assert_allowed_axioms Szkraw.omega_corner_one
