@@ -731,7 +731,11 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
     - `twoParam_poly` / `lc_twoParam`: g = Σ_j h_j x^{D−2j} y^j with h_j ≥ 0, for all real x and y: first for y > 0 through the kernel at t = x/√y, then for all y because g is a polynomial in y (`product_poly_all`);
     - `bern_term` and `logconcave_bernstein` / `lc_bernstein`: the Bernstein form, for all real r;
     - `constantRatio_twoParam`: the arrays of Theorem 8.1 are twoParam N d (1 − r) r.
-- Remaining formalization: Lemmas 7.2–7.3 (the graded algebra; the paper uses them only for its own proof of Theorem 7.1), and Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
+- Lemmas 7.2–7.3 (2026-10-22), lean/Szkraw/EdgeIdempotents.lean:
+  - Lemma 7.2 (`edge_idempotents`) holds for every commutative ℝ-algebra with y_j² = (1 − r)y_j + r and a basis B with B S = y_S, for r ≠ −1. The basis claim is linear independence of the f_l y_S (l ∉ S), proved through the coordinate at S ∪ {l}, together with span = `Ideal.span {f_l}`.
+  - `cube_model` gives such an algebra: the functions on {1, −r}^N. The y_S span because each point indicator is Π_j (α_j + β_j y_j), and 2^N of them match the dimension.
+  - Lemma 7.3 (`three_term_action`) uses only the relations. V sits inside A × A^N. Two double counts (`count_out`, `count_in`) do the odd case.
+- Remaining formalization: Section 9 beyond Lemma 9.1. That part is analytic: derivatives along deformations (Lemmas 9.2 and 9.6, Theorem 9.4, Propositions 9.7–9.12, Corollaries 9.10 and 9.13) and the Nörlund–Rice contour bound (Lemma 9.5).
 - Statement fidelity: round 1 PASS WITH MINOR FIXES (REVIEW.md); round 2 pending.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)

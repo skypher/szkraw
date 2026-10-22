@@ -135,3 +135,7 @@ assert_allowed_axioms Szkraw.kernel_nonnegG
 assert_allowed_axioms Szkraw.lc_twoParam
 assert_allowed_axioms Szkraw.lc_bernstein
 assert_allowed_axioms Szkraw.constantRatio_twoParam
+assert_allowed_axioms Szkraw.edge_idempotents
+assert_allowed_axioms Szkraw.cube_model
+assert_allowed_axioms Szkraw.three_term_action
+assert_allowed_axioms Szkraw.Uvec_top

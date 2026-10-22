@@ -38,3 +38,4 @@ import Szkraw.ParityParams
 import Szkraw.CornerValue
 import Szkraw.LCGraded
 import Szkraw.LCRemark
+import Szkraw.EdgeIdempotents
