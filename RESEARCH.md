@@ -696,7 +696,10 @@ Order: F5, F6 (self-contained real inequalities), then F1–F3, then F4, F7 and 
   - lean/Szkraw/AllProducts.lean proves `Gk_rel` (x acts on either factor; the case m = N follows from symmetry, with no separate terminal relation needed) and the rescaling w_m = Π a_lσ_{l+1}/(c_{l+1}σ_l). From these it proves Theorem 7.12 (`Szkraw.all_products : Stmt_all_products`) and Corollary 7.13 (`Szkraw.heavy_top : Stmt_heavy_top`), both in matrix form, with an axiom audit clean.
   - Theorem 7.10 (`Szkraw.low_products : Stmt_low_products`) is proved with `cone_nonneg_low`. That lemma assumes the hypotheses only on the ranges that products of total degree at most N reach (`ConeHypLow`); `Hadj_vD_zero` also covers i + j > n + m. The two-of-three consequence uses `piW_entry`: π_n g(m,n;k) = π_k g(m,k;n), with π_i = Π a_j/c_{j+1}, from diag(π)J = Jᵀdiag(π).
   - Corollary 7.11 is `Szkraw.convex_low : Stmt_convex_low`; its proof uses superadditivity d_i + d_j ≤ d_{i+j}. The arrays (2.3) are included via `Szkraw.geometric_convex : Geometric v → ConvexProfile v`.
-- Remaining formalization: that remark, the rest of Section 7 (Theorems 7.1, 7.6, 7.8, 7.15, 7.16 and their lemmas and corollaries), and the provable statements of Section 9.
+  - lean/Szkraw/Reversal.lean holds the matrix tools: `commute_product` (X J = J X implies X p_m(J) = p_m(J) X); `eq_of_row_zero` and `eq_of_row_N` (e_0 and e_N are cyclic); `product_identity` (p_m(J)p_n(J) = Σ_k g(m,n;k)p_k(J)). For the reversed array: `revCoeff` and `revPerm` with `J_rev` (J' = ΠJΠ), and `Rp t = Π p'_t(J') Π`, which equals p'_t(J).
+  - Proved there: Lemma 7.14 (`reversal_identity`) and Theorem 7.15 (`deep_formula` for all x, y ≤ N; `top_expansion` R_N = Σ g(N,N;N−l)R'_l; the criterion `deep_reduction`).
+  - Also proved: Theorem 7.16 (`palindromic`, via `product_congr` and `conj_product_fixed`) and Corollary 7.17 (`palin_mono`; `palin_mono_kraw` for the symmetric Krawtchouk array).
+- Remaining formalization: that remark, Theorems 7.1, 7.6 and 7.8, Corollaries 7.7 and 7.9, Lemmas 7.2–7.5, and the provable statements of Section 9.
 
 ## THEOREM: the log-concave Newton criterion holds for all N (2026-10-22; consult round 4 plus derivations here; verified exactly; NOT yet in the paper or independently reviewed)
 

@@ -40,6 +40,9 @@ example : Szkraw.Stmt_all_products := Szkraw.all_products
 example : Szkraw.Stmt_heavy_top := Szkraw.heavy_top
 example : Szkraw.Stmt_low_products := Szkraw.low_products
 example : Szkraw.Stmt_convex_low := Szkraw.convex_low
+example : Szkraw.Stmt_deep_reduction := Szkraw.deep_reduction
+example : Szkraw.Stmt_palindromic := Szkraw.palindromic
+example : Szkraw.Stmt_palin_mono := Szkraw.palin_mono
 
 assert_allowed_axioms Szkraw.geometric_matrix_positivity
 assert_allowed_axioms Szkraw.error_amplification
@@ -86,3 +89,11 @@ assert_allowed_axioms Szkraw.low_products
 assert_allowed_axioms Szkraw.convex_low
 assert_allowed_axioms Szkraw.geometric_convex
 assert_allowed_axioms Szkraw.piW_entry
+assert_allowed_axioms Szkraw.reversal_identity
+assert_allowed_axioms Szkraw.deep_formula
+assert_allowed_axioms Szkraw.top_expansion
+assert_allowed_axioms Szkraw.deep_reduction
+assert_allowed_axioms Szkraw.palindromic
+assert_allowed_axioms Szkraw.palin_mono
+assert_allowed_axioms Szkraw.palin_mono_kraw
+assert_allowed_axioms Szkraw.product_identity
