@@ -1841,3 +1841,19 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
 - **End-to-end test:** runs/cubic/c3_property_P.py at the boundary rσ = tτ (logs in runs/cubic/logs/).
 - **End-to-end (P) at the boundary rσ = tτ** (runs/cubic/c3_property_P.py, logs in runs/cubic/logs/): 4,400 full exact tables with N = 4–14, plus 2,760 rows g(m,N;k) with N = 15–60. No negative coefficient. Exact ingredient check (runs/cubic/final_ingredients.py, N ≤ 16): minimum detour quotients B 9.14, V 11.08, E 4.80, H 23.2, C′ 9.87 (needed: 4, 9/2, 3, 10, 6); minimum key ratio 2.50 (needed: 1).
 - **In the paper** as Theorem 8.17 (thm:lc-cubic), with eqs. (8.10)–(8.13). The abstract, open problems and AI disclosure are updated. Review round 25 brief: reviews/round25-brief.md.
+
+## Is log-concavity of the profile's Newton coefficients sharp? No, not quantitatively (2026-10-23)
+
+Scripts: runs/sharp/. Constant-ratio arrays (a = 1 − d, b = (1−r)d, c = rd); violation measured by V = max_k ρ_k/ρ_{k−1} over the Newton ratios ρ_k = σ_{k+1}/σ_k (LC iff V ≤ 1).
+- **One-step family = Krawtchouk/geometric mixtures.** ρ_1 = A, ρ_{k≥2} = B gives D(i) = (1−μ)i + μ[i]_q with μ = A/B and q = 1+B, violation V = B/A = 1/μ. These are the segment arrays of Section 9.
+- **Thresholds at r = 1** (r1_grid.py: float scan of log A, log B in steps of 0.5, hits confirmed at 60 digits; r1_large.py and r1_trend.py in mpmath at 80–160 digits, the N = 40 hit stable at 80 and 140 digits):
+  - N = 4–20: the smallest failing V is ≈ 10² (10^2.5 at N = 4);
+  - N = 30: 10²;
+  - N = 40, 60, 80: 10^1.5 fails, 10^1.25 does not on the grid.
+  So the threshold falls slowly and seems to level off near 20–30. There is no evidence that it tends to 1.
+- **r < 1 needs larger violations:** at r = 0.9, 10²–10^2.5 (N ≤ 20); at r = 0.7, 10³–10⁴; at r = 0.5, no failure on the grid for N ≤ 20.
+- **Other shapes** (random_violation.py, N = 12, 30,000 random LC sequences with 1–3 upward bumps, violations up to 10³, r ∈ {1, 0.9, 0.7}): no failure. Single jumps and dips on a geometric base (step_scan.py, ratio_step_scan.py, exact, N ≤ 10): failures only for V ≥ 10⁴, and only with small A. Failures occur in windows of the step size, not beyond a threshold (non-monotone in V).
+- **First order at r = 1** (near1.py): for N odd the corner vanishes at r = 1 (parity). Its r-derivative at N = 3 is (3σ₂ + 2σ₃)/(σ₁ + 2σ₂ + σ₃) ≥ 0 for every nonnegative σ, so it detects nothing. Every failure found was already g < 0 at r = 1.
+- **Corner lemma reading.** At K_{N,1}, N even, a profile perturbation δ (r = 1) changes the corner at first order by 2s_NΔ^Nδ(0), where Δ^Nδ(0) is the top Newton coefficient of the perturbation. For N ≡ 0 mod 4 (s_N < 0), a top Newton coefficient of order ε breaks (P). Log-concavity allows only O(ε^{N−1}) there, so this is again a violation that is enormous in the multiplicative measure.
+- **Conclusion.** The statement "log-concavity cannot be relaxed by any constant factor" is false for every tested N ≤ 80. (P) tolerates violations by a factor of about 18 in the mixture family and more elsewhere. What is proved is only that some condition beyond positivity is needed: there are exact failing mixtures with positive Newton coefficients, which are far past the boundary (V from 30 up to 10⁸). Whether the threshold tends to 1 as N → ∞ is open; proving anything there needs the asymptotics of the corner under a top boundary layer (see the route decision of 2026-10-22). Not pursued further.
+- **Correction to the wording used for Szwarc.** Section 9 excludes criteria valid for every N that keep a margin of fixed size around Krawtchouk. At a fixed N the perturbation criterion does give a neighbourhood. "Arrays just past the boundary fail" was wrong: the failing arrays are 30 to 10⁸ times past it.
