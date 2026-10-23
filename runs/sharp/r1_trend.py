@@ -1,9 +1,9 @@
-"""Threshold trend at large N (r = 1, K = 2): for each N, the smallest v in a list with B/A = 10^v failing (P),
-over log A in a list. One line per table with timestamp (progress). Usage: r1_trend.py Ns vs las dps"""
+"""Threshold trend at large N (r = 1, K = 2 subfamily, i.e. the mixtures (1-mu) i + mu [i]_q): for each N, the smallest
+v in a (sorted) list with B/A = 10^v failing (P) for some log A in a list; the smallest failure found, not a threshold. One line per table with timestamp (progress). Usage: r1_trend.py Ns vs las dps"""
 import sys, time
 import mpmath as mp
 from math import comb
-Ns = [int(z) for z in sys.argv[1].split(',')]; vs = [float(z) for z in sys.argv[2].split(',')]; las = [float(z) for z in sys.argv[3].split(',')]
+Ns = [int(z) for z in sys.argv[1].split(',')]; vs = sorted(float(z) for z in sys.argv[2].split(',')); las = [float(z) for z in sys.argv[3].split(',')]
 mp.mp.dps = int(sys.argv[4])
 def min_entry(d):
     N = len(d) - 1; size = N + 1; a = [1 - x for x in d]; c = d

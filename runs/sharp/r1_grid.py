@@ -1,6 +1,7 @@
 """At r = 1 (b = 0): which one-step log-convex Newton profiles fail (P)? Family: Newton ratios rho_k = A (k < K),
-B (k >= K); LC iff B <= A. Float64 scan over log10 A, log10 B, K; every failing grid point with the smallest B/A per N
-is confirmed in mpmath (60 digits). Prints per N: number of failing points, min violation B/A (confirmed) and where.
+B (k >= K); LC iff B <= A; K = 2 is the mixture family (1-mu) i + mu [i]_q. Float64 screening over log10 A, log10 B, K;
+at most twenty of the float failures with the smallest B/A per N are confirmed in mpmath (60 digits), so the result is the
+smallest confirmed failure found on the grid, not a threshold. Prints per N: number of failing points, min violation B/A (confirmed) and where.
 Optional r < 1 (b = (1-r) d, c = r d). Usage: r1_grid.py Ns step [r]"""
 import sys, time
 import numpy as np, mpmath as mp

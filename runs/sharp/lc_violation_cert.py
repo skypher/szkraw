@@ -1,8 +1,8 @@
 """Exact certificate that a profile violating log-concavity of its Newton coefficients by a factor 1/mu still has (P)
 for every r in [0, 1]. Profile D(i) = (1 - mu) i + mu [i]_q (Newton ratios mu(q-1), q-1, q-1, ...: one upward step by
 the factor 1/mu), d = D / D(N), constant ratio a = 1 - d, b = (1-r) d, c = r d. Every g(m,n;k) is a polynomial in r
-(divisions only by a_m); (P) on [0,1] follows if all its Bernstein coefficients are >= 0; otherwise the polynomial is
-checked exactly for a sign change on (0,1] (Sturm). Usage: lc_violation_cert.py N mu q"""
+(divisions only by a_m); (P) on [0,1] follows if all its Bernstein coefficients are >= 0 (CERTIFIED). Otherwise an exact
+negative value on the grid r = j/64 gives FAILS, and anything else is INCONCLUSIVE. Usage: lc_violation_cert.py N mu q"""
 import sys
 from fractions import Fraction as F
 import sympy as sp
@@ -33,7 +33,8 @@ for m in range(N):
             row.append(pscale(v, 1 / a[m]))
         nxt.append(row)
     prev, cur = cur, nxt; tables.append(cur)
-r = sp.Symbol('r'); nonbern = 0; bad = []
+nonbern = 0; witness = None
+GRID = [F(j, 64) for j in range(65)]
 for m, T in enumerate(tables):
     for n_, row in enumerate(T):
         for k, p in enumerate(row):
@@ -42,15 +43,12 @@ for m, T in enumerate(tables):
             bern = [sum(F(sp.binomial(i, j)) / F(sp.binomial(deg, j)) * p[j] for j in range(i + 1)) for i in range(deg + 1)]
             if min(bern) >= 0: continue
             nonbern += 1
-            P = sp.Poly([sp.Rational(x.numerator, x.denominator) for x in reversed(p)], r)
-            if P.eval(0) < 0 or P.eval(1) < 0 or P.count_roots(0, 1) > 0 and any(P.eval(sp.Rational(x)) < 0 for x in [sp.nsimplify(rt) for rt in []]):
-                bad.append((m, n_, k))
-            else:
-                # exact: sign at midpoints between real roots in (0,1)
-                rts = sorted(set([0, 1] + [x for x in sp.Poly(P).real_roots() if 0 < x < 1]), key=lambda x: float(x))
-                for lo, hi in zip(rts, rts[1:]):
-                    mid = sp.Rational(sp.nsimplify((sp.N(lo, 50) + sp.N(hi, 50)) / 2, rational=True))
-                    if P.eval(mid) < 0: bad.append((m, n_, k)); break
+            if witness is None:   # exact negative witness on a rational grid of r in [0, 1]
+                for x in GRID:
+                    v = sum(c * x ** e for e, c in enumerate(p))
+                    if v < 0: witness = (m, n_, k, x, v); break
 print(f'N = {N}, mu = {mu}, q = {q}: max Newton log-convexity factor sigma_(k-1) sigma_(k+1) / sigma_k^2 = {float(viol):.6g}')
-print(f'entries without nonnegative Bernstein form: {nonbern}; entries negative somewhere on [0,1]: {len(bad)} {bad[:5]}')
-print('CERTIFIED: (P) for every r in [0,1]' if not bad else 'FAILS')
+print(f'entries without nonnegative Bernstein form: {nonbern}')
+if nonbern == 0: print('CERTIFIED: (P) for every r in [0,1]')
+elif witness: print(f'FAILS: g{witness[:3]} = {witness[4]} < 0 at r = {witness[3]} (exact)')
+else: print('INCONCLUSIVE')

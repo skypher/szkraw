@@ -3,7 +3,8 @@ In B_0(0,a) B_0(1,a-2) >= 4 c_1 B_1(0,a), the m = 4 term needs 6 C(a,4) phi_2(0)
 which fails pointwise. B_0(0,a) >= C(a,2) phi_2(0) + C(a,3) phi_3(0) and C(a,3) C(a-2,2) = 2(a-2) C(a,4) >= 4 C(a,4)
 (a >= 4) give the extra 4 C(a,4) phi_3(0) phi_2(1); the other terms (n >= 3) use only C(a,2) phi_2(0).
 So it suffices: Dc = (12 phi_2(0) + 8 phi_3(0)) phi_2(1) - 8 c_1 phi_4(0) >= 0 (u_0 = d_0 = 0).
-Polarized, Dc = D(0,2) + 8 phi_3(0) phi_2(1), the added coefficients are all >= 0; only kappa_ts of D(0,2) can be < 0.
+Polarized, Dc = D(0,2) + 8 phi_3(0) phi_2(1), and the added coefficients are all >= 0. Only kappa_ts requires an
+additional check; the quadratic block (Theorem 8.11) and the existing trade estimates handle the other terms.
 Certify kappa_ts + 8 [phi_3(0) phi_2(1)]_ts >= 0 for log-concave u with u_0 = 0, u_1 = 1, u_2 = q, u_3 = q a (a <= q),
 u_4 <= q a^2. Asserts; prints CERTIFIED."""
 import sys, os
