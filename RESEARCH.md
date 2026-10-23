@@ -1752,3 +1752,16 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - the key with weights (2,1,1);
   - the Theorem 8.11 resummation with μ_H = 10, μ_V = 9/2, μ_E = 3, μ_C = 6.
   - Missing: an analytic proof of the off-corner copositivity for all ℓ, n and profiles, and of the E-detour and the key.
+- **Cubic weighted B-detour: certificate structure** (runs/varratio/cubic_quadB_suff.py, cubic_quadB_abel.py, cubic_quadB_abel2.py, cubic_quadB_nu.py).
+  - **Coefficient criterion.** After the trade rσ ≤ tτ (u = 1), off the corner (0,2), the following held in 2,414 cases with ℓ, n ≤ 12 (random and geometric profiles):
+    - every coefficient except rτ is ≥ 0;
+    - κ_rτ ≥ −2√(κ_rr·κ_ττ), with margin ≥ 2.19.
+    - Note κ_rr ≥ 0 for every profile: it is Lemma 8.3 together with (n+1)(n+2) ≥ 8(n−1).
+  - **u-coordinates.** With u = f(ℓ), D(ℓ,n) only involves u_a·u_{n+δ} with a ≤ 2.
+    - Abel tails per weight: every tail with a ≥ 1 passes (ℓ ≤ 12, 3 ≤ n ≤ 16).
+    - The full tail (a = 0) fails for ℓ ≥ 1 and small n: log-concavity alone does not bound u₀ well enough, and the convexity bound u₀ = d_ℓ ≤ ℓu₁ is needed.
+    - Pushing every negative u₀u_w term with u₀ ≤ ℓu₁ to the next weight is too lossy (435 failures).
+  - **ν-coordinates** (base profile, ν₀ = 0, u_k = Σ_h C(ℓ,h)ν_{k+h}), so convexity is built in:
+    - all Abel tails pass: 12,380 tails, ℓ ≤ 10, 2 ≤ n ≤ 16, corner excluded;
+    - but many inner pairs (i ≥ 2) are negative on their own, so partial tails matter and full weight sums alone do not suffice.
+  - **Proof plan.** Follow the Theorem 8.11 structure. D is affine in u₀ (for n ≥ 4), and D(u₀ = 0) ≥ 0 by the a ≥ 1 tails. Then check u₀ = min(ℓu₁, u₁²/u₂), split by which bound binds; in the convexity case u₂ ≤ u₁/ℓ is available. Each tail is a polynomial in (ℓ, n) times ratio monomials, so certificates come from shifted-variable positivity, as for the key inequality.
