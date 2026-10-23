@@ -698,3 +698,20 @@ Scope:
 - The zero and infinite-support cases are covered.
 
 The reviewer could not fetch `lean/axioms.log`: it was not tracked in git. It is now committed. The table row, scope sentence and disclosure ("is machine-verified") are applied.
+
+## Review round 25: Theorem 8.17 (cubic ratios with rσ ≤ tτ) (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3b695c0a-d1b9-48dc-8fd3-d71c7c1774b6`. Brief: `reviews/round25-brief.md` (paper at commit faaa5a0). Answer: `reviews/round25-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer found no failed certificate and no substantive gap in the detours, the key inequality or the resummation. Independent checks:
+- reran bdetour_cert.py (349 checks), corner_cert.py, edetour_cert.py (124 checks), phi2loc_cert.py and phi3loc_cert.py, all CERTIFIED;
+- re-derived the cubic Leibniz splitting, the Γ identity and the B/E coefficient constructors;
+- checked the E-detour weights (j−2)(m−1)/j, the corner supply 2(a−2)C(a,4) ≥ 4C(a,4), the key reduction (α, the polarization, Φ₁ = F(z), both local decompositions, the y₂ balance s/3, and the case n = a), the survivals 1/18 and 1/12, and the boundary cases ℓ + a = N, small a, q = 0, ℓ = 0, r > 0;
+- found no prior statement of the theorem. The condition tτ > rσ is the cubic Routh–Hurwitz condition for the ordinary coefficient polynomial r + tz + τz² + σz³; this is not related to the theorem.
+
+Fixes, all applied:
+1. The claimed cutoff at u = 1 was wrong: κ_tτ/|κ_rσ| → 2 at (0,3), so the geometric family obstructs only u > 2. The remark after the proof and the open problem are corrected.
+2. The B reduction is not concave in c (example: the rt coefficient at (0,4,1,0)). The text now gives the y = 0 branch (affine in c) and the y = c branch (a cubic certified on the whole interval), which is what bdetour_cert.py does. For E the bound is a concave quadratic in c. The second block is normalized separately, and "overlap" is replaced by "exceptional low-index cases".
+3. The q → 0 limit sentence after the Φ₃^loc bounds was false in general (counterexample a = 3, u = (1/q,1,q,0)) and unused. Deleted.
+4. Corner wording: "only κ_tσ requires a new check; the added quadratic form has nonnegative coefficients".
+5. Boundary cases: zero tails and q = 0 by continuity within the local log-concavity constraints, keeping u₀ = 0 when ℓ = 0.
