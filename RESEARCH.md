@@ -1620,3 +1620,37 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
 - Remaining:
   - a precise proof of (L1′) for σ ≥ 3 and of S_{2,0} ≥ 0;
   - writing out (i) and (ii) for a ≥ 11.
+
+**Key for general a: (L1′) for σ ≥ 3 PROVED for all a (2026-10-23).** Notation as above, u the LC Newton coefficients at base ℓ, D = d₁ = u₀ + u₁, c′ = C(a−1,s−1), c″ = C(a−1,s).
+- **Decomposition** (exact, runs/varratio/key_L1_decomp.py, 7072 cases, a ≤ 18): M_{0,s} = c′·B·K″ + F·G_s, where:
+  - K″ = Y′X″ + YX′ − 4DH_*, with X″ = B − d₀ and X′ = B − d₁;
+  - G_s = c′(Y′X″ + YX′) − c″(d₀Y′ + d₁Y) + D(2V₁^{(s)} − 4Z_s), with Z_s = Σ(n−2)y_n(C(a,s) − C(n,s)).
+- **Reduction.** LC gives u₀u_{m+1} ≤ u₁u_m, so u₁B ≥ u₀F. Hence, once K″ ≥ 0,
+  u₁M_{0,s} ≥ F·(2′), where (2′) = c′u₀K″ + u₁G_s.
+  (2′) was checked exactly: runs/varratio/key_L1_2prime.py, 8892 cases, a ≤ 20, min ratio 1.0505 at a = 20, s = 3.
+- **(2′) is a quadratic form times D, plus a nonnegative term.** Y′ = Y − (a−1)u₂, and (2′) = D·Q + c″u₁²Y′ with
+  Q = c′(Y′X″ + YX′) − 4c′u₀H_* + u₁(2V₁^{(s)} − 4Z_s) − c″u₁(Y + Y′).
+  The identity was checked on random LC u (runs/varratio/key_L1_quad.py).
+- **Abel criterion for quadratic forms.** For LC u (no internal zeros), u_iu_{W−i} is nondecreasing in i ≤ W/2. So a quadratic form is ≥ 0 if, for every weight W, every tail sum Σ_{i ≥ i₀} q_{i,W−i} is ≥ 0.
+  - In Q and in K″ the only negative coefficients sit at the pairs (0, W) and (1, W−1).
+  - So the criterion reduces to the full weight sums N_W ≥ 0. These are the coefficients of the forms evaluated at u_n = rⁿ.
+- **Closed forms.** With p = 1 + r:
+  - Y = pᵃ − 1 − ar, X″ = p^{a−1} − 1, X′ = X″ − r, H_* = arp^{a−1} − 2pᵃ + 2 + ar.
+  - G(r) := Σ(n−2)C(a,n)C(n,s)rⁿ = C(a,s)[(s−2)rˢp^{a−s} + (a−s)r^{s+1}p^{a−s−1}].
+  - rV₁ = sG and Z = C(a,s)H_* − G.
+  - For W ≥ 4, N_W(Q)/c′ = [2C(2a−1,W) − 2C(a,W) − 2C(a−1,W) − 2aC(a−1,W−1) − C(a,W−1) − (a−1)C(a−1,W−2) − 4(W−2)C(a,W)] − (4a/s)(W−3)C(a,W−1) − 2((a−s)/s)C(a,W−1) + (a/s)·(a nonnegative G-term).
+  - Checked against the coefficient expansion for a ≤ 40 (runs/varratio/key_L1_weights.py).
+- **Signs of the weight sums.**
+  - W ≤ 2: the sums vanish.
+  - W = 3: N₃(Q) = c′(a−1)(a−2)(2a−3)/6 + 6C(a,3)[s=3] − c″(a−1)².
+    - At s = 3 this is (a−1)(a−2)·(a(a−1)/12 + a) > 0. This is the far-field tight case.
+    - At s ≥ 4 it is ≥ c′(a−1)(a²+a)/12.
+  - W ≥ 4: drop the G-term and take s = 3 in the two negative terms (both shrink as s grows). This gives the crude bound
+    2C(2a−1,W) ≥ 2C(a,W) + 2C(a−1,W) + 2aC(a−1,W−1) + (a−1)C(a−1,W−2) + 4(W−2)C(a,W) + C(a,W−1)[(2a−3)/3 + 4a(W−3)/3].
+    - W = 4: the difference is (a−1)(a−2)(a²−a+3)/6.
+    - W = 5: the difference, after a ↦ a+4, has positive coefficients.
+    - 6 ≤ W ≤ a+1: Vandermonde, C(2a−1,W) = Σ_k C(a,k)C(a−1,W−k). The terms k = W, 0, 1, 2 cover the first four negative terms. The terms k = W−1, W−2, W−3 give at least C(a,W−1)(a−1)[2 + (W−1) + (W−1)(W−2)/3], using (a−2)/(a−W+2) ≥ 1 and (a−3)/(a−W+3) ≥ 1. The rest is at most C(a,W−1)·a(4W+2)/3, and a(W−1)(W−3) ≥ W²+5 holds for a ≥ W−1 ≥ 5.
+    - W ≥ a+2: no negative terms remain.
+  - K″: N₃(K″) = (a−1)(a−2)(2a−3)/6. For W ≥ 4, N_W(K″) is the bracket − 4(W−3)C(a,W−1), which is ≥ the crude bound.
+  - So Q ≥ 0 and K″ ≥ 0 for all LC u, hence (2′) ≥ 0 and M_{0,s} ≥ 0 for all s ≥ 3 and all a. Exact Abel-tail test: runs/varratio/key_L1_quad.py, all (a, s) with a ≤ 70, no failure.
+- Remaining for the key at all a: S_{2,0} = φ₁₁ + φ₀₂ ≥ 0, and (L2) for 11 ≤ a.
