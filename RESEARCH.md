@@ -1728,3 +1728,27 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - G ≥ 0 is the existing Lean lemma `G_nonneg`;
   - K ≥ K″ ≥ 0, with K″ a weight-certified form;
   - α = tB/F ≥ t·u₀/u₁.
+
+**Cubic ratios (conjecture (C3)): the B-detour is the only obstacle, and its structure is now clear (2026-10-23).** ρ = r + tx + τC(x,2) + σC(x,3), t, τ, σ ≥ 0. Log-concave (r, t, τ, σ) is covered by Theorem 8.16; open is rσ ≤ u·tτ without full log-concavity.
+- Existing measurements (cubic_ingredients.py, adversarial, u = 1, N ≤ 12):
+  - the grouped detour E = W + X (τ- and σ-families together) has constant ≥ 5.07, where 3 is needed;
+  - the key ratio is ≥ 2.7 with weights (2,0,0);
+  - only the X-detour alone (constant 1) and the weighted B-detour are short.
+- **Polarization** (runs/varratio/cubic_quadB_polar.py, exact). D(ℓ,n) = (n+1)(n+2)φ₂(ℓ)φ_n(ℓ+1) − 8(n−1)c_{ℓ+1}φ_{n+2}(ℓ) is a quadratic form in (r,t,τ,σ). Negative coefficients occur only at:
+  - rτ, which is the quadratic case, handled jointly by Theorem 8.11;
+  - rσ, often;
+  - tσ, only at the corner (ℓ,n) = (0,2).
+- **The trade.** Use rσ ≤ u·tτ, i.e. move u·min(k_rσ, 0) into the tτ coefficient (runs/varratio/cubic_quadB_copos.py; random and geometric LC profiles, ℓ ≤ 8, n ≤ 8, plus ℓ, n ≤ 10 at u = 1). Off the corner:
+  - all remaining σ coefficients (tσ, τσ, σ²) are ≥ 0;
+  - the σ-free part is still copositive (3×3 Hadeler test) for u ≤ 4 in every case;
+  - it fails from u = 5 (geometric q = 1000 at (0,3) and (0,4), the (t,τ) pair).
+  - This matches the earlier operator test: M ≥ 0 up to u = 4, negative at u = 16.
+- On geometric profiles at (0,3), (k_rσ + k_tτ)/|k_rσ| = (4q⁴+30q³+54q²+35q+6)/(q(4q³+11q²+9q+1)) → 1. So u = 1 is exactly where the coefficientwise trade ends. Beyond u = 1 the joint copositivity carries it, up to about u = 4.
+- **Corner (0,2):** the pointwise inequality fails; the consult-round-8 witness is confirmed exactly. The repair (12φ₂(0) + φ₃(0))φ₂(1) ≥ 8c₁φ₄(0) holds on the witness, and the summed B-detour can reserve C(a,3)φ₃(0)·C(a−2,2)φ₂(1) from B₀(0,a)B₀(1,a−2).
+- **Proof route for (C3) with u ≤ 4 (u = 1 first):**
+  - the pointwise B-detour off the corner, via the trade and copositivity;
+  - the corner repair;
+  - the E = W + X detour;
+  - the key with weights (2,1,1);
+  - the Theorem 8.11 resummation with μ_H = 10, μ_V = 9/2, μ_E = 3, μ_C = 6.
+  - Missing: an analytic proof of the off-corner copositivity for all ℓ, n and profiles, and of the E-detour and the key.
