@@ -1802,3 +1802,20 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - μ = 3 fails at n = 3 only, in the relaxation (z = ℓ = 1/q, which no profile realizes; see the sharper bound below).
 - **Resummation** as in Theorem 8.11 with families H, V^q, W^τ, σG³ and constants 10, 9/2, 3, 2. The σG³ family survives with coefficient 1 − 2/2 = 0, so it needs no key weight. The key therefore needed is A₀P + PA₀ + 2V^q₁ + W^τ₁ ≥ 4H₁ (cubic quantities); the measured ratio is ≥ 2.85.
 - **A sharper u₀ bound** (runs/cubic/small_n_test.py, 0 violations on realizable profiles): u₀ ≤ (u₁²/u₂)(1 − (u₁/(u₁+u₂))^ℓ), with equality for geometric ν. Unproved, and not needed so far.
+
+**(C3) at u = 1: the right family split, and the key reduced to one ℓ-free inequality (2026-10-23, numerical plus partial certificates).**
+- **The σ-part of V cannot leave the key.** The polarized key (runs/cubic/key_polar.py) with V = V^q only has κ_σσ < 0 at large ℓ, on geometric u with z = 1/q, which profiles realize up to an exponentially small error. In that case the key ratio for the pure ratio C(x,3) tends to 0, while with V's σ-part at weight 2 it stays ≥ 3.9 up to ℓ = 10⁵. The earlier tests had N ≤ 12, i.e. ℓ ≤ 12, and missed this.
+- **Families that work** (local coordinates C(ℓ+k,3) = C(ℓ,3) + C(ℓ,2)k + ℓC(k,2) + C(k,3)):
+  - **V:** v_n = n[t + τ(ℓ+n−1) + σ(C(ℓ,2) + ℓ(n−1))]f_{n−1}. The termwise detour holds, since (n+1)Γ(ℓ+1,n) − nΓ(ℓ,n+2) = t + τℓ + σ(C(ℓ,2) + n² − 1) ≥ 0. Constant 9/2, key weight 2.
+  - **E:** e_n = C(n,2)(τ + σℓ)f_{n−2} + σE3_n, with E3_n = C(n,3)(3f_{n−1} + 3f_{n−2} + f_{n−3}). Constant 3, key weight 1.
+  - The sum is v + e = all of ψ's φ-part except the top term (checked).
+- **Detour of E** (runs/cubic/edetour_polar.py, numerical in the relaxation).
+  - The summed detour may use B₀ ≥ C(a,2)φ₂ + C(a,3)φ₃ for every term, and C(a,3)C(a−2,n) = ((a−2)/3)C(a,n+2)C(n+2,2) with a ≥ n+2. So the pointwise inequality is (n+1)(n+2)(φ₂ + (n/3)φ₃)E_n(ℓ+1) ≥ μ(n−1)c_{ℓ+1}E_{n+2}(ℓ), n ≥ 3. The weight condition is (j−2)(m−1) ≥ 0.
+  - Without φ₃ it fails at n = 3 for large q (realizable). With φ₃, polarized in ρ with the trade rσ ≤ tτ, all conditions hold at μ = 3 (κ_rσ < 0 occurs, κ_tτ + κ_rσ ≥ 0). At μ = 2 no trade is needed.
+  - Dead ends: f-only versions of every σ-family detour fail at n = 3 (small q with z ≈ ℓ ≥ 3, or ℓ = 0 with large q). The certified G³ (μ = 2) and the ℓ-free E3 detours are therefore not used.
+- **Key.** With B₀ kept exact and α = sR_ℓ (α's coefficient is ≥ ρ(ℓ+1)K ≥ 0), the key is a quadratic form in ρ.
+  - Using B₀[e_γ] ≥ e_γ(ℓ+1)Y and A₀[e_β], A₀″[e_β] ≥ 0 (convexity of e_β), κ_βγ ≥ e_γ(ℓ+1)Φ_β + e_β(ℓ+1)Φ_γ and κ_0γ = Φ_γ. So the key needs no trade, and **it holds once Φ₁, Φ₂, Φ₃ ≥ 0**, where Φ_β is the reduced key of the pure ratio e_β (B₀ → Y, c → D).
+  - Exactly (runs/cubic/phi_loc.py): Φ₂ = ℓΦ₁ + Φ₂^{loc} and Φ₃ = C(ℓ,2)Φ₁ + ℓΦ₂^{loc} + Φ₃^{loc}.
+  - Φ₁ ≥ 0 is Theorem 8.9's F(z) ≥ 0, and Φ₂^{loc} ≥ 0 is the τ-part of Theorem 8.11's key (s = a−1, z ≤ 1/q).
+  - **Remaining:** Φ₃^{loc} ≥ 0 for all a ≥ 3, log-concave u, z ∈ [0, 1/q]. It is free of ℓ, uses the local ratio C(k,3) and E3-weight 1, and is concave in z. Numerically it is ≥ 0 even at E3-weight 0 (normalized minimum 0.34).
+- **Remaining for (C3) at u = 1:** certify the E-detour (as for the B-detour, with small block u₀,…,u₃), prove Φ₃^{loc} ≥ 0, and write up.
