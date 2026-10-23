@@ -1590,6 +1590,8 @@ Exact sign measurements (runs/varratio/key_S_low_signs.py, 50 LC sequences, a �
 
 So the key for general a follows from:
 - (L1) M_{0,σ} ≥ 0 for σ ≥ 2. Here σ = 1 is λ₁ ≥ 0, proved.
+  - CORRECTION (same day): (L1) is FALSE at σ = 2 in the far field. M_{0,2} < 0 for geometric u (u₀ = 1/w) with w ≤ 10⁻², from a = 14 on (runs/varratio/key_M0_steps.py, key_M0_far.py); the a ≤ 12 sign test missed it.
+  - Corrected lemma (L1′): M_{0,σ} ≥ 0 for σ ≥ 3, with no far-field failure up to a = 22, together with S_{2,0} = φ₁₁ + φ₀₂ ≥ 0 jointly, also with no failure up to a = 22. M₀ is negative on some step increments, so (L1′) must use the binomial (Newton) structure of the basis ratios.
 - (L2) M_{1,σ−1} + M_{σ−1,1} ≥ 0 for σ ≥ 3. Here σ = 2 is φ₁₁ ≥ 0, proved.
 - (L3) S_{σ,i} ≥ 0 for i ≥ 2. The closed form and a sufficient condition are recorded above.
 
