@@ -755,3 +755,14 @@ Fixes, applied directly to the papers (now the primary sources):
 5. P1: Remark 3.5 is labelled, the table row reads "Corollary 5.3 and its no-uniform-radius conclusion", and the disclosure says "unlisted remarks and computational observations are not claimed machine-verified". P2's introduction now points to the Lean table instead of making a blanket claim.
 6. Concordance and FORMALIZATION.md: Remark 8.5 → P1 3.5 and Definition 9.3 → P3 9.3 added, placeholders resolved, the cut entry explained (commit b018bac).
 7. A new citation \bibitem{docs} pins b018bac for the split documentation; the code citation keeps 4f739c3. The P2 typo "$b$,," is fixed.
+
+**Citation check by us (2026-10-23).** In rounds 24–27 the reviewer could not open Szwarc's survey, Eagleson (1969) or Walkup (1976). We checked them as follows.
+- **Szwarc, Inzell survey** (author version, 37 pp., local copy `sources/szwarc-inzell.pdf`, retrieved 2026-10-18; the live URL currently fails TLS verification): checked against the PDF text.
+  - §5, Problem 2 (printed pp. 125–126) matches P1's quotation word for word: "Find any criteria for the property (P) for finite systems of orthogonal polynomials, like the Krawtchouk polynomials" and "The problem is to find a general criterion that would handle this case."
+  - Also matching: the Q_n recurrence, K_n(y²) = Q_{2n}(y), "(P) for p ≤ 1/2", and "Eagleson showed that they satisfy the property (P) if and only if p ≤ 1/2".
+  - Matching locators: Theorems 3.2 and 3.3 (Sz. 1992, monotonicity conditions), Theorem 3.4 (Sz. 2001, the boundary problem (3.13)), equation (3.9), §3.4 (H = L₁ − L₂) and §3.5 (quadratic transformation).
+  - The survey's displayed weights and recurrence use opposite conventions (∫K₁dμ = (1−2p)/(1−p)). P1 now restores the footnote of paper.tex that says so.
+- **Eagleson 1969 and Walkup 1976:** Crossref metadata match our bibitems exactly (authors, titles, journals, volumes, issues, pages, years). Eagleson's content is cited only for the classical Krawtchouk range, which Szwarc's survey attributes to him. For Walkup:
+  - the Cambridge Core abstract states the binomial-convolution result for Pólya frequency sequences and its use, "this and similar results", for unions of independent random subsets;
+  - Wang–Yeh (PDF verified) cite Walkup's Theorem 1 for binomial convolution;
+  - which theorem gives P2's Proposition 5.3 (round 23's reviewer said Theorem 2, from search-indexed text) is not verified in the full text.
