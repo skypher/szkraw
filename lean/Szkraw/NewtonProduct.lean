@@ -1112,4 +1112,69 @@ theorem choose_mul_choose_eq_sum (x i j : ℕ) :
       rw [if_neg (by omega), mul_zero]
   rw [L, R]
 
+
+/-- Value at `x ∈ ℕ` of the Newton series with coefficients `ρ`. -/
+def nval (ρ : ℕ → ℝ) (x : ℕ) : ℝ := ∑ i ∈ range (x + 1), (x.choose i : ℝ) * ρ i
+
+theorem sum_Icc_zero_eq_range (L : ℕ) (f : ℤ → ℝ) :
+    ∑ i ∈ Icc (0 : ℤ) L, f i = ∑ n ∈ range (L + 1), f n := by
+  symm
+  refine Finset.sum_nbij' (fun n : ℕ => (n : ℤ)) (fun i : ℤ => i.toNat) ?_ ?_ ?_ ?_ ?_
+  · intro n hn; simp only [mem_range] at hn; simp only [mem_Icc]; omega
+  · intro i hi; simp only [mem_Icc] at hi; simp only [mem_range]; omega
+  · intro n _; simp
+  · intro i hi; simp only [mem_Icc] at hi; omega
+  · intro n _; rfl
+
+theorem kap_nat (ρ ν : ℕ → ℝ) (k x : ℕ) (hk : k ≤ x) :
+    kap ρ ν k = ∑ i ∈ range (x + 1), ∑ j ∈ range (x + 1), (Hn k i j : ℝ) * (ρ i * ν j) := by
+  rw [kap_ext ρ ν k x (by exact_mod_cast hk), sum_Icc_zero_eq_range]
+  refine sum_congr rfl (fun i _ => ?_)
+  rw [sum_Icc_zero_eq_range]
+  refine sum_congr rfl (fun j _ => ?_)
+  simp [Hz, extZ]
+
+/-- The Newton series with coefficients `κ = kap ρ ν` is the product of those of `ρ` and `ν`. -/
+theorem nval_mul (ρ ν : ℕ → ℝ) (x : ℕ) : nval ρ x * nval ν x = nval (kap ρ ν) x := by
+  unfold nval
+  have h1 : ∑ k ∈ range (x + 1), (x.choose k : ℝ) * kap ρ ν k =
+      ∑ k ∈ range (x + 1), ∑ i ∈ range (x + 1), ∑ j ∈ range (x + 1),
+        (x.choose k : ℝ) * (Hn k i j : ℝ) * (ρ i * ν j) := by
+    refine sum_congr rfl (fun k hk => ?_)
+    simp only [mem_range] at hk
+    rw [kap_nat ρ ν k x (by omega), mul_sum]
+    refine sum_congr rfl (fun i _ => ?_)
+    rw [mul_sum]
+    exact sum_congr rfl (fun j _ => by ring)
+  rw [h1, sum_comm]
+  rw [sum_mul]
+  refine sum_congr rfl (fun i _ => ?_)
+  rw [sum_comm, mul_sum]
+  refine sum_congr rfl (fun j _ => ?_)
+  rw [← sum_mul]
+  have := choose_mul_choose_eq_sum x i j
+  have hc : ∑ k ∈ range (x + 1), (x.choose k : ℝ) * (Hn k i j : ℝ) = (x.choose i : ℝ) * (x.choose j : ℝ) := by
+    exact_mod_cast this
+  rw [hc]; ring
+
+/-- Newton coefficients are determined by the values on `ℕ`. -/
+theorem nval_inj {a b : ℕ → ℝ} (h : ∀ x, nval a x = nval b x) : a = b := by
+  funext x
+  induction x using Nat.strong_induction_on with
+  | _ x ih =>
+    have hx := h x
+    unfold nval at hx
+    rw [sum_range_succ, sum_range_succ, Nat.choose_self, Nat.cast_one, one_mul, one_mul] at hx
+    have : ∑ i ∈ range x, (x.choose i : ℝ) * a i = ∑ i ∈ range x, (x.choose i : ℝ) * b i :=
+      sum_congr rfl (fun i hi => by rw [ih i (by simpa using hi)])
+    linarith
+
+/-- **Proposition 8.14** (Walkup, Theorem 2, in the Newton basis). If `ρ` and `ν` are nonnegative and
+log-concave without internal zeros, then the Newton coefficients of the product of their Newton series,
+`f(x) g(x) = Σ_k C(x,k) κ_k` on `ℕ`, are nonnegative and log-concave without internal zeros. -/
+theorem newton_product_LCNZ {ρ ν κ : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν)
+    (hκ : ∀ x, nval ρ x * nval ν x = nval κ x) : LCNZ κ := by
+  have : κ = kap ρ ν := nval_inj (fun x => by rw [← hκ x, nval_mul])
+  rw [this]; exact kap_LCNZ hρ hν
+
 end Szkraw

@@ -250,3 +250,8 @@ assert_allowed_axioms Szkraw.lowdeg_ratio_matrix
 assert_allowed_axioms Szkraw.profile_last_le
 assert_allowed_axioms Szkraw.affine_range_remarks
 assert_allowed_axioms Szkraw.affEx_remark
+assert_allowed_axioms Szkraw.newton_product_LCNZ
+assert_allowed_axioms Szkraw.kap_LCNZ
+assert_allowed_axioms Szkraw.nval_mul
+assert_allowed_axioms Szkraw.nval_inj
+assert_allowed_axioms Szkraw.LCNZ.conv
