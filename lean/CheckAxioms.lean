@@ -397,3 +397,7 @@ assert_allowed_axioms Szkraw.combo_fails_1_3_100
 assert_allowed_axioms Szkraw.combo_fails_3_10_200
 assert_allowed_axioms Szkraw.combo_fails_2_7_200
 assert_allowed_axioms Szkraw.PolyCol.rule_deriv_4_5
+assert_allowed_axioms Szkraw.koelink_relation_32
+assert_allowed_axioms Szkraw.koelink_recurrence_71
+assert_allowed_axioms Szkraw.positive_subalgebra_full
+assert_allowed_axioms Szkraw.symmetric_open

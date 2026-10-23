@@ -135,3 +135,5 @@ import Szkraw.ProfileCounterexamples
 import Szkraw.RuleCounterexamples
 import Szkraw.ComboCounterexamples
 import Szkraw.PolyColumn
+import Szkraw.Koelink
+import Szkraw.CompletionP3
