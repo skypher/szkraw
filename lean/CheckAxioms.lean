@@ -362,3 +362,6 @@ assert_allowed_axioms Szkraw.CubicSetting.alpha_ge
 assert_allowed_axioms Szkraw.CubicSetting.key
 assert_allowed_axioms Szkraw.cubic_kernel_nonneg
 assert_allowed_axioms Szkraw.cubic_ratio_matrix
+assert_allowed_axioms Szkraw.affine_linear_quadratic
+assert_allowed_axioms Szkraw.lc_violation_fails
+assert_allowed_axioms Szkraw.krawtchouk_range_sharp

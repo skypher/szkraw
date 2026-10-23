@@ -306,3 +306,6 @@ Szkraw.CubicSetting.alpha_ge: allowed axioms [propext, Classical.choice, Quot.so
 Szkraw.CubicSetting.key: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.cubic_kernel_nonneg: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.cubic_ratio_matrix: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.affine_linear_quadratic: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.lc_violation_fails: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.krawtchouk_range_sharp: allowed axioms [propext, Classical.choice, Quot.sound]
