@@ -69,6 +69,7 @@ out.append(r"""
 For fixed $r$ the radius also decays exponentially in $N$: raising the top mass of the measure of $K_{N,r}$, the reverse of Lemma~\ref{lem:topmass}, gives $\rho_N(r)\leq3(1-r^2)^N$ whenever $(1-r^2)^N\leq\frac12$ and $3(1-r^2)^N\leq(1-r)/N$~\cite[Proposition~\ref{P1-prop:raise} and Corollary~\ref{P1-cor:radius-exp}]{P1}.
 """)
 fx = L[1653]
+fx = cut_between(fx, "At $r=\\tfrac12$, computations for $N=30,\\ldots,77$", "This is a finite-range computational observation, not an asymptotic statement.", "")
 fx = edit(fx, ("The deformation of Proposition~\\ref{prop:raise} has the binomial profile $w_n$ and is not a uniform rule.",
                "The deformation that raises the top mass has the binomial profile of the masses and is not a uniform rule."))
 out.append(fx)
@@ -77,13 +78,14 @@ out.append(lines(1656, 1669))
 out.append('')
 out.append(r"\section{Open problems}\label{sec:open}")
 out.append('')
-op = lines(1676, 1689)
+op = lines(1676, 1683) + '\n\n' + lines(1687, 1689)
 op = edit(op, ("and Corollary~\\ref{cor:radius-exp} gives $\\rho_N(r)=O((1-r^2)^N)$ for each fixed $r$;",
                "and~\\cite[Corollary~\\ref{P1-cor:radius-exp}]{P1} gives $\\rho_N(r)=O((1-r^2)^N)$ for each fixed $r$;"),
     ("By Theorem~\\ref{thm:decomp}, any criterion", "By the quadratic decomposition~\\cite[Theorem~\\ref{P1-thm:decomp}]{P1}, any criterion"),
     ("For constant-ratio arrays, Theorem~\\ref{thm:lc} controls the deep triples by inequalities that contain the whole geometric criterion, in particular the Krawtchouk arrays. Theorems~\\ref{thm:lc-vary} and~\\ref{thm:lc-affine} and Proposition~\\ref{prop:lc-quad} extend this to ratios $c_i/(b_i+c_i)$ that increase in the ways described there; other nonconstant ratios remain open.",
      "For constant-ratio arrays, the log-concave Newton criterion~\\cite[Theorem~\\ref{P1-thm:lc}]{P1} controls the deep triples by inequalities that contain the whole geometric criterion, in particular the Krawtchouk arrays, and~\\cite{P2} extends it to ratios $c_i/(b_i+c_i)$ that increase in several ways; other nonconstant ratios remain open."),
     ("First, Corollary~\\ref{cor:radius-exp} gives", "First,~\\cite[Corollary~\\ref{P1-cor:radius-exp}]{P1} gives"))
+op = cut_between(op, "Szwarc-type certificates were also tested on the deep triples.", "agreed with property (P).", "Floating-point searches for Szwarc-type certificates on the deep triples, which are not exact, are recorded in the companion code.")
 op = cut_between(op, "For $q\\geq1$ let $G_{N,q,r}$", "can admit both $K_{N,r}$ and $G_{N,q,r}$.",
     "For $q\\geq1$ let $G_{N,q,r}$ be the array \\eqref{eq:parameters}, so that $G_{N,1,r}=K_{N,r}$. The combinations $(1-\\lambda)K_{N,r}+\\lambda G_{N,q,r}$ have $g(N,N;N)<0$ at seven exactly certified parameter choices with $r$ between $2/7$ and $4/5$~\\cite[Section~\\ref{P1-sec:limits}]{P1}, and, in $150$- and $300$-digit arithmetic that is not an exact sign certificate, at $(r,N,q,t)=(1/4,500,3,10)$. At the certified parameters no sufficient criterion whose admitted set is convex, in particular none defined by a system of linear inequalities in the coefficients, can admit both $K_{N,r}$ and $G_{N,q,r}$.")
 out.append(op)
@@ -94,7 +96,7 @@ OpenAI Codex was used to develop the proof arguments of Sections~\ref{sec:criter
 
 \section*{Code and formalization}
 
-The companion code~\cite{code} contains exact-arithmetic diagnostics for every result (\path{papers/DIAGNOSTICS.md}), among them \path{verify.py}, which compares recurrence-matrix multiplication with multiplication modulo the terminal polynomial, and a Lean~4 development, built and audited by \verb|make lean| and \verb|make axioms|; the audit rejects dependencies outside \path{propext}, \path{Classical.choice} and \path{Quot.sound}. All declarations below have compiled proofs without added axioms or admitted goals. Notes on how each Lean statement matches the text are in \path{papers/FORMALIZATION.md}.
+The companion code~\cite{code} contains exact-arithmetic diagnostics for every result (\path{papers/DIAGNOSTICS.md}), among them \path{verify.py}, which compares recurrence-matrix multiplication with multiplication modulo the terminal polynomial, and a Lean~4 development, built and audited by \verb|make lean| and \verb|make axioms|; the audit rejects dependencies outside \path{propext}, \path{Classical.choice} and \path{Quot.sound}. All declarations below have compiled proofs without added axioms or admitted goals. The table lists one principal declaration per result; the full lists, and notes on how each Lean statement matches the text, are in \path{papers/FORMALIZATION.md}.
 \begin{center}
 \begin{tabular}{@{}p{0.36\linewidth}p{0.59\linewidth}@{}}
 Result & Lean declaration\\[3pt]
@@ -110,7 +112,9 @@ rows = []
 for l in L[1701:1760]:
     for k in keep:
         if l.startswith(('Theorem~\\ref{%s}' % k, 'Lemma~\\ref{%s}' % k, 'Corollary~\\ref{%s}' % k, 'Proposition~\\ref{%s}' % k)):
-            rows.append(l if l.endswith('\\\\[3pt]') else l + '[3pt]')
+            left, right = l.split('&', 1)
+            first = right[right.index('\\path{'):right.index('}', right.index('\\path{')) + 1]
+            rows.append(left + '& ' + first + ('' if right.count('\\path{') == 1 else ', \\dots') + '\\\\[3pt]')
 assert len(rows) == len(keep), (len(rows), len(keep))
 rows[-1] = rows[-1][:-len('\\\\[3pt]')]
 out.append('\n'.join(rows))

@@ -1,0 +1,59 @@
+2.1|theorem|Geometric increment criterion|thm:criterion|P3 2.1
+2.2|lemma|Coefficient parametrization|lem:parameters|P3 2.2
+3.1|lemma|Basis and positivity|lem:basis|P3 3.1
+3.2|lemma|Positive associative inner product|lem:trace|P3 3.2
+3.3|lemma|Three-term multiplication|lem:three|P3 3.3
+3.4|proposition|Positive subalgebra|prop:subalgebra|P3 3.4
+4.1|lemma|Positive normalization|lem:normalization|P3 4.1
+5.1|lemma|Finite recurrence realization and triangle support|lem:finite|P1 2.1, P3 5.1
+5.2|lemma|A uniform positive margin in the asymmetric case|lem:margin|P3 5.2
+5.3|theorem|Explicit perturbation inequalities|thm:perturbation|P3 5.3
+5.4|corollary|Finite systems outside the geometric family|cor:nonclassical|P3 5.4
+6.1|corollary|Full positive Krawtchouk range|cor:kraw|P1 3.6, P3 6.1
+6.2|corollary|The dual $q$-Krawtchouk case|cor:additional|P1 3.7, P3 6.2
+6.3|proposition|Relation to the existing algebraic construction|prop:source|P3 6.3
+7.1|theorem|Szwarc's quadratic system|thm:szwarc|P1 4.3, P3 7.1
+7.2|lemma|Edge idempotents|lem:edge|P3 7.2
+7.3|lemma|Three-term action|lem:qthree|P3 7.3
+7.4|lemma|Margin for the quadratic system|lem:qmargin|P3 7.4
+7.5|lemma|Stability of a reference with a margin|lem:stability|P3 7.5
+7.6|theorem|Symmetric criterion near Szwarc's system|thm:symmetric|P3 7.6
+7.7|corollary|Symmetric systems outside both families|cor:symmetric-new|P3 7.7
+7.8|theorem|Quadratic decomposition|thm:decomp|P1 4.1
+7.9|corollary|Parity-split criterion|cor:parity|P1 4.2
+7.10|theorem|Low products|thm:low|P3 8.1
+7.11|corollary|Convex profiles|cor:convex-low|P3 8.2
+7.12|theorem|All products|thm:all|P3 8.3
+7.13|corollary|Heavy top step|cor:heavy|P3 8.4
+7.14|lemma|Reversal identity|lem:reversal|P3 8.5
+7.15|theorem|Deep reduction|thm:deep|P3 8.6
+7.16|theorem|Palindromic criterion|thm:palindromic|P3 8.7
+7.17|corollary|Monotone palindromic systems|cor:palin|P3 8.8
+8.1|theorem|Log-concave Newton criterion|thm:lc|P1 3.1
+8.2|lemma||lem:kernel-rec|P1 3.2
+8.3|lemma||lem:lc-ineq|P1 3.3, P2 2.1
+8.4|lemma||lem:detours|P1 3.4
+8.6|theorem|Varying ratio|thm:lc-vary|P2 3.1
+8.7|corollary||cor:lc-vary|P2 3.2
+8.8|proposition|Quadratic arrays|prop:lc-quad|P2 3.3
+8.9|theorem|Linearly increasing ratio|thm:lc-affine|P2 4.1
+8.10|proposition|Quadratic profiles|prop:lc-quadprof|cut (see note)
+8.11|theorem|Convex quadratic ratio|thm:lc-quadratic|P2 4.2
+8.12|theorem|Low-degree profiles|thm:lc-lowdeg|P2 5.1
+8.13|corollary||cor:lc-lowdeg|P2 5.2
+8.14|proposition|Products|prop:np|P2 5.3
+8.15|lemma||lem:abel-weights|P2 5.4
+8.16|theorem|Log-concave ratio|thm:lc-general|P2 5.5
+8.17|theorem|Cubic ratio|thm:lc-cubic|P2 5.6
+9.1|lemma|Corner value|lem:corner-value|P1 5.1, P3 9.1
+9.2|lemma|Corner identity|lem:corner|P3 9.2
+9.4|theorem|Forced equalities for uniform criteria|thm:uniform|P3 9.4
+9.5|lemma|N\"orlund--Rice bound|lem:nr|P3 9.5
+9.6|corollary||cor:analytic-rules|P3 9.6
+9.7|lemma|Lowering the top mass|lem:topmass|P3 9.7
+9.8|proposition|Interior points near the symmetric endpoint|prop:interior|P3 9.8
+9.9|proposition|Families depending on $N$|prop:families|P3 9.9
+9.10|proposition|Thinness near the symmetric endpoint|prop:thin|P3 9.10
+9.11|corollary|Optimal order of the stability radius|cor:radius-order|P3 9.11
+9.12|proposition|Raising the top mass|prop:raise|P1 5.2
+9.13|corollary|Exponentially small stability radius|cor:radius-exp|P1 5.3

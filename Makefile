@@ -2,7 +2,7 @@ LAKE ?= lake
 PDFLATEX ?= pdflatex
 PYTHON ?= python3
 
-.PHONY: help paper lean axioms diagnostics check
+.PHONY: help paper papers lean axioms diagnostics check
 .DEFAULT_GOAL := help
 
 help:
@@ -16,6 +16,13 @@ help:
 paper:
 	$(PDFLATEX) -interaction=nonstopmode -halt-on-error paper.tex > paper-build.log 2>&1
 	$(PDFLATEX) -interaction=nonstopmode -halt-on-error paper.tex >> paper-build.log 2>&1
+
+# The three papers (papers/p1.tex, p2.tex, p3.tex) are generated from paper.tex by papers/build_p*.py;
+# p2 and p3 read p1.aux for cross-references, so p1 is built first.
+papers:
+	cd papers && $(PYTHON) build_p1.py && $(PYTHON) build_p2.py && $(PYTHON) build_p3.py
+	cd papers && for p in p1 p2 p3; do $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex > $$p-build.log 2>&1 && $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex >> $$p-build.log 2>&1 || exit 1; done
+	cd papers && for p in p1 p2 p3; do $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex >> $$p-build.log 2>&1 || exit 1; ! grep -a -q 'LaTeX Warning: \(Reference\|Citation\)' $$p.log || { echo "undefined references in $$p"; exit 1; }; done
 
 lean:
 	$(LAKE) -d lean build Szkraw > lean/lake-build.log 2>&1
