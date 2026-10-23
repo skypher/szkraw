@@ -1765,3 +1765,22 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
     - all Abel tails pass: 12,380 tails, ℓ ≤ 10, 2 ≤ n ≤ 16, corner excluded;
     - but many inner pairs (i ≥ 2) are negative on their own, so partial tails matter and full weight sums alone do not suffice.
   - **Proof plan.** Follow the Theorem 8.11 structure. D is affine in u₀ (for n ≥ 4), and D(u₀ = 0) ≥ 0 by the a ≥ 1 tails. Then check u₀ = min(ℓu₁, u₁²/u₂), split by which bound binds; in the convexity case u₂ ≤ u₁/ℓ is available. Each tail is a polynomial in (ℓ, n) times ratio monomials, so certificates come from shifted-variable positivity, as for the key inequality.
+
+**Cubic weighted B-detour proved off the corner at u = 1 (2026-10-23; computer-assisted, exact certificates).** Script: runs/cubic/bdetour_cert.py, which asserts every step and prints ALL CERTIFIED (349 polynomial and sign checks).
+- **Decomposition.** Polarize D(ℓ,n) = K φ₂(ℓ)φ_n(ℓ+1) − L c_{ℓ+1}φ_{n+2}(ℓ) in ρ = (r,t,τ,σ) (basis 1, x, C(x,2), C(x,3)): D = Σ κ_αβ ρ_αρ_β. Then:
+  - D(r,0,τ,0) ≥ 0 at every (ℓ,n), including the corner, by (8.quad-B) of Theorem 8.11 with t = 0. Its proof uses only log-concavity, z ≤ ℓ and zq ≤ 1.
+  - Under rσ ≤ tτ the rest is ≥ κ_rt·rt + κ_tt·t² + (κ_tτ + min(κ_rσ,0))·tτ + κ_tσ·tσ + κ_τσ·τσ + κ_σσ·σ².
+  - So it suffices that κ_rt, κ_tt, κ_tσ, κ_τσ, κ_σσ, κ_tτ and κ_tτ + κ_rσ are all ≥ 0. These are seven scalar forms, with no ratio parameters.
+- **Closed forms** (runs/cubic/kappa_sym.py; cross-checked against the u-form of cubic_quadB_abel.py, 0 mismatches). Leibniz gives φ_m[e_β](ℓ) = Σ_i C(m,i)C(ℓ+m−i, β−i)u_{m−i}. Each κ is bilinear in the small block (u₀,u₁,u₂) and the n-block (u_{n−3},…,u_{n+2}), with polynomial coefficients in (ℓ,n).
+- **Exact reduction, n ≥ 4.** Set u₁ = 1, u₂ = q, z = u₀ ∈ [0, min(ℓ,1/q)], and normalize the n-block at u_{n−1} = 1. Write G_j = Σ_a g_{a,j}u_a.
+  - G_{−3}, G_{−2} ≥ 0 and G_2 ≤ 0 (checked). So u_{n−2} ≥ 1/q and u_{n−3} ≥ 1/q² may be taken with equality.
+  - With u_n = c ∈ [0,q], u_{n+1} = cy and u_{n+2} ≤ cy² (y ∈ [0,c]), κ ≥ A + c(G₀ + G₁y + G₂y²), which is concave in y. Here A = G_{−1} + G_{−2}/q + G_{−3}/q².
+  - So κ ≥ 0 for all configurations iff (i) A ≥ 0, (ii) A + qG₀ ≥ 0, and (iii) A + cG₀ + c²G₁ + c³G₂ ≥ 0 on [0,q].
+  - Each is affine in z, so it suffices to check z = 0 and z = min(ℓ,1/q).
+  - For n = 4, 5 the n-block overlaps the small block only through its scale, and the functional is homogeneous in the n-block, so the same reduction applies.
+- **n = 2, 3.** Exact: κ = P₀(z,q) + Σ_{b≥3} H_b u_b with H_top ≤ 0, and u₃ = qa, u₄ = qay, u₅ ≤ qay². This gives the same endpoint conditions.
+  - κ_τσ and κ_σσ contain z² there, because u₀ lies in both blocks. So z = ζ·min(ℓ,1/q) is certified in Bernstein form in ζ.
+  - κ_tσ at n = 2 is certified for ℓ ≥ 1. At ℓ = 0 it equals −8(q+1)(q²−q−5) at the endpoint: the corner, which needs its own repair.
+- **Certificates.** Every condition is checked in three regimes: z = 0; z = ℓ with q = 1/(ℓ+w); z = 1/q = h with ℓ = h+w. Condition (iii) is checked in Bernstein form in s = c/q. In each regime the numerator polynomial has only nonnegative coefficients, with n = 6+m symbolic and n = 2,…,5 explicit.
+- **Consequence.** For cubic ρ with rσ ≤ tτ, D(ℓ,n) ≥ 0 at every (ℓ,n) ≠ (0,2) with ℓ+n+2 ≤ N. The earlier Abel-tail failures at n = 2, 3 were weaknesses of the method, not of the coefficients: on admissible profiles, κ_tσ < 0 occurs only at (0,2).
+- **Remaining for (C3) at u = 1:** the corner repair in summed form, the E = W + X detour, the key with weights (2,1,1), and the resummation.

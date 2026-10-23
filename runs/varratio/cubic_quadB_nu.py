@@ -19,7 +19,7 @@ def ok_vec(gg):
     if gg['rtau'] < 0 and gg['rtau'] ** 2 > 4 * gg['rr'] * gg['tautau']: return False, 'rtau'
     return True, None
 add = lambda a, b, c=1: {k: a.get(k, 0) + c * b.get(k, 0) for k in mon}
-fails = []; cnt = 0; inner = []
+fails = []; cnt = 0; inner = []; maxneg = [0]
 for l in range(0, lmax + 1):
     for n in range(2, nmax + 1):
         if (l, n) == (0, 2): continue
@@ -44,5 +44,8 @@ for l in range(0, lmax + 1):
                 if i >= 2:
                     ok2, why2 = ok_vec(row[i])
                     if not ok2: inner.append((l, n, W, i, why2))
+                ok3, _ = ok_vec(row[i])
+                if not ok3: maxneg[0] = max(maxneg[0], i)
 print(f'{cnt} tails in nu, l <= {lmax}, 2 <= n <= {nmax} except (0,2): failures {len(fails)} {fails[:12]}')
 print(f'pairs (i, W-i) with i >= 2 not copositive on their own: {len(inner)} {inner[:8]}')
+print('largest index i with a non-copositive single pair (i, W-i):', maxneg[0])
