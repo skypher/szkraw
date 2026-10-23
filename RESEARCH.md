@@ -1877,3 +1877,10 @@ The user asked to finish the Lean work: Theorem 8.16 first, then Theorem 8.17. S
 - **Step (iii)** (M01, M11): the paper's scaling argument. Key(λP) for P = (P₀,P₁) is at least (P₀+P₁) times the affine expression with α = tB/F, which is ≥ 0 by `G_nonneg` and K ≥ 0. Use u_1B ≥ u_0F, AX' ≥ (a−2)DF and BX ≥ a u_0 F.
 - **Windows a ≤ 5:** exact certificates (runs/varratio/key_phi_ustep.py, key_lin_cert.py) translated to linarith hints.
 - **Order:** generic lemmas (edge product, u_0 shift) → forms → reductions (ii)–(v) → (iii) → windows → assembly → fidelity review. Then Theorem 8.17.
+
+## Lean plan for Theorem 8.17 (cubic ratio, 7/4 version), 2026-10-23
+
+Theorem 8.16 is machine-verified (`Szkraw.lc_general`, commit 148cca3; fidelity round 18 submitted). For 8.17 the 8.11 pipeline is reused: `ResumWeights2` with the family E in place of W (detour constants B 4, C' 6, H 10, V 9/2, E 3 meet the required 4, 4, 4, 4, 3), `gkernel_resum2`, `detour_gen`.
+- **Detours (cubic-B), (cubic-E): a simpler certificate than the paper's regime analysis.** Each coefficient form κ (bilinear: small block u_0..u_2, resp. u_0..u_3, times the n-block) is ≥ 0 by LC transfers u_{a+1}u_{b−1} − u_a u_b alone: grouping by index sum, every tail sum T_k(d) = Σ_{a≥k} K(a, d−a) has nonnegative coefficients in (l, m), for B with n = 6 + m and E with n = 7 + m, for all forms including κ_tτ + (7/4)κ_rσ (runs/lean_plan/cubic_tails.py). Float LPs (cubicB_lp_test2.py, cubicE_lp_test.py) find certificates for the small n too; B with κ_tτ + (7/4)κ_rσ at n ≤ 5 also needs the moves u_j(l u_1 − u_0) ≥ 0 (convexity).
+- In Lean: D(r,t,τ,σ) = D(r,0,τ,0) + D_rem; D(r,0,τ,0) ≥ 0 is the existing quad-B (8.11); D_rem is written as chain sums by index sum (ring identity), and the tails are polynomial certificates generated from Python.
+- Still to plan: small n (B n = 2..5 and the corner (0,2); E n = 3..6), Φ_3^loc (try the edge u_1-linearization of 8.16), the cubic Leibniz split ψ = h − v − e, and the detours of H, V, C' in the cubic setting.
