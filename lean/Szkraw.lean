@@ -140,3 +140,5 @@ import Szkraw.CompletionP3
 import Szkraw.SignPattern
 import Szkraw.QuadNeeded
 import Szkraw.RemarksP3
+import Szkraw.RemarksP2
+import Szkraw.RemarksP2b
