@@ -443,3 +443,10 @@ assert_allowed_axioms Szkraw.direction_not_uniform
 assert_allowed_axioms Szkraw.epsNorm_scaled_hasDerivAt
 assert_allowed_axioms Szkraw.raise_direction
 assert_allowed_axioms Szkraw.raise_not_uniform
+assert_allowed_axioms Szkraw.kernelRecV_iff
+assert_allowed_axioms Szkraw.tmat_split
+assert_allowed_axioms Szkraw.opS_eq
+assert_allowed_axioms Szkraw.cub_dd
+assert_allowed_axioms Szkraw.cubic_data
+assert_allowed_axioms Szkraw.opM_negative_entry
+assert_allowed_axioms Szkraw.opM_has_negative_entry

@@ -147,3 +147,4 @@ import Szkraw.RemarksP3b
 import Szkraw.JetColumn
 import Szkraw.LambdaN
 import Szkraw.RaiseDirection
+import Szkraw.OperatorM
