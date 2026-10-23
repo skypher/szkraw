@@ -173,4 +173,142 @@ theorem Hz_symm (t : ℕ) (i j : ℤ) : Hz t i j = Hz t j i := by
   · rw [if_pos h, if_pos ⟨h.2, h.1⟩, Hn_symm]
   · rw [if_neg h, if_neg (by tauto)]
 
+
+/-! ## (T3): a log-concave sequence that is heavier on the right of `M/2` is nondecreasing up to `M/2` -/
+
+theorem LCNZ.mono_of_reflect {g : ℕ → ℝ} (hg : LCNZ g) (M : ℕ)
+    (hsym : ∀ x, 2 * x ≤ M → g x ≤ g (M - x)) {x : ℕ} (hx1 : 1 ≤ x) (hx : 2 * x ≤ M) :
+    g (x - 1) ≤ g x := by
+  by_contra hlt
+  push Not at hlt
+  have hpos : 0 < g (x - 1) := lt_of_le_of_lt (hg.1 x) hlt
+  -- g is nonincreasing from x on
+  have step : ∀ n, x ≤ n → g (n + 1) ≤ g n := by
+    intro n hn
+    have hb := hg.balanced 1 x n hx1 hn
+    have e : x - 1 = x - 1 := rfl
+    nlinarith [hg.1 n, hg.1 (n + 1), mul_le_mul_of_nonneg_left hlt.le (hg.1 n)]
+  have desc : ∀ d, g (x + d) ≤ g x := by
+    intro d
+    induction d with
+    | zero => simp
+    | succ d ih => exact le_trans (step (x + d) (by omega)) ih
+  have h1 := hsym (x - 1) (by omega)
+  have h2 := desc (M - (x - 1) - x)
+  have e : x + (M - (x - 1) - x) = M - (x - 1) := by omega
+  rw [e] at h2
+  linarith
+
+/-! ## Binomial representation of `V(x,y) = H_t(x,y) H_t(m₁-x, m₂-y)` -/
+
+/-- Binomial coefficient with an integer lower index, zero for negative indices. -/
+noncomputable def Cz (n : ℕ) (z : ℤ) : ℝ := if 0 ≤ z then (n.choose z.toNat : ℝ) else 0
+
+theorem Cz_nonneg (n : ℕ) (z : ℤ) : 0 ≤ Cz n z := by
+  unfold Cz; split_ifs
+  · exact Nat.cast_nonneg _
+  · exact le_refl 0
+
+theorem Hz_support {t : ℕ} {i j : ℤ} (h : Hz t i j ≠ 0) :
+    0 ≤ i ∧ 0 ≤ j ∧ i ≤ t ∧ j ≤ t ∧ (t : ℤ) ≤ i + j := by
+  unfold Hz at h
+  by_cases hq : 0 ≤ i ∧ 0 ≤ j
+  · rw [if_pos hq] at h
+    by_contra hc
+    have : ¬ (i.toNat ≤ t ∧ j.toNat ≤ t ∧ t ≤ i.toNat + j.toNat) := by omega
+    rw [Hn_eq_zero this, Nat.cast_zero] at h; exact h rfl
+  · rw [if_neg hq] at h; exact absurd rfl h
+
+theorem Cz_support {n : ℕ} {z : ℤ} (h : Cz n z ≠ 0) : 0 ≤ z ∧ z ≤ n := by
+  unfold Cz at h
+  by_cases hz : 0 ≤ z
+  · rw [if_pos hz] at h
+    refine ⟨hz, ?_⟩
+    by_contra hc
+    rw [Nat.choose_eq_zero_of_lt (show n < z.toNat by omega), Nat.cast_zero] at h; exact h rfl
+  · rw [if_neg hz] at h; exact absurd rfl h
+
+theorem Hz_factorial {t : ℕ} {i j : ℤ} (h0i : 0 ≤ i) (h0j : 0 ≤ j) (hi : i ≤ t) (hj : j ≤ t)
+    (hij : (t : ℤ) ≤ i + j) :
+    Hz t i j * (((t : ℤ) - i).toNat.factorial * ((t : ℤ) - j).toNat.factorial *
+      (i + j - t).toNat.factorial : ℝ) = t.factorial := by
+  unfold Hz; rw [if_pos ⟨h0i, h0j⟩]
+  have := Hn_factorial (t := t) (x := i.toNat) (y := j.toNat) (by omega) (by omega) (by omega)
+  have e1 : ((t : ℤ) - i).toNat = t - i.toNat := by omega
+  have e2 : ((t : ℤ) - j).toNat = t - j.toNat := by omega
+  have e3 : (i + j - t).toNat = i.toNat + j.toNat - t := by omega
+  rw [e1, e2, e3]; exact_mod_cast this
+
+theorem Cz_factorial {n : ℕ} {z : ℤ} (h0 : 0 ≤ z) (hz : z ≤ n) :
+    Cz n z * ((z.toNat.factorial * ((n : ℤ) - z).toNat.factorial : ℕ) : ℝ) = n.factorial := by
+  unfold Cz; rw [if_pos h0]
+  have := Nat.choose_mul_factorial_mul_factorial (show z.toNat ≤ n by omega)
+  have e : ((n : ℤ) - z).toNat = n - z.toNat := by omega
+  rw [e]; push_cast
+  rw [← mul_assoc]; exact_mod_cast this
+
+
+/-- `V(x,y) = H_t(x,y) H_t(m₁-x, m₂-y)` is a constant times
+`C(n₂, t-x) C(n₁, t-y) C(n₃, x+y-t)` with `n₁ = 2t-m₂`, `n₂ = 2t-m₁`, `n₃ = m₁+m₂-2t`. -/
+theorem V_repr (t : ℕ) (m1 m2 : ℤ) (h1 : m2 ≤ 2 * t) (h2 : m1 ≤ 2 * t) (h3 : 2 * (t : ℤ) ≤ m1 + m2)
+    (x y : ℤ) :
+    Hz t x y * Hz t (m1 - x) (m2 - y) *
+      (((2 * t - m2).toNat.factorial * (2 * t - m1).toNat.factorial * (m1 + m2 - 2 * t).toNat.factorial : ℕ) : ℝ) =
+    (t.factorial : ℝ) ^ 2 * (Cz (2 * t - m1).toNat (t - x) * Cz (2 * t - m2).toNat (t - y) *
+      Cz (m1 + m2 - 2 * t).toNat (x + y - t)) := by
+  by_cases hP : 0 ≤ x ∧ 0 ≤ y ∧ x ≤ t ∧ y ≤ t ∧ (t : ℤ) ≤ x + y ∧ 0 ≤ m1 - x ∧ 0 ≤ m2 - y ∧
+      m1 - x ≤ t ∧ m2 - y ≤ t ∧ (t : ℤ) ≤ m1 - x + (m2 - y)
+  · obtain ⟨a1, a2, a3, a4, a5, a6, a7, a8, a9, a10⟩ := hP
+    have HA := Hz_factorial a1 a2 a3 a4 a5
+    have HB := Hz_factorial a6 a7 a8 a9 a10
+    have C1 := Cz_factorial (n := (2 * t - m1).toNat) (z := t - x) (by omega) (by omega)
+    have C2 := Cz_factorial (n := (2 * t - m2).toNat) (z := t - y) (by omega) (by omega)
+    have C3 := Cz_factorial (n := (m1 + m2 - 2 * t).toNat) (z := x + y - t) (by omega) (by omega)
+    -- the six factorials of the two H's are those of the three binomials
+    have f1 : ((t : ℤ) - (m1 - x)).toNat = (((2 * t - m1).toNat : ℤ) - (t - x)).toNat := by omega
+    have f2 : ((t : ℤ) - (m2 - y)).toNat = (((2 * t - m2).toNat : ℤ) - (t - y)).toNat := by omega
+    have f3 : (m1 - x + (m2 - y) - t).toNat = (((m1 + m2 - 2 * t).toNat : ℤ) - (x + y - t)).toNat := by omega
+    rw [f1, f2, f3] at HB
+    push_cast at C1 C2 C3 HA HB ⊢
+    set F1 := (((t : ℤ) - x).toNat.factorial : ℝ)
+    set F2 := (((t : ℤ) - y).toNat.factorial : ℝ)
+    set F3 := ((x + y - t).toNat.factorial : ℝ)
+    set G1 := ((((2 * t - m1).toNat : ℤ) - (t - x)).toNat.factorial : ℝ)
+    set G2 := ((((2 * t - m2).toNat : ℤ) - (t - y)).toNat.factorial : ℝ)
+    set G3 := ((((m1 + m2 - 2 * t).toNat : ℤ) - (x + y - t)).toNat.factorial : ℝ)
+    have hF : 0 < F1 * F2 * F3 * G1 * G2 * G3 := by positivity
+    have key : (Hz t x y * Hz t (m1 - x) (m2 - y) *
+        ((2 * t - m2).toNat.factorial * (2 * t - m1).toNat.factorial * (m1 + m2 - 2 * t).toNat.factorial)) *
+          (F1 * F2 * F3 * G1 * G2 * G3) =
+        ((t.factorial : ℝ) ^ 2 * (Cz (2 * t - m1).toNat (t - x) * Cz (2 * t - m2).toNat (t - y) *
+          Cz (m1 + m2 - 2 * t).toNat (x + y - t))) * (F1 * F2 * F3 * G1 * G2 * G3) := by
+      have e1 : (t - x).toNat = ((t : ℤ) - x).toNat := rfl
+      calc _ = (Hz t x y * (F1 * F2 * F3)) * (Hz t (m1 - x) (m2 - y) * (G1 * G2 * G3)) *
+              ((2 * t - m2).toNat.factorial * (2 * t - m1).toNat.factorial *
+                (m1 + m2 - 2 * t).toNat.factorial) := by ring
+        _ = (t.factorial : ℝ) * t.factorial * ((2 * t - m2).toNat.factorial * (2 * t - m1).toNat.factorial *
+                (m1 + m2 - 2 * t).toNat.factorial) := by rw [HA, HB]
+        _ = (t.factorial : ℝ) ^ 2 * ((Cz (2 * t - m1).toNat (t - x) * (F1 * G1)) *
+              (Cz (2 * t - m2).toNat (t - y) * (F2 * G2)) *
+              (Cz (m1 + m2 - 2 * t).toNat (x + y - t) * (F3 * G3))) := by
+                rw [C1, C2, C3]; ring
+        _ = _ := by ring
+    exact mul_right_cancel₀ hF.ne' key
+  · have lhs0 : Hz t x y * Hz t (m1 - x) (m2 - y) = 0 := by
+      by_contra hne
+      have hA : Hz t x y ≠ 0 := left_ne_zero_of_mul hne
+      have hB : Hz t (m1 - x) (m2 - y) ≠ 0 := right_ne_zero_of_mul hne
+      have sA := Hz_support hA; have sB := Hz_support hB
+      exact hP (by omega)
+    have rhs0 : Cz (2 * t - m1).toNat (t - x) * Cz (2 * t - m2).toNat (t - y) *
+        Cz (m1 + m2 - 2 * t).toNat (x + y - t) = 0 := by
+      by_contra hne
+      have hC3 : Cz (m1 + m2 - 2 * t).toNat (x + y - t) ≠ 0 := right_ne_zero_of_mul hne
+      have hne' := left_ne_zero_of_mul hne
+      have hC1 : Cz (2 * t - m1).toNat (t - x) ≠ 0 := left_ne_zero_of_mul hne'
+      have hC2 : Cz (2 * t - m2).toNat (t - y) ≠ 0 := right_ne_zero_of_mul hne'
+      have s1 := Cz_support hC1; have s2 := Cz_support hC2; have s3 := Cz_support hC3
+      exact hP (by omega)
+    rw [lhs0, rhs0]; ring
+
 end Szkraw
