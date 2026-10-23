@@ -2,7 +2,8 @@
 (m >= 1) and C(a,2) A >= (a-1) d_{l+2}. Exact over random and far-field LC u, a <= amax. Usage: key_L3_check.py amax trials seed"""
 import sys, math, random
 from fractions import Fraction as Fr
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 C = math.comb
 amax, T, rng = int(sys.argv[1]), int(sys.argv[2]), random.Random(int(sys.argv[3]))
 def lc(rng, L):

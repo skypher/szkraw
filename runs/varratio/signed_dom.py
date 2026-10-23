@@ -3,7 +3,8 @@
 Applied to the curved-profile linear-ratio family L, and to criterion S as control."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from kernel_check import tools
 from lfamily import lmember
 import stoch

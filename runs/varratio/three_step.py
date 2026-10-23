@@ -3,7 +3,8 @@ Q <= (alpha(1-alpha) - beta) P^2 + (1 - alpha) beta P^3   (P, Q: positive / nega
 Test on the curved-profile linear-ratio family over a grid of (alpha, beta)."""
 import sys, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from kernel_check import tools
 from lfamily import lmember
 

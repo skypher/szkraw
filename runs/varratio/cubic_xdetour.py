@@ -4,7 +4,8 @@ each divided by c at the destination), P = sum of B_j with j even. Reports min o
 Usage: cubic_xdetour.py Ns per us seed [parts, e.g. vwx]"""
 import sys, math, random, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from hform import lc_seq
 from resum_test import mmul
 

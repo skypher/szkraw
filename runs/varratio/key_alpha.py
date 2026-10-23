@@ -5,7 +5,8 @@ alpha/t >= -T/Aal. Compare with lower bounds from nondecreasing b:
 Reports the worst needed/bound ratio for each (<= 1 means that bound suffices everywhere)."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from hform import lc_seq
 if __name__ == '__main__':
     Ns = [int(x) for x in sys.argv[1].split(',')]; per = int(sys.argv[2]); rng = random.Random(int(sys.argv[3]))

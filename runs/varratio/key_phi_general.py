@@ -5,7 +5,8 @@ phi_km = B0'^(k) [X delta_m - F C_X^(m)] + B0'^(m) [X delta_k - F C_X^(k)] + B0^
 Usage: key_phi_general.py amax"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 C = math.comb
 amax = int(sys.argv[1])

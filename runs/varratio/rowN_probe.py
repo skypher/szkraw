@@ -3,7 +3,8 @@ v_0 = e_N, where v_m = row N of R_m(J). Families: rho_n = r + kappa*g(n/N) on pr
 kappa = lam * kappa_max (b nondecreasing, rho_N <= 1). Usage: rowN_probe.py Ns families qs rs lams"""
 import sys, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from nonlinear_probe import profile, gfun, kappa_max
 
 def rowN(a, b, c):

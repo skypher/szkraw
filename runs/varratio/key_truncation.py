@@ -3,7 +3,8 @@ Compare S(rho) with S(rho_lin), rho_lin = rho_0 + rho_1 x (same profile), at eve
 Usage: key_truncation.py Ns per seed"""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from g_ingredients import member
 
 def slack(d, co):

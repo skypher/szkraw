@@ -3,7 +3,8 @@ a = 1 - b - c. Claim: kappa2 >= 0 (c convex), beta2 + kappa2 >= 0 (d = b + c con
 Controls drop one condition at a time. Exact full tables."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..'))
 from probe import linearization, first_negative
 
 def build(N, b1, b2, k1, k2):

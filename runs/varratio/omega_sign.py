@@ -2,7 +2,8 @@
 import sys, random
 from fractions import Fraction as F
 from math import comb
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from kernel_check import tools
 from lfamily import lmember
 from probe import linearization, first_negative

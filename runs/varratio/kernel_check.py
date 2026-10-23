@@ -10,7 +10,8 @@ and the local inequalities (a), (b), (c)."""
 import sys, random, math
 from fractions import Fraction as F
 from math import comb
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization
 from mixed import newton_coeffs
 import stoch

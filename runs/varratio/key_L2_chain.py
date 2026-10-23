@@ -8,7 +8,8 @@ Usage: key_L2_chain.py amax trials seed"""
 import sys, math, random
 from fractions import Fraction as Fr
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_S_low import pieces
 from key_phi import parts
 C = math.comb

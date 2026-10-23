@@ -2,7 +2,8 @@
 Usage: key_cert_inspect.py a (rand seed | geo w)"""
 import sys, random
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_cert_lp import lc_u
 from key_cert_exact import build, certify
 a = int(sys.argv[1])

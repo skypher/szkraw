@@ -4,7 +4,8 @@ nondecreasing), and moderately steep ones. Checks (P) via rows g(m,N;k) (N > 16)
 (gamma_V = 2, gamma_W = 0) at all sources. Usage: g_adversarial.py Ns ws Bs lams"""
 import sys, math, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from rowN_probe import rowN
 

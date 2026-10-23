@@ -4,7 +4,8 @@
 Usage: key_slack.py amin amax trials seed"""
 import sys, math, random
 from fractions import Fraction as Fr
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_S_low import pieces
 C = math.comb
 amin, amax, T, rng = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), random.Random(int(sys.argv[4]))

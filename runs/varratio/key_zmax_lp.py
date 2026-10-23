@@ -5,7 +5,8 @@ import sys, math, itertools
 import sympy as sp
 import numpy as np
 from scipy.optimize import linprog
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_extreme import L
 amax = int(sys.argv[1])
 for a in range(3, amax + 1):

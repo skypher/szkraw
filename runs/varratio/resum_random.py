@@ -3,7 +3,8 @@ x = n/N, on random log-concave Newton profiles, kappa = lam * kappa_max (b nonde
 Usage: resum_random.py Ns per seed"""
 import sys, random, time, math, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from resum_test import Mmin
 from rowN_probe import rowN
 from nonlinear_probe import kappa_max

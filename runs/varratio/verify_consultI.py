@@ -7,7 +7,8 @@ LC Newton profile d, rho(x) = r + t x + tau C(x,2), b nondecreasing.
  M >= 0 and (P) for N <= 9; the scalar counterexample of section 5."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from hform import lc_seq
 from probe import linearization, first_negative
 from resum_test import Mmin

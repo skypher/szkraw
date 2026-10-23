@@ -9,7 +9,8 @@ Checks: the identity and both steps on random LC u (a <= 14); Abel tail criterio
 Usage: key_S20_proof.py amax"""
 import sys, math, random
 from fractions import Fraction as Fr
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_S_low import pieces
 def mul(Q, f, g, c=1):
     for i, x in f.items():

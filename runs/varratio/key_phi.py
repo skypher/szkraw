@@ -4,7 +4,8 @@ Phi(P) = Lin(P) Dc(l+a-1)(P) - f_1(l+a-1) Quad(P) >= 0. Test the Abel criterion 
 every anti-diagonal of Phi's symmetric coefficient matrix is >= 0 (exact). Usage: key_phi.py amax trials seed [--adv]"""
 import sys, random, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_cert_lp import lc_u
 
 def parts(u, a):

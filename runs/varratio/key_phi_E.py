@@ -5,7 +5,8 @@ E3 = 2 F V1 - 4 sum_{n>=3} (n-2) y_n [F (rho(l+a) - rho(l+n)) + s_{a-1} d_{l+a-1
 symbolically in u and P, a = 3..amax. Usage: key_phi_E.py amax"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 C = math.comb
 amax = int(sys.argv[1])

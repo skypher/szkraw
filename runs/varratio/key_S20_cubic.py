@@ -60,10 +60,11 @@ def check(T, a):
                 s = sum(row.get((i + t, j, k - t), 0) for t in range(0, j - i + 1))
                 if s < 0: bad.append(('row', W, (i, j, k), s))
     return bad, negs
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
 if __name__ == '__main__':
     import random
     from fractions import Fraction as Fr
-    sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+    sys.path.insert(0, _HERE)
     from key_S_low import pieces
     rng = random.Random(5)
     for a in range(amin, amax + 1):

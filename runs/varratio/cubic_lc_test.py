@@ -4,7 +4,8 @@ Random directions (t, tau) scaled by lam * (largest scale keeping b nondecreasin
 Usage: cubic_lc_test.py Nmin Nmax per_N rs us seed [checkM]"""
 import sys, time, threading, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from ratio_random import lc_profile
 from cubic_diag import run as diag

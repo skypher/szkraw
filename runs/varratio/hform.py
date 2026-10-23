@@ -5,7 +5,8 @@ Constant ratio (Theorem 8.1) is beta_0 = 0, w constant. Exact full linearization
 Usage: hform.py Ns per seed [mode]   mode: M (w nonincreasing, default) | inc (w nondecreasing, control)"""
 import sys, math, random, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..'))
 from probe import linearization, first_negative
 STATE = {'done': 0, 'msg': '', 't0': time.time()}
 def _hb():

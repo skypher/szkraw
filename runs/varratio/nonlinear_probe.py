@@ -5,7 +5,8 @@ on a grid keeping b nondecreasing and rho_N <= 1. Reports the first negative coe
 Usage: nonlinear_probe.py Nmax [Nmin] [families] [qs] [rs]"""
 import sys, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..'))
 from probe import linearization, first_negative
 
 def profile(N, q):

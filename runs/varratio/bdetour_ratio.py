@@ -4,7 +4,8 @@ Profiles: random LC Newton (lc_seq), geometric Newton ratio q, quadratic; (t, ta
 monotonicity condition. Usage: bdetour_ratio.py Ns per seed"""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from hform import lc_seq
 def run(d, r, t, tau):
     N = len(d) - 1

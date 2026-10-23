@@ -6,7 +6,8 @@ mu_Y = B_0 Y_{j-1}' / (c Y_j) for Y = B, H, V, What, C (j as in the paper), and 
 (A0 B0' + B0 A0'') / (c (4 H1 - gV V1 - gW What1)). Usage: g_ingredients.py Ns per seed [fam]"""
 import sys, math, random, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from hform import lc_seq
 
 GAMMAS = {'(0,0)': (F(0), F(0)), '(4/3,0)': (F(4, 3), F(0)), '(2,0)': (F(2), F(0))}

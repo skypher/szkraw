@@ -3,7 +3,8 @@ M_{km} = B0'^(k) E1^(m) + B0^(k) E2^(m) + c1^(k) E3^(m); S_{sigma,i} = sum_{k=i}
 Usage: key_S_low.py amax"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 C = math.comb
 

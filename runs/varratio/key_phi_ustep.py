@@ -5,7 +5,8 @@ Usage: key_phi_ustep.py amax"""
 import sys, itertools, threading, time
 from fractions import Fraction as Fr
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 from key_cert_exact import certify
 
@@ -55,3 +56,4 @@ if __name__ == '__main__':
                 verdicts[v] = verdicts.get(v, 0) + 1
                 if v != 'CERTIFIED': print(f'  a={a} sigma={s} i={i}: {v}', flush=True)
         print(f'a={a}: central sums {verdicts}', flush=True)
+        assert set(verdicts) <= {'CERTIFIED'}, f'a={a}: uncertified central sum'

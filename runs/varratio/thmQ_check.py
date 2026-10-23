@@ -7,7 +7,8 @@ Checks: (1) Newton(c) = k e_k with e_k = (nu1 + h(k-1)) s_k + h(k-1) s_{k-1}, s_
 via the recurrence's own moves (resum_test.Mmin); (7) property (P). Usage: thmQ_check.py Nmax per seed"""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from resum_test import Mmin
 

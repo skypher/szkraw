@@ -4,7 +4,8 @@ keep lam_1 P0 P1 (need lam_1 >= 0), keep positive lam_k P0 P_k, and replace nega
 (P1..Pa). Exact. Usage: key_plan_test.py amax trials seed [--adv]"""
 import sys, random, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 from key_cert_lp import lc_u
 amax, T, rng = int(sys.argv[1]), int(sys.argv[2]), random.Random(int(sys.argv[3]))

@@ -2,7 +2,8 @@
 Usage: rowN_frontier.py Ns families qs rs lams"""
 import sys, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from nonlinear_probe import profile, kappa_max
 from rowN_probe import rowN
 from ratio_frontier import gfun

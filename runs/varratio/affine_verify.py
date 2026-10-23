@@ -10,7 +10,8 @@ Checks, on Omega = {l + a <= N}:
 Matrices act on column vectors: (T w)(y) = sum_x T[y][x] w(x); every move divided by c at its destination level."""
 import sys, math, random, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from hform import lc_seq
 

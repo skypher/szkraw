@@ -6,7 +6,8 @@ for l >= 0 with all indices within the profile length.
 Reports, per member class, how often MI holds and whether MI-holding members ever fail (P)."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 import hform_w, hform_ctrl, hform
 

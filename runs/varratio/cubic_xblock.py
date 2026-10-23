@@ -3,7 +3,8 @@
 G X G, G (X + V) G, G (X + V + W) G, where G = (I - P/2)^{-1}. Usage: cubic_xblock.py Ns per us seed"""
 import sys, math, random, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from hform import lc_seq
 from resum_test import mmul
 

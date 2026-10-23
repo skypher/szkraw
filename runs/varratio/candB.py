@@ -4,7 +4,8 @@ Exact full linearization tables (probe.linearization). Small N exhaustively rand
 Usage: candB.py Ns per seed"""
 import sys, math, random, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..'))
 from probe import linearization, first_negative
 STATE = {'done': 0, 'msg': '', 't0': time.time()}
 def _hb():

@@ -4,7 +4,8 @@ then test G' = Y' a k/(k+1) + Y Y' - 4 sum_{n>=3}(n-2)C(a,n)u_{n-1} - 4 H_* >= 0
 Usage: key_zmax_reduce.py trials amax"""
 import sys, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_extreme import L
 C = math.comb; T, amax = int(sys.argv[1]), int(sys.argv[2]); rng = random.Random(11)
 idbad = 0; gneg = 0; gpneg = 0; cnt = 0; worst = None

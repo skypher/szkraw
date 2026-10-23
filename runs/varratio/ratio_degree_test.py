@@ -5,7 +5,8 @@ b nondecreasing), the higher coefficients recomputed at each scale. Full table f
 Usage: ratio_degree_test.py Nmin Nmax per_N rs us seed"""
 import sys, time, threading, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from ratio_random import lc_profile
 from rowN_probe import rowN

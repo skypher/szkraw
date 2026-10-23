@@ -3,7 +3,8 @@ Exact check over random and adversarial LC u, all a <= amax, k, z in {0, 1/u_2, 
 Usage: key_binom_dom.py amax trials"""
 import sys, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_extreme import L
 amax, T = int(sys.argv[1]), int(sys.argv[2]); rng = random.Random(5)
 dom_fail = 0; neg = 0; cnt = 0; worst = None; wdom = None

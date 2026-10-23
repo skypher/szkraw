@@ -1,7 +1,8 @@
 """Symbolic central sums of Phi (cubic in u) for small a. Usage: key_phi_sym.py a"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 a = int(sys.argv[1])
 U = sp.symbols('u0:%d' % (a + 2))

@@ -3,7 +3,8 @@ closed-form S_{sigma,2} = Main - (a-1) d_{l+2} E1^(sigma-2) >= 0, on random and 
 Usage: key_S_high_test.py amax trials seed"""
 import sys, math, random
 from fractions import Fraction as F_
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 C = math.comb
 amax, T, rng = int(sys.argv[1]), int(sys.argv[2]), random.Random(int(sys.argv[3]))
 def lc(rng, L):

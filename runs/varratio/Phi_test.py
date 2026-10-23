@@ -2,7 +2,8 @@
 Adversarial families: geometric with small ratio, two-ratio sequences, random sorted ratios, random u0 scale."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from T_test import TA
 def Phi(u, a):
     T, A = TA(u, a); X = sum(math.comb(a, n) * u[n] for n in range(1, a + 1))

@@ -4,7 +4,8 @@ increments q, and random LC Newton profiles. Full tables for N <= 16, rows g(m,N
 Usage: steep_exp_test.py Ns Bs qs lams [rand_per_N] [seed]"""
 import sys, time, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from nonlinear_probe import profile
 from rowN_probe import rowN

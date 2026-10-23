@@ -3,7 +3,8 @@ checked against their coefficient expansions for 5 <= a <= 30. Usage: key_weight
 import sys, math
 from fractions import Fraction as Fr
 sys.argv = ['x', '3']
-src = open('/home/yang/szkraw/runs/varratio/key_S20_proof.py').read()
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+src = open(__import__('os').path.join(_HERE, 'key_S20_proof.py')).read()
 exec(src.split('rng = random.Random')[0])
 C = lambda n, k: math.comb(n, k) if 0 <= k <= n else 0
 def YXW(a, W): return 2*C(2*a-1, W) - 2*C(a, W) - 2*C(a-1, W) - 2*a*C(a-1, W-1) - C(a, W-1) - (a-1)*C(a-1, W-2)
@@ -31,3 +32,4 @@ for a in range(5, 31):
             if S.get(W, 0) != f(a, W): mism += 1; print('mismatch', name, a, W, S.get(W, 0), f(a, W)) if mism < 5 else None
         assert all(S.get(W, 0) >= 0 for W in range(3)), (name, a, [S.get(W, 0) for W in range(3)])
 print('closed-form mismatches:', mism)
+assert mism == 0

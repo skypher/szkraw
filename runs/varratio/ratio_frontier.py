@@ -5,8 +5,9 @@ kappa = lam * kappa_max (b nondecreasing, rho_N <= 1), as in nonlinear_probe.py.
 Usage: ratio_frontier.py Nmin Nmax families rs qs lams"""
 import sys, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw')
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..'))
+sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from nonlinear_probe import profile, kappa_max
 

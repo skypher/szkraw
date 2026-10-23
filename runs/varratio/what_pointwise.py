@@ -5,7 +5,8 @@ w^{(j)}_m(l) = C(m,j) D^j rho(l+m-j) f_{m-j}(l). Then the summed detour quotient
 Usage: what_pointwise.py Ns per seed"""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from g_ingredients import member
 Ns = [int(z) for z in sys.argv[1].split(',')]; per = int(sys.argv[2]); rng = random.Random(int(sys.argv[3]))
 bad = 0; checks = 0; minq = None

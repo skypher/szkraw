@@ -6,7 +6,8 @@ rows g(m,N;k) beyond. Optional M check (resummation of Theorem 8.9/8.11) for N <
 Usage: lcnewton_ratio_test.py Ns per rs fam seed [M]"""
 import sys, time, threading, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from ratio_random import lc_profile
 from rowN_probe import rowN

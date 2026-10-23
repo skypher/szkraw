@@ -6,7 +6,8 @@ modes: M (w nonincreasing), inc (w nondecreasing), spike, rand (w random), indep
 Also reports the mixed inequalities (relative to c) and the ratio c_i/(b_i+c_i)."""
 import sys, math, random, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from hform import lc_seq
 from mixed import newton_coeffs, mixed_ok

@@ -4,7 +4,8 @@ with t^2 = r tau (boundary of LC). tau = lam * max with b nondecreasing. Reports
 and the weakened-key ratio (K') at the same source. Usage: key_full_regime.py Ns ws rs"""
 import sys, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 
 def arrays(N, w, r, mode):
     d = [((1 + w) ** i - 1) / ((1 + w) ** N - 1) for i in range(N + 1)]

@@ -655,3 +655,31 @@ Fixes, all applied:
 2. The final sentence now refers to the nine ordered-step contributions; individual T_c(p) can be negative.
 3. The second bracket of the (1,1),(1,1) case is written out.
 4. **Attribution: the result is Walkup (1976), Theorem 2**, the double-binomial convolution preserving PF₂. The paper now credits Walkup and presents the proof as self-contained. The reviewer matched the theorem against search-indexed text but did not obtain the full scan; neither did we.
+
+## Review round 24: Lemma 8.15 and Theorem 8.16 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_217b9df1-6e7b-48ae-923b-086bdb7edeb3`. Brief: `reviews/round24-brief.md` (paper at commit c145f1f). Answer: `reviews/round24-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer found no counterexample and no missing case. Independent checks:
+- Lemma 8.15, the setup, (8.7), the Leibniz expansion and the use of Proposition 8.14.
+- The detours: the θ_{n,i} re-collected independently, including the target i = m with quotient ≥ 10. The resummation constants (surviving V₁ coefficient 1/6).
+- All linear-in-P coefficients, E¹, E², E³, M_{k,m} and (8.9) by direct expansion.
+- The affine reduction (iii), with α = tB/F = tR_{ℓ+a−1}.
+- The identities and chains of (iii′)–(v).
+- The generating functions of (vi), including G^{(s)} and the s = 1 correction.
+- All seven polynomial certificates and the 20 small-weight checks, rerun. The LP certificates for a = 3, 4, 5 were rerun: 9/14/20 central sums and 4/5/6 Lin coefficients, accepted only as exact rational solutions.
+- Boundary cases: ℓ + a = N, P₁ = 0, zero P_k, a ≤ 2.
+
+Fixes, all applied:
+1. Setup: integer arguments are now explicit. The sequence (ρ(n)) is log-concave; the real function x ↦ ρ(x) need not be (example given). The nonnegative quantities are listed explicitly, excluding ψ_n.
+2. Step (vi): the form N_W = πC(2a−1,W) + C(a,W−1)ϱ is stated for W ≥ 4 and the forms other than L. W = 3 is treated directly, including the extra Ψ term C(a−1,2)(a−1).
+3. Q_s certificate: the script subtracted an extra C(a,W−1), which was harmless (a stronger bound). It now certifies exactly the bound described in the text; rerun, all pass. "Only decrease" became "whose magnitudes decrease".
+4. The closed forms are derived in the text by coefficient extraction from the displayed generating functions. key_weight_closed.py is described as a finite check, 5 ≤ a ≤ 30.
+5. Scripts:
+   - every runs/varratio script now resolves imports relative to its own location, not /home/yang;
+   - key_weight_cert.py and key_weight_closed.py assert success;
+   - key_phi_ustep.py and key_lin_cert.py fail unless every nonzero target is CERTIFIED;
+   - rerun from another working directory: all pass.
+6. Literature: Lemma 8.15's Abel argument is Wang and Yeh, JCTA 114 (2007), Lemma 2.1 and Corollary 2.6, now cited. I checked both statements in the arXiv version, math/0504164v5. The reviewer found no prior statement of Theorem 8.16 or of its key inequality; that does not establish novelty.
+
+Also adopted: the reviewer's form Key = (1 − Δc/F)·Lin + Φ/F for reduction (i).

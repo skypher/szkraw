@@ -3,7 +3,8 @@ Evaluate the weakened key L (gamma = 2) at alpha = s_{a-1} R_{l+a-1} (monotone b
 adversarial and random LC u. Also the weak alpha = s_{a-1} z. Usage: key_binom_rays.py amax"""
 import sys, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_extreme import L
 from key_endpoints import Rtop  # noqa (module runs on import; guarded below)
 

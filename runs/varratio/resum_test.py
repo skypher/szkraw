@@ -4,7 +4,8 @@ C+/C- (C-moves), U (straight), Afull = sum_j (-1)^j A_j, then G = (I - P/2)^{-1}
 Reports min entry of M (exact) and whether (P) holds (terminal row). Usage: resum_test.py Ns families profiles rs lams"""
 import sys, math, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from nonlinear_probe import profile, gfun, kappa_max
 from rowN_probe import rowN
 

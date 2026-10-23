@@ -34,7 +34,7 @@ forms = {  # name: (P_F, rho_F, amin)
     'R': (a, a * (-2 * cW - 1) - 8 * (H0 + H1), 3),
     'R2': (a - 2, -(a - 2) * 2 * cW - 4 * a * (H0 + H1), 6),
     # Q_s of (L1'), crude form valid for every s >= 3 (G-term dropped, s = 3 in the negative terms), divided by c'
-    'Q_s(crude)': (2, -YXneg - 4 * H0 - (sp.Rational(2, 3) * a - 1 + sp.Rational(4, 3) * a * (W - 3)), 3),
+    'Q_s(crude)': (2, -YXneg - 4 * H0 - (sp.Rational(2, 3) * a - 2 + sp.Rational(4, 3) * a * (W - 3)), 3),
 }
 ok = True
 for name, (P, rho, amin) in forms.items():
@@ -63,7 +63,7 @@ integer_forms = {
     'Qh': lambda A, w: (A-1)*YXi(A, w) - 4*A*Hi(A, w) + 2*G1i(A, w) + 4*G2i(A, w) - 4*((A + Ci(A, 2))*Hi(A, w-1) - G1i(A, w-1) - G2i(A, w-1)),
     'R': lambda A, w: A*(Ci(2*A-1, w) - 2*Ci(A, w) - Ci(A, w-1)) - 8*(Hi(A, w) + Hi(A, w-1)),
     'R2': lambda A, w: (A-2)*(Ci(2*A-1, w) - 2*Ci(A, w)) - 4*A*(Hi(A, w) + Hi(A, w-1)),
-    'Q_s(crude)': lambda A, w: YXi(A, w) - 4*Hi(A, w) - Ci(A, w-1)*(Fr(2*A-3, 3) + Fr(4*A*(w-3), 3)),
+    'Q_s(crude)': lambda A, w: YXi(A, w) - 4*Hi(A, w) - Ci(A, w-1)*(Fr(2*A-6, 3) + Fr(4*A*(w-3), 3)),
 }
 mism = 0
 for name, (P, rho, amin) in forms.items():
@@ -91,10 +91,11 @@ for name, (P, rho, amin) in forms.items():
                 'Qh': (a-1)*YX - 4*a*H(w) + 2*G1(w) + 4*G2(w) - 4*((a + a*(a-1)/2)*H(w-1) - G1(w-1) - G2(w-1)),
                 'R': a*(Cs(2*a-1, w) - 2*Cs(a, w) - Cs(a, w-1)) - 8*(H(w) + H(w-1)),
                 'R2': (a-2)*(Cs(2*a-1, w) - 2*Cs(a, w)) - 4*a*(H(w) + H(w-1)),
-                'Q_s(crude)': YX - 4*H(w) - Cs(a, w-1)*(sp.Rational(2, 3)*a - 1 + sp.Rational(4, 3)*a*(w-3))}[name]
+                'Q_s(crude)': YX - 4*H(w) - Cs(a, w-1)*(sp.Rational(2, 3)*a - 2 + sp.Rational(4, 3)*a*(w-3))}[name]
         for A in range(max(amin, 3), 12): assert poly.subs(a, A) == integer_forms[name](A, w), (name, w, A)
         sh = sp.Poly(sp.expand(poly.subs(a, a + amin)), a)
         good = all(c >= 0 for c in sh.coeffs())
         allsmall &= good
         print(f'  {name} W={w}: N_W(a+{amin}) coefficients all >= 0: {good}' + ('' if good else f'  {sp.factor(poly)}'))
 print('all small-weight checks pass:', allsmall)
+assert ok and allsmall and mism == 0, 'weight certificate FAILED'

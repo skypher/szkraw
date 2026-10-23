@@ -6,7 +6,8 @@ Usage: key_L1_weights.py amax"""
 import sys, math
 from fractions import Fraction as Fr
 AMAX = int(sys.argv[1]); sys.argv = sys.argv[:1] + ["3", "3"]
-exec(open('/home/yang/szkraw/runs/varratio/key_L1_quad.py').read().split('rng = random')[0])
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+exec(open(__import__('os').path.join(_HERE, 'key_L1_quad.py')).read().split('rng = random')[0])
 C = lambda n, k: math.comb(n, k) if 0 <= k <= n else 0
 def NW(a, s, W):
     c1, c2, cas = C(a - 1, s - 1), C(a - 1, s), C(a, s)

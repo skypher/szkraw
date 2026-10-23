@@ -5,7 +5,8 @@ psi_n = h_n - v_n - w_n with h_n = (1-rho(l+n)) f_n, v_n = n (t + tau (l+n-1)) f
 (iv) key: A_0 B_0(l+1,a-1) + B_0 A_0(l+1,a-2) >= c (4 H_1 - 2 V_1), a >= 3. Usage: quad_ingredients.py Ns per seed"""
 import sys, math, random, time
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from hform import lc_seq
 
 def check(d, r, t, tau):

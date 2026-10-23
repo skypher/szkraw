@@ -2,7 +2,8 @@
 wmode: rand (w_k random >= 0), geo (w_k = W^k, W in {2,5,20}), spike (one w_k large)"""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from probe import linearization, first_negative
 from hform import lc_seq
 def member(rng, N, wmode):

@@ -3,7 +3,8 @@ alpha = R_{l+a-1} = d_{l+a-1}/f_1(l+a-1) (strong, from monotone b at the top). A
 truncated geometric, and random LC. Usage: key_endpoints.py amax"""
 import sys, random, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_extreme import L
 
 def Rtop(u, a):

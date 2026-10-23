@@ -4,7 +4,8 @@ phi_01 = K d_a + F [4 D sum_{n=3}^a (n-2)(n-a+1) C(a,n) u_n + 2 D sum_{n=3}^a (n
 K = X Y' + Y X' - 4 D H_*, F = d_{l+a} - d_{l+a-1}, D = d_{l+1}. Usage: key_phi01.py amax"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 C = math.comb
 amax = int(sys.argv[1])

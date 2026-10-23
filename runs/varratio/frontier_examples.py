@@ -2,7 +2,8 @@
 Each: linear profile d_i = i/N, rho_i = r + kappa g(i); checks b nondecreasing, rho_N <= 1, and reports min g(m,N;k)."""
 import sys, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from rowN_probe import rowN
 
 def check(N, r, kappa, g, label):

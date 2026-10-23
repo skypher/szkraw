@@ -1,7 +1,8 @@
 """Smallest curved-profile linear-ratio example where signed P^2 >= 4Q fails; print the array and the offending entries."""
 import sys, math, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from kernel_check import tools
 from mixed import newton_coeffs
 from hform import lc_seq

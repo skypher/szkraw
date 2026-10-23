@@ -3,7 +3,8 @@ min entries of R = U + P^2/4 - Q, of G A G, of G (C+ - C-) G and of M = G (R + C
 Also the scalar B-detour 4 c_{l+1} B_1(l,a) <= B_0(l,a) B_0(l+1,a-2) at every source. Usage: cubic_diag.py N r t tau sig [q]"""
 import sys, math
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from nonlinear_probe import profile
 from resum_test import mmul
 

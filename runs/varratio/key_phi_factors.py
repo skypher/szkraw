@@ -2,7 +2,8 @@
 with the factor and the cofactor of the top sum. Usage: key_phi_factors.py amax"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 amax = int(sys.argv[1])
 for a in range(3, amax + 1):

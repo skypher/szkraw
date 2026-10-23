@@ -3,7 +3,8 @@ ratios on the LC boundary rho = r + t x + (t^2/r) C(x,2) and exponential rho = r
 nondecreasing. Checks the rows g(m,N;k) exactly. Heartbeat every 60 s. Usage: g_farfield.py Ns ws rs lams"""
 import sys, math, time, threading
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from rowN_probe import rowN
 CUR = {'item': '', 'done': 0, 'total': 0}; t0 = time.time()
 def hb():

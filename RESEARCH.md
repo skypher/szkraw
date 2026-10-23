@@ -1690,3 +1690,11 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - With Lin ≥ 0 and the ray/top-constraint reduction, the key inequality holds for every a ≥ 6 (written reductions plus symbolic weight certificates), and for a ≤ 10 by the exact LP certificates.
 - With the general detours (B via Proposition 8.14; C′, H, V, Ŵ) and the resummation, conjecture (G) holds for every N.
 - Status: written proof and review still to do. Next: write the full proof of (G) into the paper and run a review round.
+
+**Theorem 8.16 in the paper; review round 24 PASS WITH MINOR FIXES (2026-10-23).** Conjecture (G) is now Theorem 8.16, with Lemma 8.15 (Abel criterion; Wang–Yeh 2007, Lemma 2.1 and Corollary 2.6).
+- Fixes applied (REVIEW.md):
+  - integer arguments in the setup;
+  - the scope of the closed form in step (vi);
+  - the Q_s certificate now matches the text exactly (the earlier script was more conservative by C(a,W−1));
+  - script portability, with assert-on-failure.
+- The reviewer reran all certificates. Status: computer-assisted, reviewed, not machine-verified.

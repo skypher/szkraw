@@ -3,7 +3,8 @@ Q <= (a1(1-a1) - a2) P^2 + ((1-a1) a2 - a3) P^3 + (1-a1) a3 P^4.
 Report worst margin for several (a1, a2, a3) on the curved-profile linear-ratio family."""
 import sys, random
 from fractions import Fraction as F
-sys.path.insert(0, '/home/yang/szkraw'); sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, __import__('os').path.join(_HERE, '..', '..')); sys.path.insert(0, _HERE)
 from lfamily import lmember
 from three_step import PQ, mul
 rng = random.Random(int(sys.argv[2])); NS = [int(x) for x in sys.argv[3].split(',')]

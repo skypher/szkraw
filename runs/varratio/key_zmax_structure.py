@@ -2,7 +2,8 @@
 Prints monomials with negative coefficients."""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_extreme import L
 from fractions import Fraction as F
 a, k = int(sys.argv[1]), int(sys.argv[2])

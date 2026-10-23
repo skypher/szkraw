@@ -3,7 +3,8 @@ non-log-concave Newton coefficients (p1^2 < p0 tau), monotone b and b >= 0 in th
 Far-field geometric u (u0 = 1/w). Exact rational arithmetic. Usage: key_nolc_witness.py a w"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_cert_lp import key_poly
 a = int(sys.argv[1]); w = sp.Rational(sys.argv[2])
 u = [1 / w, sp.Integer(1)] + [w ** (n - 1) for n in range(2, a + 4)]

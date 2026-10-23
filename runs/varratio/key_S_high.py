@@ -5,7 +5,8 @@ E1^(m) = C(a,m) A (B - d_l) - C(a-1,m) B (A - d_l), E2^(m) = C(a,m) A (B - d_{l+
 Checked against the symbolic central sums of Phi, a = 3..amax. Usage: key_S_high.py amax"""
 import sys, math
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 C = math.comb
 amax = int(sys.argv[1])

@@ -3,7 +3,8 @@ u_{i+1}u_{j-1} - u_i u_j (i+1 <= j-1) and products u_i u_j. Usage: key_lin_cert.
 import sys, itertools
 from fractions import Fraction as Fr
 import sympy as sp
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_phi import parts
 from key_cert_exact import certify
 amax = int(sys.argv[1]); amin = int(sys.argv[2]) if len(sys.argv) > 2 else 3
@@ -25,3 +26,4 @@ for a in range(amin, amax + 1):
         for m, v in zip(Ps.monoms(), Ps.coeffs()): bv[idx[m]] = Fr(int(sp.numer(v)), int(sp.denom(v)))
         v = certify(A, bv)[0]; verdicts[v] = verdicts.get(v, 0) + 1
     print(f'a={a}: Lin coefficients {verdicts}', flush=True)
+    assert set(verdicts) <= {'CERTIFIED', 'zero'}, f'a={a}: uncertified Lin coefficient'

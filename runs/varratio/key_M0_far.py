@@ -2,7 +2,8 @@
 on geometric u (u0 = 1/w) with tiny w, a <= amax (exact). Usage: key_M0_far.py amax"""
 import sys, math
 from fractions import Fraction as Fr
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_S_low import pieces
 C = math.comb
 amax = int(sys.argv[1]); res = {}

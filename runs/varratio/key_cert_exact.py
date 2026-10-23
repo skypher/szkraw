@@ -7,7 +7,8 @@ from fractions import Fraction as Fr
 import sympy as sp
 import numpy as np
 from scipy.optimize import linprog
-sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
+_HERE = __import__('os').path.dirname(__import__('os').path.abspath(__file__))
+sys.path.insert(0, _HERE)
 from key_cert_lp import key_poly, lc_u
 
 def build(u, a, use_lc):
