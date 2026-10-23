@@ -1839,3 +1839,5 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - a bookkeeping slip in a chain check;
   - an earlier family split (V^q only) that fails the key at large ℓ.
 - **End-to-end test:** runs/cubic/c3_property_P.py at the boundary rσ = tτ (logs in runs/cubic/logs/).
+- **End-to-end (P) at the boundary rσ = tτ** (runs/cubic/c3_property_P.py, logs in runs/cubic/logs/): 4,400 full exact tables with N = 4–14, plus 2,760 rows g(m,N;k) with N = 15–60. No negative coefficient. Exact ingredient check (runs/cubic/final_ingredients.py, N ≤ 16): minimum detour quotients B 9.14, V 11.08, E 4.80, H 23.2, C′ 9.87 (needed: 4, 9/2, 3, 10, 6); minimum key ratio 2.50 (needed: 1).
+- **In the paper** as Theorem 8.17 (thm:lc-cubic), with eqs. (8.10)–(8.13). The abstract, open problems and AI disclosure are updated. Review round 25 brief: reviews/round25-brief.md.
