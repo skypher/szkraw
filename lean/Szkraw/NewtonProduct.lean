@@ -486,4 +486,79 @@ theorem Vk_marginal_lcnz (t : ℕ) (m1 m2 w1 w2 : ℤ) :
     ring
   · exact LCNZ.zero.congr (fun n => by simp [Vk_zero_of hm])
 
+
+/-! ## Interval-sum bookkeeping on `ℤ` -/
+
+theorem sum_Icc_reflect (f : ℤ → ℝ) (m p q : ℤ) :
+    ∑ y ∈ Icc p q, f (m - y) = ∑ y ∈ Icc (m - q) (m - p), f y := by
+  refine Finset.sum_nbij' (fun y => m - y) (fun y => m - y) ?_ ?_ ?_ ?_ ?_
+  · intro y hy; simp only [mem_Icc] at hy ⊢; omega
+  · intro y hy; simp only [mem_Icc] at hy ⊢; omega
+  · intro y _; ring
+  · intro y _; ring
+  · intro y _; rfl
+
+theorem sum_Icc_shift (f : ℤ → ℝ) (d p q : ℤ) :
+    ∑ y ∈ Icc p q, f (y - d) = ∑ y ∈ Icc (p - d) (q - d), f y := by
+  refine Finset.sum_nbij' (fun y => y - d) (fun y => y + d) ?_ ?_ ?_ ?_ ?_
+  · intro y hy; simp only [mem_Icc] at hy ⊢; omega
+  · intro y hy; simp only [mem_Icc] at hy ⊢; omega
+  · intro y _; ring
+  · intro y _; ring
+  · intro y _; rfl
+
+/-- Moving an interval down by one: `Σ_{[p-1,q-1]} f - Σ_{[p,q]} f = f(p-1) - f(q)` for `p ≤ q + 1`. -/
+theorem sum_Icc_down (f : ℤ → ℝ) {p q : ℤ} (h : p ≤ q + 1) :
+    ∑ y ∈ Icc (p - 1) (q - 1), f y - ∑ y ∈ Icc p q, f y = f (p - 1) - f q := by
+  rcases eq_or_lt_of_le h with h' | h'
+  · have e1 : Icc (p - 1) (q - 1) = ∅ := by ext y; simp only [mem_Icc, notMem_empty, iff_false]; omega
+    have e2 : Icc p q = ∅ := by ext y; simp only [mem_Icc, notMem_empty, iff_false]; omega
+    simp only [e1, e2, sum_empty]
+    rw [show p - 1 = q by omega]; ring
+  · have e1 : Icc (p - 1) (q - 1) = insert (p - 1) (Icc p (q - 1)) := by
+      ext y; simp only [mem_Icc, mem_insert]; omega
+    have e2 : Icc p q = insert q (Icc p (q - 1)) := by
+      ext y; simp only [mem_Icc, mem_insert]; omega
+    rw [e1, e2, sum_insert (by simp), sum_insert (by simp)]
+    ring
+
+/-! ## Pointwise (T2) and monotonicity of marginals -/
+
+/-- (T2) pointwise: `V(x,y) ≤ V(x,y')` for `2x ≤ m₁`, `y ≤ y'`, `y + y' = m₂`. -/
+theorem Vk_T2 (t : ℕ) (m1 m2 : ℤ) {x y y' : ℤ} (hx : 2 * x ≤ m1) (hy : y ≤ y') (hs : y + y' = m2) :
+    Vk t m1 m2 x y ≤ Vk t m1 m2 x y' := by
+  have rr := Vk_rr2 t m1 m2 (x := x) (x' := m1 - x) (y := y) (y' := y') (by omega) hy
+  have s1 : Vk t m1 m2 (m1 - x) y' = Vk t m1 m2 x y := by
+    rw [show y' = m2 - y by omega, Vk_symm]
+  have s2 : Vk t m1 m2 (m1 - x) y = Vk t m1 m2 x y' := by
+    rw [show y = m2 - y' by omega, Vk_symm]
+  rw [s1, s2] at rr
+  have h0 := Vk_nonneg t m1 m2 x y
+  have h1 := Vk_nonneg t m1 m2 x y'
+  nlinarith
+
+theorem Vk_transpose (t : ℕ) (m1 m2 x y : ℤ) : Vk t m1 m2 x y = Vk t m2 m1 y x := by
+  unfold Vk; rw [Hz_symm t x y, Hz_symm t (m1 - x) (m2 - y)]
+
+theorem Vk_neg_left {t : ℕ} {m1 m2 x : ℤ} (hx : x < 0) (y : ℤ) : Vk t m1 m2 x y = 0 := by
+  unfold Vk Hz; rw [if_neg (by omega), zero_mul]
+
+/-- Marginal monotonicity: if `G` (a row marginal of `V` over `[w₁,w₂]`) satisfies
+`G x ≤ G (m₁ - x)` whenever `2x ≤ m₁`, then `G (x-1) ≤ G x` whenever `2x ≤ m₁`. -/
+theorem marginal_mono (t : ℕ) (m1 m2 w1 w2 : ℤ)
+    (hsym : ∀ x : ℤ, 2 * x ≤ m1 → ∑ y ∈ Icc w1 w2, Vk t m1 m2 x y ≤ ∑ y ∈ Icc w1 w2, Vk t m1 m2 (m1 - x) y)
+    {x : ℤ} (hx : 2 * x ≤ m1) :
+    ∑ y ∈ Icc w1 w2, Vk t m1 m2 (x - 1) y ≤ ∑ y ∈ Icc w1 w2, Vk t m1 m2 x y := by
+  by_cases h1 : 1 ≤ x
+  · have hm : 0 ≤ m1 := by omega
+    have lc := Vk_marginal_lcnz t m1 m2 w1 w2
+    have := lc.mono_of_reflect m1.toNat (x := x.toNat) (fun n hn => ?_) (by omega) (by omega)
+    · have e1 : ((x.toNat - 1 : ℕ) : ℤ) = x - 1 := by omega
+      have e2 : ((x.toNat : ℕ) : ℤ) = x := by omega
+      rw [e1, e2] at this; exact this
+    · have e : ((m1.toNat - n : ℕ) : ℤ) = m1 - n := by omega
+      rw [e]; exact hsym n (by omega)
+  · rw [sum_eq_zero (fun y _ => Vk_neg_left (by omega) y)]
+    exact sum_nonneg (fun y _ => Vk_nonneg _ _ _ _ _)
+
 end Szkraw
