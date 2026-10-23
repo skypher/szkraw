@@ -144,3 +144,5 @@ import Szkraw.RemarksP2
 import Szkraw.RemarksP2b
 import Szkraw.RemarksP1
 import Szkraw.RemarksP3b
+import Szkraw.JetColumn
+import Szkraw.LambdaN

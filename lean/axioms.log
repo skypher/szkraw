@@ -379,3 +379,8 @@ Szkraw.no_open_set_of_rules: allowed axioms [propext, Classical.choice, Quot.sou
 Szkraw.logconcave_increment_class: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.weight_sums_geometric: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.newton_examples_quad: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.JetCol.jet_column: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.lambda_values: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.topmass_rates: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.normalized_direction: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.direction_not_uniform: allowed axioms [propext, Classical.choice, Quot.sound]
