@@ -345,3 +345,7 @@ Szkraw.koelink_relation_32: allowed axioms [propext, Classical.choice, Quot.soun
 Szkraw.koelink_recurrence_71: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.positive_subalgebra_full: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.symmetric_open: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.sign_pattern: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.kraw_mem_signClass: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.signClass_zero_zero: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.quadratic_hypotheses_needed: allowed axioms [propext, Classical.choice, Quot.sound]

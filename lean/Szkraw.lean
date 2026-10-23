@@ -137,3 +137,5 @@ import Szkraw.ComboCounterexamples
 import Szkraw.PolyColumn
 import Szkraw.Koelink
 import Szkraw.CompletionP3
+import Szkraw.SignPattern
+import Szkraw.QuadNeeded

@@ -401,3 +401,7 @@ assert_allowed_axioms Szkraw.koelink_relation_32
 assert_allowed_axioms Szkraw.koelink_recurrence_71
 assert_allowed_axioms Szkraw.positive_subalgebra_full
 assert_allowed_axioms Szkraw.symmetric_open
+assert_allowed_axioms Szkraw.sign_pattern
+assert_allowed_axioms Szkraw.kraw_mem_signClass
+assert_allowed_axioms Szkraw.signClass_zero_zero
+assert_allowed_axioms Szkraw.quadratic_hypotheses_needed
