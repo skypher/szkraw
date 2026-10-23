@@ -1,0 +1,84 @@
+[02:50:33] removed the chunk build outputs
+[02:50:33] start lake build Szkraw.Kink500
+[02:50:35] ⚠ [1589/1644] Replayed Szkraw.ThreeTerm
+[02:50:35] warning: Szkraw/ThreeTerm.lean:79:14: Unused tactic linter: `change
+[02:50:35]   (tower p q n).sum + q • ((tower p q n).sum * 1) + (p - 1) • (1 : (tower p q n).Carrier) = _` does nothing
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unusedTactic false`
+[02:50:35] ⚠ [1591/1644] Replayed Szkraw.Parameters
+[02:50:35] warning: Szkraw/Parameters.lean:61:33: This simp argument is unused:
+[02:50:35]   qInteger
+[02:50:35] 
+[02:50:35] Hint: Omit it from the simp argument list.
+[02:50:35]   [apply] simp [geometricCoefficients, ne_of_gt hQN]
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+[02:50:35] ⚠ [1592/1644] Replayed Szkraw.NormalizedRecurrence
+[02:50:35] warning: Szkraw/NormalizedRecurrence.lean:37:8: Unused tactic linter: `ring` does nothing
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unusedTactic false`
+[02:50:35] warning: Szkraw/NormalizedRecurrence.lean:51:10: Unused tactic linter: `ring` does nothing
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unusedTactic false`
+[02:50:35] warning: Szkraw/NormalizedRecurrence.lean:37:8: this tactic is never executed
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+[02:50:35] warning: Szkraw/NormalizedRecurrence.lean:51:10: this tactic is never executed
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+[02:50:35] ⚠ [1593/1644] Replayed Szkraw.RowAction
+[02:50:35] warning: Szkraw/RowAction.lean:49:13: This simp argument is unused:
+[02:50:35]   hc
+[02:50:35] 
+[02:50:35] Hint: Omit it from the simp argument list.
+[02:50:35]   [apply] simp [hi]
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+[02:50:35] warning: Szkraw/RowAction.lean:71:35: This simp argument is unused:
+[02:50:35]   hi
+[02:50:35] 
+[02:50:35] Hint: Omit it from the simp argument list.
+[02:50:35]   [apply] simp [geometricCoefficients, qInteger, hQN, normalized_elementary_zero]
+[02:50:35] 
+[02:50:35] Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+[02:50:36] ⚠ [2652/2663] Replayed Szkraw.Representation
+[02:50:36] warning: Szkraw/Representation.lean:36:45: This simp argument is unused:
+[02:50:36]   smul_eq_mul
+[02:50:36] 
+[02:50:36] Hint: Omit it from the simp argument list.
+[02:50:36]   [apply] simp only [Finset.smul_sum, smul_smul]
+[02:50:36] 
+[02:50:36] Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+[02:50:36] ⚠ [2658/2663] Replayed Szkraw.ColumnCheck
+[02:50:36] warning: Szkraw/ColumnCheck.lean:48:40: This simp argument is unused:
+[02:50:36]   List.getElem?_append_right le_rfl
+[02:50:36] 
+[02:50:36] Hint: Omit it from the simp argument list.
+[02:50:36]   [apply] simp [List.getD_eq_getElem?_getD]
+[02:50:36] 
+[02:50:36] Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+[02:50:36] ⚠ [2659/2663] Replayed Szkraw.ProfileCounterexamples
+[02:50:36] warning: Szkraw/ProfileCounterexamples.lean:167:50: Unused tactic linter: `omega` does nothing
+[02:50:36] 
+[02:50:36] Note: This linter can be disabled with `set_option linter.unusedTactic false`
+[02:50:36] warning: Szkraw/ProfileCounterexamples.lean:167:50: this tactic is never executed
+[02:50:36] 
+[02:50:36] Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+[02:51:03] heartbeat: 0/4 chunks done; running: Kink500Chunk2 27s 4.1GB; Kink500Chunk1 26s 4.2GB; Kink500Chunk4 26s 4.6GB; Kink500Chunk3 26s 4.1GB;  summed RSS 17.1 GB, peak 17.1 GB
+[02:51:34] heartbeat: 0/4 chunks done; running: Kink500Chunk2 57s 4.5GB; Kink500Chunk1 57s 4.7GB; Kink500Chunk4 57s 6.1GB; Kink500Chunk3 57s 4.6GB;  summed RSS 19.9 GB, peak 19.9 GB
+[02:51:46] ✔ [2665/2669] Built Szkraw.Kink500Chunk1 (70s)
+[02:51:57] ✔ [2666/2669] Built Szkraw.Kink500Chunk4 (80s)
+[02:52:05] heartbeat: 2/4 chunks done; running: Kink500Chunk2 88s 4.7GB; Kink500Chunk3 88s 4.9GB;  summed RSS 9.6 GB, peak 20.4 GB
+[02:52:35] heartbeat: 2/4 chunks done; running: Kink500Chunk2 119s 4.8GB; Kink500Chunk3 118s 5.1GB;  summed RSS 9.9 GB, peak 20.4 GB
+[02:53:06] heartbeat: 2/4 chunks done; running: Kink500Chunk2 149s 5.0GB; Kink500Chunk3 149s 5.2GB;  summed RSS 10.1 GB, peak 20.4 GB
+[02:53:37] heartbeat: 2/4 chunks done; running: Kink500Chunk2 180s 5.1GB; Kink500Chunk3 180s 5.3GB;  summed RSS 10.3 GB, peak 20.4 GB
+[02:54:07] heartbeat: 2/4 chunks done; running: Kink500Chunk2 210s 5.2GB; Kink500Chunk3 210s 5.4GB;  summed RSS 10.6 GB, peak 20.4 GB
+[02:54:38] heartbeat: 2/4 chunks done; running: Kink500Chunk2 241s 5.3GB; Kink500Chunk3 241s 5.5GB;  summed RSS 10.8 GB, peak 20.4 GB
+[02:55:08] heartbeat: 2/4 chunks done; running: Kink500Chunk2 272s 5.4GB; Kink500Chunk3 272s 5.6GB;  summed RSS 11.0 GB, peak 20.4 GB
+[02:55:39] heartbeat: 2/4 chunks done; running: Kink500Chunk2 302s 5.6GB; Kink500Chunk3 302s 5.7GB;  summed RSS 11.3 GB, peak 20.4 GB
+[02:55:54] ✔ [2667/2669] Built Szkraw.Kink500Chunk2 (317s)
+[02:56:10] heartbeat: 3/4 chunks done; running: Kink500Chunk3 333s 5.9GB;  summed RSS 5.9 GB, peak 20.4 GB
+[02:56:17] ✔ [2668/2669] Built Szkraw.Kink500Chunk3 (340s)
+[02:56:22] ✔ [2669/2669] Built Szkraw.Kink500 (4.9s)
+[02:56:22] Build completed successfully (2669 jobs).
+[02:56:28] lake build exit 0; peak summed RSS of the chunk checks 20.4 GB (5 s sampling)
