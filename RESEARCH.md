@@ -1866,3 +1866,14 @@ Scripts: runs/sharp/. Constant-ratio arrays (a = 1 − d, b = (1−r)d, c = rd);
   - The key inequality and all other coefficients do not involve the condition, so Theorem 8.17 holds with rσ ≤ (7/4)tτ.
   - Diagnostics at the boundary rσ = (7/4)tτ: c3_property_P.py found no negative coefficient (1,500 full tables with N = 4–13, 780 rows with N = 15–40). final_ingredients.py (N ≤ 14) gave minimum quotients B 9.12, V 11.9, E 5.68, H 29.6, C′ 11.2 and key 2.98.
   - Paper: a remark after the proof, plus the updated open problem and AI disclosure. Not yet reviewed.
+
+## Lean plan for the key inequality of Theorem 8.16 (= P2 Theorem 5.5), 2026-10-23
+
+The user asked to finish the Lean work: Theorem 8.16 first, then Theorem 8.17. Scripts: runs/lean_plan/. State in Lean: `genKey_of_props` reduces `GenKeyStmt` to `LinCoefStmt` (k ≥ 2 done: `linC_ge2`) and `CentralStmt` (i ≥ 2 done: `central_ge2`; i ≤ 1 split into `M0Stmt`, `MM1Stmt`, `S20Stmt`, `M01Stmt`, `M11Stmt` by `central_of_pieces`). Open: `linC f a 0`, `linC f a 1` and the five pieces.
+- **Replacement for the weight sums (Lemma 8.15).** Use the pointwise facts u_i u_j ≥ u_1 u_{i+j−1} (i, j ≥ 1) and u_0 u_n ≤ u_1 u_{n−1}. For u₀-free nonnegative forms, keep only the pairs with i or j ∈ {1, 2}: (Σx_i u_i)(Σy_j u_j) ≥ u_1[x_1 Σ y_j u_j + x_2 Σ y_j u_{j+1} + y_1 Σ_{i≥3} x_i u_i + y_2 Σ_{i≥3} x_i u_{i+1}]. Each form is then ≥ u_1 Σ_n e_n u_n with explicit e_n (runs/lean_plan/edge_exact.py).
+  - e_n ≥ 0 holds exactly for a ≤ 60 and all n, for K (= l₀), L, R, K'', Ψ, Q̂ (a ≥ 3), K_a (a ≥ 5), R₂ (a ≥ 6), and the s-free bound Q* of Q_s/C(a−1,s−1): Q* = Y'X'' + YX' − 4u_0H − (4a/3)u_1H − ((a−3)/3)u_1(Y+Y'), using ν_s ≥ 0, Z_s/c' ≤ (a/s)H and c''/c' = (a−s)/s.
+  - For generic n ≥ 4, with a = n + k (k ≥ 0) and everything relative to C(a,n), the cleared numerator of e_n/C(a,n) has only nonnegative coefficients in (p, k), n = 4 + p, for K, L, R, R₂, K'', K_a, Ψ (edge_cert.py). Small n and n = a + 1 are checked directly.
+  - This needs neither Vandermonde closed forms nor Abel tails.
+- **Step (iii)** (M01, M11): the paper's scaling argument. Key(λP) for P = (P₀,P₁) is at least (P₀+P₁) times the affine expression with α = tB/F, which is ≥ 0 by `G_nonneg` and K ≥ 0. Use u_1B ≥ u_0F, AX' ≥ (a−2)DF and BX ≥ a u_0 F.
+- **Windows a ≤ 5:** exact certificates (runs/varratio/key_phi_ustep.py, key_lin_cert.py) translated to linarith hints.
+- **Order:** generic lemmas (edge product, u_0 shift) → forms → reductions (ii)–(v) → (iii) → windows → assembly → fidelity review. Then Theorem 8.17.
