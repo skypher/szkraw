@@ -2,6 +2,14 @@
 Copied verbatim; every change is an exact replacement asserted to match (once, or the stated number of times).
 Cut: Proposition 8.10 (contained in Theorem 8.11), the diagnostics paragraphs (moved to papers/DIAGNOSTICS.md).
 Cross-references into paper 1 use xr-hyper labels P1-*; run after p1.tex has been compiled."""
+import sys as _sys, hashlib as _hl
+# FROZEN (2026-10-23): papers/p1.tex, p2.tex, p3.tex are now edited directly; this script is kept as a record of how
+# they were first generated from paper.tex at commit ad5eb72. It refuses to run unless called with --regenerate and
+# paper.tex is byte-identical to that version (line ranges below refer to it). Regenerating discards direct edits.
+_SRC = __import__('os').path.join(__import__('os').path.dirname(__import__('os').path.abspath(__file__)), '..', 'paper.tex')
+if '--regenerate' not in _sys.argv or _hl.sha256(open(_SRC, 'rb').read()).hexdigest() != '4e82af43d92cc4296d85f6b852776f85aea61a5a686cb921a289f94f734ad567':
+    _sys.exit('build script frozen: the papers are edited directly (see the header of this file)')
+
 import os, re
 HERE = os.path.dirname(os.path.abspath(__file__))
 L = open(os.path.join(HERE, '..', 'paper.tex')).read().split('\n')
