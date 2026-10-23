@@ -102,3 +102,4 @@ import Szkraw.VRGenSetting
 import Szkraw.GenKeyAlgebra
 import Szkraw.GenMain
 import Szkraw.GenKey
+import Szkraw.GenPhaseA

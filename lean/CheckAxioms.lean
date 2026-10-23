@@ -286,3 +286,12 @@ assert_allowed_axioms Szkraw.GenSetting.B0p_expand
 assert_allowed_axioms Szkraw.GenSetting.H1_expand
 assert_allowed_axioms Szkraw.GenSetting.V1_expand
 assert_allowed_axioms Szkraw.MC_zero
+assert_allowed_axioms Szkraw.R_chain_f
+assert_allowed_axioms Szkraw.F_le
+assert_allowed_axioms Szkraw.A2a
+assert_allowed_axioms Szkraw.A2b
+assert_allowed_axioms Szkraw.A2c
+assert_allowed_axioms Szkraw.A2d
+assert_allowed_axioms Szkraw.linC_ge2
+assert_allowed_axioms Szkraw.MC_ge2
+assert_allowed_axioms Szkraw.central_ge2
