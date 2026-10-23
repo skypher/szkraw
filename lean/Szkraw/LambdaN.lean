@@ -16,7 +16,8 @@ triple `z = (m,n,k)` the rates are `A_z = ∂_ε g(m,n;k)` and `B_z = -∂_r g(m
 * `normalized_direction`: after the affine change `y = (1-ε)x + ε`, which keeps every product coefficient and
   restores `a_0 = 1`, `b_0 = 0`, the direction is `δa_n = (N-n)/N (C(N,n) - 1)`, `δb_n = 1 + (2n/N - 1) C(N,n)`,
   `δc_n = -(n/N)(1 + C(N,n))`.
-* `direction_not_uniform`: neither this direction nor its negative (raising the top mass) is a uniform rule.
+* `direction_not_uniform`: no nonzero rescaling of this direction (in particular neither it nor its negative,
+  which raises the top mass) is a uniform rule, from any starting size `N₀` on.
 -/
 
 namespace Szkraw
@@ -343,17 +344,35 @@ theorem normalized_direction (N : ℕ) (hN : 1 ≤ N) :
     refine this.congr_deriv ?_
     rw [(lowK_one_zero N n hN).2.2]; ring
 
-/-- **P3, Section 9**: neither the affine-normalized top-mass direction nor its negative (raising the top mass) is a
-uniform rule `δb_n = β(n/N)`, `δc_n = γ(n/N)`: its dependence on `N` is binomial (`N = 2, n = 1` and `N = 4, n = 2`). -/
-theorem direction_not_uniform (σ : ℝ) (hσ : σ = 1 ∨ σ = -1) :
-    ¬ ∃ β γ : ℝ → ℝ, ∀ N : ℕ, 1 ≤ N →
-      (∀ n, 1 ≤ n → n < N → σ * (1 + (2 * (n : ℝ) / N - 1) * N.choose n) = β (n / N)) ∧
-      (∀ n, 1 ≤ n → n ≤ N → σ * -((n : ℝ) / N * (1 + N.choose n)) = γ (n / N)) := by
+/-- **P3, Section 9**: the affine-normalized top-mass direction is not a uniform rule `δb_n = β(n/N)`,
+`δc_n = γ(n/N)`, from any starting size `N₀` on and after any rescaling `s_N ≠ 0` (`s_N = 1` lowers the top mass,
+`s_N = -1` raises it): its dependence on `N` is binomial. The ratio `δb_n/δc_n` at `n/N = 1/N` differs between the
+sizes `N` and `2N` for every `N ≥ 2`. -/
+theorem direction_not_uniform (N₀ : ℕ) (s : ℕ → ℝ) (hs : ∀ N, N₀ ≤ N → s N ≠ 0) :
+    ¬ ∃ β γ : ℝ → ℝ, ∀ N : ℕ, N₀ ≤ N →
+      (∀ n, 1 ≤ n → n < N → s N * (1 + (2 * (n : ℝ) / N - 1) * N.choose n) = β (n / N)) ∧
+      (∀ n, 1 ≤ n → n ≤ N → s N * -((n : ℝ) / N * (1 + N.choose n)) = γ (n / N)) := by
   rintro ⟨β, γ, h⟩
-  have h2 := (h 2 (by norm_num)).2 1 le_rfl (by norm_num)
-  have h4 := (h 4 (by norm_num)).2 2 (by norm_num) (by norm_num)
-  norm_num [Nat.choose] at h2 h4
-  rw [← h4] at h2
-  rcases hσ with rfl | rfl <;> norm_num at h2
+  set M := N₀ + 2 with hM
+  have hb1 := (h M (by omega)).1 1 le_rfl (by omega)
+  have hc1 := (h M (by omega)).2 1 le_rfl (by omega)
+  have hb2 := (h (2 * M) (by omega)).1 2 (by norm_num) (by omega)
+  have hc2 := (h (2 * M) (by omega)).2 2 (by norm_num) (by omega)
+  have hMr : (2 : ℝ) ≤ M := by exact_mod_cast (show 2 ≤ M by omega)
+  have hM0 : (M : ℝ) ≠ 0 := by linarith
+  have hx : ((2 : ℕ) : ℝ) / ((2 * M : ℕ) : ℝ) = ((1 : ℕ) : ℝ) / (M : ℝ) := by push_cast; field_simp
+  rw [hx] at hb2 hc2
+  rw [Nat.cast_choose_two] at hb2 hc2
+  simp only [Nat.choose_one_right] at hb1 hc1
+  push_cast at hb1 hc1 hb2 hc2
+  -- `s_M (b₁, c₁) = s_{2M} (b₂, c₂)` forces `s_M s_{2M} (b₁ c₂ - c₁ b₂) = 0`, and the determinant is
+  -- `-4 (M-1)² / M`.
+  have det : s M * s (2 * M) * (4 * ((M : ℝ) - 1) ^ 2) = 0 := by
+    field_simp at hb1 hc1 hb2 hc2
+    linear_combination (s (2 * M) * (1 + (2 - (M : ℝ)) * (2 * M - 1))) * (hc1 - hc2) +
+      (s (2 * M) * (1 + (M : ℝ) * (2 * M - 1))) * (hb1 - hb2)
+  exact mul_ne_zero (mul_ne_zero (hs M (by omega)) (hs (2 * M) (by omega)))
+    (by have : 0 < (M : ℝ) - 1 := by linarith
+        positivity) det
 
 end Szkraw

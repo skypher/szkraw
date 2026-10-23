@@ -440,3 +440,6 @@ assert_allowed_axioms Szkraw.lambda_values
 assert_allowed_axioms Szkraw.topmass_rates
 assert_allowed_axioms Szkraw.normalized_direction
 assert_allowed_axioms Szkraw.direction_not_uniform
+assert_allowed_axioms Szkraw.epsNorm_scaled_hasDerivAt
+assert_allowed_axioms Szkraw.raise_direction
+assert_allowed_axioms Szkraw.raise_not_uniform
