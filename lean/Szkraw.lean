@@ -98,3 +98,4 @@ import Szkraw.LeibnizGeneral
 import Szkraw.LCRatioFacts
 import Szkraw.VRResum3
 import Szkraw.VRMoves3
+import Szkraw.VRGenSetting
