@@ -1,0 +1,56 @@
+[19:42:29] edge_exact 60
+K: fails at []
+L: fails at []
+R: fails at []
+R2: fails at [(3, [2, 3]), (4, [2, 3]), (5, [2, 3])]
+K'': fails at []
+Ka: fails at [(3, [2]), (4, [2])]
+Q*: fails at []
+Psi: fails at []
+Qhat: fails at []
+exit=0
+[19:42:29] forms_iii_v
+exact: all e_n >= 0 for a0 <= a <= 40
+== R (a0 = 3)
+  n=0: 0   coeffs at a = t + a0: [0]
+exit=0
+[19:42:33] window_cert
+ALL CERTIFIED
+[19:42:36] gen_cubicB gen
+case gen: 93 tail facts
+exit=0
+[19:42:41] gen_cubicB 2
+case 2: 67 tail facts
+exit=0
+[19:42:42] gen_cubicB 3
+case 3: 82 tail facts
+exit=0
+[19:42:43] gen_cubicB 4
+case 4: 89 tail facts
+exit=0
+[19:42:44] gen_cubicB 5
+case 5: 93 tail facts
+exit=0
+[19:42:46] gen_cubicB corner
+case corner: 46 tail facts
+exit=0
+[19:42:46] gen_cubicE gen
+case gen: 92 tail facts
+exit=0
+[19:42:50] gen_cubicE 3
+case 3: 62 tail facts
+exit=0
+[19:42:51] gen_cubicE 4
+case 4: 77 tail facts
+exit=0
+[19:42:52] gen_cubicE 5
+case 5: 88 tail facts
+exit=0
+[19:42:53] gen_cubicE 6
+case 6: 92 tail facts
+exit=0
+[19:42:54] phi3_edge 40
+done
+[19:42:54] phi3_generic
+generic formulas agree with the exact coefficients for 4 <= n <= a <= 15
+[19:42:56] done
