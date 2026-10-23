@@ -129,3 +129,8 @@ import Szkraw.CubicKey
 import Szkraw.CubicMain
 import Szkraw.LateRemarks
 import Szkraw.LCViolationPos
+import Szkraw.ColumnCheck
+import Szkraw.RatioCounterexamples
+import Szkraw.ProfileCounterexamples
+import Szkraw.RuleCounterexamples
+import Szkraw.ComboCounterexamples
