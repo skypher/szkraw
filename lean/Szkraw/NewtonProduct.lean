@@ -808,4 +808,36 @@ theorem layer_cake_z (c : ℤ) (u φ : ℤ → ℝ) (hsym : ∀ i, 0 ≤ i → i
   · rintro ⟨⟨hi0, hic⟩, ⟨ha0, hac⟩, h1, h2⟩; exact ⟨⟨h1, by omega⟩, ha0, hac⟩
   · rintro ⟨⟨h1, h2⟩, ha0, hac⟩; exact ⟨⟨by omega, by omega⟩, ⟨ha0, hac⟩, h1, by omega⟩
 
+
+/-! ## Reindexing pairs by their sum -/
+
+theorem pair_reindex (L : ℤ) (F : ℤ → ℤ → ℝ)
+    (hF : ∀ i i', 0 ≤ i → 0 ≤ i' → (L < i ∨ L < i') → F i i' = 0) :
+    ∑ i ∈ Icc 0 L, ∑ i' ∈ Icc 0 L, F i i' = ∑ c ∈ Icc 0 (2 * L), ∑ i ∈ Icc 0 c, F i (c - i) := by
+  have step1 : ∑ c ∈ Icc 0 (2 * L), ∑ i ∈ Icc 0 c, F i (c - i) =
+      ∑ i ∈ Icc 0 (2 * L), ∑ c ∈ Icc i (2 * L), F i (c - i) := by
+    rw [sum_comm' (t' := Icc 0 (2 * L)) (s' := fun i => Icc i (2 * L))]
+    intro c i; simp only [mem_Icc]; omega
+  have step2 : ∀ i, ∑ c ∈ Icc i (2 * L), F i (c - i) = ∑ i' ∈ Icc 0 (2 * L - i), F i i' := by
+    intro i
+    have := sum_Icc_shift (fun i' => F i i') i i (2 * L)
+    rw [sub_self] at this; exact this
+  rw [step1]
+  simp only [step2]
+  have outer : ∑ i ∈ Icc 0 L, ∑ i' ∈ Icc 0 (2 * L - i), F i i' =
+      ∑ i ∈ Icc 0 (2 * L), ∑ i' ∈ Icc 0 (2 * L - i), F i i' := by
+    apply sum_subset
+    · intro i; simp only [mem_Icc]; omega
+    · intro i hi hni
+      simp only [mem_Icc] at hi hni
+      exact sum_eq_zero (fun i' hi' => hF i i' hi.1 (by simp only [mem_Icc] at hi'; omega) (Or.inl (by omega)))
+  rw [← outer]
+  refine sum_congr rfl (fun i hi => ?_)
+  simp only [mem_Icc] at hi
+  apply sum_subset
+  · intro i'; simp only [mem_Icc]; omega
+  · intro i' hi' hni'
+    simp only [mem_Icc] at hi' hni'
+    exact hF i i' hi.1 hi'.1 (Or.inr (by omega))
+
 end Szkraw
