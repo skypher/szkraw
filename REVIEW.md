@@ -733,3 +733,5 @@ Fixes, all applied:
 3. The control is now stated at r = 1, and the open problem defines V_N (the infimum of the failing factors 1/μ at r = 1) and asks whether V_N → 1.
 4. The stale comment in corner_cert.py is fixed.
 5. \bibitem{code} now pins 4f739c3 (contains all certificate scripts and the fixes above).
+
+**Fresh-clone certificate run (2026-10-23).** In rounds 24–26 the reviewer could not download the repository and reran transcribed copies of the scripts. To close that gap, all 16 certificate scripts of Theorems 8.16 and 8.17 and of the sharpness remark were run unmodified from a fresh clone at 4f739c3 (runs/verify/run_certs.sh, record in runs/verify/RESULTS.md). All exit with code 0 and print CERTIFIED/pass; the control prints FAILS as intended. The disclosure now says that the reviewers reran transcribed copies and that the scripts were also run from a fresh clone.
