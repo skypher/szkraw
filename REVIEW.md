@@ -745,6 +745,21 @@ Scope:
 
 Fixes applied: the docstring of `productMatrix_one` now reads `g(1,i;i) = b_i`. The docstring of `sharpD` says the profile equals D(i)/D(6) for 0 ≤ i ≤ 6 and is extended by 1 for i > 6. All proposed table rows and notes sentences were applied as written.
 
+## Lean statement fidelity, round 21: Theorem 8.17 extended to rσ ≤ (7/4)tτ (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_2d77a527-fed0-45f3-8834-2df63cd4bb53`. Brief: `reviews/lean-fidelity21-brief.md` (commit 7086f41). Answer: `reviews/lean-fidelity21-answer.md`.
+
+Scope:
+- `Szkraw.cubic_ratio74_matrix : Stmt_cubic_ratio74`, with `CubicRatioHyp74`;
+- `cubic_ratio_matrix`, now derived from the extended form;
+- the proposed P2 table row, introduction, disclosure and remark sentences, and the FORMALIZATION.md row and note.
+
+**Verdict: PASS; no fixes.**
+- `CubicRatioHyp74` changes only the bound rσ ≤ tτ to rσ ≤ (7/4)tτ (real division). Everything else is unchanged, so the statement MATCHES.
+- The description of the small-n certificates matches the generators: positive polynomial scaling, the moves u_j(ℓu₁ − u₀), and separate exact certificates at small ℓ.
+
+All five proposed changes were applied as written. P2 now calls the 7/4 extension machine-verified.
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.
