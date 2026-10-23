@@ -313,3 +313,9 @@ assert_allowed_axioms Szkraw.linCoef_holds
 assert_allowed_axioms Szkraw.scaling_identity
 assert_allowed_axioms Szkraw.sKey_nonneg
 assert_allowed_axioms Szkraw.M01_M11_nonneg
+assert_allowed_axioms Szkraw.Kpp_ge
+assert_allowed_axioms Szkraw.eKpp_nonneg
+assert_allowed_axioms Szkraw.Qs_ge
+assert_allowed_axioms Szkraw.eQs_nonneg
+assert_allowed_axioms Szkraw.m0s_scalar
+assert_allowed_axioms Szkraw.M0s_holds
