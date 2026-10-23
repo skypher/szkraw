@@ -1525,7 +1525,7 @@ Exact check (runs/varratio/key_phi.py, sympy rationals):
 
 So, for each fixed profile window, the key follows from monotone b at the top of the window plus the ratio's log-concavity, by an explicit certificate. Remaining: show that the central sums of Φ (cubic polynomials in u) are ≥ 0 for every LC u. That is a second Abel-type step, now in u.
 
-**Key inequality PROVED for windows a ≤ 7 (computer-assisted, exact), so (G) holds for N ≤ 7 (2026-10-23).** Two certificate stages:
+**Key inequality PROVED for windows a ≤ 8 (computer-assisted, exact), so (G) holds for N ≤ 8 (2026-10-23; a = 8 added: 44 central sums and 9 Lin coefficients CERTIFIED).** Two certificate stages:
 1. **Ratio stage.** Key(P) = Lin(P) − Quad(P). Along rays λP̂ the key is concave and vanishes at 0, and the top constraint bounds λ. So the key holds if (i) all coefficients of Lin are ≥ 0 and (ii) Φ := Lin·Δc_top − f₁(top)·Quad ≥ 0 on LC P. For (ii), Abel summation in P: every central partial sum S_{σ,i}(u) of every anti-diagonal of Φ is ≥ 0.
 2. **Profile stage.** Each S_{σ,i}(u) is a cubic in u, and each Lin coefficient a quadratic. Each is certified ≥ 0 for every LC u by an exact LP certificate, using:
    - Robin Hood transfers u_k(u_{i+1}u_{j−1} − u_iu_j) ≥ 0 (resp. u_{i+1}u_{j−1} − u_iu_j ≥ 0 for the quadratics);
