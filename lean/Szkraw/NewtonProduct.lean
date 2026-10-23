@@ -2,6 +2,7 @@ import Szkraw.LCConvolution
 import Mathlib.Algebra.BigOperators.Intervals
 import Mathlib.Order.Interval.Finset.Nat
 import Mathlib.Data.Int.Interval
+import Mathlib.Data.Nat.Choose.Vandermonde
 
 /-!
 # Proposition 8.14 (Walkup): log-concavity of Newton coefficients under products — groundwork
@@ -1043,5 +1044,72 @@ theorem kap_LCNZ {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) : LCNZ (k
   have hi' : (i : ℤ) ≤ j := by exact_mod_cast hij
   have hk' : (j : ℤ) ≤ k := by exact_mod_cast hjk
   exact kap_pos_of hρ hν (x := x) (y := y) (by omega) (by omega) (by omega) (by omega) (by omega) hx hy
+
+
+/-! ## Identification with the Newton coefficients of the product -/
+
+/-- The product rule in the binomial basis: `Σ_k C(x,k) H_k(i,j) = C(x,i) C(x,j)`. -/
+theorem choose_mul_choose_eq_sum (x i j : ℕ) :
+    ∑ k ∈ range (x + 1), x.choose k * Hn k i j = x.choose i * x.choose j := by
+  by_cases hix : x < i
+  · rw [Nat.choose_eq_zero_of_lt hix, zero_mul]
+    refine sum_eq_zero (fun k hk => ?_)
+    simp only [mem_range] at hk
+    unfold Hn; split_ifs
+    · rw [Nat.choose_eq_zero_of_lt (show k < i by omega)]; simp
+    · simp
+  push Not at hix
+  obtain ⟨n, rfl⟩ : ∃ n, x = i + n := ⟨x - i, by omega⟩
+  -- terms with k < i vanish; write k = i + m
+  have hsplit : ∑ k ∈ range (i + n + 1), (i + n).choose k * Hn k i j =
+      ∑ m ∈ range (n + 1), (i + n).choose (i + m) * Hn (i + m) i j := by
+    rw [show i + n + 1 = i + (n + 1) by ring, sum_range_add]
+    have z : ∑ k ∈ range i, (i + n).choose k * Hn k i j = 0 := by
+      refine sum_eq_zero (fun k hk => ?_)
+      simp only [mem_range] at hk
+      unfold Hn; split_ifs
+      · rw [Nat.choose_eq_zero_of_lt hk]; simp
+      · simp
+    rw [z, zero_add]
+  rw [hsplit]
+  have hterm : ∀ m, (i + n).choose (i + m) * Hn (i + m) i j =
+      (i + n).choose i * (n.choose m * (if m ≤ j then i.choose (j - m) else 0)) := by
+    intro m
+    have cm := Nat.choose_mul (n := i + n) (k := i + m) (s := i) (by omega)
+    rw [show i + n - i = n by omega, show i + m - i = m by omega] at cm
+    unfold Hn
+    by_cases hj : j ≤ i + m
+    · rw [if_pos hj]
+      by_cases hmj : m ≤ j
+      · rw [if_pos hmj]
+        have e : i.choose (i + m - j) = i.choose (j - m) := by
+          rw [show i + m - j = i - (j - m) by omega, Nat.choose_symm (by omega)]
+        rw [e, ← mul_assoc, cm]; ring
+      · rw [if_neg hmj, Nat.choose_eq_zero_of_lt (show i < i + m - j by omega)]; simp
+    · rw [if_neg hj]
+      have hmj : m ≤ j := by omega
+      rw [if_pos hmj, Nat.choose_eq_zero_of_lt (show i < j - m by omega)]; simp
+  simp only [hterm, ← mul_sum]
+  congr 1
+  -- Vandermonde
+  have vdm : (n + i).choose j = ∑ m ∈ range (j + 1), n.choose m * i.choose (j - m) := by
+    rw [Nat.add_choose_eq, Finset.Nat.sum_antidiagonal_eq_sum_range_succ (fun a b => n.choose a * i.choose b)]
+  rw [show i + n = n + i by ring, vdm]
+  have L : ∑ m ∈ range (n + 1), n.choose m * (if m ≤ j then i.choose (j - m) else 0) =
+      ∑ m ∈ range (n + j + 1), n.choose m * (if m ≤ j then i.choose (j - m) else 0) := by
+    apply sum_subset
+    · intro m; simp only [mem_range]; omega
+    · intro m _ hm; simp only [mem_range] at hm
+      rw [Nat.choose_eq_zero_of_lt (by omega), zero_mul]
+  have R : ∑ m ∈ range (j + 1), n.choose m * i.choose (j - m) =
+      ∑ m ∈ range (n + j + 1), n.choose m * (if m ≤ j then i.choose (j - m) else 0) := by
+    rw [show ∑ m ∈ range (j + 1), n.choose m * i.choose (j - m) =
+      ∑ m ∈ range (j + 1), n.choose m * (if m ≤ j then i.choose (j - m) else 0) from
+        sum_congr rfl (fun m hm => by simp only [mem_range] at hm; rw [if_pos (by omega)])]
+    apply sum_subset
+    · intro m; simp only [mem_range]; omega
+    · intro m _ hm; simp only [mem_range] at hm
+      rw [if_neg (by omega), mul_zero]
+  rw [L, R]
 
 end Szkraw
