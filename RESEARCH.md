@@ -1860,3 +1860,9 @@ Scripts: runs/sharp/. Constant-ratio arrays (a = 1 − d, b = (1−r)d, c = rd);
 
 **Review round 25 (Theorem 8.17): PASS WITH MINOR FIXES; correction.** The remark "u = 1 is exactly where the coefficientwise trade ends" (2026-10-23 entries above) is wrong. Under rσ ≤ u·tτ the test is κ_tτ + u·κ_rσ ≥ 0. At (0,3) on geometric profiles κ_tτ/|κ_rσ| → 2, so that family only obstructs u > 2. The printed quotient (κ_rσ + κ_tτ)/|κ_rσ| → 1 is the margin left after trading at u = 1. The other fixes are in REVIEW.md.
 - **Sharpness remark added to the paper** (Section 10, "How sharp is log-concavity?"). It includes an exact all-r certificate (runs/sharp/lc_violation_cert.py): the mixture with μ = 1/10, q = 11/10 (violation factor 10) has (P) for every r ∈ [0,1] at N = 6, 8, 10, 12, since every g(m,n;k) has nonnegative Bernstein coefficients in r. The control μ = 1/100 fails at N = 6, at g(6,6;6). The grid thresholds of the previous section are the smallest failures found, not safe limits: failures sit in narrow (μ, q) windows that a coarse grid or a random search can miss.
+- **(C3) extends to u = 7/4 (2026-10-23, after review round 25).** runs/cubic/bdetour_u.py and edetour_u.py rerun only the trade-dependent coefficient with κ_tτ + u·κ_rσ.
+  - u = 3/2 and 7/4: both certified.
+  - u = 9/5 and 19/10: the B certificate fails, while E still passes at u = 2.
+  - The key inequality and all other coefficients do not involve the condition, so Theorem 8.17 holds with rσ ≤ (7/4)tτ.
+  - Diagnostics at the boundary rσ = (7/4)tτ: c3_property_P.py found no negative coefficient (1,500 full tables with N = 4–13, 780 rows with N = 15–40). final_ingredients.py (N ≤ 14) gave minimum quotients B 9.12, V 11.9, E 5.68, H 29.6, C′ 11.2 and key 2.98.
+  - Paper: a remark after the proof, plus the updated open problem and AI disclosure. Not yet reviewed.
