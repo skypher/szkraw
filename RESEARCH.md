@@ -1509,3 +1509,18 @@ Proof architecture for (G), all pieces now proved except the last:
 - Structure of exact certificates (runs/varratio/key_cert_inspect.py): basic LP solutions are arbitrary vertices.
   - In the far-field case (a = 8, w = 10⁻³) the certificate uses every LC difference P₁P_j − P₀P_{j+1} (j = 1…7), heavily, together with g_m·P_k at the top of the window (m = 6, 7).
   - Suggested uniform route: the top-of-window monotone-b products as in Theorem 8.9, plus the (1, j) LC differences that move higher Newton terms onto P₀ and P₁.
+
+**Key inequality: reduction to an Abel certificate in the ratio (2026-10-23).** For fixed u, write Key(P) = Lin(P) − Quad(P), with P_k = Δ^kρ(ℓ):
+- Lin(P) = XB₀′ + B₀X′ − 4cH_* is linear in P, with nonnegative coefficients; its P₀-coefficient is Theorem 8.9's K.
+- Quad(P) = C_XB₀′ + B₀C_{X′} − 4cZ₁ − 2cV₁ is a homogeneous quadratic.
+
+Top constraint g_top(P) = f₁(ℓ+a−1) − Δc(ℓ+a−1)(P) ≥ 0. Along each ray P = λP̂, Key = λLin − λ²Quad is concave in λ and vanishes at 0. Hence Key ≥ 0 on the feasible set if
+- Φ(P) := Lin(P)·Δc(ℓ+a−1)(P) − f₁(ℓ+a−1)·Quad(P) ≥ 0 for LC P,
+
+a homogeneous quadratic. By the Abel argument of Proposition 8.14 (pair products P_iP_{σ−i} increase toward the centre), Φ ≥ 0 if every central partial sum of every anti-diagonal of its coefficient matrix is ≥ 0.
+
+Exact check (runs/varratio/key_phi.py, sympy rationals):
+- the criterion holds for 70 random LC u (a ≤ 12) and for far-field geometric u (u₀ = 1/w, w ∈ {10⁻¹, 10⁻², 10⁻³, 10⁻⁶}) at a = 3…10 and 12, 14, 16;
+- the only zero is the P₀² coefficient, which is tight because the constant ratio is exact; the next smallest (P₀P₁) is strictly positive.
+
+So, for each fixed profile window, the key follows from monotone b at the top of the window plus the ratio's log-concavity, by an explicit certificate. Remaining: show that the central sums of Φ (cubic polynomials in u) are ≥ 0 for every LC u. That is a second Abel-type step, now in u.
