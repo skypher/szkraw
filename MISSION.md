@@ -26,7 +26,7 @@ A product formula only for Krawtchouk, a reformulation of positivity as equally 
 
 ## Status (2026-10-23)
 
-- **Split into three papers (2026-10-23)** in `papers/`, generated from `paper.tex` (kept as the full record) by `papers/build_p*.py`; `make papers`.
+- **Split into three papers (2026-10-23)** in `papers/`. They were generated once from `paper.tex`, which stays frozen as the full record, and are now edited directly; the generators `papers/build_p*.py` are frozen. `make papers` compiles them.
   - P1, *A log-concavity criterion for finite nonnegative linearization* (16 pp.): the answer to Szwarc's Problem 2 (log-concave Newton criterion, Krawtchouk and geometric arrays, quadratic decomposition, parity split and Q_n, no fixed margin, sharpness remark). Every theorem, corollary and proposition is Lean-verified (the Section 3 lemmas within the proof of Theorem 3.1, Lemma 3.2 in converse form).
   - P2, *Increasing ratios in finite nonnegative linearization* (27 pp.): Theorems 8.6-8.17 of paper.tex; depends on P1 only.
   - P3, *Exact and perturbative criteria for finite nonnegative linearization* (31 pp.): Sections 2-7 and 9 of paper.tex without the parts moved to P1/P2; depends on P1 only.
