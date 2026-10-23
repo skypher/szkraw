@@ -369,3 +369,8 @@ Szkraw.log_rho_not_concave: allowed axioms [propext, Classical.choice, Quot.soun
 Szkraw.quad_lowdeg_incomparable: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.geometric_kappa_values: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.geometric_kappa: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.binomial_mean: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.szwarc_footnote: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.newton_examples: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.convex_counterexamples_newton_signs: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.szwarc_thm33_check: allowed axioms [propext, Classical.choice, Quot.sound]

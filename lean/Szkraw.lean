@@ -142,3 +142,4 @@ import Szkraw.QuadNeeded
 import Szkraw.RemarksP3
 import Szkraw.RemarksP2
 import Szkraw.RemarksP2b
+import Szkraw.RemarksP1
