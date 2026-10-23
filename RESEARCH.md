@@ -1600,3 +1600,23 @@ For (L1): with E₁^{(m)} = C(a−1,m−1)AB − d₀δ_m and E₂^{(m)} = C(a�
 - the first bracket is a shifted copy of Theorem 8.9's K.
 
 Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's K-lemma.
+
+**Key for general a: (L3) proved; slack map of (L2) and (L1′) (2026-10-23).**
+- **(L3) PROVED for all a** (central sums S_{σ,i} with i ≥ 2). Every term M_{k,m} with k, m ≥ 2 is ≥ 0:
+  - E₁^{(m)} ≥ 0 and E₂^{(m)} ≥ 0 for every basis ratio C(x,m). By convexity ρ(ℓ+a−1) − ρ(ℓ) ≤ (a−1)s_{a−1}. Since R_i = d_i/f₁(i) is nondecreasing (Theorem 8.9), (A/F)(B − d_ℓ) = Σ_{i≤a−2}(A/F)f₁(ℓ+i) ≥ Σ_i R_{ℓ+i}f₁(ℓ+i) ≥ (a−1)d_ℓ. The same argument works with base ℓ+1.
+  - For k ≥ 3, M_{k,m} = C(a,k)A(E₁ + E₂)^{(m)} ≥ 0.
+  - For k = 2, M_{2,m} = E₁^{(m)}(C(a,2)A − (a−1)d_{ℓ+2}) + C(a,2)AE₂^{(m)}, and C(a,2)d_{ℓ+a} ≥ (a−1)d_{ℓ+2}.
+  - Exact check: runs/varratio/key_L3_check.py, 72 LC sequences, a ≤ 24.
+- **(L2) splits as (i) + (ii), exact, 11,718 cases with a ≤ 20** (runs/varratio/key_L2_split.py):
+  - (i) B₀^{(1)}E₂^{(m)} ≥ 4DC(a−1,m−1)BH_*;
+  - (ii) everything else covers DF[4Σ(n−2)y_n(C(a,m) − C(n,m)) − 2V₁^{(m)}].
+  - Slack for a ∈ [11, 20]: (i) ≥ 20.4, (ii) ≥ 181 (runs/varratio/key_slack.py).
+  - Crude proof of (i): it suffices that a(A − d₁)(B − d₁) ≥ 8d₁H_*. Use H_* ≤ (a−2)(A − d₁), B − d₁ ≥ (a−2)u₁, and u₀u_n ≤ u₁u_{n−1}. This works for a ≥ 18; sharpening is needed for 11 ≤ a ≤ 17 (a ≤ 10 is computer-certified).
+- **(L1′) at σ = 3 is the tight core.** The minimum ratio pos/neg is 1.023 at a = 20, in the far field (u₀ = 1/w, w → 0), and it tends to 1 as a grows (runs/varratio/key_L1_tight.py). Far-field leading order, normalized by a(a−1)(a−2):
+  - pos = (a−1)(a−2)/6 + (a−1)(2a−3)/12 + 1 and neg = (a−1)(a−2)/3;
+  - so pos − neg = (a−1)/12 + 1 > 0 and pos/neg = 1 + 3((a−1)/12+1)/((a−1)(a−2)), checked against exact values up to a = 80.
+  - At σ ≥ 4 the far-field ratio stays ≥ 1.13.
+  - A proof needs E₁, E₂ in difference form (E₁^{(σ)} = C(a−1,σ−1)A(B − d_ℓ) − C(a−1,σ)d_ℓF, and likewise for E₂), because the O(u₀) parts cancel. Geometric u makes every LC trade an equality, so the far-field limit is exactly the extreme case.
+- Remaining:
+  - a precise proof of (L1′) for σ ≥ 3 and of S_{2,0} ≥ 0;
+  - writing out (i) and (ii) for a ≥ 11.
