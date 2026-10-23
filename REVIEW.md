@@ -760,6 +760,20 @@ Scope:
 
 All five proposed changes were applied as written. P2 now calls the 7/4 extension machine-verified.
 
+## Lean statement fidelity, round 22: P1, the positive example of "Log-concavity is not necessary either" (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_8d275990-31fd-4466-8cd4-b63bbbfa2be2`. Brief: `reviews/lean-fidelity22-brief.md` (commit 1fb1d1e). Answer: `reviews/lean-fidelity22-answer.md`.
+
+Scope: `Szkraw.lc_violation_holds` (μ = 1/10, q = 11/10, N ∈ {6, 8, 10, 12}, 0 < r ≤ 1), the P1 table row and paragraph, and the FORMALIZATION.md note.
+
+**Verdict: PASS WITH MINOR FIXES; theorem statement MATCH.**
+- Existence clause, the ν₁ν₃ = 10ν₂² violation and property (P) match the paragraph.
+- The theorem exports (P), not the Bernstein representation.
+
+Fixes applied verbatim:
+1. In P1 the machine-verification attribution now follows the (P) claim. The Bernstein sentence stays attributed to the script.
+2. The FORMALIZATION.md proof description now states the unnormalized basis r^e(1−r)^(m−e) and the Bernstein coefficients H_e/(S_m C(m,e)).
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.
