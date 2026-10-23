@@ -303,3 +303,8 @@ assert_allowed_axioms Szkraw.central_low_of
 assert_allowed_axioms Szkraw.central_of_pieces
 assert_allowed_axioms Szkraw.sum_Icc_zero_split
 assert_allowed_axioms Szkraw.sum_Icc_one_split
+assert_allowed_axioms Szkraw.LCNZ.edge_prod
+assert_allowed_axioms Szkraw.LCNZ.u0_lf
+assert_allowed_axioms Szkraw.linC_zero_ge
+assert_allowed_axioms Szkraw.eK_nonneg
+assert_allowed_axioms Szkraw.linC_zero_nonneg

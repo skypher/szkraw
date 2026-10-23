@@ -174,6 +174,30 @@ theorem LCNZ.edge_prod (hu : LCNZ u) {R : ℕ} (hR : 3 ≤ R) {x y : ℕ → ℝ
     rw [mul_assoc]; exact mul_le_mul_of_nonneg_left hSy' (hx 2)
   linarith
 
+theorem edgeCoef_zero (x y : ℕ → ℝ) : edgeCoef x y 0 = x 1 * y 0 := by simp [edgeCoef]
+theorem edgeCoef_one (x y : ℕ → ℝ) : edgeCoef x y 1 = x 1 * y 1 + x 2 * y 0 := by simp [edgeCoef]
+theorem edgeCoef_two (x y : ℕ → ℝ) : edgeCoef x y 2 = x 1 * y 2 + x 2 * y 1 := by simp [edgeCoef]
+theorem edgeCoef_three (x y : ℕ → ℝ) : edgeCoef x y 3 = x 1 * y 3 + x 2 * y 2 + y 1 * x 3 := by
+  simp [edgeCoef]
+theorem edgeCoef_ge4 (x y : ℕ → ℝ) {n : ℕ} (hn : 4 ≤ n) :
+    edgeCoef x y n = x 1 * y n + x 2 * y (n - 1) + y 1 * x n + y 2 * x (n - 1) := by
+  unfold edgeCoef; rw [if_pos (by omega), if_pos (by omega), if_pos hn]
+
+/-- `C(a, k+1) (k+1) = C(a,k) (a - k)` over `ℝ`. -/
+theorem choose_succ_real (a k : ℕ) (hk : k ≤ a) :
+    ((a.choose (k + 1) : ℕ) : ℝ) * ((k : ℝ) + 1) = (a.choose k : ℝ) * ((a : ℝ) - k) := by
+  have h := Nat.choose_succ_right_eq a k
+  have h' : ((a.choose (k + 1) * (k + 1) : ℕ) : ℝ) = ((a.choose k * (a - k) : ℕ) : ℝ) := by rw [h]
+  push_cast [Nat.cast_sub hk] at h'; linarith
+
+/-- `a C(a-1, k) = C(a, k+1) (k+1)` over `ℝ`. -/
+theorem choose_pred_real (a k : ℕ) (ha : 1 ≤ a) :
+    ((a - 1).choose k : ℝ) * (a : ℝ) = (a.choose (k + 1) : ℝ) * ((k : ℝ) + 1) := by
+  have h := Nat.add_one_mul_choose_eq (a - 1) k
+  rw [show a - 1 + 1 = a by omega] at h
+  have h' : ((a * (a - 1).choose k : ℕ) : ℝ) = ((a.choose (k + 1) * (k + 1) : ℕ) : ℝ) := by rw [h]
+  push_cast at h'; linarith
+
 /-- The edge coefficients are nonnegative when `x` and `y` are. -/
 theorem edgeCoef_nonneg {x y : ℕ → ℝ} (hx : ∀ i, 0 ≤ x i) (hy : ∀ j, 0 ≤ y j) (n : ℕ) :
     0 ≤ edgeCoef x y n := by
