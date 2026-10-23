@@ -107,3 +107,4 @@ import Szkraw.GenCentral
 import Szkraw.GenEdge
 import Szkraw.GenFormK
 import Szkraw.GenFormL1
+import Szkraw.GenM01

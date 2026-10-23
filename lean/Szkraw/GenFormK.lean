@@ -117,6 +117,36 @@ theorem cf_vanish {n : ℕ} (ha : 3 ≤ a) (hn : a + 1 ≤ n) :
 
 end Values
 
+/-! ### The linear forms of the key -/
+
+theorem X_lf (f : ℕ → ℝ) {a : ℕ} (ha : 3 ≤ a) : dd f a - dd f 0 = lf (a + 1) (cfX a) f := by
+  rw [dd_lf f (m := a) (R := a + 1) (by omega), dd_lf f (m := 0) (R := a + 1) (by omega)]
+  unfold lf cfX; rw [← sum_sub_distrib]; exact sum_congr rfl fun n _ => by ring
+
+theorem Xp_lf (f : ℕ → ℝ) {a : ℕ} (ha : 3 ≤ a) : dd f (a - 1) - dd f 1 = lf (a + 1) (cfXp a) f := by
+  rw [dd_lf f (m := a - 1) (R := a + 1) (by omega), dd_lf f (m := 1) (R := a + 1) (by omega)]
+  unfold lf cfXp; rw [← sum_sub_distrib]; exact sum_congr rfl fun n _ => by ring
+
+theorem betaC_zero_lf (f : ℕ → ℝ) {a : ℕ} (ha : 3 ≤ a) : betaC f a 0 = lf (a + 1) (cfY a) f := by
+  unfold betaC
+  rw [dd_lf f (m := a) (R := a + 1) (by omega), dd_lf f (m := 0) (R := a + 1) (by omega),
+    dd_lf f (m := 1) (R := a + 1) (by omega)]
+  unfold lf cfY
+  simp only [Nat.choose_zero_right, Nat.cast_one, one_mul, mul_sum, ← sum_sub_distrib]
+  exact sum_congr rfl fun n _ => by ring
+
+theorem beta'C_zero_lf (f : ℕ → ℝ) {a : ℕ} (ha : 3 ≤ a) : beta'C f a 0 = lf (a + 1) (cfYp a) f := by
+  unfold beta'C
+  rw [dd_lf f (m := a) (R := a + 1) (by omega), dd_lf f (m := 1) (R := a + 1) (by omega),
+    dd_lf f (m := 2) (R := a + 1) (by omega)]
+  unfold lf cfYp
+  simp only [Nat.choose_zero_right, Nat.cast_one, one_mul, mul_one, mul_sum, ← sum_sub_distrib,
+    ← sum_add_distrib]
+  exact sum_congr rfl fun n _ => by ring
+
+theorem Hstar_lf (f : ℕ → ℝ) (a : ℕ) : Hstar f a = lf (a + 1) (cfH a) f := by
+  unfold Hstar lf cfH; exact sum_congr rfl fun n _ => by ring
+
 /-! ### `K` as linear forms and its edge bound -/
 
 theorem linC_zero_lf (f : ℕ → ℝ) {a : ℕ} (ha : 3 ≤ a) :

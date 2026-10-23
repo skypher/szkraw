@@ -310,3 +310,6 @@ assert_allowed_axioms Szkraw.eK_nonneg
 assert_allowed_axioms Szkraw.linC_zero_nonneg
 assert_allowed_axioms Szkraw.linC_one_nonneg
 assert_allowed_axioms Szkraw.linCoef_holds
+assert_allowed_axioms Szkraw.scaling_identity
+assert_allowed_axioms Szkraw.sKey_nonneg
+assert_allowed_axioms Szkraw.M01_M11_nonneg
