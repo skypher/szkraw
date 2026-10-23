@@ -699,6 +699,22 @@ Scope:
 
 The reviewer could not fetch `lean/axioms.log`: it was not tracked in git. It is now committed. The table row, scope sentence and disclosure ("is machine-verified") are applied.
 
+## Lean statement fidelity, round 18: Theorem 8.16 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_9d71b5a3-c0b5-4721-bfd9-e97476ce46e2`. Brief: `reviews/lean-fidelity18-brief.md` (commit 148cca3). Answer: `reviews/lean-fidelity18-answer.md`.
+
+Scope:
+- `Szkraw.lc_general : Stmt_lc_general`, with `GenRatioHyp`, `dd`/`dd_eq_nval` and `LCNZ`;
+- the proposed P2 table row, the deletion of the "in progress" sentence, the introduction and disclosure changes;
+- the FORMALIZATION.md row and notes sentence.
+
+**Verdict: PASS, no fixes.**
+- Ratio, ratio coefficients, data and conclusion all MATCH. Every paper instance satisfies `Admissible`, and omitting strict increase of d does not narrow the statement.
+- `lc_general` carries no key-inequality hypothesis.
+- The proposed text is accurate, including the description of the edge bounds and of the window certificates.
+
+Applied: all six proposed changes. P2 now lists `Szkraw.lc_general`, and says that Theorem 5.5 is machine-verified and Theorem 5.6 is not.
+
 ## Review round 25: Theorem 8.17 (cubic ratios with rσ ≤ tτ) (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3b695c0a-d1b9-48dc-8fd3-d71c7c1774b6`. Brief: `reviews/round25-brief.md` (paper at commit faaa5a0). Answer: `reviews/round25-answer.md`.
