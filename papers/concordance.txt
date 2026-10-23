@@ -37,7 +37,7 @@
 8.7|corollary||cor:lc-vary|P2 3.2
 8.8|proposition|Quadratic arrays|prop:lc-quad|P2 3.3
 8.9|theorem|Linearly increasing ratio|thm:lc-affine|P2 4.1
-8.10|proposition|Quadratic profiles|prop:lc-quadprof|cut (see note)
+8.10|proposition|Quadratic profiles|prop:lc-quadprof|cut: special case of 8.11 = P2 4.2
 8.11|theorem|Convex quadratic ratio|thm:lc-quadratic|P2 4.2
 8.12|theorem|Low-degree profiles|thm:lc-lowdeg|P2 5.1
 8.13|corollary||cor:lc-lowdeg|P2 5.2
@@ -57,3 +57,5 @@
 9.11|corollary|Optimal order of the stability radius|cor:radius-order|P3 9.11
 9.12|proposition|Raising the top mass|prop:raise|P1 5.2
 9.13|corollary|Exponentially small stability radius|cor:radius-exp|P1 5.3
+8.5|remark|two-parameter and Bernstein coefficients|(unlabelled)|P1 3.5
+9.3|definition|uniform rule|def:rule|P3 9.3
