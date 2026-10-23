@@ -263,3 +263,4 @@ assert_allowed_axioms Szkraw.resum_nonneg3
 assert_allowed_axioms Szkraw.gkernel_resum3
 assert_allowed_axioms Szkraw.GenSetting.domV
 assert_allowed_axioms Szkraw.GenSetting.domH
+assert_allowed_axioms Szkraw.GenSetting.domW
