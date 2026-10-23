@@ -799,6 +799,27 @@ Reviewer: ChatGPT Pro (gpt-6-pro), job `job_f033c651-7bf5-4fec-bdc8-63d1e811119c
 
 **Verdict: PASS; no fixes.** `Szkraw.PolyCol.rule_deriv_4_5` MATCHES: the derivatives in ε at ε = 0 of g(N,N;N) are 512/1875 (N = 4) and −71936/5859375 (N = 8). The P3 table row and the merged FORMALIZATION.md sentence were applied.
 
+## Lean statement fidelity, round 25: P3 Proposition 3.4 in full, Corollary 7.7 last sentence, Proposition 6.3 transcription (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_a369f73b-0b00-4316-8f41-f43e77962fee`. Brief: `reviews/lean-fidelity25-brief.md` (commit f579147). Answer: `reviews/lean-fidelity25-answer.md`.
+
+**Verdict: statement fidelity PASS WITH MINOR FIXES; transcription audit incomplete.**
+- `positive_subalgebra_full`, `symmetric_open`, `koelink_relation_32` and `koelink_recurrence_71` MATCH.
+- The reviewer could not open the published article (HTTP 403). It compared the transcription with the arXiv preprint q-alg/9605040: both formulas match its Theorem 3.1(ii), equation (3.3), and its Theorem 7.1.
+- The author compared the transcription with the published article itself (supplied by the author; not redistributed). There the square relations are (3.2). Theorem 3.1(ii), Theorem 7.1 and Theorem 7.8 carry the same numbers and formulas in both versions.
+
+Fix: the bibliography's locator sentence now says the locators follow the published version and notes that (3.2) is (3.3) in the preprint. The P3 citation "(3.2)" is consistent with that. The earlier "(3.3)" was the preprint's number, not a copying error.
+
+## Review round 29: completeness of the not-formalized marking (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_db388018-0f6f-4a71-849b-fb0683177ed3`. Brief: `reviews/round29-brief.md` (commit 92848bf). Answer: `reviews/round29-answer.md`.
+
+**Verdict: FAIL (completeness).**
+- Every numbered result is mapped.
+- Many unnumbered calculations, interpretations and scope remarks were unmarked: auxiliary calculations and comparisons in P1; certificate-limit claims and interpretations in P2; reversal obstructions, Λ_N values, the sign-pattern classification and the exact contour identity in P3.
+
+Applied: the reviewer's replacement paragraphs for P1, P2 and P3. P3's was updated for the later formalization of Proposition 3.4 and Corollary 7.7 and for the Proposition 6.3 transcription wording. A follow-up round checks the result.
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.
