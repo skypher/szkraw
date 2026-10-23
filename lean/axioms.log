@@ -340,3 +340,4 @@ Szkraw.combo_fails_2_5_60: allowed axioms [propext, Classical.choice, Quot.sound
 Szkraw.combo_fails_1_3_100: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.combo_fails_3_10_200: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.combo_fails_2_7_200: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.PolyCol.rule_deriv_4_5: allowed axioms [propext, Classical.choice, Quot.sound]

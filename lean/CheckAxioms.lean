@@ -396,3 +396,4 @@ assert_allowed_axioms Szkraw.combo_fails_2_5_60
 assert_allowed_axioms Szkraw.combo_fails_1_3_100
 assert_allowed_axioms Szkraw.combo_fails_3_10_200
 assert_allowed_axioms Szkraw.combo_fails_2_7_200
+assert_allowed_axioms Szkraw.PolyCol.rule_deriv_4_5

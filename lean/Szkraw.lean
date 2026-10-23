@@ -134,3 +134,4 @@ import Szkraw.RatioCounterexamples
 import Szkraw.ProfileCounterexamples
 import Szkraw.RuleCounterexamples
 import Szkraw.ComboCounterexamples
+import Szkraw.PolyColumn
