@@ -352,3 +352,13 @@ assert_allowed_axioms Szkraw.cubicB_all
 assert_allowed_axioms Szkraw.cubicE_all
 assert_allowed_axioms Szkraw.detour_gen3
 assert_allowed_axioms Szkraw.coefE
+assert_allowed_axioms Szkraw.Phi3_nonneg
+assert_allowed_axioms Szkraw.eA_nonneg
+assert_allowed_axioms Szkraw.eB_nonneg
+assert_allowed_axioms Szkraw.cubic_key_scalar
+assert_allowed_axioms Szkraw.cubicHV_eq
+assert_allowed_axioms Szkraw.cubicE1_eq
+assert_allowed_axioms Szkraw.CubicSetting.alpha_ge
+assert_allowed_axioms Szkraw.CubicSetting.key
+assert_allowed_axioms Szkraw.cubic_kernel_nonneg
+assert_allowed_axioms Szkraw.cubic_ratio_matrix

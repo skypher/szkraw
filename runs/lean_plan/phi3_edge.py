@@ -6,7 +6,7 @@ Prints, per a, the indices n with e_n < 0. Usage: phi3_edge.py amax"""
 import sys
 from fractions import Fraction as F
 from math import comb as C
-amax = int(sys.argv[1])
+amax = int(sys.argv[1]) if len(sys.argv) > 1 else 3
 def run(a):
     R = range(a + 4)
     s = C(a - 1, 2)
@@ -35,8 +35,12 @@ def run(a):
     eA = {n: s * eYX[n] - C(a - 1, 3) * Y[n] - 4 * T3[n] + E3[n] for n in R}
     eB = {n: s * (eXY[n] + eYX[n]) - 4 * s * Hs[n] - 4 * s * Hsh[n] - C(a, 3) * Yp[n] - C(a - 1, 3) * Y[n]
           - 4 * T3[n] + E3[n] + (C(a, 3) if n == 1 else 0) for n in R}
-    return [n for n in R if eA[n] < 0], [n for n in R if eB[n] < 0]
-for a in range(3, amax + 1):
-    ba, bb = run(a)
+    return eA, eB
+def bad(a):
+    eA, eB = run(a)
+    return [n for n in eA if eA[n] < 0], [n for n in eB if eB[n] < 0]
+if __name__ == '__main__':
+  for a in range(3, amax + 1):
+    ba, bb = bad(a)
     if ba or bb: print(f'a={a}: A neg at {ba}, B neg at {bb}')
-print('done')
+  print('done')
