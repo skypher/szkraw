@@ -103,3 +103,4 @@ import Szkraw.GenKeyAlgebra
 import Szkraw.GenMain
 import Szkraw.GenKey
 import Szkraw.GenPhaseA
+import Szkraw.GenCentral

@@ -295,3 +295,11 @@ assert_allowed_axioms Szkraw.A2d
 assert_allowed_axioms Szkraw.linC_ge2
 assert_allowed_axioms Szkraw.MC_ge2
 assert_allowed_axioms Szkraw.central_ge2
+assert_allowed_axioms Szkraw.MC_right_zero
+assert_allowed_axioms Szkraw.Ssum_zero_split
+assert_allowed_axioms Szkraw.Ssum_one_split
+assert_allowed_axioms Szkraw.Ssum_one_nonneg
+assert_allowed_axioms Szkraw.central_low_of
+assert_allowed_axioms Szkraw.central_of_pieces
+assert_allowed_axioms Szkraw.sum_Icc_zero_split
+assert_allowed_axioms Szkraw.sum_Icc_one_split
