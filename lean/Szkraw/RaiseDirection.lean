@@ -8,7 +8,8 @@ import Mathlib.Analysis.Calculus.Deriv.Comp
 # P3, Section 9: the raising direction at fixed `r` is not a uniform rule
 
 At fixed `0 < r ≤ 1`, raising the top mass of `K_{N,r}` to `(1 + τ) w_0` gives the normalized array
-`raisedKraw N r τ` of P1's Proposition 9.12 (`RaiseTopMass.lean`), with masses `w_n = C(N,n) r^{N-n} / (1+r)^N`.
+`raisedKraw N r τ` of P1's Proposition 5.2 (`RaiseTopMass.lean`; Proposition 9.12 of `paper.tex`), with masses
+`w_n = C(N,n) r^{N-n} / (1+r)^N`.
 
 * `raise_direction`: at `τ = 0` the coefficients move in the direction
   `δc_n = (r n/N)(w_0 + w_n)`, `δb_n = ((N-n)/N - r n/N) w_n - ((N-n)/N + r n/N) w_0`,
@@ -77,7 +78,7 @@ theorem epsNorm_scaled_hasDerivAt (n : ℕ) :
 end general
 
 /-- **P3, Section 9 (raising at fixed `r`)**: for `0 < r ≤ 1` and `n ≤ N`, raising the top mass of `K_{N,r}` to
-`(1 + τ) w_0` (`raisedKraw`, P1 Proposition 9.12) moves the coefficients at `τ = 0` in the direction
+`(1 + τ) w_0` (`raisedKraw`, P1 Proposition 5.2) moves the coefficients at `τ = 0` in the direction
 `δb_n = ((N-n)/N - r n/N) w_n - ((N-n)/N + r n/N) w_0`, `δc_n = (r n/N)(w_0 + w_n)`, where
 `w_n = C(N,n) r^{N-n} / (1+r)^N` are the binomial masses. -/
 theorem raise_direction (hN : 1 ≤ N) (hr : 0 < r) (hr1 : r ≤ 1) (n : ℕ) (hn : n ≤ N) :
