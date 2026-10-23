@@ -715,3 +715,21 @@ Fixes, all applied:
 3. The q → 0 limit sentence after the Φ₃^loc bounds was false in general (counterexample a = 3, u = (1/q,1,q,0)) and unused. Deleted.
 4. Corner wording: "only κ_tσ requires a new check; the added quadratic form has nonnegative coefficients".
 5. Boundary cases: zero tails and q = 0 by continuity within the local log-concavity constraints, keeping u₀ = 0 when ℓ = 0.
+
+## Review round 26: additions after round 25 (Theorem 8.17 extension to 7/4; sharpness remark) (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_7f5e4383-ff52-45d3-8eb5-e003bd9ee2eb`. Brief: `reviews/round26-brief.md` (paper at commit 19b0346). Answer: `reviews/round26-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** The reviewer confirmed that the round-25 fixes are applied correctly, that the extension to rσ ≤ (7/4)tτ is fully justified, and that the four all-r examples are correct. Independent checks:
+- κ_tτ t τ + κ_rσ r σ ≥ (κ_tτ + uκ_rσ)tτ when κ_rσ < 0. The corner, the inherited quadratic block and the key inequality need no further trade.
+- Reruns: the baseline B and E certificates (349 / 124 checks); B at u = 7/4 (51) and E at u = 7/4 (18) pass; B at u = 9/5 rejects (a certificate failure, not a counterexample).
+- 330 polarized coefficients rebuilt from forward differences. 13,800 exact table entries matched by multiplication modulo the terminal polynomial. The geometric limit 2 at (0,3).
+- lc_violation_cert.py: all four positive examples have nonnegative Bernstein forms. The control's g(6,6;6) at r = 1 matches exactly.
+- Citations verified in PDF: Askey, Koelink, Miclo 2015/2017, Szwarc 2003, Wang–Yeh. Unverified (PDF not openable): Eagleson 1969, Walkup 1976, Szwarc's Inzell survey.
+
+Fixes, all applied:
+1. lc_violation_cert.py's fallback root test was not exact; the reviewer built a false certificate with two roots 10⁻⁶⁰ apart. The script now prints CERTIFIED only when every entry has a nonnegative Bernstein form, FAILS with an exact negative value on the grid r = j/64, and INCONCLUSIVE otherwise. Rerun: N = 6, 8, 10, 12 CERTIFIED; the control FAILS with the same exact value.
+2. Grid wording: "float64 screening with high-precision confirmation (N ≤ 20) and high-precision searches in this family (20 ≤ N ≤ 80)". The figures are now 10^{5/2} at N = 4, 10² for 6 ≤ N ≤ 30 and 10^{3/2} at N = 40, 60, 80. "The observed failures lay in narrow windows on the tested grids." r1_large.py is cited, r1_trend.py sorts its exponent list, the docstrings are corrected, and the commands and outputs are archived in runs/sharp/RESULTS.md.
+3. The control is now stated at r = 1, and the open problem defines V_N (the infimum of the failing factors 1/μ at r = 1) and asks whether V_N → 1.
+4. The stale comment in corner_cert.py is fixed.
+5. \bibitem{code} now pins 4f739c3 (contains all certificate scripts and the fixes above).
