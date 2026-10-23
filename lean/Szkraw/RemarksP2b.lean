@@ -2,10 +2,10 @@ import Szkraw.RemarksP2
 import Szkraw.CubicB
 
 /-!
-# P2: non-comparability of Theorem 5.3 and Corollary 4.4; the geometric family after Theorem 5.6
+# P2: non-comparability of Theorem 4.2 and Corollary 5.2; the geometric family after Theorem 5.6
 
-* `quad_lowdeg_incomparable`: an array satisfying the hypotheses of Theorem 5.3 but not those of Corollary 4.4
-  (geometric profile, `N = 3`), and one satisfying those of Corollary 4.4 but not those of Theorem 5.3 (linear
+* `quad_lowdeg_incomparable`: an array satisfying the hypotheses of Theorem 4.2 but not those of Corollary 5.2
+  (geometric profile, `N = 3`), and one satisfying those of Corollary 5.2 but not those of Theorem 4.2 (linear
   profile, cubic ratio, `N = 4`).
 * `geometric_kappa`: on the geometric Newton sequence `u_0 = 0`, `u_k = q^(k-1)`, the coefficients of `tτ` and `rσ` in
   (eq:cubic-B) at `(ℓ, n) = (0, 3)` are `20(q+1)(8q³+33q²+30q+6)` and `-20q(4q³+11q²+9q+1)`; their ratio tends to `2`,
@@ -18,7 +18,7 @@ open Finset Filter Topology
 
 /-! ### Non-comparability -/
 
-/-- Theorem 5.3 and Corollary 4.4 are not comparable. -/
+/-- Theorem 4.2 and Corollary 5.2 are not comparable. -/
 theorem quad_lowdeg_incomparable :
     (∃ v : Coefficients 3, Admissible v ∧ QuadRatioHyp v ∧ ¬ LowDegRatioHyp v) ∧
     (∃ v : Coefficients 4, Admissible v ∧ LowDegRatioHyp v ∧ ¬ QuadRatioHyp v) := by

@@ -10,7 +10,7 @@ import Szkraw.ParitySplit
 * `g111`, `g222`: closed forms of `g(1,1;1)` and `g(2,2;2)` for any array.
 * After Corollary 8.4 (heavy top): the bound `d_{N-1} ≤ 1/2` is sharp (`heavy_top_sharp`), the corollary contains the
   arrays (eq:parameters) with `q ≥ 2` but not the Krawtchouk arrays with `N ≥ 3`, the profile need not be convex
-  (`heavy_top_scope`), and convex profiles with `d_0 = 0` are superadditive (`convex_superadditive`).
+  (`heavy_top_scope`), and profiles convex on `0, …, N` with `d_0 = 0` are superadditive there (`convex_superadditive`).
 * After Corollary 7.7: perturbing `K_{2,1}` by `c_1 = 1/2 + ε`, `a_1 = 1/2 - ε` keeps the positive coefficients
   positive but gives `g(2,2;2) = -2ε/(1/2 - ε)` (`k21_perturbation`).
 * End of Section 8: reversal obstructions (`reversal_obstruction_kraw`, `reversal_obstruction_szwarc`) and the
@@ -126,18 +126,20 @@ theorem heavy_top_scope :
       fun i hi => by interval_cases i <;> simp [hprof] <;> norm_num, by rw [hprof]; norm_num⟩
     exact ⟨v, hadm, hh, by simp only [hprof]; norm_num, heavy_top 3 v hadm hh⟩
 
-/-- Convex sequences with `d_0 = 0` are superadditive: `d_i + d_j ≤ d_{i+j}`. -/
-theorem convex_superadditive (d : ℕ → ℝ) (hd0 : d 0 = 0)
-    (hconv : ∀ n, d (n + 1) - d n ≤ d (n + 2) - d (n + 1)) (i j : ℕ) : d i + d j ≤ d (i + j) := by
-  have hinc : ∀ a b, a ≤ b → d (a + 1) - d a ≤ d (b + 1) - d b := by
-    intro a b hab
+/-- A profile convex on `0, …, N` with `d_0 = 0` is superadditive there: `d_i + d_j ≤ d_{i+j}` for `i + j ≤ N`. -/
+theorem convex_superadditive (N : ℕ) (d : ℕ → ℝ) (hd0 : d 0 = 0)
+    (hconv : ∀ n, n + 2 ≤ N → d (n + 1) - d n ≤ d (n + 2) - d (n + 1))
+    (i j : ℕ) (hij : i + j ≤ N) : d i + d j ≤ d (i + j) := by
+  have hinc : ∀ a b, a ≤ b → b + 1 ≤ N → d (a + 1) - d a ≤ d (b + 1) - d b := by
+    intro a b hab hbN
     induction b, hab using Nat.le_induction with
     | base => exact le_rfl
-    | succ b _ ih => exact ih.trans (hconv b)
+    | succ b hab ih => exact (ih (by omega)).trans (hconv b (by omega))
   induction j with
   | zero => simp [hd0]
   | succ j ih =>
-    have h1 : d (j + 1) - d j ≤ d (i + j + 1) - d (i + j) := hinc j (i + j) (by omega)
+    have h1 : d (j + 1) - d j ≤ d (i + j + 1) - d (i + j) := hinc j (i + j) (by omega) (by omega)
+    have := ih (by omega)
     rw [show i + (j + 1) = i + j + 1 by omega]
     linarith
 

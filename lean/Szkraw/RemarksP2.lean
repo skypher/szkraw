@@ -14,8 +14,8 @@ import Mathlib.Analysis.SpecialFunctions.Log.Deriv
   `b = (0,1,1,1)/91` (`openEx1_b_newton`), and the concave diagonal of linear ratios on the linear profile
   (`linear_ratio_concave_b`).
 * Section 5: exponential ratios (`exponential_ratio`), the internal zeros of the cubic counterexample's ratio
-  (`cubic_example_ratio_newton`), the containments of Theorems 4.1, Corollary 4.4 and the case `t² ≥ rτ` of
-  Theorem 5.3 in Theorem 5.5 (`general_contains`), and the non-comparability of Theorem 5.3 and Corollary 4.4
+  (`cubic_example_ratio_newton`), the containments of Theorems 4.1, Corollary 5.2 and the case `t² ≥ rτ` of
+  Theorem 4.2 in Theorem 5.5 (`general_contains`), and the non-comparability of Theorem 4.2 and Corollary 5.2
   (`quad_lowdeg_incomparable`).
 * Proof of Theorem 5.5: `ρ(x) = 1 + x/2 + x²/2` has log-concave Newton coefficients but `(log ρ)''(0) > 0`
   (`log_rho_not_concave`).
@@ -71,8 +71,10 @@ theorem openEx1_b_newton :
   simp only [newtonCoeff, b, sum_range_succ, sum_range_zero]
   norm_num [Nat.choose]
 
-/-- A strictly increasing linear ratio `ρ_i = r + κ i/N` (`κ > 0`) on the linear profile `d_i = i/N` has concave
-diagonal `b_i = (1 - ρ_i) d_i`; its second Newton coefficient is `-2κ/N² < 0`, so it is excluded by Corollary 3.2. -/
+/-- For `N ≥ 1`, the quadratic extension of the diagonal associated with
+`ρ_i = r + κ i/N` and `d_i = i/N` has constant second difference
+`-2κ/N² < 0`. For `N ≥ 2`, this is an in-range negative Newton
+coefficient, excluding the array from Corollary 3.2. -/
 theorem linear_ratio_concave_b (N : ℕ) (hN : 1 ≤ N) (r κ : ℝ) (hκ : 0 < κ) :
     let b : ℕ → ℝ := fun i => (1 - (r + κ * i / N)) * (i / N)
     (∀ i, b (i + 2) - 2 * b (i + 1) + b i = -2 * κ / N ^ 2) ∧ newtonCoeff b 2 = -2 * κ / N ^ 2 ∧
@@ -135,7 +137,7 @@ theorem cubic_example_ratio_newton :
   have : k ≤ 2 := by omega
   interval_cases k <;> simp [h0, h1, h2, h3, h4]
 
-/-- Theorem 5.5 contains Theorem 4.1, Corollary 4.4 and the case `t² ≥ rτ` of Theorem 5.3: their hypotheses imply
+/-- Theorem 5.5 contains Theorem 4.1, Corollary 5.2 and the case `t² ≥ rτ` of Theorem 4.2: their hypotheses imply
 those of Theorem 5.5. -/
 theorem general_contains {N : ℕ} (hN : 1 ≤ N) (v : Coefficients N) :
     (AffineRatioHyp v → GenRatioHyp v) ∧ (LowDegRatioHyp v → GenRatioHyp v) ∧
@@ -209,15 +211,47 @@ theorem general_contains {N : ℕ} (hN : 1 ≤ N) (v : Coefficients N) :
 
 /-! ### Proof of Theorem 5.5: log-concavity on integers only -/
 
+theorem newton_examples_quad (ν₁ ν₂ : ℝ) (k : ℕ) :
+    newtonCoeff (fun i : ℕ => ν₁ * i + ν₂ * (i.choose 2 : ℝ)) k = if k = 1 then ν₁ else if k = 2 then ν₂ else 0 := by
+  rw [newtonCoeff_congr (d' := fun i => (ν₁ - ν₂ / 2) * (i : ℝ) + (ν₂ / 2) * (i : ℝ) ^ 2)
+    (fun i _ => by rw [choose2_real]; ring), newtonCoeff_eq_iter]
+  rcases k with _ | _ | _ | k
+  · simp
+  · simp [fwdDiff]; try ring
+  · simp [fwdDiff]; try ring
+  · have hq : (fwdDiff 1)^[3] (fun i : ℕ => (ν₁ - ν₂ / 2) * (i : ℝ) + (ν₂ / 2) * (i : ℝ) ^ 2) = 0 := by
+      funext x; simp [fwdDiff]; ring
+    rw [show k + 1 + 1 + 1 = k + 3 by omega, Function.iterate_add_apply, hq]
+    have h0 : ∀ m : ℕ, (fwdDiff 1)^[m] (0 : ℕ → ℝ) = 0 := by
+      intro m
+      induction m with
+      | zero => rfl
+      | succ m ih => rw [Function.iterate_succ_apply', ih]; funext x; simp [fwdDiff]
+    rw [h0]; simp
+
 /-- `ρ(x) = 1 + x/2 + x²/2` has Newton coefficients `(1, 1, 1, 0, …)` (log-concave without internal zeros) but
 `(log ρ)''(0) = 3/4 > 0`. -/
 theorem log_rho_not_concave :
-    newtonCoeff (fun i : ℕ => 1 + (i : ℝ) / 2 + (i : ℝ) ^ 2 / 2) 0 = 1 ∧
-    newtonCoeff (fun i : ℕ => 1 + (i : ℝ) / 2 + (i : ℝ) ^ 2 / 2) 1 = 1 ∧
-    newtonCoeff (fun i : ℕ => 1 + (i : ℝ) / 2 + (i : ℝ) ^ 2 / 2) 2 = 1 ∧
+    let ρ : ℕ → ℝ := fun i => 1 + (i : ℝ) / 2 + (i : ℝ) ^ 2 / 2
+    (∀ k : ℕ, newtonCoeff ρ k = if k ≤ 2 then (1 : ℝ) else 0) ∧
+    LCNZ (newtonCoeff ρ) ∧
     deriv (deriv fun x : ℝ => Real.log (1 + x / 2 + x ^ 2 / 2)) 0 = 3 / 4 := by
-  refine ⟨by simp [newtonCoeff], by simp [newtonCoeff, sum_range_succ]; norm_num,
-    by simp [newtonCoeff, sum_range_succ]; norm_num, ?_⟩
+  intro ρ
+  have hnc : ∀ k : ℕ, newtonCoeff ρ k = if k ≤ 2 then (1 : ℝ) else 0 := by
+    intro k
+    rw [newtonCoeff_congr (d' := fun i : ℕ => (1 : ℝ) * (i : ℝ) + (1 : ℝ) * (i.choose 2 : ℝ) + 1)
+      (fun i _ => by simp only [ρ, choose2_real]; ring)]
+    have hadd : ∀ f : ℕ → ℝ, newtonCoeff (fun i => f i + 1) k = newtonCoeff f k + newtonCoeff (fun _ => (1 : ℝ)) k :=
+      fun f => by unfold newtonCoeff; rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl fun _ _ => by ring
+    have hone : newtonCoeff (fun _ : ℕ => (1 : ℝ)) k = (0 : ℝ) ^ k := by
+      have := newtonCoeff_const_geom 1 0 0 k
+      simp only [zero_mul, add_zero, mul_one] at this
+      simpa using this
+    rw [hadd, newton_examples_quad, hone]
+    rcases k with _ | _ | _ | k <;> simp
+  refine ⟨hnc, ⟨fun i => by rw [hnc]; split_ifs <;> norm_num, fun i => ?_, fun i j k hij hjk hi hk => ?_⟩, ?_⟩
+  · rw [hnc, hnc, hnc]; split_ifs <;> first | omega | norm_num
+  · rw [hnc] at hi hk ⊢; split_ifs at hi hk ⊢ <;> first | omega | norm_num | linarith
   have hpos : ∀ x : ℝ, 0 < 1 + x / 2 + x ^ 2 / 2 := fun x => by nlinarith [sq_nonneg (x + 1 / 2)]
   have hd : deriv (fun x : ℝ => Real.log (1 + x / 2 + x ^ 2 / 2)) = fun x => (1 / 2 + x) / (1 + x / 2 + x ^ 2 / 2) := by
     funext x

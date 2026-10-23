@@ -820,6 +820,48 @@ Reviewer: ChatGPT Pro (gpt-6-pro), job `job_db388018-0f6f-4a71-849b-fb0683177ed3
 
 Applied: the reviewer's replacement paragraphs for P1, P2 and P3. P3's was updated for the later formalization of Proposition 3.4 and Corollary 7.7 and for the Proposition 6.3 transcription wording. A follow-up round checks the result.
 
+## Review round 30: completeness of the not-formalized marking, follow-up (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_2e0e1d13-b2e4-4d26-800c-e0976cf15f04`. Brief: `reviews/round30-brief.md` (commit abff2bc). Answer: `reviews/round30-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- P1 PASS.
+- P2: the hypothesis-dropping counterexamples after Proposition 3.3 were unmarked. They are now formalized (`Szkraw.quadratic_hypotheses_needed`) rather than listed as unformalized.
+- P3: the quadratic-decomposition applications are combinations of mapped results. The reviewer's FORMALIZATION.md note was inserted verbatim.
+
+After this round, about 40 further exact remarks of P1–P3 were formalized and checked in rounds 31–32.
+
+## Lean statement fidelity, round 31: P1 and P2 remarks (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_d58d1116-cca5-4204-9f35-ea5d419f5b27`. Brief: `reviews/lean-fidelity31-brief.md` (commit 3f6ee84). Answer: `reviews/lean-fidelity31-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- All statements MATCH except three:
+  - the exclusion wording of `linear_ratio_concave_b` needed `N ≥ 2`;
+  - `log_rho_not_concave` did not state its full advertised Newton sequence;
+  - docstrings cited P2's Theorem 4.2 and Corollary 5.2 as "Theorem 5.3" and "Corollary 4.4".
+- The Szwarc Theorem 3.3 transcription MATCHES the survey's indexed text.
+
+Fixes applied verbatim:
+- the new docstring of `linear_ratio_concave_b` and the new P2 sentence after Corollary 3.2;
+- the strengthened statement of `log_rho_not_concave` (all Newton coefficients and `LCNZ`);
+- the corrected numbers.
+
+## Lean statement fidelity, round 32: P3 remarks and the final not-formalized paragraphs (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_e87d913b-a652-4826-a2a3-df066e88c795`. Brief: `reviews/lean-fidelity32-brief.md` (commit 3f6ee84). Answer: `reviews/lean-fidelity32-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- All statements MATCH except two domain-scope gaps: `convex_superadditive` assumed convexity on all of ℕ, and the palindromic conjunct of `known_directions_satisfy` assumed antisymmetry on all of ℝ.
+- Miclo's condition as P3 states it MATCHES.
+- The not-formalized paragraphs of P1 and P2 are accurate and complete.
+- In P3's paragraph one parenthetical was stale: explicit binomial spectral data are formalized.
+
+Fixes applied verbatim:
+- `convex_superadditive` now takes convexity on `0, …, N` and `i + j ≤ N`;
+- the palindromic conjunct now takes antisymmetry on `[0, 1]`;
+- the P3 parenthetical was replaced.
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.

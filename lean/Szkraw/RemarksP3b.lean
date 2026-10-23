@@ -22,7 +22,7 @@ open Finset Polynomial Filter Topology
 
 theorem known_directions_satisfy :
     (Leven (fun x => x) (fun x => -x) = 0 ∧ Lodd (fun x => x) (fun x => -x) = 0) ∧
-    (∀ γ : ℝ → ℝ, (∀ x, γ (1 - x) = -γ x) → γ 0 = 0 → γ 1 = 0 →
+    (∀ γ : ℝ → ℝ, (∀ x, 0 ≤ x → x ≤ 1 → γ (1 - x) = -γ x) → γ 0 = 0 → γ 1 = 0 →
       Leven (fun _ => 0) γ = 0 ∧ Lodd (fun _ => 0) γ = 0) ∧
     (Leven (fun _ => 0) (fun x => x * (x - 1)) = 0 ∧ Lodd (fun _ => 0) (fun x => x * (x - 1)) = 0) ∧
     (∀ β γ : ℝ, Leven (fun _ => β) (fun _ => γ) = 2 * β + 3 * γ ∧ Lodd (fun _ => β) (fun _ => γ) = -γ) ∧
