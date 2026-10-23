@@ -1718,3 +1718,13 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
 - Toward a self-contained step (iii), i.e. without Theorem 8.9's argument (runs/varratio/key_M01_M11_cubic.py; identity checked against `pieces` for a ≤ 10; greedy run a ≤ 26). M_{0,1} and M_{1,1}, as exact cubic forms in u, pass the greedy majorization certificate (push (i,j,k) → (i+1,j,k−1)) for a ≤ 26:
   - M_{1,1}: every u₀-coefficient is ≤ 0, and one push from level 0 suffices, the same structure as S_{2,0}. So an L1′/S_{2,0}-type reduction to quadratic forms is likely.
   - M_{0,1}: two positive u₀-coefficients, and pushes to level 1 are needed.
+- **M_{1,1} via one quadratic form** (runs/varratio/key_M11_quad.py):
+  - With B ≤ A and FD ≤ u₁A, M_{1,1} ≥ B₀′E¹₁ + A·Q₁₁ + 2DFν₁, where Q₁₁ = a(A−D)J − 4DH_* − 4u₁Z₁.
+  - The chain was checked exactly on random LC u (a ≤ 14), and Q₁₁ passes the Abel tails for a ≤ 40.
+  - Its weight sums are a[C(2a−1,W) − 2C(a,W) − (a−1)C(a,W−1)] − 4[(W−2)C(a,W) + (W−3)C(a,W−1)] − 4[a(W−3)C(a,W−1) − G^{(1)}_{W−1}].
+- **M_{0,1} for Lean.** Follow the paper's route at the scaled linear ratio:
+  - Key(λP) = (λ/Δc)Φ(P);
+  - Key ≥ ρ̃(ℓ+1)·L(α,t) with L(α,t) = K(α − t·u₀/u₁) + (t/u₁)G;
+  - G ≥ 0 is the existing Lean lemma `G_nonneg`;
+  - K ≥ K″ ≥ 0, with K″ a weight-certified form;
+  - α = tB/F ≥ t·u₀/u₁.
