@@ -976,4 +976,72 @@ theorem kap_lc {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) (t : ℕ) :
     exact sum_nonneg (fun c1 _ => sum_nonneg (fun c2 _ => inner_nonneg hρ hν t c1 c2))
   linarith
 
+
+theorem Hz_pos {m : ℕ} {x y : ℤ} (hx0 : 0 ≤ x) (hy0 : 0 ≤ y) (hx : x ≤ m) (hy : y ≤ m) (hxy : (m : ℤ) ≤ x + y) :
+    0 < Hz m x y := by
+  unfold Hz Hn
+  rw [if_pos ⟨hx0, hy0⟩, if_pos (by omega)]
+  have h1 : 0 < m.choose x.toNat := Nat.choose_pos (by omega)
+  have h2 : 0 < x.toNat.choose (m - y.toNat) := Nat.choose_pos (by omega)
+  exact_mod_cast Nat.mul_pos h1 h2
+
+theorem kap_pos_of {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) {m : ℕ} {x y : ℤ} (hx0 : 0 ≤ x) (hy0 : 0 ≤ y)
+    (hx : x ≤ m) (hy : y ≤ m) (hxy : (m : ℤ) ≤ x + y) (hpx : 0 < extZ ρ x) (hpy : 0 < extZ ν y) :
+    0 < kap ρ ν m := by
+  unfold kap
+  have hterm : 0 < Hz m x y * (extZ ρ x * extZ ν y) := mul_pos (Hz_pos hx0 hy0 hx hy hxy) (mul_pos hpx hpy)
+  have hin : ∀ i ∈ Icc (0 : ℤ) m, 0 ≤ ∑ j ∈ Icc (0 : ℤ) m, Hz m i j * (extZ ρ i * extZ ν j) :=
+    fun i _ => sum_nonneg (fun j _ => mul_nonneg (Hz_nonneg _ _ _) (mul_nonneg (extZ_nonneg hρ _) (extZ_nonneg hν _)))
+  have h1 : Hz m x y * (extZ ρ x * extZ ν y) ≤ ∑ j ∈ Icc (0 : ℤ) m, Hz m x j * (extZ ρ x * extZ ν j) :=
+    single_le_sum (f := fun j => Hz m x j * (extZ ρ x * extZ ν j))
+      (fun j _ => mul_nonneg (Hz_nonneg _ _ _) (mul_nonneg (extZ_nonneg hρ _) (extZ_nonneg hν _)))
+      (by simp only [mem_Icc]; omega)
+  have h2 := single_le_sum (f := fun i => ∑ j ∈ Icc (0 : ℤ) m, Hz m i j * (extZ ρ i * extZ ν j)) hin
+    (show x ∈ Icc (0 : ℤ) m by simp only [mem_Icc]; omega)
+  linarith
+
+theorem kap_witness {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) {m : ℕ} (h : 0 < kap ρ ν m) :
+    ∃ x y : ℤ, 0 ≤ x ∧ 0 ≤ y ∧ x ≤ m ∧ y ≤ m ∧ (m : ℤ) ≤ x + y ∧ 0 < extZ ρ x ∧ 0 < extZ ν y := by
+  by_contra hno
+  push Not at hno
+  have : kap ρ ν m = 0 := by
+    unfold kap
+    refine sum_eq_zero (fun i hi => sum_eq_zero (fun j hj => ?_))
+    simp only [mem_Icc] at hi hj
+    by_cases hz : Hz m i j = 0
+    · rw [hz, zero_mul]
+    · have sp := Hz_support hz
+      by_cases hρi : 0 < extZ ρ i
+      · have hν0 : extZ ν j = 0 :=
+          le_antisymm (hno i j hi.1 hj.1 hi.2 hj.2 sp.2.2.2.2 hρi) (extZ_nonneg hν j)
+        rw [hν0, mul_zero, mul_zero]
+      · have hρ0 : extZ ρ i = 0 := le_antisymm (not_lt.mp hρi) (extZ_nonneg hρ i)
+        rw [hρ0, zero_mul, mul_zero]
+  linarith
+
+theorem extZ_interval {ρ : ℕ → ℝ} (hρ : LCNZ ρ) {x1 x2 x : ℤ} (h1 : 0 < extZ ρ x1) (h2 : 0 < extZ ρ x2)
+    (hlo : min x1 x2 ≤ x) (hhi : x ≤ max x1 x2) : 0 < extZ ρ x := by
+  have p1 : 0 ≤ x1 := by by_contra h; unfold extZ at h1; rw [if_neg h] at h1; exact lt_irrefl _ h1
+  have p2 : 0 ≤ x2 := by by_contra h; unfold extZ at h2; rw [if_neg h] at h2; exact lt_irrefl _ h2
+  unfold extZ at h1 h2 ⊢
+  rw [if_pos p1] at h1; rw [if_pos p2] at h2; rw [if_pos (by omega)]
+  rcases le_total x1 x2 with h | h
+  · exact hρ.2.2 x1.toNat x.toNat x2.toNat (by omega) (by omega) h1 h2
+  · exact hρ.2.2 x2.toNat x.toNat x1.toNat (by omega) (by omega) h2 h1
+
+/-- **Proposition 8.14** (Walkup): the Newton coefficients `κ` of the product are nonnegative and
+log-concave without internal zeros. -/
+theorem kap_LCNZ {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) : LCNZ (kap ρ ν) := by
+  refine ⟨kap_nonneg hρ hν, kap_lc hρ hν, ?_⟩
+  intro i j k hij hjk hi hk
+  obtain ⟨x1, y1, a1, b1, c1, d1, e1, f1, g1⟩ := kap_witness hρ hν hi
+  obtain ⟨x2, y2, a2, b2, c2, d2, e2, f2, g2⟩ := kap_witness hρ hν hk
+  set x := min (max x1 x2) (j : ℤ)
+  set y := min (max y1 y2) (j : ℤ)
+  have hx := extZ_interval hρ f1 f2 (x := x) (by omega) (by omega)
+  have hy := extZ_interval hν g1 g2 (x := y) (by omega) (by omega)
+  have hi' : (i : ℤ) ≤ j := by exact_mod_cast hij
+  have hk' : (j : ℤ) ≤ k := by exact_mod_cast hjk
+  exact kap_pos_of hρ hν (x := x) (y := y) (by omega) (by omega) (by omega) (by omega) (by omega) hx hy
+
 end Szkraw
