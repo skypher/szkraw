@@ -2,7 +2,7 @@ GitHub: yes
 
 # Independent review, round 25: Theorem 8.17 (cubic ratios with rσ ≤ tτ on log-concave Newton profiles)
 
-Repository: github.com/skypher/szkraw, commit cfe8aff (paper.tex; scripts under runs/cubic/). Read paper.tex at that commit: Theorem 8.17 and its proof (search for `thm:lc-cubic`), and the results it builds on: Lemmas 8.3–8.4, Theorems 8.6, 8.9 (`thm:lc-affine`, whose proof defines u_n, y_n, D, X, Y, X′, Y′, J, H_*, T, K and F(z)) and 8.11 (`thm:lc-quadratic`, whose proof gives the move/detour/resummation framework, (8.4) and (8.6)).
+Repository: github.com/skypher/szkraw, commit faaa5a0 (paper.tex; scripts under runs/cubic/). Read paper.tex at that commit: Theorem 8.17 and its proof (search for `thm:lc-cubic`), and the results it builds on: Lemmas 8.3–8.4, Theorems 8.6, 8.9 (`thm:lc-affine`, whose proof defines u_n, y_n, D, X, Y, X′, Y′, J, H_*, T, K and F(z)) and 8.11 (`thm:lc-quadratic`, whose proof gives the move/detour/resummation framework, (8.4) and (8.6)).
 
 Theorem 8.17 is new. It was found and proved here, without research consultation, and answers the question in Section 10 ("decide whether rσ ≤ u·tτ suffices for some u > 0") for u = 1. Its proof is computer-assisted. Please review completely and independently, including the certificate scripts. This is a mathematics review, not a Lean review. Every citation of a paper or book must be verified in its PDF; mark any citation you cannot open as unverified (the project's own TeX and scripts are their own originals).
 
