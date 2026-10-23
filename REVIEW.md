@@ -715,6 +715,20 @@ Scope:
 
 Applied: all six proposed changes. P2 now lists `Szkraw.lc_general`, and says that Theorem 5.5 is machine-verified and Theorem 5.6 is not.
 
+## Lean statement fidelity, round 19: Theorem 8.17 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_c2ee77e3-befd-47a5-91d6-c9049cf273dd`. Brief: `reviews/lean-fidelity19-brief.md` (commit f8a0e44). Answer: `reviews/lean-fidelity19-answer.md`.
+
+Scope:
+- `Szkraw.cubic_ratio_matrix : Stmt_cubic_ratio`, with `CubicRatioHyp`;
+- the proposed table rows, the introduction and disclosure changes, and the notes sentence.
+
+**Verdict: PASS WITH MINOR FIXES; theorem-statement fidelity PASS.**
+- Ratio, data, monotonicity and conclusion MATCH.
+- The Lean statement covers rσ ≤ tτ, the theorem as stated. The disclosure that the 7/4 remark is not formalized is accurate.
+
+Fix applied: the notes sentence "Each coefficient form …" was replaced by the reviewer's text. The rσ form is not nonnegative by itself; it is grouped with tτ using rσ ≤ tτ. All other proposed changes were applied as written.
+
 ## Review round 25: Theorem 8.17 (cubic ratios with rσ ≤ tτ) (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3b695c0a-d1b9-48dc-8fd3-d71c7c1774b6`. Brief: `reviews/round25-brief.md` (paper at commit faaa5a0). Answer: `reviews/round25-answer.md`.

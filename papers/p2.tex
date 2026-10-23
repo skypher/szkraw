@@ -23,7 +23,7 @@ Szwarc~\cite[\S5, Problem~2]{szwarc} asked for criteria, in the recurrence coeff
 
 Section~\ref{sec:setting} recalls the setting and the log-concavity inequality on which all proofs rest. Section~\ref{sec:vary} extends the kernel recurrence of~\cite{P1} to arrays with independent diagonal and downward coefficients and proves property (P) when the Newton coefficients of $c$ are log-concave without internal zeros and those of $b$ are those of $c$ times nonincreasing nonnegative weights (Theorem~\ref{thm:lc-vary} and Corollary~\ref{cor:lc-vary}), and for arrays that are quadratic in the index (Proposition~\ref{prop:lc-quad}). In general some moves of the recurrence have negative weight; Section~\ref{sec:affine} handles them by a resummation, for ratios that increase linearly (Theorem~\ref{thm:lc-affine}) or as a convex quadratic (Theorem~\ref{thm:lc-quadratic}) on every log-concave Newton profile, under the natural condition that $b$ be nondecreasing. Section~\ref{sec:higher} treats ratios of higher degree: on profiles of Newton degree at most two (Theorem~\ref{thm:lc-lowdeg}), and on every log-concave Newton profile when the Newton coefficients of the ratio are log-concave (Theorem~\ref{thm:lc-general}) or, for cubic ratios, when $r\sigma\leq t\tau$ (Theorem~\ref{thm:lc-cubic}). Proposition~\ref{prop:np}, due to Walkup~\cite{walkup}, shows that log-concavity of Newton coefficients is preserved under pointwise products. Section~\ref{sec:open} records counterexamples and open problems.
 
-The key inequalities of Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} are proved with exact computer certificates, and Theorem~\ref{thm:lc-general} is also machine-verified; the other results have written proofs. The formalized statements are listed in the section on code and formalization.
+The key inequalities of Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} are proved with exact computer certificates, and both theorems are also machine-verified; the other results have written proofs. The formalized statements are listed in the section on code and formalization.
 
 \section{Setting}\label{sec:setting}
 
@@ -525,33 +525,23 @@ where $K_a=(a-1)K''-4DH_*$ and $W=(a-1)(Y'X''+YX')+D(2\nu_1+2\nu_2-4Z_1-4Z_2)$.
 \end{itemize}
 Hence $u_1S_{2,0}\geq u_1\beta'_1E^1_1+u_1A\Psi+FD\widehat Q\geq0$ once $K_a$, $\Psi$ and $\widehat Q$ are nonnegative.
 
-\emph{(vi) Weight sums.} Steps (ii)--(v) reduce \eqref{eq:G-key} to the nonnegativity of the quadratic forms $L$, $R$, $R_2$, $K''$, $Q_s$ $(3\leq s\leq a)$, $K_a$, $\Psi$ and $\widehat Q$ in the sequence $u$. In each of them:
+\emph{(vi) Edge bounds.} Steps (ii)--(v) reduce \eqref{eq:G-key} to the nonnegativity of the quadratic forms $K$, $L$, $R$, $R_2$, $K''$, $Q_s$ $(3\leq s\leq a)$, $K_a$, $\Psi$ and $\widehat Q$ in the sequence $u$. For $Q_s$, first remove the dependence on $s$: by $\nu_s\geq0$, $Z_s\leq\binom asH_*$, $\binom as\leq\frac a3\binom{a-1}{s-1}$ and $\binom{a-1}s\leq\frac{a-3}3\binom{a-1}{s-1}$ for $s\geq3$, one has $Q_s\geq\binom{a-1}{s-1}Q^*$ with
+\[
+Q^*=Y'X''+YX'-4u_0H_*-\tfrac{4a}3u_1H_*-\tfrac{a-3}3u_1(Y+Y').
+\]
+Each of these forms is a sum of products $xy$ of linear forms $x=\sum_{i\geq1}x_iu_i$ and $y=\sum_{j\geq1}y_ju_j$ with nonnegative coefficients, plus $u_1$ times a linear form, minus $u_0$ times a linear form with nonnegative coefficients. Since $u$ is log-concave without internal zeros, $u_iu_j\geq u_1u_{i+j-1}$ for $i,j\geq1$ and $u_0u_{n+1}\leq u_1u_n$. Keeping in $xy$ only the pairs with $i\leq2$ or $j\leq2$ gives
+\[
+xy\geq u_1\sum_ne_n(x,y)u_n,\qquad e_n(x,y)=x_1y_n+x_2y_{n-1}+[n\geq3]\,y_1x_n+[n\geq4]\,y_2x_{n-1},
+\]
+and $u_0\sum_{n\geq1}h_nu_n\leq u_1\sum_{n\geq0}h_{n+1}u_n$. So each form is at least $u_1\sum_ne_nu_n$ with explicit coefficients $e_n$, and it suffices that every $e_n\geq0$.
 \begin{itemize}
-\item the only negative coefficients come from multiples of $u_0H_*$, $u_1H_*$, $u_1Z_s$ and $u_1(Y+Y')$, so they sit at index pairs $(0,j)$ and $(1,j)$;
-\item the positive parts $X$, $X'$, $X''$, $J$, $Y$, $Y'$ and $A-D$ contain no $u_0$.
+\item For $4\leq n\leq a$ write $n=4+p$ and $a=n+k$. Then $e_n/\binom an$ is a rational function of $(p,k)$ whose numerator has nonnegative coefficients.
+\item For $n\leq3$, $e_n$ is a polynomial in $a$ whose coefficients are nonnegative after $a\mapsto a+a_0$, with $a_0=6$ for $R_2$, $a_0=5$ for $K_a$ and $a_0=3$ otherwise.
+\item For $n\geq a+1$ only nonnegative products remain.
 \end{itemize}
-So Lemma~\ref{lem:abel-weights} applies, and it suffices that every weight sum be nonnegative. At $u_n=r^n$, with $p=1+r$, one has $d_{\ell+n}\mapsto p^n$. Hence
-\[
-X\mapsto p^a-1,\quad X'\mapsto p^{a-1}-p,\quad X''\mapsto p^{a-1}-1,\quad Y\mapsto p^a-1-ar,\quad H_*\mapsto arp^{a-1}-2p^a+2+ar,
-\]
-and $r\nu_s\mapsto sG^{(s)}$, $Z_s\mapsto\binom asH_*-G^{(s)}$, where
-\[
-G^{(s)}=\tbinom as\bigl((s-2)r^sp^{a-s}+(a-s)r^{s+1}p^{a-s-1}\bigr)+[s=1]ar.
-\]
-Extracting $[r^W]$ from these products of powers of $p$ and $r$ gives each weight sum as a finite combination of binomial coefficients; for the forms other than $L$ and for $W\geq4$ it has the form $N_W=\pi\binom{2a-1}W+\binom a{W-1}\varrho(a,W)$, with $\pi>0$ and $\varrho$ rational, and $W=3$ is treated directly (for $\Psi$ it contains the extra term $\binom{a-1}2(a-1)$). For $Q_s$ we bound $N_W(Q_s)/c'$ below, for $W\geq4$, by its value with the nonnegative $G^{(s)}$-terms omitted and $s=3$ in the two remaining $s$-dependent negative terms, whose magnitudes decrease as $s$ grows. For $W=3$,
-\[
-N_3(Q_s)=c'\tfrac{(a-1)(a-2)(2a-3)}6+6\tbinom a3[s=3]-c''(a-1)^2,
-\]
-which is $(a-1)(a-2)\bigl(\frac{a(a-1)}{12}+a\bigr)$ for $s=3$ and at least $c'(a-1)\frac{a^2+a}{12}$ for $s\geq4$. The certificates are as follows.
-\begin{itemize}
-\item For $W\geq a+2$, all negative terms vanish.
-\item For $6\leq W\leq a+1$, bound $\binom{2a-1}W$ below by the Vandermonde terms $\binom ak\binom{a-1}{W-k}$ with $k\in\{W,W-1,W-2,W-3,0,1,2\}$. These are distinct. Substituting $a=W-1+x$ and $W=6+y$, the cleared numerator of the resulting lower bound for $N_W/\binom a{W-1}$ is a polynomial in $(x,y)$ with nonnegative coefficients.
-\item For $W\in\{3,4,5\}$, $N_W$ is a polynomial in $a$ whose coefficients are nonnegative after $a\mapsto a+a_0$. Here $a_0=5$ for $K_a$, $a_0=6$ for $R_2$, and $a_0=3$ otherwise.
-\item For $W\leq2$, the weight sums are $0$ or positive.
-\end{itemize}
-The coefficient signs are verified in exact arithmetic by \path{runs/varratio/key_weight_cert.py}, which fails unless every certificate passes; \path{runs/varratio/key_weight_closed.py} checks the closed forms against the coefficient expansions for $5\leq a\leq30$. For $L$, the bound $\binom{2a}W\geq\binom{2a-1}W$ gives $N_W(L)\geq\frac{2(a-1)}aN_W(R)\geq0$ for $W\geq3$; also $N_2(L)=2a(a-1)(a-2)>0$, and $N_W(L)=0$ for $W\leq1$.
+These certificates are formalized in Lean, and \path{runs/lean_plan/edge_exact.py} checks every $e_n$ in exact arithmetic for $a\leq60$.
 
-\emph{(vii) Small windows.} Steps (iii$'$) and (v) need $a\geq6$ and $a\geq5$. For $3\leq a\leq5$, every central sum $S_{\sigma,i}$, a cubic polynomial in $u$, and every $l_k$ is certified nonnegative on log-concave $u$. The certificates are exact rational combinations of $u_k(u_{i+1}u_{j-1}-u_iu_j)$, respectively $u_{i+1}u_{j-1}-u_iu_j$ ($i+1\leq j-1$), and monomials (\path{runs/varratio/key_phi_ustep.py}, \path{runs/varratio/key_lin_cert.py}; these cover all $a\leq10$). This proves \eqref{eq:G-key} and the theorem.
+\emph{(vii) Small windows.} Steps (iii$'$) and (v) need $a\geq6$ and $a\geq5$. For $3\leq a\leq5$, each sum $M_{1,m}+M_{m,1}$ $(2\leq m\leq a)$ and, for $a\leq4$, $S_{2,0}$ is a cubic form in $u$ that is an exact nonnegative rational combination of the products $u_k(u_{i+1}u_{j-1}-u_iu_j)$ $(i+1\leq j-1)$ and of monomials (\path{runs/lean_plan/window_cert.py}). This proves \eqref{eq:G-key} and the theorem.
 \end{proof}
 
 For cubic ratios, log-concavity of the Newton coefficients can be replaced by a single inequality.
@@ -560,7 +550,7 @@ For cubic ratios, log-concavity of the Newton coefficients can be replaced by a 
 Let $0=d_0<d_1<\cdots<d_N=1$ have Newton coefficients that are log-concave without internal zeros, and let $\rho(x)=r+tx+\tau\binom x2+\sigma\binom x3$ with $r>0$, $t,\tau,\sigma\geq0$ and $r\sigma\leq t\tau$. Put $a_i=1-d_i$, $b_i=(1-\rho(i))d_i$ and $c_i=\rho(i)d_i$. If $b$ is nondecreasing, then the system has nonnegative linearization.
 \end{theorem}
 
-If $(r,t,\tau,\sigma)$ is log-concave without internal zeros, then $r\sigma\leq t\tau$: for $t\tau>0$ this follows from $t^2\tau^2\geq r\tau\cdot t\sigma$, and otherwise $\sigma=0$. Theorem~\ref{thm:lc-cubic} also admits cubic ratios with $t^2<r\tau$ or $\tau^2<t\sigma$, which Theorem~\ref{thm:lc-general} does not cover. The failing cubic examples of Section~\ref{sec:open} violate $r\sigma\leq t\tau$. The proof is computer-assisted: the inequalities \eqref{eq:cubic-B}, \eqref{eq:cubic-corner} and \eqref{eq:cubic-E} and the inequalities $\Phi^{\mathrm{loc}}_2,\Phi^{\mathrm{loc}}_3\geq0$ below are reduced to finitely many families of explicit polynomial inequalities, each certified in exact rational arithmetic by the nonnegativity of all coefficients.
+If $(r,t,\tau,\sigma)$ is log-concave without internal zeros, then $r\sigma\leq t\tau$: for $t\tau>0$ this follows from $t^2\tau^2\geq r\tau\cdot t\sigma$, and otherwise $\sigma=0$. Theorem~\ref{thm:lc-cubic} also admits cubic ratios with $t^2<r\tau$ or $\tau^2<t\sigma$, which Theorem~\ref{thm:lc-general} does not cover. The failing cubic examples of Section~\ref{sec:open} violate $r\sigma\leq t\tau$. The proof is computer-assisted: the inequalities \eqref{eq:cubic-B}, \eqref{eq:cubic-corner} and \eqref{eq:cubic-E} and the inequality $\Phi^{\mathrm{loc}}_3\geq0$ below are reduced to families of explicit polynomials with nonnegative coefficients.
 
 \begin{proof}
 \emph{Setup.} As in the proof of Theorem~\ref{thm:lc-quadratic}, $R_i=d_i/f_1(i)$ is nondecreasing, $1-\rho(m+1)\geq\Delta\rho(m)R_m$ for $0\leq m<N$, and $\rho$ is nondecreasing with $0<\rho(i)\leq1$ for $i\leq N$; here $\Delta\rho(x)=t+\tau x+\sigma\binom x2$ and $\Delta^2\rho(x)=\tau+\sigma x$. For $\ell+n\leq N$ the Leibniz rule gives, all at $\ell$,
@@ -601,65 +591,48 @@ and, if $N\geq4$,
 \end{equation}
 Granting these, the argument after \eqref{eq:quad-B} gives $B_0(\ell,a)B_{j-1}(\ell+1,a-2)\geq4c_{\ell+1}B_j(\ell,a)$ for $j\geq1$. The only exception is the term $m=4$ for $\ell=0$, $j=1$. There $B_0(0,a)\geq\binom a2\varphi_2(0)+\binom a3\varphi_3(0)$, $\binom a2\binom{a-2}2=6\binom a4$ and $\binom a3\binom{a-2}2=2(a-2)\binom a4\geq4\binom a4$ reduce the term to \eqref{eq:cubic-corner}. Inequality \eqref{eq:cubic-B} fails at $(\ell,n)=(0,2)$ in general.
 
-\emph{Proof of \eqref{eq:cubic-B}, \eqref{eq:cubic-corner} and \eqref{eq:cubic-E}.}
+\emph{Proof of \eqref{eq:cubic-B}, \eqref{eq:cubic-corner} and \eqref{eq:cubic-E}.} In each, the difference of the two sides is a quadratic form $\sum\kappa_{\beta\gamma}\rho_\beta\rho_\gamma$ in $(\rho_0,\rho_1,\rho_2,\rho_3)=(r,t,\tau,\sigma)$. Its coefficients are bilinear forms in the $u_k$, with coefficients polynomial in $\ell$ and $n$.
 \begin{itemize}
-\item \emph{Quadratic forms.} In each, the difference of the two sides is a quadratic form $\sum\kappa_{\beta\gamma}\rho_\beta\rho_\gamma$ in $(\rho_0,\rho_1,\rho_2,\rho_3)=(r,t,\tau,\sigma)$. Its coefficients are bilinear forms in the $u_k$, with coefficients polynomial in $\ell$ and $n$. By $r\sigma\leq t\tau$, the form is nonnegative if $\kappa_{t\tau}+\min(\kappa_{r\sigma},0)\geq0$ and all coefficients other than $\kappa_{r\sigma}$ are nonnegative.
-\item \emph{The quadratic part.} For \eqref{eq:cubic-B} the coefficients $\kappa_{rr},\kappa_{r\tau},\kappa_{\tau\tau}$ need not be checked: the form with $t=\sigma=0$ is \eqref{eq:quad-B} for the ratio $r+\tau\binom x2$. The left side of \eqref{eq:cubic-corner} exceeds that of \eqref{eq:cubic-B} at $(0,2)$ by $8\varphi_3(0)\varphi_2(1)$, a form with nonnegative coefficients. So only $\kappa_{t\sigma}$ requires a new check, made with $u_0=0$; the added quadratic form has nonnegative coefficients.
-\item \emph{Reduction.} Divisions are first made for positive entries; zero tails, including $q=0$, follow by continuity within the local log-concavity constraints, keeping $u_0=0$ when $\ell=0$. Each remaining coefficient inequality is reduced as in the proof of \eqref{eq:quad-B}. Take $u_1=1$, $q=u_2$ and $z=u_0\in[0,\min(\ell,1/q)]$, and for \eqref{eq:cubic-E} also $x=u_3/u_2\leq q$, since $\varphi_3$ involves $u_3$; put $x=q$ for \eqref{eq:cubic-B}. The second factor involves $u_{n-3},\ldots,u_{n+2}$, respectively $u_{n-3},\ldots,u_{n+1}$ for \eqref{eq:cubic-E}. The two smallest indices carry nonnegative coefficients and the largest a nonpositive one.
-  \begin{itemize}
-  \item Normalize the second block separately by $u_{n-1}=1$. By log-concavity, $u_{n-2}\geq1/x$ and $u_{n-3}\geq1/x^2$, and $u_n=c\leq x$, $u_{n+1}=cy$ and $u_{n+2}\leq cy^2$ with $y\leq c$ (for \eqref{eq:cubic-E}, $u_{n+1}\leq c^2$). For \eqref{eq:cubic-B}, concavity in $y$ leaves the branches $y=0$, where each coefficient is affine in $c$, and $y=c$, where it is a cubic in $c$ that is certified on the whole interval $0\leq c\leq x$. For \eqref{eq:cubic-E} the bound is a concave quadratic in $c$, so $c=0$ and $c=x$ suffice.
-  \item In the exceptional low-index cases ($n\leq3$ for \eqref{eq:cubic-B}, $n\leq4$ for \eqref{eq:cubic-E}), the reduction is done exactly in the free indices. For larger $n$ the relaxed argument above remains valid where the index ranges of the two blocks overlap. Where $u_0$ occurs in both factors, a coefficient need not be affine in $z$; then $z$ is written as $\zeta\min(\ell,1/q)$ with $\zeta\in[0,1]$.
-  \end{itemize}
-\item \emph{Certificates.} The resulting polynomial inequalities are certified in three regimes: $z=0$; $z=\ell$ with $q=1/(\ell+w)$; and $z=1/q$ with $\ell=1/q+w$. In each regime all coefficients are nonnegative, in Bernstein form on $[0,1]$ in $c/q$, $x/q$ and $\zeta$, with $n$ symbolic above the overlap.
-  \begin{itemize}
-  \item The scripts are \path{runs/cubic/bdetour_cert.py}, \path{runs/cubic/corner_cert.py} and \path{runs/cubic/edetour_cert.py}.
-  \item At $(\ell,n)=(0,2)$ the endpoint value of $\kappa_{t\sigma}$ in \eqref{eq:cubic-B} is $-8(q+1)(q^2-q-5)$. With the extra term of \eqref{eq:cubic-corner} it becomes $8(6q^4s^2-4q^3s^2+29q^3s+11q^2s+33q^2+36q+11)$ with $s=x/q\in[0,1]$, whose Bernstein coefficients in $s$ have only nonnegative coefficients.
-  \end{itemize}
+\item Since $t\tau\kappa_{t\tau}+r\sigma\kappa_{r\sigma}=(t\tau-r\sigma)\kappa_{t\tau}+r\sigma(\kappa_{t\tau}+\kappa_{r\sigma})$ and $r\sigma\leq t\tau$, the form is nonnegative if $\kappa_{t\tau}$, $\kappa_{t\tau}+\kappa_{r\sigma}$ and all coefficients other than $\kappa_{r\sigma}$ are nonnegative as forms in $u$.
+\item For \eqref{eq:cubic-B} the coefficients $\kappa_{rr}$, $\kappa_{r\tau}$, $\kappa_{\tau\tau}$ need not be checked: the form with $t=\sigma=0$ is \eqref{eq:quad-B} for the ratio $r+\tau\binom x2$. The same holds for \eqref{eq:cubic-corner}, whose left side exceeds that of \eqref{eq:cubic-B} at $(0,2)$ by $8\varphi_3(0)\varphi_2(1)\geq0$.
+\item Every remaining coefficient is a sum $\sum c_{ij}u_iu_j$ over $i\leq j$. Group its terms by $i+j=m$. Within a group, $u_iu_{m-i}$ is nondecreasing in $i$ by log-concavity, so with the tail sums $T_k=\sum_{i\geq k}c_{i,m-i}$ and the smallest index $k_0$ of the group,
+\[
+\sum_ic_{i,m-i}u_iu_{m-i}=T_{k_0}u_{k_0}u_{m-k_0}+\sum_{k>k_0}T_k\,(u_ku_{m-k}-u_{k-1}u_{m-k+1}),
+\]
+and the coefficient is nonnegative if all $T_k\geq0$.
+\item The tail sums are polynomials in $(\ell,n)$. For \eqref{eq:cubic-B} with $n\geq6$ and for \eqref{eq:cubic-E} with $n\geq7$ they have nonnegative coefficients in $(\ell,n-6)$, respectively $(\ell,n-7)$. For each $n$ in $3\leq n\leq5$ (\eqref{eq:cubic-B}) and $3\leq n\leq6$ (\eqref{eq:cubic-E}) they are polynomials in $\ell$ with nonnegative coefficients. The same holds for \eqref{eq:cubic-B} with $n=2$ and $\ell\geq1$ after $\ell\mapsto\ell+1$, and for \eqref{eq:cubic-corner}, where $u_0=0$.
 \end{itemize}
+The certificates are generated and checked in exact arithmetic by \path{runs/lean_plan/gen_cubicB.py} and \path{runs/lean_plan/gen_cubicE.py}.
 
 \emph{Key inequality.} We show, for $(\ell,a)\in\Omega$ with $a\geq3$,
 \begin{equation}\label{eq:cubic-key}
 A^\psi_0(\ell,a)B_0(\ell+1,a-1)+B_0(\ell,a)A^\psi_0(\ell+1,a-2)\geq c_{\ell+1}\bigl(4H_1-2V_1-E_1\bigr)(\ell,a).
 \end{equation}
-Use the notation of the proof of Theorem~\ref{thm:lc-affine} ($u_n$, $y_n$, $D$, $X$, $Y$, $X'$, $Y'$, $J$, $H_*$, $K$), and put $\alpha=1-\rho(\ell+a)$, $s=\Delta\rho(\ell+a-1)$ and $z=u_0/u_1$.
-\begin{itemize}
-\item \emph{The parameter $\alpha$.} We have $\alpha\geq sR_{\ell+a-1}\geq sz$. Every occurrence of $1$ in the two sides lies in $\alpha$, through $1-\rho(\ell+n)=\alpha+\rho(\ell+a)-\rho(\ell+n)$. The coefficient of $\alpha$ in the difference of the two sides is $XB_0(\ell+1,a-1)+B_0(\ell,a)X'-4c_{\ell+1}H_*\geq\rho(\ell+1)K\geq0$. So it suffices to take $\alpha=sz$.
-\item \emph{A quadratic form in $\rho$.} Then both sides are quadratic forms in $(\rho_\beta)$, where $\rho=\sum_\beta\rho_\beta e_\beta$ and $e_\beta(x)=\binom x\beta$. Write $[e_\beta]$ for the contribution of a single basis ratio, and put $s_\beta=\Delta e_\beta(\ell+a-1)$.
-  \begin{itemize}
-  \item By convexity of $e_\beta$, $A^\psi_0[e_\beta](\ell,a)\geq zs_\beta(X-au_1)\geq0$ and $A^\psi_0[e_\beta](\ell+1,a-2)\geq s_\beta D(X'-(a-2)u_1)\geq0$.
-  \item Moreover $B_0[e_\gamma](\ell,a)\geq e_\gamma(\ell+1)Y$, $B_0[e_\gamma](\ell+1,a-1)\geq e_\gamma(\ell+1)Y'$ and $c_{\ell+1}[e_\gamma]=e_\gamma(\ell+1)D$.
-  \end{itemize}
-  Hence the coefficient of $\rho_\beta\rho_\gamma$ in the difference is at least $e_\gamma(\ell+1)\Phi_\beta+e_\beta(\ell+1)\Phi_\gamma$ for $\beta\neq\gamma$, and at least $e_\beta(\ell+1)\Phi_\beta$ for $\beta=\gamma$. Here
+Use the notation of the proof of Theorem~\ref{thm:lc-quadratic}, and put $P_1=\Delta\rho(\ell)$ and $P_2=\Delta^2\rho(\ell)=\tau+\sigma\ell$, so that $\rho(\ell+k)=\rho(\ell)+kP_1+\binom k2P_2+\binom k3\sigma$. Put $\alpha=1-\rho(\ell+a)$, $s_q=P_1+(a-1)P_2$ and $s=\Delta\rho(\ell+a-1)=s_q+\binom{a-1}2\sigma$. Then $\alpha\geq su_0/u_1$ and $s_q\geq(a-1)P_2$. Backward differences give
 \[
-\Phi_\beta=A^\psi_0[e_\beta](\ell,a)\,Y'+Y\,A^\psi_0[e_\beta](\ell+1,a-2)-D\,(4H_1-2V_1-E_1)[e_\beta],
+\begin{aligned}
+A^\psi_0(\ell,a)&=\alpha X-s_qau_0+P_2\tbinom a2u_0-\sigma\tbinom a3u_0,\\
+A^\psi_0(\ell+1,a-2)&=(\alpha+s)X'-s_q(a-2)D+P_2\tbinom{a-1}2D-\sigma\tbinom{a-1}3D,
+\end{aligned}
 \]
-and $\Phi_0=0$. So \eqref{eq:cubic-key} needs no condition linking $r$ and $\sigma$, and it remains to show $\Phi_1,\Phi_2,\Phi_3\geq0$.
-\item \emph{Local decomposition.} Expand in the local basis: $\binom{\ell+k}2=\binom\ell2+\ell k+\binom k2$ and $\binom{\ell+k}3=\binom\ell3+\binom\ell2k+\ell\binom k2+\binom k3$. With the splittings of $\Gamma_n$ and $e_n$ above, this gives
+and, reindexing as before, $4H_1-2V_1-E_1=4\alpha H_*+2s_qT+4P_2Z-P_2\sum_{n\geq1}n\binom{a-n}2y_n+\sigma(4T_3-E_3)$, where $T_3=\sum_{n\geq3}(n-2)\bigl(\binom a3-\binom n3\bigr)y_n$ and $E_3=\sum_{n\geq3}(n-2)\binom n3\binom an(3u_{n-1}+3u_{n-2}+u_{n-3})$. With $B_0(\ell,a)\geq pY$, $B_0(\ell+1,a-1)\geq pY'$ and $c_{\ell+1}=pD$, it suffices that $R=A^\psi_0(\ell,a)Y'+YA^\psi_0(\ell+1,a-2)-D(4H_1-2V_1-E_1)\geq0$. $R$ is affine in $\alpha$, with coefficient $XY'+YX'-4DH_*$. Its part without $\sigma$ is the expression bounded in the proof of Theorem~\ref{thm:lc-quadratic}, with $s_q$ and $P_2$ in place of $s$ and $\tau$; that bound holds for every value $\alpha'$ of $\alpha$ with $\alpha'u_1\geq s_qu_0$. Apply it with $\alpha'=\alpha-\binom{a-1}2\sigma z$, where $z=u_0/u_1$. This gives $R\geq\sigma\Phi^{\mathrm{loc}}_3$ with
 \[
-\Phi_2=\ell\Phi_1+\Phi_2^{\mathrm{loc}},\qquad\Phi_3=\tbinom\ell2\Phi_1+\ell\Phi_2^{\mathrm{loc}}+\Phi_3^{\mathrm{loc}}.
+\Phi^{\mathrm{loc}}_3=\tbinom{a-1}2z\,(XY'+YX'-4DH_*)-\tbinom a3u_0Y'+Y\Bigl(\tbinom{a-1}2X'-\tbinom{a-1}3D\Bigr)-D(4T_3-E_3).
 \]
-Here $\Phi_\beta^{\mathrm{loc}}$ is $\Phi_\beta$ computed with $\rho(\ell+k)$ replaced by $\binom k\beta$. Its moves $V_1$ are formed with $\Gamma_n$ replaced by $n-1$ for $\beta=2$ and by $0$ for $\beta=3$, and its moves $E_1$ from $\binom n2f_{n-2}$, respectively $\binom n3(3f_{n-1}+3f_{n-2}+f_{n-3})$.
-\item \emph{$\Phi_1$ and $\Phi_2^{\mathrm{loc}}$.} With $u_1=1$, $\Phi_1$ is the function $F(z)$ of the proof of Theorem~\ref{thm:lc-affine}, which is nonnegative for $0\leq z\leq1/q$. $\Phi_2^{\mathrm{loc}}$ is the $\tau$-part of \eqref{eq:quad-key} with $s=a-1$, nonnegative for $0\leq z\leq1/q$ by the proof of Theorem~\ref{thm:lc-quadratic}.
-\item \emph{$\Phi_3^{\mathrm{loc}}$: two endpoints.} Take $u_1=1$, $s=\binom{a-1}2$, $\kappa=\frac{s(2a-3)}3$ and $T_3=\sum_{n\geq3}(n-2)\bigl(\binom a3-\binom n3\bigr)y_n$. Since $E_1\geq0$,
+
+\emph{$\Phi^{\mathrm{loc}}_3\geq0$.} Write $E_3=\binom a3u_0+E_3^0$ and $H_*^+=\sum_{n\geq2}(n-1)\binom a{n+1}u_n$, so that $u_0H_*\leq u_1H_*^+$. Bounding the only term quadratic in $u_0$, $-4\binom{a-1}2u_0^2H_*$, this way and dropping $\binom a3u_0^2u_1\geq0$ gives $u_1\Phi^{\mathrm{loc}}_3\geq u_1A+u_0B$ with
 \[
-\Phi_3^{\mathrm{loc}}\geq z\Bigl(sY+2\tbinom a3\Bigr)Y'+(z+1)Y(sJ+\kappa)-4(z+1)\bigl(szH_*+T_3\bigr).
+\begin{aligned}
+A&=\tbinom{a-1}2YX'-u_1\Bigl(\tbinom{a-1}3Y+4T_3-E^0_3\Bigr),\\
+B&=\tbinom{a-1}2\bigl(XY'+YX'-4u_1H_*-4u_1H_*^+\bigr)-u_1\Bigl(\tbinom a3Y'+\tbinom{a-1}3Y+4T_3-E^0_3-\tbinom a3u_1\Bigr).
+\end{aligned}
 \]
-The right side is concave in $z$, so the endpoints $z=0$ and $z=1/q$ suffice.
-\item \emph{$\Phi_3^{\mathrm{loc}}$: coefficient bounds.} In $YJ$ keep the products with indices $(2,n-1)$ for $n\geq3$ and $(3,n-2)$ for $n\geq4$, and use $u_iu_j\geq u_{i+j-1}$.
-  \begin{itemize}
-  \item At $z=0$, the coefficient of $y_n$ ($n\geq3$) is then at least
-\[
-\kappa+s\Bigl(\frac{n(a-1)}2+[n\geq4]\frac{(a-1)(a-2)n(n-1)}{6(a-n+1)}\Bigr)-4(n-2)\Bigl(\tbinom a3-\tbinom n3\Bigr).
-\]
-  \item At $z=1/q$, multiply by $q/(1+q)$. In $sYY'/(1+q)$ keep $\binom a2q$ from $Y$, and use $q(u_j+u_{j+1})\geq(1+q)u_{j+1}$ and $u_n\leq qu_{n-1}$. The coefficient of $y_2$ is then $\kappa-\frac{2s(a-2)}3=\frac s3$, and that of $y_n$ ($n\geq3$) is at least the expression above plus $\frac{sn(a-1)}2-s\bigl(\frac{10(n+1)}3-8\bigr)\frac{a-n}{n+1}$.
-  \end{itemize}
-  With $a=n+1+m$ and $n=3$ or $n=4+p$, the numerators of these bounds are polynomials in $(m,p)$ with nonnegative coefficients (\path{runs/cubic/phi3loc_cert.py}); for $n=a$ the bounds are nonnegative directly. The same argument proves $\Phi_2^{\mathrm{loc}}\geq0$ independently (\path{runs/cubic/phi2loc_cert.py}).
-\end{itemize}
+These are forms of the kind treated in step (vi) of the proof of Theorem~\ref{thm:lc-general}: the edge bounds give $A\geq u_1\sum_ne^A_nu_n$ and $B\geq u_1\sum_ne^B_nu_n$. Their coefficients are nonnegative by the same three kinds of certificates: for $4\leq n\leq a$ the numerators in $(p,k)$ have nonnegative coefficients, for $n\leq3$ the polynomials in $a$ have nonnegative coefficients after $a\mapsto a+3$, and for $n\geq a+1$ only nonnegative terms remain (\path{runs/lean_plan/phi3_generic.py}, \path{runs/lean_plan/phi3_edge.py}). Hence $R\geq0$.
 
 \emph{Resummation.} Proceed as in the proof of Theorem~\ref{thm:lc-quadratic}, with $E$ in place of $W$. The inequalities $P^2\geq4Q$, $H_+P\geq10H_-$, $V_+P\geq\frac92V_-$, $E_+P\geq3E_-$, $C_+P\geq6C_-$ and $A_0P+PA_0+2V_1+E_1\geq4H_1$ give $GAG\geq\frac12(GA_0+A_0G)+\frac1{18}GV_1G+\frac1{12}GE_1G\geq0$, and (P) follows.
 \end{proof}
 
-The condition $r\sigma\leq t\tau$ enters only through \eqref{eq:cubic-B} and \eqref{eq:cubic-E}, each time through $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$. On geometric profiles at $(\ell,n)=(0,3)$ one has $\kappa_{r\sigma}=-20q(4q^3+11q^2+9q+1)$ and $\kappa_{t\tau}=20(q+1)(8q^3+33q^2+30q+6)$ in \eqref{eq:cubic-B}, so $\kappa_{t\tau}/|\kappa_{r\sigma}|\to2$ as $q\to\infty$. This geometric family therefore obstructs the coefficientwise test for $r\sigma\leq u\,t\tau$ with $u>2$; it does not establish a cutoff at $u=1$. In fact the certificates for \eqref{eq:cubic-B} and \eqref{eq:cubic-E} also pass with $\kappa_{t\tau}+\frac74\kappa_{r\sigma}$ in place of $\kappa_{t\tau}+\kappa_{r\sigma}$ (\path{runs/cubic/bdetour_u.py}, \path{runs/cubic/edetour_u.py}; the other coefficients and the key inequality do not involve the condition). Hence Theorem~\ref{thm:lc-cubic} holds with $r\sigma\leq\frac74t\tau$ in place of $r\sigma\leq t\tau$. With $\frac95$ the certificate for \eqref{eq:cubic-B} fails. Exact diagnostics for this proof are listed in \path{papers/DIAGNOSTICS.md}.
+The condition $r\sigma\leq t\tau$ enters only through \eqref{eq:cubic-B} and \eqref{eq:cubic-E}, each time through $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$. On geometric profiles at $(\ell,n)=(0,3)$ one has $\kappa_{r\sigma}=-20q(4q^3+11q^2+9q+1)$ and $\kappa_{t\tau}=20(q+1)(8q^3+33q^2+30q+6)$ in \eqref{eq:cubic-B}, so $\kappa_{t\tau}/|\kappa_{r\sigma}|\to2$ as $q\to\infty$. This geometric family therefore obstructs the coefficientwise test for $r\sigma\leq u\,t\tau$ with $u>2$; it does not establish a cutoff at $u=1$. In fact \eqref{eq:cubic-B} and \eqref{eq:cubic-E} also hold with $\kappa_{t\tau}+\frac74\kappa_{r\sigma}\geq0$ in place of $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$; the other coefficients and the key inequality do not involve the condition. For \eqref{eq:cubic-E}, and for \eqref{eq:cubic-B} with $n\geq6$, the tail sums above stay nonnegative. For \eqref{eq:cubic-B} with $n\leq5$ the transfers alone do not suffice. There the coefficient forms are certified after the substitution $u_0=zu_1$, $0\leq z\leq\min(\ell,1/q)$ with $q=u_2/u_1$, in the regimes $z=0$, $z=\ell$ and $z=1/q$ (\path{runs/cubic/bdetour_u.py}, \path{runs/cubic/edetour_u.py}). Hence Theorem~\ref{thm:lc-cubic} holds with $r\sigma\leq\frac74t\tau$ in place of $r\sigma\leq t\tau$. With $\frac95$ the certificate of \path{runs/cubic/bdetour_u.py} fails. Exact diagnostics for this proof are listed in \path{papers/DIAGNOSTICS.md}.
 
 \section{Counterexamples and open problems}\label{sec:open}
 
@@ -667,7 +640,7 @@ The criterion of~\cite{P1} retains the full Krawtchouk range with a constant rat
 
 \section*{AI-use disclosure}
 
-OpenAI Codex and Anthropic Claude were used to develop proof arguments, check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean formalization. The resummation in the proof of Theorem~\ref{thm:lc-affine}, its key inequality under nondecreasing $b$, and the weighted detour and key inequality in the proof of Theorem~\ref{thm:lc-quadratic} arose in research consultations with ChatGPT Pro; the exact checks were completed with Claude, which also prepared the Lean formalizations. Theorem~\ref{thm:lc-lowdeg}, Corollary~\ref{cor:lc-lowdeg}, Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} and Lemma~\ref{lem:abel-weights} were found and proved with Claude, without research consultation; Proposition~\ref{prop:np}, which is due to Walkup, was rederived with Claude together with the self-contained proof given here. Every result was reviewed by ChatGPT Pro, as part of a longer manuscript (an AI review with independent exact checks, not human peer review); the review rounds and their corrections are recorded in \path{REVIEW.md}, and each returned PASS or PASS WITH MINOR FIXES, with the fixes applied. For Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} the reviewer reran transcribed copies of the certificate scripts; the scripts were also run unmodified from a fresh clone of the companion code at the cited revision, and all of them passed (\path{runs/verify/RESULTS.md}). The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. ``Machine-verified'' refers only to the Lean theorems listed in the section on code and formalization; Theorem~\ref{thm:lc-general} is machine-verified; Theorem~\ref{thm:lc-cubic} is not.
+OpenAI Codex and Anthropic Claude were used to develop proof arguments, check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean formalization. The resummation in the proof of Theorem~\ref{thm:lc-affine}, its key inequality under nondecreasing $b$, and the weighted detour and key inequality in the proof of Theorem~\ref{thm:lc-quadratic} arose in research consultations with ChatGPT Pro; the exact checks were completed with Claude, which also prepared the Lean formalizations. Theorem~\ref{thm:lc-lowdeg}, Corollary~\ref{cor:lc-lowdeg}, Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} and Lemma~\ref{lem:abel-weights} were found and proved with Claude, without research consultation; Proposition~\ref{prop:np}, which is due to Walkup, was rederived with Claude together with the self-contained proof given here. Every result was reviewed by ChatGPT Pro, as part of a longer manuscript (an AI review with independent exact checks, not human peer review); the review rounds and their corrections are recorded in \path{REVIEW.md}, and each returned PASS or PASS WITH MINOR FIXES, with the fixes applied. For Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} the reviewer reran transcribed copies of the certificate scripts; the scripts were also run unmodified from a fresh clone of the companion code at the cited revision, and all of them passed (\path{runs/verify/RESULTS.md}). The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. ``Machine-verified'' refers only to the Lean theorems listed in the section on code and formalization; Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} are machine-verified; the extension to $r\sigma\leq\frac74t\tau$ in the remark after the proof of Theorem~\ref{thm:lc-cubic} is not.
 
 \section*{Code and formalization}
 
@@ -687,6 +660,7 @@ Corollary~\ref{cor:lc-lowdeg} & \path{Szkraw.lowdeg_newton_lc}, \path{Szkraw.low
 Proposition~\ref{prop:np}: products of Newton sequences & \path{Szkraw.newton_product_LCNZ}\\[3pt]
 Lemma~\ref{lem:abel-weights} & \path{Szkraw.abel_weight}\\[3pt]
 Theorem~\ref{thm:lc-general}: log-concave ratio & \path{Szkraw.lc_general}\\[3pt]
+Theorem~\ref{thm:lc-cubic}: cubic ratio & \path{Szkraw.cubic_ratio_matrix}\\[3pt]
 Section~\ref{sec:open}: the counterexamples with $N=3$ and the cubic counterexample with $N=4$ & \path{Szkraw.openEx1_fails}, \path{Szkraw.openEx2_fails}, \path{Szkraw.cubic_ratio_fails}
 \end{tabular}
 \end{center}
