@@ -1578,3 +1578,23 @@ Open: general a. The certificates are LP vertices, not yet closed forms. Next, f
   - Proof sketch of the condition: write LHS − RHS = u₀·[4S₁ − (2a−4)F − 2u₁] + [4S₁² + 4S₁F − 2u₁S₁ − au₁F]. The second bracket is ≥ 0. In the first, the u₁ and u₂ coefficients are 2a−2 and 0, and the negative u_m coefficients (m ≥ 3) are traded by u₀u_m ≤ u₁u_{m−1}.
   - Exact test (runs/varratio/key_S_high_test.py, 70 LC sequences, a ≤ 18): the condition and all S_{σ,i≥2} hold, including the i = 2 correction.
 - **Still open: S_{σ,1} and S_{σ,0}.** They involve the k ∈ {0,1} terms and E₃ (with V₁^{(m)}, Z₁^{(m)} sums over u), and are cubic in u. This is now the only obstacle to the key for all a, and hence to (G).
+
+**Key for general a: Φ's Abel criterion reduced to three blockwise lemmas (2026-10-23).** Every central sum of Φ now has an explicit closed form (runs/varratio/key_S_low.py; all i ∈ {0,1} sums match for a ≤ 8).
+- k = 0 drops out: E₁^{(0)} = E₂^{(0)} = E₃^{(0)} = 0, so M_{σ,0} = 0.
+- E₃^{(m)} = 2FV₁^{(m)} − 4Σ_{n≥3}(n−2)y_n[F(C(a,m) − C(n,m)) + C(a−1,m−1)B].
+- k = 1: B₀^{(1)} = a(A − d₁), B₀′^{(1)} = aA − 2(a−1)d₂ + (a−2)d₁, E₁^{(1)} = AB − d₀δ₁, and E₂^{(1)} equals the m ≥ 2 formula plus d₁F.
+- Decomposition: S_{σ,1} = S_{σ,2} + (M_{1,σ−1} + M_{σ−1,1}) and S_{σ,0} = S_{σ,1} + M_{0,σ}.
+
+Exact sign measurements (runs/varratio/key_S_low_signs.py, 50 LC sequences, a ≤ 12):
+- M_{0,σ} ≥ 0 and M_{1,σ−1} + M_{σ−1,1} ≥ 0 for every σ ≥ 2. Within M_{0,σ}, T₂ alone reaches −3·10⁵·S₀, but T₁ + T₂ ≥ −0.16·S₀.
+
+So the key for general a follows from:
+- (L1) M_{0,σ} ≥ 0 for σ ≥ 2. Here σ = 1 is λ₁ ≥ 0, proved.
+- (L2) M_{1,σ−1} + M_{σ−1,1} ≥ 0 for σ ≥ 3. Here σ = 2 is φ₁₁ ≥ 0, proved.
+- (L3) S_{σ,i} ≥ 0 for i ≥ 2. The closed form and a sufficient condition are recorded above.
+
+For (L1): with E₁^{(m)} = C(a−1,m−1)AB − d₀δ_m and E₂^{(m)} = C(a−1,m−1)AB − d₁δ_m (m ≥ 2), and δ_m = C(a−1,m−1)A + C(a−1,m)F,
+- M_{0,σ} = C(a−1,σ−1)[A(Y′X″ + YX′) − 4BDH_*] + F·[−C(a−1,σ)(d₀Y′ + d₁Y) + D(2V₁^{(σ)} − 4Σ(n−2)y_n(C(a,σ) − C(n,σ)))], with X″ = d_{ℓ+a−1} − d_ℓ;
+- the first bracket is a shifted copy of Theorem 8.9's K.
+
+Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's K-lemma.
