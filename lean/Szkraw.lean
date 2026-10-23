@@ -101,3 +101,4 @@ import Szkraw.VRMoves3
 import Szkraw.VRGenSetting
 import Szkraw.GenKeyAlgebra
 import Szkraw.GenMain
+import Szkraw.GenKey

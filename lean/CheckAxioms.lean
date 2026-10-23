@@ -273,3 +273,16 @@ assert_allowed_axioms Szkraw.GenSetting.kernel_nonneg
 assert_allowed_axioms Szkraw.nval_inj_le
 assert_allowed_axioms Szkraw.dd_eq_nval
 assert_allowed_axioms Szkraw.lcgeneral_matrix_of_key
+
+assert_allowed_axioms Szkraw.genKey_of_props
+assert_allowed_axioms Szkraw.key_core
+assert_allowed_axioms Szkraw.iterShift_base
+assert_allowed_axioms Szkraw.shift_reindex
+assert_allowed_axioms Szkraw.GenSetting.cexp
+assert_allowed_axioms Szkraw.GenSetting.A0_expand
+assert_allowed_axioms Szkraw.GenSetting.A0p_expand
+assert_allowed_axioms Szkraw.GenSetting.B0_expand
+assert_allowed_axioms Szkraw.GenSetting.B0p_expand
+assert_allowed_axioms Szkraw.GenSetting.H1_expand
+assert_allowed_axioms Szkraw.GenSetting.V1_expand
+assert_allowed_axioms Szkraw.MC_zero
