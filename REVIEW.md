@@ -862,6 +862,17 @@ Fixes applied verbatim:
 - the palindromic conjunct now takes antisymmetry on `[0, 1]`;
 - the P3 parenthetical was replaced.
 
+## Lean statement fidelity, round 36: the one-kink counterexample with N = 500 (P3, Section 9) (2026-10-24)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_13d4bcbc-c50c-4266-a119-edde07b75810`. Brief: `reviews/lean-fidelity36-brief.md` (commit e2dec22). Answer: `reviews/lean-fidelity36-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- `kink500_1_10_fails` MATCHES the `r = 1/10`, `N = 500` column: 450 unit increments, then 50 increments of 11/10, in the accepted `KinkFails` form, with the parameters of `smallr_probe.py`.
+- The table row MATCHES, and so does the removal of the N = 500 item from the not-formalized paragraph. Being outside the default build does not make the example unformalized.
+- The new descriptive sentence was imprecise. There are three checkpoint equalities followed by a final sign check, not four equalities, and the time and memory figures belong to the parallel build.
+
+Fix applied: the reviewer's replacement paragraph, verbatim except its last sentence. "The parallel certificate build is reported to take about 6 minutes and use up to about 20 GB" became "In our run the parallel certificate build took about 6 minutes and used up to about 20 GB", because the figures are our own measurement. `papers/FORMALIZATION.md` was aligned the same way.
+
 ## Lean statement fidelity, round 35: the negative entry of the operator M (P2, Section 6) (2026-10-24)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_e047ff95-0ab8-46b2-ad5e-ebfbec4598a0`. Brief: `reviews/lean-fidelity35-brief.md` (commit 4a03165). Answer: `reviews/lean-fidelity35-answer.md`.
