@@ -704,4 +704,69 @@ theorem case_11_11 (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b �
   have d := diff (a - 1) (by omega)
   linarith
 
+
+/-! ## The box identity and `D_c(B) ≥ 0` -/
+
+theorem Xb_transpose (t : ℕ) (m1 m2 p q r w : ℤ) : Xb t m1 m2 p q r w = Xb t m2 m1 r w p q := by
+  unfold Xb Gm; rw [sum_comm]
+  exact sum_congr rfl (fun y _ => sum_congr rfl (fun x _ => Vk_transpose t m1 m2 x y))
+
+/-- Shifted double sums of products of `H`'s are box sums of `V`. -/
+theorem shift_box (t : ℕ) (e1 e2 f1 f2 c1 c2 a1 a2 b1 b2 : ℤ) :
+    ∑ x ∈ Icc a1 a2, ∑ y ∈ Icc b1 b2, Hz t (x - e1) (y - e2) * Hz t (c1 - x - f1) (c2 - y - f2) =
+      Xb t (c1 - (e1 + f1)) (c2 - (e2 + f2)) (a1 - e1) (a2 - e1) (b1 - e2) (b2 - e2) := by
+  unfold Xb Gm Vk
+  rw [← sum_Icc_shift]
+  refine sum_congr rfl (fun x _ => ?_)
+  rw [← sum_Icc_shift]
+  refine sum_congr rfl (fun y _ => ?_)
+  congr 2 <;> ring
+
+/-- The box sum `D_c(B)` of `T_c` with `k = t + 1`. -/
+noncomputable def Dbox (t : ℕ) (c1 c2 a b : ℤ) : ℝ :=
+  ∑ x ∈ Icc a (c1 - a), ∑ y ∈ Icc b (c2 - b),
+    (Hz (t + 1) x y * Hz (t + 1) (c1 - x) (c2 - y) - Hz t x y * Hz (t + 2) (c1 - x) (c2 - y))
+
+/-- `D_c(B) ≥ 0` for centred boxes. -/
+theorem Dbox_nonneg (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b ≤ c2) :
+    0 ≤ Dbox t c1 c2 a b := by
+  -- pointwise expansion into nine differences
+  have pt : ∀ x y : ℤ, Hz (t + 1) x y * Hz (t + 1) (c1 - x) (c2 - y) - Hz t x y * Hz (t + 2) (c1 - x) (c2 - y) =
+      (Hz t (x - 1) (y - 0) * Hz t (c1 - x - 1) (c2 - y - 0) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 2) (c2 - y - 0)) +
+      (Hz t (x - 1) (y - 0) * Hz t (c1 - x - 0) (c2 - y - 1) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 1) (c2 - y - 1)) +
+      (Hz t (x - 1) (y - 0) * Hz t (c1 - x - 1) (c2 - y - 1) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 2) (c2 - y - 1)) +
+      (Hz t (x - 0) (y - 1) * Hz t (c1 - x - 1) (c2 - y - 0) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 1) (c2 - y - 1)) +
+      (Hz t (x - 0) (y - 1) * Hz t (c1 - x - 0) (c2 - y - 1) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 0) (c2 - y - 2)) +
+      (Hz t (x - 0) (y - 1) * Hz t (c1 - x - 1) (c2 - y - 1) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 1) (c2 - y - 2)) +
+      (Hz t (x - 1) (y - 1) * Hz t (c1 - x - 1) (c2 - y - 0) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 2) (c2 - y - 1)) +
+      (Hz t (x - 1) (y - 1) * Hz t (c1 - x - 0) (c2 - y - 1) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 1) (c2 - y - 2)) +
+      (Hz t (x - 1) (y - 1) * Hz t (c1 - x - 1) (c2 - y - 1) - Hz t (x - 0) (y - 0) * Hz t (c1 - x - 2) (c2 - y - 2)) := by
+    intro x y
+    rw [Hz_succ t x y, Hz_succ t (c1 - x) (c2 - y), show t + 2 = (t + 1) + 1 by ring, Hz_succ (t + 1) (c1 - x) (c2 - y),
+      Hz_succ t (c1 - x - 1) (c2 - y), Hz_succ t (c1 - x) (c2 - y - 1), Hz_succ t (c1 - x - 1) (c2 - y - 1)]
+    rw [show c1 - x - 1 - 1 = c1 - x - 2 by ring, show c2 - y - 1 - 1 = c2 - y - 2 by ring]
+    simp only [sub_zero]
+    ring
+  unfold Dbox
+  simp only [pt, sum_add_distrib, sum_sub_distrib]
+  -- rewrite all eighteen double sums as box sums
+  simp only [shift_box]
+  simp only [sub_zero, zero_add, add_zero, show (1 : ℤ) + 1 = 2 by norm_num]
+  -- the nine differences
+  have k1 := case_10_10 t ha hb
+  have k2 := case_10_01 t ha hb
+  have k3 := case_10_11 t ha hb
+  have k4 : 0 ≤ Xb t (c1 - 1) (c2 - 1) a (c1 - a) (b - 1) (c2 - b - 1) - Xb t (c1 - 1) (c2 - 1) a (c1 - a) b (c2 - b) := by
+    rw [Xb_transpose, Xb_transpose t (c1 - 1)]; exact case_10_01 t hb ha
+  have k5 : 0 ≤ Xb t c1 (c2 - 2) a (c1 - a) (b - 1) (c2 - b - 1) - Xb t c1 (c2 - 2) a (c1 - a) b (c2 - b) := by
+    rw [Xb_transpose, Xb_transpose t c1]; exact case_10_10 t hb ha
+  have k6 : 0 ≤ Xb t (c1 - 1) (c2 - 2) a (c1 - a) (b - 1) (c2 - b - 1) - Xb t (c1 - 1) (c2 - 2) a (c1 - a) b (c2 - b) := by
+    rw [Xb_transpose, Xb_transpose t (c1 - 1)]; exact case_10_11 t hb ha
+  have k7 := case_11_10 t ha hb
+  have k8 : 0 ≤ Xb t (c1 - 1) (c2 - 2) (a - 1) (c1 - a - 1) (b - 1) (c2 - b - 1) -
+      Xb t (c1 - 1) (c2 - 2) a (c1 - a) b (c2 - b) := by
+    rw [Xb_transpose, Xb_transpose t (c1 - 1)]; exact case_11_10 t hb ha
+  have k9 := case_11_11 t ha hb
+  linarith
+
 end Szkraw
