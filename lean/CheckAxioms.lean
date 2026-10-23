@@ -259,3 +259,4 @@ assert_allowed_axioms Szkraw.abel_weight
 assert_allowed_axioms Szkraw.leibniz_general
 assert_allowed_axioms Szkraw.ratio_ineq1
 assert_allowed_axioms Szkraw.ratio_ineq2
+assert_allowed_axioms Szkraw.resum_nonneg3

@@ -96,3 +96,4 @@ import Szkraw.NewtonProduct
 import Szkraw.AbelWeights
 import Szkraw.LeibnizGeneral
 import Szkraw.LCRatioFacts
+import Szkraw.VRResum3
