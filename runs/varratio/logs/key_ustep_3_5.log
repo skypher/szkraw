@@ -1,0 +1,7 @@
+a=3: central sums {'CERTIFIED': 9}
+a=4: central sums {'CERTIFIED': 14}
+a=5: central sums {'CERTIFIED': 20}
+
+real	0m8.411s
+user	0m9.102s
+sys	0m7.319s
