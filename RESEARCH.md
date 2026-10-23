@@ -1524,3 +1524,19 @@ Exact check (runs/varratio/key_phi.py, sympy rationals):
 - the only zero is the P₀² coefficient, which is tight because the constant ratio is exact; the next smallest (P₀P₁) is strictly positive.
 
 So, for each fixed profile window, the key follows from monotone b at the top of the window plus the ratio's log-concavity, by an explicit certificate. Remaining: show that the central sums of Φ (cubic polynomials in u) are ≥ 0 for every LC u. That is a second Abel-type step, now in u.
+
+**Key inequality PROVED for windows a ≤ 7 (computer-assisted, exact), so (G) holds for N ≤ 7 (2026-10-23).** Two certificate stages:
+1. **Ratio stage.** Key(P) = Lin(P) − Quad(P). Along rays λP̂ the key is concave and vanishes at 0, and the top constraint bounds λ. So the key holds if (i) all coefficients of Lin are ≥ 0 and (ii) Φ := Lin·Δc_top − f₁(top)·Quad ≥ 0 on LC P. For (ii), Abel summation in P: every central partial sum S_{σ,i}(u) of every anti-diagonal of Φ is ≥ 0.
+2. **Profile stage.** Each S_{σ,i}(u) is a cubic in u, and each Lin coefficient a quadratic. Each is certified ≥ 0 for every LC u by an exact LP certificate, using:
+   - Robin Hood transfers u_k(u_{i+1}u_{j−1} − u_iu_j) ≥ 0 (resp. u_{i+1}u_{j−1} − u_iu_j ≥ 0 for the quadratics);
+   - monomials.
+
+   Every multiplier is re-solved in rationals and the identity checked exactly (runs/varratio/key_phi_ustep.py, key_lin_cert.py).
+   - Central sums: a = 3: 9, a = 4: 14, a = 5: 20, a = 6: 27, a = 7: 35, all CERTIFIED.
+   - Lin coefficients: all CERTIFIED for a ≤ 7.
+
+Consequence:
+- the key holds at every source with a ≤ 7, for every LC profile and every LC ratio with nondecreasing b;
+- with the general detour proofs (B via Proposition 8.14; C′, H, V, Ŵ) and the resummation, conjecture (G) holds for every array with N ≤ 7.
+
+Open: general a. The certificates are LP vertices, not yet closed forms. Next, find the pattern of the stage-2 certificates (they look like majorization certificates for cubic forms) and of the stage-1 central sums S_{σ,i}(u).
