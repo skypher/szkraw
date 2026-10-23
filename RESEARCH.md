@@ -1499,7 +1499,10 @@ Proof architecture for (G), all pieces now proved except the last:
 - LP (runs/varratio/key_cert_lp.py):
   - certificates FOUND for random LC u with a ≤ 6, and for far-field geometric u (u₀ = 1/w, w ∈ {10⁻¹, 10⁻², 10⁻³}) with a ≤ 8 and a = 12, 14, 16;
   - WITHOUT the LC generators they fail at (a, w) = (14, 10⁻³), (16, 10⁻²), (16, 10⁻³), exactly where the nonnegative-Newton relaxation failed.
-  - So the ratio's log-concavity (with P₀ = ρ(ℓ)) is necessary for this certificate family and sufficient in every tested case.
+  - CORRECTION (same day): these were floating-point (scipy HiGHS) verdicts on data spanning 10⁻⁵⁰ to 10³, so neither 'found' nor 'not found' was reliable. Redone exactly:
+    - **'Found' is now EXACTLY certified** (runs/varratio/key_cert_exact.py: rescaled HiGHS dual simplex, support re-solved in rationals, multipliers checked ≥ 0, identity checked exactly) for: a = 5 random; far-field geometric a = 8 (w = 1/10, 1/1000), a = 12 (w = 1/1000), a = 14 (w = 1/1000), a = 16 (w = 1/100, 1/1000).
+    - **'Not found without LC' is UNVERIFIED.** The rescaled float LP is still infeasible at (14, 10⁻³), (16, 10⁻²), (16, 10⁻³), but there is no exact infeasibility certificate. An exact grid search over non-LC ratios (p₀, p₁, τ) with monotone b in the window found NO configuration with key < 0 (runs/varratio/key_nolc_witness.py).
+    - The earlier claim that the ratio's log-concavity is necessary is WITHDRAWN. What stands: certificates using it exist and are exactly certified in every tested case.
 - Far-field counterexample check for (G) (runs/varratio/g_farfield.py, logs/g_farfield.log): geometric profiles w ∈ {1/20, 1/50}, N = 80 (ℓw up to 4), ratios on the LC boundary r + tx + (t²/r)C(x,2) and exponential r(1+p)^x, r ∈ {10⁻³, 1/2}, at the largest slope with b nondecreasing. All 8 arrays keep (P) (rows g(m,N;k)).
   - The N = 120 half was stopped: exponential cases take about 4 minutes each at N = 80, and the remaining half would have run past an hour without resumability.
 - Remaining: a uniform certificate (closed form in a and u), probably via a double LC / Abel structure in u and P, as in Proposition 8.14.

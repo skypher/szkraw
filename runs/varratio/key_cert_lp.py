@@ -7,7 +7,6 @@ import sys, random, math
 import sympy as sp
 import numpy as np
 from scipy.optimize import linprog
-amax, T, rng = int(sys.argv[1]), int(sys.argv[2]), random.Random(int(sys.argv[3])); nolc = 'nolc' in sys.argv
 
 def key_poly(u, a):
     P = sp.symbols('P0:%d' % (a + 2))
@@ -32,6 +31,7 @@ def lc_u(rng, L):
     return u
 
 if __name__ == '__main__':
+    amax, T, rng = int(sys.argv[1]), int(sys.argv[2]), random.Random(int(sys.argv[3])); nolc = 'nolc' in sys.argv
     cases = []
     for _ in range(T):
         a = rng.randint(3, amax); cases.append((a, lc_u(rng, a + 3), 'rand'))
