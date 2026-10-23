@@ -806,7 +806,7 @@ Reviewer: ChatGPT Pro (gpt-6-pro), job `job_a369f73b-0b00-4316-8f41-f43e77962fee
 **Verdict: statement fidelity PASS WITH MINOR FIXES; transcription audit incomplete.**
 - `positive_subalgebra_full`, `symmetric_open`, `koelink_relation_32` and `koelink_recurrence_71` MATCH.
 - The reviewer could not open the published article (HTTP 403). It compared the transcription with the arXiv preprint q-alg/9605040: both formulas match its Theorem 3.1(ii), equation (3.3), and its Theorem 7.1.
-- The author compared the transcription with the published article itself (supplied by the author; not redistributed). There the square relations are (3.2). Theorem 3.1(ii), Theorem 7.1 and Theorem 7.8 carry the same numbers and formulas in both versions.
+- Claude, the agent that wrote the transcription, compared it with the published article (a copy supplied by the author, not redistributed). This is not an independent check. There the square relations are (3.2); Theorem 3.1(ii), Theorem 7.1 and Theorem 7.8 carry the same numbers and formulas in both versions. The independent check is the reviewer's comparison with the preprint.
 
 Fix: the bibliography's locator sentence now says the locators follow the published version and notes that (3.2) is (3.3) in the preprint. The P3 citation "(3.2)" is consistent with that. The earlier "(3.3)" was the preprint's number, not a copying error.
 
