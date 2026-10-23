@@ -255,3 +255,4 @@ assert_allowed_axioms Szkraw.kap_LCNZ
 assert_allowed_axioms Szkraw.nval_mul
 assert_allowed_axioms Szkraw.nval_inj
 assert_allowed_axioms Szkraw.LCNZ.conv
+assert_allowed_axioms Szkraw.abel_weight

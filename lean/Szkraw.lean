@@ -93,3 +93,4 @@ import Szkraw.CubicRatioExample
 import Szkraw.VRLowDegree
 import Szkraw.VRAffineRemarks
 import Szkraw.NewtonProduct
+import Szkraw.AbelWeights
