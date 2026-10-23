@@ -1,5 +1,79 @@
 # Fresh-clone runs of the certificate scripts
 
+## Revision 14b4fa2 (2026-10-23)
+
+Clone of https://github.com/skypher/szkraw at `14b4fa228f89ea1805289001743aadb7939b2b72` (the revision cited as \bibitem{code} in the three papers), the same 33 scripts as in the run at a25bf9a below, run unmodified with python3 by `run_certs.sh` (local clone and outputs, not committed). All 33 exit with code 0, and their last output lines are identical to those of the a25bf9a run. The Lean files written by the generators occur verbatim in `lean/Szkraw/CubicB.lean` and `lean/Szkraw/CubicE.lean` at this revision. The Lean development at this revision builds with `make lean`; its axiom audit is `lean/axioms.log` (381 lines, only propext, Classical.choice, Quot.sound), produced from a working tree equal to this revision with no untracked files under `lean/`.
+
+```
+[23:45:11] start 01/33: runs/cubic/bdetour_cert.py  sha256 c1234cd3a53edc5c
+[23:47:27] end 01: rc=0, 136s, last line: ALL CERTIFIED (349 polynomial and sign checks)
+[23:47:27] start 02/33: runs/cubic/corner_cert.py  sha256 1af8fb16d3039cc2
+[23:47:29] end 02: rc=0, 2s, last line: CERTIFIED: corner repair (12 phi_2(0) + 8 phi_3(0)) phi_2(1) >= 8 c_1 phi_4(0) under r sigma <= t tau
+[23:47:29] start 03/33: runs/cubic/edetour_cert.py 3  sha256 1e37a310894c7d23
+[23:49:38] end 03: rc=0, 129s, last line: CERTIFIED: E detour with constant 3 (124 checks)
+[23:49:38] start 04/33: runs/cubic/phi2loc_cert.py  sha256 631bdcff8c7ca0ef
+[23:49:42] end 04: rc=0, 4s, last line: CERTIFIED: Phi2loc >= 0 for all a >= 3
+[23:49:42] start 05/33: runs/cubic/phi3loc_cert.py  sha256 96e033c94690a1de
+[23:49:45] end 05: rc=0, 4s, last line: CERTIFIED (with chain check)
+[23:49:46] start 06/33: runs/cubic/bdetour_u.py 7/4  sha256 0c25196c8b57dcc2
+[23:50:05] end 06: rc=0, 19s, last line: ALL CERTIFIED for kappa_ttau + 7/4 kappa_rs (51 checks)
+[23:50:05] start 07/33: runs/cubic/edetour_u.py 3 7/4  sha256 6c895068baa1a1bb
+[23:50:17] end 07: rc=0, 12s, last line: CERTIFIED: E detour, constant 3, kappa_ttau + 7/4 kappa_rs (18 checks)
+[23:50:17] start 08/33: runs/sharp/lc_violation_cert.py 6 1/10 11/10  sha256 a580479d73aee4e4
+[23:50:17] end 08: rc=0, 0s, last line: CERTIFIED: (P) for every r in [0,1]
+[23:50:17] start 09/33: runs/sharp/lc_violation_cert.py 8 1/10 11/10  sha256 a580479d73aee4e4
+[23:50:18] end 09: rc=0, 1s, last line: CERTIFIED: (P) for every r in [0,1]
+[23:50:18] start 10/33: runs/sharp/lc_violation_cert.py 10 1/10 11/10  sha256 a580479d73aee4e4
+[23:50:19] end 10: rc=0, 1s, last line: CERTIFIED: (P) for every r in [0,1]
+[23:50:19] start 11/33: runs/sharp/lc_violation_cert.py 12 1/10 11/10  sha256 a580479d73aee4e4
+[23:50:20] end 11: rc=0, 1s, last line: CERTIFIED: (P) for every r in [0,1]
+[23:50:20] start 12/33: runs/sharp/lc_violation_cert.py 6 1/100 11/10  sha256 a580479d73aee4e4
+[23:50:20] end 12: rc=0, 0s, last line: FAILS: g(6, 6, 6) = -11421689396209222100480371/11282159504913398311706203653864919 < 0 at r = 1 (exact)
+[23:50:20] start 13/33: runs/varratio/key_weight_cert.py  sha256 98cdfd094853b19a
+[23:50:25] end 13: rc=0, 5s, last line: all small-weight checks pass: True
+[23:50:25] start 14/33: runs/varratio/key_weight_closed.py  sha256 104ff8b35eb2f33f
+[23:50:26] end 14: rc=0, 1s, last line: closed-form mismatches: 0
+[23:50:26] start 15/33: runs/varratio/key_phi_ustep.py 5  sha256 0e1e48daf8f7eb9b
+[23:50:35] end 15: rc=0, 9s, last line: a=5: central sums {'CERTIFIED': 20}
+[23:50:35] start 16/33: runs/varratio/key_lin_cert.py 5  sha256 bebde4f1f76d13cc
+[23:50:37] end 16: rc=0, 2s, last line: a=5: Lin coefficients {'CERTIFIED': 6}
+[23:50:37] start 17/33: runs/lean_plan/edge_exact.py 60  sha256 5c672d687645c760
+[23:50:37] end 17: rc=0, 0s, last line: Qhat: fails at []
+[23:50:37] start 18/33: runs/lean_plan/forms_iii_v.py  sha256 ec8d35c58fa468a6
+[23:50:42] end 18: rc=0, 5s, last line: generic formulas agree with the exact sequences for 4 <= n <= a <= 13
+[23:50:42] start 19/33: runs/lean_plan/window_cert.py  sha256 9d97b37700afe147
+[23:50:45] end 19: rc=0, 3s, last line: ALL CERTIFIED
+[23:50:45] start 20/33: runs/lean_plan/gen_cubicB.py gen /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/B_gen.lean  sha256 a14373132671fa5a
+[23:50:49] end 20: rc=0, 4s, last line: case gen: 93 tail facts
+[23:50:49] start 21/33: runs/lean_plan/gen_cubicB.py 2 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/B_2.lean  sha256 a14373132671fa5a
+[23:50:51] end 21: rc=0, 2s, last line: case 2: 67 tail facts
+[23:50:51] start 22/33: runs/lean_plan/gen_cubicB.py 3 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/B_3.lean  sha256 a14373132671fa5a
+[23:50:54] end 22: rc=0, 3s, last line: case 3: 94 tail facts
+[23:50:54] start 23/33: runs/lean_plan/gen_cubicB.py 4 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/B_4.lean  sha256 a14373132671fa5a
+[23:50:56] end 23: rc=0, 2s, last line: case 4: 102 tail facts
+[23:50:56] start 24/33: runs/lean_plan/gen_cubicB.py 5 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/B_5.lean  sha256 a14373132671fa5a
+[23:50:59] end 24: rc=0, 3s, last line: case 5: 121 tail facts
+[23:50:59] start 25/33: runs/lean_plan/gen_cubicB.py corner /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/B_corner.lean  sha256 a14373132671fa5a
+[23:50:59] end 25: rc=0, 0s, last line: case corner: 46 tail facts
+[23:50:59] start 26/33: runs/lean_plan/gen_cubicE.py gen /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/E_gen.lean  sha256 f3d0db86e107626c
+[23:51:04] end 26: rc=0, 5s, last line: case gen: 92 tail facts
+[23:51:04] start 27/33: runs/lean_plan/gen_cubicE.py 3 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/E_3.lean  sha256 f3d0db86e107626c
+[23:51:05] end 27: rc=0, 1s, last line: case 3: 62 tail facts
+[23:51:05] start 28/33: runs/lean_plan/gen_cubicE.py 4 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/E_4.lean  sha256 f3d0db86e107626c
+[23:51:06] end 28: rc=0, 1s, last line: case 4: 77 tail facts
+[23:51:06] start 29/33: runs/lean_plan/gen_cubicE.py 5 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/E_5.lean  sha256 f3d0db86e107626c
+[23:51:07] end 29: rc=0, 1s, last line: case 5: 88 tail facts
+[23:51:07] start 30/33: runs/lean_plan/gen_cubicE.py 6 /home/yang/szkraw/runs/verify/r14b4fa2-out/gen/E_6.lean  sha256 f3d0db86e107626c
+[23:51:08] end 30: rc=0, 1s, last line: case 6: 92 tail facts
+[23:51:08] start 31/33: runs/lean_plan/phi3_edge.py 40  sha256 9977f63f232e1e89
+[23:51:08] end 31: rc=0, 0s, last line: done
+[23:51:08] start 32/33: runs/lean_plan/phi3_generic.py  sha256 0e2fd112c023b819
+[23:51:11] end 32: rc=0, 3s, last line: generic formulas agree with the exact coefficients for 4 <= n <= a <= 15
+[23:51:11] start 33/33: runs/lean_plan/p3_numeric_witnesses.py  sha256 f16727cce76173f5
+[23:51:12] end 33: rc=0, 1s, last line: terminal r=1/3 N=120 e=-2/125: g(N,N;N) < 0: True
+[23:51:12] all done
+```
+
 ## Revision a25bf9a (2026-10-23)
 
 Clone of https://github.com/skypher/szkraw at `a25bf9a148047a6d909ae752e1ed1f8452aea394` (the revision cited as \bibitem{code} in the three papers), scripts run unmodified with python3 by `run_certs.sh` (local clone and outputs, not committed). Items 1-16 are the certificate scripts of the earlier run below; items 17-33 are the scripts of the Lean route cited in P2 (edge bounds, forms of step (v), small windows, the generators of the cubic B and E detour certificates, the Phi_3 edge forms) and the witness recomputation for the P3 rule and terminal-row statements. Each line gives the exit code, the run time and the last output line. All 33 exit with code 0 and print the expected verdicts. `edge_exact.py 60` fails exactly for R2 at a <= 5 and K_a at a <= 4, as stated in P2.
