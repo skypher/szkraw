@@ -99,3 +99,4 @@ import Szkraw.LCRatioFacts
 import Szkraw.VRResum3
 import Szkraw.VRMoves3
 import Szkraw.VRGenSetting
+import Szkraw.GenKeyAlgebra

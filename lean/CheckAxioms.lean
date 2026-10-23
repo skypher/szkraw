@@ -264,3 +264,6 @@ assert_allowed_axioms Szkraw.gkernel_resum3
 assert_allowed_axioms Szkraw.GenSetting.domV
 assert_allowed_axioms Szkraw.GenSetting.domH
 assert_allowed_axioms Szkraw.GenSetting.domW
+assert_allowed_axioms Szkraw.matrix_abel
+assert_allowed_axioms Szkraw.phi_matrix
+assert_allowed_axioms Szkraw.key_of_phi
