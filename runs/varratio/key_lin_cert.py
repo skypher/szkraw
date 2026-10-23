@@ -6,8 +6,8 @@ import sympy as sp
 sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
 from key_phi import parts
 from key_cert_exact import certify
-amax = int(sys.argv[1])
-for a in range(3, amax + 1):
+amax = int(sys.argv[1]); amin = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+for a in range(amin, amax + 1):
     U = sp.symbols('u0:%d' % (a + 1))
     P, Lin, Quad, f1, Dc = parts(list(U) + [sp.Integer(0)] * 3, a)
     co = sp.Poly(Lin, *P); verdicts = {}
