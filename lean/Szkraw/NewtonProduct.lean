@@ -840,4 +840,58 @@ theorem pair_reindex (L : ℤ) (F : ℤ → ℤ → ℝ)
     simp only [mem_Icc] at hi' hni'
     exact hF i i' hi.1 hi'.1 (Or.inr (by omega))
 
+
+/-! ## Nonnegativity of the grouped sums -/
+
+/-- Extension of a sequence by zero to negative integers. -/
+noncomputable def extZ (ρ : ℕ → ℝ) (i : ℤ) : ℝ := if 0 ≤ i then ρ i.toNat else 0
+
+theorem extZ_nonneg {ρ : ℕ → ℝ} (hρ : LCNZ ρ) (i : ℤ) : 0 ≤ extZ ρ i := by
+  unfold extZ; split_ifs
+  · exact hρ.1 _
+  · exact le_refl 0
+
+theorem incr_pair_nonneg {ρ : ℕ → ℝ} (hρ : LCNZ ρ) {c a : ℤ} (ha0 : 0 ≤ a) (ha : 2 * a ≤ c) :
+    0 ≤ incrZ (fun i => extZ ρ i * extZ ρ (c - i)) a := by
+  unfold incrZ
+  by_cases h0 : a = 0
+  · rw [if_pos h0, sub_zero]; exact mul_nonneg (extZ_nonneg hρ _) (extZ_nonneg hρ _)
+  · rw [if_neg h0]
+    simp only
+    unfold extZ
+    rw [if_pos ha0, if_pos (by omega), if_pos (by omega), if_pos (by omega)]
+    have hb := hρ.balanced 1 a.toNat (c - a).toNat (by omega) (by omega)
+    have e1 : a.toNat - 1 = (a - 1).toNat := by omega
+    have e2 : (c - a).toNat + 1 = (c - (a - 1)).toNat := by omega
+    rw [e1, e2] at hb
+    linarith
+
+theorem inner_nonneg {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) (t : ℕ) (c1 c2 : ℤ) :
+    0 ≤ ∑ i ∈ Icc 0 c1, ∑ j ∈ Icc 0 c2, (extZ ρ i * extZ ρ (c1 - i)) * (extZ ν j * extZ ν (c2 - j)) *
+      (Hz (t + 1) i j * Hz (t + 1) (c1 - i) (c2 - j) - Hz t i j * Hz (t + 2) (c1 - i) (c2 - j)) := by
+  set u : ℤ → ℝ := fun i => extZ ρ i * extZ ρ (c1 - i)
+  set w : ℤ → ℝ := fun j => extZ ν j * extZ ν (c2 - j)
+  set T : ℤ → ℤ → ℝ := fun i j => Hz (t + 1) i j * Hz (t + 1) (c1 - i) (c2 - j) - Hz t i j * Hz (t + 2) (c1 - i) (c2 - j)
+  have e0 : ∑ i ∈ Icc 0 c1, ∑ j ∈ Icc 0 c2, u i * w j * T i j =
+      ∑ i ∈ Icc 0 c1, u i * ∑ j ∈ Icc 0 c2, w j * T i j := by
+    refine sum_congr rfl (fun i _ => ?_); rw [mul_sum]; exact sum_congr rfl (fun j _ => by ring)
+  show 0 ≤ ∑ i ∈ Icc 0 c1, ∑ j ∈ Icc 0 c2, u i * w j * T i j
+  rw [e0, layer_cake_z c1 u _ (fun i _ _ => by simp only [u, sub_sub_cancel]; ring)]
+  apply sum_nonneg
+  intro a ha
+  simp only [mem_Icc] at ha
+  apply mul_nonneg (incr_pair_nonneg hρ ha.1 (by omega))
+  have e1 : ∑ i ∈ Icc a (c1 - a), ∑ j ∈ Icc 0 c2, w j * T i j =
+      ∑ j ∈ Icc 0 c2, w j * ∑ i ∈ Icc a (c1 - a), T i j := by
+    rw [sum_comm]; exact sum_congr rfl (fun j _ => by rw [mul_sum])
+  rw [e1, layer_cake_z c2 w _ (fun j _ _ => by simp only [w, sub_sub_cancel]; ring)]
+  apply sum_nonneg
+  intro b hb
+  simp only [mem_Icc] at hb
+  apply mul_nonneg (incr_pair_nonneg hν hb.1 (by omega))
+  have e2 : ∑ j ∈ Icc b (c2 - b), ∑ i ∈ Icc a (c1 - a), T i j = Dbox t c1 c2 a b := by
+    unfold Dbox; rw [sum_comm]
+  rw [e2]
+  exact Dbox_nonneg t (by omega) (by omega)
+
 end Szkraw
