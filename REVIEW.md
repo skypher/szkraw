@@ -862,6 +862,18 @@ Fixes applied verbatim:
 - the palindromic conjunct now takes antisymmetry on `[0, 1]`;
 - the P3 parenthetical was replaced.
 
+## Lean statement fidelity, round 35: the negative entry of the operator M (P2, Section 6) (2026-10-24)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_e047ff95-0ab8-46b2-ad5e-ebfbec4598a0`. Brief: `reviews/lean-fidelity35-brief.md` (commit 4a03165). Answer: `reviews/lean-fidelity35-answer.md`.
+
+**Verdict: PASS.**
+- The operators `opU`, `opP`, `opQ`, `opCp`, `opCm`, `opA`, `opG`, `opS` and `opM` MATCH the operator M of the proof of P2 Theorem 4.1. They are built from the weights of the Theorem 3.1 recurrence (`kernelRecV_iff`, `tmat_split`, `opS_eq`). The square index set is harmless.
+- The cubic data MATCH: N = 6, d_i = i/6, r = 1/5, t = τ = 0, σ = 1/200.
+- `opM_negative_entry` (M_{(2,2),(0,6)} = −9/32) and `opM_has_negative_entry` MATCH the example. They do not claim a universal statement for t = τ = 0.
+- The P2 table row, the shortened not-formalized paragraph and the moved obstruction/non-contradiction clause MATCH.
+
+No fixes were required.
+
 ## Lean statement fidelity, round 34: the raising direction at fixed r, and non-uniformity from every N₀ (2026-10-24)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_a24b6d69-57b7-4896-b4c7-6f3bd0dbc25b`. Brief: `reviews/lean-fidelity34-brief.md` (commit ee6b5a6). Answer: `reviews/lean-fidelity34-answer.md`.
