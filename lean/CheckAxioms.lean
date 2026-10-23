@@ -454,3 +454,8 @@ assert_allowed_axioms Szkraw.ColCheck.ccol_triangle
 assert_allowed_axioms Szkraw.ColCheck.witer_eq
 assert_allowed_axioms Szkraw.ColCheck.witer_corner
 assert_allowed_axioms Szkraw.ColCheck.psum_kinkZ
+assert_allowed_axioms Szkraw.FinSys.P_orth
+assert_allowed_axioms Szkraw.FinSys.P_terminal
+assert_allowed_axioms Szkraw.FinSys.christoffel_darboux
+assert_allowed_axioms Szkraw.FinSys.P_top_pos
+assert_allowed_axioms Szkraw.FinSys.finite_system_reduction

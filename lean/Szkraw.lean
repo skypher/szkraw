@@ -149,3 +149,4 @@ import Szkraw.LambdaN
 import Szkraw.RaiseDirection
 import Szkraw.OperatorM
 import Szkraw.WindowColumn
+import Szkraw.FiniteSystem

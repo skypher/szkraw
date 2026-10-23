@@ -398,3 +398,8 @@ Szkraw.ColCheck.ccol_triangle: allowed axioms [propext, Classical.choice, Quot.s
 Szkraw.ColCheck.witer_eq: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.ColCheck.witer_corner: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.ColCheck.psum_kinkZ: allowed axioms [propext, Quot.sound]
+Szkraw.FinSys.P_orth: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.FinSys.P_terminal: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.FinSys.christoffel_darboux: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.FinSys.P_top_pos: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.FinSys.finite_system_reduction: allowed axioms [propext, Classical.choice, Quot.sound]
