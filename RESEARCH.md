@@ -1506,3 +1506,6 @@ Proof architecture for (G), all pieces now proved except the last:
 - Far-field counterexample check for (G) (runs/varratio/g_farfield.py, logs/g_farfield.log): geometric profiles w ∈ {1/20, 1/50}, N = 80 (ℓw up to 4), ratios on the LC boundary r + tx + (t²/r)C(x,2) and exponential r(1+p)^x, r ∈ {10⁻³, 1/2}, at the largest slope with b nondecreasing. All 8 arrays keep (P) (rows g(m,N;k)).
   - The N = 120 half was stopped: exponential cases take about 4 minutes each at N = 80, and the remaining half would have run past an hour without resumability.
 - Remaining: a uniform certificate (closed form in a and u), probably via a double LC / Abel structure in u and P, as in Proposition 8.14.
+- Structure of exact certificates (runs/varratio/key_cert_inspect.py): basic LP solutions are arbitrary vertices.
+  - In the far-field case (a = 8, w = 10⁻³) the certificate uses every LC difference P₁P_j − P₀P_{j+1} (j = 1…7), heavily, together with g_m·P_k at the top of the window (m = 6, 7).
+  - Suggested uniform route: the top-of-window monotone-b products as in Theorem 8.9, plus the (1, j) LC differences that move higher Newton terms onto P₀ and P₁.
