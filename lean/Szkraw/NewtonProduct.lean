@@ -561,4 +561,147 @@ theorem marginal_mono (t : ℕ) (m1 m2 w1 w2 : ℤ)
   · rw [sum_eq_zero (fun y _ => Vk_neg_left (by omega) y)]
     exact sum_nonneg (fun y _ => Vk_nonneg _ _ _ _ _)
 
+
+/-! ## The five box cases -/
+
+/-- Row marginal of `V` over `[p, q]`. -/
+noncomputable def Gm (t : ℕ) (m1 m2 p q x : ℤ) : ℝ := ∑ y ∈ Icc p q, Vk t m1 m2 x y
+
+/-- Box sum of `V` over `[p,q] × [r,w]`. -/
+noncomputable def Xb (t : ℕ) (m1 m2 p q r w : ℤ) : ℝ := ∑ x ∈ Icc p q, Gm t m1 m2 r w x
+
+theorem Gm_reflect (t : ℕ) (m1 m2 p q x : ℤ) :
+    Gm t m1 m2 p q (m1 - x) = Gm t m1 m2 (m2 - q) (m2 - p) x := by
+  unfold Gm
+  have : ∀ y, Vk t m1 m2 (m1 - x) y = Vk t m1 m2 x (m2 - y) := by
+    intro y; rw [← Vk_symm t m1 m2 x (m2 - y), sub_sub_cancel]
+  simp only [this]
+  exact sum_Icc_reflect (fun y => Vk t m1 m2 x y) m2 p q
+
+theorem Gm_down (t : ℕ) (m1 m2 p q x : ℤ) (h : p ≤ q + 1) :
+    Gm t m1 m2 (p - 1) (q - 1) x - Gm t m1 m2 p q x = Vk t m1 m2 x (p - 1) - Vk t m1 m2 x q := by
+  unfold Gm; exact sum_Icc_down (fun y => Vk t m1 m2 x y) h
+
+theorem Xb_rows (t : ℕ) (m1 m2 a c1 r w : ℤ) (h : a ≤ c1 - a + 1) :
+    Xb t m1 m2 (a - 1) (c1 - a - 1) r w - Xb t m1 m2 a (c1 - a) r w =
+      Gm t m1 m2 r w (a - 1) - Gm t m1 m2 r w (c1 - a) := by
+  unfold Xb; exact sum_Icc_down (fun x => Gm t m1 m2 r w x) h
+
+/-- The marginal monotonicity lemma in `Gm` notation. -/
+theorem Gm_mono (t : ℕ) (m1 m2 p q : ℤ)
+    (hsym : ∀ x : ℤ, 2 * x ≤ m1 → Gm t m1 m2 p q x ≤ Gm t m1 m2 p q (m1 - x)) {x : ℤ} (hx : 2 * x ≤ m1) :
+    Gm t m1 m2 p q (x - 1) ≤ Gm t m1 m2 p q x :=
+  marginal_mono t m1 m2 p q hsym hx
+
+/-- Case `e = e' = (1,0)`: `s = (2,0)`. -/
+theorem case_10_10 (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (_hb : 2 * b ≤ c2) :
+    0 ≤ Xb t (c1 - 2) c2 (a - 1) (c1 - a - 1) b (c2 - b) - Xb t (c1 - 2) c2 a (c1 - a) b (c2 - b) := by
+  rw [Xb_rows _ _ _ _ _ _ _ (by omega)]
+  have e : Gm t (c1 - 2) c2 b (c2 - b) (c1 - a) = Gm t (c1 - 2) c2 b (c2 - b) (a - 1 - 1) := by
+    rw [show c1 - a = (c1 - 2) - (a - 2) by ring, Gm_reflect, show c2 - (c2 - b) = b by ring,
+      show a - 1 - 1 = a - 2 by ring]
+  rw [e]
+  have := Gm_mono t (c1 - 2) c2 b (c2 - b) (fun x _ => by
+    rw [Gm_reflect, show c2 - (c2 - b) = b by ring]) (x := a - 1) (by omega)
+  linarith
+
+/-- Case `e = (1,0)`, `e' = (0,1)`: `s = (1,1)`. -/
+theorem case_10_01 (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b ≤ c2) :
+    0 ≤ Xb t (c1 - 1) (c2 - 1) (a - 1) (c1 - a - 1) b (c2 - b) -
+      Xb t (c1 - 1) (c2 - 1) a (c1 - a) b (c2 - b) := by
+  rw [Xb_rows _ _ _ _ _ _ _ (by omega)]
+  have e : Gm t (c1 - 1) (c2 - 1) b (c2 - b) (c1 - a) = Gm t (c1 - 1) (c2 - 1) (b - 1) (c2 - b - 1) (a - 1) := by
+    rw [show c1 - a = (c1 - 1) - (a - 1) by ring, Gm_reflect]
+    congr 1 <;> ring
+  rw [e]
+  have hd := Gm_down t (c1 - 1) (c2 - 1) b (c2 - b) (a - 1) (by omega)
+  have ht := Vk_T2 t (c1 - 1) (c2 - 1) (x := a - 1) (y := b - 1) (y' := c2 - b) (by omega) (by omega) (by omega)
+  linarith
+
+/-- Case `e = (1,0)`, `e' = (1,1)`: `s = (2,1)`; the row step. -/
+theorem case_10_11 (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b ≤ c2) :
+    0 ≤ Xb t (c1 - 2) (c2 - 1) (a - 1) (c1 - a - 1) b (c2 - b) -
+      Xb t (c1 - 2) (c2 - 1) a (c1 - a) b (c2 - b) := by
+  rw [Xb_rows _ _ _ _ _ _ _ (by omega)]
+  set m1 := c1 - 2; set m2 := c2 - 1
+  have e : Gm t m1 m2 b (c2 - b) (c1 - a) = Gm t m1 m2 (b - 1) (c2 - b - 1) (a - 1 - 1) := by
+    rw [show c1 - a = m1 - (a - 2) by ring, Gm_reflect, show a - 1 - 1 = a - 2 by ring]
+    congr 1 <;> ring
+  rw [e]
+  have hd := Gm_down t m1 m2 b (c2 - b) (a - 1) (by omega)
+  have ht := Vk_T2 t m1 m2 (x := a - 1) (y := b - 1) (y' := c2 - b) (by omega) (by omega) (by omega)
+  have hm := Gm_mono t m1 m2 (b - 1) (c2 - b - 1) (fun x hx => by
+    rw [Gm_reflect, show m2 - (c2 - b - 1) = b by ring, show m2 - (b - 1) = c2 - b by ring]
+    have := Gm_down t m1 m2 b (c2 - b) x (by omega)
+    have := Vk_T2 t m1 m2 (x := x) (y := b - 1) (y' := c2 - b) hx (by omega) (by omega)
+    linarith) (x := a - 1) (by omega)
+  linarith
+
+
+/-- Central symmetry of box sums over a row interval symmetric about `m₁/2`. -/
+theorem Xb_reflect_cols (t : ℕ) (c1 m2 a p q : ℤ) :
+    Xb t (c1 - 2) m2 (a - 1) (c1 - a - 1) p q = Xb t (c1 - 2) m2 (a - 1) (c1 - a - 1) (m2 - q) (m2 - p) := by
+  unfold Xb
+  have h := sum_Icc_reflect (fun x => Gm t (c1 - 2) m2 p q x) (c1 - 2) (a - 1) (c1 - a - 1)
+  rw [show c1 - 2 - (c1 - a - 1) = a - 1 by ring, show c1 - 2 - (a - 1) = c1 - a - 1 by ring] at h
+  rw [← h]
+  exact sum_congr rfl (fun x _ => Gm_reflect t (c1 - 2) m2 p q x)
+
+/-- Case `e = (1,1)`, `e' = (1,0)`: `s = (2,1)`. -/
+theorem case_11_10 (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b ≤ c2) :
+    0 ≤ Xb t (c1 - 2) (c2 - 1) (a - 1) (c1 - a - 1) (b - 1) (c2 - b - 1) -
+      Xb t (c1 - 2) (c2 - 1) a (c1 - a) b (c2 - b) := by
+  have z := Xb_reflect_cols t c1 (c2 - 1) a (b - 1) (c2 - b - 1)
+  rw [show c2 - 1 - (c2 - b - 1) = b by ring, show c2 - 1 - (b - 1) = c2 - b by ring] at z
+  rw [z]
+  exact case_10_11 t ha hb
+
+/-- Case `e = e' = (1,1)`: `s = (2,2)`. -/
+theorem case_11_11 (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b ≤ c2) :
+    0 ≤ Xb t (c1 - 2) (c2 - 2) (a - 1) (c1 - a - 1) (b - 1) (c2 - b - 1) -
+      Xb t (c1 - 2) (c2 - 2) a (c1 - a) b (c2 - b) := by
+  set m1 := c1 - 2; set m2 := c2 - 2
+  -- second bracket: X(I-1, J-2) = X(I-1, J)
+  have z := Xb_reflect_cols t c1 m2 a (b - 2) (c2 - b - 2)
+  rw [show m2 - (c2 - b - 2) = b by ring, show m2 - (b - 2) = c2 - b by ring] at z
+  -- first bracket via the column marginal K(y) = Gm t m2 m1 (a-1) (c1-a-1) y
+  have colX : ∀ r w, Xb t m1 m2 (a - 1) (c1 - a - 1) r w =
+      ∑ y ∈ Icc r w, Gm t m2 m1 (a - 1) (c1 - a - 1) y := by
+    intro r w; unfold Xb Gm
+    rw [sum_comm]
+    exact sum_congr rfl (fun y _ => sum_congr rfl (fun x _ => Vk_transpose t m1 m2 x y))
+  have T1 : Xb t m1 m2 (a - 1) (c1 - a - 1) (b - 1) (c2 - b - 1) -
+      Xb t m1 m2 (a - 1) (c1 - a - 1) (b - 2) (c2 - b - 2) =
+      Gm t m2 m1 (a - 1) (c1 - a - 1) (c2 - b - 1) - Gm t m2 m1 (a - 1) (c1 - a - 1) (b - 2) := by
+    rw [colX, colX]
+    have := sum_Icc_down (fun y => Gm t m2 m1 (a - 1) (c1 - a - 1) y) (p := b - 1) (q := c2 - b - 1) (by omega)
+    rw [show b - 1 - 1 = b - 2 by ring, show c2 - b - 1 - 1 = c2 - b - 2 by ring] at this
+    linarith
+  have Ksym : Gm t m2 m1 (a - 1) (c1 - a - 1) (c2 - b - 1) = Gm t m2 m1 (a - 1) (c1 - a - 1) (b - 1) := by
+    rw [show c2 - b - 1 = m2 - (b - 1) by ring, Gm_reflect]
+    congr 1 <;> ring
+  have Kmono := Gm_mono t m2 m1 (a - 1) (c1 - a - 1) (fun y _ => by
+    rw [Gm_reflect, show m1 - (c1 - a - 1) = a - 1 by ring, show m1 - (a - 1) = c1 - a - 1 by ring])
+    (x := b - 1) (by omega)
+  rw [show b - 1 - 1 = b - 2 by ring] at Kmono
+  -- third bracket: rows
+  have R := Xb_rows t m1 m2 a c1 b (c2 - b) (by omega)
+  have e : Gm t m1 m2 b (c2 - b) (c1 - a) = Gm t m1 m2 (b - 2) (c2 - b - 2) (a - 2) := by
+    rw [show c1 - a = m1 - (a - 2) by ring, Gm_reflect]
+    congr 1 <;> ring
+  have diff : ∀ x : ℤ, 2 * x ≤ m1 → Gm t m1 m2 (b - 2) (c2 - b - 2) x ≤ Gm t m1 m2 b (c2 - b) x := by
+    intro x hx
+    have d1 := Gm_down t m1 m2 b (c2 - b) x (by omega)
+    have d2 := Gm_down t m1 m2 (b - 1) (c2 - b - 1) x (by omega)
+    rw [show b - 1 - 1 = b - 2 by ring, show c2 - b - 1 - 1 = c2 - b - 2 by ring] at d2
+    have t1 := Vk_T2 t m1 m2 (x := x) (y := b - 2) (y' := c2 - b) hx (by omega) (by omega)
+    have t2 := Vk_T2 t m1 m2 (x := x) (y := b - 1) (y' := c2 - b - 1) hx (by omega) (by omega)
+    linarith
+  have Gmono := Gm_mono t m1 m2 (b - 2) (c2 - b - 2) (fun x hx => by
+    rw [Gm_reflect, show m2 - (c2 - b - 2) = b by ring, show m2 - (b - 2) = c2 - b by ring]
+    exact diff x hx) (x := a - 1) (by omega)
+  rw [show a - 1 - 1 = a - 2 by ring] at Gmono
+  have d := diff (a - 1) (by omega)
+  linarith
+
 end Szkraw
