@@ -1,0 +1,74 @@
+# PASS WITH MINOR FIXES
+
+**No split-induced gap found in the numbered mathematical results.** P1’s written proofs stand alone; P2 and P3 use P1, not each other, in proofs. The fixes below concern overstated summaries, missing notation and documentation. Literature verification has the exceptions listed below.
+
+## Required fixes
+
+**1. P2: restore hypotheses in summaries.** In the abstract, introduction and opening summary of §6, the decreasing-weight criterion must require that the Newton coefficients \(\kappa_k\) of \(c\) are **nonnegative and log-concave without internal zeros**, and that
+\[
+\Delta^k b(0)=w_k\kappa_k,\qquad w_1\ge w_2\ge\cdots\ge0.
+\]
+The current unrestricted assertion is false. Independently, \(N=4\), \(d=(0,10,20,30,41)/41\), \(c=0.9d\), \(b=0.1d\) have constant weights \(1/9\), but
+\[
+g(4,4;4)=-11393/2170000.
+\]
+For the abstract’s low-degree assertion, also restore \(\nu_1>0,\nu_2\ge0\) and **nondecreasing \(b\)**, as in Theorem 5.1. Add the latter hypothesis to P1’s §6 “Other ratios” summary. [1][2]
+
+**2. P1: qualify the paragraph after Corollary 5.3.** Restrict the exact-order assertion to **fixed \(N\ge2\)**, matching P3 Corollary 9.11. For \(N=1\), every admissible two-point stochastic array has (P), so the defined supremum is \(+\infty\). Make the same correction in P3’s “Sharper stability radii” paragraph. Restrict the endpoint equalities to **polynomial rules, or analytic rules satisfying P3 Corollary 9.6’s hypotheses**, rather than arbitrary uniform rules. In P1’s abstract, replace “every fixed ratio” by “every fixed \(0<r<1\)” and \(p_0\le1/2\) by \(0<p_0\le1/2\). [3][4]
+
+**3. Repair three local scope/notation defects.**
+- **P2 Setting:** define \(\rho(i)=c_i/d_i\) only **when \(d_i>0\)**. The displayed basic assumptions alone allow \(d_i=0\), since they allow negative \(b_i\). The positivity criteria subsequently ensure the needed positivity.
+- **P1 sharpness paragraph:** add **\(N\ge3\)** before asserting \(\nu_2^2<\nu_1\nu_3\).
+- **P3 §10, shortened K–G paragraph:** restore the missing definition, for \(q>1\), \(0<\lambda<1\),
+  \[
+  t=\frac{\lambda N(q-1)q^{N-1}}{(1-\lambda)(q^N-1)}.
+  \]
+  Otherwise the numerical quadruple and subsequent \((N,q,t)\)-grid are undefined locally. [1][2][4]
+
+**4. Make the remaining open questions genuinely open.** P3 §10’s question about *any* inequality criterion covering \(0<r\le r_0\), all \(N\), is already answered literally by P1. Replace it with the question suggested by the following discussion: **whether a criterion given by linear inequalities can admit every \(K_{N,r}\) and \(G_{N,q,r}\), for all \(N,q\), throughout such a range**. In P1’s last open-problem paragraph, replace the broad exclusivity claim by “Theorem 3.1 and its extensions in P2 give shape conditions controlling these deep products”; otherwise P3’s perturbation inequalities are overlooked. [4][2]
+
+**5. Align formalization claims with the tables.** This is a documentation finding, not a Lean audit.
+- P1’s numbered results are accounted for, including Lemmas 3.2–3.4 through the explanatory paragraph. Label the numbered remark **“Remark 3.5”**. Rename the final row **“Corollary 5.3 and its no-uniform-radius conclusion”**: its listed declarations do not cover the entire following P3-summary paragraph. Change the disclosure’s blanket exclusion of remarks to **“Unlisted remarks and computational observations are not claimed machine-verified.”**
+- P2’s newly generalized Lemma 2.1 has no table entry. Either document a declaration covering that general form, or replace the introduction’s blanket formalization assertion by **“The formalized statements are listed in the section on code and formalization.”** The exclusions for Theorems 5.5–5.6 are otherwise clear. [2][1]
+
+**6. Repair concordance/documentation.** Add **Remark 8.5 → P1 Remark 3.5** and **Definition 9.3 → P3 Definition 9.3** to both concordances. In the formalization table, change the two-parameter/Bernstein remark’s destination from **P1 3.1 to P1 3.5**. Replace the unresolved placeholders by: counterexamples **original §10 → P2 §6**; algebra sections **3 and 4**; low/deep-product section **7**; admission **Definition 9.3**. In `concordance.txt`, replace “cut (see note)” by **“cut: special case of 8.11 = P2 4.2”**. [5][6]
+
+**7. Fix the repository citation and typo.** The cited code revision `4f739c3` does not contain the newly referenced `papers/FORMALIZATION.md` and `papers/DIAGNOSTICS.md`. Retain that revision for historical verification provenance, but add a separate split-documentation citation pinned to **`9c9e1e3`**. In P2 §6, change `$b$,,` to `$b$,`. Apply generated-text fixes in the corresponding builders and regenerate. [1]
+
+## Independent checks
+
+**P1.** The rewritten spectral argument correctly establishes cyclicity, simple spectrum and positive spectral weights; evaluating at \(1\) gives coefficient sum one without assuming (P). The \(G/K\) definitions, edited remark and proofs through Theorem 3.1 are consistent. The symmetry argument in Theorem 4.1 is valid. For Corollary 4.2, the \(N=1\) identities check directly; for \(N\ge2\), the components are exactly
+\[
+G_{N,q,r},\qquad G_{N-1,q,r/q},
+\]
+so Theorem 3.1 applies to both. Theorem 4.3 follows internally. The cube proof gives \(g(N,N;N)=(1-r)^N\); detailed balance gives \(\pi_N=r^{-N}\). The two radius definitions agree on their common domain. No P2/P3 result is needed in these written proofs. [3]
+
+**P2.** The generalized Lemma 2.1 proof works, including leading/trailing zeros, and covers its uses for \(\phi,f,P_k\). The cited `P1-*` labels identify the intended statements. Removed Proposition 8.10 is subsumed by P2 Theorem 4.2; its removal leaves no proof dependency, and the edited last-index monotonicity test is correct. [7][8]
+
+**P3 and preservation.** The roadmap and added radius citations are consistent. The duplicated finite realization, Krawtchouk/geometric results, Szwarc theorem and corner value agree. Apart from the missing \(t\), the cuts leave no dangling mathematical dependency. Source inspection found no unlisted weakening of a moved theorem’s statement or hypotheses. **I did not replay the builders, perform a byte-for-byte regeneration comparison, or compile the papers.** [9][5]
+
+**Exact arithmetic:** independently checked 45 geometric systems, 45 parity systems and their normalized components, 20 raised-mass perturbations against weighted Gram–Schmidt, and 160 finite log-concave sequences for Lemma 2.1. Reproduced P2’s three displayed small counterexamples and the abstract counterexample above. [Reproducible check script](sandbox:/mnt/data/check_split27.py).
+
+## PDF citation audit
+
+**Verified in PDFs:** Askey, Part II, Theorem 1/Corollary 1; Koelink’s cited preprint, Theorems 3.1, 7.1 and 7.8; Miclo 2017, Proposition 3.3; Miclo 2015, Theorem 31/Proposition 6; Wang–Yeh, Lemma 2.1/Corollary 2.6; Szwarc 2003, Theorem 1. No attribution mismatch found at those locators. [10][11][12][13][14]
+
+**Unverified:** Szwarc’s survey—including Problem 2’s exact wording, locators and parameter convention—Eagleson 1969, and Walkup 1976: their PDFs could not be opened. Companion-paper PDFs also would not render; their TeX was reviewed instead.
+
+**Submission structure:** sensible. P1 supplies the complete internal argument for the problem as it states it. Its long sharpness/search-grid discussion is the main candidate for an appendix or P3; no additional proof from either companion is needed.
+
+Sources:
+[1] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/p2.tex
+[2] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/p1.tex
+[3] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/build_p1.py
+[4] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/p3.tex
+[5] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/concordance.txt
+[6] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/FORMALIZATION.md
+[7] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/build_p2.py
+[8] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/paper.tex
+[9] https://raw.githubusercontent.com/skypher/szkraw/9c9e1e3/papers/build_p3.py
+[10] arXiv:q-alg/9605040v1  28 May 1996 — https://arxiv.org/pdf/q-alg/9605040v1
+[11] https://arxiv.org/pdf/1505.02540
+[12] https://arxiv.org/pdf/math/0504164
+[13] A Necessary and Sufficient Condition for Nonnegative Product Linearization of Orthogonal Polynomials — https://scispace.com/pdf/a-necessary-and-sufficient-condition-for-nonnegative-product-d6zy3q5vuz.pdf
+[14] https://ir.cwi.nl/pub/7741/7741D.pdf — https://ir.cwi.nl/pub/7741/7741D.pdf

@@ -735,3 +735,23 @@ Fixes, all applied:
 5. \bibitem{code} now pins 4f739c3 (contains all certificate scripts and the fixes above).
 
 **Fresh-clone certificate run (2026-10-23).** In rounds 24–26 the reviewer could not download the repository and reran transcribed copies of the scripts. To close that gap, all 16 certificate scripts of Theorems 8.16 and 8.17 and of the sharpness remark were run unmodified from a fresh clone at 4f739c3 (runs/verify/run_certs.sh, record in runs/verify/RESULTS.md). All exit with code 0 and print CERTIFIED/pass; the control prints FAILS as intended. The disclosure now says that the reviewers reran transcribed copies and that the scripts were also run from a fresh clone.
+
+## Review round 27: the split into three papers (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro). The first job (`job_4d6ffc8f-…`) was rejected upstream (HTTP 403, "unusual activity"). The resubmission is job `job_cd2d9ddf-9316-47f9-9f3a-e82dd96e731b`, brief `reviews/round27b-brief.md` (commit 9c9e1e3), answer `reviews/round27b-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.** No gap caused by the split. P1's written proofs stand alone, and P2 and P3 use P1 in proofs but not each other. Independent checks:
+- P1's spectral argument, the G/K definitions, the symmetry argument, Corollary 4.2 (N = 1 directly; for N ≥ 2 the components G_{N,q,r} and G_{N−1,q,r/q}), Theorem 4.3, the cube proof of the corner value, detailed balance, and the two radius definitions.
+- P2's generalized Lemma 2.1, including leading and trailing zeros; the P1 label targets; the removal of Proposition 8.10.
+- P3's cuts leave no dangling dependency except the missing t, and no moved statement was weakened.
+- Exact arithmetic on 45 geometric systems, 45 parity systems, 20 raised-mass perturbations and 160 log-concave sequences.
+- Citations verified in PDFs: Askey, Koelink, Miclo 2015/2017, Wang–Yeh, Szwarc 2003. Unverified: Szwarc's survey, Eagleson 1969, Walkup 1976.
+
+Fixes, applied directly to the papers (now the primary sources):
+1. P2 abstract, introduction and §6: the weights criterion now states its hypotheses (Newton coefficients of c log-concave without internal zeros, nonincreasing nonnegative weights). Without them the claim is false: N = 4, d = (0,10,20,30,41)/41, c = 0.9d has g(4,4;4) < 0. The low-degree claim now states ν₁ > 0, ν₂ ≥ 0 and nondecreasing b, and P1 §6 adds nondecreasing b.
+2. P1 and P3: the exact order (1−r)^N is now stated for fixed N ≥ 2, and the endpoint equalities for polynomial or qualifying analytic rules. P1's abstract now says "fixed 0 < r < 1" and "0 < p₀ ≤ 1/2".
+3. P2 defines ρ(i) only where d_i > 0. P1 adds N ≥ 3 before ν₂² < ν₁ν₃. P3 restores the definition of t.
+4. P3's open question is now about linear-inequality criteria that admit all K_{N,r} and G_{N,q,r}. P1's last open problem uses "give shape conditions that control them".
+5. P1: Remark 3.5 is labelled, the table row reads "Corollary 5.3 and its no-uniform-radius conclusion", and the disclosure says "unlisted remarks and computational observations are not claimed machine-verified". P2's introduction now points to the Lean table instead of making a blanket claim.
+6. Concordance and FORMALIZATION.md: Remark 8.5 → P1 3.5 and Definition 9.3 → P3 9.3 added, placeholders resolved, the cut entry explained (commit b018bac).
+7. A new citation \bibitem{docs} pins b018bac for the split documentation; the code citation keeps 4f739c3. The P2 typo "$b$,," is fixed.
