@@ -147,3 +147,24 @@ theorem geometric_kappa :
     nlinarith [pow_pos (by linarith : (0 : ℝ) < q) 2, mul_pos hδ0 h3, mul_pos (mul_pos hδ0 h3) (by linarith : (0 : ℝ) < q)]
 
 end Szkraw
+
+namespace Szkraw
+
+open Finset
+
+/-- **P2, after Lemma 5.4**: the weight sums are the coefficients of `Q` on geometric sequences,
+`Q(1, r, r², …) = Σ_W N_W(Q) r^W`, for `Q(u) = Σ_{i ≤ j ≤ M} q_{ij} u_i u_j` and
+`N_W(Q) = Σ_{i ≤ j, i + j = W} q_{ij}`. -/
+theorem weight_sums_geometric (M : ℕ) (q : ℕ → ℕ → ℝ) (r : ℝ) :
+    ∑ p ∈ (range (M + 1) ×ˢ range (M + 1)).filter (fun p => p.1 ≤ p.2), q p.1 p.2 * (r ^ p.1 * r ^ p.2) =
+      ∑ W ∈ range (2 * M + 1),
+        (∑ p ∈ (range (M + 1) ×ˢ range (M + 1)).filter (fun p => p.1 ≤ p.2 ∧ p.1 + p.2 = W), q p.1 p.2) * r ^ W := by
+  rw [← Finset.sum_fiberwise_of_maps_to (g := fun p : ℕ × ℕ => p.1 + p.2) (t := range (2 * M + 1)) (fun p hp => by
+    simp only [Finset.mem_filter, Finset.mem_product, Finset.mem_range] at hp ⊢; omega)]
+  refine Finset.sum_congr rfl fun W _ => ?_
+  rw [Finset.sum_mul, Finset.filter_filter]
+  refine Finset.sum_congr rfl fun p hp => ?_
+  simp only [Finset.mem_filter] at hp
+  rw [← pow_add, hp.2.2]
+
+end Szkraw

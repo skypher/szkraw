@@ -377,3 +377,4 @@ Szkraw.szwarc_thm33_check: allowed axioms [propext, Classical.choice, Quot.sound
 Szkraw.known_directions_satisfy: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.no_open_set_of_rules: allowed axioms [propext, Classical.choice, Quot.sound]
 Szkraw.logconcave_increment_class: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.weight_sums_geometric: allowed axioms [propext, Classical.choice, Quot.sound]

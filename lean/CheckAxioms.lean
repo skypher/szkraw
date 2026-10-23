@@ -433,3 +433,4 @@ assert_allowed_axioms Szkraw.szwarc_thm33_check
 assert_allowed_axioms Szkraw.known_directions_satisfy
 assert_allowed_axioms Szkraw.no_open_set_of_rules
 assert_allowed_axioms Szkraw.logconcave_increment_class
+assert_allowed_axioms Szkraw.weight_sums_geometric
