@@ -1566,3 +1566,15 @@ Open: general a. The certificates are LP vertices, not yet closed forms. Next, f
   - replacing every negative λ_kP₀P_k (k ≥ 2) by λ_kP₁P_{k−1} leaves a quadratic in (P₁…P_a) whose central sums are all ≥ 0;
   - covered: 40 random LC u with a ≤ 9 and 24 far-field geometric u with a ≤ 10, no failure.
   Remaining for a general proof: closed forms of these central sums (via E₁, E₂, E₃, B₀, B₀′) and a uniform majorization certificate in u. λ₁ ≥ 0 should be the boundary form of Theorem 8.9's key.
+
+**Key for general a: progress on the Abel criterion for Φ (2026-10-23).**
+- **λ₁ = φ₀₁ ≥ 0, and φ₁₁ ≥ 0, for all a (proved).** On linear ratios (P₀, P₁), Φ is the key at the top boundary. Theorem 8.9's proof gives (K′) for every LC u, every t ≥ 0 and every α ≥ t·u₀/u₁, and (K′) implies the full key. So Φ(P₀, P₁) = φ₀₁P₀P₁ + φ₁₁P₁² ≥ 0 for all P₀, P₁ ≥ 0, using φ₀₀ = 0. The coefficients follow by letting P₀ → ∞ and by setting P₀ = 0.
+- **The trade adds nothing new.** Moving λ_σP₀P_σ to λ_σP₁P_{σ−1} is one Abel step on the same anti-diagonal. The post-trade criterion is exactly "all central sums S_{σ,i} of Φ are ≥ 0", including i = 0 and i = 1.
+- **Central sums with i ≥ 2 have a simple closed form** (runs/varratio/key_S_high.py, matches for a ≤ 8): S_{σ,i} = Σ_{k=i}^{σ−i}[B₀′^{(k)}E₁^{(σ−k)} + B₀^{(k)}E₂^{(σ−k)}]. E₃ drops out because c₁^{(k)} = 0 for k ≥ 2. With A = d_{ℓ+a}, B = d_{ℓ+a−1}:
+  - B₀^{(k)} = C(a,k)A and B₀′^{(k)} = C(a,k)A − [k=2](a−1)d_{ℓ+2};
+  - E₁^{(m)} = C(a,m)A(B − d_ℓ) − C(a−1,m)B(A − d_ℓ), and E₂^{(m)} is the same with d_{ℓ+1} in place of d_ℓ.
+  - So S_{σ,i} = A[2AB(V−W) − t(AV − BW)] − [i=2](a−1)d_{ℓ+2}E₁^{(σ−2)}, with t = d_ℓ + d_{ℓ+1}, V = Σ_{k=i}^{σ−i}C(a,k)C(a,σ−k) and W = Σ_{k=i}^{σ−i}C(a,k)C(a−1,σ−k).
+  - The main part is ≥ 0 if 2A(2B − t) ≥ (a−2)tF, since (V−W)/W ≥ i/(a−i) ≥ 2/(a−2).
+  - Proof sketch of the condition: write LHS − RHS = u₀·[4S₁ − (2a−4)F − 2u₁] + [4S₁² + 4S₁F − 2u₁S₁ − au₁F]. The second bracket is ≥ 0. In the first, the u₁ and u₂ coefficients are 2a−2 and 0, and the negative u_m coefficients (m ≥ 3) are traded by u₀u_m ≤ u₁u_{m−1}.
+  - Exact test (runs/varratio/key_S_high_test.py, 70 LC sequences, a ≤ 18): the condition and all S_{σ,i≥2} hold, including the i = 2 correction.
+- **Still open: S_{σ,1} and S_{σ,0}.** They involve the k ∈ {0,1} terms and E₃ (with V₁^{(m)}, Z₁^{(m)} sums over u), and are cubic in u. This is now the only obstacle to the key for all a, and hence to (G).
