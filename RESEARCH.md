@@ -1784,3 +1784,21 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
 - **Certificates.** Every condition is checked in three regimes: z = 0; z = ℓ with q = 1/(ℓ+w); z = 1/q = h with ℓ = h+w. Condition (iii) is checked in Bernstein form in s = c/q. In each regime the numerator polynomial has only nonnegative coefficients, with n = 6+m symbolic and n = 2,…,5 explicit.
 - **Consequence.** For cubic ρ with rσ ≤ tτ, D(ℓ,n) ≥ 0 at every (ℓ,n) ≠ (0,2) with ℓ+n+2 ≤ N. The earlier Abel-tail failures at n = 2, 3 were weaknesses of the method, not of the coefficients: on admissible profiles, κ_tσ < 0 occurs only at (0,2).
 - **Remaining for (C3) at u = 1:** the corner repair in summed form, the E = W + X detour, the key with weights (2,1,1), and the resummation.
+
+**(C3) at u = 1: every detour is now proved; only the cubic key inequality remains (2026-10-23, computer-assisted).**
+- **Corner repair** (runs/cubic/corner_cert.py, asserts, prints CERTIFIED).
+  - In B₀(0,a)B₀(1,a−2) ≥ 4c₁B₁(0,a), only the m = 4 term needs the corner. It requires 6C(a,4)φ₂(0)φ₂(1) ≥ 4C(a,4)c₁φ₄(0).
+  - Reserve C(a,3)φ₃(0) from B₀(0,a). Since C(a,3)C(a−2,2) = 2(a−2)C(a,4) ≥ 4C(a,4) for a ≥ 4, it suffices that (12φ₂(0) + 8φ₃(0))φ₂(1) ≥ 8c₁φ₄(0).
+  - The added form has only nonnegative polarized coefficients, so only κ_tσ needs checking. With u₀ = 0, u₃ = qa, u₄ ≤ qa² it equals 8(6q⁴s² − 4q³s² + 29q³s + 11q²s + 33q² + 36q + 11) with s = a/q, and its Bernstein coefficients are ≥ 0.
+  - The other terms (n ≥ 3, and j ≥ 2) use only C(a,2)φ₂(0) and the pointwise B-detour. **So P² ≥ 4Q for cubic ρ with rσ ≤ tτ.**
+- **Regrouped families** (runs/cubic/families.py: exact on random LC profiles, u = 1, N ≤ 12, 160 arrays). ψ_n = h_n − V^q_n − τW^τ_n − σG³_n, where:
+  - V^q_n = n(t + τ(ℓ+n−1))f_{n−1};
+  - W^τ_n = C(n,2)f_{n−2};
+  - G³_n = nC(ℓ+n−1,2)f_{n−1} + C(n,2)(ℓ+n−2)f_{n−2} + C(n,3)f_{n−3}, the σ-part of V, W and X.
+  - Measured minima: μ_{V^q} = 11.4, μ_{E′} = 5.75, μ_{G³} = 4.18 (f-only 3.26). Key ratio with weights (γ_V, γ_E) = (2,0) is 2.85; (2,1) gives 2.87.
+- **Detours.**
+  - H (μ = 10), V^q (μ = 9/2), W^τ (μ = 3) and C′ (μ = 6) carry over verbatim from Theorem 8.11. V^q's Δρ part is t + τx, so (n+1)Δ − nΔ' = t + τℓ ≥ 0. The σC(x,2) part of the cubic Δρ is what broke the termwise V argument; it now sits in G³.
+  - **G³ with μ = 2** (runs/cubic/g3_cert.py, prints CERTIFIED). With B₀ ≥ C(a,2)ρ(ℓ+1)f₂, it suffices that (n+1)(n+2)u₂G³_n(ℓ+1) ≥ 2(n−1)(u₀+u₁)G³_{n+2}(ℓ) for n ≥ 3. The weight condition is j(m−3) ≥ 2(m−j−1), i.e. (j−2)(m−1) ≥ 0. Certified by the same exact reduction (n ≥ 4 generic, n = 3 exact).
+  - μ = 3 fails at n = 3 only, in the relaxation (z = ℓ = 1/q, which no profile realizes; see the sharper bound below).
+- **Resummation** as in Theorem 8.11 with families H, V^q, W^τ, σG³ and constants 10, 9/2, 3, 2. The σG³ family survives with coefficient 1 − 2/2 = 0, so it needs no key weight. The key therefore needed is A₀P + PA₀ + 2V^q₁ + W^τ₁ ≥ 4H₁ (cubic quantities); the measured ratio is ≥ 2.85.
+- **A sharper u₀ bound** (runs/cubic/small_n_test.py, 0 violations on realizable profiles): u₀ ≤ (u₁²/u₂)(1 − (u₁/(u₁+u₂))^ℓ), with equality for geometric ν. Unproved, and not needed so far.
