@@ -400,14 +400,15 @@ Result & Lean declaration\\[3pt]
 Lemma~\ref{lem:finite}: finite realization & \path{Szkraw.finite_realization}, \path{Szkraw.product_triangle_zero}\\[3pt]
 Theorem~\ref{thm:lc}: log-concave Newton criterion & \path{Szkraw.logconcave_criterion}\\[3pt]
 Remark~\ref{rem:bernstein} & \path{Szkraw.lc_twoParam}, \path{Szkraw.lc_bernstein}, \path{Szkraw.constantRatio_twoParam}\\[3pt]
-Corollary~\ref{cor:kraw}: Krawtchouk range & \path{Szkraw.full_krawtchouk_binomial_range}, \path{Szkraw.binomial_normalized_at_zero}, \path{Szkraw.binomial_node_probability_convention}\\[3pt]
+Corollary~\ref{cor:kraw}: Krawtchouk range & \path{Szkraw.full_krawtchouk_binomial_range}, \path{Szkraw.binomial_normalized_at_zero}, \path{Szkraw.binomial_node_probability_convention}, \path{Szkraw.krawtchouk_range_sharp}\\[3pt]
 Corollary~\ref{cor:additional}: geometric arrays & \path{Szkraw.additional_geometric_class}\\[3pt]
 Theorem~\ref{thm:decomp}: quadratic decomposition & \path{Szkraw.decomp_positivity}, \path{Szkraw.decomp_converse}, \path{Szkraw.even_block}, \path{Szkraw.odd_block}, \path{Szkraw.evenComp_admissible}, \path{Szkraw.oddComp_admissible}\\[3pt]
 Corollary~\ref{cor:parity}: parity-split criterion & \path{Szkraw.parity_split}, \path{Szkraw.parity_split_sharp}, \path{Szkraw.ps_even_params}, \path{Szkraw.ps_odd_params}\\[3pt]
 Theorem~\ref{thm:szwarc}: Szwarc's quadratic system & \path{Szkraw.szwarc_full}, \path{Szkraw.szwarc_sharp}, \path{Szkraw.realization_symmetric}\\[3pt]
 Lemma~\ref{lem:corner-value}: corner value & \path{Szkraw.corner_value}\\[3pt]
 Proposition~\ref{prop:raise}: raising the top mass & \path{Szkraw.raise_measure}, \path{Szkraw.raise_corner}, \path{Szkraw.raise_sign}, \path{Szkraw.raise_bound}\\[3pt]
-Corollary~\ref{cor:radius-exp} and its no-uniform-radius conclusion & \path{Szkraw.radius_exp}, \path{Szkraw.radius_exp_asymp}, \path{Szkraw.radius_no_uniform}
+Corollary~\ref{cor:radius-exp} and its no-uniform-radius conclusion & \path{Szkraw.radius_exp}, \path{Szkraw.radius_exp_asymp}, \path{Szkraw.radius_no_uniform}\\[3pt]
+The failing example in the paragraph ``How sharp is log-concavity?'' & \path{Szkraw.lc_violation_fails}
 \end{tabular}
 \end{center}
 The entry for Theorem~\ref{thm:lc} formalizes Lemmas~\ref{lem:lc-ineq} and~\ref{lem:detours}, the operator induction, and Lemma~\ref{lem:kernel-rec} in converse form: the solution of~\eqref{eq:kernel-rec} yields the linearization coefficients. The Lean proofs of Corollaries~\ref{cor:kraw} and~\ref{cor:parity} obtain positivity of the components from the geometric-increment criterion of~\cite{P3} rather than from Theorem~\ref{thm:lc}; the statements are the ones given here. The Lean proof of Lemma~\ref{lem:corner-value} uses the algebra of~\cite{P3}.

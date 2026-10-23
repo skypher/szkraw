@@ -30,7 +30,8 @@ theorem affine_linear_quadratic {N : ℕ} (vv : Coefficients N) (hN : 1 ≤ N) {
   · rw [hc n hn, hlin n hn, choose2_real]
     field_simp; ring
 
-/-- The profile `d_i = D(i)/D(6)`, `D(i) = (99/100) i + (1/100) [i]_{11/10}`, scaled by `D(6) = 60171561/10⁷`. -/
+/-- The profile `d_i = D(i)/D(6)` for `0 ≤ i ≤ 6`, extended by `1` for `i > 6`, where
+`D(i) = (99/100) i + (1/100) [i]_{11/10}`, scaled by `D(6) = 60171561/10⁷`. -/
 noncomputable def sharpD (i : ℕ) : ℝ :=
   (if i = 0 then 0 else if i = 1 then 10000000 else if i = 2 then 20010000 else if i = 3 then 30031000
     else if i = 4 then 40064100 else if i = 5 then 50110510 else 60171561) / 60171561
@@ -73,7 +74,7 @@ theorem lc_violation_fails :
     have h := sharpEx_g666
     linarith
 
-/-- For `a₀ = 1`, `b₀ = 0` the first product matrix is the recurrence matrix, so `g(1,1;i) = b_i` on the diagonal. -/
+/-- For `a₀ = 1`, `b₀ = 0` the first product matrix is the recurrence matrix, so `g(1,i;i) = b_i` on the diagonal. -/
 theorem productMatrix_one {N : ℕ} (v : Coefficients N) (ha0 : v.a 0 = 1) (hb0 : v.b 0 = 0) :
     productMatrix v 1 = recurrenceMatrix v := by
   simp [productMatrix, matrixPair, ha0, hb0]

@@ -729,6 +729,22 @@ Scope:
 
 Fix applied: the notes sentence "Each coefficient form …" was replaced by the reviewer's text. The rσ form is not nonnegative by itself; it is grouped with tτ using rσ ≤ tτ. All other proposed changes were applied as written.
 
+## Lean statement fidelity, round 20: three remarks (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_29b5176b-b0b0-4063-a234-443efb18f684`. Brief: `reviews/lean-fidelity20-brief.md` (commit f2bd5d5). Answer: `reviews/lean-fidelity20-answer.md`.
+
+Scope:
+- `Szkraw.affine_linear_quadratic` (P2, remark after Theorem 4.1: linear-profile arrays are arrays of Proposition 3.3);
+- `Szkraw.lc_violation_fails` (P1, "How sharp is log-concavity?", the failing case μ = 1/100 only);
+- `Szkraw.krawtchouk_range_sharp` (P1 Corollary 3.6 and P3 Corollary 6.1, sharpness of the range);
+- the proposed table rows and notes sentences.
+
+**Verdict: PASS WITH MINOR FIXES; no theorem-statement changes.**
+- All three statements MATCH. The positive μ = 1/10 example is not formalized, and the new rows and notes say so.
+- The notes' attribution of the positive example to exact arithmetic is supported by the archived CERTIFIED outputs.
+
+Fixes applied: the docstring of `productMatrix_one` now reads `g(1,i;i) = b_i`. The docstring of `sharpD` says the profile equals D(i)/D(6) for 0 ≤ i ≤ 6 and is extended by 1 for i > 6. All proposed table rows and notes sentences were applied as written.
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.
