@@ -1,0 +1,51 @@
+\documentclass[twoside,10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,mathtools}
+\usepackage[letterpaper,total={5.5in,8in},vmarginratio=1:1,hmarginratio=1:1,headsep=21pt]{geometry}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage[breaklinks=true,linktocpage=true]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=purple,urlcolor=purple,citecolor=blue!80!black,
+pdfauthor={Leslie P. Polzer},pdftitle={\papertitle},
+pdfsubject={Finite orthogonal polynomials and nonnegative linearization},
+pdfkeywords={orthogonal polynomials, Krawtchouk polynomials, nonnegative linearization, quadratic transformation, hypergroups, Lean}}
+\medmuskip=4mu
+\thickmuskip=8mu
+\setlength{\emergencystretch}{2em}
+\numberwithin{equation}{section}
+\newtheoremstyle{slbody}{8pt}{8pt}{\normalfont\slshape}{}{\bfseries}{.}{0.5em}
+{\thmname{#1}\thmnumber{ #2}\thmnote{ {\normalfont\itshape(\ignorespaces#3\unskip)}}}
+\theoremstyle{slbody}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\qint}[1]{[#1]_q}
+\title{\papertitle}
+\author{Leslie P. Polzer}
+\newcommand{\authoraffiliation}{Independent Researcher}
+\newcommand{\authoremail}{polzer@fastmail.com}
+\date{\paperdate}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{\z@}{-3.5ex \@plus -1ex \@minus -.2ex}{2.3ex \@plus .2ex}{\normalfont\large\bfseries}}
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\enspace}
+\def\tagform@#1{\maketag@@@{(\ignorespaces{\oldstylenums{#1}}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{\textup{{\normalfont(\oldstylenums{\ref{#1}}}\normalfont)}}
+\newcommand{\shorttitle}{\papershort}
+\newcommand{\shortauthors}{LESLIE P. POLZER}
+\newcommand{\ps@bookheader}{%
+\renewcommand\@oddfoot{\hfil}\renewcommand\@evenfoot{\hfil}%
+\renewcommand\@oddhead{\ifnum\value{page}>1{\small\hfil\shortauthors}\hfil\thepage\else\hfil\fi}%
+\renewcommand\@evenhead{\thepage\hfil\small\shorttitle\hfil}}
+\pagestyle{bookheader}
+\renewcommand{\maketitle}{\begin{center}{\large\bfseries\@title}\\\vskip36pt
+{\scshape\@author}\par\medskip{\small\authoraffiliation}\par\smallskip
+{\small\texttt{\authoremail}}\par\smallskip{\small\@date}\par\vskip36pt\end{center}}
+\makeatother
+\renewenvironment{abstract}{\quotation\noindent\small{\bfseries\abstractname.\enspace}}{\endquotation}
