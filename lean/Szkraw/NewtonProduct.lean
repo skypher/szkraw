@@ -311,4 +311,81 @@ theorem V_repr (t : ℕ) (m1 m2 : ℤ) (h1 : m2 ≤ 2 * t) (h2 : m1 ≤ 2 * t) (
       exact hP (by omega)
     rw [lhs0, rhs0]; ring
 
+
+/-! ## (T2): `V` is reverse regular of order two -/
+
+/-- Balanced products of a binomial row dominate (integer indices). -/
+theorem Cz_balanced (n : ℕ) {p q r w : ℤ} (hpq : p ≤ q) (hpr : p ≤ r) (hqw : q ≤ w) (_hrw : r ≤ w)
+    (hsum : p + w = q + r) : Cz n p * Cz n w ≤ Cz n q * Cz n r := by
+  by_cases hp : 0 ≤ p
+  · unfold Cz
+    rw [if_pos hp, if_pos (by omega), if_pos (by omega), if_pos (by omega)]
+    have hb := (LCNZ.choose n).balanced
+    rcases le_total q r with h | h
+    · have := hb (q.toNat - p.toNat) q.toNat r.toNat (by omega) (by omega)
+      have e1 : q.toNat - (q.toNat - p.toNat) = p.toNat := by omega
+      have e2 : r.toNat + (q.toNat - p.toNat) = w.toNat := by omega
+      rw [e1, e2] at this; exact this
+    · have := hb (r.toNat - p.toNat) r.toNat q.toNat (by omega) (by omega)
+      have e1 : r.toNat - (r.toNat - p.toNat) = p.toNat := by omega
+      have e2 : q.toNat + (r.toNat - p.toNat) = w.toNat := by omega
+      rw [e1, e2] at this; linarith
+  · unfold Cz; rw [if_neg hp, zero_mul]
+    exact mul_nonneg (Cz_nonneg n q) (Cz_nonneg n r)
+
+/-- The kernel `V`. -/
+noncomputable def Vk (t : ℕ) (m1 m2 x y : ℤ) : ℝ := Hz t x y * Hz t (m1 - x) (m2 - y)
+
+theorem Vk_nonneg (t : ℕ) (m1 m2 x y : ℤ) : 0 ≤ Vk t m1 m2 x y :=
+  mul_nonneg (Hz_nonneg _ _ _) (Hz_nonneg _ _ _)
+
+theorem Vk_symm (t : ℕ) (m1 m2 x y : ℤ) : Vk t m1 m2 (m1 - x) (m2 - y) = Vk t m1 m2 x y := by
+  unfold Vk; rw [sub_sub_cancel, sub_sub_cancel, mul_comm]
+
+theorem Vk_zero_of {t : ℕ} {m1 m2 : ℤ} (h : ¬ (m2 ≤ 2 * t ∧ m1 ≤ 2 * t ∧ 2 * (t : ℤ) ≤ m1 + m2)) (x y : ℤ) :
+    Vk t m1 m2 x y = 0 := by
+  unfold Vk
+  by_contra hne
+  have sA := Hz_support (left_ne_zero_of_mul hne)
+  have sB := Hz_support (right_ne_zero_of_mul hne)
+  exact h (by omega)
+
+/-- The constant of the binomial representation. -/
+noncomputable def Vconst (t : ℕ) (m1 m2 : ℤ) : ℝ :=
+  (t.factorial : ℝ) ^ 2 / (((2 * t - m2).toNat.factorial * (2 * t - m1).toNat.factorial *
+    (m1 + m2 - 2 * t).toNat.factorial : ℕ) : ℝ)
+
+theorem Vconst_pos (t : ℕ) (m1 m2 : ℤ) : 0 < Vconst t m1 m2 := by unfold Vconst; positivity
+
+theorem Vk_eq {t : ℕ} {m1 m2 : ℤ} (h1 : m2 ≤ 2 * t) (h2 : m1 ≤ 2 * t) (h3 : 2 * (t : ℤ) ≤ m1 + m2)
+    (x y : ℤ) : Vk t m1 m2 x y = Vconst t m1 m2 * (Cz (2 * t - m1).toNat (t - x) *
+      Cz (2 * t - m2).toNat (t - y) * Cz (m1 + m2 - 2 * t).toNat (x + y - t)) := by
+  have := V_repr t m1 m2 h1 h2 h3 x y
+  unfold Vk Vconst
+  have hpos : (0 : ℝ) < (((2 * t - m2).toNat.factorial * (2 * t - m1).toNat.factorial *
+      (m1 + m2 - 2 * t).toNat.factorial : ℕ) : ℝ) := by positivity
+  rw [div_mul_eq_mul_div, eq_div_iff hpos.ne']
+  exact this
+
+theorem Vk_rr2 (t : ℕ) (m1 m2 : ℤ) {x x' y y' : ℤ} (hx : x ≤ x') (hy : y ≤ y') :
+    Vk t m1 m2 x y * Vk t m1 m2 x' y' ≤ Vk t m1 m2 x y' * Vk t m1 m2 x' y := by
+  by_cases hm : m2 ≤ 2 * t ∧ m1 ≤ 2 * t ∧ 2 * (t : ℤ) ≤ m1 + m2
+  · obtain ⟨h1, h2, h3⟩ := hm
+    simp only [Vk_eq h1 h2 h3]
+    set K := Vconst t m1 m2
+    set A := fun z : ℤ => Cz (2 * t - m1).toNat (t - z)
+    set B := fun z : ℤ => Cz (2 * t - m2).toNat (t - z)
+    set Cc := fun z : ℤ => Cz (m1 + m2 - 2 * t).toNat z
+    have key : Cc (x + y - t) * Cc (x' + y' - t) ≤ Cc (x + y' - t) * Cc (x' + y - t) :=
+      Cz_balanced _ (by omega) (by omega) (by omega) (by omega) (by omega)
+    have hK : 0 ≤ K := (Vconst_pos t m1 m2).le
+    have hA : 0 ≤ A x * A x' := mul_nonneg (Cz_nonneg _ _) (Cz_nonneg _ _)
+    have hB : 0 ≤ B y * B y' := mul_nonneg (Cz_nonneg _ _) (Cz_nonneg _ _)
+    have := mul_le_mul_of_nonneg_left key (mul_nonneg (mul_nonneg (mul_nonneg hK hK) hA) hB)
+    calc K * (A x * B y * Cc (x + y - t)) * (K * (A x' * B y' * Cc (x' + y' - t)))
+        = K * K * (A x * A x') * (B y * B y') * (Cc (x + y - t) * Cc (x' + y' - t)) := by ring
+      _ ≤ K * K * (A x * A x') * (B y * B y') * (Cc (x + y' - t) * Cc (x' + y - t)) := this
+      _ = K * (A x * B y' * Cc (x + y' - t)) * (K * (A x' * B y * Cc (x' + y - t))) := by ring
+  · simp only [Vk_zero_of hm, mul_zero, le_refl]
+
 end Szkraw
