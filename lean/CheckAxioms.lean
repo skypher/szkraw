@@ -260,3 +260,4 @@ assert_allowed_axioms Szkraw.leibniz_general
 assert_allowed_axioms Szkraw.ratio_ineq1
 assert_allowed_axioms Szkraw.ratio_ineq2
 assert_allowed_axioms Szkraw.resum_nonneg3
+assert_allowed_axioms Szkraw.gkernel_resum3
