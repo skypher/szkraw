@@ -769,4 +769,43 @@ theorem Dbox_nonneg (t : ℕ) {c1 c2 a b : ℤ} (ha : 2 * a ≤ c1) (hb : 2 * b 
   have k9 := case_11_11 t ha hb
   linarith
 
+
+/-! ## Layer cake on `ℤ` -/
+
+/-- Increments of `u` on `ℤ`, starting at `0`. -/
+def incrZ (u : ℤ → ℝ) (a : ℤ) : ℝ := u a - (if a = 0 then 0 else u (a - 1))
+
+theorem sum_incrZ (u : ℤ → ℝ) {m : ℤ} (hm : 0 ≤ m) : ∑ a ∈ Icc 0 m, incrZ u a = u m := by
+  induction m, hm using Int.leInduction with
+  | base => simp [incrZ]
+  | succ m hm ih =>
+    have e : Icc (0 : ℤ) (m + 1) = insert (m + 1) (Icc 0 m) := by
+      ext y; simp only [mem_Icc, mem_insert]; omega
+    rw [e, sum_insert (by simp), ih]
+    unfold incrZ; rw [if_neg (by omega)]; simp
+
+theorem layer_cake_z (c : ℤ) (u φ : ℤ → ℝ) (hsym : ∀ i, 0 ≤ i → i ≤ c → u i = u (c - i)) :
+    ∑ i ∈ Icc 0 c, u i * φ i = ∑ a ∈ Icc 0 (c / 2), incrZ u a * ∑ i ∈ Icc a (c - a), φ i := by
+  have h1 : ∀ i ∈ Icc 0 c, u i * φ i =
+      (∑ a ∈ (Icc 0 (c / 2)).filter (fun a => a ≤ i ∧ a ≤ c - i), incrZ u a) * φ i := by
+    intro i hi
+    simp only [mem_Icc] at hi
+    have hm : (Icc 0 (c / 2)).filter (fun a => a ≤ i ∧ a ≤ c - i) = Icc 0 (min i (c - i)) := by
+      ext a; simp only [mem_filter, mem_Icc]; constructor
+      · rintro ⟨⟨h0, _⟩, h1, h2⟩; omega
+      · intro h; refine ⟨⟨by omega, by omega⟩, by omega, by omega⟩
+    rw [hm, sum_incrZ u (by omega)]
+    congr 1
+    rcases le_total i (c - i) with h | h
+    · rw [min_eq_left h]
+    · rw [min_eq_right h, ← hsym i hi.1 hi.2]
+  rw [sum_congr rfl h1]
+  simp only [sum_mul, mul_sum]
+  rw [sum_comm' (t' := Icc 0 (c / 2)) (s' := fun a => Icc a (c - a))]
+  intro i a
+  simp only [mem_filter, mem_Icc]
+  constructor
+  · rintro ⟨⟨hi0, hic⟩, ⟨ha0, hac⟩, h1, h2⟩; exact ⟨⟨h1, by omega⟩, ha0, hac⟩
+  · rintro ⟨⟨h1, h2⟩, ha0, hac⟩; exact ⟨⟨by omega, by omega⟩, ⟨ha0, hac⟩, h1, by omega⟩
+
 end Szkraw
