@@ -1561,3 +1561,8 @@ Open: general a. The certificates are LP vertices, not yet closed forms. Next, f
   1. Show the coefficient of P₁ in L₀ is ≥ 0 (the linear-ratio case of Theorem 8.9 at the boundary).
   2. For negative coefficients λ_k (k ≥ 2), trade P₀P_k ≤ P₁P_{k−1} (LC).
   3. Prove the resulting quadratic form in (P₁, P₂, …) ≥ 0 by Abel summation, using closed forms of E₁, E₂, E₃ and of B₀, B₀′.
+- Proof plan tested (runs/varratio/key_plan_test.py, exact):
+  - λ₁ (the coefficient of P₀P₁ in Φ) is ≥ 0;
+  - replacing every negative λ_kP₀P_k (k ≥ 2) by λ_kP₁P_{k−1} leaves a quadratic in (P₁…P_a) whose central sums are all ≥ 0;
+  - covered: 40 random LC u with a ≤ 9 and 24 far-field geometric u with a ≤ 10, no failure.
+  Remaining for a general proof: closed forms of these central sums (via E₁, E₂, E₃, B₀, B₀′) and a uniform majorization certificate in u. λ₁ ≥ 0 should be the boundary form of Theorem 8.9's key.
