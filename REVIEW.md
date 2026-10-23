@@ -862,6 +862,20 @@ Fixes applied verbatim:
 - the palindromic conjunct now takes antisymmetry on `[0, 1]`;
 - the P3 parenthetical was replaced.
 
+## Lean statement fidelity, round 34: the raising direction at fixed r, and non-uniformity from every N₀ (2026-10-24)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_a24b6d69-57b7-4896-b4c7-6f3bd0dbc25b`. Brief: `reviews/lean-fidelity34-brief.md` (commit ee6b5a6). Answer: `reviews/lean-fidelity34-answer.md`.
+
+Context: after round 33, an internal check found that `direction_not_uniform` excluded only a rule fitting at every `N ≥ 1`. Admission in Definition 9.3, and hence Theorem 9.4, uses only `N ≥ N₀`. Both statements below now quantify over every `N₀` and every nonzero size-dependent rescaling `s_N`.
+
+**Verdict: PASS.**
+- `raise_direction` MATCHES: these are the derivatives in the relative parameter `τ` of the affine-normalized raised array, built from the binomial masses `w_n`. Covering `r = 1` and using a two-sided derivative leave the paper's case `0 < r < 1`, `τ > 0` covered.
+- `raise_not_uniform` MATCHES: it excludes every tail `N ≥ N₀` and every nonzero speed `s_N`. That covers the relative parameter, the additive mass and lowering, though not zero-speed reparametrizations. It is strong enough for the consistency remark.
+- The restated `direction_not_uniform` MATCHES the direction displayed after Proposition 9.8.
+- The P3 table row and the deletion of the round-33 sentence from the not-formalized paragraph MATCH.
+
+No fixes were required.
+
 ## Lean statement fidelity, round 33: Λ_N values and the top-mass direction (2026-10-24)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_9a723fb6-b03b-4d53-a2af-7d7387df0621`. Brief: `reviews/lean-fidelity33-brief.md` (commit 077e5e5). Answer: `reviews/lean-fidelity33-answer.md`.
