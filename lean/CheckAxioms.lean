@@ -459,3 +459,7 @@ assert_allowed_axioms Szkraw.FinSys.P_terminal
 assert_allowed_axioms Szkraw.FinSys.christoffel_darboux
 assert_allowed_axioms Szkraw.FinSys.P_top_pos
 assert_allowed_axioms Szkraw.FinSys.finite_system_reduction
+assert_allowed_axioms Szkraw.RandomSets.perm_invariant_card
+assert_allowed_axioms Szkraw.RandomSets.union_card_law
+assert_allowed_axioms Szkraw.RandomSets.walkup_convolution
+assert_allowed_axioms Szkraw.RandomSets.random_sets_ulc
