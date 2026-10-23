@@ -774,6 +774,31 @@ Fixes applied verbatim:
 1. In P1 the machine-verification attribution now follows the (P) claim. The Bernstein sentence stays attributed to the script.
 2. The FORMALIZATION.md proof description now states the unnormalized basis r^e(1−r)^(m−e) and the Bernstein coefficients H_e/(S_m C(m,e)).
 
+## Lean statement fidelity, round 23: exact computational counterexamples in P1, P2 and P3 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_f314430b-bcc0-4775-8228-7fee3bd9b4f9`. Brief: `reviews/lean-fidelity23-brief.md` (commit 81eddf3). Answer: `reviews/lean-fidelity23-answer.md`.
+
+Scope:
+- P2's five ratio counterexamples (N = 48, 64, 40, 40, 120);
+- P3's profile counterexamples (seven one-kink, three log-concave-increment, one log-convex-increment, with the two shape lemmas);
+- P3's rule (β = 1, γ = 0) and terminal-row failures;
+- P1's `combo_shape` and its seven combination failures;
+- the proposed table rows and notes.
+
+**Verdict: PASS WITH MINOR FIXES; every Lean statement MATCHES.**
+
+Fixes applied verbatim:
+1. The P2 cross-reference now names the top-raised ratio (r = 2/5, ρ_N = r + (1−r)/N) instead of "the last example of this section".
+2. The FORMALIZATION.md note now attributes the open-problems examples to Section 10 of paper.tex.
+
+The other proposed changes were applied as written. The P2 sentence that cited P3 for the N = 120 kinked ratio was a split artifact: that example is in P2 itself.
+
+## Lean statement fidelity, round 24: first-order derivatives along the rule β = 1, γ = 0 at r = 4/5 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_f033c651-7bf5-4fec-bdc8-63d1e811119c`. Brief: `reviews/lean-fidelity24-brief.md` (commit e479a4e). Answer: `reviews/lean-fidelity24-answer.md`.
+
+**Verdict: PASS; no fixes.** `Szkraw.PolyCol.rule_deriv_4_5` MATCHES: the derivatives in ε at ε = 0 of g(N,N;N) are 512/1875 (N = 4) and −71936/5859375 (N = 8). The P3 table row and the merged FORMALIZATION.md sentence were applied.
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.

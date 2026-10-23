@@ -408,7 +408,8 @@ Theorem~\ref{thm:szwarc}: Szwarc's quadratic system & \path{Szkraw.szwarc_full},
 Lemma~\ref{lem:corner-value}: corner value & \path{Szkraw.corner_value}\\[3pt]
 Proposition~\ref{prop:raise}: raising the top mass & \path{Szkraw.raise_measure}, \path{Szkraw.raise_corner}, \path{Szkraw.raise_sign}, \path{Szkraw.raise_bound}\\[3pt]
 Corollary~\ref{cor:radius-exp} and its no-uniform-radius conclusion & \path{Szkraw.radius_exp}, \path{Szkraw.radius_exp_asymp}, \path{Szkraw.radius_no_uniform}\\[3pt]
-The two examples in the paragraph ``How sharp is log-concavity?'' ($\mu=\frac1{10}$ and $\mu=\frac1{100}$) & \path{Szkraw.lc_violation_holds}, \path{Szkraw.lc_violation_fails}
+The two examples in the paragraph ``How sharp is log-concavity?'' ($\mu=\frac1{10}$ and $\mu=\frac1{100}$) & \path{Szkraw.lc_violation_holds}, \path{Szkraw.lc_violation_fails}\\[3pt]
+The combinations $(1-\lambda)K_{N,r}+\lambda G_{N,q,r}$ in the paragraph ``How sharp is log-concavity?'' and the seven listed failures & \path{Szkraw.combo_shape}, \path{Szkraw.combo_fails_4_5_10}, \path{Szkraw.combo_fails_3_5_20}, \path{Szkraw.combo_fails_1_2_20}, \path{Szkraw.combo_fails_2_5_60}, \path{Szkraw.combo_fails_1_3_100}, \path{Szkraw.combo_fails_3_10_200}, \path{Szkraw.combo_fails_2_7_200}
 \end{tabular}
 \end{center}
 The entry for Theorem~\ref{thm:lc} formalizes Lemmas~\ref{lem:lc-ineq} and~\ref{lem:detours}, the operator induction, and Lemma~\ref{lem:kernel-rec} in converse form: the solution of~\eqref{eq:kernel-rec} yields the linearization coefficients. The Lean proofs of Corollaries~\ref{cor:kraw} and~\ref{cor:parity} obtain positivity of the components from the geometric-increment criterion of~\cite{P3} rather than from Theorem~\ref{thm:lc}; the statements are the ones given here. The Lean proof of Lemma~\ref{lem:corner-value} uses the algebra of~\cite{P3}.
