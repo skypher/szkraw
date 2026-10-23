@@ -1698,3 +1698,20 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - the Q_s certificate now matches the text exactly (the earlier script was more conservative by C(a,W−1));
   - script portability, with assert-on-failure.
 - The reviewer reran all certificates. Status: computer-assisted, reviewed, not machine-verified.
+
+**Lean formalization status (2026-10-23).**
+- Proposition 8.14 is machine-verified: `newton_product_LCNZ`, fidelity round 17 MATCH.
+- Theorem 8.16 is formalized up to the key inequality:
+  - Lemma 8.15: `abel_weight`;
+  - the general Leibniz rule: `leibniz_general`;
+  - the ratio facts (8.7): `ratio_ineq1`, `ratio_ineq2`;
+  - the resummation with Ŵ-constant 2: `resum_nonneg3`, `gkernel_resum3`, `ResumWeights3`;
+  - the setting `GenSetting` with ψ-split and the detours `domB` (via `lemma_8_4_B`), `domC`, `domH`, `domV`, `domW` (lean/Szkraw/VRGenSetting.lean).
+- Remaining Lean work for Theorem 8.16, in order:
+  - K1: express A₀, B₀, H₁, V₁, c_{ℓ+1} in the variables u_n = f_n(ℓ) and P_k = Δ^kρ(ℓ);
+  - K2: the decomposition Key = Lin − Quad, and Φ with M_{k,m} for general a;
+  - K3: the Abel argument in P;
+  - K4: the central sums via (ii)–(v), using `abel_weight` on quadratic forms in u, with (iii) from the Lean key of Theorem 8.9 (`AffSetting.key`);
+  - K5: the closed forms of the weight sums and the polynomial certificates;
+  - K6: windows a ≤ 5 from the LP certificates;
+  - finally the main theorem: hypotheses → `GenSetting`, with u LCNZ via Proposition 8.14 and truncation.
