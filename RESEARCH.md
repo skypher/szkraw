@@ -1545,3 +1545,19 @@ Open: general a. The certificates are LP vertices, not yet closed forms. Next, f
   - the central sums on anti-diagonals σ ≳ a+2 carry the factor d_{ℓ+a};
   - the low anti-diagonals are dense cubics with no visible factorization.
   A general proof needs Φ's coefficients as explicit binomial sums and a majorization certificate in u for their central sums. Exact coverage is being extended to a = 9, 10 (logs/key_ustep_9_10.log).
+
+**Closed-form structure of Φ, for general window a (2026-10-23; symbolic checks for a ≤ 8 or 10).**
+- σ = 1 (runs/varratio/key_phi01.py, a = 3…10): φ₀₁ = K·d_{ℓ+a} + F·[4DΣ(n−2)(n−a+1)C(a,n)u_n + 2DΣ(n−2)nC(a,n)u_{n−1} − Y′(d_{ℓ+a} + (a−1)u₀) − (a−2)YD].
+- General coefficients (runs/varratio/key_phi_general.py, a ≤ 8):
+  - φ₀ₖ = Kδ_k + F[4DZ₁^{(k)} + 2DV₁^{(k)} − YC_{X′}^{(k)} − Y′C_X^{(k)}] (k ≥ 1; the c^{(k)}(1)-terms cancel);
+  - for k, m ≥ 2, φ_{km} is a sum of four products B₀^{(·)}·[2×2 determinants between the profile and the basis ratios].
+- **Decomposition** (runs/varratio/key_phi_E.py, a ≤ 8): Φ = B₀′E₁ + B₀E₂ + c_{ℓ+1}E₃, where
+  - E₁ = s_{a−1}d_{ℓ+a}(d_{ℓ+a−1} − d_ℓ) − (ρ(ℓ+a−1) − ρ(ℓ))d_ℓF;
+  - E₂ = the same expression with base ℓ+1;
+  - E₃ = 2FV₁ − 4Σ_{n≥3}(n−2)y_n[F(ρ(ℓ+a) − ρ(ℓ+n)) + s_{a−1}d_{ℓ+a−1}].
+- E₁, E₂ ≥ 0 for every convex ratio. Proof: ρ(ℓ+a−1) − ρ(ℓ) ≤ (a−1)s_{a−1}, and since R_m = d_m/f₁(m) and f₁ are nondecreasing, d_{ℓ+a}(d_{ℓ+a−1} − d_ℓ) ≥ (a−1)d_ℓF. E₃ is the only negative part.
+- E₁, E₂, E₃ are linear in the increments s, so Φ = ρ(ℓ)·L₀(s) + (quadratic in s).
+- Proof plan for general a:
+  1. Show the coefficient of P₁ in L₀ is ≥ 0 (the linear-ratio case of Theorem 8.9 at the boundary).
+  2. For negative coefficients λ_k (k ≥ 2), trade P₀P_k ≤ P₁P_{k−1} (LC).
+  3. Prove the resulting quadratic form in (P₁, P₂, …) ≥ 0 by Abel summation, using closed forms of E₁, E₂, E₃ and of B₀, B₀′.
