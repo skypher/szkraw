@@ -308,3 +308,5 @@ assert_allowed_axioms Szkraw.LCNZ.u0_lf
 assert_allowed_axioms Szkraw.linC_zero_ge
 assert_allowed_axioms Szkraw.eK_nonneg
 assert_allowed_axioms Szkraw.linC_zero_nonneg
+assert_allowed_axioms Szkraw.linC_one_nonneg
+assert_allowed_axioms Szkraw.linCoef_holds
