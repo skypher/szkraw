@@ -230,8 +230,9 @@ theorem LCNZ_trunc {u : ℕ → ℝ} (hu : LCNZ u) (n : ℕ) : LCNZ (fun k => if
 
 /-- **P2, after Proposition 4.3 (random sets, Walkup's Theorem 4 for two sets).** Let `S`, `T` be independent
 random subsets of `[n]` whose laws `pS`, `pT` are invariant under permutations, and whose cardinalities are
-ultra-log-concave of order `n`. Then `|S ∪ T|` is ultra-log-concave of order `n`. (Nonnegativity of the laws is
-implied by the ultra-log-concavity of the cardinalities and is not assumed separately.) -/
+ultra-log-concave of order `n`. Then `|S ∪ T|` is ultra-log-concave of order `n`. (Nonnegativity of the laws
+follows from the permutation invariance together with the ultra-log-concavity of the cardinalities and is not
+assumed separately.) -/
 theorem random_sets_ulc (n : ℕ) (pS pT : Finset (Fin n) → ℝ)
     (hSinv : ∀ (σ : Equiv.Perm (Fin n)) (A : Finset (Fin n)), pS (A.map σ.toEmbedding) = pS A)
     (hTinv : ∀ (σ : Equiv.Perm (Fin n)) (B : Finset (Fin n)), pT (B.map σ.toEmbedding) = pT B)

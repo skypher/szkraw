@@ -862,6 +862,18 @@ Fixes applied verbatim:
 - the palindromic conjunct now takes antisymmetry on `[0, 1]`;
 - the P3 parenthetical was replaced.
 
+## Lean statement fidelity, round 38: the random-set reading of the product theorem (P2, after Proposition 4.3) (2026-10-24)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_fdd45b63-b098-42b0-8b8d-8b4321ed66e9`. Brief: `reviews/lean-fidelity38-brief.md` (commit f199058). Answer: `reviews/lean-fidelity38-answer.md`.
+
+**Verdict: PASS.**
+- `union_card_law` MATCHES Pr(|S ∪ T| = k) = C(n,k) κ_k for independent exchangeable laws; the restriction k ≤ n loses no case.
+- `perm_invariant_card` and `random_sets_ulc` MATCH. Omitting total mass one is a harmless strengthening.
+- `walkup_convolution` MATCHES h_k = κ_k after the substitution j = k − r.
+- The P2 table row MATCHES, and so does the narrowed not-formalized item, which keeps only the literature identification with Walkup's formulation.
+
+No fixes were required. Following the reviewer's remark, the docstring of `random_sets_ulc` and `papers/FORMALIZATION.md` now say that nonnegativity of the laws follows from permutation invariance together with ultra-log-concavity, not from ultra-log-concavity alone.
+
 ## Lean statement fidelity, round 37: every finite system reduces to the normalized recurrence (P3, Section 9) (2026-10-24)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_1104f059-6c37-4683-9ae9-d661080d24d0`. Brief: `reviews/lean-fidelity37-brief.md` (commit 98ac91c). Answer: `reviews/lean-fidelity37-answer.md`.
