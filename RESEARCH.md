@@ -1819,3 +1819,23 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - Φ₁ ≥ 0 is Theorem 8.9's F(z) ≥ 0, and Φ₂^{loc} ≥ 0 is the τ-part of Theorem 8.11's key (s = a−1, z ≤ 1/q).
   - **Remaining:** Φ₃^{loc} ≥ 0 for all a ≥ 3, log-concave u, z ∈ [0, 1/q]. It is free of ℓ, uses the local ratio C(k,3) and E3-weight 1, and is concave in z. Numerically it is ≥ 0 even at E3-weight 0 (normalized minimum 0.34).
 - **Remaining for (C3) at u = 1:** certify the E-detour (as for the B-detour, with small block u₀,…,u₃), prove Φ₃^{loc} ≥ 0, and write up.
+
+**(C3) PROVED at u = 1 (2026-10-23; computer-assisted, exact certificates; not yet reviewed).** Statement: the profile d has log-concave Newton coefficients, ρ(x) = r + tx + τC(x,2) + σC(x,3) with r > 0, t, τ, σ ≥ 0 and **rσ ≤ tτ**, and b = (1 − ρ)d is nondecreasing. Then (P). The proof follows Theorem 8.11 with these ingredients:
+1. **B-detour, P² ≥ 4Q.** runs/cubic/bdetour_cert.py (pointwise, (ℓ,n) ≠ (0,2)) and runs/cubic/corner_cert.py (corner, via C(a,3)φ₃(0)).
+2. **H (μ = 10) and C′ (μ = 6):** Theorem 8.11 verbatim.
+3. **V (μ = 9/2):** v_n = nΓ(ℓ,n)f_{n−1} with Γ = t + τ(ℓ+n−1) + σ(C(ℓ,2) + ℓ(n−1)). The termwise detour holds since (n+1)Γ(ℓ+1,n) − nΓ(ℓ,n+2) = t + τℓ + σ(C(ℓ,2) + n² − 1) ≥ 0.
+4. **E (μ = 3):** e_n = C(n,2)(τ + σℓ)f_{n−2} + σC(n,3)(3f_{n−1} + 3f_{n−2} + f_{n−3}). runs/cubic/edetour_cert.py: pointwise with φ₂ + (n/3)φ₃ (from C(a,3)φ₃ ⊂ B₀), polarized, with the trade on κ_rσ; 124 checks.
+5. **Key, A₀P + PA₀ + 2V₁ + E₁ ≥ 4H₁.**
+   - Substitute α = sR_ℓ; α's coefficient is ≥ ρ(ℓ+1)K ≥ 0. Then κ_βγ ≥ e_γ(ℓ+1)Φ_β + e_β(ℓ+1)Φ_γ, using B₀[e_γ] ≥ e_γ(ℓ+1)Y and convexity (A₀[e_β], A₀″[e_β] ≥ 0). **No trade is needed.**
+   - Φ₁ = Theorem 8.9's F(z). Φ₂ = ℓΦ₁ + Φ₂^{loc}. Φ₃ = C(ℓ,2)Φ₁ + ℓΦ₂^{loc} + Φ₃^{loc}.
+   - runs/cubic/phi2loc_cert.py and runs/cubic/phi3loc_cert.py: per-index coefficient inequalities, symbolic in (a,k), with products (2,k−1), (3,k−2) and the shifts u_k/q ≤ u_{k−1}. Each has an exact chain check on 1,500 random log-concave u.
+   - At z = 1/q with q → 0, Φ₃^{loc}'s margin is exactly sC(a,2)/3: the y₂ balance κ′C(a,2) − 2sC(a,3) = sC(a,2)/3.
+6. **Resummation** as in Theorem 8.11, with E in place of W. Survivals: 5/9 − 1/2 for V, 1/3 − 1/4 for E.
+- **Where the trade enters:** the B-detour (κ_tτ + κ_rσ ≥ 0, off the corner) and the E-detour (κ_tτ + κ_rσ ≥ 0 at μ = 3). Both are coefficientwise. The B-detour's margin tends to 1 at (0,3), so u = 1 is the limit of this route; u ≤ 4 would need joint copositivity.
+- **Errors caught on the way:**
+  - the endpoint shortcut for forms convex in z at n = 2,3 (fixed with ζ-Bernstein);
+  - a wrong weight condition in g3_cert.py (fixed: (j−2)(m−1) ≥ 0);
+  - the constant κ′ = s(2a−3)/3, not 2C(a−1,3);
+  - a bookkeeping slip in a chain check;
+  - an earlier family split (V^q only) that fails the key at large ℓ.
+- **End-to-end test:** runs/cubic/c3_property_P.py at the boundary rσ = tτ (logs in runs/cubic/logs/).
