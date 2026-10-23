@@ -1715,3 +1715,6 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - K5: the closed forms of the weight sums and the polynomial certificates;
   - K6: windows a ≤ 5 from the LP certificates;
   - finally the main theorem: hypotheses → `GenSetting`, with u LCNZ via Proposition 8.14 and truncation.
+- Toward a self-contained step (iii), i.e. without Theorem 8.9's argument (runs/varratio/key_M01_M11_cubic.py; identity checked against `pieces` for a ≤ 10; greedy run a ≤ 26). M_{0,1} and M_{1,1}, as exact cubic forms in u, pass the greedy majorization certificate (push (i,j,k) → (i+1,j,k−1)) for a ≤ 26:
+  - M_{1,1}: every u₀-coefficient is ≤ 0, and one push from level 0 suffices, the same structure as S_{2,0}. So an L1′/S_{2,0}-type reduction to quadratic forms is likely.
+  - M_{0,1}: two positive u₀-coefficients, and pushes to level 1 are needed.
