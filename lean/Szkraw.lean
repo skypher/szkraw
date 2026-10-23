@@ -111,3 +111,6 @@ import Szkraw.GenM01
 import Szkraw.GenRel
 import Szkraw.GenFormKpp
 import Szkraw.GenM0s
+import Szkraw.GenWindows
+import Szkraw.GenFormR
+import Szkraw.GenMM1S20
