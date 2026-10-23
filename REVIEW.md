@@ -862,6 +862,17 @@ Fixes applied verbatim:
 - the palindromic conjunct now takes antisymmetry on `[0, 1]`;
 - the P3 parenthetical was replaced.
 
+## Lean statement fidelity, round 37: every finite system reduces to the normalized recurrence (P3, Section 9) (2026-10-24)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_1104f059-6c37-4683-9ae9-d661080d24d0`. Brief: `reviews/lean-fidelity37-brief.md` (commit 98ac91c). Answer: `reviews/lean-fidelity37-answer.md`.
+
+**Verdict: PASS.**
+- `finite_system_reduction` MATCHES, reading "finite system" as a positive measure on N + 1 ≥ 2 distinct points. It gives an orientation-preserving affine change sending the largest point to 1 and an array satisfying (2.1). The array's endpoint-normalized polynomials are orthogonal for the measure, and every endpoint-normalized orthogonal family is identified with them.
+- The terminal and product identities are correctly restricted to the support nodes.
+- The P3 table row MATCHES, and so does the removal of the reduction item from the not-formalized paragraph.
+
+No fixes were required.
+
 ## Lean statement fidelity, round 36: the one-kink counterexample with N = 500 (P3, Section 9) (2026-10-24)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_13d4bcbc-c50c-4266-a119-edde07b75810`. Brief: `reviews/lean-fidelity36-brief.md` (commit e2dec22). Answer: `reviews/lean-fidelity36-answer.md`.
