@@ -1,5 +1,7 @@
 import Szkraw.LCConvolution
 import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.Order.Interval.Finset.Nat
+import Mathlib.Data.Int.Interval
 
 /-!
 # Proposition 8.14 (Walkup): log-concavity of Newton coefficients under products — groundwork
@@ -387,5 +389,101 @@ theorem Vk_rr2 (t : ℕ) (m1 m2 : ℤ) {x x' y y' : ℤ} (hx : x ≤ x') (hy : y
       _ ≤ K * K * (A x * A x') * (B y * B y') * (Cc (x + y' - t) * Cc (x' + y - t)) := this
       _ = K * (A x * B y' * Cc (x + y' - t)) * (K * (A x' * B y * Cc (x' + y - t))) := by ring
   · simp only [Vk_zero_of hm, mul_zero, le_refl]
+
+
+/-! ## (T1): marginals of `V` over intervals are log-concave -/
+
+theorem LCNZ.zero : LCNZ (fun _ => (0 : ℝ)) :=
+  ⟨fun _ => le_refl 0, fun _ => by simp, fun _ _ _ _ _ h _ => absurd h (lt_irrefl 0)⟩
+
+theorem LCNZ.smul {u : ℕ → ℝ} (hu : LCNZ u) {c : ℝ} (hc : 0 < c) : LCNZ (fun n => c * u n) := by
+  refine ⟨fun n => mul_nonneg hc.le (hu.1 n), fun n => ?_, fun i j k hij hjk hi hk => ?_⟩
+  · have := hu.2.1 n
+    calc c * u n * (c * u (n + 2)) = c ^ 2 * (u n * u (n + 2)) := by ring
+      _ ≤ c ^ 2 * u (n + 1) ^ 2 := mul_le_mul_of_nonneg_left this (sq_nonneg c)
+      _ = (c * u (n + 1)) ^ 2 := by ring
+  · simp only at hi hk ⊢
+    have hi' : 0 < u i := by
+      by_contra h; push Not at h; nlinarith [hu.1 i]
+    have hk' : 0 < u k := by
+      by_contra h; push Not at h; nlinarith [hu.1 k]
+    exact mul_pos hc (hu.2.2 i j k hij hjk hi' hk')
+
+theorem LCNZ.congr {u v : ℕ → ℝ} (hu : LCNZ u) (h : ∀ n, u n = v n) : LCNZ v := by
+  have : u = v := funext h
+  rw [← this]; exact hu
+
+/-- The interval sum of `Cz n1 (t - y) * Cz n3 (n + y - t)` is a convolution. -/
+theorem marginal_conv (n1 n3 t : ℕ) (w1 w2 : ℤ) (n : ℕ) :
+    ∑ y ∈ Icc w1 w2, Cz n1 (t - y) * Cz n3 (n + y - t) =
+      conv (fun z : ℕ => if (t : ℤ) - w2 ≤ z ∧ (z : ℤ) ≤ t - w1 then (n1.choose z : ℝ) else 0)
+        (fun z => (n3.choose z : ℝ)) n := by
+  unfold conv
+  symm
+  dsimp only
+  refine Finset.sum_bij_ne_zero (fun (z : ℕ) _ _ => ((t : ℤ) - (z : ℤ))) ?_ ?_ ?_ ?_
+  · intro z hz hne
+    simp only [mem_range] at hz
+    simp only [mem_Icc]
+    by_contra hc
+    rw [if_neg (by omega), zero_mul] at hne; exact hne rfl
+  · intro z1 _ _ z2 _ _ h; omega
+  · intro y hy hne
+    have s1 := Cz_support (left_ne_zero_of_mul hne)
+    have s2 := Cz_support (right_ne_zero_of_mul hne)
+    simp only [mem_Icc] at hy
+    refine ⟨((t : ℤ) - y).toNat, by simp only [mem_range]; omega, ?_, by omega⟩
+    rw [if_pos (by omega)]
+    unfold Cz at hne
+    rw [if_pos (by omega), if_pos (by omega)] at hne
+    have e : ((n : ℤ) + y - t).toNat = n - ((t : ℤ) - y).toNat := by omega
+    rw [e] at hne; exact hne
+  · intro z hz hne
+    simp only [mem_range] at hz
+    by_cases hc : (t : ℤ) - w2 ≤ z ∧ (z : ℤ) ≤ t - w1
+    · rw [if_pos hc]
+      unfold Cz
+      rw [if_pos (by omega), if_pos (by omega)]
+      have e1 : ((t : ℤ) - ((t : ℤ) - z)).toNat = z := by omega
+      have e2 : ((n : ℤ) + ((t : ℤ) - z) - t).toNat = n - z := by omega
+      rw [e1, e2]
+    · rw [if_neg hc, zero_mul] at hne; exact absurd rfl hne
+
+/-- (T1) Marginals of `V` over intervals are `LCNZ` in the first coordinate. -/
+theorem Vk_marginal_lcnz (t : ℕ) (m1 m2 w1 w2 : ℤ) :
+    LCNZ (fun n : ℕ => ∑ y ∈ Icc w1 w2, Vk t m1 m2 n y) := by
+  by_cases hm : m2 ≤ 2 * t ∧ m1 ≤ 2 * t ∧ 2 * (t : ℤ) ≤ m1 + m2
+  · obtain ⟨h1, h2, h3⟩ := hm
+    set n1 := (2 * (t : ℤ) - m2).toNat
+    set n2 := (2 * (t : ℤ) - m1).toNat
+    set n3 := (m1 + m2 - 2 * (t : ℤ)).toNat
+    set a : ℕ → ℝ := fun z => if (t : ℤ) - w2 ≤ z ∧ (z : ℤ) ≤ t - w1 then (n1.choose z : ℝ) else 0
+    have ha : LCNZ a := by
+      by_cases hw : 0 ≤ (t : ℤ) - w1
+      · refine (LCNZ.restrict (LCNZ.choose n1) ((t : ℤ) - w2).toNat ((t : ℤ) - w1).toNat).congr ?_
+        intro z; simp only [a]
+        by_cases hz : ((t : ℤ) - w2).toNat ≤ z ∧ z ≤ ((t : ℤ) - w1).toNat
+        · rw [if_pos hz, if_pos (by omega)]
+        · rw [if_neg hz, if_neg (by omega)]
+      · refine LCNZ.zero.congr ?_
+        intro z; simp only [a]; rw [if_neg (by omega)]
+    have hconv := ha.conv (LCNZ.choose n3)
+    have hrefl := (LCNZ.choose n2).reflect t
+    have hprod := (hrefl.mul hconv).smul (Vconst_pos t m1 m2)
+    refine hprod.congr ?_
+    intro n
+    simp only [Vk_eq h1 h2 h3]
+    rw [← marginal_conv]
+    rw [mul_sum, mul_sum]
+    refine sum_congr rfl (fun y _ => ?_)
+    have e : Cz n2 ((t : ℤ) - n) = if n ≤ t then (n2.choose (t - n) : ℝ) else 0 := by
+      unfold Cz
+      by_cases hn : n ≤ t
+      · rw [if_pos (by omega), if_pos hn]; congr 2; omega
+      · rw [if_neg (by omega), if_neg hn]
+    rw [← e]
+    have e2 : ((n : ℤ) + y - t) = (n : ℤ) + y - t := rfl
+    ring
+  · exact LCNZ.zero.congr (fun n => by simp [Vk_zero_of hm])
 
 end Szkraw
