@@ -1654,3 +1654,38 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - K″: N₃(K″) = (a−1)(a−2)(2a−3)/6. For W ≥ 4, N_W(K″) is the bracket − 4(W−3)C(a,W−1), which is ≥ the crude bound.
   - So Q ≥ 0 and K″ ≥ 0 for all LC u, hence (2′) ≥ 0 and M_{0,s} ≥ 0 for all s ≥ 3 and all a. Exact Abel-tail test: runs/varratio/key_L1_quad.py, all (a, s) with a ≤ 70, no failure.
 - Remaining for the key at all a: S_{2,0} = φ₁₁ + φ₀₂ ≥ 0, and (L2) for 11 ≤ a.
+
+**Key inequality PROVED for every window size a; with the a ≤ 10 certificates this proves conjecture (G) for all N (2026-10-23; unreviewed).** All central sums of Φ, and all coefficients of Lin, are now handled by hand for a ≥ 6, and by the exact certificates for a ≤ 10.
+- **Tool.** The Abel criterion for quadratic forms in LC u: the tail sums from the centre of every anti-diagonal are ≥ 0.
+  - In every form below the negative coefficients sit only at the pairs (0, W) and (1, W−1). So the criterion reduces to the weight sums N_W ≥ 0, i.e. the coefficients of the form at u_n = rⁿ.
+  - The weight sums have closed forms N_W = P·C(2a−1, W) + C(a, W−1)·ρ(a, W), with ρ rational (runs/varratio/key_weight_closed.py, against the coefficient expansions, 5 ≤ a ≤ 30).
+  - Certificates (runs/varratio/key_weight_cert.py, exact sympy):
+    - W ≥ a+2: the negative terms vanish.
+    - 6 ≤ W ≤ a+1: the Vandermonde bound C(2a−1,W) ≥ Σ_{k∈{W,W−1,W−2,W−3,0,1,2}} C(a,k)C(a−1,W−k). With a = W−1+x and W = 6+y, the cleared numerator has nonnegative coefficients in (x, y).
+    - W = 3, 4, 5: the polynomial in a has nonnegative coefficients after a ↦ a + a_min.
+  - The same certificate also re-proves K″ ≥ 0 and the crude bound for Q_s of (L1′).
+- **S_{2,0} = M_{0,2} + M_{1,1} ≥ 0** (needs a ≥ 5). Exact identity, with c″ = C(a−1,2), E1 = E₁^{(1)}, E2 = E₂^{(1)}, B0 = B₀^{(1)} = a(X′+F) and B0′ = B₀′^{(1)}:
+  S_{2,0} = B0′E1 + [B0·E2 − c″F(u₀Y′ + DY)] + B·Ka + F·W2,
+  where Ka = (a−1)K″ − 4DH_* and W2 = (a−1)(Y′X″+YX′) + D(2V₁^{(1)} + 2V₁^{(2)} − 4Z₁ − 4Z₂).
+  - Step 1: FD ≤ u₁A (from u₀F ≤ u₁B) gives B0·E2 − c″F(u₀Y′+DY) ≥ A·Ψ, with Ψ = a(X′+F)J − c″u₁(Y+Y′) and J = X′ − (a−2)u₁.
+  - Step 2: Ka ≥ 0 and u₁B ≥ u₀F give u₁(B·Ka + F·W2) ≥ F·D·Q̂, with Q̂ = (a−1)(Y′X″+YX′) − 4au₀H_* + u₁(2V₁^{(1)} + 2V₁^{(2)} − 4Z₁ − 4Z₂).
+  - Hence u₁S_{2,0} ≥ u₁B0′E1 + u₁AΨ + FDQ̂ ≥ 0, since Ka, Ψ, Q̂ ≥ 0 by the weight certificates (Ka needs a ≥ 5).
+  - The identity and both steps were checked on random LC u, a ≤ 14 (runs/varratio/key_S20_proof.py). The Abel tails of Ka (a ≥ 5), Ψ and Q̂ were checked for a ≤ 40.
+  - Why it works: S_{2,0} is decreasing in u₀ (every u₀-coefficient is ≤ 0 for a ≥ 7). B0·E2 alone carries the dominant negative term c″F(u₀Y′+DY), with leading-order ratio a/(a−1).
+- **(L2) for all a ≥ 6.** Using A(B − d_ℓ) ≥ (a−1)d_ℓF, A(B − d_{ℓ+1}) ≥ (a−2)d_{ℓ+1}F and m ≥ 2:
+  - E₂^{(m)} ≥ ½C(a−1,m−1)A(B−d₁) and E₁^{(m)} ≥ ½C(a−1,m−1)A(B−d₀).
+  - B₀′^{(1)} ≥ (a−2)(A−d₁), by convexity: A − d₁ ≥ (a−1)(u₁+u₂).
+  - Z_m ≤ C(a,m)H_*, and C(a,m) ≤ (a/2)C(a−1,m−1).
+  - So (i) follows from R = a(A−d₁)(B−d₁) − 8d₁H_* ≥ 0, and (ii) from R2 = (a−2)(A−d₁)(B−d₀) − 4ad₁H_* ≥ 0 (a ≥ 6). Both are weight-certified.
+  - The chain and the identity M_{1,m} + M_{m,1} = [(i)] + [(ii)] were checked exactly on random LC u, a ≤ 16 (runs/varratio/key_L2_chain.py).
+- **Lin coefficients for all a.** l₀ = K ≥ 0 (Theorem 8.9). For k ≥ 2, l_k = X·B₀′^{(k)} + B₀^{(k)}X′ ≥ 0 termwise. For l₁:
+  - l₁ ≥ (A−d₁)((a−2)X + aX′) − 4DH_*;
+  - its weight sums are ≥ (2(a−1)/a)N_W(R) + ((12a−16)/a)·[(W−2)C(a,W) + (W−3)C(a,W−1)] ≥ 0, using C(2a,W) ≥ C(2a−1,W).
+  - Checked in runs/varratio/key_L2_chain.py (a ≤ 9).
+- **Assembly.** Abel in P needs every central sum S_{σ,i} of Φ ≥ 0:
+  - i ≥ 2: (L3);
+  - i = 1: σ = 2 is φ₁₁ ≥ 0 (Theorem 8.9's key at t > 0); σ ≥ 3 is (L3) + (L2);
+  - i = 0: σ = 1 is λ₁ ≥ 0; σ = 2 is S_{2,0}; σ ≥ 3 is S_{σ,1} + (L1′).
+  - With Lin ≥ 0 and the ray/top-constraint reduction, the key inequality holds for every a ≥ 6, and for a ≤ 10 by the exact certificates.
+- With the general detours (B via Proposition 8.14; C′, H, V, Ŵ) and the resummation, conjecture (G) holds for every N.
+- Status: written proof and review still to do. Next: write the full proof of (G) into the paper and run a review round.
