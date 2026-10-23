@@ -130,4 +130,47 @@ theorem Hz_nonneg (k : ℕ) (i j : ℤ) : 0 ≤ Hz k i j := by
   · exact Nat.cast_nonneg _
   · exact le_refl 0
 
+
+/-- Factorial form: `H_t(x,y) (t-x)! (t-y)! (x+y-t)! = t!` on the support. -/
+theorem Hn_factorial {t x y : ℕ} (hx : x ≤ t) (hy : y ≤ t) (hxy : t ≤ x + y) :
+    Hn t x y * ((t - x).factorial * (t - y).factorial * (x + y - t).factorial) = t.factorial := by
+  unfold Hn; rw [if_pos hy]
+  have h1 := Nat.choose_mul_factorial_mul_factorial hx
+  have h2 := Nat.choose_mul_factorial_mul_factorial (show t - y ≤ x by omega)
+  have e : x - (t - y) = x + y - t := by omega
+  rw [e] at h2
+  calc t.choose x * x.choose (t - y) * ((t - x).factorial * (t - y).factorial * (x + y - t).factorial)
+      = t.choose x * (t - x).factorial * (x.choose (t - y) * (t - y).factorial * (x + y - t).factorial) := by ring
+    _ = t.choose x * (t - x).factorial * x.factorial := by rw [h2]
+    _ = t.factorial := by rw [← h1]; ring
+
+theorem Hn_eq_zero {t x y : ℕ} (h : ¬ (x ≤ t ∧ y ≤ t ∧ t ≤ x + y)) : Hn t x y = 0 := by
+  unfold Hn
+  by_cases hy : y ≤ t
+  · rw [if_pos hy]
+    by_cases hx : x ≤ t
+    · rw [Nat.choose_eq_zero_of_lt (show x < t - y by omega), mul_zero]
+    · rw [Nat.choose_eq_zero_of_lt (show t < x by omega), zero_mul]
+  · rw [if_neg hy]
+
+theorem Hn_symm (t x y : ℕ) : Hn t x y = Hn t y x := by
+  by_cases h : x ≤ t ∧ y ≤ t ∧ t ≤ x + y
+  · obtain ⟨hx, hy, hxy⟩ := h
+    have a := Hn_factorial hx hy hxy
+    have b := Hn_factorial hy hx (by omega)
+    have e : y + x - t = x + y - t := by omega
+    rw [e] at b
+    have hpos : 0 < (t - x).factorial * (t - y).factorial * (x + y - t).factorial := by positivity
+    have : Hn t x y * ((t - x).factorial * (t - y).factorial * (x + y - t).factorial) =
+        Hn t y x * ((t - x).factorial * (t - y).factorial * (x + y - t).factorial) := by
+      rw [a, ← b]; ring
+    exact Nat.eq_of_mul_eq_mul_right hpos this
+  · rw [Hn_eq_zero h, Hn_eq_zero (by omega)]
+
+theorem Hz_symm (t : ℕ) (i j : ℤ) : Hz t i j = Hz t j i := by
+  unfold Hz
+  by_cases h : 0 ≤ i ∧ 0 ≤ j
+  · rw [if_pos h, if_pos ⟨h.2, h.1⟩, Hn_symm]
+  · rw [if_neg h, if_neg (by tauto)]
+
 end Szkraw
