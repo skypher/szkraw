@@ -729,6 +729,22 @@ Scope:
 
 Fix applied: the notes sentence "Each coefficient form …" was replaced by the reviewer's text. The rσ form is not nonnegative by itself; it is grouped with tτ using rσ ≤ tτ. All other proposed changes were applied as written.
 
+## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES; no algebraic error.**
+
+The reviewer reran edge_exact.py 60, forms_iii_v.py, window_cert.py (11 windows), the six B and five E generator cases, phi3_edge.py 40 and phi3_generic.py, all passing. The edge_exact exceptions are exactly R₂ at a ≤ 5 and K_a at a ≤ 4, as stated. The reviewer also checked:
+- the Q_s domination, the edge-pair counting, the Abel tail identity, the reduction to A and B (exact remainder 4C(a−1,2)u₀(u₁H₊ − u₀H) + C(a,3)u₀²u₁);
+- the 7/4 scripts: bdetour_u.py 7/4 passes 51 checks, edetour_u.py 3 7/4 passes 18, and bdetour_u.py 9/5 fails (a certificate failure, not a counterexample).
+
+Fixes applied verbatim:
+1. Denominator positivity is stated in step (vi) and in the Φ₃^loc paragraph.
+2. "the only negative term quadratic in u₀".
+3. Generator checks are distinguished from Lean identity checks.
+4. The 7/4 remark now names the modified coefficient, covers the boundary regimes, the case q = 0 and the corner, and says which script certifies what.
+
 ## Review round 25: Theorem 8.17 (cubic ratios with rσ ≤ tτ) (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3b695c0a-d1b9-48dc-8fd3-d71c7c1774b6`. Brief: `reviews/round25-brief.md` (paper at commit faaa5a0). Answer: `reviews/round25-answer.md`.

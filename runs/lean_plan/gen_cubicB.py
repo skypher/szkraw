@@ -10,11 +10,12 @@ nonnegative coefficients (asserted). The main theorem combines these with rho >=
 CASE corner: (l, n) = (0, 2) with v_0 = 0, the inequality 8 c_1 phi_4(0) <= 12 (phi_2(0) + (2/3) phi_3(0)) phi_2(1)
 (eq. cubic-corner); its quadratic part is quadB_seq plus the nonnegative extra term 8 phi_3(0) phi_2(1) at t = sigma = 0.
 Usage: gen_cubicB.py CASE OUT   (CASE = gen | 2 | 3 | 4 | 5 | corner; gen is n = m + 6, case 2 is l >= 1)"""
-import sys
+import sys, os
 import sympy as sp
 
 L, M = sp.symbols('l m', nonnegative=True)
 CASE = sys.argv[1]
+URS = sp.Rational(os.environ.get('URS', '7/4'))  # weight of kappa_rsigma in the combined form
 GEN = CASE == 'gen'
 COR = CASE == 'corner'
 n = M + 6 if GEN else sp.Integer(2 if COR else int(CASE))
@@ -139,10 +140,10 @@ if COR: expand_lines += ['  simp only [hv0]']
 out = []
 total = 0
 for name, pairs in FORMS.items():
-    expr = sp.expand(sum(kap(b, c) for b, c in pairs))
+    expr = sp.expand(sum((URS if (b, c) == ('r', 'sig') else 1) * kap(b, c) for b, c in pairs))
     facts = cert(expr)
     total += len(facts)
-    stmt = ' + '.join(f'({katom(b, c)})' for b, c in pairs)
+    stmt = ' + '.join((f'({URS.p} / {URS.q} : ℝ) * ' if (b, c) == ('r', 'sig') else '') + f'({katom(b, c)})' for b, c in pairs)
     lines = [f'theorem kapB_{SUF}_{name} {{v : ℕ → ℝ}} (hv : LCNZ v) {lhyp} :', f'    0 ≤ {stmt} := by']
     for i, (st, pr) in enumerate(facts):
         lines.append(f'  have g{i} : {st} := {pr}')

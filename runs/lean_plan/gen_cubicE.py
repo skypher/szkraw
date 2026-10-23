@@ -12,11 +12,12 @@ summation writes kappa = sum_k T_k (m_k - m_{k-1}) + T_{a0} m_{a0}, every tail T
 nonnegative coefficients (asserted). The main theorem combines these with rho >= 0 and r sigma <= t tau through
 (t tau - r sigma) kappa_ttau + r sigma (kappa_ttau + kappa_rsigma).
 Usage: gen_cubicE.py CASE OUT   (CASE = gen | 3 | 4 | 5 | 6; gen is n = m + 7)"""
-import sys
+import sys, os
 import sympy as sp
 
 L, M = sp.symbols('l m', nonnegative=True)
 CASE = sys.argv[1]
+URS = sp.Rational(os.environ.get('URS', '7/4'))  # weight of kappa_rsigma in the combined form
 GEN = CASE == 'gen'
 n = M + 7 if GEN else sp.Integer(int(CASE))
 lsym = L
@@ -119,10 +120,10 @@ expand_lines += ['  push_cast', '  try simp only [Nat.add_assoc, Nat.reduceAdd]'
 out = []
 total = 0
 for name, pairs in FORMS.items():
-    expr = sp.expand(sum(kap(b, c) for b, c in pairs))
+    expr = sp.expand(sum((URS if (b, c) == ('r', 'sig') else 1) * kap(b, c) for b, c in pairs))
     facts = cert(expr)
     total += len(facts)
-    stmt = ' + '.join(f'({katom(b, c)})' for b, c in pairs)
+    stmt = ' + '.join((f'({URS.p} / {URS.q} : ℝ) * ' if (b, c) == ('r', 'sig') else '') + f'({katom(b, c)})' for b, c in pairs)
     lines = [f'theorem kapE_{SUF}_{name} {{v : ℕ → ℝ}} (hv : LCNZ v) {lhyp} :', f'    0 ≤ {stmt} := by']
     for i, (st, pr) in enumerate(facts):
         lines.append(f'  have g{i} : {st} := {pr}')
