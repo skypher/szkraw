@@ -894,4 +894,86 @@ theorem inner_nonneg {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) (t : 
   rw [e2]
   exact Dbox_nonneg t (by omega) (by omega)
 
+
+/-! ## The Newton coefficients of the product and their log-concavity -/
+
+/-- `κ_m = Σ_{i,j} H_m(i,j) ρ_i ν_j`, the Newton coefficients of the product (Proposition 8.14). -/
+noncomputable def kap (ρ ν : ℕ → ℝ) (m : ℕ) : ℝ :=
+  ∑ i ∈ Icc (0 : ℤ) m, ∑ j ∈ Icc (0 : ℤ) m, Hz m i j * (extZ ρ i * extZ ν j)
+
+theorem Hz_eq_zero_of_gt {m : ℕ} {i j : ℤ} (h : (m : ℤ) < i ∨ (m : ℤ) < j) : Hz m i j = 0 := by
+  by_contra hne; have := Hz_support hne; omega
+
+theorem kap_ext (ρ ν : ℕ → ℝ) (m : ℕ) (L : ℤ) (hL : (m : ℤ) ≤ L) :
+    kap ρ ν m = ∑ i ∈ Icc 0 L, ∑ j ∈ Icc 0 L, Hz m i j * (extZ ρ i * extZ ν j) := by
+  unfold kap
+  have inner : ∀ i, ∑ j ∈ Icc (0 : ℤ) m, Hz m i j * (extZ ρ i * extZ ν j) =
+      ∑ j ∈ Icc 0 L, Hz m i j * (extZ ρ i * extZ ν j) := by
+    intro i
+    apply sum_subset
+    · intro j; simp only [mem_Icc]; omega
+    · intro j hj hnj; simp only [mem_Icc] at hj hnj
+      rw [Hz_eq_zero_of_gt (Or.inr (by omega)), zero_mul]
+  simp only [inner]
+  apply sum_subset
+  · intro i; simp only [mem_Icc]; omega
+  · intro i hi hni; simp only [mem_Icc] at hi hni
+    exact sum_eq_zero (fun j _ => by rw [Hz_eq_zero_of_gt (Or.inl (by omega)), zero_mul])
+
+theorem kap_nonneg {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) (m : ℕ) : 0 ≤ kap ρ ν m :=
+  sum_nonneg (fun _ _ => sum_nonneg (fun _ _ =>
+    mul_nonneg (Hz_nonneg _ _ _) (mul_nonneg (extZ_nonneg hρ _) (extZ_nonneg hν _))))
+
+theorem kap_lc {ρ ν : ℕ → ℝ} (hρ : LCNZ ρ) (hν : LCNZ ν) (t : ℕ) :
+    kap ρ ν t * kap ρ ν (t + 2) ≤ kap ρ ν (t + 1) ^ 2 := by
+  set L : ℤ := t + 2
+  set A : ℕ → ℤ → ℤ → ℝ := fun m i j => Hz m i j * (extZ ρ i * extZ ν j)
+  have hprod : ∀ m m' : ℕ, (m : ℤ) ≤ L → (m' : ℤ) ≤ L → kap ρ ν m * kap ρ ν m' =
+      ∑ i ∈ Icc 0 L, ∑ i' ∈ Icc 0 L, ∑ j ∈ Icc 0 L, ∑ j' ∈ Icc 0 L, A m i j * A m' i' j' := by
+    intro m m' hm hm'
+    rw [kap_ext ρ ν m L hm, kap_ext ρ ν m' L hm', sum_mul]
+    refine sum_congr rfl (fun i _ => ?_)
+    rw [sum_mul]
+    simp only [mul_sum]
+    rw [sum_comm]
+  set G : ℤ → ℤ → ℤ → ℤ → ℝ := fun i i' j j' => (extZ ρ i * extZ ρ i') * (extZ ν j * extZ ν j') *
+    (Hz (t + 1) i j * Hz (t + 1) i' j' - Hz t i j * Hz (t + 2) i' j') with hG
+  have hint : ∀ i i' j j', A (t + 1) i j * A (t + 1) i' j' - A t i j * A (t + 2) i' j' = G i i' j j' := by
+    intro i i' j j'; simp only [A, G]; ring
+  have vanish : ∀ i i' j j', (L < i ∨ L < j ∨ L < i' ∨ L < j') → G i i' j j' = 0 := by
+    intro i i' j j' h
+    simp only [G]
+    rcases h with h | h | h | h
+    · rw [Hz_eq_zero_of_gt (m := t + 1) (Or.inl (by push_cast; omega)),
+        Hz_eq_zero_of_gt (m := t) (Or.inl (by omega))]; ring
+    · rw [Hz_eq_zero_of_gt (m := t + 1) (i := i) (Or.inr (by push_cast; omega)),
+        Hz_eq_zero_of_gt (m := t) (i := i) (Or.inr (by omega))]; ring
+    · rw [Hz_eq_zero_of_gt (m := t + 1) (i := i') (Or.inl (by push_cast; omega)),
+        Hz_eq_zero_of_gt (m := t + 2) (i := i') (Or.inl (by push_cast; omega))]; ring
+    · rw [Hz_eq_zero_of_gt (m := t + 1) (i := i') (Or.inr (by push_cast; omega)),
+        Hz_eq_zero_of_gt (m := t + 2) (i := i') (Or.inr (by push_cast; omega))]; ring
+  have D : kap ρ ν (t + 1) ^ 2 - kap ρ ν t * kap ρ ν (t + 2) =
+      ∑ c1 ∈ Icc 0 (2 * L), ∑ c2 ∈ Icc 0 (2 * L), ∑ i ∈ Icc 0 c1, ∑ j ∈ Icc 0 c2, G i (c1 - i) j (c2 - j) := by
+    rw [sq, hprod (t + 1) (t + 1) (by push_cast; omega) (by push_cast; omega),
+      hprod t (t + 2) (by omega) (by push_cast; omega)]
+    simp only [← sum_sub_distrib, hint]
+    have s1 := pair_reindex L (fun i i' => ∑ j ∈ Icc 0 L, ∑ j' ∈ Icc 0 L, G i i' j j')
+      (fun i i' _ _ h => sum_eq_zero (fun j _ => sum_eq_zero (fun j' _ =>
+        vanish i i' j j' (by rcases h with h | h <;> [exact Or.inl h; exact Or.inr (Or.inr (Or.inl h))]))))
+    beta_reduce at s1
+    rw [s1]
+    refine sum_congr rfl (fun c1 _ => ?_)
+    have s2 : ∀ i, ∑ j ∈ Icc 0 L, ∑ j' ∈ Icc 0 L, G i (c1 - i) j j' =
+        ∑ c2 ∈ Icc 0 (2 * L), ∑ j ∈ Icc 0 c2, G i (c1 - i) j (c2 - j) := by
+      intro i
+      have := pair_reindex L (fun j j' => G i (c1 - i) j j')
+        (fun j j' _ _ h => vanish i (c1 - i) j j' (by rcases h with h | h <;> [exact Or.inr (Or.inl h); exact Or.inr (Or.inr (Or.inr h))]))
+      beta_reduce at this; exact this
+    simp only [s2]
+    rw [sum_comm]
+  have hD : 0 ≤ kap ρ ν (t + 1) ^ 2 - kap ρ ν t * kap ρ ν (t + 2) := by
+    rw [D]
+    exact sum_nonneg (fun c1 _ => sum_nonneg (fun c2 _ => inner_nonneg hρ hν t c1 c2))
+  linarith
+
 end Szkraw
