@@ -862,6 +862,17 @@ Fixes applied verbatim:
 - the palindromic conjunct now takes antisymmetry on `[0, 1]`;
 - the P3 parenthetical was replaced.
 
+## Lean statement fidelity, round 33: Λ_N values and the top-mass direction (2026-10-24)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_9a723fb6-b03b-4d53-a2af-7d7387df0621`. Brief: `reviews/lean-fidelity33-brief.md` (commit 077e5e5). Answer: `reviews/lean-fidelity33-answer.md`.
+
+**Verdict: PASS WITH MINOR FIXES.**
+- `lambda_values` MATCHES: it characterizes the proof's maximum over `Z_N`, not the sum `lamN`.
+- `topmass_rates`, `normK` and `normalized_direction` MATCH.
+- `direction_not_uniform` MATCHES at `r = 1`, for lowering and for raising by additive mass. It does not cover the later remark on raising at fixed `0 < r < 1`.
+
+Fix applied verbatim: a sentence in P3's not-formalized paragraph keeps the fixed-`r` raising remark listed as unformalized.
+
 ## Review round 28: P2 proofs of Theorems 5.5 and 5.6 rewritten along the Lean route (2026-10-23)
 
 Reviewer: ChatGPT Pro (gpt-6-pro), job `job_5a7e4f8c-7444-4946-a34d-32ff2a003f79`. Brief: `reviews/round28-brief.md` (commit 911524a). Answer: `reviews/round28-answer.md`.
