@@ -100,3 +100,4 @@ import Szkraw.VRResum3
 import Szkraw.VRMoves3
 import Szkraw.VRGenSetting
 import Szkraw.GenKeyAlgebra
+import Szkraw.GenMain

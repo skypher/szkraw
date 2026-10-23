@@ -267,3 +267,9 @@ assert_allowed_axioms Szkraw.GenSetting.domW
 assert_allowed_axioms Szkraw.matrix_abel
 assert_allowed_axioms Szkraw.phi_matrix
 assert_allowed_axioms Szkraw.key_of_phi
+
+assert_allowed_axioms Szkraw.GenSetting.resumW
+assert_allowed_axioms Szkraw.GenSetting.kernel_nonneg
+assert_allowed_axioms Szkraw.nval_inj_le
+assert_allowed_axioms Szkraw.dd_eq_nval
+assert_allowed_axioms Szkraw.lcgeneral_matrix_of_key
