@@ -1655,7 +1655,8 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - So Q ≥ 0 and K″ ≥ 0 for all LC u, hence (2′) ≥ 0 and M_{0,s} ≥ 0 for all s ≥ 3 and all a. Exact Abel-tail test: runs/varratio/key_L1_quad.py, all (a, s) with a ≤ 70, no failure.
 - Remaining for the key at all a: S_{2,0} = φ₁₁ + φ₀₂ ≥ 0, and (L2) for 11 ≤ a.
 
-**Key inequality PROVED for every window size a; with the a ≤ 10 certificates this proves conjecture (G) for all N (2026-10-23; unreviewed).** All central sums of Φ, and all coefficients of Lin, are now handled by hand for a ≥ 6, and by the exact certificates for a ≤ 10.
+**Key inequality PROVED for every window size a (computer-assisted); with the a ≤ 10 certificates this proves conjecture (G) for all N (2026-10-23; unreviewed).** All central sums of Φ, and all coefficients of Lin, are handled for a ≥ 6 by written reductions to quadratic forms whose weight sums are certified by exact symbolic computation, and for a ≤ 10 by the exact LP certificates.
+- CORRECTION (same day): the commit message of e17ae23 and the first version of this entry said "by hand". That is overstated. The reductions are written arguments. The sign of every weight sum, for W = 3, 4, 5 and for 6 ≤ W ≤ a+1, is settled by sympy checks that explicit polynomials have nonnegative coefficients (runs/varratio/key_weight_cert.py). Windows a ≤ 5 are not covered by the written reductions (Ka needs a ≥ 5, R2 needs a ≥ 6) and rest on the solver certificates re-checked in rationals. So (G) for all N is computer-assisted. The detour lemmas (V, Ŵ, C′, H for general ratios) are also unreviewed. A review must cover the certificate scripts, and a Lean version would have to reproduce the certificates.
 - **Tool.** The Abel criterion for quadratic forms in LC u: the tail sums from the centre of every anti-diagonal are ≥ 0.
   - In every form below the negative coefficients sit only at the pairs (0, W) and (1, W−1). So the criterion reduces to the weight sums N_W ≥ 0, i.e. the coefficients of the form at u_n = rⁿ.
   - The weight sums have closed forms N_W = P·C(2a−1, W) + C(a, W−1)·ρ(a, W), with ρ rational (runs/varratio/key_weight_closed.py, against the coefficient expansions, 5 ≤ a ≤ 30).
@@ -1686,6 +1687,6 @@ Next: prove (L1)–(L3) by hand with LC estimates, in the style of Theorem 8.9's
   - i ≥ 2: (L3);
   - i = 1: σ = 2 is φ₁₁ ≥ 0 (Theorem 8.9's key at t > 0); σ ≥ 3 is (L3) + (L2);
   - i = 0: σ = 1 is λ₁ ≥ 0; σ = 2 is S_{2,0}; σ ≥ 3 is S_{σ,1} + (L1′).
-  - With Lin ≥ 0 and the ray/top-constraint reduction, the key inequality holds for every a ≥ 6, and for a ≤ 10 by the exact certificates.
+  - With Lin ≥ 0 and the ray/top-constraint reduction, the key inequality holds for every a ≥ 6 (written reductions plus symbolic weight certificates), and for a ≤ 10 by the exact LP certificates.
 - With the general detours (B via Proposition 8.14; C′, H, V, Ŵ) and the resummation, conjecture (G) holds for every N.
 - Status: written proof and review still to do. Next: write the full proof of (G) into the paper and run a review round.
