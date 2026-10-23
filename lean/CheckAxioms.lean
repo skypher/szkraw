@@ -341,3 +341,14 @@ assert_allowed_axioms Szkraw.S20_holds
 assert_allowed_axioms Szkraw.central_holds
 assert_allowed_axioms Szkraw.genKey_holds
 assert_allowed_axioms Szkraw.lc_general
+assert_allowed_axioms Szkraw.leibniz_cubic
+assert_allowed_axioms Szkraw.CubicSetting.psi
+assert_allowed_axioms Szkraw.CubicSetting.domC
+assert_allowed_axioms Szkraw.CubicSetting.domH
+assert_allowed_axioms Szkraw.CubicSetting.domV
+assert_allowed_axioms Szkraw.CubicSetting.domB
+assert_allowed_axioms Szkraw.CubicSetting.domE
+assert_allowed_axioms Szkraw.cubicB_all
+assert_allowed_axioms Szkraw.cubicE_all
+assert_allowed_axioms Szkraw.detour_gen3
+assert_allowed_axioms Szkraw.coefE

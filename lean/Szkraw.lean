@@ -114,3 +114,8 @@ import Szkraw.GenM0s
 import Szkraw.GenWindows
 import Szkraw.GenFormR
 import Szkraw.GenMM1S20
+import Szkraw.CubicLeib
+import Szkraw.CubicSetting
+import Szkraw.CubicB
+import Szkraw.CubicE
+import Szkraw.CubicDetours
