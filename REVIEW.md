@@ -683,3 +683,18 @@ Fixes, all applied:
 6. Literature: Lemma 8.15's Abel argument is Wang and Yeh, JCTA 114 (2007), Lemma 2.1 and Corollary 2.6, now cited. I checked both statements in the arXiv version, math/0504164v5. The reviewer found no prior statement of Theorem 8.16 or of its key inequality; that does not establish novelty.
 
 Also adopted: the reviewer's form Key = (1 − Δc/F)·Lin + Φ/F for reduction (i).
+
+## Lean statement fidelity, round 17: Proposition 8.14 (2026-10-23)
+
+Reviewer: ChatGPT Pro (gpt-6-pro), job `job_3d1729bb-6ed2-46a3-b0de-ac429250fe0a`. Brief: `reviews/lean-fidelity17-brief.md` (commit f74ef1e). Answer: `reviews/lean-fidelity17-answer.md`.
+
+Scope:
+- `Szkraw.newton_product_LCNZ`, together with `nval_mul` (existence) and `nval_inj` (uniqueness of the Newton coefficients);
+- the predicate `LCNZ`;
+- the proposed table row, scope sentence and disclosure change.
+
+**Verdict: MATCH, no hidden narrowing, no fixes required.**
+- `hκ` characterizes the Newton coefficients through evaluation, which is equivalent to κ_k = Δ^k(fg)(0).
+- The zero and infinite-support cases are covered.
+
+The reviewer could not fetch `lean/axioms.log`: it was not tracked in git. It is now committed. The table row, scope sentence and disclosure ("is machine-verified") are applied.
