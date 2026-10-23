@@ -139,3 +139,4 @@ import Szkraw.Koelink
 import Szkraw.CompletionP3
 import Szkraw.SignPattern
 import Szkraw.QuadNeeded
+import Szkraw.RemarksP3
