@@ -450,3 +450,7 @@ assert_allowed_axioms Szkraw.cub_dd
 assert_allowed_axioms Szkraw.cubic_data
 assert_allowed_axioms Szkraw.opM_negative_entry
 assert_allowed_axioms Szkraw.opM_has_negative_entry
+assert_allowed_axioms Szkraw.ColCheck.ccol_triangle
+assert_allowed_axioms Szkraw.ColCheck.witer_eq
+assert_allowed_axioms Szkraw.ColCheck.witer_corner
+assert_allowed_axioms Szkraw.ColCheck.psum_kinkZ

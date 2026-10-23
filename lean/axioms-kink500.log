@@ -1,0 +1,6 @@
+Szkraw.kink500_chunk1: allowed axioms [propext]
+Szkraw.kink500_chunk2: allowed axioms [propext]
+Szkraw.kink500_chunk3: allowed axioms [propext]
+Szkraw.kink500_chunk4: allowed axioms [propext]
+Szkraw.kink500_corner: allowed axioms [propext, Classical.choice, Quot.sound]
+Szkraw.kink500_1_10_fails: allowed axioms [propext, Classical.choice, Quot.sound]

@@ -148,3 +148,4 @@ import Szkraw.JetColumn
 import Szkraw.LambdaN
 import Szkraw.RaiseDirection
 import Szkraw.OperatorM
+import Szkraw.WindowColumn
