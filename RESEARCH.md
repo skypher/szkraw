@@ -1492,3 +1492,14 @@ Proof architecture for (G), all pieces now proved except the last:
 - Adversarial realizable (G) arrays in exactly this regime (geometric profiles with w = 10⁻², 10⁻³; ratios r·B^x with B up to 100; N = 16, 20): (P) holds and the full key ratio is ≥ 1.8·10⁴ (runs/varratio/g_adversarial.py).
 - Consequence: a proof of the key must use LC of (ρ(ℓ), Δρ(ℓ), Δ²ρ(ℓ), …) including the coupling to ρ(ℓ) = 1 − α − Σs, and/or the Δρ terms of B₀ dropped in (K′). The extreme-ray method does not apply directly, because the LC set is not a cone.
 - What remains valid: the z = 0 endpoints and the k = 0 ray (Theorem 8.9). The key for (G) remains OPEN.
+
+**Key inequality: degree-2 certificates using the ratio's log-concavity (2026-10-23).**
+- For fixed u_n = f_n(ℓ), the full key is a quadratic Q(P) with no constant term, where P = (P₀,…,P_a), P_k = Δ^kρ(ℓ), and P₀ = ρ(ℓ).
+- Certificate generators: g_m·P_k with g_m = b_{ℓ+m+1} − b_{ℓ+m} (monotone b in the window), b_{ℓ+m}·P_k, P_k, P_kP_j, and the LC differences P_iP_j − P_{i−1}P_{j+1} (1 ≤ i ≤ j, P₀ included).
+- LP (runs/varratio/key_cert_lp.py):
+  - certificates FOUND for random LC u with a ≤ 6, and for far-field geometric u (u₀ = 1/w, w ∈ {10⁻¹, 10⁻², 10⁻³}) with a ≤ 8 and a = 12, 14, 16;
+  - WITHOUT the LC generators they fail at (a, w) = (14, 10⁻³), (16, 10⁻²), (16, 10⁻³), exactly where the nonnegative-Newton relaxation failed.
+  - So the ratio's log-concavity (with P₀ = ρ(ℓ)) is necessary for this certificate family and sufficient in every tested case.
+- Far-field counterexample check for (G) (runs/varratio/g_farfield.py, logs/g_farfield.log): geometric profiles w ∈ {1/20, 1/50}, N = 80 (ℓw up to 4), ratios on the LC boundary r + tx + (t²/r)C(x,2) and exponential r(1+p)^x, r ∈ {10⁻³, 1/2}, at the largest slope with b nondecreasing. All 8 arrays keep (P) (rows g(m,N;k)).
+  - The N = 120 half was stopped: exponential cases take about 4 minutes each at N = 80, and the remaining half would have run past an hour without resumability.
+- Remaining: a uniform certificate (closed form in a and u), probably via a double LC / Abel structure in u and P, as in Proposition 8.14.
