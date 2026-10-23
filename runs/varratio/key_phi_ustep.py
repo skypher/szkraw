@@ -2,7 +2,7 @@
 LC u by an EXACT LP certificate with generators u_k (u_{i+1} u_{j-1} - u_i u_j) (i+1 <= j-1; Robin Hood transfers)
 and monomials u_i u_j u_k. Uses key_cert_exact.certify (float LP for support, exact rational re-solve and check).
 Usage: key_phi_ustep.py amax"""
-import sys, itertools
+import sys, itertools, threading, time
 from fractions import Fraction as Fr
 import sympy as sp
 sys.path.insert(0, '/home/yang/szkraw/runs/varratio')
@@ -29,6 +29,12 @@ def certificate_for(S, U):
 
 if __name__ == '__main__':
     amax = int(sys.argv[1]); amin = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+    CUR = {'item': 'start', 'done': 0}; t0 = time.time()
+    def _hb():
+        while True:
+            time.sleep(60)
+            print(f"[{time.strftime('%H:%M:%S')}] heartbeat: {CUR['done']} sums certified so far, at {CUR['item']}, elapsed {time.time()-t0:.0f}s", flush=True)
+    threading.Thread(target=_hb, daemon=True).start()
     for a in range(amin, amax + 1):
         U = sp.symbols('u0:%d' % (a + 1))
         P, Lin, Quad, f1, Dc = parts(list(U) + [sp.Integer(0)] * 3, a)
@@ -44,7 +50,8 @@ if __name__ == '__main__':
                 if s - i > a: continue
                 tot = sp.expand(tot + q.get((i, s - i), 0))
                 if tot == 0: continue
-                v = certificate_for(tot, U)
+                CUR['item'] = f'a={a} sigma={s} i={i}'
+                v = certificate_for(tot, U); CUR['done'] += 1
                 verdicts[v] = verdicts.get(v, 0) + 1
                 if v != 'CERTIFIED': print(f'  a={a} sigma={s} i={i}: {v}', flush=True)
         print(f'a={a}: central sums {verdicts}', flush=True)

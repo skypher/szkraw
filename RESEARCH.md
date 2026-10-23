@@ -1540,3 +1540,8 @@ Consequence:
 - with the general detour proofs (B via Proposition 8.14; C′, H, V, Ŵ) and the resummation, conjecture (G) holds for every array with N ≤ 7.
 
 Open: general a. The certificates are LP vertices, not yet closed forms. Next, find the pattern of the stage-2 certificates (they look like majorization certificates for cubic forms) and of the stage-1 central sums S_{σ,i}(u).
+- Structure of Φ (runs/varratio/key_phi_factors.py, a ≤ 6):
+  - the top coefficient is φ_{aa} = d_{ℓ+a}²·(2(d_{ℓ+a−1} − d_ℓ) − f₁(ℓ)), checked a = 3…6;
+  - the central sums on anti-diagonals σ ≳ a+2 carry the factor d_{ℓ+a};
+  - the low anti-diagonals are dense cubics with no visible factorization.
+  A general proof needs Φ's coefficients as explicit binomial sums and a majorization certificate in u for their central sums. Exact coverage is being extended to a = 9, 10 (logs/key_ustep_9_10.log).
