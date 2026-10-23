@@ -61,8 +61,19 @@ def CubicRatioHyp {N : ℕ} (vv : Coefficients N) : Prop :=
 def Stmt_cubic_ratio : Prop :=
   ∀ (N : ℕ) (vv : Coefficients N), Admissible vv → CubicRatioHyp vv → MatrixPositivity vv
 
-/-- **Theorem 8.17** (cubic ratio). -/
-theorem cubic_ratio_matrix : Stmt_cubic_ratio := by
+/-- Theorem 8.17 with the extension `r σ ≤ (7/4) t τ` (remark after its proof). -/
+def CubicRatioHyp74 {N : ℕ} (vv : Coefficients N) : Prop :=
+  ∃ r t τ σ : ℝ, 0 < r ∧ 0 ≤ t ∧ 0 ≤ τ ∧ 0 ≤ σ ∧ r * σ ≤ 7 / 4 * (t * τ) ∧
+    (∀ i, i < N → vv.b i ≤ vv.b (i + 1)) ∧
+    (∀ i, i ≤ N → vv.c i = (r + t * i + τ * (i.choose 2 : ℝ) + σ * (i.choose 3 : ℝ)) * profile vv i) ∧
+    LogConcaveNoInternalZeros N (newtonCoeff (profile vv))
+
+/-- Theorem 8.17, extended form (`r σ ≤ (7/4) t τ`), matrix-positivity conclusion. -/
+def Stmt_cubic_ratio74 : Prop :=
+  ∀ (N : ℕ) (vv : Coefficients N), Admissible vv → CubicRatioHyp74 vv → MatrixPositivity vv
+
+/-- **Theorem 8.17, extended** to `r σ ≤ (7/4) t τ` (remark after the proof). -/
+theorem cubic_ratio74_matrix : Stmt_cubic_ratio74 := by
   intro N vv hv hyp
   obtain ⟨r, t, τ, σ, hr, ht, hτ, hσ, hrs, hbmono, hc, hlc⟩ := hyp
   have hv' := hv
@@ -114,5 +125,11 @@ theorem cubic_ratio_matrix : Stmt_cubic_ratio := by
     rw [hddb N le_rfl, hddc N le_rfl]; have := hsum N le_rfl; rw [haN] at this; linarith
   exact matrixPositivity_of_kernel vv hv hu_nn S.hu1 (padNewton_zero _ _) hddc hddb
     (fun k hk => cubic_kernel_nonneg S hd1 hT hk)
+
+/-- **Theorem 8.17** (cubic ratio, `r σ ≤ t τ`), from the extended form. -/
+theorem cubic_ratio_matrix : Stmt_cubic_ratio := by
+  intro N vv hv hyp
+  obtain ⟨r, t, τ, σ, hr, ht, hτ, hσ, hrs, hb, hc, hlc⟩ := hyp
+  exact cubic_ratio74_matrix N vv hv ⟨r, t, τ, σ, hr, ht, hτ, hσ, by nlinarith [mul_nonneg ht hτ], hb, hc, hlc⟩
 
 end Szkraw

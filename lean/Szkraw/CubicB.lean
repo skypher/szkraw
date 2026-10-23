@@ -187,21 +187,21 @@ theorem kapB_gen_ttau {v : ℕ → ℝ} (hv : LCNZ v) (ℓ m : ℕ) :
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
 
 theorem kapB_gen_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ m : ℕ) :
-    0 ≤ (((((m + 6) : ℕ) : ℝ) + 1) * ((((m + 6) : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1))) - 8 * ((((m + 6) : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ ((m + 6) + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ ((m + 6) + 2) v)) + (((((m + 6) : ℕ) : ℝ) + 1) * ((((m + 6) : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1))) - 8 * ((((m + 6) : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ ((m + 6) + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ ((m + 6) + 2) v)) := by
-  have g0 : 0 ≤ ((m : ℝ) ^ 5/6 + 14*(m : ℝ) ^ 4/3 + 103*(m : ℝ) ^ 3/2 + 847*(m : ℝ) ^ 2/3 + 2344*(m : ℝ)/3 + 896) * (v 0 * v (m + 5)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g1 : 0 ≤ ((m : ℝ) ^ 5/6 + 6*(m : ℝ) ^ 4 + 511*(m : ℝ) ^ 3/6 + 596*(m : ℝ) ^ 2 + 6170*(m : ℝ)/3 + 2800) * (v 1 * v (m + 4) - v 0 * v (m + 5)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 3)) (by omega)))
-  have g2 : 0 ≤ ((m : ℝ) ^ 5/6 + 5*(m : ℝ) ^ 4 + 355*(m : ℝ) ^ 3/6 + 345*(m : ℝ) ^ 2 + 2972*(m : ℝ)/3 + 1120) * (v 2 * v (m + 3) - v 1 * v (m + 4)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 2)) (by omega)))
-  have g3 : 0 ≤ ((ℓ : ℝ)*(m : ℝ) ^ 4 + 22*(ℓ : ℝ)*(m : ℝ) ^ 3 + 177*(ℓ : ℝ)*(m : ℝ) ^ 2 + 632*(ℓ : ℝ)*(m : ℝ) + 896*(ℓ : ℝ) + 2*(m : ℝ) ^ 5/3 + 115*(m : ℝ) ^ 4/6 + 217*(m : ℝ) ^ 3 + 7307*(m : ℝ) ^ 2/6 + 10324*(m : ℝ)/3 + 4032) * (v 0 * v (m + 6)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g4 : 0 ≤ ((ℓ : ℝ)*(m : ℝ) ^ 4 + 30*(ℓ : ℝ)*(m : ℝ) ^ 3 + 335*(ℓ : ℝ)*(m : ℝ) ^ 2 + 1650*(ℓ : ℝ)*(m : ℝ) + 3024*(ℓ : ℝ) + 2*(m : ℝ) ^ 5/3 + 139*(m : ℝ) ^ 4/6 + 323*(m : ℝ) ^ 3 + 13553*(m : ℝ) ^ 2/6 + 23767*(m : ℝ)/3 + 11144) * (v 1 * v (m + 5) - v 0 * v (m + 6)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 4)) (by omega)))
-  have g5 : 0 ≤ ((ℓ : ℝ)*(m : ℝ) ^ 4 + 26*(ℓ : ℝ)*(m : ℝ) ^ 3 + 251*(ℓ : ℝ)*(m : ℝ) ^ 2 + 1066*(ℓ : ℝ)*(m : ℝ) + 1680*(ℓ : ℝ) + 2*(m : ℝ) ^ 5/3 + 43*(m : ℝ) ^ 4/2 + 827*(m : ℝ) ^ 3/3 + 3513*(m : ℝ) ^ 2/2 + 16685*(m : ℝ)/3 + 7000) * (v 2 * v (m + 4) - v 1 * v (m + 5)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 3)) (by omega)))
-  have g6 : 0 ≤ (2*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 30*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 144*(ℓ : ℝ) ^ 2*(m : ℝ) + 256*(ℓ : ℝ) ^ 2 + 3*(ℓ : ℝ)*(m : ℝ) ^ 4 + 67*(ℓ : ℝ)*(m : ℝ) ^ 3 + 546*(ℓ : ℝ)*(m : ℝ) ^ 2 + 1968*(ℓ : ℝ)*(m : ℝ) + 2816*(ℓ : ℝ) + (m : ℝ) ^ 5 + 59*(m : ℝ) ^ 4/2 + 342*(m : ℝ) ^ 3 + 3919*(m : ℝ) ^ 2/2 + 5636*(m : ℝ) + 6720) * (v 0 * v (m + 7)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g7 : 0 ≤ (2*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 46*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 352*(ℓ : ℝ) ^ 2*(m : ℝ) + 896*(ℓ : ℝ) ^ 2 + 3*(ℓ : ℝ)*(m : ℝ) ^ 4 + 83*(ℓ : ℝ)*(m : ℝ) ^ 3 + 872*(ℓ : ℝ)*(m : ℝ) ^ 2 + 4138*(ℓ : ℝ)*(m : ℝ) + 7504*(ℓ : ℝ) + (m : ℝ) ^ 5 + 67*(m : ℝ) ^ 4/2 + 453*(m : ℝ) ^ 3 + 6203*(m : ℝ) ^ 2/2 + 10787*(m : ℝ) + 15288) * (v 1 * v (m + 6) - v 0 * v (m + 7)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 5)) (by omega)))
-  have g8 : 0 ≤ (2*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 42*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 292*(ℓ : ℝ) ^ 2*(m : ℝ) + 672*(ℓ : ℝ) ^ 2 + 3*(ℓ : ℝ)*(m : ℝ) ^ 4 + 83*(ℓ : ℝ)*(m : ℝ) ^ 3 + 858*(ℓ : ℝ)*(m : ℝ) ^ 2 + 3928*(ℓ : ℝ)*(m : ℝ) + 6720*(ℓ : ℝ) + (m : ℝ) ^ 5 + 69*(m : ℝ) ^ 4/2 + 475*(m : ℝ) ^ 3 + 6525*(m : ℝ) ^ 2/2 + 11179*(m : ℝ) + 15288) * (v 2 * v (m + 5) - v 1 * v (m + 6)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 4)) (by omega)))
-  have g9 : 0 ≤ (4*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/3 + 28*(ℓ : ℝ) ^ 3*(m : ℝ)/3 + 64*(ℓ : ℝ) ^ 3/3 + 4*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 60*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 288*(ℓ : ℝ) ^ 2*(m : ℝ) + 512*(ℓ : ℝ) ^ 2 + 3*(ℓ : ℝ)*(m : ℝ) ^ 4 + 68*(ℓ : ℝ)*(m : ℝ) ^ 3 + 1682*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 6113*(ℓ : ℝ)*(m : ℝ)/3 + 8816*(ℓ : ℝ)/3 + 2*(m : ℝ) ^ 5/3 + 121*(m : ℝ) ^ 4/6 + 239*(m : ℝ) ^ 3 + 8369*(m : ℝ) ^ 2/6 + 12220*(m : ℝ)/3 + 4928) * (v 0 * v (m + 8)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g10 : 0 ≤ (4*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/3 + 20*(ℓ : ℝ) ^ 3*(m : ℝ) + 224*(ℓ : ℝ) ^ 3/3 + 4*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 76*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 496*(ℓ : ℝ) ^ 2*(m : ℝ) + 1152*(ℓ : ℝ) ^ 2 + 3*(ℓ : ℝ)*(m : ℝ) ^ 4 + 76*(ℓ : ℝ)*(m : ℝ) ^ 3 + 2186*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 3187*(ℓ : ℝ)*(m : ℝ) + 16456*(ℓ : ℝ)/3 + 2*(m : ℝ) ^ 5/3 + 43*(m : ℝ) ^ 4/2 + 833*(m : ℝ) ^ 3/3 + 3619*(m : ℝ) ^ 2/2 + 18056*(m : ℝ)/3 + 8288) * (v 1 * v (m + 7) - v 0 * v (m + 8)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 6)) (by omega)))
-  have g11 : 0 ≤ (4*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/3 + 20*(ℓ : ℝ) ^ 3*(m : ℝ) + 224*(ℓ : ℝ) ^ 3/3 + 4*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 88*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 644*(ℓ : ℝ) ^ 2*(m : ℝ) + 1568*(ℓ : ℝ) ^ 2 + 3*(ℓ : ℝ)*(m : ℝ) ^ 4 + 88*(ℓ : ℝ)*(m : ℝ) ^ 3 + 2900*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 4713*(ℓ : ℝ)*(m : ℝ) + 25816*(ℓ : ℝ)/3 + 2*(m : ℝ) ^ 5/3 + 49*(m : ℝ) ^ 4/2 + 1079*(m : ℝ) ^ 3/3 + 5273*(m : ℝ) ^ 2/2 + 28952*(m : ℝ)/3 + 14112) * (v 2 * v (m + 6) - v 1 * v (m + 7)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 5)) (by omega)))
-  have g12 : 0 ≤ (4*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/3 + 28*(ℓ : ℝ) ^ 3*(m : ℝ)/3 + 64*(ℓ : ℝ) ^ 3/3 + 2*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 30*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 144*(ℓ : ℝ) ^ 2*(m : ℝ) + 256*(ℓ : ℝ) ^ 2 + (ℓ : ℝ)*(m : ℝ) ^ 4 + 23*(ℓ : ℝ)*(m : ℝ) ^ 3 + 575*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 2105*(ℓ : ℝ)*(m : ℝ)/3 + 3056*(ℓ : ℝ)/3 + (m : ℝ) ^ 5/6 + 31*(m : ℝ) ^ 4/6 + 125*(m : ℝ) ^ 3/2 + 2225*(m : ℝ) ^ 2/6 + 3292*(m : ℝ)/3 + 1344) * (v 1 * v (m + 8)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g13 : 0 ≤ (4*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/3 + 20*(ℓ : ℝ) ^ 3*(m : ℝ) + 224*(ℓ : ℝ) ^ 3/3 + 2*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3 + 46*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2 + 352*(ℓ : ℝ) ^ 2*(m : ℝ) + 896*(ℓ : ℝ) ^ 2 + (ℓ : ℝ)*(m : ℝ) ^ 4 + 31*(ℓ : ℝ)*(m : ℝ) ^ 3 + 1079*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 1851*(ℓ : ℝ)*(m : ℝ) + 10696*(ℓ : ℝ)/3 + (m : ℝ) ^ 5/6 + 13*(m : ℝ) ^ 4/2 + 607*(m : ℝ) ^ 3/6 + 1571*(m : ℝ) ^ 2/2 + 9128*(m : ℝ)/3 + 4704) * (v 2 * v (m + 7) - v 1 * v (m + 8)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 6)) (by omega)))
+    0 ≤ (((((m + 6) : ℕ) : ℝ) + 1) * ((((m + 6) : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1))) - 8 * ((((m + 6) : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ ((m + 6) + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ ((m + 6) + 2) v)) + (7 / 4 : ℝ) * (((((m + 6) : ℕ) : ℝ) + 1) * ((((m + 6) : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) (m + 6) (fun k => v k + v (k + 1))) - 8 * ((((m + 6) : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ ((m + 6) + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ ((m + 6) + 2) v)) := by
+  have g0 : 0 ≤ (7*(m : ℝ) ^ 5/24 + 89*(m : ℝ) ^ 4/12 + 559*(m : ℝ) ^ 3/8 + 3481*(m : ℝ) ^ 2/12 + 1375*(m : ℝ)/3 + 56) * (v 0 * v (m + 5)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g1 : 0 ≤ (7*(m : ℝ) ^ 5/24 + 39*(m : ℝ) ^ 4/4 + 3109*(m : ℝ) ^ 3/24 + 3419*(m : ℝ) ^ 2/4 + 8399*(m : ℝ)/3 + 3640) * (v 1 * v (m + 4) - v 0 * v (m + 5)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 3)) (by omega)))
+  have g2 : 0 ≤ (7*(m : ℝ) ^ 5/24 + 35*(m : ℝ) ^ 4/4 + 2485*(m : ℝ) ^ 3/24 + 2415*(m : ℝ) ^ 2/4 + 5201*(m : ℝ)/3 + 1960) * (v 2 * v (m + 3) - v 1 * v (m + 4)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 2)) (by omega)))
+  have g3 : 0 ≤ (11*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 115*(ℓ : ℝ)*(m : ℝ) ^ 3/4 + 1695*(ℓ : ℝ)*(m : ℝ) ^ 2/8 + 650*(ℓ : ℝ)*(m : ℝ) + 728*(ℓ : ℝ) + 7*(m : ℝ) ^ 5/6 + 733*(m : ℝ) ^ 4/24 + 1201*(m : ℝ) ^ 3/4 + 32231*(m : ℝ) ^ 2/24 + 30589*(m : ℝ)/12 + 1302) * (v 0 * v (m + 6)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g4 : 0 ≤ (11*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 159*(ℓ : ℝ)*(m : ℝ) ^ 3/4 + 3433*(ℓ : ℝ)*(m : ℝ) ^ 2/8 + 8199*(ℓ : ℝ)*(m : ℝ)/4 + 3654*(ℓ : ℝ) + 7*(m : ℝ) ^ 5/6 + 901*(m : ℝ) ^ 4/24 + 1937*(m : ℝ) ^ 3/4 + 75287*(m : ℝ) ^ 2/24 + 122737*(m : ℝ)/12 + 13454) * (v 1 * v (m + 5) - v 0 * v (m + 6)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 4)) (by omega)))
+  have g5 : 0 ≤ (11*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 143*(ℓ : ℝ)*(m : ℝ) ^ 3/4 + 2761*(ℓ : ℝ)*(m : ℝ) ^ 2/8 + 5863*(ℓ : ℝ)*(m : ℝ)/4 + 2310*(ℓ : ℝ) + 7*(m : ℝ) ^ 5/6 + 295*(m : ℝ) ^ 4/8 + 5555*(m : ℝ) ^ 3/12 + 23085*(m : ℝ) ^ 2/8 + 107201*(m : ℝ)/12 + 10990) * (v 2 * v (m + 4) - v 1 * v (m + 5)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 3)) (by omega)))
+  have g6 : 0 ≤ (19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/8 + 285*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/8 + 171*(ℓ : ℝ) ^ 2*(m : ℝ) + 304*(ℓ : ℝ) ^ 2 + 33*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 701*(ℓ : ℝ)*(m : ℝ) ^ 3/8 + 2643*(ℓ : ℝ)*(m : ℝ) ^ 2/4 + 4209*(ℓ : ℝ)*(m : ℝ)/2 + 2516*(ℓ : ℝ) + 7*(m : ℝ) ^ 5/4 + 377*(m : ℝ) ^ 4/8 + 963*(m : ℝ) ^ 3/2 + 18307*(m : ℝ) ^ 2/8 + 19589*(m : ℝ)/4 + 3570) * (v 0 * v (m + 7)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g7 : 0 ≤ (19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/8 + 437*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/8 + 418*(ℓ : ℝ) ^ 2*(m : ℝ) + 1064*(ℓ : ℝ) ^ 2 + 33*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 877*(ℓ : ℝ)*(m : ℝ) ^ 3/8 + 1103*(ℓ : ℝ)*(m : ℝ) ^ 2 + 20041*(ℓ : ℝ)*(m : ℝ)/4 + 8722*(ℓ : ℝ) + 7*(m : ℝ) ^ 5/4 + 433*(m : ℝ) ^ 4/8 + 1341*(m : ℝ) ^ 3/2 + 33467*(m : ℝ) ^ 2/8 + 52985*(m : ℝ)/4 + 17178) * (v 1 * v (m + 6) - v 0 * v (m + 7)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 5)) (by omega)))
+  have g8 : 0 ≤ (19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/8 + 399*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/8 + 1387*(ℓ : ℝ) ^ 2*(m : ℝ)/4 + 798*(ℓ : ℝ) ^ 2 + 33*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 901*(ℓ : ℝ)*(m : ℝ) ^ 3/8 + 4593*(ℓ : ℝ)*(m : ℝ) ^ 2/4 + 5182*(ℓ : ℝ)*(m : ℝ) + 8736*(ℓ : ℝ) + 7*(m : ℝ) ^ 5/4 + 465*(m : ℝ) ^ 4/8 + 1541*(m : ℝ) ^ 3/2 + 40779*(m : ℝ) ^ 2/8 + 67345*(m : ℝ)/4 + 22218) * (v 2 * v (m + 5) - v 1 * v (m + 6)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 4)) (by omega)))
+  have g9 : 0 ≤ (19*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/12 + 133*(ℓ : ℝ) ^ 3*(m : ℝ)/12 + 76*(ℓ : ℝ) ^ 3/3 + 19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/4 + 567*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/8 + 2715*(ℓ : ℝ) ^ 2*(m : ℝ)/8 + 602*(ℓ : ℝ) ^ 2 + 33*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 89*(ℓ : ℝ)*(m : ℝ) ^ 3 + 2057*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 54181*(ℓ : ℝ)*(m : ℝ)/24 + 8534*(ℓ : ℝ)/3 + 7*(m : ℝ) ^ 5/6 + 775*(m : ℝ) ^ 4/24 + 1367*(m : ℝ) ^ 3/4 + 40997*(m : ℝ) ^ 2/24 + 47767*(m : ℝ)/12 + 3458) * (v 0 * v (m + 8)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g10 : 0 ≤ (19*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/12 + 95*(ℓ : ℝ) ^ 3*(m : ℝ)/4 + 266*(ℓ : ℝ) ^ 3/3 + 19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/4 + 719*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/8 + 4667*(ℓ : ℝ) ^ 2*(m : ℝ)/8 + 1347*(ℓ : ℝ) ^ 2 + 33*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 100*(ℓ : ℝ)*(m : ℝ) ^ 3 + 2732*(ℓ : ℝ)*(m : ℝ) ^ 2/3 + 30095*(ℓ : ℝ)*(m : ℝ)/8 + 18349*(ℓ : ℝ)/3 + 7*(m : ℝ) ^ 5/6 + 277*(m : ℝ) ^ 4/8 + 4877*(m : ℝ) ^ 3/12 + 18991*(m : ℝ) ^ 2/8 + 83903*(m : ℝ)/12 + 8498) * (v 1 * v (m + 7) - v 0 * v (m + 8)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := (m + 6)) (by omega)))
+  have g11 : 0 ≤ (19*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/12 + 95*(ℓ : ℝ) ^ 3*(m : ℝ)/4 + 266*(ℓ : ℝ) ^ 3/3 + 19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/4 + 833*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/8 + 6073*(ℓ : ℝ) ^ 2*(m : ℝ)/8 + 1841*(ℓ : ℝ) ^ 2 + 33*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 118*(ℓ : ℝ)*(m : ℝ) ^ 3 + 15179*(ℓ : ℝ)*(m : ℝ) ^ 2/12 + 48189*(ℓ : ℝ)*(m : ℝ)/8 + 32263*(ℓ : ℝ)/3 + 7*(m : ℝ) ^ 5/6 + 325*(m : ℝ) ^ 4/8 + 6797*(m : ℝ) ^ 3/12 + 31631*(m : ℝ) ^ 2/8 + 165863*(m : ℝ)/12 + 19362) * (v 2 * v (m + 6) - v 1 * v (m + 7)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 5)) (by omega)))
+  have g12 : 0 ≤ (19*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/12 + 133*(ℓ : ℝ) ^ 3*(m : ℝ)/12 + 76*(ℓ : ℝ) ^ 3/3 + 19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/8 + 141*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/4 + 1347*(ℓ : ℝ) ^ 2*(m : ℝ)/8 + 298*(ℓ : ℝ) ^ 2 + 11*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 241*(ℓ : ℝ)*(m : ℝ) ^ 3/8 + 5683*(ℓ : ℝ)*(m : ℝ) ^ 2/24 + 19273*(ℓ : ℝ)*(m : ℝ)/24 + 3170*(ℓ : ℝ)/3 + 7*(m : ℝ) ^ 5/24 + 199*(m : ℝ) ^ 4/24 + 725*(m : ℝ) ^ 3/8 + 11345*(m : ℝ) ^ 2/24 + 14089*(m : ℝ)/12 + 1134) * (v 1 * v (m + 8)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g13 : 0 ≤ (19*(ℓ : ℝ) ^ 3*(m : ℝ) ^ 2/12 + 95*(ℓ : ℝ) ^ 3*(m : ℝ)/4 + 266*(ℓ : ℝ) ^ 3/3 + 19*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 3/8 + 217*(ℓ : ℝ) ^ 2*(m : ℝ) ^ 2/4 + 3299*(ℓ : ℝ) ^ 2*(m : ℝ)/8 + 1043*(ℓ : ℝ) ^ 2 + 11*(ℓ : ℝ)*(m : ℝ) ^ 4/8 + 329*(ℓ : ℝ)*(m : ℝ) ^ 3/8 + 11083*(ℓ : ℝ)*(m : ℝ) ^ 2/24 + 18459*(ℓ : ℝ)*(m : ℝ)/8 + 12985*(ℓ : ℝ)/3 + 7*(m : ℝ) ^ 5/24 + 85*(m : ℝ) ^ 4/8 + 3727*(m : ℝ) ^ 3/24 + 9107*(m : ℝ) ^ 2/8 + 50225*(m : ℝ)/12 + 6174) * (v 2 * v (m + 7) - v 1 * v (m + 8)) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := (m + 6)) (by omega)))
   rw [show m + 6 + 2 = m + 5 + 3 by ring]
   rw [show m + 6 = m + 3 + 3 by ring]
   simp only [PhiC_two, PhiC_add3, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
@@ -210,7 +210,7 @@ theorem kapB_gen_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ m : ℕ) :
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12 + g13
 
 theorem cubicB_gen {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ m : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ m : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
     8 * ((((m + 6) : ℕ) : ℝ) - 1) * rhoC r t τ σ (ℓ + 1) * (v 0 + v 1) * PhiC r t τ σ ℓ ((m + 6) + 2) v ≤
       ((((m + 6) : ℕ) : ℝ) + 1) * ((((m + 6) : ℕ) : ℝ) + 2) * PhiC r t τ σ ℓ 2 v * PhiC r t τ σ (ℓ + 1) (m + 6) (fun k => v k + v (k + 1)) := by
   have hq := quadB_seq (v := v) hv hv1 (n := (m + 6)) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz
@@ -225,8 +225,8 @@ theorem cubicB_gen {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : 
   have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_gen_ts hv ℓ m)
   have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_gen_taus hv ℓ m)
   have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_gen_ss hv ℓ m)
-  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_gen_ttau hv ℓ m)
-  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_gen_ttaurs hv ℓ m)
+  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - 4 / 7 * (r * σ)) (kapB_gen_ttau hv ℓ m)
+  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ 4 / 7 * (r * σ)) (kapB_gen_ttaurs hv ℓ m)
   linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7
 
 theorem kapB_two_rt {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
@@ -328,25 +328,28 @@ theorem kapB_two_ttau {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
   try simp only [Nat.add_assoc, Nat.reduceAdd]
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9
 
-theorem kapB_two_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
-    0 ≤ ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 (ℓ + 1) 2 v * PhiC 0 0 1 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 (ℓ + 1) 2 v * PhiC 0 1 0 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 0 1 0 (ℓ + 1) (2 + 2) v + rhoC 0 0 1 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 1 0 0 (ℓ + 1) (2 + 2) v)) + ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 (ℓ + 1) 2 v * PhiC 0 0 0 1 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 (ℓ + 1) 2 v * PhiC 1 0 0 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 0 0 1 (ℓ + 1) (2 + 2) v + rhoC 0 0 0 1 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 1 0 0 0 (ℓ + 1) (2 + 2) v)) := by
-  have g0 : 0 ≤ (16) * (v 0 * v 1) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g1 : 0 ≤ (48*(ℓ : ℝ) + 136) * (v 0 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g2 : 0 ≤ (96*(ℓ : ℝ) + 232) * (v 1 * v 1 - v 0 * v 2) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 0) (by omega)))
-  have g3 : 0 ≤ (32*(ℓ : ℝ) ^ 2 + 224*(ℓ : ℝ) + 360) * (v 0 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g4 : 0 ≤ (96*(ℓ : ℝ) ^ 2 + 552*(ℓ : ℝ) + 780) * (v 1 * v 2 - v 0 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 1) (by omega)))
-  have g5 : 0 ≤ (16*(ℓ : ℝ) ^ 3/3 + 80*(ℓ : ℝ) ^ 2 + 956*(ℓ : ℝ)/3 + 380) * (v 0 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g6 : 0 ≤ (16*(ℓ : ℝ) ^ 3 + 176*(ℓ : ℝ) ^ 2 + 604*(ℓ : ℝ) + 660) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by omega)))
-  have g7 : 0 ≤ (16*(ℓ : ℝ) ^ 3 + 192*(ℓ : ℝ) ^ 2 + 692*(ℓ : ℝ) + 780) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by omega)))
-  have g8 : 0 ≤ (16*(ℓ : ℝ) ^ 3/3 + 48*(ℓ : ℝ) ^ 2 + 428*(ℓ : ℝ)/3 + 140) * (v 1 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g9 : 0 ≤ (16*(ℓ : ℝ) ^ 3 + 144*(ℓ : ℝ) ^ 2 + 428*(ℓ : ℝ) + 420) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by omega)))
-  simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
-  push_cast
-  try simp only [Nat.add_assoc, Nat.reduceAdd]
-  linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9
+theorem kapB_two_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) (hz : v 0 ≤ (((ℓ + 1) : ℕ) : ℝ) * v 1) :
+    0 ≤ ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 (ℓ + 1) 2 v * PhiC 0 0 1 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 (ℓ + 1) 2 v * PhiC 0 1 0 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 0 1 0 (ℓ + 1) (2 + 2) v + rhoC 0 0 1 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 1 0 0 (ℓ + 1) (2 + 2) v)) + (7 / 4 : ℝ) * ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 (ℓ + 1) 2 v * PhiC 0 0 0 1 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 (ℓ + 1) 2 v * PhiC 1 0 0 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 0 0 1 (ℓ + 1) (2 + 2) v + rhoC 0 0 0 1 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 1 0 0 0 (ℓ + 1) (2 + 2) v)) := by
+  have g0 : 0 ≤ (528*(ℓ : ℝ) ^ 3 + 2256*(ℓ : ℝ) ^ 2 + 2928*(ℓ : ℝ) + 1200) * (v 1 * v 1 - v 0 * v 2) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 0) (by norm_num)))
+  have g1 : 0 ≤ (684*(ℓ : ℝ) ^ 4 + 4950*(ℓ : ℝ) ^ 3 + 12420*(ℓ : ℝ) ^ 2 + 12726*(ℓ : ℝ) + 4572) * (v 1 * v 2 - v 0 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 1) (by norm_num)))
+  have g2 : 0 ≤ (76*(ℓ : ℝ) ^ 5 + 780*(ℓ : ℝ) ^ 4 + 3043*(ℓ : ℝ) ^ 3 + 5490*(ℓ : ℝ) ^ 2 + 4441*(ℓ : ℝ) + 1290) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by norm_num)))
+  have g3 : 0 ≤ (114*(ℓ : ℝ) ^ 5 + 1569*(ℓ : ℝ) ^ 4 + 7551*(ℓ : ℝ) ^ 3 + 16125*(ℓ : ℝ) ^ 2 + 15303*(ℓ : ℝ) + 5274) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+  have g4 : 0 ≤ (114*(ℓ : ℝ) ^ 5 + 1227*(ℓ : ℝ) ^ 4 + 5013*(ℓ : ℝ) ^ 3 + 9591*(ℓ : ℝ) ^ 2 + 8481*(ℓ : ℝ) + 2790) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+  have g5 : 0 ≤ (48*(ℓ : ℝ) ^ 2 + 96*(ℓ : ℝ) + 48) * (v 1 * (((ℓ : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 1) (sub_nonneg.2 (by exact_mod_cast hz)))
+  have g6 : 0 ≤ (38*(ℓ : ℝ) ^ 4 + 637*(ℓ : ℝ) ^ 3 + 2773*(ℓ : ℝ) ^ 2 + 4532*(ℓ : ℝ) + 2508) * (v 3 * (((ℓ : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 3) (sub_nonneg.2 (by exact_mod_cast hz)))
+  have g7 : 0 ≤ (38*(ℓ : ℝ) ^ 4 + 371*(ℓ : ℝ) ^ 3 + 1228*(ℓ : ℝ) ^ 2 + 1645*(ℓ : ℝ) + 750) * (v 4 * (((ℓ : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 (by exact_mod_cast hz)))
+  have g8 : 0 ≤ (132*(ℓ : ℝ) ^ 3 + 402*(ℓ : ℝ) ^ 2 + 408*(ℓ : ℝ) + 138) * (v 0 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g9 : 0 ≤ (266*(ℓ : ℝ) ^ 4 + 2257*(ℓ : ℝ) ^ 3 + 6571*(ℓ : ℝ) ^ 2 + 8180*(ℓ : ℝ) + 3750) * (v 0 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have hQ : (0 : ℝ) < 6*(ℓ : ℝ) ^ 2 + 12*(ℓ : ℝ) + 6 := by positivity
+  have key : 0 ≤ (6*(ℓ : ℝ) ^ 2 + 12*(ℓ : ℝ) + 6) * (((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 (ℓ + 1) 2 v * PhiC 0 0 1 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 (ℓ + 1) 2 v * PhiC 0 1 0 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 0 1 0 (ℓ + 1) (2 + 2) v + rhoC 0 0 1 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 1 0 0 (ℓ + 1) (2 + 2) v)) + (7 / 4 : ℝ) * ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 (ℓ + 1) 2 v * PhiC 0 0 0 1 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 (ℓ + 1) 2 v * PhiC 1 0 0 0 ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 0 0 0 1 (ℓ + 1) (2 + 2) v + rhoC 0 0 0 1 ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC 1 0 0 0 (ℓ + 1) (2 + 2) v))) := by
+    simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+    push_cast
+    try simp only [Nat.add_assoc, Nat.reduceAdd]
+    linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9
+  exact (mul_nonneg_iff_of_pos_left hQ).1 key
 
 theorem cubicB_two {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ : ℕ) (hz : v 0 ≤ (((ℓ + 1) : ℕ) : ℝ) * v 1) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ : ℕ) (hz : v 0 ≤ (((ℓ + 1) : ℕ) : ℝ) * v 1) :
     8 * (((2 : ℕ) : ℝ) - 1) * rhoC r t τ σ ((ℓ + 1) + 1) * (v 0 + v 1) * PhiC r t τ σ (ℓ + 1) (2 + 2) v ≤
       (((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * PhiC r t τ σ (ℓ + 1) 2 v * PhiC r t τ σ ((ℓ + 1) + 1) 2 (fun k => v k + v (k + 1)) := by
   have hq := quadB_seq (v := v) hv hv1 (n := 2) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz
@@ -361,8 +364,8 @@ theorem cubicB_two {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : 
   have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_two_ts hv ℓ)
   have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_two_taus hv ℓ)
   have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_two_ss hv ℓ)
-  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_two_ttau hv ℓ)
-  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_two_ttaurs hv ℓ)
+  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - 4 / 7 * (r * σ)) (kapB_two_ttau hv ℓ)
+  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ 4 / 7 * (r * σ)) (kapB_two_ttaurs hv ℓ hz)
   linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7
 
 theorem kapB_three_rt {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
@@ -477,27 +480,48 @@ theorem kapB_three_ttau {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
   try simp only [Nat.add_assoc, Nat.reduceAdd]
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11
 
-theorem kapB_three_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
-    0 ≤ ((((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) 3 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) 3 (fun k => v k + v (k + 1))) - 8 * (((3 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ (3 + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ (3 + 2) v)) + ((((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) 3 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) 3 (fun k => v k + v (k + 1))) - 8 * (((3 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ (3 + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ (3 + 2) v)) := by
-  have g0 : 0 ≤ (40) * (v 0 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g1 : 0 ≤ (120) * (v 1 * v 1 - v 0 * v 2) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 0) (by omega)))
-  have g2 : 0 ≤ (80*(ℓ : ℝ) + 200) * (v 0 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g3 : 0 ≤ (360*(ℓ : ℝ) + 700) * (v 1 * v 2 - v 0 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 1) (by omega)))
-  have g4 : 0 ≤ (40*(ℓ : ℝ) ^ 2 + 260*(ℓ : ℝ) + 360) * (v 0 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g5 : 0 ≤ (200*(ℓ : ℝ) ^ 2 + 940*(ℓ : ℝ) + 1080) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by omega)))
-  have g6 : 0 ≤ (120*(ℓ : ℝ) ^ 2 + 660*(ℓ : ℝ) + 840) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by omega)))
-  have g7 : 0 ≤ (16*(ℓ : ℝ) ^ 3/3 + 80*(ℓ : ℝ) ^ 2 + 836*(ℓ : ℝ)/3 + 280) * (v 0 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g8 : 0 ≤ (80*(ℓ : ℝ) ^ 3/3 + 240*(ℓ : ℝ) ^ 2 + 2020*(ℓ : ℝ)/3 + 600) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by omega)))
-  have g9 : 0 ≤ (80*(ℓ : ℝ) ^ 3/3 + 320*(ℓ : ℝ) ^ 2 + 3100*(ℓ : ℝ)/3 + 1000) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by omega)))
-  have g10 : 0 ≤ (16*(ℓ : ℝ) ^ 3/3 + 40*(ℓ : ℝ) ^ 2 + 296*(ℓ : ℝ)/3 + 80) * (v 1 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g11 : 0 ≤ (80*(ℓ : ℝ) ^ 3/3 + 200*(ℓ : ℝ) ^ 2 + 1480*(ℓ : ℝ)/3 + 400) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by omega)))
-  simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
-  push_cast
-  try simp only [Nat.add_assoc, Nat.reduceAdd]
-  linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11
+theorem kapB_three_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    0 ≤ ((((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) 3 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) 3 (fun k => v k + v (k + 1))) - 8 * (((3 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ (3 + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ (3 + 2) v)) + (7 / 4 : ℝ) * ((((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) 3 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) 3 (fun k => v k + v (k + 1))) - 8 * (((3 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ (3 + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ (3 + 2) v)) := by
+  rcases (show ℓ = 0 ∨ 1 ≤ ℓ by omega) with rfl | hℓ
+  · have g0 : 0 ≤ ((120 / 1 : ℝ)) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g1 : 0 ≤ ((760 / 1 : ℝ)) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g2 : 0 ≤ ((460 / 1 : ℝ)) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g3 : 0 ≤ ((185 / 1 : ℝ)) * (v 2 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 2) (sub_nonneg.2 hz))
+    have g4 : 0 ≤ ((860 / 1 : ℝ)) * (v 3 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 3) (sub_nonneg.2 hz))
+    have g5 : 0 ≤ ((1080 / 1 : ℝ)) * (v 4 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 hz))
+    have g6 : 0 ≤ ((440 / 1 : ℝ)) * (v 5 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 5) (sub_nonneg.2 hz))
+    have g7 : 0 ≤ ((120 / 1 : ℝ)) * (v 1 * v 1) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g8 : 0 ≤ ((685 / 1 : ℝ)) * (v 1 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g9 : 0 ≤ ((20 / 1 : ℝ)) * (v 1 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g10 : 0 ≤ ((945 / 1 : ℝ)) * (v 2 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g11 : 0 ≤ ((435 / 1 : ℝ)) * (v 2 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+    push_cast
+    try simp only [Nat.add_assoc, Nat.reduceAdd]
+    linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11
+  · obtain ⟨kk, rfl⟩ : ∃ kk, ℓ = kk + 1 := ⟨ℓ - 1, by omega⟩
+    have g0 : 0 ≤ (720*(kk : ℝ) ^ 2 + 1440*(kk : ℝ) + 720) * (v 1 * v 1 - v 0 * v 2) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 0) (by norm_num)))
+    have g1 : 0 ≤ (2040*(kk : ℝ) ^ 3 + 10230*(kk : ℝ) ^ 2 + 14340*(kk : ℝ) + 6150) * (v 1 * v 2 - v 0 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 1) (by norm_num)))
+    have g2 : 0 ≤ (1102*(kk : ℝ) ^ 4 + 9059*(kk : ℝ) ^ 3 + 25724*(kk : ℝ) ^ 2 + 28249*(kk : ℝ) + 10362) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by norm_num)))
+    have g3 : 0 ≤ (152*(kk : ℝ) ^ 5 + 1826*(kk : ℝ) ^ 4 + 8428*(kk : ℝ) ^ 3 + 18028*(kk : ℝ) ^ 2 + 17196*(kk : ℝ) + 5922) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by norm_num)))
+    have g4 : 0 ≤ (855*(kk : ℝ) ^ 4 + 8325*(kk : ℝ) ^ 3 + 26235*(kk : ℝ) ^ 2 + 30915*(kk : ℝ) + 12150) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g5 : 0 ≤ (190*(kk : ℝ) ^ 5 + 3185*(kk : ℝ) ^ 4 + 18135*(kk : ℝ) ^ 3 + 44365*(kk : ℝ) ^ 2 + 46115*(kk : ℝ) + 16890) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g6 : 0 ≤ (190*(kk : ℝ) ^ 5 + 2330*(kk : ℝ) ^ 4 + 10800*(kk : ℝ) ^ 3 + 23080*(kk : ℝ) ^ 2 + 22130*(kk : ℝ) + 7710) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g7 : 0 ≤ (390*(kk : ℝ) ^ 2 + 780*(kk : ℝ) + 390) * (v 2 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 2) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g8 : 0 ≤ (270*(kk : ℝ) ^ 3 + 1860*(kk : ℝ) ^ 2 + 2910*(kk : ℝ) + 1320) * (v 3 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 3) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g9 : 0 ≤ (38*(kk : ℝ) ^ 4 + 751*(kk : ℝ) ^ 3 + 3346*(kk : ℝ) ^ 2 + 5021*(kk : ℝ) + 2508) * (v 4 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g10 : 0 ≤ (38*(kk : ℝ) ^ 4 + 428*(kk : ℝ) ^ 3 + 1516*(kk : ℝ) ^ 2 + 2020*(kk : ℝ) + 894) * (v 5 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 5) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g11 : 0 ≤ (53*(kk : ℝ) ^ 4 + 466*(kk : ℝ) ^ 3 + 1591*(kk : ℝ) ^ 2 + 2426*(kk : ℝ) + 1368) * (v 1 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have hQ : (0 : ℝ) < 6*(kk : ℝ) ^ 2 + 12*(kk : ℝ) + 6 := by positivity
+    have key : 0 ≤ (6*(kk : ℝ) ^ 2 + 12*(kk : ℝ) + 6) * (((((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 (kk + 1) 2 v * PhiC 0 0 1 0 ((kk + 1) + 1) 3 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 (kk + 1) 2 v * PhiC 0 1 0 0 ((kk + 1) + 1) 3 (fun k => v k + v (k + 1))) - 8 * (((3 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 0 0 1 0 (kk + 1) (3 + 2) v + rhoC 0 0 1 0 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 0 1 0 0 (kk + 1) (3 + 2) v)) + (7 / 4 : ℝ) * ((((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 (kk + 1) 2 v * PhiC 0 0 0 1 ((kk + 1) + 1) 3 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 (kk + 1) 2 v * PhiC 1 0 0 0 ((kk + 1) + 1) 3 (fun k => v k + v (k + 1))) - 8 * (((3 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 0 0 0 1 (kk + 1) (3 + 2) v + rhoC 0 0 0 1 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 1 0 0 0 (kk + 1) (3 + 2) v))) := by
+      simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+      push_cast
+      try simp only [Nat.add_assoc, Nat.reduceAdd]
+      linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11
+    exact (mul_nonneg_iff_of_pos_left hQ).1 key
 
 theorem cubicB_three {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
     8 * (((3 : ℕ) : ℝ) - 1) * rhoC r t τ σ (ℓ + 1) * (v 0 + v 1) * PhiC r t τ σ ℓ (3 + 2) v ≤
       (((3 : ℕ) : ℝ) + 1) * (((3 : ℕ) : ℝ) + 2) * PhiC r t τ σ ℓ 2 v * PhiC r t τ σ (ℓ + 1) 3 (fun k => v k + v (k + 1)) := by
   have hq := quadB_seq (v := v) hv hv1 (n := 3) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz
@@ -512,8 +536,8 @@ theorem cubicB_three {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ 
   have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_three_ts hv ℓ)
   have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_three_taus hv ℓ)
   have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_three_ss hv ℓ)
-  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_three_ttau hv ℓ)
-  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_three_ttaurs hv ℓ)
+  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - 4 / 7 * (r * σ)) (kapB_three_ttau hv ℓ)
+  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ 4 / 7 * (r * σ)) (kapB_three_ttaurs hv ℓ hz)
   linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7
 
 theorem kapB_four_rt {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
@@ -634,28 +658,50 @@ theorem kapB_four_ttau {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
   try simp only [Nat.add_assoc, Nat.reduceAdd]
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
 
-theorem kapB_four_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
-    0 ≤ ((((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) 4 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) 4 (fun k => v k + v (k + 1))) - 8 * (((4 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ (4 + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ (4 + 2) v)) + ((((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) 4 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) 4 (fun k => v k + v (k + 1))) - 8 * (((4 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ (4 + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ (4 + 2) v)) := by
-  have g0 : 0 ≤ (120) * (v 0 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g1 : 0 ≤ (480) * (v 1 * v 2 - v 0 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 1) (by omega)))
-  have g2 : 0 ≤ (180*(ℓ : ℝ) + 570) * (v 0 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g3 : 0 ≤ (840*(ℓ : ℝ) + 2100) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by omega)))
-  have g4 : 0 ≤ (360*(ℓ : ℝ) + 1020) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by omega)))
-  have g5 : 0 ≤ (72*(ℓ : ℝ) ^ 2 + 576*(ℓ : ℝ) + 990) * (v 0 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g6 : 0 ≤ (360*(ℓ : ℝ) ^ 2 + 2100*(ℓ : ℝ) + 3000) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by omega)))
-  have g7 : 0 ≤ (240*(ℓ : ℝ) ^ 2 + 1680*(ℓ : ℝ) + 2700) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by omega)))
-  have g8 : 0 ≤ (8*(ℓ : ℝ) ^ 3 + 144*(ℓ : ℝ) ^ 2 + 610*(ℓ : ℝ) + 750) * (v 0 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g9 : 0 ≤ (40*(ℓ : ℝ) ^ 3 + 432*(ℓ : ℝ) ^ 2 + 1466*(ℓ : ℝ) + 1590) * (v 1 * v 5 - v 0 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 4) (by omega)))
-  have g10 : 0 ≤ (40*(ℓ : ℝ) ^ 3 + 600*(ℓ : ℝ) ^ 2 + 2390*(ℓ : ℝ) + 2850) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by omega)))
-  have g11 : 0 ≤ (8*(ℓ : ℝ) ^ 3 + 72*(ℓ : ℝ) ^ 2 + 214*(ℓ : ℝ) + 210) * (v 1 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g12 : 0 ≤ (40*(ℓ : ℝ) ^ 3 + 360*(ℓ : ℝ) ^ 2 + 1070*(ℓ : ℝ) + 1050) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by omega)))
-  simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
-  push_cast
-  try simp only [Nat.add_assoc, Nat.reduceAdd]
-  linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
+theorem kapB_four_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    0 ≤ ((((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) 4 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) 4 (fun k => v k + v (k + 1))) - 8 * (((4 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ (4 + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ (4 + 2) v)) + (7 / 4 : ℝ) * ((((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) 4 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) 4 (fun k => v k + v (k + 1))) - 8 * (((4 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ (4 + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ (4 + 2) v)) := by
+  rcases (show ℓ = 0 ∨ 1 ≤ ℓ by omega) with rfl | hℓ
+  · have g0 : 0 ≤ ((1515 / 1 : ℝ)) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g1 : 0 ≤ ((780 / 1 : ℝ)) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g2 : 0 ≤ ((3615 / 1 : ℝ)) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g3 : 0 ≤ ((1275 / 1 : ℝ)) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by norm_num)))
+    have g4 : 0 ≤ ((720 / 1 : ℝ)) * (v 3 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 3) (sub_nonneg.2 hz))
+    have g5 : 0 ≤ ((2610 / 1 : ℝ)) * (v 4 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 hz))
+    have g6 : 0 ≤ ((3090 / 1 : ℝ)) * (v 5 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 5) (sub_nonneg.2 hz))
+    have g7 : 0 ≤ ((1200 / 1 : ℝ)) * (v 6 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 6) (sub_nonneg.2 hz))
+    have g8 : 0 ≤ ((570 / 1 : ℝ)) * (v 1 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g9 : 0 ≤ ((2235 / 1 : ℝ)) * (v 1 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g10 : 0 ≤ ((1275 / 1 : ℝ)) * (v 1 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g11 : 0 ≤ ((75 / 1 : ℝ)) * (v 1 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g12 : 0 ≤ ((2865 / 1 : ℝ)) * (v 2 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+    push_cast
+    try simp only [Nat.add_assoc, Nat.reduceAdd]
+    linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
+  · obtain ⟨kk, rfl⟩ : ∃ kk, ℓ = kk + 1 := ⟨ℓ - 1, by omega⟩
+    have g0 : 0 ≤ (2280*(kk : ℝ) ^ 2 + 4560*(kk : ℝ) + 2280) * (v 1 * v 2 - v 0 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 1) (by norm_num)))
+    have g1 : 0 ≤ (3300*(kk : ℝ) ^ 3 + 18840*(kk : ℝ) ^ 2 + 27780*(kk : ℝ) + 12240) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by norm_num)))
+    have g2 : 0 ≤ (1330*(kk : ℝ) ^ 4 + 12557*(kk : ℝ) ^ 3 + 40013*(kk : ℝ) ^ 2 + 46660*(kk : ℝ) + 17574) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by norm_num)))
+    have g3 : 0 ≤ (152*(kk : ℝ) ^ 5 + 2054*(kk : ℝ) ^ 4 + 10663*(kk : ℝ) ^ 3 + 25270*(kk : ℝ) ^ 2 + 25707*(kk : ℝ) + 9198) * (v 1 * v 5 - v 0 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 4) (by norm_num)))
+    have g4 : 0 ≤ (1980*(kk : ℝ) ^ 3 + 12000*(kk : ℝ) ^ 2 + 18060*(kk : ℝ) + 8040) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g5 : 0 ≤ (1140*(kk : ℝ) ^ 4 + 13080*(kk : ℝ) ^ 3 + 46980*(kk : ℝ) ^ 2 + 59280*(kk : ℝ) + 24240) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g6 : 0 ≤ (190*(kk : ℝ) ^ 5 + 3755*(kk : ℝ) ^ 4 + 24675*(kk : ℝ) ^ 3 + 67855*(kk : ℝ) ^ 2 + 75755*(kk : ℝ) + 29010) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g7 : 0 ≤ (190*(kk : ℝ) ^ 5 + 2615*(kk : ℝ) ^ 4 + 13575*(kk : ℝ) ^ 3 + 32035*(kk : ℝ) ^ 2 + 32855*(kk : ℝ) + 11970) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by norm_num)))
+    have g8 : 0 ≤ (600*(kk : ℝ) ^ 2 + 1200*(kk : ℝ) + 600) * (v 3 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 3) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g9 : 0 ≤ (330*(kk : ℝ) ^ 3 + 2490*(kk : ℝ) ^ 2 + 3990*(kk : ℝ) + 1830) * (v 4 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g10 : 0 ≤ (38*(kk : ℝ) ^ 4 + 865*(kk : ℝ) ^ 3 + 4405*(kk : ℝ) ^ 2 + 7382*(kk : ℝ) + 4104) * (v 5 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 5) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g11 : 0 ≤ (38*(kk : ℝ) ^ 4 + 485*(kk : ℝ) ^ 3 + 1942*(kk : ℝ) ^ 2 + 2881*(kk : ℝ) + 1386) * (v 6 * (((kk : ℝ) + 1) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 6) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g12 : 0 ≤ (50*(kk : ℝ) ^ 4 + 673*(kk : ℝ) ^ 3 + 2857*(kk : ℝ) ^ 2 + 4910*(kk : ℝ) + 2976) * (v 1 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have hQ : (0 : ℝ) < 4*(kk : ℝ) ^ 2 + 8*(kk : ℝ) + 4 := by positivity
+    have key : 0 ≤ (4*(kk : ℝ) ^ 2 + 8*(kk : ℝ) + 4) * (((((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 (kk + 1) 2 v * PhiC 0 0 1 0 ((kk + 1) + 1) 4 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 (kk + 1) 2 v * PhiC 0 1 0 0 ((kk + 1) + 1) 4 (fun k => v k + v (k + 1))) - 8 * (((4 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 0 0 1 0 (kk + 1) (4 + 2) v + rhoC 0 0 1 0 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 0 1 0 0 (kk + 1) (4 + 2) v)) + (7 / 4 : ℝ) * ((((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 (kk + 1) 2 v * PhiC 0 0 0 1 ((kk + 1) + 1) 4 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 (kk + 1) 2 v * PhiC 1 0 0 0 ((kk + 1) + 1) 4 (fun k => v k + v (k + 1))) - 8 * (((4 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 0 0 0 1 (kk + 1) (4 + 2) v + rhoC 0 0 0 1 ((kk + 1) + 1) * (v 0 + v 1) * PhiC 1 0 0 0 (kk + 1) (4 + 2) v))) := by
+      simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+      push_cast
+      try simp only [Nat.add_assoc, Nat.reduceAdd]
+      linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
+    exact (mul_nonneg_iff_of_pos_left hQ).1 key
 
 theorem cubicB_four {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
     8 * (((4 : ℕ) : ℝ) - 1) * rhoC r t τ σ (ℓ + 1) * (v 0 + v 1) * PhiC r t τ σ ℓ (4 + 2) v ≤
       (((4 : ℕ) : ℝ) + 1) * (((4 : ℕ) : ℝ) + 2) * PhiC r t τ σ ℓ 2 v * PhiC r t τ σ (ℓ + 1) 4 (fun k => v k + v (k + 1)) := by
   have hq := quadB_seq (v := v) hv hv1 (n := 4) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz
@@ -670,8 +716,8 @@ theorem cubicB_four {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ :
   have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_four_ts hv ℓ)
   have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_four_taus hv ℓ)
   have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_four_ss hv ℓ)
-  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_four_ttau hv ℓ)
-  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_four_ttaurs hv ℓ)
+  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - 4 / 7 * (r * σ)) (kapB_four_ttau hv ℓ)
+  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ 4 / 7 * (r * σ)) (kapB_four_ttaurs hv ℓ hz)
   linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7
 
 theorem kapB_five_rt {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
@@ -795,29 +841,70 @@ theorem kapB_five_ttau {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
   try simp only [Nat.add_assoc, Nat.reduceAdd]
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
 
-theorem kapB_five_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) :
-    0 ≤ ((((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) 5 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) 5 (fun k => v k + v (k + 1))) - 8 * (((5 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ (5 + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ (5 + 2) v)) + ((((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) 5 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) 5 (fun k => v k + v (k + 1))) - 8 * (((5 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ (5 + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ (5 + 2) v)) := by
-  have g0 : 0 ≤ (350) * (v 0 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g1 : 0 ≤ (1260) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by omega)))
-  have g2 : 0 ≤ (420) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by omega)))
-  have g3 : 0 ≤ (420*(ℓ : ℝ) + 1610) * (v 0 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g4 : 0 ≤ (1680*(ℓ : ℝ) + 5180) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by omega)))
-  have g5 : 0 ≤ (840*(ℓ : ℝ) + 2940) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by omega)))
-  have g6 : 0 ≤ (140*(ℓ : ℝ) ^ 2 + 1330*(ℓ : ℝ) + 2730) * (v 0 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g7 : 0 ≤ (588*(ℓ : ℝ) ^ 2 + 4158*(ℓ : ℝ) + 7182) * (v 1 * v 5 - v 0 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 4) (by omega)))
-  have g8 : 0 ≤ (420*(ℓ : ℝ) ^ 2 + 3570*(ℓ : ℝ) + 6930) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by omega)))
-  have g9 : 0 ≤ (40*(ℓ : ℝ) ^ 3/3 + 280*(ℓ : ℝ) ^ 2 + 4190*(ℓ : ℝ)/3 + 2030) * (v 0 * v 7) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g10 : 0 ≤ (56*(ℓ : ℝ) ^ 3 + 728*(ℓ : ℝ) ^ 2 + 2954*(ℓ : ℝ) + 3822) * (v 1 * v 6 - v 0 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 5) (by omega)))
-  have g11 : 0 ≤ (56*(ℓ : ℝ) ^ 3 + 1008*(ℓ : ℝ) ^ 2 + 4774*(ℓ : ℝ) + 6762) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by omega)))
-  have g12 : 0 ≤ (40*(ℓ : ℝ) ^ 3/3 + 140*(ℓ : ℝ) ^ 2 + 1460*(ℓ : ℝ)/3 + 560) * (v 1 * v 7) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g13 : 0 ≤ (56*(ℓ : ℝ) ^ 3 + 588*(ℓ : ℝ) ^ 2 + 2044*(ℓ : ℝ) + 2352) * (v 2 * v 6 - v 1 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 5) (by omega)))
-  simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
-  push_cast
-  try simp only [Nat.add_assoc, Nat.reduceAdd]
-  linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12 + g13
+theorem kapB_five_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    0 ≤ ((((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 ℓ 2 v * PhiC 0 0 1 0 (ℓ + 1) 5 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 ℓ 2 v * PhiC 0 1 0 0 (ℓ + 1) 5 (fun k => v k + v (k + 1))) - 8 * (((5 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 1 0 ℓ (5 + 2) v + rhoC 0 0 1 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 1 0 0 ℓ (5 + 2) v)) + (7 / 4 : ℝ) * ((((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 ℓ 2 v * PhiC 0 0 0 1 (ℓ + 1) 5 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 ℓ 2 v * PhiC 1 0 0 0 (ℓ + 1) 5 (fun k => v k + v (k + 1))) - 8 * (((5 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (ℓ + 1) * (v 0 + v 1) * PhiC 0 0 0 1 ℓ (5 + 2) v + rhoC 0 0 0 1 (ℓ + 1) * (v 0 + v 1) * PhiC 1 0 0 0 ℓ (5 + 2) v)) := by
+  rcases (show ℓ = 0 ∨ ℓ = 1 ∨ 2 ≤ ℓ by omega) with rfl | rfl | hℓ
+  · have g0 : 0 ≤ ((735 / 1 : ℝ)) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g1 : 0 ≤ ((4515 / 1 : ℝ)) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g2 : 0 ≤ ((9765 / 1 : ℝ)) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g3 : 0 ≤ ((8967 / 1 : ℝ)) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by norm_num)))
+    have g4 : 0 ≤ ((2982 / 1 : ℝ)) * (v 2 * v 6 - v 1 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 5) (by norm_num)))
+    have g5 : 0 ≤ ((1750 / 1 : ℝ)) * (v 4 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 hz))
+    have g6 : 0 ≤ ((6090 / 1 : ℝ)) * (v 5 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 5) (sub_nonneg.2 hz))
+    have g7 : 0 ≤ ((6972 / 1 : ℝ)) * (v 6 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 6) (sub_nonneg.2 hz))
+    have g8 : 0 ≤ ((2632 / 1 : ℝ)) * (v 7 * (((0 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 7) (sub_nonneg.2 hz))
+    have g9 : 0 ≤ ((1575 / 1 : ℝ)) * (v 1 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g10 : 0 ≤ ((5915 / 1 : ℝ)) * (v 1 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g11 : 0 ≤ ((7497 / 1 : ℝ)) * (v 1 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g12 : 0 ≤ ((3507 / 1 : ℝ)) * (v 1 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g13 : 0 ≤ ((350 / 1 : ℝ)) * (v 1 * v 7) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+    push_cast
+    try simp only [Nat.add_assoc, Nat.reduceAdd]
+    linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12 + g13
+  · have g0 : 0 ≤ ((1575 / 1 : ℝ)) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by norm_num)))
+    have g1 : 0 ≤ ((7735 / 1 : ℝ)) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by norm_num)))
+    have g2 : 0 ≤ ((12817 / 1 : ℝ)) * (v 1 * v 5 - v 0 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 4) (by norm_num)))
+    have g3 : 0 ≤ ((4194 / 1 : ℝ)) * (v 1 * v 6 - v 0 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 5) (by norm_num)))
+    have g4 : 0 ≤ ((735 / 1 : ℝ)) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g5 : 0 ≤ ((5670 / 1 : ℝ)) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g6 : 0 ≤ ((29715 / 2 : ℝ)) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g7 : 0 ≤ ((32193 / 2 : ℝ)) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by norm_num)))
+    have g8 : 0 ≤ ((6174 / 1 : ℝ)) * (v 2 * v 6 - v 1 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 5) (by norm_num)))
+    have g9 : 0 ≤ ((175 / 1 : ℝ)) * (v 4 * (((1 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 hz))
+    have g10 : 0 ≤ ((175 / 2 : ℝ)) * (v 5 * (((1 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 5) (sub_nonneg.2 hz))
+    have g11 : 0 ≤ ((6795 / 2 : ℝ)) * (v 6 * (((1 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 6) (sub_nonneg.2 hz))
+    have g12 : 0 ≤ ((990 / 1 : ℝ)) * (v 7 * (((1 : ℕ) : ℝ) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 7) (sub_nonneg.2 hz))
+    have g13 : 0 ≤ ((4990 / 1 : ℝ)) * (v 0 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+    push_cast
+    try simp only [Nat.add_assoc, Nat.reduceAdd]
+    linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12 + g13
+  · obtain ⟨kk, rfl⟩ : ∃ kk, ℓ = kk + 2 := ⟨ℓ - 2, by omega⟩
+    have g0 : 0 ≤ (18900*(kk : ℝ) ^ 2 + 75600*(kk : ℝ) + 75600) * (v 1 * v 3 - v 0 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 2) (by norm_num)))
+    have g1 : 0 ≤ (21840*(kk : ℝ) ^ 3 + 202020*(kk : ℝ) ^ 2 + 546000*(kk : ℝ) + 458640) * (v 1 * v 4 - v 0 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 3) (by norm_num)))
+    have g2 : 0 ≤ (8379*(kk : ℝ) ^ 4 + 123543*(kk : ℝ) ^ 3 + 630126*(kk : ℝ) ^ 2 + 1306116*(kk : ℝ) + 946008) * (v 1 * v 5 - v 0 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 4) (by norm_num)))
+    have g3 : 0 ≤ (608*(kk : ℝ) ^ 5 + 12130*(kk : ℝ) ^ 4 + 94546*(kk : ℝ) ^ 3 + 350840*(kk : ℝ) ^ 2 + 604128*(kk : ℝ) + 386640) * (v 1 * v 6 - v 0 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 0) (y := 5) (by norm_num)))
+    have g4 : 0 ≤ (8820*(kk : ℝ) ^ 2 + 35280*(kk : ℝ) + 35280) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by norm_num)))
+    have g5 : 0 ≤ (13860*(kk : ℝ) ^ 3 + 137340*(kk : ℝ) ^ 2 + 383040*(kk : ℝ) + 327600) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by norm_num)))
+    have g6 : 0 ≤ (5985*(kk : ℝ) ^ 4 + 103005*(kk : ℝ) ^ 3 + 591570*(kk : ℝ) ^ 2 + 1321740*(kk : ℝ) + 1005480) * (v 2 * v 4 - v 1 * v 5) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 3) (by norm_num)))
+    have g7 : 0 ≤ (798*(kk : ℝ) ^ 5 + 22155*(kk : ℝ) ^ 4 + 215901*(kk : ℝ) ^ 3 + 935130*(kk : ℝ) ^ 2 + 1794828*(kk : ℝ) + 1247400) * (v 2 * v 5 - v 1 * v 6) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 4) (by norm_num)))
+    have g8 : 0 ≤ (798*(kk : ℝ) ^ 5 + 16170*(kk : ℝ) ^ 4 + 126756*(kk : ℝ) ^ 3 + 472080*(kk : ℝ) ^ 2 + 820848*(kk : ℝ) + 534240) * (v 2 * v 6 - v 1 * v 7) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 5) (by norm_num)))
+    have g9 : 0 ≤ (2100*(kk : ℝ) ^ 2 + 8400*(kk : ℝ) + 8400) * (v 4 * (((kk : ℝ) + 2) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 4) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g10 : 0 ≤ (190*(kk : ℝ) ^ 4 + 5655*(kk : ℝ) ^ 3 + 45575*(kk : ℝ) ^ 2 + 136560*(kk : ℝ) + 137220) * (v 6 * (((kk : ℝ) + 2) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 6) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g11 : 0 ≤ (190*(kk : ℝ) ^ 4 + 3470*(kk : ℝ) ^ 3 + 21800*(kk : ℝ) ^ 2 + 55840*(kk : ℝ) + 49200) * (v 7 * (((kk : ℝ) + 2) * v 1 - v 0)) := mul_nonneg (by positivity) (mul_nonneg (hv.1 7) (sub_nonneg.2 (by exact_mod_cast hz)))
+    have g12 : 0 ≤ (1050*(kk : ℝ) ^ 3 + 4200*(kk : ℝ) ^ 2 + 4200*(kk : ℝ)) * (v 0 * v 5) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have g13 : 0 ≤ (2185*(kk : ℝ) ^ 4 + 33480*(kk : ℝ) ^ 3 + 170945*(kk : ℝ) ^ 2 + 367980*(kk : ℝ) + 289260) * (v 0 * v 6) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    have hQ : (0 : ℝ) < 12*(kk : ℝ) ^ 2 + 48*(kk : ℝ) + 48 := by positivity
+    have key : 0 ≤ (12*(kk : ℝ) ^ 2 + 48*(kk : ℝ) + 48) * (((((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * (PhiC 0 1 0 0 (kk + 2) 2 v * PhiC 0 0 1 0 ((kk + 2) + 1) 5 (fun k => v k + v (k + 1)) + PhiC 0 0 1 0 (kk + 2) 2 v * PhiC 0 1 0 0 ((kk + 2) + 1) 5 (fun k => v k + v (k + 1))) - 8 * (((5 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 ((kk + 2) + 1) * (v 0 + v 1) * PhiC 0 0 1 0 (kk + 2) (5 + 2) v + rhoC 0 0 1 0 ((kk + 2) + 1) * (v 0 + v 1) * PhiC 0 1 0 0 (kk + 2) (5 + 2) v)) + (7 / 4 : ℝ) * ((((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * (PhiC 1 0 0 0 (kk + 2) 2 v * PhiC 0 0 0 1 ((kk + 2) + 1) 5 (fun k => v k + v (k + 1)) + PhiC 0 0 0 1 (kk + 2) 2 v * PhiC 1 0 0 0 ((kk + 2) + 1) 5 (fun k => v k + v (k + 1))) - 8 * (((5 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 ((kk + 2) + 1) * (v 0 + v 1) * PhiC 0 0 0 1 (kk + 2) (5 + 2) v + rhoC 0 0 0 1 ((kk + 2) + 1) * (v 0 + v 1) * PhiC 1 0 0 0 (kk + 2) (5 + 2) v))) := by
+      simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
+      push_cast
+      try simp only [Nat.add_assoc, Nat.reduceAdd]
+      linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12 + g13
+    exact (mul_nonneg_iff_of_pos_left hQ).1 key
 
 theorem cubicB_five {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ : ℕ) (hz : v 0 ≤ ((ℓ : ℕ) : ℝ) * v 1) :
     8 * (((5 : ℕ) : ℝ) - 1) * rhoC r t τ σ (ℓ + 1) * (v 0 + v 1) * PhiC r t τ σ ℓ (5 + 2) v ≤
       (((5 : ℕ) : ℝ) + 1) * (((5 : ℕ) : ℝ) + 2) * PhiC r t τ σ ℓ 2 v * PhiC r t τ σ (ℓ + 1) 5 (fun k => v k + v (k + 1)) := by
   have hq := quadB_seq (v := v) hv hv1 (n := 5) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz
@@ -832,8 +919,8 @@ theorem cubicB_five {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ :
   have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_five_ts hv ℓ)
   have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_five_taus hv ℓ)
   have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_five_ss hv ℓ)
-  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_five_ttau hv ℓ)
-  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_five_ttaurs hv ℓ)
+  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - 4 / 7 * (r * σ)) (kapB_five_ttau hv ℓ)
+  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ 4 / 7 * (r * σ)) (kapB_five_ttaurs hv ℓ hz)
   linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7
 
 theorem kapB_corner_rt {v : ℕ → ℝ} (hv : LCNZ v) (hv0 : v 0 = 0) :
@@ -924,14 +1011,14 @@ theorem kapB_corner_ttau {v : ℕ → ℝ} (hv : LCNZ v) (hv0 : v 0 = 0) :
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6
 
 theorem kapB_corner_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (hv0 : v 0 = 0) :
-    0 ≤ ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * ((PhiC 0 1 0 0 0 2 v + ((2 : ℝ) / 3) * PhiC 0 1 0 0 0 3 v) * PhiC 0 0 1 0 (0 + 1) 2 (fun k => v k + v (k + 1)) + (PhiC 0 0 1 0 0 2 v + ((2 : ℝ) / 3) * PhiC 0 0 1 0 0 3 v) * PhiC 0 1 0 0 (0 + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (0 + 1) * (v 0 + v 1) * PhiC 0 0 1 0 0 (2 + 2) v + rhoC 0 0 1 0 (0 + 1) * (v 0 + v 1) * PhiC 0 1 0 0 0 (2 + 2) v)) + ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * ((PhiC 1 0 0 0 0 2 v + ((2 : ℝ) / 3) * PhiC 1 0 0 0 0 3 v) * PhiC 0 0 0 1 (0 + 1) 2 (fun k => v k + v (k + 1)) + (PhiC 0 0 0 1 0 2 v + ((2 : ℝ) / 3) * PhiC 0 0 0 1 0 3 v) * PhiC 1 0 0 0 (0 + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (0 + 1) * (v 0 + v 1) * PhiC 0 0 0 1 0 (2 + 2) v + rhoC 0 0 0 1 (0 + 1) * (v 0 + v 1) * PhiC 1 0 0 0 0 (2 + 2) v)) := by
-  have g0 : 0 ≤ (184) * (v 1 * v 1) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g1 : 0 ≤ (684) * (v 1 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g2 : 0 ≤ (936) * (v 1 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g3 : 0 ≤ (696) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by omega)))
-  have g4 : 0 ≤ (600) * (v 1 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
-  have g5 : 0 ≤ (680) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by omega)))
-  have g6 : 0 ≤ (160) * (v 3 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+    0 ≤ ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * ((PhiC 0 1 0 0 0 2 v + ((2 : ℝ) / 3) * PhiC 0 1 0 0 0 3 v) * PhiC 0 0 1 0 (0 + 1) 2 (fun k => v k + v (k + 1)) + (PhiC 0 0 1 0 0 2 v + ((2 : ℝ) / 3) * PhiC 0 0 1 0 0 3 v) * PhiC 0 1 0 0 (0 + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 0 1 0 0 (0 + 1) * (v 0 + v 1) * PhiC 0 0 1 0 0 (2 + 2) v + rhoC 0 0 1 0 (0 + 1) * (v 0 + v 1) * PhiC 0 1 0 0 0 (2 + 2) v)) + (7 / 4 : ℝ) * ((((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * ((PhiC 1 0 0 0 0 2 v + ((2 : ℝ) / 3) * PhiC 1 0 0 0 0 3 v) * PhiC 0 0 0 1 (0 + 1) 2 (fun k => v k + v (k + 1)) + (PhiC 0 0 0 1 0 2 v + ((2 : ℝ) / 3) * PhiC 0 0 0 1 0 3 v) * PhiC 1 0 0 0 (0 + 1) 2 (fun k => v k + v (k + 1))) - 8 * (((2 : ℕ) : ℝ) - 1) * (rhoC 1 0 0 0 (0 + 1) * (v 0 + v 1) * PhiC 0 0 0 1 0 (2 + 2) v + rhoC 0 0 0 1 (0 + 1) * (v 0 + v 1) * PhiC 1 0 0 0 0 (2 + 2) v)) := by
+  have g0 : 0 ≤ (160) * (v 1 * v 1) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g1 : 0 ≤ (657) * (v 1 * v 2) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g2 : 0 ≤ (945) * (v 1 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g3 : 0 ≤ (741) * (v 2 * v 2 - v 1 * v 3) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 1) (by omega)))
+  have g4 : 0 ≤ (627) * (v 1 * v 4) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
+  have g5 : 0 ≤ (731) * (v 2 * v 3 - v 1 * v 4) := mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := 1) (y := 2) (by omega)))
+  have g6 : 0 ≤ (172) * (v 3 * v 3) := mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))
   simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]
   push_cast
   try simp only [Nat.add_assoc, Nat.reduceAdd]
@@ -939,7 +1026,7 @@ theorem kapB_corner_ttaurs {v : ℕ → ℝ} (hv : LCNZ v) (hv0 : v 0 = 0) :
   linear_combination g0 + g1 + g2 + g3 + g4 + g5 + g6
 
 theorem cubicB_corner {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (hv0 : v 0 = 0) (hz : v 0 ≤ ((0 : ℕ) : ℝ) * v 1) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (hv0 : v 0 = 0) (hz : v 0 ≤ ((0 : ℕ) : ℝ) * v 1) :
     8 * (((2 : ℕ) : ℝ) - 1) * rhoC r t τ σ (0 + 1) * (v 0 + v 1) * PhiC r t τ σ 0 (2 + 2) v ≤
       (((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (PhiC r t τ σ 0 2 v + ((2 : ℝ) / 3) * PhiC r t τ σ 0 3 v) * PhiC r t τ σ (0 + 1) 2 (fun k => v k + v (k + 1)) := by
   have hq := quadB_seq (v := v) hv hv1 (n := 2) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz
@@ -954,8 +1041,8 @@ theorem cubicB_corner {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ
   have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_corner_ts hv hv0)
   have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_corner_taus hv hv0)
   have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_corner_ss hv hv0)
-  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_corner_ttau hv hv0)
-  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_corner_ttaurs hv hv0)
+  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - 4 / 7 * (r * σ)) (kapB_corner_ttau hv hv0)
+  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ 4 / 7 * (r * σ)) (kapB_corner_ttaurs hv hv0)
   have cq : 0 ≤ (((2 : ℕ) : ℝ) + 1) * (((2 : ℕ) : ℝ) + 2) * (((2 : ℝ) / 3) * (r * PhiC 1 0 0 0 0 3 v + 0 * PhiC 0 1 0 0 0 3 v + τ * PhiC 0 0 1 0 0 3 v + 0 * PhiC 0 0 0 1 0 3 v)) * (r * PhiC 1 0 0 0 (0 + 1) 2 (fun k => v k + v (k + 1)) + 0 * PhiC 0 1 0 0 (0 + 1) 2 (fun k => v k + v (k + 1)) + τ * PhiC 0 0 1 0 (0 + 1) 2 (fun k => v k + v (k + 1)) + 0 * PhiC 0 0 0 1 (0 + 1) 2 (fun k => v k + v (k + 1))) := by
     rw [← PhiC_lin, ← PhiC_lin]; have h3 := PhiC_nonneg hr.le le_rfl hτ le_rfl hv.1 0 3; have h2 := PhiC_nonneg hr.le le_rfl hτ le_rfl (fun k => add_nonneg (hv.1 k) (hv.1 (k + 1))) (0 + 1) 2; positivity
   linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7 + cq

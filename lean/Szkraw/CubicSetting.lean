@@ -22,7 +22,7 @@ structure CubicSetting (N : ℕ) (r t τ σ : ℝ) (ν u : ℕ → ℝ) : Prop w
   ht : 0 ≤ t
   hτ : 0 ≤ τ
   hσ : 0 ≤ σ
-  hrs : r * σ ≤ t * τ
+  hrs : r * σ ≤ 7 / 4 * (t * τ)
   hν : LCNZ ν
   hν0 : ν 0 = 0
   hν1 : 0 < ν 1

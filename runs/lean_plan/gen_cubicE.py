@@ -133,7 +133,7 @@ for name, pairs in FORMS.items():
 # main theorem
 A = '{"ℓ m" if GEN else "ℓ"}'
 main = [f'theorem cubicE_{SUF} {{v : ℕ → ℝ}} (hv : LCNZ v) {{r t τ σ : ℝ}} (hr : 0 < r) (ht : 0 ≤ t)',
-        f'    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) {lhyp} :',
+        f'    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ {URS.p} / {URS.q} * (t * τ)) {lhyp} :',
         f'    {Ltxt} * (rhoC r t τ σ ({lv} + 1) * (v 0 + v 1) * eCv τ σ {lv} ({nl} + 2) v) ≤',
         f'      {Ktxt} * ((PhiC r t τ σ {lv} 2 v + ((({nl} : ℕ) : ℝ) / 3) * PhiC r t τ σ {lv} 3 v) * eCv τ σ ({lv} + 1) {nl} {W}) := by',
         f'  rw [PhiC_lin r t τ σ {lv} 2, PhiC_lin r t τ σ {lv} 3, rhoC_lin r t τ σ ({lv} + 1), eCv_lin τ σ {lv} ({nl} + 2),',
@@ -143,8 +143,8 @@ main = [f'theorem cubicE_{SUF} {{v : ℕ → ℝ}} (hv : LCNZ v) {{r t τ σ : �
         f'  have c3 := mul_nonneg (mul_nonneg ht hσ) (kapE_{SUF}_ts hv {"ℓ m" if GEN else "ℓ"})',
         f'  have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapE_{SUF}_taus hv {"ℓ m" if GEN else "ℓ"})',
         f'  have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapE_{SUF}_ss hv {"ℓ m" if GEN else "ℓ"})',
-        f'  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapE_{SUF}_ttau hv {"ℓ m" if GEN else "ℓ"})',
-        f'  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapE_{SUF}_ttaurs hv {"ℓ m" if GEN else "ℓ"})',
+        f'  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - {URS.q} / {URS.p} * (r * σ)) (kapE_{SUF}_ttau hv {"ℓ m" if GEN else "ℓ"})',
+        f'  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ {URS.q} / {URS.p} * (r * σ)) (kapE_{SUF}_ttaurs hv {"ℓ m" if GEN else "ℓ"})',
         f'  linear_combination c1 + c2 + c3 + c4 + c5 + c6 + c7']
 out.append('\n'.join(main))
 open(sys.argv[2], 'w').write('\n\n'.join(out) + '\n')

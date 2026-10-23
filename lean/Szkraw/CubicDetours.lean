@@ -136,7 +136,7 @@ theorem kap_scale {K L X Y P Q : ℝ} (hK : 0 < K) (hP : 0 ≤ Q) (hY : 0 ≤ Y)
 
 /-- The local `B` inequality (eqs. `cubic-B`, `cubic-corner`) for every `n ≥ 2`. -/
 theorem cubicB_all {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ n : ℕ) (hn : 2 ≤ n) (hz : v 0 ≤ (ℓ : ℝ) * v 1)
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ n : ℕ) (hn : 2 ≤ n) (hz : v 0 ≤ (ℓ : ℝ) * v 1)
     (hv0 : ℓ = 0 → v 0 = 0) :
     kapB n * (rhoC r t τ σ (ℓ + 1) * (v 0 + v 1) * PhiC r t τ σ ℓ (n + 2) v) ≤
       (PhiC r t τ σ ℓ 2 v + (n : ℝ) / 3 * PhiC r t τ σ ℓ 3 v) * PhiC r t τ σ (ℓ + 1) n (fun k => v k + v (k + 1)) := by
@@ -161,7 +161,7 @@ theorem cubicB_all {v : ℕ → ℝ} (hv : LCNZ v) (hv1 : 0 < v 1) {r t τ σ : 
 
 /-- The local `E` inequality (eq. `cubic-E`) for every `n ≥ 3`. -/
 theorem cubicE_all {v : ℕ → ℝ} (hv : LCNZ v) {r t τ σ : ℝ} (hr : 0 < r) (ht : 0 ≤ t)
-    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) (ℓ n : ℕ) (hn : 3 ≤ n) :
+    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ 7 / 4 * (t * τ)) (ℓ n : ℕ) (hn : 3 ≤ n) :
     kapE n * (rhoC r t τ σ (ℓ + 1) * (v 0 + v 1) * eCv τ σ ℓ (n + 2) v) ≤
       (PhiC r t τ σ ℓ 2 v + (n : ℝ) / 3 * PhiC r t τ σ ℓ 3 v) * eCv τ σ (ℓ + 1) n (fun k => v k + v (k + 1)) := by
   have hK : (0 : ℝ) < ((n : ℝ) + 1) * ((n : ℝ) + 2) := by positivity

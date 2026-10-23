@@ -10,7 +10,7 @@ nonnegative coefficients (asserted). The main theorem combines these with rho >=
 CASE corner: (l, n) = (0, 2) with v_0 = 0, the inequality 8 c_1 phi_4(0) <= 12 (phi_2(0) + (2/3) phi_3(0)) phi_2(1)
 (eq. cubic-corner); its quadratic part is quadB_seq plus the nonnegative extra term 8 phi_3(0) phi_2(1) at t = sigma = 0.
 Usage: gen_cubicB.py CASE OUT   (CASE = gen | 2 | 3 | 4 | 5 | corner; gen is n = m + 6, case 2 is l >= 1)"""
-import sys, os
+import sys, os, re
 import sympy as sp
 
 L, M = sp.symbols('l m', nonnegative=True)
@@ -137,13 +137,76 @@ else:
     expand_lines += ['  simp only [PhiC, rhoC, drhoC, d2rhoC, choose2_real, choose3_real]']
 expand_lines += ['  push_cast', '  try simp only [Nat.add_assoc, Nat.reduceAdd]']
 if COR: expand_lines += ['  simp only [hv0]']
+MOVES = (not GEN) and (not COR) and URS != 1
+def form_dict(expr):
+    inv = {s_: i for i, s_ in V.items()}
+    syms = [s_ for s_ in V.values() if expr.has(s_)]
+    P = sp.Poly(expr, *syms); D = {}
+    for mon, c in zip(P.monoms(), P.coeffs()):
+        ids = sorted(int(inv[syms[k]]) for k, e in enumerate(mon) for _ in range(e))
+        D[tuple(ids)] = sp.expand(D.get(tuple(ids), 0) + c)
+    return D
+def gen_fact(c, g, lvtxt, ct=None):
+    if ct is None: ct = lean_poly(c) if not isinstance(c, sp.Rational) else f'({c.p} / {c.q} : ℝ)'
+    if g[0] == 'T':
+        _, a, b = g
+        return (f'0 ≤ ({ct}) * (v {a + 1} * v {b - 1} - v {a} * v {b})',
+                f'mul_nonneg (by positivity) (sub_nonneg.2 (hv.step (x := {a}) (y := {b - 2}) (by norm_num)))')
+    if g[0] == 'Z':
+        _, j = g
+        mm = re.fullmatch(r'(\w+) \+ (\d+)', lvtxt)
+        if mm:  # cast pushed to ℝ so that ring sees ℓ as the only atom
+            return (f'0 ≤ ({ct}) * (v {j} * ((({mm.group(1)} : ℝ) + {mm.group(2)}) * v 1 - v 0))',
+                    f'mul_nonneg (by positivity) (mul_nonneg (hv.1 {j}) (sub_nonneg.2 (by exact_mod_cast hz)))')
+        return (f'0 ≤ ({ct}) * (v {j} * ((({lvtxt} : ℕ) : ℝ) * v 1 - v 0))',
+                f'mul_nonneg (by positivity) (mul_nonneg (hv.1 {j}) (sub_nonneg.2 hz))')
+    _, a, b = g
+    return (f'0 ≤ ({ct}) * (v {a} * v {b})', 'mul_nonneg (by positivity) (mul_nonneg (hv.1 _) (hv.1 _))')
 out = []
 total = 0
 for name, pairs in FORMS.items():
     expr = sp.expand(sum((URS if (b, c) == ('r', 'sig') else 1) * kap(b, c) for b, c in pairs))
+    stmt = ' + '.join((f'({URS.p} / {URS.q} : ℝ) * ' if (b, c) == ('r', 'sig') else '') + f'({katom(b, c)})' for b, c in pairs)
+    if MOVES and name == 'ttaurs':
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from cert74 import move_cert, K as KK
+        lam = sp.Symbol('l', nonnegative=True) + (1 if CASE == '2' else 0)
+        L0, Q, terms, small = move_cert(form_dict(expr), lam, int(n) + 2)
+        lvof = (lambda x: f'{x} + 1') if CASE == '2' else (lambda x: f'{x}')
+        lines = [f'theorem kapB_{SUF}_{name} {{v : ℕ → ℝ}} (hv : LCNZ v) {lhyp} (hz : v 0 ≤ (({lv} : ℕ) : ℝ) * v 1) :',
+                 f'    0 ≤ {stmt} := by']
+        if L0 > 0:
+            lines.append(f'  rcases (show {" ∨ ".join(f"ℓ = {x}" for x in range(L0))} ∨ {L0} ≤ ℓ by omega) with '
+                         + ' | '.join(['rfl'] * L0) + ' | hℓ')
+        for lv_ in range(L0):
+            lines.append('  · ' + '\n    '.join(
+                [f'have g{i} : {st} := {pr}' for i, (st, pr) in enumerate(gen_fact(c, g, lvof(lv_)) for c, g in small[lv_])]
+                + [x.strip() for x in expand_lines]
+                + ['linear_combination ' + ' + '.join(f'g{i}' for i in range(len(small[lv_])))]))
+            total += len(small[lv_])
+        ind = '    ' if L0 > 0 else '  '
+        var = 'kk' if L0 > 0 else 'ℓ'
+        body = [f'obtain ⟨kk, rfl⟩ : ∃ kk, ℓ = kk + {L0} := ⟨ℓ - {L0}, by omega⟩'] if L0 > 0 else []
+        kpoly = lambda e: sp.sstr(sp.expand(e)).replace('**', ' ^ ').replace('k', f'({var} : ℝ)')
+        lvgen = lvof(f'kk + {L0}') if L0 > 0 else lvof('ℓ')
+        for i, (P, g) in enumerate(terms):
+            st, pr = gen_fact(None, g, lvgen, ct=kpoly(P))
+            body.append(f'have g{i} : {st} := {pr}')
+        stmt_k = stmt.replace('ℓ', f'(kk + {L0})') if L0 > 0 else stmt
+        body.append(f'have hQ : (0 : ℝ) < {kpoly(Q)} := by positivity')
+        body.append(f'have key : 0 ≤ ({kpoly(Q)}) * ({stmt_k}) := by')
+        body += ['  ' + x.strip() for x in expand_lines]
+        body.append('  linear_combination ' + ' + '.join(f'g{i}' for i in range(len(terms))))
+        body.append('exact (mul_nonneg_iff_of_pos_left hQ).1 key')
+        total += len(terms)
+        if L0 > 0:
+            lines.append('  · ' + ('\n' + ind).join(body))
+        else:
+            lines += ['  ' + x for x in body]
+        out.append('\n'.join(lines))
+        continue
     facts = cert(expr)
     total += len(facts)
-    stmt = ' + '.join((f'({URS.p} / {URS.q} : ℝ) * ' if (b, c) == ('r', 'sig') else '') + f'({katom(b, c)})' for b, c in pairs)
     lines = [f'theorem kapB_{SUF}_{name} {{v : ℕ → ℝ}} (hv : LCNZ v) {lhyp} :', f'    0 ≤ {stmt} := by']
     for i, (st, pr) in enumerate(facts):
         lines.append(f'  have g{i} : {st} := {pr}')
@@ -155,7 +218,7 @@ ARG = 'ℓ m' if GEN else ('hv0' if COR else 'ℓ')
 hz_l = f'(({lv} : ℕ) : ℝ)'
 P2r = f'(PhiC r t τ σ {lv} 2 v + ((2 : ℝ) / 3) * PhiC r t τ σ {lv} 3 v)' if COR else f'PhiC r t τ σ {lv} 2 v'
 main = [f'theorem cubicB_{SUF} {{v : ℕ → ℝ}} (hv : LCNZ v) (hv1 : 0 < v 1) {{r t τ σ : ℝ}} (hr : 0 < r) (ht : 0 ≤ t)',
-        f'    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ t * τ) {lhyp} (hz : v 0 ≤ {hz_l} * v 1) :',
+        f'    (hτ : 0 ≤ τ) (hσ : 0 ≤ σ) (hrs : r * σ ≤ {URS.p} / {URS.q} * (t * τ)) {lhyp} (hz : v 0 ≤ {hz_l} * v 1) :',
         f'    {Ltxt} * rhoC r t τ σ ({lv} + 1) * (v 0 + v 1) * PhiC r t τ σ {lv} ({nl} + 2) v ≤',
         f'      {Ktxt} * {P2r} * PhiC r t τ σ ({lv} + 1) {nl} {W} := by',
         f'  have hq := quadB_seq (v := v) hv hv1 (n := {nl}) (by norm_num) hr le_rfl hτ (Nat.cast_nonneg _) hz',
@@ -170,8 +233,8 @@ main = [f'theorem cubicB_{SUF} {{v : ℕ → ℝ}} (hv : LCNZ v) (hv1 : 0 < v 1)
         f'  have c3 := mul_nonneg (mul_nonneg ht hσ) (kapB_{SUF}_ts hv {ARG})',
         f'  have c4 := mul_nonneg (mul_nonneg hτ hσ) (kapB_{SUF}_taus hv {ARG})',
         f'  have c5 := mul_nonneg (mul_nonneg hσ hσ) (kapB_{SUF}_ss hv {ARG})',
-        f'  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - r * σ) (kapB_{SUF}_ttau hv {ARG})',
-        f'  have c7 := mul_nonneg (mul_nonneg hr.le hσ) (kapB_{SUF}_ttaurs hv {ARG})',
+        f'  have c6 := mul_nonneg (by linarith : (0 : ℝ) ≤ t * τ - {URS.q} / {URS.p} * (r * σ)) (kapB_{SUF}_ttau hv {ARG})',
+        f'  have c7 := mul_nonneg (by positivity : (0 : ℝ) ≤ {URS.q} / {URS.p} * (r * σ)) (kapB_{SUF}_ttaurs hv {ARG}' + (' hz)' if MOVES else ')'),
         f'  linear_combination hq + c1 + c2 + c3 + c4 + c5 + c6 + c7' + (' + cq' if COR else '')]
 if COR:
     main.insert(-1, f'  have cq : 0 ≤ {Ktxt} * (((2 : ℝ) / 3) * (r * PhiC 1 0 0 0 0 3 v + 0 * PhiC 0 1 0 0 0 3 v + τ * PhiC 0 0 1 0 0 3 v + 0 * PhiC 0 0 0 1 0 3 v)) * (r * PhiC 1 0 0 0 (0 + 1) 2 {W} + 0 * PhiC 0 1 0 0 (0 + 1) 2 {W} + τ * PhiC 0 0 1 0 (0 + 1) 2 {W} + 0 * PhiC 0 0 0 1 (0 + 1) 2 {W}) := by')
