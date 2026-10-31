@@ -1,7 +1,7 @@
 % Edit this file directly. It was generated once from paper.tex (commit ad5eb72) by build_p2.py, which is now frozen.
 \newcommand{\papertitle}{Increasing ratios in finite nonnegative linearization}
 \newcommand{\papershort}{INCREASING RATIOS IN FINITE LINEARIZATION}
-\newcommand{\paperdate}{October 23, 2026}
+\newcommand{\paperdate}{October 31, 2026}
 \input{preamble}
 \externaldocument[P1-]{p1}
 \begin{document}
@@ -91,7 +91,8 @@ where $c(\theta)=\sum_k\kappa_k\binom\theta k$ and $b(\theta)=\sum_k\beta_k\bino
 with $\chi_{-2}=-Z^{-1}$ and $\chi_{-1}=0$. Collecting terms as there, with $W_{p,q}$ formed from $\varphi$ and $W^\psi_{p,q}$ from $\psi$, gives
 \[
 \begin{aligned}
-c_{\ell+1}\omega_{\ell+1,a}={}&a_{\ell+a}\,\omega_{\ell,a}+\sum_{j\geq0}(-1)^j\Big(A^\psi_j(\ell-j,a+2j+1)\,\omega_{\ell-j,a+2j+1}+B_j(\ell-j,a+2j+2)\,\omega_{\ell-j,a+2j+2}\\
+c_{\ell+1}\omega_{\ell+1,a}={}&a_{\ell+a}\,\omega_{\ell,a}+\sum_{j\geq0}(-1)^j\Big(A^\psi_j(\ell-j,a+2j+1)\,\omega_{\ell-j,a+2j+1}\\
+&+B_j(\ell-j,a+2j+2)\,\omega_{\ell-j,a+2j+2}\\
 &+\bigl(C_j+C^\psi_j\bigr)(\ell-j-1,a+2j+2)\,\omega_{\ell-j-1,a+2j+2}\Big),
 \end{aligned}
 \]
@@ -128,7 +129,7 @@ Let $b_n=\beta_1n+\beta_2\binom n2$ and $c_n=\kappa_1n+\kappa_2\binom n2$ $(0\le
 In the recurrence of the proof of Theorem~\ref{thm:lc-vary}, which holds for every array, $\varphi_n=\psi_n=0$ for $n\geq3$. So all moves with $j\geq1$ vanish, and the moves with $j=0$ have the weights $A^\psi_0(\ell,a)=\sum_{n\geq1}\binom an\psi_n(\ell)=b_{\ell+a}-b_\ell$, $B_0(\ell,a)=\binom a2\kappa_2$ and $(C_0+C^\psi_0)(\ell,a)=\binom a2(\kappa_2+\beta_2)$. These and the straight weights $a_{\ell+a}$ are nonnegative on $\Omega$, so $\omega\geq0$ by induction on $\ell$, and $g(m,n;k)\geq0$ as in the proof of Theorem~\ref{thm:lc-vary}.
 \end{proof}
 
-With the linear profile $d_n=n/N$ and the ratio $c_n/d_n=r+\kappa n/N$ ($1\leq n\leq N$, $r>0$, $\kappa\geq0$), one has $\kappa_2=2\kappa/N^2$ and $\kappa_2+\beta_2=0$ for $N\geq2$. For $N=1$, property (P) follows directly from $R_1^2=c_1R_0+b_1R_1$ when $b_1\geq0$. So every linearly increasing ratio with a linear profile and nondecreasing $b$ has property (P); $b$ is nondecreasing exactly when $\kappa\leq(1-r)N/(2N-1)$. Exact computations (\path{runs/varratio/quadratic.py}) show that each of the three hypotheses is needed: dropping any one of them gives quadratic arrays with a negative coefficient at $N\leq3$.
+With the linear profile $d_n=n/N$ and the ratio $c_n/d_n=r+\kappa n/N$ ($1\leq n\leq N$, $r>0$, $\kappa\geq0$), one has $\kappa_2=2\kappa/N^2$ and $\kappa_2+\beta_2=0$ for $N\geq2$. For $N=1$, property (P) follows directly from $R_1^2=c_1R_0+b_1R_1$ when $b_1\geq0$. So every linearly increasing ratio with a linear profile and nondecreasing $b$ has property (P); $b$ is nondecreasing exactly when $\kappa\leq(1-r)N/(2N-1)$. Exact computations~\cite{code} show that each of the three hypotheses is needed: dropping any one of them gives quadratic arrays with a negative coefficient at $N\leq3$.
 
 \section{Linearly and quadratically increasing ratios}\label{sec:affine}
 For curved profiles, linearly increasing ratios need not satisfy the hypotheses of Theorem~\ref{thm:lc-vary}: the Newton coefficients of $b$ of order at least $3$ can be negative, and then some moves of even index in the recurrence of its proof have negative weight and no two-step detour. A resummation of the positive moves handles this.
@@ -146,7 +147,10 @@ Write $s=1-r$ and $t=\kappa/N$, and let $f_n(\ell)=\Delta^nd(\ell)$ and $\nu_i=\
 \]
 with $h_n(\ell)=(s-t(\ell+n))f_n(\ell)$ and $v_n(\ell)=tnf_{n-1}(\ell)$; both are nonnegative when $\ell+n\leq N$. (Outside this range the formulas need not hold, because the Newton coefficients of $b$ and $c$ are set to zero beyond $N$.) Extend $\nu$ by zero outside $1\leq i\leq N$ and put $\widehat\kappa_i=p_i\nu_i+q_i\nu_{i-1}$ $(i\geq1)$, $\widehat\kappa_0=0$, with $p_i=r+ti$ and $q_i=ti$; the Newton sequence $\kappa$ of $c$ is the truncation of $\widehat\kappa$ at $N$. Then
 \[
-\widehat\kappa_i^2-\widehat\kappa_{i-1}\widehat\kappa_{i+1}=p_i^2(\nu_i^2-\nu_{i-1}\nu_{i+1})+q_i^2(\nu_{i-1}^2-\nu_{i-2}\nu_i)+q_{i-1}p_{i+1}(\nu_i\nu_{i-1}-\nu_{i-2}\nu_{i+1})+t^2(\nu_{i-1}\nu_{i+1}+\nu_{i-2}\nu_i+2\nu_i\nu_{i-1}),
+\begin{aligned}
+\widehat\kappa_i^2-\widehat\kappa_{i-1}\widehat\kappa_{i+1}={}&p_i^2(\nu_i^2-\nu_{i-1}\nu_{i+1})+q_i^2(\nu_{i-1}^2-\nu_{i-2}\nu_i)\\
+&+q_{i-1}p_{i+1}(\nu_i\nu_{i-1}-\nu_{i-2}\nu_{i+1})+t^2(\nu_{i-1}\nu_{i+1}+\nu_{i-2}\nu_i+2\nu_i\nu_{i-1}),
+\end{aligned}
 \]
 and each term is nonnegative by log-concavity of $\nu$. The positive support of $\widehat\kappa$ is that of $\nu$ when $t=0$ and extends it by one index when $t>0$, an interval in both cases. Truncation at $N$ preserves log-concavity and interval support, so $\kappa$ is log-concave without internal zeros, and Lemma~\ref{lem:lc-ineq} applies to $f$ and to $\varphi$.
 
@@ -154,11 +158,17 @@ and each term is nonnegative by log-concavity of $\nu$. The positive support of 
 
 \emph{Detours.} All detour inequalities below are asserted for source nodes $(\ell,a)\in\Omega$; in the mixed products the occurring indices satisfy $n\leq a-2$, hence $\ell+n+2\leq N$. Since $\varphi_2(\ell)\geq(r+t(\ell+1))f_2(\ell)$ and $c_{\ell+1}=(r+t(\ell+1))d_{\ell+1}$, Lemma~\ref{lem:lc-ineq} for $f$ gives
 \[
-\varphi_2(\ell)f_n(\ell+1)\geq c_{\ell+1}f_{n+2}(\ell),\quad\varphi_2(\ell)h_n(\ell+1)\geq c_{\ell+1}h_{n+2}(\ell),\quad\varphi_2(\ell)v_n(\ell+1)\geq\tfrac{n}{n+2}\,c_{\ell+1}v_{n+2}(\ell)\ (n\geq2),
+\begin{gathered}
+\varphi_2(\ell)f_n(\ell+1)\geq c_{\ell+1}f_{n+2}(\ell),\qquad\varphi_2(\ell)h_n(\ell+1)\geq c_{\ell+1}h_{n+2}(\ell),\\
+\varphi_2(\ell)v_n(\ell+1)\geq\tfrac{n}{n+2}\,c_{\ell+1}v_{n+2}(\ell)\quad(n\geq2),
+\end{gathered}
 \]
 using $s-t(\ell+n+1)\geq s-t(\ell+n+2)\geq0$ for the second and Lemma~\ref{lem:lc-ineq} with indices $(2,n-1)$ for the third. As in the proof of \cite[Lemma~\ref{P1-lem:detours}]{P1}, with $B_0(\ell,a)\geq\binom a2\varphi_2(\ell)$, for $0\leq\ell\leq N-1$ and second factors at $(\ell+1,a-2)$,
 \[
-B_0B_{j-1}\geq4c_{\ell+1}B_j\ (j\geq1),\quad B_0H_{j-1}\geq6c_{\ell+1}H_j\ (j\geq2),\quad B_0V_{j-1}\geq6c_{\ell+1}V_j\ (j\geq2),\quad B_0C'_{j-1}\geq6c_{\ell+1}C'_j\ (j\geq1).
+\begin{gathered}
+B_0B_{j-1}\geq4c_{\ell+1}B_j\ (j\geq1),\qquad B_0H_{j-1}\geq6c_{\ell+1}H_j\ (j\geq2),\\
+B_0V_{j-1}\geq6c_{\ell+1}V_j\ (j\geq2),\qquad B_0C'_{j-1}\geq6c_{\ell+1}C'_j\ (j\geq1).
+\end{gathered}
 \]
 The first uses Lemma~\ref{lem:lc-ineq} for $\varphi$. The coefficient ratios are, on $m\geq2j+2$, $2j+1$, $2j+1$ and $2j+2$ respectively,
 \[
@@ -168,13 +178,23 @@ they increase with $j$ and are at least $5$, $10$, $6$ and $6$. Finally,
 \begin{equation}\label{eq:affine-key}
 A^\psi_0(\ell,a)B_0(\ell+1,a-1)+B_0(\ell,a)A^\psi_0(\ell+1,a-2)\geq c_{\ell+1}\bigl(4H_1(\ell,a)-2V_1(\ell,a)\bigr).
 \end{equation}
-Only $a\geq3$ needs proof. Put $u_n=f_n(\ell)$, $y_n=\binom anu_n$, $D=u_0+u_1=d_{\ell+1}$, $\alpha=s-t(\ell+a)$, $X=\sum_{n\geq1}y_n$, $Y=\sum_{n\geq2}y_n$, $X'=\sum_{j\geq1}\binom{a-2}j(u_j+u_{j+1})$, $Y'=\sum_{j\geq2}\binom{a-1}j(u_j+u_{j+1})$ and $J=\sum_{n=2}^{a-1}\binom{a-1}nu_n$, so that $X=au_1+Y$, $X'=(a-2)u_1+J$ and $Y'=Y-(a-1)u_2$. Then $A^\psi_0(\ell,a)=\alpha X-tau_0$ and $A^\psi_0(\ell+1,a-2)=(\alpha+t)X'-t(a-2)D$; both are nonnegative, and the two weights $B_0$ are at least $(r+t(\ell+1))Y'$ and $(r+t(\ell+1))Y$. With $H_*=\sum_{n\geq3}(n-2)y_n$ and $T=\sum_{n\geq2}(n-3)(a-n)y_n$ one has $H_1=\sum_{n\geq3}(n-2)(\alpha+t(a-n))y_n$ and, after a shift of index, $V_1=t\sum_{n\geq2}(n-1)(a-n)y_n$, so $4H_1-2V_1=4\alpha H_*+2tT$. Since $c_{\ell+1}=(r+t(\ell+1))D$, it suffices to show
+Only $a\geq3$ needs proof. Put $u_n=f_n(\ell)$, $y_n=\binom anu_n$, $D=u_0+u_1=d_{\ell+1}$, $\alpha=s-t(\ell+a)$,
+\[
+\begin{gathered}
+X=\sum_{n\geq1}y_n,\qquad Y=\sum_{n\geq2}y_n,\qquad J=\sum_{n=2}^{a-1}\tbinom{a-1}nu_n,\\
+X'=\sum_{j\geq1}\tbinom{a-2}j(u_j+u_{j+1}),\qquad Y'=\sum_{j\geq2}\tbinom{a-1}j(u_j+u_{j+1}),
+\end{gathered}
+\]
+so that $X=au_1+Y$, $X'=(a-2)u_1+J$ and $Y'=Y-(a-1)u_2$. Then $A^\psi_0(\ell,a)=\alpha X-tau_0$ and $A^\psi_0(\ell+1,a-2)=(\alpha+t)X'-t(a-2)D$; both are nonnegative, and the two weights $B_0$ are at least $(r+t(\ell+1))Y'$ and $(r+t(\ell+1))Y$. With $H_*=\sum_{n\geq3}(n-2)y_n$ and $T=\sum_{n\geq2}(n-3)(a-n)y_n$ one has $H_1=\sum_{n\geq3}(n-2)(\alpha+t(a-n))y_n$ and, after a shift of index, $V_1=t\sum_{n\geq2}(n-1)(a-n)y_n$, so $4H_1-2V_1=4\alpha H_*+2tT$. Since $c_{\ell+1}=(r+t(\ell+1))D$, it suffices to show
 \begin{equation}\label{eq:affine-red}
 (\alpha X-tau_0)Y'+Y\bigl((\alpha+t)X'-t(a-2)D\bigr)\geq D(4\alpha H_*+2tT).
 \end{equation}
 The coefficient of $\alpha$ in the difference of the two sides is $K=XY'+YX'-4DH_*$. By Lemma~\ref{lem:lc-ineq}, $u_i(u_j+u_{j+1})\geq Du_{i+j}$ for $i,j\geq1$, so $XY'\geq au_1Y'\geq D\sum_{n\geq3}ny_n$ and $YX'\geq\binom a2u_2X'\geq D\sum_{n\geq3}\binom n2y_n$; hence $K\geq\frac D2\sum_{n\geq3}\bigl((n-3)(n-4)+4\bigr)y_n\geq0$, and \eqref{eq:affine-red} holds when $t=0$. Let $t>0$. Monotonicity of $b$ at $\ell+a-1$ gives $\alpha\geq tR_{\ell+a-1}\geq tR_\ell=tu_0/u_1$, so it suffices to prove \eqref{eq:affine-red} at $\alpha=tu_0/u_1$. Both sides are homogeneous of degree two in $(u_n)$; take $u_1=1$ and write $z=u_0$ and $q=u_2$. If $q=0$, then $u_n=0$ for $n\geq2$ and both sides vanish. Otherwise $0\leq z\leq1/q$ by log-concavity. At $\alpha=tz$ the two weights $A^\psi_0$ are $tzY$ and $t(z+1)J$, and \eqref{eq:affine-red} divided by $t$ reads $F(z)\geq0$, where
 \[
-F(z)=zYY'+(z+1)YJ-(z+1)(4zH_*+2T)=(1-qz)F(0)+qzF(1/q)+4H_*z(1/q-z),
+\begin{aligned}
+F(z)&=zYY'+(z+1)YJ-(z+1)(4zH_*+2T)\\
+&=(1-qz)F(0)+qzF(1/q)+4H_*z(1/q-z),
+\end{aligned}
 \]
 the second form holding because $F$ is quadratic with leading coefficient $-4H_*$. It remains to show $F(0)\geq0$ and $F(1/q)\geq0$. Put $L_3=\frac32$, $L_n=\frac{n(n+2)}6$ for $n\geq4$, and $E_n=\frac{2(n^2-5)}{n+1}$. In $YJ$ keep, for each $n$, the product with indices $(2,2)$ if $n=3$, and the products with indices $(2,n-1)$ and $(3,n-2)$ if $n\geq4$; by log-concavity with $u_1=1$, $u_iu_{n+1-i}\geq u_n$, and $\binom{a-1}j\geq\binom{a-i}j$, so $YJ\geq\sum_{n=3}^{a-1}L_n(a-n)y_n$. In $Y$ keep the term $\binom a2q$; as $q(u_{n-1}+u_n)\geq(q+1)u_n$ for $n\geq3$, $YY'\geq(q+1)\sum_{n=3}^a\frac{n(a-1)}2y_n$. Since $L_n\geq2(n-3)$,
 \[
@@ -188,11 +208,14 @@ The numerical facts used are $L_3=\frac32\geq0$, $L_3+\frac32=3\geq E_3=2$, and,
 
 \emph{Resummation.} Regard the moves as operators on functions on $\Omega$, each divided by $c$ at the destination level; all strictly raise $\ell$, and inequalities between operators are entrywise. Let $P$ and $Q$ be the sums of the $B_j$ with $j$ even and odd, $C=C_+-C_-$ with $C_\pm$ the sums of the $C'_j$ with $j$ even and odd, $H_+$ and $H_-$ the sums of the $H_j$ with $j\geq2$ even and $j\geq3$ odd, $V_+$ and $V_-$ the sums of the $V_j$ with $j$ odd and $j\geq2$ even, $A_0$ the operator of $A^\psi_0$, and $U$ the straight moves. The recurrence reads $\omega=\beta+(U+P-Q+C+A)\omega$ with $A=A_0+H_+-H_--H_1+V_+-V_-$ and $\beta=\omega|_{\ell=0}\geq0$. The inequalities above give
 \[
-P^2\geq4Q,\qquad H_+P\geq6H_-,\qquad V_+P\geq6V_-,\qquad C_+P\geq6C_-,\qquad A_0P+PA_0+2V_1\geq4H_1.
+P^2\geq4Q,\quad H_+P\geq6H_-,\quad V_+P\geq6V_-,\quad C_+P\geq6C_-,\quad A_0P+PA_0+2V_1\geq4H_1.
 \]
 Let $G=(I-P/2)^{-1}=\sum_{m=0}^N(P/2)^m\geq0$. Then $PG=GP=2(G-I)$ and $(I-P/6)G=\frac23G+\frac13I$, so $G(H_+-H_-)G\geq GH_+(I-P/6)G\geq0$, $GCG\geq0$ and $G(V_+-V_-)G\geq\frac23GV_1G$. Hence
 \[
-GAG\geq G\bigl(A_0-H_1+\tfrac23V_1\bigr)G\geq G\bigl(A_0-\tfrac14(A_0P+PA_0)+\tfrac16V_1\bigr)G=\tfrac12(GA_0+A_0G)+\tfrac16GV_1G\geq0.
+\begin{aligned}
+GAG&\geq G\bigl(A_0-H_1+\tfrac23V_1\bigr)G\geq G\bigl(A_0-\tfrac14(A_0P+PA_0)+\tfrac16V_1\bigr)G\\
+&=\tfrac12(GA_0+A_0G)+\tfrac16GV_1G\geq0.
+\end{aligned}
 \]
 With $R=U+P^2/4-Q\geq0$, the operator $M=G(R+C+A)G$ is nonnegative and strictly raises $\ell$. Since $(I-P/2)^2\omega=\beta+(R+C+A)\omega$, the function $v=(I-P/2)\omega$ satisfies $v=G\beta+Mv$. Therefore $\omega=G\sum_{q=0}^NM^qG\beta\geq0$, and $g(m,n;k)\geq0$ as in the proof of Theorem~\ref{thm:lc-vary}.
 \end{proof}
@@ -214,12 +237,19 @@ with $h_n=(1-\rho(\ell+n))f_n$, $v_n=n\Delta\rho(\ell+n-1)f_{n-1}$ and $w_n=\bin
 
 \emph{Detours of $H$, $V$, $W$ and $C'$.} All detours are asserted for sources $(\ell,a)\in\Omega$, with second factors at $(\ell+1,a-2)$, marked by a prime. Since $\varphi_2(\ell)\geq\rho(\ell+1)f_2(\ell)$ and $c_{\ell+1}=\rho(\ell+1)d_{\ell+1}$, Lemma~\ref{lem:lc-ineq} for $f$ gives, for $n\leq a-2$,
 \[
-\varphi_2f_n'\geq c_{\ell+1}f_{n+2},\quad\varphi_2h_n'\geq c_{\ell+1}h_{n+2},\quad(n+1)(n+2)\varphi_2v_n'\geq n^2c_{\ell+1}v_{n+2},\quad(n+1)(n+2)\varphi_2w_n'\geq n(n-1)c_{\ell+1}w_{n+2},
+\begin{gathered}
+\varphi_2f_n'\geq c_{\ell+1}f_{n+2},\qquad\varphi_2h_n'\geq c_{\ell+1}h_{n+2},\\
+(n+1)(n+2)\varphi_2v_n'\geq n^2c_{\ell+1}v_{n+2},\qquad(n+1)(n+2)\varphi_2w_n'\geq n(n-1)c_{\ell+1}w_{n+2},
+\end{gathered}
 \]
 the last two for $n\geq3$. The second uses $1-\rho(\ell+n+1)\geq1-\rho(\ell+n+2)\geq0$; the third uses Lemma~\ref{lem:lc-ineq} with indices $(2,n-1)$ and $(n+1)\Delta\rho(\ell+n)-n\Delta\rho(\ell+n+1)=t+\tau\ell\geq0$; the fourth uses indices $(2,n-2)$. As in the proof of \cite[Lemma~\ref{P1-lem:detours}]{P1}, with $B_0(\ell,a)\geq\binom a2\varphi_2(\ell)$ and $\binom a2\binom{a-2}{m-2}=\binom am\binom m2$,
 \[
-B_0H_{j-1}'\geq10c_{\ell+1}H_j,\qquad B_0V_{j-1}'\geq\tfrac92c_{\ell+1}V_j,\qquad B_0W_{j-1}'\geq3c_{\ell+1}W_j\quad(j\geq2),\qquad B_0\,C'_{j-1}(\ell+1,a-2)\geq6c_{\ell+1}C'_j\quad(j\geq1).
-\] The coefficient ratios are $\frac{jm(m-1)}{2(m-j-1)}$, $\frac{j(m-2)^2}{2(m-j-1)}$ and $\frac{j(m-2)(m-3)}{2(m-j-1)}$ on $m\geq2j+1$, and $\frac{(j+1)m(m-1)}{2(m-j-1)}$ on $m\geq2j+2$; they increase with $j$, and at the smallest $j$ the bounds are $(m-5)(m-6)\geq0$, $(m-5)(2m-7)\geq0$, $m\geq5$ and $(m-3)(m-4)\geq0$.
+\begin{gathered}
+B_0H_{j-1}'\geq10c_{\ell+1}H_j,\qquad B_0V_{j-1}'\geq\tfrac92c_{\ell+1}V_j,\qquad B_0W_{j-1}'\geq3c_{\ell+1}W_j\quad(j\geq2),\\
+B_0\,C'_{j-1}(\ell+1,a-2)\geq6c_{\ell+1}C'_j\quad(j\geq1).
+\end{gathered}
+\]
+The coefficient ratios are $\frac{jm(m-1)}{2(m-j-1)}$, $\frac{j(m-2)^2}{2(m-j-1)}$ and $\frac{j(m-2)(m-3)}{2(m-j-1)}$ on $m\geq2j+1$, and $\frac{(j+1)m(m-1)}{2(m-j-1)}$ on $m\geq2j+2$; they increase with $j$, and at the smallest $j$ the bounds are $(m-5)(m-6)\geq0$, $(m-5)(2m-7)\geq0$, $m\geq5$ and $(m-3)(m-4)\geq0$.
 
 \emph{Detour of $B$.} We show, for $n\geq2$ and $\ell+n+2\leq N$,
 \begin{equation}\label{eq:quad-B}
@@ -227,7 +257,10 @@ B_0H_{j-1}'\geq10c_{\ell+1}H_j,\qquad B_0V_{j-1}'\geq\tfrac92c_{\ell+1}V_j,\qqua
 \end{equation}
 Granting this, $B_0(\ell,a)\geq\binom a2\varphi_2(\ell)$, \eqref{eq:quad-B} with $n=m-2$, $\binom a2\binom{a-2}{m-2}=\binom am\binom m2$ and $\binom m2\frac{8(m-3)}{m(m-1)}=4(m-3)$ give
 \[
-B_0(\ell,a)B_{j-1}(\ell+1,a-2)\geq4c_{\ell+1}\sum_{m\geq2j+2}(m-3)\binom{m-j-3}{j-1}\binom am\varphi_m(\ell)\geq4c_{\ell+1}B_j(\ell,a)
+\begin{aligned}
+B_0(\ell,a)B_{j-1}(\ell+1,a-2)&\geq4c_{\ell+1}\sum_{m\geq2j+2}(m-3)\binom{m-j-3}{j-1}\binom am\varphi_m(\ell)\\
+&\geq4c_{\ell+1}B_j(\ell,a)
+\end{aligned}
 \]
 for $j\geq1$, because $(m-3)\binom{m-j-3}{j-1}-\binom{m-j-2}j=\binom{m-j-3}{j-1}\frac{(j-1)(m-2)}j\geq0$. (With constant $1$ in place of $\frac{(n+1)(n+2)}{8(n-1)}$, \eqref{eq:quad-B} can fail: for $N=20$, $d_i=(2^i-1)/(2^{20}-1)$, $r=\frac12$, $t=0$, $\tau=10^{-3}$ one gets $\varphi_2(16)\varphi_2(17)<c_{17}\varphi_4(16)$.)
 
@@ -262,14 +295,23 @@ If $\ell<1/q$, take $z=\ell$, and write $w=1/q-\ell>0$, $h_0=\ell+1$, $h=h_0+w$ 
 \[
 \begin{aligned}
 [w]&=K_np^2+p(a_1t+b_1\tau)+K_n\bigl(\bar A\bar B+h_0(\eta\bar B+\bar A\theta)\bigr),\\
-[w^2]&=p(a_2t+b_2\tau)+K_n\bigl(\eta\bar B+\bar A\theta+h_0(\eta\theta+\bar A\epsilon)\bigr),\qquad[w^3]=K_n\bigl(\eta\theta+A(0)\epsilon+h_0\eta\epsilon\bigr),\qquad[w^4]=K_n\eta\epsilon,
+[w^2]&=p(a_2t+b_2\tau)+K_n\bigl(\eta\bar B+\bar A\theta+h_0(\eta\theta+\bar A\epsilon)\bigr),\\
+[w^3]&=K_n\bigl(\eta\theta+A(0)\epsilon+h_0\eta\epsilon\bigr),\qquad[w^4]=K_n\eta\epsilon,
 \end{aligned}
 \]
-where $\eta=2s+(\ell+2)\tau$, $\theta=n(s+\tau)+n(n-1)\tau h_0$, $\epsilon=\binom n2\tau$, $a_1=(n+2)\bigl(2\ell(n^2-n+6)+2n^2-3n+11\bigr)$, $a_2=K_n(n+2)$, $b_1=\frac{n+2}2(\ell^2P_n+\ell Q_n+R_n)$ and $b_2=\frac{K_n}2\bigl(3n(n-3)(\ell+1)+14\ell+12\bigr)$, with $P_n=3k^3+15k^2+6k+8$, $Q_n=6k^3+30k^2+20k+16$ and $R_n=3k^3+15k^2+16k+16$ for $k=n-3$; for $n=2$ the coefficients of $w$, $w^2$ and $w^3$ are
+where
+\[
+\begin{gathered}
+\eta=2s+(\ell+2)\tau,\qquad\theta=n(s+\tau)+n(n-1)\tau h_0,\qquad\epsilon=\tbinom n2\tau,\\
+a_1=(n+2)\bigl(2\ell(n^2-n+6)+2n^2-3n+11\bigr),\qquad a_2=K_n(n+2),\\
+b_1=\tfrac{n+2}2(\ell^2P_n+\ell Q_n+R_n),\qquad b_2=\tfrac{K_n}2\bigl(3n(n-3)(\ell+1)+14\ell+12\bigr),
+\end{gathered}
+\]
+with $P_n=3k^3+15k^2+6k+8$, $Q_n=6k^3+30k^2+20k+16$ and $R_n=3k^3+15k^2+16k+16$ for $k=n-3$; for $n=2$ the coefficients of $w$, $w^2$ and $w^3$ are
 \[
 \begin{aligned}
-&12p^2+4(16\ell+13)pt+8(\ell+1)(2\ell+3)p\tau+48(\ell+1)(3\ell+2)t^2+12(36\ell^3+92\ell^2+76\ell+21)t\tau\\&\qquad+12(27\ell^4+93\ell^3+114\ell^2+62\ell+13)\tau^2,\\
-&48pt+12(2\ell+3)p\tau+24(6\ell+5)t^2+12(36\ell^2+67\ell+29)t\tau+12(27\ell^3+78\ell^2+67\ell+19)\tau^2,\\
+&12p^2+4(16\ell+13)pt+8(\ell+1)(2\ell+3)p\tau+48(\ell+1)(3\ell+2)t^2\\&\qquad+12(36\ell^3+92\ell^2+76\ell+21)t\tau+12(27\ell^4+93\ell^3+114\ell^2+62\ell+13)\tau^2,\\
+&48pt+12(2\ell+3)p\tau+24(6\ell+5)t^2\\&\qquad+12(36\ell^2+67\ell+29)t\tau+12(27\ell^3+78\ell^2+67\ell+19)\tau^2,\\
 &12\bigl(2s+(\ell+2)\tau\bigr)\bigl(2t+(3\ell+5)\tau\bigr).
 \end{aligned}
 \]
@@ -281,7 +323,10 @@ A^\psi_0(\ell,a)B_0(\ell+1,a-1)+B_0(\ell,a)A^\psi_0(\ell+1,a-2)\geq c_{\ell+1}\b
 \end{equation}
 Use the notation of the proof of Theorem~\ref{thm:lc-affine} ($u_n=f_n(\ell)$, $y_n$, $D$, $X$, $Y$, $X'$, $Y'$, $J$, $H_*$, $T$), and put $\alpha=1-\rho(\ell+a)$, $s=\Delta\rho(\ell+a-1)$, $p=\rho(\ell+1)$ and $Z=\sum_{n\geq2}\binom{a-n}2y_n$. Then $\alpha\geq sR_{\ell+a-1}\geq su_0/u_1$ and $s\geq\tau(a-1)$. Backward differences give
 \[
-A^\psi_0(\ell,a)=\alpha X-sau_0+\tau\tbinom a2u_0,\qquad A^\psi_0(\ell+1,a-2)=(\alpha+s)X'-s(a-2)D+\tau\tbinom{a-1}2D,
+\begin{aligned}
+A^\psi_0(\ell,a)&=\alpha X-sau_0+\tau\tbinom a2u_0,\\
+A^\psi_0(\ell+1,a-2)&=(\alpha+s)X'-s(a-2)D+\tau\tbinom{a-1}2D,
+\end{aligned}
 \]
 both nonnegative, and $B_0(\ell,a)\geq pY$, $B_0(\ell+1,a-1)\geq pY'$, $c_{\ell+1}=pD$. Since $1-\rho(\ell+n)=\alpha+(a-n)s-\tau\binom{a-n}2$, reindexing gives $4H_1-2V_1=4\alpha H_*+2sT+4\tau Z$ and $W_1=\tau\sum_{n\geq1}n\binom{a-n}2y_n$. The argument of the proof of Theorem~\ref{thm:lc-affine} with $s$ in place of $t$, keeping the surplus of the two endpoints ($F(0)\geq2(a-2)y_2$ and $F(1/q)\geq\frac23(1+1/q)(a-2)y_2$, from the term $n=2$ and $E_2=-\frac23$), shows
 \[
@@ -289,12 +334,18 @@ both nonnegative, and $B_0(\ell,a)\geq pY$, $B_0(\ell+1,a-1)\geq pY'$, $c_{\ell+
 \]
 for $\alpha u_1\geq su_0$; the right side of this bound is linear in $z=u_0/u_1$ and is subtracted before the interpolation. With $s\geq\tau(a-1)$, the difference of the two sides of \eqref{eq:quad-key} divided by $p$ is therefore at least
 \[
-\tau\Bigl(\tbinom a2u_0Y'+D\Bigl[\tbinom{a-1}2y_1+\tfrac{(a-2)(a+11)}6y_2+(2a-5)y_3+\sum_{n\geq4}\Bigl(\tbinom{a-1}2+(n-4)\tbinom{a-n}2\Bigr)y_n\Bigr]\Bigr)\geq0.
+\begin{aligned}
+\tau\Bigl(\tbinom a2u_0Y'+D\Bigl[&\tbinom{a-1}2y_1+\tfrac{(a-2)(a+11)}6y_2+(2a-5)y_3\\
+&+\sum_{n\geq4}\Bigl(\tbinom{a-1}2+(n-4)\tbinom{a-n}2\Bigr)y_n\Bigr]\Bigr)\geq0.
+\end{aligned}
 \]
 
 \emph{Resummation.} With $W_\pm$ the sums of the $W_j$ with $j$ odd and $j\geq2$ even, the recurrence reads as in the proof of Theorem~\ref{thm:lc-affine} with $A=A_0-H_1+(H_+-H_-)+(V_+-V_-)+(W_+-W_-)$, and the inequalities above give $P^2\geq4Q$, $H_+P\geq10H_-$, $V_+P\geq\frac92V_-$, $W_+P\geq3W_-$, $C_+P\geq6C_-$ and $A_0P+PA_0+2V_1+W_1\geq4H_1$. Since $(I-P/\mu)G=(1-\frac2\mu)G+\frac2\mu I$, one has $G(H_+-H_-)G\geq0$, $GCG\geq0$, $G(V_+-V_-)G\geq\frac59GV_1G$ and $G(W_+-W_-)G\geq\frac13GW_1G$, hence
 \[
-GAG\geq G\bigl(A_0-\tfrac14(A_0P+PA_0)+\tfrac1{18}V_1+\tfrac1{12}W_1\bigr)G=\tfrac12(GA_0+A_0G)+\tfrac1{18}GV_1G+\tfrac1{12}GW_1G\geq0.
+\begin{aligned}
+GAG&\geq G\bigl(A_0-\tfrac14(A_0P+PA_0)+\tfrac1{18}V_1+\tfrac1{12}W_1\bigr)G\\
+&=\tfrac12(GA_0+A_0G)+\tfrac1{18}GV_1G+\tfrac1{12}GW_1G\geq0.
+\end{aligned}
 \]
 With $U+P^2/4-Q\geq0$ this gives $M\geq0$, and (P) follows as before.
 \end{proof}
@@ -318,7 +369,8 @@ In Theorem~\ref{thm:lc-lowdeg} let $c_i=\rho(i)d_i$ with $\rho(x)=\sum_k\rho_k\b
 Put $s_k=\rho_k+\rho_{k-1}$ ($\rho_{-1}=0$), which is log-concave without internal zeros, and $h=\nu_2/2$. The Leibniz rule gives $\kappa_k=ke_k$ for $k\geq1$, with $e_k=(\nu_1+h(k-1))s_k+h(k-1)s_{k-1}$. Write $\alpha=\nu_1+h(k-1)$ and $\beta=h(k-1)$; then
 \[
 \begin{aligned}
-e_k^2-e_{k-1}e_{k+1}={}&\alpha^2(s_k^2-s_{k-1}s_{k+1})+\beta^2(s_{k-1}^2-s_{k-2}s_k)+(\beta-h)(\alpha+h)(s_{k-1}s_k-s_{k-2}s_{k+1})\\
+e_k^2-e_{k-1}e_{k+1}={}&\alpha^2(s_k^2-s_{k-1}s_{k+1})+\beta^2(s_{k-1}^2-s_{k-2}s_k)\\
+&+(\beta-h)(\alpha+h)(s_{k-1}s_k-s_{k-2}s_{k+1})\\
 &+h^2(s_{k-1}s_{k+1}+s_{k-2}s_k+2s_{k-1}s_k),
 \end{aligned}
 \]
@@ -337,7 +389,10 @@ Let $(\rho_i)_{i\geq0}$ and $(\nu_j)_{j\geq0}$ be nonnegative and log-concave wi
 \begin{proof}
 The product rule $\binom xi\binom xj=\sum_k\binom ki\binom i{k-j}\binom xk$ gives $\kappa_k=\sum_pH_k(p)\rho_{p_1}\nu_{p_2}$, where $H_k(i,j)=\binom ki\binom i{k-j}=[y^iw^j](y+w+yw)^k$ vanishes unless $i,j\leq k\leq i+j$. If either sequence vanishes identically, so does $\kappa$. Otherwise, if $\rho$ and $\nu$ are supported on $[p_0,p_1]$ and $[q_0,q_1]$, with $p_1,q_1\leq\infty$, then $\kappa_k>0$ exactly for $\max(p_0,q_0)\leq k\leq p_1+q_1$, so $\kappa$ has no internal zeros. For log-concavity fix $k\geq1$; then
 \[
-\kappa_k^2-\kappa_{k-1}\kappa_{k+1}=\sum_{c\in\mathbb Z^2}\sum_{p\in\mathbb Z^2}T_c(p)\,u_c(p_1)\,w_c(p_2),\qquad T_c(p)=H_k(p)H_k(c-p)-H_{k-1}(p)H_{k+1}(c-p),
+\begin{gathered}
+\kappa_k^2-\kappa_{k-1}\kappa_{k+1}=\sum_{c\in\mathbb Z^2}\sum_{p\in\mathbb Z^2}T_c(p)\,u_c(p_1)\,w_c(p_2),\\
+T_c(p)=H_k(p)H_k(c-p)-H_{k-1}(p)H_{k+1}(c-p),
+\end{gathered}
 \]
 with $u_c(i)=\rho_i\rho_{c_1-i}$ and $w_c(j)=\nu_j\nu_{c_2-j}$. By log-concavity without internal zeros, $u_c$ is symmetric about $c_1/2$ and nondecreasing on $i\leq c_1/2$, so $u_c=\sum_{0\leq a\leq c_1/2}(u_c(a)-u_c(a-1))\mathbf 1_{[a,c_1-a]}$ with nonnegative coefficients, and likewise $w_c$. It therefore suffices to show $D_c(B)=\sum_{p\in B}T_c(p)\geq0$ for every box $B=[a,c_1-a]\times[b,c_2-b]$ with $a\leq c_1/2$, $b\leq c_2/2$.
 
@@ -365,12 +420,19 @@ The first bracket is nonnegative by (T2), as $a-1\leq\mu_1$. For the second, $G_
 
 \emph{$e=(1,1)$, $e'=(1,0)$}: the same $V$, and $V(B-e)-V(B)=\bigl[X(I-1,J-1)-X(I-1,J)\bigr]+\bigl[V(B-(1,0))-V(B)\bigr]$. The first bracket vanishes by central symmetry, since $I-1$ is symmetric about $\mu_1$; the second is the previous case.
 
-\emph{$e=e'=(1,1)$}: $\mu=c/2-(1,1)$ and $V(B-e)-V(B)=\bigl[K(b-1)-K(b-2)\bigr]+\bigl[X(a-1,J)-X(a-1,J-2)\bigr]+\bigl[G_{J-2}(a-1)-G_{J-2}(a-2)\bigr]$ with $K(y)=\sum_{x\in I-1}V(x,y)$. Since $I-1$ is symmetric about $\mu_1$, $K$ is symmetric about $\mu_2$ and nondecreasing on $y\leq\mu_2$ by (T1) and (T3); and $b-1\leq\mu_2$. The second bracket is $[V(a-1,c_2-b)-V(a-1,b-2)]+[V(a-1,c_2-b-1)-V(a-1,b-1)]$, two differences of the form in (T2), since both pairs of second coordinates sum to $2\mu_2=c_2-2$. For the third, $G_{J-2}(2\mu_1-x)-G_{J-2}(x)=X(x,J)-X(x,J-2)\geq0$ for $x\leq\mu_1$ by (T2), so (T1) and (T3) give $G_{J-2}(a-1)\geq G_{J-2}(a-2)$.
+\emph{$e=e'=(1,1)$}: $\mu=c/2-(1,1)$ and
+\[
+\begin{aligned}
+V(B-e)-V(B)={}&\bigl[K(b-1)-K(b-2)\bigr]+\bigl[X(a-1,J)-X(a-1,J-2)\bigr]\\
+&+\bigl[G_{J-2}(a-1)-G_{J-2}(a-2)\bigr]
+\end{aligned}
+\]
+with $K(y)=\sum_{x\in I-1}V(x,y)$. Since $I-1$ is symmetric about $\mu_1$, $K$ is symmetric about $\mu_2$ and nondecreasing on $y\leq\mu_2$ by (T1) and (T3); and $b-1\leq\mu_2$. The second bracket is $[V(a-1,c_2-b)-V(a-1,b-2)]+[V(a-1,c_2-b-1)-V(a-1,b-1)]$, two differences of the form in (T2), since both pairs of second coordinates sum to $2\mu_2=c_2-2$. For the third, $G_{J-2}(2\mu_1-x)-G_{J-2}(x)=X(x,J)-X(x,J-2)\geq0$ for $x\leq\mu_1$ by (T2), so (T1) and (T3) give $G_{J-2}(a-1)\geq G_{J-2}(a-2)$.
 
 Each of the nine ordered-step contributions $V_{e+e'}(B-e)-V_{e+e'}(B)$ is nonnegative, so $D_c(B)\geq0$, which proves the proposition. (The individual $T_c(p)$ need not be nonnegative.)
 \end{proof}
 
-In the language of random sets: if $S$ and $T$ are independent random subsets of $[n]$ whose laws are invariant under permutations and whose cardinalities are ultra-log-concave of order $n$, then so is $|S\cup T|$, since $\Pr(|S\cup T|=k)=\binom nk\kappa_k$ for $\Pr(S=A)=\rho_{|A|}$ and $\Pr(T=A)=\nu_{|A|}$. This closure theorem is Walkup's Theorem~4 for two sets~\cite{walkup}: his random sets are conditionally uniform, and their fundamental sequences are $\rho$ and $\nu$. He derives it from his Theorem~2, which proves that the double-binomial convolution $h_k=\sum_i\sum_r\binom ki\binom ir\rho_i\nu_{k-r}$, which is $\kappa_k$ after the substitution $j=k-r$, preserves log-concavity; Proposition~\ref{prop:np} expresses it in the Newton basis, and the proof above is self-contained. Hoggar's theorem is the analogue for the power basis. The diagnostics \path{runs/np/two_step.py} and \path{runs/np/case_proofs.py} check in exact arithmetic the identity for $D_c(B)$, the sign of each of its nine terms for $k\leq9$, and every bracket of the case analysis, (T1) and (T2) for $k\leq6$.
+In the language of random sets: if $S$ and $T$ are independent random subsets of $[n]$ whose laws are invariant under permutations and whose cardinalities are ultra-log-concave of order $n$, then so is $|S\cup T|$, since $\Pr(|S\cup T|=k)=\binom nk\kappa_k$ for $\Pr(S=A)=\rho_{|A|}$ and $\Pr(T=A)=\nu_{|A|}$. This closure theorem is Walkup's Theorem~4 for two sets~\cite{walkup}: his random sets are conditionally uniform, and their fundamental sequences are $\rho$ and $\nu$. He derives it from his Theorem~2, which proves that the double-binomial convolution $h_k=\sum_i\sum_r\binom ki\binom ir\rho_i\nu_{k-r}$, which is $\kappa_k$ after the substitution $j=k-r$, preserves log-concavity; Proposition~\ref{prop:np} expresses it in the Newton basis, and the proof above is self-contained. Hoggar's theorem is the analogue for the power basis. Diagnostics in the companion code~\cite{code} check in exact arithmetic the identity for $D_c(B)$, the sign of each of its nine terms for $k\leq9$, and every bracket of the case analysis, (T1) and (T2) for $k\leq6$.
 
 \paragraph{Log-concave ratios on log-concave profiles.}
 Corollary~\ref{cor:lc-lowdeg} extends to every log-concave Newton profile. Besides Proposition~\ref{prop:np}, the proof uses a sign criterion for quadratic forms in log-concave sequences.
@@ -448,7 +510,8 @@ and (P) follows as before.
 \[
 \begin{aligned}
 &\beta_0=Y,\quad\beta_1=a(A-D),\quad\beta_k=\tbinom akA\ (k\geq2),\\
-&\beta'_0=Y',\quad\beta'_1=aA-2(a-1)d_{\ell+2}+(a-2)D,\quad\beta'_2=\tbinom a2A-(a-1)d_{\ell+2},\quad\beta'_k=\tbinom akA\ (k\geq3);
+&\beta'_0=Y',\quad\beta'_1=aA-2(a-1)d_{\ell+2}+(a-2)D,\\
+&\beta'_2=\tbinom a2A-(a-1)d_{\ell+2},\quad\beta'_k=\tbinom akA\ (k\geq3);
 \end{aligned}
 \]
 \item $c_{\ell+a}-c_\ell=\sum_k\chi_kP_k$ and $c_{\ell+a-1}-c_{\ell+1}=\sum_k\chi'_kP_k$;
@@ -506,11 +569,14 @@ M_{0,s}=Y'E^1_s+YE^2_s+DE^3_s=c'BK''+FG_s,
 \]
 where
 \[
-K''=Y'X''+YX'-4DH_*,\qquad G_s=c'(Y'X''+YX')-c''(d_\ell Y'+DY)+D(2\nu_s-4Z_s).
+K''=Y'X''+YX'-4DH_*,\quad G_s=c'(Y'X''+YX')-c''(d_\ell Y'+DY)+D(2\nu_s-4Z_s).
 \]
 Note $u_1=d_{\ell+1}-d_\ell>0$. If $K''\geq0$, then $u_1B\geq u_0F$ gives $u_1M_{0,s}\geq F(c'u_0K''+u_1G_s)$, and
 \[
-c'u_0K''+u_1G_s=D\,Q_s+c''u_1^2Y',\qquad Q_s=c'(Y'X''+YX')-4c'u_0H_*+u_1(2\nu_s-4Z_s)-c''u_1(Y+Y').
+\begin{gathered}
+c'u_0K''+u_1G_s=D\,Q_s+c''u_1^2Y',\\
+Q_s=c'(Y'X''+YX')-4c'u_0H_*+u_1(2\nu_s-4Z_s)-c''u_1(Y+Y').
+\end{gathered}
 \]
 So $M_{0,s}\geq0$ once $K''\geq0$ and $Q_s\geq0$.
 
@@ -541,7 +607,7 @@ and $u_0\sum_{n\geq1}h_nu_n\leq u_1\sum_{n\geq0}h_{n+1}u_n$. So each form is at 
 \end{itemize}
 These certificates are formalized in Lean, and \path{runs/lean_plan/edge_exact.py} checks every $e_n$ in exact arithmetic for $a\leq60$.
 
-\emph{(vii) Small windows.} Steps (iii$'$) and (v) need $a\geq6$ and $a\geq5$. For $3\leq a\leq5$, each sum $M_{1,m}+M_{m,1}$ $(2\leq m\leq a)$ and, for $a\leq4$, $S_{2,0}$ is a cubic form in $u$ that is an exact nonnegative rational combination of the products $u_k(u_{i+1}u_{j-1}-u_iu_j)$ $(i+1\leq j-1)$ and of monomials (\path{runs/lean_plan/window_cert.py}). This proves \eqref{eq:G-key} and the theorem.
+\emph{(vii) Small windows.} Steps (iii$'$) and (v) need $a\geq6$ and $a\geq5$. For $3\leq a\leq5$, each sum $M_{1,m}+M_{m,1}$ $(2\leq m\leq a)$ and, for $a\leq4$, $S_{2,0}$ is a cubic form in $u$ that is an exact nonnegative rational combination of the products $u_k(u_{i+1}u_{j-1}-u_iu_j)$ $(i+1\leq j-1)$ and of monomials (\path{runs/lean_plan/window_cert.py} in~\cite{code}). This proves \eqref{eq:G-key} and the theorem.
 \end{proof}
 
 For cubic ratios, log-concavity of the Newton coefficients can be replaced by a single inequality.
@@ -559,7 +625,10 @@ If $(r,t,\tau,\sigma)$ is log-concave without internal zeros, then $r\sigma\leq 
 \]
 Since $\binom{\ell+n-1}2=\binom\ell2+\ell(n-1)+\binom{n-1}2$ and $n\binom{n-1}2=\binom n2(n-2)=3\binom n3$, this gives $\psi_n=h_n-v_n-e_n$ with $h_n=(1-\rho(\ell+n))f_n$,
 \[
-v_n=n\Gamma_n(\ell)f_{n-1},\quad\Gamma_n(\ell)=t+\tau(\ell+n-1)+\sigma\Bigl(\tbinom\ell2+\ell(n-1)\Bigr),\qquad e_n=\tbinom n2(\tau+\sigma\ell)f_{n-2}+\sigma\tbinom n3\bigl(3f_{n-1}+3f_{n-2}+f_{n-3}\bigr),
+\begin{gathered}
+v_n=n\Gamma_n(\ell)f_{n-1},\qquad\Gamma_n(\ell)=t+\tau(\ell+n-1)+\sigma\Bigl(\tbinom\ell2+\ell(n-1)\Bigr),\\
+e_n=\tbinom n2(\tau+\sigma\ell)f_{n-2}+\sigma\tbinom n3\bigl(3f_{n-1}+3f_{n-2}+f_{n-3}\bigr),
+\end{gathered}
 \]
 all nonnegative. Write $u_k=f_k(\ell)$, so that $f_k(\ell+1)=u_k+u_{k+1}$; then $(u_k)$ is log-concave, and $u_0\leq\ell u_1$ by convexity.
 
@@ -615,7 +684,11 @@ A^\psi_0(\ell,a)&=\alpha X-s_qau_0+P_2\tbinom a2u_0-\sigma\tbinom a3u_0,\\
 A^\psi_0(\ell+1,a-2)&=(\alpha+s)X'-s_q(a-2)D+P_2\tbinom{a-1}2D-\sigma\tbinom{a-1}3D,
 \end{aligned}
 \]
-and, reindexing as before, $4H_1-2V_1-E_1=4\alpha H_*+2s_qT+4P_2Z-P_2\sum_{n\geq1}n\binom{a-n}2y_n+\sigma(4T_3-E_3)$, where $T_3=\sum_{n\geq3}(n-2)\bigl(\binom a3-\binom n3\bigr)y_n$ and $E_3=\sum_{n\geq3}(n-2)\binom n3\binom an(3u_{n-1}+3u_{n-2}+u_{n-3})$. With $B_0(\ell,a)\geq pY$, $B_0(\ell+1,a-1)\geq pY'$ and $c_{\ell+1}=pD$, it suffices that $R=A^\psi_0(\ell,a)Y'+YA^\psi_0(\ell+1,a-2)-D(4H_1-2V_1-E_1)\geq0$. $R$ is affine in $\alpha$, with coefficient $XY'+YX'-4DH_*$. Its part without $\sigma$ is the expression bounded in the proof of Theorem~\ref{thm:lc-quadratic}, with $s_q$ and $P_2$ in place of $s$ and $\tau$; that bound holds for every value $\alpha'$ of $\alpha$ with $\alpha'u_1\geq s_qu_0$. Apply it with $\alpha'=\alpha-\binom{a-1}2\sigma z$, where $z=u_0/u_1$. This gives $R\geq\sigma\Phi^{\mathrm{loc}}_3$ with
+and, reindexing as before,
+\[
+4H_1-2V_1-E_1=4\alpha H_*+2s_qT+4P_2Z-P_2\sum_{n\geq1}n\tbinom{a-n}2y_n+\sigma(4T_3-E_3),
+\]
+where $T_3=\sum_{n\geq3}(n-2)\bigl(\binom a3-\binom n3\bigr)y_n$ and $E_3=\sum_{n\geq3}(n-2)\binom n3\binom an(3u_{n-1}+3u_{n-2}+u_{n-3})$. With $B_0(\ell,a)\geq pY$, $B_0(\ell+1,a-1)\geq pY'$ and $c_{\ell+1}=pD$, it suffices that $R=A^\psi_0(\ell,a)Y'+YA^\psi_0(\ell+1,a-2)-D(4H_1-2V_1-E_1)\geq0$. $R$ is affine in $\alpha$, with coefficient $XY'+YX'-4DH_*$. Its part without $\sigma$ is the expression bounded in the proof of Theorem~\ref{thm:lc-quadratic}, with $s_q$ and $P_2$ in place of $s$ and $\tau$; that bound holds for every value $\alpha'$ of $\alpha$ with $\alpha'u_1\geq s_qu_0$. Apply it with $\alpha'=\alpha-\binom{a-1}2\sigma z$, where $z=u_0/u_1$. This gives $R\geq\sigma\Phi^{\mathrm{loc}}_3$ with
 \[
 \Phi^{\mathrm{loc}}_3=\tbinom{a-1}2z\,(XY'+YX'-4DH_*)-\tbinom a3u_0Y'+Y\Bigl(\tbinom{a-1}2X'-\tbinom{a-1}3D\Bigr)-D(4T_3-E_3).
 \]
@@ -627,27 +700,27 @@ A&=\tbinom{a-1}2YX'-u_1\Bigl(\tbinom{a-1}3Y+4T_3-E^0_3\Bigr),\\
 B&=\tbinom{a-1}2\bigl(XY'+YX'-4u_1H_*-4u_1H_*^+\bigr)-u_1\Bigl(\tbinom a3Y'+\tbinom{a-1}3Y+4T_3-E^0_3-\tbinom a3u_1\Bigr).
 \end{aligned}
 \]
-These are forms of the kind treated in step (vi) of the proof of Theorem~\ref{thm:lc-general}: the edge bounds give $A\geq u_1\sum_ne^A_nu_n$ and $B\geq u_1\sum_ne^B_nu_n$. Their coefficients are nonnegative by the same three kinds of certificates: for $4\leq n\leq a$ the numerators in $(p,k)$ have nonnegative coefficients and the denominators are strictly positive for $p,k\geq0$, for $n\leq3$ the polynomials in $a$ have nonnegative coefficients after $a\mapsto a+3$, and for $n\geq a+1$ only nonnegative terms remain (\path{runs/lean_plan/phi3_generic.py}, \path{runs/lean_plan/phi3_edge.py}). Hence $R\geq0$.
+These are forms of the kind treated in step (vi) of the proof of Theorem~\ref{thm:lc-general}: the edge bounds give $A\geq u_1\sum_ne^A_nu_n$ and $B\geq u_1\sum_ne^B_nu_n$. Their coefficients are nonnegative by the same three kinds of certificates: for $4\leq n\leq a$ the numerators in $(p,k)$ have nonnegative coefficients and the denominators are strictly positive for $p,k\geq0$, for $n\leq3$ the polynomials in $a$ have nonnegative coefficients after $a\mapsto a+3$, and for $n\geq a+1$ only nonnegative terms remain (\path{runs/lean_plan/phi3_generic.py} and \path{runs/lean_plan/phi3_edge.py} in~\cite{code}). Hence $R\geq0$.
 
 \emph{Resummation.} Proceed as in the proof of Theorem~\ref{thm:lc-quadratic}, with $E$ in place of $W$. The inequalities $P^2\geq4Q$, $H_+P\geq10H_-$, $V_+P\geq\frac92V_-$, $E_+P\geq3E_-$, $C_+P\geq6C_-$ and $A_0P+PA_0+2V_1+E_1\geq4H_1$ give $GAG\geq\frac12(GA_0+A_0G)+\frac1{18}GV_1G+\frac1{12}GE_1G\geq0$, and (P) follows.
 \end{proof}
 
-The condition $r\sigma\leq t\tau$ enters only through \eqref{eq:cubic-B} and \eqref{eq:cubic-E}, each time through $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$. On geometric profiles at $(\ell,n)=(0,3)$ one has $\kappa_{r\sigma}=-20q(4q^3+11q^2+9q+1)$ and $\kappa_{t\tau}=20(q+1)(8q^3+33q^2+30q+6)$ in \eqref{eq:cubic-B}, so $\kappa_{t\tau}/|\kappa_{r\sigma}|\to2$ as $q\to\infty$. This geometric family therefore obstructs the coefficientwise test for $r\sigma\leq u\,t\tau$ with $u>2$; it does not establish a cutoff at $u=1$. In fact \eqref{eq:cubic-B} and \eqref{eq:cubic-E} also hold with $\kappa_{t\tau}+\frac74\kappa_{r\sigma}\geq0$ in place of $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$; the other coefficients and the key inequality do not involve the condition. For \eqref{eq:cubic-E}, and for \eqref{eq:cubic-B} with $n\geq6$, the tail sums above stay nonnegative. For \eqref{eq:cubic-B} with $n\leq5$ the transfers alone do not suffice. There the modified coefficient $\kappa_{t\tau}+\frac74\kappa_{r\sigma}$ is certified after the substitution $u_0=zu_1$, $0\leq z\leq\min(\ell,1/q)$ with $q=u_2/u_1$, in the regimes $z=0$, $z=\ell$ and $z=1/q$ (\path{runs/cubic/bdetour_u.py}, \path{runs/cubic/edetour_u.py}). The relevant expressions are affine in $z$, so these boundary regimes cover the admissible interval for $q>0$. When $q=0$, all $u_k$ with $k\geq2$ vanish, and the inequality follows directly. For \eqref{eq:cubic-corner}, with $u_0=0$, the modified tail sums are also nonnegative. Here \path{runs/cubic/bdetour_u.py} supplies the small-$n$ $B$ certificate; \path{runs/cubic/edetour_u.py} separately certifies $E$. Hence Theorem~\ref{thm:lc-cubic} holds with $r\sigma\leq\frac74t\tau$ in place of $r\sigma\leq t\tau$. This extension is machine-verified (\path{Szkraw.cubic_ratio74_matrix}). For \eqref{eq:cubic-B} with $n\leq5$ the Lean proof does not substitute $u_0=zu_1$: it writes the modified coefficient, times a positive polynomial in $\ell$, as a combination of transfers, products $u_au_b$ and the terms $u_j(\ell u_1-u_0)\geq0$ with multipliers that are polynomials in $\ell$ with nonnegative coefficients after a shift of $\ell$, plus exact rational certificates at the few smaller values of $\ell$ (\path{runs/lean_plan/cert74.py}, \path{runs/lean_plan/gen_cubicB.py}). With $\frac95$ the certificate of \path{runs/cubic/bdetour_u.py} fails. Exact diagnostics for this proof are listed in \path{papers/DIAGNOSTICS.md}.
+The condition $r\sigma\leq t\tau$ enters only through \eqref{eq:cubic-B} and \eqref{eq:cubic-E}, each time through $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$. On geometric profiles at $(\ell,n)=(0,3)$ one has $\kappa_{r\sigma}=-20q(4q^3+11q^2+9q+1)$ and $\kappa_{t\tau}=20(q+1)(8q^3+33q^2+30q+6)$ in \eqref{eq:cubic-B}, so $\kappa_{t\tau}/|\kappa_{r\sigma}|\to2$ as $q\to\infty$. This geometric family therefore obstructs the coefficientwise test for $r\sigma\leq u\,t\tau$ with $u>2$; it does not establish a cutoff at $u=1$. In fact \eqref{eq:cubic-B} and \eqref{eq:cubic-E} also hold with $\kappa_{t\tau}+\frac74\kappa_{r\sigma}\geq0$ in place of $\kappa_{t\tau}+\kappa_{r\sigma}\geq0$; the other coefficients and the key inequality do not involve the condition. For \eqref{eq:cubic-E}, and for \eqref{eq:cubic-B} with $n\geq6$, the tail sums above stay nonnegative. For \eqref{eq:cubic-B} with $n\leq5$ the transfers alone do not suffice. There the modified coefficient $\kappa_{t\tau}+\frac74\kappa_{r\sigma}$ is certified after the substitution $u_0=zu_1$, $0\leq z\leq\min(\ell,1/q)$ with $q=u_2/u_1$, in the regimes $z=0$, $z=\ell$ and $z=1/q$ (\path{runs/cubic/bdetour_u.py} and \path{runs/cubic/edetour_u.py} in~\cite{code}). The relevant expressions are affine in $z$, so these boundary regimes cover the admissible interval for $q>0$. When $q=0$, all $u_k$ with $k\geq2$ vanish, and the inequality follows directly. For \eqref{eq:cubic-corner}, with $u_0=0$, the modified tail sums are also nonnegative. Here \path{runs/cubic/bdetour_u.py} supplies the small-$n$ $B$ certificate; \path{runs/cubic/edetour_u.py} separately certifies $E$. Hence Theorem~\ref{thm:lc-cubic} holds with $r\sigma\leq\frac74t\tau$ in place of $r\sigma\leq t\tau$. This extension is machine-verified (\path{Szkraw.cubic_ratio74_matrix}). For \eqref{eq:cubic-B} with $n\leq5$ the Lean proof does not substitute $u_0=zu_1$: it writes the modified coefficient, times a positive polynomial in $\ell$, as a combination of transfers, products $u_au_b$ and the terms $u_j(\ell u_1-u_0)\geq0$ with multipliers that are polynomials in $\ell$ with nonnegative coefficients after a shift of $\ell$, plus exact rational certificates at the few smaller values of $\ell$ (\path{runs/lean_plan/cert74.py} and \path{runs/lean_plan/gen_cubicB.py} in~\cite{code}). With $\frac95$ the certificate of \path{runs/cubic/bdetour_u.py} fails. Exact diagnostics for this proof are listed in \path{papers/DIAGNOSTICS.md}.
 
 \section{Counterexamples and open problems}\label{sec:open}
 
-The criterion of~\cite{P1} retains the full Krawtchouk range with a constant ratio $b_i/c_i$. Theorem~\ref{thm:lc-vary} and Corollary~\ref{cor:lc-vary} allow the ratio $c_i/(b_i+c_i)$ to increase, provided the Newton coefficients of $c$ are log-concave without internal zeros and those of $b$ are those of $c$ with nonincreasing nonnegative weights, Proposition~\ref{prop:lc-quad} covers linearly increasing ratios with a linear profile, and Theorem~\ref{thm:lc-affine} covers linearly increasing ratios with log-concave Newton profiles and nondecreasing $b$, Theorem~\ref{thm:lc-quadratic} extends this to increasing convex quadratic ratios, and Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} to ratios of higher degree. Find direct inequalities that cover other varying ratios, for instance nonlinear increasing ratios, which Theorems~\ref{thm:lc-vary} and~\ref{thm:lc-affine} do not cover in general. Log-concavity of the Newton coefficients of both $d$ and $c$ together with monotone $b$ does not suffice: $d=(0,25,55,91)/91$, $c=(0,24,54,90)/91$ gives $g(3,3;3)=-3/2002$. Increasing ratios with nondecreasing $b$ can fail as well: for the linear profile $d_i=i/3$ and the concave ratio $\rho=(1/2,3/4,5/6)$, for which $b_i=1/6$ for $i\geq1$, one has $g(3,3;3)=-1/24$, and a convex kinked ratio on the linear profile fails at $N=120$ (the example below with $r=2/5$ and $\rho_N=r+(1-r)/N$). Theorem~\ref{thm:lc-quadratic} does not extend to cubic ratios: for $N=4$, $d_i=i/4$ and $\rho(x)=\frac{19}{20}+\binom x3/320$, whose Newton coefficients $(\frac{19}{20},0,0,\frac1{320})$ are nonnegative, $b=(0,\frac1{80},\frac1{40},\frac9{256},\frac3{80})$ is nondecreasing, but $g(4,4;4)=-14011/30720000$. Even the bound $r\leq\frac9{10}$ does not restore (P) for cubic ratios: on linear profiles with $\kappa=1/80$, which keeps $b$ nondecreasing, $\rho_i=\frac9{10}+\kappa\binom i3/\binom N3$ gives $g(48,48;48)<0$ for $N=48$, and $\rho_i=\frac9{10}+\kappa(i/N)^3$ gives $g(64,64;63)<0$ for $N=64$. Steeper ratios fail at smaller $r$, again with nondecreasing $b$ and nonnegative Newton coefficients of $\rho$: $\rho_i=\frac12+10^{i-N}/100$ gives $g(40,40;40)<0$ for $N=40$, and raising only the last ratio, $\rho_i=r$ for $i<N$ and $\rho_N=r+(1-r)/N$, gives $g(40,40;38)<0$ for $r=\frac12$, $N=40$ and $g(120,120;119)<0$ for $r=\frac25$, $N=120$ (\path{runs/varratio/frontier_examples.py}). Write a cubic ratio as $\rho(x)=r+tx+\tau\binom x2+\sigma\binom x3$. The cubic examples above violate $r\sigma\leq t\tau$, a consequence of log-concavity without internal zeros of $(r,t,\tau,\sigma)$: in the first two $t=\tau=0$, and for $\kappa(i/N)^3$ one has $t\tau=6\kappa^2/N^6<r\sigma=6r\kappa/N^3$. In sampled arrays with $t,\tau\geq0$, $r\sigma=u\,t\tau$ and nondecreasing $b$ on log-concave Newton profiles, no negative coefficients were found for the tested values $u\in\{\frac14,1,4,16,64\}$, $r\in\{\frac1{10},\frac13,\frac12,\frac45,\frac{19}{20},\frac{99}{100}\}$ and $4\leq N\leq18$ (full tables), and in the coefficients $g(m,N;k)$ for $u\in\{1,4,16\}$ and $N=24,32,48,64,96$ (\path{runs/varratio/cubic_lc_test.py}); in these samples the operator $M$ of the proof of Theorem~\ref{thm:lc-affine} was nonnegative for $u\leq4$ and $N\leq13$. For $t=\tau=0$, by contrast, $M$ has negative entries; for instance $N=6$, $d_i=i/6$, $r=\frac15$ and $\sigma=\frac1{200}$ give a negative entry (\path{runs/varratio/cubic_diag.py}); this obstructs extending that resummation to such data, and does not contradict Theorem~\ref{thm:lc-affine}, which does not cover them. Theorem~\ref{thm:lc-cubic} and the remark after its proof show that $r\sigma\leq u\,t\tau$ suffices for $u\leq\frac74$. Decide whether it suffices for larger $u$; the proof of Theorem~\ref{thm:lc-cubic} uses the condition only coefficientwise, and on geometric profiles that test fails for $u>2$. Theorem~\ref{thm:lc-general} admits ratios with log-concave Newton coefficients, of any degree, on every log-concave Newton profile; its proof is computer-assisted. Find a proof of its key inequality \eqref{eq:G-key} without computer certificates, and decide whether, for ratios of degree greater than three, log-concavity of the ratio's Newton coefficients can be weakened to conditions like the one in Theorem~\ref{thm:lc-cubic}. The terminating row and products of degree sum greater than $N$ must remain part of the conclusion.
+The criterion of~\cite{P1} retains the full Krawtchouk range with a constant ratio $b_i/c_i$. Theorem~\ref{thm:lc-vary} and Corollary~\ref{cor:lc-vary} allow the ratio $c_i/(b_i+c_i)$ to increase, provided the Newton coefficients of $c$ are log-concave without internal zeros and those of $b$ are those of $c$ with nonincreasing nonnegative weights, Proposition~\ref{prop:lc-quad} covers linearly increasing ratios with a linear profile, and Theorem~\ref{thm:lc-affine} covers linearly increasing ratios with log-concave Newton profiles and nondecreasing $b$, Theorem~\ref{thm:lc-quadratic} extends this to increasing convex quadratic ratios, and Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} to ratios of higher degree. Find direct inequalities that cover other varying ratios, for instance nonlinear increasing ratios, which Theorems~\ref{thm:lc-vary} and~\ref{thm:lc-affine} do not cover in general. Log-concavity of the Newton coefficients of both $d$ and $c$ together with monotone $b$ does not suffice: $d=(0,25,55,91)/91$, $c=(0,24,54,90)/91$ gives $g(3,3;3)=-3/2002$. Increasing ratios with nondecreasing $b$ can fail as well: for the linear profile $d_i=i/3$ and the concave ratio $\rho=(1/2,3/4,5/6)$, for which $b_i=1/6$ for $i\geq1$, one has $g(3,3;3)=-1/24$, and a convex kinked ratio on the linear profile fails at $N=120$ (the example below with $r=2/5$ and $\rho_N=r+(1-r)/N$). Theorem~\ref{thm:lc-quadratic} does not extend to cubic ratios: for $N=4$, $d_i=i/4$ and $\rho(x)=\frac{19}{20}+\binom x3/320$, whose Newton coefficients $(\frac{19}{20},0,0,\frac1{320})$ are nonnegative, $b=(0,\frac1{80},\frac1{40},\frac9{256},\frac3{80})$ is nondecreasing, but $g(4,4;4)=-14011/30720000$. Even the bound $r\leq\frac9{10}$ does not restore (P) for cubic ratios: on linear profiles with $\kappa=1/80$, which keeps $b$ nondecreasing, $\rho_i=\frac9{10}+\kappa\binom i3/\binom N3$ gives $g(48,48;48)<0$ for $N=48$, and $\rho_i=\frac9{10}+\kappa(i/N)^3$ gives $g(64,64;63)<0$ for $N=64$. Steeper ratios fail at smaller $r$, again with nondecreasing $b$ and nonnegative Newton coefficients of $\rho$: $\rho_i=\frac12+10^{i-N}/100$ gives $g(40,40;40)<0$ for $N=40$, and raising only the last ratio, $\rho_i=r$ for $i<N$ and $\rho_N=r+(1-r)/N$, gives $g(40,40;38)<0$ for $r=\frac12$, $N=40$ and $g(120,120;119)<0$ for $r=\frac25$, $N=120$~\cite{code}. Write a cubic ratio as $\rho(x)=r+tx+\tau\binom x2+\sigma\binom x3$. The cubic examples above violate $r\sigma\leq t\tau$, a consequence of log-concavity without internal zeros of $(r,t,\tau,\sigma)$: in the first two $t=\tau=0$, and for $\kappa(i/N)^3$ one has $t\tau=6\kappa^2/N^6<r\sigma=6r\kappa/N^3$. In sampled arrays with $t,\tau\geq0$, $r\sigma=u\,t\tau$ and nondecreasing $b$ on log-concave Newton profiles, no negative coefficients were found for the tested values $u\in\{\frac14,1,4,16,64\}$, $r\in\{\frac1{10},\frac13,\frac12,\frac45,\frac{19}{20},\frac{99}{100}\}$ and $4\leq N\leq18$ (full tables), and in the coefficients $g(m,N;k)$ for $u\in\{1,4,16\}$ and $N=24,32,48,64,96$~\cite{code}; in these samples the operator $M$ of the proof of Theorem~\ref{thm:lc-affine} was nonnegative for $u\leq4$ and $N\leq13$. For $t=\tau=0$, by contrast, $M$ has negative entries; for instance $N=6$, $d_i=i/6$, $r=\frac15$ and $\sigma=\frac1{200}$ give a negative entry~\cite{code}; this obstructs extending that resummation to such data, and does not contradict Theorem~\ref{thm:lc-affine}, which does not cover them. Theorem~\ref{thm:lc-cubic} and the remark after its proof show that $r\sigma\leq u\,t\tau$ suffices for $u\leq\frac74$. Decide whether it suffices for larger $u$; the proof of Theorem~\ref{thm:lc-cubic} uses the condition only coefficientwise, and on geometric profiles that test fails for $u>2$. Theorem~\ref{thm:lc-general} admits ratios with log-concave Newton coefficients, of any degree, on every log-concave Newton profile; its proof is computer-assisted. Find a proof of its key inequality \eqref{eq:G-key} without computer certificates, and decide whether, for ratios of degree greater than three, log-concavity of the ratio's Newton coefficients can be weakened to conditions like the one in Theorem~\ref{thm:lc-cubic}. The terminating row and products of degree sum greater than $N$ must remain part of the conclusion.
 
 \section*{AI-use disclosure}
 
-OpenAI Codex and Anthropic Claude were used to develop proof arguments, check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean formalization. The resummation in the proof of Theorem~\ref{thm:lc-affine}, its key inequality under nondecreasing $b$, and the weighted detour and key inequality in the proof of Theorem~\ref{thm:lc-quadratic} arose in research consultations with ChatGPT Pro; the exact checks were completed with Claude, which also prepared the Lean formalizations. Theorem~\ref{thm:lc-lowdeg}, Corollary~\ref{cor:lc-lowdeg}, Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} and Lemma~\ref{lem:abel-weights} were found and proved with Claude, without research consultation; Proposition~\ref{prop:np}, which is due to Walkup, was rederived with Claude together with the self-contained proof given here. Every result was reviewed by ChatGPT Pro, as part of a longer manuscript (an AI review with independent exact checks, not human peer review); the review rounds and their corrections are recorded in \path{REVIEW.md}, and each returned PASS or PASS WITH MINOR FIXES, with the fixes applied. For Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} the reviewer reran transcribed copies of the certificate scripts; the scripts were also run unmodified from a fresh clone of the companion code at the cited revision, and all of them passed (\path{runs/verify/RESULTS.md}). The author set the research objective and retains responsibility for publication decisions and the final mathematical claims. No independent human verification is asserted here. ``Machine-verified'' refers only to the Lean theorems listed in the section on code and formalization; Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} and the extension to $r\sigma\leq\frac74t\tau$ in the remark after the proof of Theorem~\ref{thm:lc-cubic} are machine-verified.
+The following AI models were used: Claude Opus 5.5 and, for parts of the Lean formalization of Theorem~\ref{thm:lc-general}, Claude Haiku (Anthropic; the Haiku version was not recorded), both run in the Claude Code agent; GPT-6 Astra or GPT-6.1 Sol (OpenAI; which of the two was not recorded), run in the Codex agent; and GPT-6 Pro (OpenAI), used in ChatGPT. Claude Opus 5.5 and the Codex model were used to develop proof arguments, check source passages, construct exact-arithmetic diagnostics, draft and revise this manuscript, and prepare the Lean formalization. The resummation in the proof of Theorem~\ref{thm:lc-affine}, its key inequality under nondecreasing $b$, and the weighted detour and key inequality in the proof of Theorem~\ref{thm:lc-quadratic} arose in research consultations with GPT-6 Pro; the exact checks were completed with Claude Opus 5.5, which also prepared the Lean formalizations. Theorem~\ref{thm:lc-lowdeg}, Corollary~\ref{cor:lc-lowdeg}, Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} and Lemma~\ref{lem:abel-weights} were found and proved with Claude Opus 5.5, without research consultation; Proposition~\ref{prop:np}, which is due to Walkup, was rederived with Claude Opus 5.5 together with the self-contained proof given here. GPT-6 Pro reviewed every result, as part of a longer manuscript and with independent exact checks, and the corrections it requested were applied. For Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} the reviewer reran transcribed copies of the certificate scripts; the scripts were also run unmodified from a fresh clone of the companion code at the cited revision, and all of them passed~\cite{docs}. This AI review is not human peer review, and no independent human verification is claimed. The author set the research objective and is responsible for publication decisions and the final mathematical claims. ``Machine-verified'' refers only to the Lean theorems listed in the section on code and formalization; Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic} and the extension to $r\sigma\leq\frac74t\tau$ in the remark after the proof of Theorem~\ref{thm:lc-cubic} are machine-verified.
 
 \section*{Code and formalization}
 
-The companion code~\cite{code} contains the certificate scripts cited in the proofs of Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic}, exact-arithmetic diagnostics for every result (\path{papers/DIAGNOSTICS.md}), and a Lean~4 development, built and audited by \verb|make lean| and \verb|make axioms|; the audit rejects dependencies outside \path{propext}, \path{Classical.choice} and \path{Quot.sound}. The declarations below have compiled proofs without added axioms or admitted goals. Notes on how each Lean statement matches the text are in \path{papers/FORMALIZATION.md}; this file, \path{papers/DIAGNOSTICS.md} and \path{runs/verify/RESULTS.md} are in the later revision~\cite{docs}.
-\begin{center}
-\begin{tabular}{@{}p{0.36\linewidth}p{0.59\linewidth}@{}}
+The companion code~\cite{code} contains the certificate scripts cited in the proofs of Theorems~\ref{thm:lc-general} and~\ref{thm:lc-cubic}, exact-arithmetic diagnostics for every result, and a Lean~4 development. Its axiom audit rejects dependencies outside \path{propext}, \path{Classical.choice} and \path{Quot.sound}; the declarations below have compiled proofs without added axioms or admitted goals. The documentation revision~\cite{docs} describes the diagnostics, explains how each Lean statement matches the text, and records a run of all scripts from a fresh clone.
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.59\linewidth}@{}}
 Result & Lean declaration\\[3pt]
+\endhead
 Theorem~\ref{thm:lc-vary}: varying ratio & \path{Szkraw.varyratio_matrix}\\[3pt]
 Corollary~\ref{cor:lc-vary}: nonincreasing weights & \path{Szkraw.varyratio_weights}\\[3pt]
 Proposition~\ref{prop:lc-quad}: quadratic arrays & \path{Szkraw.quadratic_matrix}\\[3pt]
@@ -672,18 +745,17 @@ Proof of Theorem~\ref{thm:lc-general}: $(\log\rho)''(0)>0$ for $\rho(x)=1+x/2+x^
 Remark after the proof of Theorem~\ref{thm:lc-cubic}: geometric profiles and the case $u>2$ & \path{Szkraw.geometric_kappa_values}, \path{Szkraw.geometric_kappa}\\[3pt]
 Section~\ref{sec:open}: a negative entry of the operator $M$ for $N=6$, $t=\tau=0$ & \path{Szkraw.opM_negative_entry}, \path{Szkraw.opM_has_negative_entry}\\[3pt]
 After Proposition~\ref{prop:np}: the law of $|S\cup T|$, ultra-log-concavity of $|S\cup T|$, and the double-binomial convolution $h_k=\kappa_k$ & \path{Szkraw.RandomSets.union_card_law}, \path{Szkraw.RandomSets.random_sets_ulc}, \path{Szkraw.RandomSets.walkup_convolution}
-\end{tabular}
-\end{center}
+\end{longtable}
 Not formalized: the identification of the random-set reading after Proposition~\ref{prop:np} with Walkup's formulation (his conditionally uniform random sets and their fundamental sequences), which concerns the literature; the reported failure of \path{runs/cubic/bdetour_u.py} at $u=9/5$, which concerns one certificate search, not property (P); and, in Section~\ref{sec:open}, the sampled tests of cubic ratios and of the resummed operator, which are numerical evidence over finitely many arrays. More generally, attributions to other works and statements about what they contain are not formalized, for instance that Proposition~\ref{prop:np} is Walkup's Theorem~2 in the Newton basis and that the Abel argument is that of Wang and Yeh: Lean checks our statements, not the cited papers.
 
 \begin{thebibliography}{9}
 
 \bibitem{P1} L. P. Polzer, \emph{A log-concavity criterion for finite nonnegative linearization}, companion paper (2026).
 \bibitem{P3} L. P. Polzer, \emph{Exact and perturbative criteria for finite nonnegative linearization}, companion paper (2026).
+\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization} (2026), revision \texttt{2f96f4d} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}.
+\bibitem{docs} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, revision \texttt{4b2d7e1} with the split documentation \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the fresh-clone record \path{runs/verify/RESULTS.md} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
 \bibitem{szwarc} R. Szwarc, \emph{Orthogonal polynomials and Banach algebras}, in \emph{Inzell Lectures on Orthogonal Polynomials}, W. zu Castell, F. Filbir, and B. Forster (eds.), Advances in the Theory of Special Functions and Orthogonal Polynomials, vol.~2, Nova Science Publishers, 2005, 103--139; \S5, Problem~2. Author version (2004, 97--133; Problem~2 on printed p.~125): \url{https://www.math.uni.wroc.pl/~szwarc/pdf/inzell.pdf}.
 \bibitem{walkup} D. W. Walkup, \emph{Pólya sequences, binomial convolution and the union of random sets}, Journal of Applied Probability \textbf{13} (1976), no.~1, 76--85, \href{https://doi.org/10.2307/3212667}{\nolinkurl{doi:10.2307/3212667}}.
 \bibitem{wangyeh} Y. Wang and Y.-N. Yeh, \emph{Log-concavity and LC-positivity}, Journal of Combinatorial Theory, Series~A \textbf{114} (2007), no.~1, 195--210; preprint \url{https://arxiv.org/abs/math/0504164}.
-\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization} (2026), revision \texttt{2f96f4d} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}.
-\bibitem{docs} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, revision \texttt{4b2d7e1} with the split documentation \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the fresh-clone record \path{runs/verify/RESULTS.md} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
 \end{thebibliography}
 \end{document}
