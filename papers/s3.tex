@@ -1,0 +1,92 @@
+% Supplement to p3.tex. Its theorem, section and equation numbers are those of p3.pdf, read from p3.aux;
+% build p3.tex first (make papers does).
+\newcommand{\papertitle}{Supplement to ``Exact and perturbative criteria for finite nonnegative linearization'': formalization and AI use}
+\newcommand{\papershort}{SUPPLEMENT: EXACT AND PERTURBATIVE CRITERIA FOR FINITE LINEARIZATION}
+\newcommand{\paperdate}{November 1, 2026}
+\input{preamble}
+\externaldocument[M-]{p3}
+\begin{document}
+\maketitle
+
+\noindent This supplement to~\cite{main} gives the Lean declaration for each of its results, the statements that are not formalized, and the full AI-use disclosure. Theorem, section, equation and appendix numbers refer to~\cite{main}.
+
+\section*{Code and formalization}
+The companion code~\cite{code} contains exact-arithmetic diagnostics for every result, among them a comparison of recurrence-matrix multiplication with multiplication modulo the terminal polynomial, and a Lean~4 development. Its axiom audit rejects dependencies outside \path{propext}, \path{Classical.choice} and \path{Quot.sound}; all declarations below have compiled proofs without added axioms or admitted goals. The table lists one principal declaration per result; the documentation revision~\cite{docs} gives the full lists, describes the diagnostics, and explains how each Lean statement matches the text.
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.59\linewidth}@{}}
+Result & Lean declaration\\[3pt]
+\endhead
+Theorem~\ref{M-thm:criterion}: geometric criterion & \path{Szkraw.geometric_criterion}\\[3pt]
+Lemma~\ref{M-lem:parameters}: coefficient parametrization & \path{Szkraw.geometric_parameters}, \dots\\[3pt]
+Lemma~\ref{M-lem:basis}: basis and positivity & \path{Szkraw.squarefreeBasis}, \dots\\[3pt]
+Lemma~\ref{M-lem:trace}: positive associative inner product & \path{Szkraw.squarefree_trace_diagonal}, \dots\\[3pt]
+Lemma~\ref{M-lem:three}: three-term multiplication & \path{Szkraw.elementary_three_term}, \dots\\[3pt]
+Proposition~\ref{M-prop:subalgebra}: positive subalgebra & \path{Szkraw.positive_subalgebra_full}\\[3pt]
+Lemma~\ref{M-lem:normalization}: positive normalization & \path{Szkraw.towerCharacter}, \dots\\[3pt]
+Lemma~\ref{M-lem:finite}: finite realization and triangle support & \path{Szkraw.finite_realization}, \dots\\[3pt]
+Lemma~\ref{M-lem:margin}: uniform positive margin & \path{Szkraw.kraw_triangle_margin}\\[3pt]
+Theorem~\ref{M-thm:perturbation}: perturbation & \path{Szkraw.perturbation_criterion}\\[3pt]
+Corollary~\ref{M-cor:nonclassical}: systems outside the geometric family & \path{Szkraw.nongeometric_perturbation_example}, \dots\\[3pt]
+Corollary~\ref{M-cor:kraw}: full positive Krawtchouk range & \path{Szkraw.full_krawtchouk_binomial_range}, \path{Szkraw.krawtchouk_range_sharp}, \dots\\[3pt]
+Corollary~\ref{M-cor:additional}: dual $q$-Krawtchouk case & \path{Szkraw.additional_geometric_class}\\[3pt]
+Proposition~\ref{M-prop:source}: Koelink's relation (3.2) and the recurrence of his Theorem~7.1, transcribed by hand; agreement checked in Lean & \path{Szkraw.koelink_relation_32}, \path{Szkraw.koelink_recurrence_71}\\[3pt]
+Theorem~\ref{M-thm:szwarc}: Szwarc's quadratic system & \path{Szkraw.szwarc_full}, \dots\\[3pt]
+Lemma~\ref{M-lem:edge}: edge idempotents & \path{Szkraw.edge_idempotents}, \dots\\[3pt]
+Lemma~\ref{M-lem:qthree}: three-term action & \path{Szkraw.three_term_action}, \dots\\[3pt]
+Lemma~\ref{M-lem:qmargin}: margin for the quadratic system & \path{Szkraw.szwarc_margin}\\[3pt]
+Lemma~\ref{M-lem:stability}: stability of a reference with a margin & \path{Szkraw.stability}\\[3pt]
+Theorem~\ref{M-thm:symmetric}: symmetric criterion & \path{Szkraw.symmetric_criterion}\\[3pt]
+Corollary~\ref{M-cor:symmetric-new}: symmetric systems outside both families & \path{Szkraw.symmetric_new}, \path{Szkraw.symmetric_open}\\[3pt]
+Theorem~\ref{M-thm:low}: low products & \path{Szkraw.low_products}\\[3pt]
+Corollary~\ref{M-cor:convex-low}: convex profiles & \path{Szkraw.convex_low}, \dots\\[3pt]
+Theorem~\ref{M-thm:all}: all products & \path{Szkraw.all_products}\\[3pt]
+Corollary~\ref{M-cor:heavy}: heavy top step & \path{Szkraw.heavy_top}\\[3pt]
+Lemma~\ref{M-lem:reversal}: reversal identity & \path{Szkraw.reversal_identity}\\[3pt]
+Theorem~\ref{M-thm:deep}: deep reduction & \path{Szkraw.deep_formula}, \dots\\[3pt]
+Theorem~\ref{M-thm:palindromic}: palindromic criterion & \path{Szkraw.palindromic}\\[3pt]
+Corollary~\ref{M-cor:palin}: monotone palindromic systems & \path{Szkraw.palin_mono}, \dots\\[3pt]
+Lemma~\ref{M-lem:corner-value}: corner value & \path{Szkraw.corner_value}\\[3pt]
+Lemma~\ref{M-lem:corner}: corner identity & \path{Szkraw.corner_identity}\\[3pt]
+Theorem~\ref{M-thm:uniform}: forced equalities for uniform criteria & \path{Szkraw.forced_equalities}, \dots\\[3pt]
+Lemma~\ref{M-lem:nr}: N\"orlund--Rice bound & \path{Szkraw.norlund_rice}\\[3pt]
+Corollary~\ref{M-cor:analytic-rules}: analytic rules & \path{Szkraw.analytic_forced_equalities}, \dots\\[3pt]
+Proposition~\ref{M-prop:families}: families depending on $N$ & \path{Szkraw.families_sign}, \dots\\[3pt]
+Lemma~\ref{M-lem:topmass}: lowering the top mass & \path{Szkraw.lower_measure}, \dots\\[3pt]
+Proposition~\ref{M-prop:interior}: interior points near the symmetric endpoint & \path{Szkraw.interior_measure}, \dots\\[3pt]
+Proposition~\ref{M-prop:thin}: thinness near the symmetric endpoint & \path{Szkraw.thinness}\\[3pt]
+Corollary~\ref{M-cor:radius-order}: order of the stability radius as $r\to1$ & \path{Szkraw.radius_order}\\[3pt]
+Appendix~\ref{M-app:computations}: terminal-row failures at fixed $r$ & \path{Szkraw.terminal_fails}\\[3pt]
+Appendix~\ref{M-app:computations}: the rule $\beta=1$, $\gamma=0$ at $r=4/5$ and $r=19/20$ & \path{Szkraw.rule_fails_4_5}, \path{Szkraw.rule_fails_19_20}\\[3pt]
+Appendix~\ref{M-app:computations}: first-order derivatives along the rule $\beta=1$, $\gamma=0$ at $r=4/5$ & \path{Szkraw.PolyCol.rule_deriv_4_5}\\[3pt]
+Appendix~\ref{M-app:computations}: the one-kink counterexamples and the exact log-concave-increment counterexamples & \path{Szkraw.kink20_2_5_fails}, \path{Szkraw.kink40_1_3_fails}, \path{Szkraw.kink40_3_10_fails}, \path{Szkraw.kink60_1_4_fails}, \path{Szkraw.kink80_2_7_fails}, \path{Szkraw.kink100_1_5_fails}, \path{Szkraw.kink500_1_10_fails}, \path{Szkraw.stepInc_logconcave}, \path{Szkraw.logconcave32_fails}, \path{Szkraw.logconcave80_fails}, \path{Szkraw.logconcave90_fails}\\[3pt]
+Appendix~\ref{M-app:computations}: the convex-profile and log-convex-increment counterexamples & \path{Szkraw.kink14_fails}, \path{Szkraw.kink20_2_5_fails}, \path{Szkraw.cvxInc_logconvex}, \path{Szkraw.logconvex18_fails}\\[3pt]
+Introduction: the parameter convention of~\cite{szwarc} & \path{Szkraw.szwarc_footnote}\\[3pt]
+Remarks after Corollary~\ref{M-cor:symmetric-new}: $K_{2,1}$ perturbed & \path{Szkraw.k21_perturbation}\\[3pt]
+Remarks after Corollary~\ref{M-cor:heavy} & \path{Szkraw.heavy_top_sharp}, \path{Szkraw.heavy_top_scope}, \path{Szkraw.convex_superadditive}\\[3pt]
+End of Section~\ref{M-sec:low}: reversal obstructions and Miclo's condition & \path{Szkraw.g111}, \path{Szkraw.g222}, \path{Szkraw.reversal_obstruction_kraw}, \path{Szkraw.reversal_obstruction_szwarc}, \path{Szkraw.miclo_condition_fails}\\[3pt]
+After Theorem~\ref{M-thm:uniform}: known directions, independence, open sets of rules & \path{Szkraw.known_directions_satisfy}, \path{Szkraw.no_open_set_of_rules}\\[3pt]
+Section~\ref{M-sec:limits}: polynomial dependence along the terminal row & \path{Szkraw.terminal_polynomial}\\[3pt]
+Appendix~\ref{M-app:computations}: the class of convex profiles with log-concave increments & \path{Szkraw.logconcave_increment_class}\\[3pt]
+Appendix~\ref{M-app:computations}: sign conditions on the shape & \path{Szkraw.sign_pattern}, \path{Szkraw.kraw_mem_signClass}, \path{Szkraw.signClass_zero_zero}\\[3pt]
+Section~\ref{M-sec:limits}: the reduction of every finite system to the normalized recurrence & \path{Szkraw.FinSys.finite_system_reduction}\\[3pt]
+After Proposition~\ref{M-prop:interior}: the values of $\Lambda_N$, the top-mass direction and its normalization, not uniform rules & \path{Szkraw.lambda_values}, \path{Szkraw.topmass_rates}, \path{Szkraw.normalized_direction}, \path{Szkraw.direction_not_uniform}\\[3pt]
+Remark after Corollary~\ref{M-cor:radius-order}: the direction of the raising deformation at fixed $r$, its binomial profile, not a uniform rule & \path{Szkraw.raise_direction}, \path{Szkraw.raise_not_uniform}
+\end{longtable}
+Two Lean proofs take a route different from the written one and use the Lean development of~\cite{P1}: Theorem~\ref{M-thm:szwarc} is proved through the parity-split criterion~\cite[Corollary~\xnum{P1-cor:parity}{4.2}]{P1} with $q=1$, and Lemma~\ref{M-lem:qmargin} through the quadratic decomposition~\cite[Theorem~\xnum{P1-thm:decomp}{4.1}]{P1}, whose components are Krawtchouk arrays, rather than through the graded algebra of Section~\ref{M-sec:szwarc}. The statements are the ones given here.
+
+The finite counterexamples are decided in the Lean kernel using exact integer representations of positively rescaled columns of the product table; for the one-kink example with $N=500$, the current column entries are computed only for $\max(m,N-m)\leq n\leq N$ at step $m$, retaining the previous-step window as well. The computation is split into four kernel-checked chunks: three equalities to stated intermediate states at steps $150$, $250$ and $350$, followed by a final sign check determining $g(N,N;N)<0$ (\path{Szkraw.ColCheck.witer_eq}, \path{Szkraw.kink500_1_10_fails}). This certificate is built and audited separately from the rest of the development; in our run its parallel build took about 6 minutes and used up to about 20~GB of memory.
+
+Not formalized, or formalized only in part: for Proposition~\ref{M-prop:source}, Koelink's relation (3.2) and the recurrence of his Theorem~7.1 were transcribed by hand into Lean, and Lean checks that they agree with \eqref{M-eq:algebra} and with the recurrence of \eqref{M-eq:parameters}; it does not check that the transcription is faithful to~\cite{koelink}. His type-B Hecke-algebra construction, his spherical functions and the dual $q$-Krawtchouk interpretation are not formalized; no other result depends on this identification. The identification with distance-regular graphs in the introduction is not formalized either. The comparisons with Szwarc's infinite-system conditions and with Miclo's conditions in Sections~\ref{M-sec:low} and~\ref{M-sec:open} are not formalized, except the failure of Miclo's monotonicity condition for the symmetric Krawtchouk chain with $N>2$ (\path{Szkraw.miclo_condition_fails}, with the condition transcribed as stated here). The subdivided-cube interpretation and the $O(N)$ and $O(N^2)$ operation counts are not formalized. The following are not formalized: the equispaced-interpolation interpretation of $\Omega$ in Section~\ref{M-sec:limits}, and, in Appendix~\ref{M-app:computations}, the exact contour representation of the first-order change along the terminal row with the accompanying saddle-point discussion, which is heuristic. The high-precision examples and the unsuccessful searches in Appendix~\ref{M-app:computations} are numerical evidence, not exact sign certificates. More generally, attributions to other works and statements about what they contain are not formalized, for instance the earlier treatment of the Krawtchouk range by Eagleson and Szwarc: Lean checks our statements, not the cited papers.
+
+\section*{AI-use disclosure}
+The following AI models were used: GPT-6 Astra or GPT-6.1 Sol (OpenAI; which of the two was not recorded), run in the Codex agent; GPT-6.1 Sol, run as a separate Codex reviewing agent; Claude Opus 5.5 (Anthropic), run in the Claude Code agent; and GPT-6 Pro (OpenAI), used in ChatGPT. The Codex model was used to develop the proof arguments of Sections~\ref{M-sec:criterion}--\ref{M-sec:applications}, search and check source passages, construct exact-arithmetic diagnostics, draft and revise the paper, and prepare the Lean translation. The separate GPT-6.1 Sol agent reviewed the algebraic proof, boundary cases, normalizations, and quantitative estimates. Claude Opus 5.5 was used to analyze Szwarc's Problem~2 against the survey text, to explore discrete hyperbolic certificates numerically, and to develop and draft Sections~\ref{M-sec:szwarc}--\ref{M-sec:limits} together with their exact diagnostics, and it prepared the Lean formalizations of those sections. GPT-6 Pro reviewed these sections over several rounds, as part of a longer manuscript and with independent exact checks, and the errors it found were corrected. This AI review is not human peer review, and no independent human verification is claimed. The author set the research objective and is responsible for publication decisions and the final mathematical claims. ``Machine-verified'' refers only to the Lean theorems listed in the section on code and formalization, with the axioms stated there. Results and prose remarks not covered by those listed Lean theorems are supported by written proofs, AI review and exact numerical checks, but are not machine-verified.
+
+\begin{thebibliography}{99}
+
+\bibitem{main} L. P. Polzer, \emph{Exact and perturbative criteria for finite nonnegative linearization}, 2026, in release~1.0.5 of the companion code, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.5}.
+\bibitem{koelink} H. T. Koelink, \emph{$q$-Krawtchouk polynomials as spherical functions on the Hecke algebra of type B}, Transactions of the American Mathematical Society \textbf{352} (2000), no.~10, 4789--4813, \href{https://doi.org/10.1090/S0002-9947-00-02588-5}{\nolinkurl{doi:10.1090/S0002-9947-00-02588-5}}; preprint arXiv:q-alg/9605040v1 (1996), \url{https://arxiv.org/abs/q-alg/9605040v1}. Theorem and equation locators refer to the published version; the theorem numbers agree with the preprint, where relation (3.2) is numbered (3.3).
+\bibitem{P1} L. P. Polzer, \emph{A log-concavity criterion for finite nonnegative linearization}, companion paper (2026), in release~1.0.5 of the companion code, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.5}.
+\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization} (2026), revision \texttt{2f96f4d} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}.
+\bibitem{docs} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, revision \texttt{4b2d7e1} with the split documentation \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the fresh-clone record \path{runs/verify/RESULTS.md} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
+\bibitem{szwarc} R. Szwarc, \emph{Orthogonal polynomials and Banach algebras}, in \emph{Inzell Lectures on Orthogonal Polynomials}, W. zu Castell, F. Filbir, and B. Forster (eds.), Advances in the Theory of Special Functions and Orthogonal Polynomials, vol.~2, Nova Science Publishers, 2005, 103--139; \S5, Problem~2. Author version (2004, 97--133; Problem~2 on printed pp.~125--126): \url{https://www.math.uni.wroc.pl/~szwarc/pdf/inzell.pdf}.
+\end{thebibliography}
+\end{document}

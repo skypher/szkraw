@@ -20,10 +20,14 @@ paper:
 	$(PDFLATEX) -interaction=nonstopmode -halt-on-error paper.tex >> paper-build.log 2>&1
 
 # The three papers papers/p1.tex, p2.tex, p3.tex are edited directly (they were generated once from paper.tex;
-# the generators papers/build_p*.py are frozen). p2 and p3 read p1.aux for cross-references, so p1 is built first.
+# the generators papers/build_p*.py are frozen). Each paper compiles alone: cross-paper numbers are written with
+# \xnum and checked against the companion .aux files by check_xref.py. The supplements s1-s3 read the .aux file of
+# their paper, so they are built after the papers.
 papers:
 	cd papers && for p in p1 p2 p3; do $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex > $$p-build.log 2>&1 && $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex >> $$p-build.log 2>&1 || exit 1; done
 	cd papers && for p in p1 p2 p3; do $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex >> $$p-build.log 2>&1 || exit 1; ! grep -a -q 'LaTeX Warning: \(Reference\|Citation\)' $$p.log || { echo "undefined references in $$p"; exit 1; }; done
+	cd papers && for p in s1 s2 s3; do $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex > $$p-build.log 2>&1 && $(PDFLATEX) -interaction=nonstopmode -halt-on-error $$p.tex >> $$p-build.log 2>&1 || exit 1; ! grep -a -q 'LaTeX Warning: \(Reference\|Citation\)' $$p.log || { echo "undefined references in $$p"; exit 1; }; done
+	$(PYTHON) papers/check_xref.py
 
 lean:
 	$(LAKE) -d lean build Szkraw > lean/lake-build.log 2>&1
