@@ -7,7 +7,7 @@
 \maketitle
 
 \begin{abstract}
-We study quantitative and structural criteria for nonnegative linearization of finite three-term recurrences normalized to have row sums one, including products beyond the terminal degree. An explicit coefficient bound gives a relatively open neighborhood around each Krawtchouk system in the interior of its positive range; for fixed size $N\geq2$, the stability radius and the radius of this bound both have exact order $(1-r)^N$ as the bias parameter $r$ tends to the symmetric endpoint, whereas for fixed $r<1$ the stability radius decays at least exponentially in $N$, as the companion paper shows. A graded algebra gives explicit symmetric neighborhoods of Szwarc's quadratic system. Finite versions of Szwarc's inequalities control all products except those whose pairwise index sums all exceed the size, and a reversal identity settles these deep products for palindromic systems. Uniform polynomial and suitably analytic deformation rules at the symmetric Krawtchouk endpoint obey two first-order equalities. We also give a constructive positive-algebra proof for the geometric-increment family. This algebra and the corresponding named family occur in Koelink's work; the companion paper proves a broader log-concavity criterion that includes them.
+For finite three-term recurrences normalized to have row sums one, we ask how far nonnegative linearization (property (P)), including products beyond the terminal degree, extends from the Krawtchouk arrays into the space of recurrence coefficients. Explicit coefficient bounds give relatively open neighborhoods with property (P) around every Krawtchouk array with bias $r<1$ and around Szwarc's quadratic system, and these neighborhoods contain arrays outside every classical family. For fixed size $N\geq2$ the largest admissible radius has exact order $(1-r)^N$ as $r$ tends to the symmetric endpoint, where polynomial and suitably analytic deformation rules that keep property (P) must satisfy two first-order equalities. Criteria of another kind reach the endpoint: finite versions of Szwarc's inequalities control all products except those whose pairwise index sums all exceed the size, and a reversal identity settles these for palindromic systems. The reference positivity comes from a finite algebra with positive multiplication that occurs in Koelink's work.
 \vskip5pt
 \noindent\textbf{Keywords.}\enspace Finite orthogonal polynomials; nonnegative linearization; Krawtchouk polynomials; dual $q$-Krawtchouk polynomials; quadratic transformation; polynomial hypergroups.
 \vskip5pt
@@ -20,20 +20,37 @@ We study quantitative and structural criteria for nonnegative linearization of f
 
 Nonnegative linearization (property (P)) asks whether the product of two orthogonal polynomials is a nonnegative linear combination of polynomials in the same basis. For a finite system, the identity is understood on the orthogonality support. This distinction is essential when the formal product degree exceeds the terminal degree. In a normalization with $R_i(1)=1$, nonnegative coefficients have sum one and define the product probabilities of a finite polynomial hypergroup.
 
-The main subject of this paper is how far property (P) extends from the Krawtchouk arrays $K_{N,r}$ into the space of recurrence coefficients. Write $\rho_N(r)$ for the radius of the largest coefficient ball around $K_{N,r}$ in which every normalized array with $b_i\geq0$ has property (P). For $0<r<1$, Theorem~\ref{thm:perturbation} gives the explicit bound $\rho_N(r)\geq\frac12(\min(r,1-r)/(32N))^N$, and the neighborhoods it admits contain arrays outside every classical family (Corollary~\ref{cor:nonclassical}); Theorem~\ref{thm:symmetric} gives explicit symmetric neighborhoods of Szwarc's quadratic system $Q_n$ for $p_0<1/2$. Two regimes must be distinguished. For fixed $N\geq2$ and $r\to1$, $\rho_N(r)$ has exact order $(1-r)^N$ (Corollary~\ref{cor:radius-order}), which the explicit bound attains up to a factor depending on $N$. For fixed $r<1$ and $N\to\infty$, $\rho_N(r)\leq3(1-r^2)^N$~\cite[Corollary~\xnum{P1-cor:radius-exp}{5.3}]{P1}, while the explicit bound decays faster than every exponential; the order in this regime is open.
+The main subject of this paper is how far property (P) extends from the Krawtchouk arrays $K_{N,r}$ into the space of recurrence coefficients. Write $\rho_N(r)$ for the radius of the largest coefficient ball around $K_{N,r}$ in which every normalized array with $b_i\geq0$ has property (P). For $0<r<1$, Theorem~\ref{thm:perturbation} gives the explicit bound $\rho_N(r)\geq\frac12(\min(r,1-r)/(32N))^N$, which is deliberately conservative: it is many orders of magnitude below the known upper bounds (Remark~\ref{rem:size}), and the neighborhoods it admits contain arrays outside every classical family (Corollary~\ref{cor:nonclassical}); Theorem~\ref{thm:symmetric} gives explicit symmetric neighborhoods of Szwarc's quadratic system $Q_n$ for $p_0<1/2$. Two regimes must be distinguished. For fixed $N\geq2$ and $r\to1$, $\rho_N(r)$ has exact order $(1-r)^N$ (Corollary~\ref{cor:radius-order}), which the explicit bound attains up to a factor depending on $N$. For fixed $r<1$ and $N\to\infty$, $\rho_N(r)\leq3(1-r^2)^N$~\cite[Corollary~\xnum{P1-cor:radius-exp}{A.3}]{P1}, while the explicit bound decays faster than every exponential; the order in this regime is open.
 
-At the symmetric endpoint $r=1$ the corner coefficient $g(N,N;N)$ of $K_{N,1}$ vanishes (Lemma~\ref{lem:corner-value}), and Section~\ref{sec:limits} shows that the obstruction to perturbative criteria there is structural: polynomial and suitably analytic deformation rules that keep property (P) at the symmetric Krawtchouk systems for all large $N$ must satisfy two first-order equalities (Theorem~\ref{thm:uniform} and Corollary~\ref{cor:analytic-rules}), although each symmetric Krawtchouk array is a limit of arrays whose product coefficients are strictly positive on the whole triangle support (Proposition~\ref{prop:interior}). Criteria that reach the endpoint are therefore of another kind. Section~\ref{sec:low} adapts Szwarc's inequality method to finite systems. It controls every product except the deep triples, those in which each two indices have sum greater than $N$ (Theorems~\ref{thm:low} and~\ref{thm:all}), and a reversal identity (Lemma~\ref{lem:reversal}) settles the deep triples for palindromic systems (Theorems~\ref{thm:deep} and~\ref{thm:palindromic}), including the symmetric Krawtchouk array.
+At the symmetric endpoint $r=1$ the corner coefficient $g(N,N;N)$ of $K_{N,1}$ vanishes (Lemma~\ref{lem:corner-value}), and Section~\ref{sec:limits} shows that the obstruction to perturbative criteria there is structural: polynomial and suitably analytic deformation rules that keep property (P) at the symmetric Krawtchouk systems for all large $N$ must satisfy two first-order equalities (Theorem~\ref{thm:uniform} and Corollary~\ref{cor:analytic-rules}), although each symmetric Krawtchouk array is a limit of arrays whose product coefficients are strictly positive on the whole triangle support (Proposition~\ref{prop:interior}). Criteria that reach the endpoint are therefore of another kind. Section~\ref{sec:low} adapts Szwarc's inequality method to finite systems. Under monotonicity conditions away from the terminal index, Theorem~\ref{thm:low} controls every product except the deep triples, those in which each two indices have sum greater than $N$; under stronger conditions imposed through the terminal index, Theorem~\ref{thm:all} controls all products. A reversal identity (Lemma~\ref{lem:reversal}) settles the deep triples for palindromic systems (Theorems~\ref{thm:deep} and~\ref{thm:palindromic}), including the symmetric Krawtchouk array.
 
 The explicit radius needs a reference with a positive margin. It comes from a finite algebra with positive multiplication (Sections~\ref{sec:algebra} and~\ref{sec:normalization}), which gives property (P) whenever the profile $b_i+c_i$ has geometric increments and $b_i/c_i$ is constant (Theorem~\ref{thm:criterion}). This family and its algebra are Koelink's~\cite[Theorems~3.1(ii) and 7.8]{koelink}; for some parameters the arrays also come from Hamming and dual polar graphs~\cite{bcn,vdkt}, see~\cite[Section~\xnum{P1-sec:lc}{3}]{P1}, and~\cite[Theorem~\xnum{P1-thm:lc}{3.1}]{P1} contains all of them. We use the algebra for the margin of Lemma~\ref{lem:margin}, and a graded version for $Q_n$ in Section~\ref{sec:szwarc}, and claim no priority for the algebra or the family.
 
-\emph{What is new, imported and known.} New here are the explicit neighborhoods (Lemma~\ref{lem:stability}, Theorems~\ref{thm:perturbation} and~\ref{thm:symmetric} and their corollaries), the criteria of Section~\ref{sec:low}, and the results of Section~\ref{sec:limits} except Lemma~\ref{lem:corner-value}, which is also in~\cite{P1}, and Lemma~\ref{lem:nr}, a form of the classical N\"orlund--Rice estimate. From~\cite{P1} this paper uses, in remarks only, the quadratic decomposition and the components of $Q_n$~\cite[Theorem~\xnum{P1-thm:decomp}{4.1} and Corollary~\xnum{P1-cor:parity}{4.2}]{P1}, and it cites for comparison the bound~\cite[Corollary~\xnum{P1-cor:radius-exp}{5.3}]{P1} and the failures of convex combinations~\cite[Section~\xnum{P1-sec:limits}{5}]{P1}. No written proof depends on~\cite{P1}; two Lean proofs do, as stated in the section on code and formalization. Previously known are property (P) of the Krawtchouk arrays and of the geometric family, and of $Q_n$ for $p_0\leq1/2$, stated by Szwarc~\cite[\S5]{szwarc} and proved in~\cite[Theorem~\xnum{P1-thm:szwarc}{4.3}]{P1}, of which Theorem~\ref{thm:szwarc} is a second proof; the case $t=N$ of Lemma~\ref{lem:reversal}~\cite{deboor}; and Szwarc's cone argument for infinite systems~\cite{szwarc}, which Section~\ref{sec:low} adapts.
+Table~\ref{tab:results} sorts the results into new criteria, previously known positivity and second proofs shared with~\cite{P1}, and says why each shared result appears here. From~\cite{P1} this paper uses, in remarks only, the quadratic decomposition and the components of $Q_n$~\cite[Theorem~\xnum{P1-thm:decomp}{4.1} and Corollary~\xnum{P1-cor:parity}{4.2}]{P1}, and it cites for comparison the bound~\cite[Corollary~\xnum{P1-cor:radius-exp}{A.3}]{P1} and the failures of convex combinations~\cite[Section~\xnum{P1-sec:limits}{5}]{P1}. No written proof depends on~\cite{P1}; two Lean proofs do, as stated in the section on code and formalization.
+
+\begin{table}[!t]
+\centering
+\caption{The results of this paper by status, with the reason why the results shared with~\cite{P1} appear here.}\label{tab:results}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.33\linewidth}>{\raggedright\arraybackslash}p{0.27\linewidth}>{\raggedright\arraybackslash}p{0.32\linewidth}@{}}
+Results & Status & Role here\\\hline
+Thm.~\ref{thm:perturbation}, Cor.~\ref{cor:nonclassical}, Lem.~\ref{lem:stability} & new & explicit neighborhoods of $K_{N,r}$\\
+Thm.~\ref{thm:symmetric}, Cor.~\ref{cor:symmetric-new} & new & neighborhoods of $Q_n$\\
+Thms.~\ref{thm:low}, \ref{thm:all}, Cors.~\ref{cor:convex-low}, \ref{cor:heavy} & new & inequality criteria\\
+Lem.~\ref{lem:reversal}, Thms.~\ref{thm:deep}, \ref{thm:palindromic}, Cor.~\ref{cor:palin} & new; case $t=N$ of the lemma in~\cite{deboor} & deep triples, symmetric endpoint\\
+Section~\ref{sec:limits} except Lems.~\ref{lem:corner-value}, \ref{lem:nr} & new & endpoint obstruction, order of $\rho_N(r)$\\[3pt]
+Thm.~\ref{thm:criterion}, Cors.~\ref{cor:kraw}, \ref{cor:additional} & known~\cite{eagleson,dunkl,szwarc,koelink}; also from~\cite[Thm.~\xnum{P1-thm:lc}{3.1}]{P1} & reference positivity; its algebra gives the margin of Lem.~\ref{lem:margin}\\
+Thm.~\ref{thm:szwarc} & stated by Szwarc~\cite{szwarc}, proved in~\cite[Thm.~\xnum{P1-thm:szwarc}{4.3}]{P1}; second proof & its graded algebra gives the margin of Lem.~\ref{lem:qmargin}\\
+Lem.~\ref{lem:corner-value} & also in~\cite{P1} & corner coefficient at $r=1$\\
+Lem.~\ref{lem:nr} & classical N\"orlund--Rice estimate & analytic rules
+\end{tabular}
+\end{table}
 
 The positive Krawtchouk range is classical~\cite{eagleson,dunkl,szwarc}; Corollary~\ref{cor:kraw} derives our endpoint normalization directly.\footnote{The linked author version of~\cite{szwarc}, \S5, Problem~2, printed p.~125, uses inconsistent parameter conventions: its displayed weights have mean $N(1-p)$, whereas its degree-zero recurrence gives $K_1(x)=(x-pN)/((1-p)N)$, so that the displayed weights give $\int K_1\,d\mu=(1-2p)/(1-p)$.} Szwarc's finite-system problem~\cite[\S5, Problem~2]{szwarc} motivates the present criteria. Earlier recurrence criteria include Askey's finite result for products of degree sum at most $N$~\cite[Part~II, Theorem~1 and Corollary~1]{askey}, Szwarc's discrete hyperbolic characterization~\cite[Theorem~1]{szwarc2003}, his monotonicity criteria for infinite systems~\cite[Theorems~3.2--3.4]{szwarc}, from which Section~\ref{sec:low} starts, and the chain-sequence criteria of M{\l}otkowski and Szwarc~\cite{mlotszwarc} for infinite systems whose orthogonality measure is supported on a convergent sequence of points. Szwarc's quadratic-transformation arguments~\cite{szwarc1992,szwarc1996} pass from symmetric infinite systems to their even parts; the converse direction for finite systems is~\cite[Theorem~\xnum{P1-thm:decomp}{4.1}]{P1}. Miclo~\cite[Proposition~3.3]{miclo} characterizes the hypergroup property of a finite birth--death chain at a boundary point spectrally, and Terwilliger~\cite[Problems~36.4 and~36.5]{terwilliger} and Blau and Hein~\cite[Theorem~1.1]{blauhein} study related classification questions for finite systems.
 
-The companion paper~\cite{P1} proves the log-concave Newton criterion, and~\cite{P2} treats varying ratios. Section~\ref{sec:criterion} fixes conventions, Sections~\ref{sec:algebra}--\ref{sec:applications} give the reference positivity and the explicit neighborhoods, Sections~\ref{sec:szwarc}--\ref{sec:limits} treat $Q_n$, the inequality and reversal criteria and the endpoint, Section~\ref{sec:open} states open problems, and Appendix~\ref{app:computations} collects the exact counterexamples to shape conditions, separately from numerical evidence.
+The companion paper~\cite{P1} proves the log-concave Newton criterion, and~\cite{P2} treats varying ratios. Here Section~\ref{sec:criterion} fixes conventions and Section~\ref{sec:perturbation} proves the explicit neighborhoods; Sections~\ref{sec:reference}--\ref{sec:normalization} give the reference positivity and the margin; Section~\ref{sec:szwarc} treats $Q_n$, Section~\ref{sec:low} the inequality and reversal criteria, and Section~\ref{sec:limits} the endpoint. Section~\ref{sec:open} states open problems, Appendix~\ref{app:computations} collects the exact counterexamples to shape conditions, separately from numerical evidence, and Appendix~\ref{sec:applications} derives the classical positivity results and compares the geometric family with Koelink's construction.
 
-\section{Conventions and the geometric reference family}\label{sec:criterion}
-For integers $j\geq0$ put $[j]_q=1+q+\cdots+q^{j-1}$, with $[0]_q=0$; in particular $[j]_1=j$.
+\section{Conventions}\label{sec:criterion}
 Consider real coefficients indexed by $0\leq i\leq N$, where $N\geq1$, satisfying
 \begin{equation}\label{eq:basic}
 \begin{gathered}
@@ -47,6 +64,115 @@ xR_i=a_iR_{i+1}+b_iR_i+c_iR_{i-1}\qquad(0\leq i<N).
 \end{equation}
 At $i=0$, \eqref{eq:recurrence} gives $R_1=x$; induction at $x=1$, using the row sums and $a_i>0$ for $i<N$, gives $R_i(1)=1$ for $0\leq i\leq N$.
 The terminal relation is $(x-b_N)R_N-c_NR_{N-1}=0$ on the orthogonality support. Linearization means equality of functions on this support, rather than an unrestricted polynomial identity when the degree sum exceeds $N$. We call an array satisfying \eqref{eq:basic} \emph{normalized}. Its recurrence matrix has row sums one, but \eqref{eq:basic} allows $b_i<0$; we call the array \emph{stochastic} only when all $b_i\geq0$, so that the matrix is stochastic.
+For $0<r\leq1$ the \emph{Krawtchouk array} $K_{N,r}$ has $a_i=(N-i)/N$, $b_i=(1-r)i/N$ and $c_i=ri/N$; it has property (P), see Corollary~\ref{cor:kraw}.
+
+Write the tridiagonal recurrence matrix with the row convention
+\[
+J_{i,i+1}=a_i,\qquad J_{i,i}=b_i,\qquad J_{i,i-1}=c_i,
+\]
+with all other entries zero and indices outside $0,\ldots,N$ omitted.
+
+\begin{lemma}[Finite recurrence realization and triangle support]\label{lem:finite}
+Every recurrence satisfying \eqref{eq:basic} has a positive orthogonality measure on exactly $N+1$ real points. If $J$ is its tridiagonal recurrence matrix, then its finite product coefficients satisfy
+\begin{equation}\label{eq:matrix-product}
+g(m,n;k)=[R_m(J)]_{n,k}.
+\end{equation}
+They vanish unless $|m-n|\leq k\leq\min(m+n,N)$, regardless of their signs inside this interval.
+\end{lemma}
+\begin{proof}
+Choose positive $\pi_i$ with $\pi_0=1$ and $\pi_{i+1}=\pi_i a_i/c_{i+1}$. For $D=\operatorname{diag}(\sqrt{\pi_i})$, $H=DJD^{-1}$ is real symmetric. Induction in \eqref{eq:recurrence} gives the row-vector identity $e_0^\mathsf T R_i(J)=e_i^\mathsf T$, hence $e_0^\mathsf T R_i(H)=\pi_i^{-1/2}e_i^\mathsf T$. In particular $e_0$ is cyclic for $H$. In an orthogonal eigenspace decomposition of $H$, the cyclic span of $e_0$ has dimension at most the number of distinct eigenvalues; here it is all of $\mathbb R^{N+1}$, so $H$ has $N+1$ distinct eigenvalues and the projection of $e_0$ on each eigenspace is nonzero. The spectral measure $\mu$ of $H$ at $e_0$ therefore has positive mass at each of $N+1$ real points, and
+\[
+\int R_iR_j\,d\mu=e_0^\mathsf TR_i(H)R_j(H)e_0
+=\boldsymbol1_{i=j}\pi_i^{-1}.
+\]
+The terminal relation holds on this support: its polynomial $Q(x)=(x-b_N)R_N-c_NR_{N-1}$ satisfies $e_0^\mathsf TQ(J)=0$. Since $e_0$ is cyclic and $Q(J)$ commutes with $J$, $Q(J)=0$.
+Multiplying a basis polynomial by $x$ acts by the corresponding row of $J$, including the terminal row. Induction on powers of $x$ therefore gives \eqref{eq:matrix-product}. Orthogonality also gives
+\[
+g(m,n;k)=\frac{\int R_mR_nR_k\,d\mu}{\int R_k^2\,d\mu}.
+\]
+If one of $m,n,k$ exceeds the sum of the other two, its polynomial is orthogonal to their product, whose degree is smaller. This proves the asserted support.
+\end{proof}
+
+\section{Explicit perturbation neighborhoods}\label{sec:perturbation}
+
+\begin{lemma}[A uniform positive margin in the asymmetric case]\label{lem:margin}
+For the Krawtchouk array $K_{N,r}$ with $0<r<1$, put $s=\min(r,1-r)$. Every coefficient in its triangle support obeys
+\begin{equation}\label{eq:margin}
+g(m,n;k)\geq (s/4)^N\quad\text{if }|m-n|\leq k\leq\min(m+n,N).
+\end{equation}
+\end{lemma}
+This lemma comes from a single positive term in the finite algebra of Section~\ref{sec:algebra}; its proof is given at the end of Section~\ref{sec:normalization}.
+
+\begin{theorem}[Explicit perturbation inequalities]\label{thm:perturbation}
+Let $N\geq1$, $0<r<1$, $s=\min(r,1-r)$, and
+\begin{equation}\label{eq:radius}
+\eta_N(r)=\frac12\left(\frac{s}{32N}\right)^N.
+\end{equation}
+Suppose coefficients $\widetilde a_i,\widetilde b_i,\widetilde c_i$ satisfy \eqref{eq:basic}, with $\widetilde b_i\geq0$ for every $i$, and
+\begin{equation}\label{eq:closeness}
+\max_{0\leq i\leq N}\left\{
+\left|\widetilde a_i-\frac{N-i}{N}\right|,
+\left|\widetilde b_i-\frac{(1-r)i}{N}\right|,
+\left|\widetilde c_i-\frac{ri}{N}\right|\right\}\leq\eta_N(r).
+\end{equation}
+Then the finite system has nonnegative linearization. Throughout its triangle support,
+\[
+\widetilde g(m,n;k)\geq\tfrac12(s/4)^N.
+\]
+The product coefficients sum to one.
+\end{theorem}
+\begin{proof}
+Use tildes for the perturbed system and untilded letters for its $q=1$ reference at $r$. Let $\eta=\eta_N(r)$ and use the maximum absolute row-sum matrix norm. Both $J$ and $\widetilde J$ are stochastic matrices, since $b_i\geq0$ and $\widetilde b_i\geq0$, so $\|J\|_\infty=\|\widetilde J\|_\infty=1$ and $\|\widetilde J-J\|_\infty\leq3\eta$. Put $B_m=R_m(J)$, $\widetilde B_m=\widetilde R_m(\widetilde J)$ and $e_m=\|\widetilde B_m-B_m\|_\infty$. Theorem~\ref{thm:criterion} at $q=1$ and \eqref{eq:matrix-product} give $\|B_m\|_\infty=1$ for all $m\leq N$. Also $e_0=0$ and $e_1\leq3\eta$.
+
+Subtract the two matrix recurrences for $1\leq m<N$. Writing $\Delta_m=\widetilde B_m-B_m$ gives exactly
+\begin{align*}
+\widetilde a_m\Delta_{m+1}
+={}&(\widetilde J-\widetilde b_m I)\Delta_m-\widetilde c_m\Delta_{m-1}\\
+ &+\big(\widetilde J-J-(\widetilde b_m-b_m)I\big)B_m\\
+ &-(\widetilde c_m-c_m)B_{m-1}-(\widetilde a_m-a_m)B_{m+1}.
+\end{align*}
+Since $\eta\leq1/(2N)$, $\widetilde a_m\geq1/(2N)$. The terms not containing a $\Delta$ have combined norm at most $6\eta$. Also $0\leq\widetilde b_m,\widetilde c_m\leq1$, so
+\begin{equation}\label{eq:error-recursion}
+e_{m+1}\leq4Ne_m+2Ne_{m-1}+12N\eta.
+\end{equation}
+Set $L=8N$. Induction gives $e_m\leq\eta L^m$ for $1\leq m\leq N$: the base case follows from $3\leq L$, and, for $m\geq1$,
+\[
+4N+\frac{2N}{L}+\frac{12N}{L^m}
+\leq4N+\frac14+\frac32\leq8N=L.
+\]
+Thus every matrix entry differs from its reference by at most
+\[
+\eta(8N)^N=\frac12(s/4)^N.
+\]
+Lemma~\ref{lem:margin} gives the positive lower bound on triangle entries, while Lemma~\ref{lem:finite} makes all entries outside the triangle exactly zero. Finally $\widetilde R_m(1)=1$ follows by recurrence from the row sums $\widetilde a_i+\widetilde b_i+\widetilde c_i=1$, so evaluating each product at $1$ gives coefficient sum one. Here $1$ belongs to the support because $\widetilde J\boldsymbol1=\boldsymbol1$ and Lemma~\ref{lem:finite} identifies that support with its spectrum. No product-positivity inequality for the perturbed system has been assumed.
+\end{proof}
+
+\begin{remark}[Size of the radius]\label{rem:size}
+The radius $\eta_N(r)$ shows that a neighborhood exists and how it scales as $r\to1$; it is not meant to approximate the stability radius $\rho_N(r)$, the radius of the largest admissible coefficient ball around $K_{N,r}$ with property (P). At $r=\frac12$, compared with the upper bound $\rho_N(\frac12)\leq3(\frac34)^N$, valid for $N\geq16$~\cite[Corollary~\xnum{P1-cor:radius-exp}{A.3}]{P1}:
+\begin{center}
+\begin{tabular}{@{}lccccc@{}}
+$N$&$5$&$10$&$20$&$40$&$120$\\\hline
+$\eta_N(\frac12)$&$1.5\cdot10^{-13}$&$4.3\cdot10^{-29}$&$3.6\cdot10^{-63}$&$2.3\cdot10^{-137}$&$2.9\cdot10^{-467}$\\
+$3(\frac34)^N$&---&---&$9.5\cdot10^{-3}$&$3.0\cdot10^{-5}$&$3.1\cdot10^{-15}$
+\end{tabular}
+\end{center}
+The gap comes from the two crude steps of the proof: the single-term margin $(s/4)^N$ of Lemma~\ref{lem:margin} and the worst-case amplification $(8N)^N$ of the error recurrence.
+\end{remark}
+
+\begin{corollary}[Finite systems outside the geometric family]\label{cor:nonclassical}
+For every $N\geq2$, take the Krawtchouk coefficients at $r=1/2$, and replace only
+\[
+a_1\longmapsto a_1-h,\qquad b_1\longmapsto b_1+h,
+\qquad 0<h\leq\frac14(64N)^{-N}.
+\]
+These recurrences have nonnegative linearization and do not satisfy the constant-ratio hypothesis of Theorem~\ref{thm:criterion}. More generally, Theorem~\ref{thm:perturbation} admits a relatively open neighborhood of the asymmetric Krawtchouk array in the affine space defined by the row-sum and boundary equalities in \eqref{eq:basic}.
+\end{corollary}
+\begin{proof}
+All initial and terminal conventions and the row sums are preserved. The bound on $h$ is half the radius \eqref{eq:radius} at $r=1/2$, and is smaller than $a_1=(N-1)/N$, so all required signs hold. The perturbation theorem applies. At index $1$, $b_1/c_1=1+2Nh>1$, whereas at index $N$ the ratio remains $1$; these indices differ because $N\geq2$. Thus this array lies outside the geometric family. At the asymmetric reference, all free coefficients constrained to be positive are strictly positive; the strict version of \eqref{eq:closeness} therefore contains a relatively open neighborhood in that affine space; the sign conditions define the admissible region within it.
+\end{proof}
+
+\section{The geometric reference family}\label{sec:reference}
+The margin of Lemma~\ref{lem:margin} comes from a finite algebra with positive multiplication. It proves property (P) for a family of arrays that contains $K_{N,r}$; the family and the algebra occur in Koelink's work~\cite{koelink} (Proposition~\ref{prop:source}), and~\cite[Theorem~\xnum{P1-thm:lc}{3.1}]{P1} contains the family. For integers $j\geq0$ put $[j]_q=1+q+\cdots+q^{j-1}$, with $[0]_q=0$; in particular $[j]_1=j$.
 
 \begin{samepage}
 \begin{theorem}[Geometric increment criterion]\label{thm:criterion}
@@ -202,43 +328,8 @@ for real polynomials $f,h$, identifying an algebra element with its action on $1
 Proposition~\ref{prop:subalgebra} and positive $t_k$ give nonnegative product coefficients for the $U_k$. Applying the character $\epsilon$ gives their sum equal to one because $\epsilon(U_k)=1$. Polynomial identities in the algebra hold on every spectral point; conversely the $R_k$, having successive degrees at most $N$, form a basis of functions on the $N+1$ distinct points. This proves uniqueness and \eqref{eq:positive} for all products.
 \end{proof}
 
-\section{A criterion for small coefficient perturbations}\label{sec:perturbation}
-
-Write the tridiagonal recurrence matrix with the row convention
-\[
-J_{i,i+1}=a_i,\qquad J_{i,i}=b_i,\qquad J_{i,i-1}=c_i,
-\]
-with all other entries zero and indices outside $0,\ldots,N$ omitted.
-
-\begin{lemma}[Finite recurrence realization and triangle support]\label{lem:finite}
-Every recurrence satisfying \eqref{eq:basic} has a positive orthogonality measure on exactly $N+1$ real points. If $J$ is its tridiagonal recurrence matrix, then its finite product coefficients satisfy
-\begin{equation}\label{eq:matrix-product}
-g(m,n;k)=[R_m(J)]_{n,k}.
-\end{equation}
-They vanish unless $|m-n|\leq k\leq\min(m+n,N)$, regardless of their signs inside this interval.
-\end{lemma}
-\begin{proof}
-Choose positive $\pi_i$ with $\pi_0=1$ and $\pi_{i+1}=\pi_i a_i/c_{i+1}$. For $D=\operatorname{diag}(\sqrt{\pi_i})$, $H=DJD^{-1}$ is real symmetric. Induction in \eqref{eq:recurrence} gives the row-vector identity $e_0^\mathsf T R_i(J)=e_i^\mathsf T$, hence $e_0^\mathsf T R_i(H)=\pi_i^{-1/2}e_i^\mathsf T$. In particular $e_0$ is cyclic for $H$. The same finite spectral argument as in Theorem~\ref{thm:criterion} gives $N+1$ distinct eigenvalues and positive spectral masses at $e_0$, and
-\[
-\int R_iR_j\,d\mu=e_0^\mathsf TR_i(H)R_j(H)e_0
-=\boldsymbol1_{i=j}\pi_i^{-1}.
-\]
-The terminal relation holds on this support: its polynomial $Q(x)=(x-b_N)R_N-c_NR_{N-1}$ satisfies $e_0^\mathsf TQ(J)=0$. Since $e_0$ is cyclic and $Q(J)$ commutes with $J$, $Q(J)=0$.
-Multiplying a basis polynomial by $x$ acts by the corresponding row of $J$, including the terminal row. Induction on powers of $x$ therefore gives \eqref{eq:matrix-product}. Orthogonality also gives
-\[
-g(m,n;k)=\frac{\int R_mR_nR_k\,d\mu}{\int R_k^2\,d\mu}.
-\]
-If one of $m,n,k$ exceeds the sum of the other two, its polynomial is orthogonal to their product, whose degree is smaller. This proves the asserted support.
-\end{proof}
-
-\begin{lemma}[A uniform positive margin in the asymmetric case]\label{lem:margin}
-For the Krawtchouk recurrence \eqref{eq:parameters} with $q=1$ and $0<r<1$, put $s=\min(r,1-r)$. Every coefficient in its triangle support obeys
-\begin{equation}\label{eq:margin}
-g(m,n;k)\geq (s/4)^N\quad\text{if }|m-n|\leq k\leq\min(m+n,N).
-\end{equation}
-\end{lemma}
-\begin{proof}
-Specialize the algebra above to $q=1$, and put $y_i=z_i/p$, where $p=1/r$. Then $y_i^2=(1-r)y_i+r$, and $U_m=\binom Nm^{-1}\sum_{|S|=m}y_S$. The reduction of a product $y_Sy_T$ has nonnegative coefficients, each chosen term being a product of at most $N$ factors from $\{r,1-r\}$. Its coefficient is therefore at least $s^N$.
+\begin{proof}[Proof of Lemma~\ref{lem:margin}]
+Specialize the algebra of Section~\ref{sec:algebra} to $q=1$, and put $y_i=z_i/p$, where $p=1/r$. Then $y_i^2=(1-r)y_i+r$, and $U_m=\binom Nm^{-1}\sum_{|S|=m}y_S$. The reduction of a product $y_Sy_T$ has nonnegative coefficients, each chosen term being a product of at most $N$ factors from $\{r,1-r\}$. Its coefficient is therefore at least $s^N$.
 For each admissible $k$, at least one such term has degree $k$. Assume $m\geq n$. If $k\leq m$, take $T\subseteq S$, with sizes $n,m$, and retain the linear term for exactly $k-(m-n)$ overlap coordinates. This number lies between $0$ and $n$. If $k\geq m$, choose sets with overlap $m+n-k$ and union of size $k\leq N$, and retain the linear term at every overlap coordinate.
 Permutation symmetry makes the coefficient of $y_U$ depend only on $|U|=k$. Hence the coefficient in the normalized elementary-symmetric basis is at least
 \[
@@ -246,104 +337,6 @@ Permutation symmetry makes the coefficient of $y_U$ depend only on $|U|=k$. Henc
 \]
 This uses a single positive term and a denominator bound, not an explicit formula for the product coefficients.
 \end{proof}
-
-\begin{theorem}[Explicit perturbation inequalities]\label{thm:perturbation}
-Let $N\geq1$, $0<r<1$, $s=\min(r,1-r)$, and
-\begin{equation}\label{eq:radius}
-\eta_N(r)=\frac12\left(\frac{s}{32N}\right)^N.
-\end{equation}
-Suppose coefficients $\widetilde a_i,\widetilde b_i,\widetilde c_i$ satisfy \eqref{eq:basic}, with $\widetilde b_i\geq0$ for every $i$, and
-\begin{equation}\label{eq:closeness}
-\max_{0\leq i\leq N}\left\{
-\left|\widetilde a_i-\frac{N-i}{N}\right|,
-\left|\widetilde b_i-\frac{(1-r)i}{N}\right|,
-\left|\widetilde c_i-\frac{ri}{N}\right|\right\}\leq\eta_N(r).
-\end{equation}
-Then the finite system has nonnegative linearization. Throughout its triangle support,
-\[
-\widetilde g(m,n;k)\geq\tfrac12(s/4)^N.
-\]
-The product coefficients sum to one.
-\end{theorem}
-\begin{proof}
-Use tildes for the perturbed system and untilded letters for its $q=1$ reference at $r$. Let $\eta=\eta_N(r)$ and use the maximum absolute row-sum matrix norm. Both $J$ and $\widetilde J$ are stochastic matrices, since $b_i\geq0$ and $\widetilde b_i\geq0$, so $\|J\|_\infty=\|\widetilde J\|_\infty=1$ and $\|\widetilde J-J\|_\infty\leq3\eta$. Put $B_m=R_m(J)$, $\widetilde B_m=\widetilde R_m(\widetilde J)$ and $e_m=\|\widetilde B_m-B_m\|_\infty$. Theorem~\ref{thm:criterion} at $q=1$ and \eqref{eq:matrix-product} give $\|B_m\|_\infty=1$ for all $m\leq N$. Also $e_0=0$ and $e_1\leq3\eta$.
-
-Subtract the two matrix recurrences for $1\leq m<N$. Writing $\Delta_m=\widetilde B_m-B_m$ gives exactly
-\begin{align*}
-\widetilde a_m\Delta_{m+1}
-={}&(\widetilde J-\widetilde b_m I)\Delta_m-\widetilde c_m\Delta_{m-1}\\
- &+\big(\widetilde J-J-(\widetilde b_m-b_m)I\big)B_m\\
- &-(\widetilde c_m-c_m)B_{m-1}-(\widetilde a_m-a_m)B_{m+1}.
-\end{align*}
-Since $\eta\leq1/(2N)$, $\widetilde a_m\geq1/(2N)$. The terms not containing a $\Delta$ have combined norm at most $6\eta$. Also $0\leq\widetilde b_m,\widetilde c_m\leq1$, so
-\begin{equation}\label{eq:error-recursion}
-e_{m+1}\leq4Ne_m+2Ne_{m-1}+12N\eta.
-\end{equation}
-Set $L=8N$. Induction gives $e_m\leq\eta L^m$ for $1\leq m\leq N$: the base case follows from $3\leq L$, and, for $m\geq1$,
-\[
-4N+\frac{2N}{L}+\frac{12N}{L^m}
-\leq4N+\frac14+\frac32\leq8N=L.
-\]
-Thus every matrix entry differs from its reference by at most
-\[
-\eta(8N)^N=\frac12(s/4)^N.
-\]
-Lemma~\ref{lem:margin} gives the positive lower bound on triangle entries, while Lemma~\ref{lem:finite} makes all entries outside the triangle exactly zero. Finally $\widetilde R_m(1)=1$ follows by recurrence from the row sums $\widetilde a_i+\widetilde b_i+\widetilde c_i=1$, so evaluating each product at $1$ gives coefficient sum one. Here $1$ belongs to the support because $\widetilde J\boldsymbol1=\boldsymbol1$ and Lemma~\ref{lem:finite} identifies that support with its spectrum. No product-positivity inequality for the perturbed system has been assumed.
-\end{proof}
-
-\begin{corollary}[Finite systems outside the geometric family]\label{cor:nonclassical}
-For every $N\geq2$, take the Krawtchouk coefficients at $r=1/2$, and replace only
-\[
-a_1\longmapsto a_1-h,\qquad b_1\longmapsto b_1+h,
-\qquad 0<h\leq\frac14(64N)^{-N}.
-\]
-These recurrences have nonnegative linearization and do not satisfy the constant-ratio hypothesis of Theorem~\ref{thm:criterion}. More generally, Theorem~\ref{thm:perturbation} admits a relatively open neighborhood of the asymmetric Krawtchouk array in the affine space defined by the row-sum and boundary equalities in \eqref{eq:basic}.
-\end{corollary}
-\begin{proof}
-All initial and terminal conventions and the row sums are preserved. The bound on $h$ is half the radius \eqref{eq:radius} at $r=1/2$, and is smaller than $a_1=(N-1)/N$, so all required signs hold. The perturbation theorem applies. At index $1$, $b_1/c_1=1+2Nh>1$, whereas at index $N$ the ratio remains $1$; these indices differ because $N\geq2$. Thus this array lies outside the geometric family. At the asymmetric reference, all free coefficients constrained to be positive are strictly positive; the strict version of \eqref{eq:closeness} therefore contains a relatively open neighborhood in that affine space; the sign conditions define the admissible region within it.
-\end{proof}
-
-\section{Applications and scope}\label{sec:applications}
-\begin{corollary}[Full positive Krawtchouk range]\label{cor:kraw}
-For every $N\geq1$ and $0<p_0\leq1/2$, Krawtchouk polynomials orthogonal for binomial weights $\binom Nj p_0^{N-j}(1-p_0)^j$ have nonnegative linearization when normalized at $j=0$.
-\end{corollary}
-\begin{proof}
-To fix the convention without relying on a named recurrence, put $r=p_0/(1-p_0)\in(0,1]$, and let $Y_1,\ldots,Y_N$ be independent variables with values $1,-r$ of probabilities $p_0,1-p_0$. Their mean is zero and $Y_i^2=(1-r)Y_i+r$. The normalized elementary symmetric sums
-\[
-K_i(j)=\binom Ni^{-1}\sum_{|S|=i}\prod_{l\in S}Y_l
-\]
-depend only on the number $j$ of negative coordinates. They are orthogonal, because the expectation of two distinct squarefree monomials is zero: some independent mean-zero variable occurs once. Their weights in $j$ are exactly the stated binomial weights. With $x=N^{-1}\sum_lY_l=1-j/(N(1-p_0))$, multiplication by $x$ gives
-\[
-xK_i=\frac{N-i}{N}K_{i+1}+(1-r)\frac iN K_i+r\frac iN K_{i-1}.
-\]
-Indeed, in multiplying the elementary sum by $\sum_lY_l$, indices outside a subset give $(i+1)$ copies of each subset of size $i+1$; the linear part of $Y_l^2$ gives $(1-r)i$ copies of each subset of size $i$; and the constant part gives $r(N-i+1)$ copies of each subset of size $i-1$. Division by the binomial normalizers gives the displayed recurrence, including $i=N$. Its leading coefficient in $x$ is positive, its degree is $i$, and its value at $j=0$ is one. These properties identify the normalized orthogonal polynomials for the binomial measure. Apply Theorem~\ref{thm:criterion} with $q=1$.
-The range is sharp in this endpoint normalization: if $1/2<p_0<1$, then
-$r=p_0/(1-p_0)>1$ and $g(1,1;1)=b_1=(1-r)/N<0$.
-For $N=1$, this coefficient follows from the terminal relation.
-\end{proof}
-
-\begin{corollary}[The dual $q$-Krawtchouk case]\label{cor:additional}
-For every $N\geq2$, $q>1$, and $0<r\leq1$, the recurrence \eqref{eq:parameters} has nonnegative linearization. In the normalization $R_0=1$, $R_1=x$, it is outside the Krawtchouk recurrence class.
-\end{corollary}
-\begin{proof}
-Its increments are $d_i-d_{i-1}=q^{i-1}/[N]_q$, so all hypotheses hold. For a Krawtchouk recurrence in this normalization the increments of $b_i+c_i$ are constant. Here their ratio is $q>1$ and $N\geq2$, so they are not constant. An affine change of the support transporting the same endpoint-normalized basis leaves the multiplication coefficients in the basis unchanged; it cannot remove this distinction.
-\end{proof}
-
-\begin{proposition}[Relation to the existing algebraic construction]\label{prop:source}
-The quadratic relations \eqref{eq:algebra} are those of Koelink~\cite[Theorem~3.1(ii), relation (3.2)]{koelink}, with $z_j=u(x^j)$ and the same parameters $p,q$. The recurrence in this paper is the normalized recurrence of his Theorem~7.1, with $r=1/p$; its polynomial-in-the-spectral-variable interpretation is the dual $q$-Krawtchouk interpretation described after his Theorem~7.8.
-\end{proposition}
-\begin{proof}
-The source square relation is $u(x^j)^2=(q-1)u(x^j)\sum_{l>j}u(x^l)+(p-1)u(x^j)+pq^{N-j}$, which is \eqref{eq:algebra}. In Theorem~7.1 the coefficients of the next, current and previous indices are respectively $pq^i(1-q^{N-i})$, $(p-1)(1-q^i)$ and $1-q^i$. Division by $p(1-q^N)$ gives \eqref{eq:parameters} for $q>1$. For $0\leq f\leq N$, the corresponding spectral coordinate is
-\[
-x_f=\frac{p(1-q^{N-f})-(1-q^f)}{p(1-q^N)}
-=\frac{q^{N-f}-rq^f+r-1}{q^N-1},\qquad r=1/p.
-\]
-Writing $\phi_f(w_d)$ for Koelink's spherical-function values, we have $R_d(x_f)=\phi_f(w_d)$ for $0\leq d\leq N$: the initial value is one and the normalized recurrences agree, so induction in $d$ identifies them.
-As $q\to1$, dividing numerator and denominator by $q-1$ and using the finite geometric sums gives $x_f\to1-(1+r)f/N$.
-The $q=1$ case follows directly from the construction above, without division by zero. His discussion after Theorem~7.8 explicitly interchanges polynomial degree and spectral index to obtain the dual family.
-\end{proof}
-
-The geometric criterion covers the full positive Krawtchouk range, including the symmetric endpoint. The perturbation criterion allows freely varying coefficients around each Krawtchouk array in the interior of the positive linearization range; its stated radius is conservative and decreases with $N$. Both hypotheses can be checked using a number of arithmetic comparisons proportional to $N$, without forming any general product coefficients or testing polynomial matrices. The proofs use positive algebra multiplication, a lower bound from a single positive term, and a norm estimate. They provide sufficient conditions, not a characterization of all finite systems with property (P). The geometric parameter family and underlying algebra predate Szwarc's survey; this paper makes no claim of historical priority for these constructions or criteria.
 
 \section{Szwarc's quadratic system}\label{sec:szwarc}
 
@@ -586,6 +579,8 @@ The reversal route cannot reach systems whose diagonal increases at the top once
 
 \section{Limits of inequality criteria}\label{sec:limits}
 
+The radius of Theorem~\ref{thm:perturbation} shrinks like $(1-r)^N$ as $r\to1$ and vanishes at the symmetric endpoint, and Theorem~\ref{thm:symmetric} needs $p_0<1/2$. This section shows that this degeneration is forced. At the symmetric Krawtchouk systems the corner coefficient $g(N,N;N)$ vanishes and has a nonzero first-order change along most directions (Lemma~\ref{lem:corner}); this yields the two equalities for uniform deformation rules (Theorem~\ref{thm:uniform}) and the exact order $(1-r)^N$ of the stability radius (Corollary~\ref{cor:radius-order}), which Theorem~\ref{thm:perturbation} attains up to a factor depending on $N$.
+
 Theorems~\ref{thm:low} and~\ref{thm:palindromic} control every triple except the deep ones by inequalities, the criterion of~\cite[Theorem~\xnum{P1-thm:lc}{3.1}]{P1} controls all triples of constant-ratio arrays with log-concave Newton profiles, and Appendix~\ref{app:computations} records shape conditions that fail on deep triples. This section shows that part of the failure is structural near the symmetric endpoint. For uniformly sampled polynomial deformation directions, and for the analytic and boundary-layer extensions specified below, admission at every sufficiently large symmetric Krawtchouk system imposes two first-order boundary equalities. This does not exclude arbitrary uniform inequality criteria, nor families of admissible arrays that are not of these forms. Write $K_{N,r}$ for the Krawtchouk array \eqref{eq:parameters} with $q=1$, and use the coordinates $b_1,\ldots,b_{N-1},c_1,\ldots,c_N$ of a normalized array with $b_0=0$, $a_0=1$, $a_N=0$, $b_N=1-c_N$ and $a_n=1-b_n-c_n$ otherwise. An affine change of $x$, together with the positive normalization $R_n(x_0)=1$ at the largest support point $x_0$, reduces every finite system to this form. A direction $v=(\delta b_1,\ldots,\delta b_{N-1},\delta c_1,\ldots,\delta c_N)$ changes these coordinates; we put $\delta b_0=\delta c_0=0$ and $\delta b_N=-\delta c_N$.
 
 \begin{lemma}[Corner value]\label{lem:corner-value}
@@ -759,14 +754,14 @@ Theorem~\ref{thm:perturbation} gives $\rho_N(r)\geq\eta_N(r)=\tfrac12((1-r)/(32N
 \end{proof}
 
 
-For fixed $r$ the radius also decays at least exponentially in $N$: raising the top mass of the measure of $K_{N,r}$, the reverse of Lemma~\ref{lem:topmass}, gives $\rho_N(r)\leq3(1-r^2)^N$ whenever $(1-r^2)^N\leq\frac12$ and $3(1-r^2)^N\leq(1-r)/N$~\cite[Proposition~\xnum{P1-prop:raise}{5.2} and Corollary~\xnum{P1-cor:radius-exp}{5.3}]{P1}.
+For fixed $r$ the radius also decays at least exponentially in $N$: raising the top mass of the measure of $K_{N,r}$, the reverse of Lemma~\ref{lem:topmass}, gives $\rho_N(r)\leq3(1-r^2)^N$ whenever $(1-r^2)^N\leq\frac12$ and $3(1-r^2)^N\leq(1-r)/N$~\cite[Proposition~\xnum{P1-prop:raise}{A.2} and Corollary~\xnum{P1-cor:radius-exp}{A.3}]{P1}.
 
 Thus, for every fixed $r\in(0,1)$, no set of arrays with property (P) contains coefficient balls of a positive radius independent of $N$ around all $K_{N,r}$; Theorem~\ref{thm:perturbation} gives the lower bound $\rho_N(r)\geq\tfrac12(\min(r,1-r)/(32N))^N$, which decays faster than every exponential. The deformation that raises the top mass has the binomial profile of the masses and is not a uniform rule. Along the terminal row, $g(N,N;N)$ is a polynomial in the perturbation, since the recurrence for the linearization coefficients divides only by $a_0,\ldots,a_{N-1}$. Exact failures of property (P) along the terminal row at fixed $r$, a heuristic for their first-order term, and exact counterexamples to convex-profile conditions are collected in Appendix~\ref{app:computations}; they establish failures at specified parameters and sizes, without an asymptotic claim.
 
 \section{Open problems}\label{sec:open}
 
 \paragraph{Sharper stability radii.}
-For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius for which every admissible stochastic perturbation has property (P). Corollary~\ref{cor:radius-order} shows that, for fixed $N\geq2$, $\rho_N(r)$ has exact order $(1-r)^N$ as $r\to1$, which the bound of Theorem~\ref{thm:perturbation} attains up to a constant depending on $N$, and~\cite[Corollary~\xnum{P1-cor:radius-exp}{5.3}]{P1} gives $\rho_N(r)=O((1-r^2)^N)$ for each fixed $r$; the gap to the lower bound $\tfrac12(\min(r,1-r)/(32N))^N$ of Theorem~\ref{thm:perturbation} remains open. The bound in Theorem~\ref{thm:perturbation} comes from a single-term lower margin and a worst-case recurrence amplification. Both estimates discard substantial information. A useful improvement would retain a transparent coefficient test and describe its dependence on both $N$ and the bias parameter.
+For fixed $N$ and $0<r<1$, determine or estimate the largest coefficient radius for which every admissible stochastic perturbation has property (P). Corollary~\ref{cor:radius-order} shows that, for fixed $N\geq2$, $\rho_N(r)$ has exact order $(1-r)^N$ as $r\to1$, which the bound of Theorem~\ref{thm:perturbation} attains up to a constant depending on $N$, and~\cite[Corollary~\xnum{P1-cor:radius-exp}{A.3}]{P1} gives $\rho_N(r)=O((1-r^2)^N)$ for each fixed $r$; the gap to the lower bound $\tfrac12(\min(r,1-r)/(32N))^N$ of Theorem~\ref{thm:perturbation} remains open. The bound in Theorem~\ref{thm:perturbation} comes from a single-term lower margin and a worst-case recurrence amplification. Both estimates discard substantial information. A useful improvement would retain a transparent coefficient test and describe its dependence on both $N$ and the bias parameter.
 
 \paragraph{The symmetric endpoint.}
 At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity forces many coefficients to be zero. Symmetric perturbations preserve the parity zeros, and Theorem~\ref{thm:symmetric} exploits this for Szwarc's quadratic system when $p_0<1/2$. At $p_0=1/2$, and for the symmetric Krawtchouk array, further coefficients on the parity support vanish. Determine perturbation directions and structural constraints that preserve positivity there; continuity alone does not control coefficients emerging from those zeros. For every $N\geq1$, the symmetric Krawtchouk array is a limit of arrays whose product coefficients are strictly positive throughout the triangle support. For $N\geq2$ this follows from Proposition~\ref{prop:interior}; the two-point case is immediate. Theorem~\ref{thm:uniform} and Corollary~\ref{cor:analytic-rules} impose two boundary equalities on admitted polynomial rules and on the analytic rules satisfying the holomorphic-extension hypothesis specified there. A description of the cone for all $N$ is open.
@@ -775,7 +770,7 @@ At $r=1$, the reference margin in Lemma~\ref{lem:margin} vanishes because parity
 Szwarc's Theorems~3.2 and~3.3 in~\cite{szwarc} are inequality conditions of monotonicity type for infinite systems. For finite systems, property (P) at the boundary point is the hypergroup property of the corresponding birth--death chain, and Miclo~\cite[Proposition~6 and Theorem~31]{miclo2015}, adapting arguments of Bakry and Huet, gives inequality conditions for Metropolis chains whose potential is sufficiently convex and either monotone or symmetric under $n\mapsto N-n$, and for chains symmetric under $n\mapsto N-n$ whose coefficients satisfy a monotonicity condition. These conditions do not cover the full Krawtchouk or Szwarc families. For symmetric Krawtchouk they fail when $N>2$, but the cases $N=1,2$ are covered; the Szwarc instance $N=1$, $p_0=1/2$ is the same covered three-point system. By the quadratic decomposition~\cite[Theorem~\xnum{P1-thm:decomp}{4.1}]{P1}, any criterion of this kind for nonsymmetric finite systems, valid including the terminal indices, immediately gives one for symmetric finite systems. Theorem~\ref{thm:low} supplies such hypotheses for all triples except those whose pairwise sums all exceed $N$. Theorem~\ref{thm:all} supplies such hypotheses for all triples under its strengthened conditions (i)--(iii), and Corollary~\ref{cor:heavy} contains the arrays \eqref{eq:parameters} with $q\geq2$ but not the Krawtchouk arrays with $N\geq3$. For constant-ratio arrays, the log-concave Newton criterion~\cite[Theorem~\xnum{P1-thm:lc}{3.1}]{P1} controls the deep triples by inequalities that contain the whole geometric criterion, in particular the Krawtchouk arrays, and~\cite{P2} extends it to ratios $c_i/(b_i+c_i)$ that increase in several ways; other nonconstant ratios remain open. Find monotonicity-type conditions, valid through the terminal index, that control the deep triples and contain the Krawtchouk arrays with $N\geq3$. Shape conditions alone do not suffice: convex profiles, convex profiles with log-concave or log-convex increments, and the sign classes of Appendix~\ref{app:computations} contain arrays without property (P) at biases bounded away from $1$, and Section~\ref{sec:limits} explains part of this at the symmetric endpoint.
 
 \paragraph{Thinness along the terminal row.}
-For every fixed $r\in(0,1)$, \cite[Corollary~\xnum{P1-cor:radius-exp}{5.3}]{P1} gives an exponential upper bound on the admissible coefficient-ball radius around $K_{N,r}$, witnessed by raising the top mass. Determine whether analogous upper bounds hold for terminal-row perturbations, and which uniform rules exhibit such thinness. The first-order heuristic of Appendix~\ref{app:computations} changes at $r=\tfrac12$, but the exact terminal-row failures recorded there for $r\leq\tfrac12$ show that higher-order terms matter, so it does not locate a threshold for finite perturbations.
+For every fixed $r\in(0,1)$, \cite[Corollary~\xnum{P1-cor:radius-exp}{A.3}]{P1} gives an exponential upper bound on the admissible coefficient-ball radius around $K_{N,r}$, witnessed by raising the top mass. Determine whether analogous upper bounds hold for terminal-row perturbations, and which uniform rules exhibit such thinness. The first-order heuristic of Appendix~\ref{app:computations} changes at $r=\tfrac12$, but the exact terminal-row failures recorded there for $r\leq\tfrac12$ show that higher-order terms matter, so it does not locate a threshold for finite perturbations.
 
 \paragraph{Linear inequality criteria.}
 Decide whether a criterion given by linear inequalities in the coefficients can admit every $K_{N,r}$ and $G_{N,q,r}$ ($N\geq1$, $q\geq1$) for all $r$ in a range $0<r\leq r_0$; here $G_{N,q,r}$ is the array \eqref{eq:parameters}, so that $G_{N,1,r}=K_{N,r}$. Such a criterion admits a convex set of arrays, but the set of arrays with property (P) need not be convex, even at fixed $(N,r)$ and with both endpoints admitted by Theorem~\ref{thm:criterion}: for $q>1$ and $0<\lambda<1$ the combinations $(1-\lambda)K_{N,r}+\lambda G_{N,q,r}$ have $g(N,N;N)<0$ at seven exactly certified parameter choices with $r$ between $2/7$ and $4/5$~\cite[Section~\xnum{P1-sec:limits}{5}]{P1}. At those parameters no sufficient criterion whose admitted set is convex, in particular none defined by a system of linear inequalities in the coefficients, can admit both $K_{N,r}$ and $G_{N,q,r}$. For smaller $r$ the question is open; in our searches the examples found grew in size as $r$ decreased (Appendix~\ref{app:computations}). Sign conditions on the second differences of the profile and the first differences of the ratio fail for every $\rho_{\max}\geq83/400$ (Appendix~\ref{app:computations}). For $\rho_{\max}<83/400$ the sign choices not excluded there remain unresolved, and criteria with conditions on higher differences, with mixed conditions, or with conditions that do not apply at every index are not covered.
@@ -824,9 +819,52 @@ These examples disprove the stated shape conditions at the listed parameters and
 \end{itemize}
 These findings establish neither minimal failure sizes nor general conclusions about smooth deformations.
 
+\section{Known positivity and Koelink's construction}\label{sec:applications}
+This appendix derives the classical positivity results from Theorem~\ref{thm:criterion} and compares the geometric family with Koelink's construction. The positivity statements are known; they are included because Section~\ref{sec:perturbation} uses the Krawtchouk case as its reference.
+\begin{corollary}[Full positive Krawtchouk range]\label{cor:kraw}
+For every $N\geq1$ and $0<p_0\leq1/2$, Krawtchouk polynomials orthogonal for binomial weights $\binom Nj p_0^{N-j}(1-p_0)^j$ have nonnegative linearization when normalized at $j=0$.
+\end{corollary}
+\begin{proof}
+To fix the convention without relying on a named recurrence, put $r=p_0/(1-p_0)\in(0,1]$, and let $Y_1,\ldots,Y_N$ be independent variables with values $1,-r$ of probabilities $p_0,1-p_0$. Their mean is zero and $Y_i^2=(1-r)Y_i+r$. The normalized elementary symmetric sums
+\[
+K_i(j)=\binom Ni^{-1}\sum_{|S|=i}\prod_{l\in S}Y_l
+\]
+depend only on the number $j$ of negative coordinates. They are orthogonal, because the expectation of two distinct squarefree monomials is zero: some independent mean-zero variable occurs once. Their weights in $j$ are exactly the stated binomial weights. With $x=N^{-1}\sum_lY_l=1-j/(N(1-p_0))$, multiplication by $x$ gives
+\[
+xK_i=\frac{N-i}{N}K_{i+1}+(1-r)\frac iN K_i+r\frac iN K_{i-1}.
+\]
+Indeed, in multiplying the elementary sum by $\sum_lY_l$, indices outside a subset give $(i+1)$ copies of each subset of size $i+1$; the linear part of $Y_l^2$ gives $(1-r)i$ copies of each subset of size $i$; and the constant part gives $r(N-i+1)$ copies of each subset of size $i-1$. Division by the binomial normalizers gives the displayed recurrence, including $i=N$. Its leading coefficient in $x$ is positive, its degree is $i$, and its value at $j=0$ is one. These properties identify the normalized orthogonal polynomials for the binomial measure. Apply Theorem~\ref{thm:criterion} with $q=1$.
+The range is sharp in this endpoint normalization: if $1/2<p_0<1$, then
+$r=p_0/(1-p_0)>1$ and $g(1,1;1)=b_1=(1-r)/N<0$.
+For $N=1$, this coefficient follows from the terminal relation.
+\end{proof}
+
+\begin{corollary}[The dual $q$-Krawtchouk case]\label{cor:additional}
+For every $N\geq2$, $q>1$, and $0<r\leq1$, the recurrence \eqref{eq:parameters} has nonnegative linearization. In the normalization $R_0=1$, $R_1=x$, it is outside the Krawtchouk recurrence class.
+\end{corollary}
+\begin{proof}
+Its increments are $d_i-d_{i-1}=q^{i-1}/[N]_q$, so all hypotheses hold. For a Krawtchouk recurrence in this normalization the increments of $b_i+c_i$ are constant. Here their ratio is $q>1$ and $N\geq2$, so they are not constant. An affine change of the support transporting the same endpoint-normalized basis leaves the multiplication coefficients in the basis unchanged; it cannot remove this distinction.
+\end{proof}
+
+\begin{proposition}[Relation to the existing algebraic construction]\label{prop:source}
+The quadratic relations \eqref{eq:algebra} are those of Koelink~\cite[Theorem~3.1(ii), relation (3.2)]{koelink}, with $z_j=u(x^j)$ and the same parameters $p,q$. The recurrence in this paper is the normalized recurrence of his Theorem~7.1, with $r=1/p$; its polynomial-in-the-spectral-variable interpretation is the dual $q$-Krawtchouk interpretation described after his Theorem~7.8.
+\end{proposition}
+\begin{proof}
+The source square relation is $u(x^j)^2=(q-1)u(x^j)\sum_{l>j}u(x^l)+(p-1)u(x^j)+pq^{N-j}$, which is \eqref{eq:algebra}. In Theorem~7.1 the coefficients of the next, current and previous indices are respectively $pq^i(1-q^{N-i})$, $(p-1)(1-q^i)$ and $1-q^i$. Division by $p(1-q^N)$ gives \eqref{eq:parameters} for $q>1$. For $0\leq f\leq N$, the corresponding spectral coordinate is
+\[
+x_f=\frac{p(1-q^{N-f})-(1-q^f)}{p(1-q^N)}
+=\frac{q^{N-f}-rq^f+r-1}{q^N-1},\qquad r=1/p.
+\]
+Writing $\phi_f(w_d)$ for Koelink's spherical-function values, we have $R_d(x_f)=\phi_f(w_d)$ for $0\leq d\leq N$: the initial value is one and the normalized recurrences agree, so induction in $d$ identifies them.
+As $q\to1$, dividing numerator and denominator by $q-1$ and using the finite geometric sums gives $x_f\to1-(1+r)f/N$.
+The $q=1$ case follows directly from the construction above, without division by zero. His discussion after Theorem~7.8 explicitly interchanges polynomial degree and spectral index to obtain the dual family.
+\end{proof}
+
+The geometric criterion covers the full positive Krawtchouk range, including the symmetric endpoint. The perturbation criterion allows freely varying coefficients around each Krawtchouk array in the interior of the positive linearization range; its stated radius is conservative and decreases with $N$. Both hypotheses can be checked using a number of arithmetic comparisons proportional to $N$, without forming any general product coefficients or testing polynomial matrices. The proofs use positive algebra multiplication, a lower bound from a single positive term, and a norm estimate. They provide sufficient conditions, not a characterization of all finite systems with property (P). The geometric parameter family and underlying algebra predate Szwarc's survey; this paper makes no claim of historical priority for these constructions or criteria.
+
 \section*{AI-use disclosure}
 
-GPT-6 Astra or GPT-6.1 Sol (OpenAI; which of the two was not recorded), run in the Codex agent; GPT-6.1 Sol, run as a separate Codex reviewing agent; Claude Opus 5.5 (Anthropic), run in the Claude Code agent; and GPT-6 Pro (OpenAI), used in ChatGPT, were used to develop the proofs, the exact checks, the Lean formalization and the text. The Codex model developed Sections~\ref{sec:criterion}--\ref{sec:applications}, which the GPT-6.1 Sol agent reviewed; Claude Opus 5.5 developed Sections~\ref{sec:szwarc}--\ref{sec:limits}, which GPT-6 Pro reviewed. This AI review is not human peer review, and no independent human verification is claimed. The author set the research objective and is responsible for the mathematical claims. The full disclosure is in the supplement~\cite{supp}.
+GPT-6 Astra or GPT-6.1 Sol (OpenAI; which of the two was not recorded), run in the Codex agent; GPT-6.1 Sol, run as a separate Codex reviewing agent; Claude Opus 5.5 (Anthropic), run in the Claude Code agent; and GPT-6 Pro (OpenAI), used in ChatGPT, were used to develop the proofs, the exact checks, the Lean formalization and the text. The GPT-6.1 Sol agent and GPT-6 Pro reviewed the results. This AI review is not human peer review, and no independent human verification is claimed. The author set the research objective and is responsible for the mathematical claims. The supplement~\cite{supp} gives the full disclosure, including which sections arose with which model.
 
 \section*{Code and formalization}
 
@@ -845,11 +883,11 @@ All theorems, lemmas, propositions and corollaries are formalized in Lean~4 with
 \bibitem{miclo} L. Miclo, \emph{On the hypergroup property}, Annales de la Facult\'e des Sciences de Toulouse, s\'erie~6, \textbf{26} (2017), no.~2, 417--435, \href{https://doi.org/10.5802/afst.1539}{\nolinkurl{doi:10.5802/afst.1539}}.
 \bibitem{miclo2015} L. Miclo, \emph{On the Markov commutator}, Bulletin des Sciences Math\'ematiques \textbf{154} (2019), 1--35, \href{https://doi.org/10.1016/j.bulsci.2019.02.003}{\nolinkurl{doi:10.1016/j.bulsci.2019.02.003}}; preprint arXiv:1505.02540v1 (2015), \url{https://arxiv.org/abs/1505.02540}, to whose numbering the theorem locators refer.
 \bibitem{mlotszwarc} W. M{\l}otkowski and R. Szwarc, \emph{Nonnegative linearization for polynomials orthogonal with respect to discrete measures}, Constructive Approximation \textbf{17} (2001), no.~3, 413--429, \href{https://doi.org/10.1007/s003650010039}{\nolinkurl{doi:10.1007/s003650010039}}.
-\bibitem{P1} L. P. Polzer, \emph{A log-concavity criterion for finite nonnegative linearization}, companion paper (2026), in release~1.0.5 of the companion code, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.5}.
-\bibitem{P2} L. P. Polzer, \emph{Increasing ratios in finite nonnegative linearization}, companion paper (2026), in release~1.0.5 of the companion code, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.5}.
-\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization} (2026), revision \texttt{2f96f4d} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}.
-\bibitem{docs} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, revision \texttt{4b2d7e1} with the split documentation \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the fresh-clone record \path{runs/verify/RESULTS.md} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
-\bibitem{supp} L. P. Polzer, \emph{Supplement to ``Exact and perturbative criteria for finite nonnegative linearization'': formalization and AI use} (2026), in release~1.0.5 of the companion code, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.5}.
+\bibitem{P1} L. P. Polzer, \emph{A log-concavity criterion for finite nonnegative linearization}, companion paper (2026), in release~1.0.6 of the companion code~\cite{code}, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.6}.
+\bibitem{P2} L. P. Polzer, \emph{Increasing ratios in finite nonnegative linearization}, companion paper (2026), in release~1.0.6 of the companion code~\cite{code}, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.6}.
+\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, release~1.0.6 (2026), \url{https://github.com/skypher/szkraw/releases/tag/v1.0.6}. This release is the single landing point for the evidence: it contains the three papers and their supplements, the Lean development and the scripts, which are unchanged since revision \texttt{2f96f4d}, \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}, and the documentation of~\cite{docs}.
+\bibitem{docs} L. P. Polzer, documentation of the companion code~\cite{code}: \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the record \path{runs/verify/RESULTS.md} of a run of all scripts from a fresh clone of revision \texttt{2f96f4d}, as of revision \texttt{4b2d7e1}, \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
+\bibitem{supp} L. P. Polzer, \emph{Supplement to ``Exact and perturbative criteria for finite nonnegative linearization'': formalization and AI use} (2026), in release~1.0.6 of the companion code~\cite{code}, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.6}.
 \bibitem{szwarc1992} R. Szwarc, \emph{Orthogonal polynomials and a discrete boundary value problem~II}, SIAM Journal on Mathematical Analysis \textbf{23} (1992), no.~4, 965--969, \href{https://doi.org/10.1137/0523053}{\nolinkurl{doi:10.1137/0523053}}.
 \bibitem{szwarc1996} R. Szwarc, \emph{Nonnegative linearization and quadratic transformation of Askey--Wilson polynomials}, Canadian Mathematical Bulletin \textbf{39} (1996), no.~2, 241--249, \href{https://doi.org/10.4153/CMB-1996-031-x}{\nolinkurl{doi:10.4153/CMB-1996-031-x}}.
 \bibitem{szwarc2003} R. Szwarc, \emph{A necessary and sufficient condition for nonnegative product linearization of orthogonal polynomials}, Constructive Approximation \textbf{19} (2003), no.~4, 565--573, \href{https://doi.org/10.1007/s00365-002-0524-z}{\nolinkurl{doi:10.1007/s00365-002-0524-z}}.

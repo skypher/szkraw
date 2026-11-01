@@ -64,13 +64,33 @@ $\Phi^{\mathrm{loc}}_3\geq0$ in \eqref{M-eq:cubic-key} & all $n$, all $a\geq3$; 
 Corollary~\ref{M-cor:cubic74}, written route: $\kappa_{t\tau}+\frac74\kappa_{r\sigma}$ in \eqref{M-eq:cubic-B}, \eqref{M-eq:cubic-E} & $n\leq5$; regimes $z\in\{0,\ell,1/q\}$; symbolic & \path{bdetour_u.py}, \path{edetour_u.py} & Lean uses the route of \path{cert74.py} (rows above)
 \end{longtable}
 
+\section*{Verification procedure}
+The certificates of Table~\ref{tab:certs} can be checked in two independent ways from a clone of the release~\cite{code}.
+
+\emph{Lean.} From the repository root, \texttt{make lean} builds the development and \texttt{make axioms} writes the axiom audit \path{lean/axioms.log} of the principal statements, among them \path{Szkraw.lc_general} and \path{Szkraw.cubic_ratio74_matrix}. The audit of a statement covers every declaration it depends on, and so every declaration of Table~\ref{tab:certs}; it must report only \path{propext}, \path{Classical.choice} and \path{Quot.sound}. A declaration that compiles proves its obligation for every $N$; Lean does not rely on the output of any script.
+
+\emph{Scripts.} The scripts need Python~3 with SymPy, NumPy and SciPy, and are run from their own directory, \path{runs/lean_plan/} unless stated otherwise, for example \texttt{python3 window\_cert.py}. The commands are:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.3\linewidth}>{\raggedright\arraybackslash}p{0.64\linewidth}@{}}
+Obligation & Commands\\\hline
+step (vi) & \texttt{edge\_exact.py 60} (exact cross-check, $a\leq60$); \texttt{edge\_cert.py} (symbolic numerators)\\
+step (vii) & \texttt{window\_cert.py}\\
+\eqref{M-eq:cubic-B}, \eqref{M-eq:cubic-corner} & \texttt{gen\_cubicB.py C OUT} for \texttt{C} in \texttt{gen}, \texttt{2}, \texttt{3}, \texttt{4}, \texttt{5}, \texttt{corner}\\
+\eqref{M-eq:cubic-E} & \texttt{gen\_cubicE.py C OUT} for \texttt{C} in \texttt{gen}, \texttt{3}, \texttt{4}, \texttt{5}, \texttt{6}\\
+$\Phi^{\mathrm{loc}}_3\geq0$ & \texttt{phi3\_generic.py}; \texttt{phi3\_edge.py 40} (exact cross-check)\\
+Corollary~\ref{M-cor:cubic74}, written route & in \path{runs/cubic/}: \texttt{bdetour\_u.py 7/4}, \texttt{edetour\_u.py 3 7/4}
+\end{tabular}
+\end{center}
+Each script prints its verdict, for instance \texttt{ALL CERTIFIED} from \texttt{window\_cert.py} and an empty failure list for each form from \texttt{edge\_exact.py}; the exit code alone is not a verdict. The scripts \texttt{gen\_cubicB.py} and \texttt{gen\_cubicE.py} also write the Lean certificate for the case \texttt{C} to \texttt{OUT}, which can be compared with the corresponding file in \path{lean/Szkraw/}. The record~\cite{docs} lists a run of all these commands except \texttt{edge\_cert.py} from a fresh clone of revision \texttt{2f96f4d}, with the hash of each script and its last output line.
+
 \section*{AI-use disclosure}
 The following AI models were used: Claude Opus 5.5 and, for parts of the Lean formalization of Theorem~\ref{M-thm:lc-general}, Claude Haiku (Anthropic; the Haiku version was not recorded), both run in the Claude Code agent; GPT-6 Astra or GPT-6.1 Sol (OpenAI; which of the two was not recorded), run in the Codex agent; and GPT-6 Pro (OpenAI), used in ChatGPT. Claude Opus 5.5 and the Codex model were used to develop proof arguments, check source passages, construct exact-arithmetic diagnostics, draft and revise the paper, and prepare the Lean formalization. The resummation in the proof of Theorem~\ref{M-thm:lc-affine}, its key inequality under nondecreasing $b$, and the weighted detour and key inequality in the proof of Theorem~\ref{M-thm:lc-quadratic} arose in research consultations with GPT-6 Pro; the exact checks were completed with Claude Opus 5.5, which also prepared the Lean formalizations. Theorem~\ref{M-thm:lc-lowdeg}, Corollary~\ref{M-cor:lc-lowdeg}, Theorems~\ref{M-thm:lc-general} and~\ref{M-thm:lc-cubic} and Lemma~\ref{M-lem:abel-weights} were found and proved with Claude Opus 5.5, without research consultation; Proposition~\ref{M-prop:np}, which is due to Walkup, was rederived with Claude Opus 5.5 together with the self-contained proof given here. GPT-6 Pro reviewed every result, as part of a longer manuscript and with independent exact checks, and the corrections it requested were applied. For Theorems~\ref{M-thm:lc-general} and~\ref{M-thm:lc-cubic} the reviewer reran transcribed copies of the certificate scripts; the scripts were also run unmodified from a fresh clone of the companion code at the cited revision, and all of them passed~\cite{docs}. This AI review is not human peer review, and no independent human verification is claimed. The author set the research objective and is responsible for publication decisions and the final mathematical claims. ``Machine-verified'' refers only to the Lean theorems listed in the section on code and formalization; Theorems~\ref{M-thm:lc-general} and~\ref{M-thm:lc-cubic} and Corollary~\ref{M-cor:cubic74} are machine-verified.
 
 \begin{thebibliography}{99}
 
-\bibitem{main} L. P. Polzer, \emph{Increasing ratios in finite nonnegative linearization}, 2026, in release~1.0.5 of the companion code, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.5}.
-\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization} (2026), revision \texttt{2f96f4d} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}.
-\bibitem{docs} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, revision \texttt{4b2d7e1} with the split documentation \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the fresh-clone record \path{runs/verify/RESULTS.md} (full identifier in the URL), \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
+\bibitem{main} L. P. Polzer, \emph{Increasing ratios in finite nonnegative linearization}, 2026, in release~1.0.6 of the companion code~\cite{code}, \url{https://github.com/skypher/szkraw/releases/tag/v1.0.6}.
+\bibitem{code} L. P. Polzer, \emph{Companion code for finite nonnegative linearization}, release~1.0.6 (2026), \url{https://github.com/skypher/szkraw/releases/tag/v1.0.6}. This release is the single landing point for the evidence: it contains the three papers and their supplements, the Lean development and the scripts, which are unchanged since revision \texttt{2f96f4d}, \url{https://github.com/skypher/szkraw/tree/2f96f4d228215b35e31729f1d1526cd31879f161}, and the documentation of~\cite{docs}.
+\bibitem{docs} L. P. Polzer, documentation of the companion code~\cite{code}: \path{papers/FORMALIZATION.md}, \path{papers/DIAGNOSTICS.md} and the record \path{runs/verify/RESULTS.md} of a run of all scripts from a fresh clone of revision \texttt{2f96f4d}, as of revision \texttt{4b2d7e1}, \url{https://github.com/skypher/szkraw/tree/4b2d7e13d5c9a9fe8bbd406959d0ecd2cc192de8}.
 \end{thebibliography}
 \end{document}
