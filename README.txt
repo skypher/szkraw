@@ -3,6 +3,7 @@ Finite orthogonal polynomial linearization
 
 Public repository: https://github.com/skypher/szkraw
 Lean CI: https://github.com/skypher/szkraw/actions/workflows/lean.yml
+Paper 1 on arXiv: https://arxiv.org/abs/2611.01561 (papers/p1.tex, release v1.0.6)
 
 paper.tex and paper.pdf contain the manuscript. MISSION.md records the research
 objective; RESEARCH.md records proof coverage, provenance and verification.
