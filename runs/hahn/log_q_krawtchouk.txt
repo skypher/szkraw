@@ -1,0 +1,10 @@
+[22:50:40] q_krawtchouk N=3 done (1s)
+[22:50:41] q_krawtchouk N=4 done (2s)
+[22:50:44] q_krawtchouk N=5 done (4s)
+[22:50:47] q_krawtchouk N=6 done (7s)
+q_krawtchouk (3, '-', 'nocov', 'vary') 4
+q_krawtchouk (3, 'P', 'nocov', 'vary') 22
+q_krawtchouk (4, '-', 'nocov', 'vary') 1
+q_krawtchouk (4, 'P', 'nocov', 'vary') 21
+q_krawtchouk (5, 'P', 'nocov', 'vary') 21
+q_krawtchouk (6, 'P', 'nocov', 'vary') 20

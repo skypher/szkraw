@@ -1,0 +1,15 @@
+[22:50:40] dual_q_krawtchouk N=3 done (1s)
+[22:50:42] dual_q_krawtchouk N=4 done (2s)
+[22:50:43] dual_q_krawtchouk N=5 done (3s)
+[22:50:46] dual_q_krawtchouk N=6 done (6s)
+dual_q_krawtchouk (3, '-', 'nocov', 'const') 5
+dual_q_krawtchouk (3, 'P', 'cov', 'const') 6
+dual_q_krawtchouk (3, 'P', 'nocov', 'const') 1
+dual_q_krawtchouk (4, '-', 'nocov', 'const') 5
+dual_q_krawtchouk (4, 'P', 'cov', 'const') 6
+dual_q_krawtchouk (4, 'P', 'nocov', 'const') 1
+dual_q_krawtchouk (5, '-', 'nocov', 'const') 5
+dual_q_krawtchouk (5, 'P', 'cov', 'const') 6
+dual_q_krawtchouk (5, 'P', 'nocov', 'const') 1
+dual_q_krawtchouk (6, '-', 'nocov', 'const') 6
+dual_q_krawtchouk (6, 'P', 'cov', 'const') 6

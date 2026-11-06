@@ -1,0 +1,9 @@
+[22:50:40] dual_q_hahn N=3 done (1s)
+[22:50:42] dual_q_hahn N=4 done (2s)
+[22:50:46] dual_q_hahn N=5 done (7s)
+[22:50:51] dual_q_hahn N=6 done (11s)
+dual_q_hahn (3, 'P', 'cov', 'vary') 2
+dual_q_hahn (3, 'P', 'nocov', 'vary') 31
+dual_q_hahn (4, 'P', 'nocov', 'vary') 30
+dual_q_hahn (5, 'P', 'nocov', 'vary') 30
+dual_q_hahn (6, 'P', 'nocov', 'vary') 30
